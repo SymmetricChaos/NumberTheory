@@ -32,6 +32,13 @@ def polypad(P,n):
         out.append(0)
     return out
 
+# Remove zeroes from the end
+def polynorm(P):
+    while P[-1] == 0:
+        if len(P) == 1:
+            break
+        P.pop()
+
 # Add two polynomiala modulo some number
 def polyadd(P,Q,m):
     
@@ -63,32 +70,50 @@ def polymult(P,Q,m):
             break
     return L
 
-
-#function n / d:
-#  require d ≠ 0
-#  q ← 0
-#  r ← n       # At each step n = d × q + r
-#  while r ≠ 0 AND degree(r) ≥ degree(d):
-#     t ← lead(r)/lead(d)     # Divide the leading terms
-#     q ← q + t
-#     r ← r − t * d
-#  return (q, r)
-
-def polydiv(N,D):
-    if D == 0:
-        raise Exception("D cannot be equal to zero")
+def poly_divmod(P, Q):
+    # Don't modify the inputs
+    P = P[:]
+    Q = Q[:]
     
-    Q = 0
-    R = N
-    while R != 0 and len(N) >= len(D):
-        t = R[0]/D[0]
-        Q = Q + t
-        R = R - t * D
-    return (Q,R)
+    # Remove unnecessary zeroes
+    polynorm(P)
+    polynorm(Q)
+    
+    # Record the degree of the polynomials
+    dP = len(P)-1
+    dQ = len(Q)-1
+    
+    if Q == 0:
+        raise ZeroDivisionError
+    
+    if dP >= dQ:
+        qt = [0]*dP
+        while dP >= dQ:
+            d = [0]*(dP - dQ) + Q
+            mult = qt[dP - dQ] = P[-1] / float(d[-1])
+            d = [co*mult for co in d]
+            P = [float(abs ( coeffP - coeffd )) for coeffP, coeffd in zip(P, d)]
+            polynorm(P)
+            dP = len(P)-1
+            #print(P)
+        rm = P
+    else:
+        qt = [0]
+        rm = P
+    
+    
+    polynorm(qt)
+    polynorm(rm)
+    
+    return qt,rm
 
-print(polymult([1,0,2,1,0],[1,1,2,1],3))
 
-P = [1,1,1,1]
-Q = [0,1,1,0,1]
+P = [-42,0,-12,1]
+Q = [-3,1,0,0]
 
-print(polyadd(P,Q,2))
+#print(polyadd(P,Q,2))
+#print(polymult([1,0,2,1,0],[1,1,2,1],3))
+
+print(P)
+print(Q)
+print(poly_divmod(P,Q))
