@@ -25,6 +25,15 @@ def modinv(a, m):
     else:
         return x % m
 
+
+# Remove zeroes from the end of a polynomial
+def poly_norm(P):
+    while P[-1] == 0:
+        if len(P) == 1:
+            break
+        P.pop()
+
+
 # Determine the degree of a polynomial
 def poly_degree(P):
     P = P.copy()
@@ -36,6 +45,8 @@ def poly_degree(P):
     
     return len(P)-1
 
+
+
 # Pad a polynomial with zeroes
 def poly_pad(P,n):
     out = P.copy()
@@ -43,12 +54,44 @@ def poly_pad(P,n):
         out.append(0)
     return out
 
-# Remove zeroes from the end of a polynomial
-def poly_norm(P):
-    while P[-1] == 0:
-        if len(P) == 1:
-            break
-        P.pop()
+
+
+def poly_print(P):
+    
+    # Get the degree of the polynomial in case it is in non-normal form
+    d = poly_degree(P)
+    
+    # Step through it backward
+    for i in range(d,-1,-1):
+        
+        
+        coe = P[i]
+        val = abs(coe)
+        sgn = "-" if coe//val == -1 else "+"
+        
+        # Skip the zero coefficients
+        if P[i] == 0:
+            continue
+        
+        # If it is the first term include the sign of the coefficient
+        elif i == d:
+            s = "{}*x^{} ".format(coe,i)
+        
+        # If power is 1 just show x
+        elif i == 1:
+            s = " {} {}*x".format(sgn,val)
+        
+        # If the power is 0 only show the sign and value
+        elif i == 0:
+            s = " {} {}".format(sgn,val)
+        
+        # Otherwise show the sign, coefficient, and power
+        else:
+            s = "{} {}*x^{}".format(sgn,val,i)
+        
+        print(s,end="")
+    print()
+
 
 # Add two polynomiala modulo some number
 def poly_add(P,Q,m=2):
@@ -64,6 +107,8 @@ def poly_add(P,Q,m=2):
     
     return out
     
+
+
 # Multiply two polynomials modulo some number
 def poly_mult(P,Q,m=2):
     
@@ -80,6 +125,8 @@ def poly_mult(P,Q,m=2):
         else:
             break
     return L
+
+
 
 # Divide two polynomial modulo some number
 def poly_divmod(P, Q, m=2):
@@ -121,8 +168,10 @@ def poly_divmod(P, Q, m=2):
     return qt,rm
 
 
-P = [-42,0,-12,1]
+P = [-42,2,-12,-1,0,0]
 Q = [-3,1,0,0]
+
+poly_print(P)
 
 P = [0,1,1,1,1,1,1,0,1,1,1,1,1,1]
 Q = [1,1,0,1,1,0,0,0,1]
