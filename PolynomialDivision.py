@@ -25,6 +25,17 @@ def modinv(a, m):
     else:
         return x % m
 
+# Determine the degree of a polynomial
+def poly_degree(P):
+    P = P.copy()
+    poly_norm(P)
+    
+    # The zero polynomial is treated as having degree -1
+    if P[-1] == 0:
+        return -1
+    
+    return len(P)-1
+
 # Pad a polynomial with zeroes
 def poly_pad(P,n):
     out = P.copy()
@@ -32,7 +43,7 @@ def poly_pad(P,n):
         out.append(0)
     return out
 
-# Remove zeroes from the end
+# Remove zeroes from the end of a polynomial
 def poly_norm(P):
     while P[-1] == 0:
         if len(P) == 1:
@@ -84,7 +95,7 @@ def poly_divmod(P, Q, m=2):
     dP = len(P)-1
     dQ = len(Q)-1
     
-    if Q == 0:
+    if poly_degree(Q) == -1:
         raise ZeroDivisionError
     
     if dP >= dQ:
@@ -96,7 +107,6 @@ def poly_divmod(P, Q, m=2):
             P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
             poly_norm(P)
             dP = len(P)-1
-            #print(P)
         rm = P
     else:
         qt = [0]
