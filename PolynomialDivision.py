@@ -65,21 +65,20 @@ def poly_print(P):
     # We do this because polynomials are usually written in descending order
     for pwr in range(d,-1,-1):
         
-        
-        coe = P[pwr]
-        val = abs(coe)
-        sgn = "-" if coe//val == -1 else "+"
-        
-        # When 
-        if val == 1:
-            val = ""
-        
         # Skip the zero coefficients
         if P[pwr] == 0:
             continue
         
+        coe = P[pwr]
+        val = abs(coe)
+        sgn = "-" if coe//val == -1 else "+"
+                
+        # When the coefficient is 1 or -1 don't print it
+        if val == 1:
+            val = ""
+  
         # If it is the first term include the sign of the coefficient
-        elif pwr == d:
+        if pwr == d:
             s = "{}{}x^{} ".format(sgn,val,pwr)
         
         # If power is 1 just show x
@@ -95,11 +94,12 @@ def poly_print(P):
             s = "{} {}x^{}".format(sgn,val,pwr)
         
         print(s,end="")
+        
     print()
 
 
 # Add two polynomiala modulo some number
-def poly_add(P,Q,m=2):
+def poly_add(P, Q, m = 2):
     
     pad = max(len(P),len(Q))
     
@@ -115,7 +115,7 @@ def poly_add(P,Q,m=2):
 
 
 # Multiply two polynomials modulo some number
-def poly_mult(P,Q,m=2):
+def poly_mult(P, Q, m = 2):
     
     L = [0]*(len(P)+len(Q))
     
@@ -131,10 +131,8 @@ def poly_mult(P,Q,m=2):
             break
     return L
 
-
-
 # Divide two polynomial modulo some number
-def poly_divmod(P, Q, m=2):
+def poly_divmod(P, Q, m = 2):
     # Don't modify the inputs
     P = P[:]
     Q = Q[:]
@@ -164,29 +162,7 @@ def poly_divmod(P, Q, m=2):
         qt = [0]
         rm = P
     
-    
     poly_norm(qt)
     poly_norm(rm)
     
-    #qt = [int(i) for i in qt]
-    
     return qt,rm
-
-
-P = [-42,1,-12,-1,0,0]
-Q = [-3,1,0,0]
-
-print(P)
-poly_print(P)
-print()
-
-P = [0,1,1,1,1,1,1,0,1,1,1,1,1,1]
-Q = [1,1,0,1,1,0,0,0,1]
-
-#print(polyadd(P,Q,2))
-#print(polymult([1,0,2,1,0],[1,1,2,1],3))
-
-print(P)
-print(Q)
-print()
-print(poly_divmod(P,Q,2))
