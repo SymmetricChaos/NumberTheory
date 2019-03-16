@@ -1,4 +1,4 @@
-from PolynomialDivision import poly_add, poly_divmod, poly_print
+from PolynomialRepresentation import poly_add, poly_divmod, poly_print
 
 # The finite field GF(2^8) with 256 elements has various expressions
 

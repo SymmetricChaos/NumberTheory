@@ -1,4 +1,4 @@
-from PolynomialDivision import *
+from PolynomialRepresentation import *
 
 P = [-42,1,-12,-1,0,0]
 Q = [-3,1,0,0]
