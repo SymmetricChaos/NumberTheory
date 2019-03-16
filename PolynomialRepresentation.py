@@ -65,7 +65,7 @@ def poly_print(P):
     # We do this because polynomials are usually written in descending order
     for pwr in range(d,-1,-1):
         
-        # Skip the zero coefficients
+        # Skip the zero coefficients entirely
         if P[pwr] == 0:
             continue
         
@@ -73,15 +73,18 @@ def poly_print(P):
         val = abs(coe)
         sgn = "-" if coe//val == -1 else "+"
                 
-        # When the coefficient is 1 or -1 don't print it
-        if val == 1:
+        # When the coefficient is 1 or -1 don't print it unless it is the
+        # coefficient for x^0
+        if val == 1 and pwr != 0:
             val = ""
   
         # If it is the first term include the sign of the coefficient
         if pwr == d:
-            s = "{}{}x^{} ".format(sgn,val,pwr)
+            if sgn == "+":
+                sgn = ""
+            s = "{}{}x^{}".format(sgn,val,pwr)
         
-        # If power is 1 just show x
+        # If power is 1 just show x rather than x^1
         elif pwr == 1:
             s = " {} {}x".format(sgn,val)
         
@@ -91,7 +94,7 @@ def poly_print(P):
         
         # Otherwise show the sign, coefficient, and power
         else:
-            s = "{} {}x^{}".format(sgn,val,pwr)
+            s = " {} {}x^{}".format(sgn,val,pwr)
         
         print(s,end="")
         
