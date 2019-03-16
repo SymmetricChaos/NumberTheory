@@ -61,36 +61,38 @@ def poly_print(P):
     # Get the degree of the polynomial in case it is in non-normal form
     d = poly_degree(P)
     
-    # Step through the ascending list backward
-    for i in range(d,-1,-1):
+    # Step through the ascending list of coefficients backward
+    # We do this because polynomials are usually written in descending order
+    for pwr in range(d,-1,-1):
         
         
-        coe = P[i]
+        coe = P[pwr]
         val = abs(coe)
         sgn = "-" if coe//val == -1 else "+"
         
+        # When 
         if val == 1:
             val = ""
         
         # Skip the zero coefficients
-        if P[i] == 0:
+        if P[pwr] == 0:
             continue
         
         # If it is the first term include the sign of the coefficient
-        elif i == d:
-            s = "{}{}x^{} ".format(sgn,val,i)
+        elif pwr == d:
+            s = "{}{}x^{} ".format(sgn,val,pwr)
         
         # If power is 1 just show x
-        elif i == 1:
+        elif pwr == 1:
             s = " {} {}x".format(sgn,val)
         
         # If the power is 0 only show the sign and value
-        elif i == 0:
+        elif pwr == 0:
             s = " {} {}".format(sgn,val)
         
         # Otherwise show the sign, coefficient, and power
         else:
-            s = "{} {}x^{}".format(sgn,val,i)
+            s = "{} {}x^{}".format(sgn,val,pwr)
         
         print(s,end="")
     print()
