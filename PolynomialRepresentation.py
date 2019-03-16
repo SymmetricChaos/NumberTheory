@@ -160,10 +160,10 @@ def poly_divmod(P, Q, m = 2):
             P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
             poly_norm(P)
             dP = len(P)-1
-        rm = P
+        rm = [i % m for i in P]
     else:
         qt = [0]
-        rm = P
+        rm = [i % m for i in P]
     
     poly_norm(qt)
     poly_norm(rm)

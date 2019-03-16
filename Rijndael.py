@@ -9,9 +9,10 @@ def Rijndael_add(P,Q):
     R = [1,1,0,1,1,0,0,0,1]
     
     S = poly_add(P,Q,2)
-    S = poly_divmod(S,R,2)[1]
+    S = poly_divmod(S,R,2)
     
-    poly_print(S)
+    
+    poly_print(S[1])
     
 
 Rijndael_add([0,1,1,0,1,1,1],[1,0,1,0,1])
