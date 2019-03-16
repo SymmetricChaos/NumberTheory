@@ -61,7 +61,7 @@ def poly_print(P):
     # Get the degree of the polynomial in case it is in non-normal form
     d = poly_degree(P)
     
-    # Step through it backward
+    # Step through the ascending list backward
     for i in range(d,-1,-1):
         
         
@@ -69,17 +69,20 @@ def poly_print(P):
         val = abs(coe)
         sgn = "-" if coe//val == -1 else "+"
         
+        if val == 1:
+            val = ""
+        
         # Skip the zero coefficients
         if P[i] == 0:
             continue
         
         # If it is the first term include the sign of the coefficient
         elif i == d:
-            s = "{}*x^{} ".format(coe,i)
+            s = "{}{}x^{} ".format(sgn,val,i)
         
         # If power is 1 just show x
         elif i == 1:
-            s = " {} {}*x".format(sgn,val)
+            s = " {} {}x".format(sgn,val)
         
         # If the power is 0 only show the sign and value
         elif i == 0:
@@ -87,7 +90,7 @@ def poly_print(P):
         
         # Otherwise show the sign, coefficient, and power
         else:
-            s = "{} {}*x^{}".format(sgn,val,i)
+            s = "{} {}x^{}".format(sgn,val,i)
         
         print(s,end="")
     print()
@@ -168,10 +171,12 @@ def poly_divmod(P, Q, m=2):
     return qt,rm
 
 
-P = [-42,2,-12,-1,0,0]
+P = [-42,1,-12,-1,0,0]
 Q = [-3,1,0,0]
 
+print(P)
 poly_print(P)
+print()
 
 P = [0,1,1,1,1,1,1,0,1,1,1,1,1,1]
 Q = [1,1,0,1,1,0,0,0,1]
