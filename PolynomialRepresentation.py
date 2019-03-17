@@ -26,7 +26,17 @@ def modinv(a, m):
         return x % m
 
 
-# Remove zeroes from the end of a polynomial
+# Print a list with identical spacing for each element
+def eq_print(P,width=0):
+    S = [str(co) for co in P]
+    if width == 0:
+        width = max(len(s) for s in S)
+    for i in S:
+        print("{:>{w}} ".format(i,w=width),end="")
+    print()
+    
+
+# Convert the polynomial to the normal form by removing trailing zeroes
 def poly_norm(P):
     while P[-1] == 0:
         if len(P) == 1:
@@ -44,7 +54,6 @@ def poly_degree(P):
         return -1
     
     return len(P)-1
-
 
 
 # Pad a polynomial with zeroes
@@ -100,13 +109,6 @@ def poly_print(P):
         
     print()
 
-def eq_print(P,width=0):
-    S = [str(co) for co in P]
-    if width == 0:
-        width = max(len(s) for s in S)
-    for i in S:
-        print("{:>{w}} ".format(i,w=width),end="")
-    print()
 
 # Add two polynomiala modulo some number
 def poly_add(P, Q, m = 2):
