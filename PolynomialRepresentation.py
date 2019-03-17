@@ -100,6 +100,13 @@ def poly_print(P):
         
     print()
 
+def eq_print(P,width=0):
+    S = [str(co) for co in P]
+    if width == 0:
+        width = max(len(s) for s in S)
+    for i in S:
+        print("{:>{w}} ".format(i,w=width),end="")
+    print()
 
 # Add two polynomiala modulo some number
 def poly_add(P, Q, m = 2):
@@ -111,7 +118,7 @@ def poly_add(P, Q, m = 2):
     
     out = []
     for x,y in zip(P,Q):
-        out.append( x+y % m)
+        out.append( (x+y) % m)
     
     return out
     
