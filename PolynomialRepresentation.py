@@ -1,3 +1,5 @@
+from ModularArithmetic import modinv
+
 # Finite fields can often be represented by polynomials with the aid of modular
 # arithmetic. This is most useful for GF(p^n) when n is greater than 1.
 
@@ -6,25 +8,6 @@
 # x^1 is at index 1
 # x^2 is at index 2
 # etc
-
-# Extended Euclidean algorithm
-# g   : Greatest common denominator
-# x,y : integers such that g = ax + by
-def egcd(a, b):
-    if a == 0:
-        return (b, 0, 1)
-    else:
-        g, y, x = egcd(b % a, a)
-        return (g, x - (b // a) * y, y)
-
-# Use egcd to calculate the modular inverse
-def modinv(a, m):
-    g, x, y = egcd(a, m)
-    if g != 1:
-        raise Exception('modular inverse does not exist')
-    else:
-        return x % m
-
 
 # Print a list with identical spacing for each element
 def eq_print(P,width=0):

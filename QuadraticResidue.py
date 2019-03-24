@@ -14,7 +14,7 @@ def find_quad_residue(m):
     return L
 
 
-for i in range(2,20):
+for i in range(2,22):
     qr = find_quad_residue(i)
     
-    print(qr)
+    print("{:<{}} {}".format(i,2,qr))
