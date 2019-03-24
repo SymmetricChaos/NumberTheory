@@ -8,9 +8,8 @@ def primes(n=0):
         if q not in D:
             
             # If we have reached the nth prime return rather than yield
-            # If the 0th prime is requested this never happens
             ctr += 1
-            if ctr > n:
+            if ctr > n and n != 0:
                 return q
             
             yield q
