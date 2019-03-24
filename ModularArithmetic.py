@@ -1,4 +1,5 @@
 # Extended Euclidean algorithm
+# Very useful for a bunch of functions in modular arithmetics
 # g   : Greatest common denominator
 # x,y : integers such that g = ax + by
 def egcd(a, b):
@@ -7,17 +8,6 @@ def egcd(a, b):
     else:
         g, y, x = egcd(b % a, a)
         return (g, x - (b // a) * y, y)
-
-
-
-# Use egcd to calculate the modular inverse
-def modinv(a, m):
-    g, x, y = egcd(a, m)
-    if g != 1:
-        raise Exception('modular inverse does not exist')
-    else:
-        return x % m
-
 
 # Determine the greatest common denominator for a set of numbers
 def gcd(*args):
@@ -56,3 +46,20 @@ def lcm(*args):
     a = lcm(*args[0:2])
     b = lcm(*args[2:])
     return lcm(a,b)
+
+
+# Use egcd to calculate the modular multiplicative inverse
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+# Calculate the numbers coprime to some modulus m
+def coprimes(m):
+    L = []
+    for i in range(1,m):
+        if gcd(i,m) == 1:
+            L.append(i)
+    return L
