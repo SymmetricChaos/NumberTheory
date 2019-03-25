@@ -22,11 +22,3 @@ def find_quad_residue(m):
             L.append(q)
     L.sort()
     return L
-
-
-
-for i in range(2,22):
-    qr = find_quad_residue(i)
-    
-    print("{:<{}} {}".format(i,2,qr))
-    

@@ -30,10 +30,3 @@ def primitive_roots(m):
         L = []
         
     return out
-
-m = 18
-r = primitive_roots(m)
-print("numbers coprime to {}\n{}\n".format(m,coprimes(m)))
-print("primitive roots mod {}\n{}\n".format(m,r))
-for i in r:
-    show_congruences(i,m)
