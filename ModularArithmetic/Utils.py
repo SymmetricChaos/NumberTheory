@@ -63,3 +63,8 @@ def coprimes(m):
         if gcd(i,m) == 1:
             L.append(i)
     return L
+
+def coprime(p,q):
+    if gcd(p,q) == 1:
+        return True
+    return False
