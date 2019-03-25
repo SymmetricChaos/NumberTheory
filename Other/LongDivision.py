@@ -60,7 +60,7 @@ def long_division(N,D,prec=1000):
         out = "{}.{}({})".format(x1,x2,x3)
     return(out)
 
-for i in range(100):
+for i in range(20):
     N = random.randint(1,100)
     D = random.randint(1,100)
     Q = long_division(N,D,prec=30)
