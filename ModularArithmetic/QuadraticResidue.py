@@ -1,4 +1,4 @@
-from Primality import is_prime
+from PrimeNumbers import is_prime
 from ModularArithmetic import gcd
 
 def quad_residue(q,m):
@@ -17,8 +17,9 @@ def quad_residue(q,m):
 def find_quad_residue(m):
     L = []
     for i in range(m):
-        if quad_residue(i,m) and i not in L:
-            L.append(i)
+        q = i**2 % m
+        if q not in L:
+            L.append(q)
     L.sort()
     return L
 
