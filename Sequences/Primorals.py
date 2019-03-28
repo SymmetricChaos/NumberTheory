@@ -26,7 +26,7 @@ def primorials(n=0, offset=0, m=0):
         
         # Break if we reached the iteration limit
         ctr += 1
-        if ctr > n:
+        if ctr > n+offset:
             break
         
         out *= i
@@ -43,3 +43,6 @@ for i in primorials(n=10,m=1000000,offset=3):
     
 for i in primorials(n=10,m=1000000):
     print(i)
+    
+for num,i in enumerate(primorials(n=10)):
+    print(num,i)
