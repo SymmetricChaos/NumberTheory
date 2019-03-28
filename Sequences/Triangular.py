@@ -13,7 +13,7 @@ def triangular(n=0,offset=0,m=0):
     
     while True:
         
-        if ctr > offset:
+        if ctr >= offset:
             yield out
         
         out += ctr
@@ -24,5 +24,5 @@ def triangular(n=0,offset=0,m=0):
         if out > m:
             break
         
-for num,i in enumerate(triangular(10,3)):
+for num,i in enumerate(triangular(10,0)):
     print(num,i)
