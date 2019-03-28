@@ -1,5 +1,6 @@
-from Sequences.Fibonacci import fibonacci, fibonacci_zero
-from Sequences.Lucas import lucas
-from Sequences.Primes import primes
+#from Sequences.Primes import primes
+from Sequences.Wrappers import naturals, fibonacci, lucas, pell
+from Sequences.Utils import sequence_maker
 
-__all__=["fibonacci","fibonacci_zero","lucas","primes"]
+
+__all__=["sequence_maker","lucas","fibonacci","naturals","pell"]
