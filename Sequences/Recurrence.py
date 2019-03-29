@@ -1,4 +1,5 @@
-def fibonacci_inf():
+def fibonacci():
+    """Fibonacci Numbers"""
     a = 0
     b = 1
     
@@ -6,7 +7,8 @@ def fibonacci_inf():
         yield a
         a, b = b, a+b
         
-def lucas_inf():
+def lucas():
+    """Lucas Numbers"""
     a = 2
     b = 1
     
@@ -15,7 +17,8 @@ def lucas_inf():
         a, b = b, a+b
 
       
-def P_fibonacci_inf(P):
+def P_fibonacci(P):
+    """P-Fibonacci Numbers"""
     a = 0
     b = 1
     
@@ -23,15 +26,17 @@ def P_fibonacci_inf(P):
         yield a
         a, b = b, a+P*b
         
-def PQ_fibonacci_inf(P,Q):
+def PQ_fibonacci(P,Q):
+    """P,Q-Fibonacci Numbers"""
     a = 0
     b = 1
     
     while True:
         yield a
         a, b = b, Q*a+P*b
-        
-def P_lucas_inf(P):
+
+def P_lucas(P):
+    """P-Lucas Numbers"""
     a = 2
     b = P
     
@@ -39,7 +44,8 @@ def P_lucas_inf(P):
         yield a
         a, b = b, a+P*b
         
-def PQ_lucas_inf(P,Q):
+def PQ_lucas(P,Q):
+    """P,Q-Lucas Numbers"""
     a = 2
     b = P
     
@@ -47,7 +53,8 @@ def PQ_lucas_inf(P,Q):
         yield a
         a, b = b, Q*a+P*b
 
-def pell_inf():
+def pell():
+    """Pell Numbers"""
     a = 0
     b = 1
     
@@ -55,7 +62,8 @@ def pell_inf():
         yield a
         a, b = b, a+2*b
 
-def pell_lucas_inf():
+def pell_lucas():
+    """Pell-Lucas Numbers"""
     a = 2
     b = 2
     
@@ -63,7 +71,8 @@ def pell_lucas_inf():
         yield a
         a, b = b, a+2*b
         
-def tribonacci_inf():
+def tribonacci():
+    """Tribonacci Numbers"""
     a = 0
     b = 0
     c = 1
@@ -72,7 +81,8 @@ def tribonacci_inf():
         yield a
         a, b, c = b, c, a+b+c
         
-def padovan_inf():
+def padovan():
+    """Padovan Numbers"""
     a = 1
     b = 1
     c = 1

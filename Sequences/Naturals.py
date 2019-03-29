@@ -1,5 +1,5 @@
-def naturals_inf():
-
+def naturals():
+    """Natural Numbers"""
     ctr = 0
     
     while True:
@@ -7,8 +7,8 @@ def naturals_inf():
         
         ctr += 1
 
-def integers_inf():
-    
+def integers():
+    """Integers"""
     ctr = 0
     v = 0
     
