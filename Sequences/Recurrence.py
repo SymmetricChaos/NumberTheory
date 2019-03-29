@@ -21,3 +21,11 @@ def pell_inf():
     while True:
         yield a
         a, b = b, a+2*b
+
+def pell_lucas_inf():
+    a = 2
+    b = 2
+    
+    while True:
+        yield a
+        a, b = b, a+2*b
