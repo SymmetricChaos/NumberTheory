@@ -25,9 +25,10 @@ def sequence_params(num_vals,offset,min_val,max_val):
     if offset > num_vals:
         raise Exception("offset cannot be greater than num_vals")
         
+        
 def sequence_maker(generator):
     
-    def S(num_vals=0,offset=0,min_val=0,max_val=0):
+    def S(num_vals=0,offset=0,min_val=0,max_val=0,**kwargs):
         
         sequence_params(num_vals, offset, min_val, max_val)
     
@@ -37,7 +38,7 @@ def sequence_maker(generator):
         if num_vals == 0:
             num_vals = float('inf')
             
-        for ctr,val in enumerate(generator()):
+        for ctr,val in enumerate(generator(**kwargs)):
             if ctr >= num_vals+offset or val > max_val or ctr < min_val:
                 break
             
