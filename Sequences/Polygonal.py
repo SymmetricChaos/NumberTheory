@@ -1,17 +1,27 @@
 from Sequences.Naturals import naturals, integers
+from Other.Choose import choose
+
+
 def polygonal(S):
-    """S-Polygonal Numbers"""
+    """Polygonal Numbers"""
     
     for n in naturals():
         
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
 def gen_polygonal(S):
-    """Generalized S-Polygonal Numbers"""
+    """Generalized Polygonal Numbers"""
     
     for n in integers():
         
         yield ( n**2*(S-2)-n*(S-4) ) // 2
+        
+def cen_polygonal(S):
+    """Centered Polygonal Numbers"""
+    
+    for n in naturals():
+        
+        yield (S*n)//2 * (n-1)+1
         
 def triangular():
     """Triangular Numbers"""
@@ -21,7 +31,7 @@ def triangular():
         
         yield out
         
-        out += n
+        out += n+1
 
 def pentagonal():
     """Pentagonal Numbers"""
@@ -37,3 +47,10 @@ def gen_pentagonal():
         out = (3*(z*z)-z)//2
         
         yield out
+        
+def simplicial(D):
+    """Simplicial Numbers"""
+    
+    for n in naturals():
+        yield choose(n+D,D)
+
