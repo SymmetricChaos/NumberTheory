@@ -1,4 +1,4 @@
-from Sequences import primes
+from Sequences.Primes import primes
 
 def factors(n,nontrivial=False):
     L = []

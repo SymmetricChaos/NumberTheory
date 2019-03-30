@@ -14,4 +14,4 @@ def hyper(a,b,n):
     else:
         return hyper(a,hyper(a,b-1,n),n-1)
 
-print(hyper(5,2,4))
+#print(hyper(5,2,4))
