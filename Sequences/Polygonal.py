@@ -20,33 +20,7 @@ def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
     for n in naturals():
-        
         yield (S*n)//2 * (n-1)+1
-        
-def triangular():
-    """Triangular Numbers"""
-    out = 0
-    
-    for n in naturals():
-        
-        yield out
-        
-        out += n+1
-
-def pentagonal():
-    """Pentagonal Numbers"""
-    for n in naturals():
-        out = (3*(n*n)-n)//2
-        
-        yield out
-        
-
-def gen_pentagonal():
-    """Generalized Pentagonal Numbers"""
-    for z in integers():
-        out = (3*(z*z)-z)//2
-        
-        yield out
         
 def simplicial(D):
     """Simplicial Numbers"""
@@ -54,3 +28,50 @@ def simplicial(D):
     for n in naturals():
         yield choose(n+D,D)
 
+
+
+# Wrappers for some common polygonal numbers
+def triangular():
+    """Triangular Numbers"""
+    for p in polygonal(3):
+        yield p
+        
+def gen_triangular():
+    """Generalized Triangular Numbers"""
+    for p in gen_polygonal(3):
+        yield p
+        
+def cen_triangular():
+    """Centered Triangular Numbers"""
+    for p in cen_polygonal(3):
+        yield p
+        
+def square():
+    """Square Numbers"""
+    for p in polygonal(4):
+        yield p
+        
+def gen_square():
+    """Generalized Square Numbers"""
+    for p in gen_polygonal(4):
+        yield p
+        
+def cen_square():
+    """Centered Square Numbers"""
+    for p in cen_polygonal(4):
+        yield p
+        
+def pentagonal():
+    """Pentagonal Numbers"""
+    for p in polygonal(5):
+        yield p
+        
+def gen_pentagonal():
+    """Generalized Pentagonal Numbers"""
+    for p in gen_polygonal(5):
+        yield p
+        
+def cen_pentagonal():
+    """Centered Pentagonal Numbers"""
+    for p in cen_polygonal(5):
+        yield p
