@@ -1,16 +1,11 @@
 ## Generator that returns primes (not my work)
-def primes(n=0):
+def primes():
+    """Prime Numbers"""
     D = {}
     q = 2
     
-    ctr = 0
     while True:
         if q not in D:
-            
-            # If we have reached the nth prime return rather than yield
-            ctr += 1
-            if ctr > n and n != 0:
-                return q
             
             yield q
                 
@@ -20,3 +15,15 @@ def primes(n=0):
                 D.setdefault(p + q, []).append(p)
             del D[q]
         q += 1
+
+
+def primorials():
+    """Primoral Numbers"""
+
+    out = 1
+    for i in primes():
+        
+        yield out
+        
+        out *= i
+
