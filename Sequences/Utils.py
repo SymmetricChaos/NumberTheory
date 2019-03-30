@@ -20,6 +20,30 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
         if ctr >= offset:
             yield val
 
+def show_vals(sequence,**kwargs):
+    
+    print(sequence.__doc__,end="")
+    
+    if kwargs == {}:
+        print()
+    else:
+        print(":",end=" ")
+        for i,j in kwargs.items():
+            print("{} = {}".format(i,j),end="  ")
+        print()
+        
+    part = partial(sequence,10,**kwargs)
+    
+    L = []
+    
+    for i in part:
+        L.append(i)
+        
+    print(*L,sep=", ")
+        
+    print("\n")
+
+
 
 # Legacy of a more complicated method
         

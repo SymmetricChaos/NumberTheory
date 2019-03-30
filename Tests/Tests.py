@@ -3,31 +3,9 @@ from Sequences import naturals, fibonacci, lucas, pell, pell_lucas, tribonacci, 
                                pentagonal, gen_pentagonal, gen_polygonal, polygonal,\
                                primes, primorials, simplicial, cen_polygonal
 
-from Sequences.Utils import partial
+from Sequences.Utils import show_vals
 
 
-def show_vals(sequence,**kwargs):
-    
-    print(sequence.__doc__,end="")
-    
-    if kwargs == {}:
-        print()
-    else:
-        print(":",end=" ")
-        for i,j in kwargs.items():
-            print("{} = {}".format(i,j),end="  ")
-        print()
-        
-    part = partial(sequence,10,**kwargs)
-    
-    L = []
-    
-    for i in part:
-        L.append(i)
-        
-    print(*L,sep=", ")
-        
-    print("\n")
 
 
 
