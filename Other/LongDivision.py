@@ -1,4 +1,3 @@
-import random
 
 def long_division(N,D,prec=1000):
     
@@ -60,6 +59,7 @@ def long_division(N,D,prec=1000):
         out = "{}.{}({})".format(x1,x2,x3)
     return(out)
 
+# import random
 #for i in range(20):
 #    N = random.randint(1,100)
 #    D = random.randint(1,100)
