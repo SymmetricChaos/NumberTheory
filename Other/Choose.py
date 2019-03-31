@@ -1,7 +1,7 @@
 def choose(n,k):
     """Binomial coefficient"""
     if n < k:
-        raise Exception("n must be greater than k")
+        raise Exception("n cannot be less than k")
     if k < 0:
         raise Exception("k must be nonnegative")
         
