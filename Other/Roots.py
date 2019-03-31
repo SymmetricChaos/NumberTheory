@@ -48,12 +48,12 @@ def is_square(x):
         return True
     return False
 
-from math import sqrt, floor
+#from math import sqrt, floor
 
-N = 3
-print(N)
+#N = 3
+#print(N)
 #print(estimate_root(N))
-print("Math Lib:",sqrt(N))
-print("Int Root:",int_root(N))
-print("Custom:",babylonian_root(N))
+#print("Math Lib:",sqrt(N))
+#print("Int Root:",int_root(N))
+#print("Custom:",babylonian_root(N))
 
