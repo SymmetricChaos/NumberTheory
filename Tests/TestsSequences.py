@@ -4,7 +4,8 @@ from Sequences import naturals, fibonacci, lucas, pell, pell_lucas, tribonacci, 
                                square, gen_square, cen_square, \
                                pentagonal, cen_pentagonal, gen_pentagonal, \
                                primes, primorials, simplicial, \
-                               pascal, bell, catalan
+                               pascal, bell, catalan, factorials, alternating_factorials
+
 
 from Sequences.Utils import show_vals
 
@@ -14,7 +15,8 @@ for seq in [naturals, integers,
             square, gen_square, cen_square,
             pentagonal, cen_pentagonal, gen_pentagonal,
             fibonacci, lucas, pell, pell_lucas, tribonacci, padovan, 
-            primes, primorials, pascal, bell, catalan]:
+            primes, primorials, pascal, bell, catalan,
+            factorials, alternating_factorials]:
     show_vals(seq)
 
 show_vals(simplicial,D=3)
