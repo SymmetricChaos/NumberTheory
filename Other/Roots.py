@@ -20,7 +20,7 @@ def babylonian_root(x,iters=10):
 
 # Use the babylonian method with integer division to find the largest integer
 # with a square less than n
-def int_root(x,iters=10000):
+def int_root(x):
     """Integer Square Root"""
     
     if x == 0:
@@ -47,13 +47,4 @@ def is_square(x):
     if int_root(x)**2 == x:
         return True
     return False
-
-#from math import sqrt, floor
-
-#N = 3
-#print(N)
-#print(estimate_root(N))
-#print("Math Lib:",sqrt(N))
-#print("Int Root:",int_root(N))
-#print("Custom:",babylonian_root(N))
 
