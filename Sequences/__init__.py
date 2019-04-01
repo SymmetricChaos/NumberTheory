@@ -17,6 +17,8 @@ from Sequences.Catalan import catalan
 
 from Sequences.Bell import bell
 
+from Sequences.Factorials import factorials, alternating_factorials
+
 __all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials",
          "tribonacci","P_fibonacci", "PQ_fibonacci","padovan","integers",
          "triangular", "gen_triangular", "cen_triangular",
@@ -26,4 +28,5 @@ __all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials
          "simplicial",
          "pascal",
          "catalan",
-         "bell"]
+         "bell",
+         "factorials", "alternating_factorials"]

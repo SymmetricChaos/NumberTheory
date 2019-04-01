@@ -1,3 +1,17 @@
+# Skip the first few values of a sequence
+def offset(sequence,offset=0,**kwargs):
+    if type(offset) != int:
+        raise Exception("offset must be an integer")
+        
+    if offset < 0:
+        raise Exception("offset must be nonnegative")
+        
+    for ctr,val in enumerate(sequence(**kwargs)):
+          
+        if ctr >= offset:
+            yield val 
+
+# Return some number of values with some offset
 def partial(sequence,num_vals=0,offset=0,**kwargs):
 
     if type(num_vals) != int:
@@ -8,11 +22,11 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
     if num_vals < 0:
         raise Exception("n_vals must be nonnegative")
     if offset < 0:
-        raise Exception("offset must ber nonnegative")
+        raise Exception("offset must be nonnegative")
     
-    if offset > num_vals:
-        raise Exception("offset cannot be greater than num_vals")
-            
+    if num_vals == 0:
+        num_vals = float('inf')
+    
     for ctr,val in enumerate(sequence(**kwargs)):
         if ctr >= num_vals+offset:
             break
@@ -20,6 +34,9 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
         if ctr >= offset:
             yield val
             
+ 
+
+        
 def min_max(sequence,min_val=None,max_val=None,**kwargs):
 
     if type(min_val) != int and type(min_val) != None:
