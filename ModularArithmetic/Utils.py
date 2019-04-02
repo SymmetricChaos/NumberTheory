@@ -1,3 +1,6 @@
+from Other.Factors import factors
+from Sequences import primes
+
 # Extended Euclidean algorithm
 # Very useful for a bunch of functions in modular arithmetic
 # g   : Greatest common denominator
@@ -68,16 +71,33 @@ def coprimes(m):
             L.append(i)
     return L
 
-# Check if two numbers are coprimes
+# Check if two numbers are coprime
 def coprime(p,q):
     """Check if inputs are coprime"""
     if gcd(p,q) == 1:
         return True
     return False
 
+# Is there any number other than 1 than divides all elements of the set?
+def setwise_coprime(*args):
+    """Check if inputs are setwise coprime"""
+    if gcd(*args) == 1:
+        return True
+    return False
 
-from Sequences import primes
+# Is every pair of elements coprime?
+def pairwise_coprime(*args):
+    """Check if inputs are pairwise coprime"""
+    L = []
+    for i in args:
+        L += factors(i)[1:]
+    if len(set(L)) == len(L):
+        return True
+    return False
+
+# Count of naturals coprime to n
 def totient(n):
+    """Euler's Totient Function"""
     N = 1
     D = 1
     for p in primes():
