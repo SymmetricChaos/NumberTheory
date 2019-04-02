@@ -1,11 +1,12 @@
-def naturals():
+def naturals(n=0):
     """Natural Numbers"""
-    ctr = 0
+    ctr = n
     
     while True:
         yield ctr
         
         ctr += 1
+        
 
 def integers():
     """Integers"""
