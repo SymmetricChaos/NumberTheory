@@ -64,5 +64,8 @@ def highly_composite():
             F = L
             yield i
 
-    
-    
+
+def divisors():
+    """Number of Divisors"""
+    for i in naturals(1):
+        yield len(factors(i))

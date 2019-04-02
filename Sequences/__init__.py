@@ -9,7 +9,8 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
 
 from Sequences.Naturals import naturals, integers
                                  
-from Sequences.Primes import primes, primorials
+from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
+                             divisors
 
 from Sequences.Pascal import pascal
 
@@ -32,4 +33,5 @@ __all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials
          "catalan",
          "bell",
          "factorials", "alternating_factorials",
-         "aliquot", "abundant", "deficient", "perfect"]
+         "aliquot", "abundant", "deficient", "perfect",
+         "primes", "primorials", "smooth", "rough", "highly_composite", "divisors"]
