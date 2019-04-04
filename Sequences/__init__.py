@@ -35,4 +35,4 @@ __all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials
          "factorials", "alternating_factorials",
          "aliquot", "abundant", "deficient", "perfect",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree:]
+         "squarefree"]
