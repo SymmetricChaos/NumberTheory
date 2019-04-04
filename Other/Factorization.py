@@ -1,3 +1,5 @@
+from math import sqrt, ceil
+
 # Needed to avoid circular reference with sequences
 def _primes_():
     """Prime Numbers"""
@@ -21,13 +23,24 @@ def factorization(n,nontrivial=False):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
-    L = []
-    a, b = 1, n+1
+    lim = ceil(sqrt(n))+1
+    
+    # Either include or don't include trivial factors
     if nontrivial == True:
-        a, b = 2, n
-    for i in range(a,b):
-        if n % i == 0:
+        L = []
+    else:
+        L = [1,n]
+    
+    
+    for i in range(2,lim):
+        f,r = divmod(n,i)
+        if r == 0:
             L.append(i)
+            L.append(f)
+            
+    L = list(set(L))
+    L.sort()
+    
     return L
     
 def prime_factorization(n):
@@ -35,12 +48,19 @@ def prime_factorization(n):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
+    lim = ceil(sqrt(n))+1
     L = []
+    
     for p in _primes_():
         while n % p == 0:
             L.append(p)
             n = n // p
+            
         if n == 1:
+            break
+        
+        if p > lim:
+            L.append(n)
             break
     return L
 
