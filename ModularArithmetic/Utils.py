@@ -1,4 +1,4 @@
-from Other.Factors import factors
+from Other.Factorization import factorization
 from Sequences import primes
 
 # Extended Euclidean algorithm
@@ -16,6 +16,7 @@ def egcd(a, b):
 # Determine the greatest common denominator for a set of numbers
 def gcd(*args):
     """Greatest Common Denominator"""
+    
     # simplest case
     if len(args) == 1:
         return args[0]
@@ -36,6 +37,7 @@ def gcd(*args):
 # Determine the least common multiple for a set of numbers
 def lcm(*args):
     """Least Common Multiple"""
+    
     # simplest case
     if len(args) == 1:
         return args[0]
@@ -109,5 +111,3 @@ def totient(n):
             D *= p
     
     return n*N//D
-        
-        

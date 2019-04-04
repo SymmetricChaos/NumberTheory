@@ -1,4 +1,4 @@
-from Other.Factors import aliquot_sum
+from Other.Factorization import aliquot_sum
 
 def aliquot():
     """Aliquot Numbers"""

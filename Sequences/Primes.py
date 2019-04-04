@@ -1,5 +1,5 @@
 from Sequences.Naturals import naturals
-from Other.Factors import factors
+from Other.Factorization import factorization
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -59,7 +59,7 @@ def highly_composite():
     """High Composite Numbers"""
     F = 0
     for i in naturals(1):
-        L = len(factors(i))
+        L = len(factorization(i))
         if L > F:
             F = L
             yield i
@@ -68,7 +68,7 @@ def highly_composite():
 def divisors():
     """Number of Divisors"""
     for i in naturals(1):
-        yield len(factors(i))
+        yield len(factorization(i))
         
         
 def squarefree():
