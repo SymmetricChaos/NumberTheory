@@ -69,3 +69,15 @@ def divisors():
     """Number of Divisors"""
     for i in naturals(1):
         yield len(factors(i))
+        
+        
+def squarefree():
+    """Squarefree Numbers"""
+    for n in naturals(1):
+        for i in naturals(2):
+            if n % i**2 == 0:
+                break
+            if (i**2) > n:
+                yield n
+                break
+        
