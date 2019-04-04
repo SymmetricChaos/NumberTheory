@@ -16,8 +16,12 @@ def egcd(a, b):
 # Determine the greatest common denominator for a set of numbers
 def gcd(*args):
     """Greatest Common Denominator"""
+
+    # Handle the case that a list is provided
+    if len(args) == 1 and type(args[0]) is list:
+        return gcd(*args[0])
     
-    # simplest case
+    # the gcd of a number with itself is iself
     if len(args) == 1:
         return args[0]
     
@@ -38,7 +42,11 @@ def gcd(*args):
 def lcm(*args):
     """Least Common Multiple"""
     
-    # simplest case
+    # Handle the case that a list is provided
+    if len(args) == 1 and type(args[0]) is list:
+        return lcm(*args[0])
+    
+    # the lcm of a number with itself is iself
     if len(args) == 1:
         return args[0]
     
