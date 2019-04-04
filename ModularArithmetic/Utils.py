@@ -92,7 +92,7 @@ def pairwise_coprime(*args):
     """Check if inputs are pairwise coprime"""
     L = []
     for i in args:
-        L += factors(i)[1:]
+        L += factorization(i)[1:]
     if len(set(L)) == len(L):
         return True
     return False
