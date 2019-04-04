@@ -16,8 +16,8 @@ def _primes_():
             del D[q]
         q += 1
 
-def factors(n,nontrivial=False):
-    
+def factorization(n,nontrivial=False):
+    """All Unique Factors"""
     if type(n) != int:
         raise Exception("n must be an integer") 
     
@@ -31,7 +31,7 @@ def factors(n,nontrivial=False):
     return L
     
 def prime_factorization(n):
-    
+    """Prime Factors with Multiplicity"""
     if type(n) != int:
         raise Exception("n must be an integer") 
     
@@ -50,4 +50,4 @@ def aliquot_sum(n):
         raise Exception("Alquoit sum not defined") 
     if n == 1:
         return 0
-    return sum(factors(n)[:-1])
+    return sum(factorization(n)[:-1])
