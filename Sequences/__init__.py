@@ -5,7 +5,7 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
                                 square, gen_square, cen_square, \
                                 pentagonal, cen_pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, cen_polygonal, \
-                                simplicial
+                                simplicial, perfect_powers
 
 from Sequences.Naturals import naturals, integers
                                  
@@ -28,7 +28,7 @@ __all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials
          "square", "gen_square", "cen_square",
          "pentagonal","cen_pentagonal","gen_pentagonal",
          "polygonal","cen_polygonal","gen_polygonal",
-         "simplicial",
+         "simplicial","perfect_powers",
          "pascal",
          "catalan",
          "bell",

@@ -1,6 +1,6 @@
 from Sequences.Naturals import naturals, integers
 from Other.Choose import choose
-
+from Other.PerfectPower import perfect_power
 
 def polygonal(S):
     """Polygonal Numbers"""
@@ -28,6 +28,12 @@ def simplicial(D):
     for n in naturals():
         yield choose(n+D,D)
 
+
+def perfect_powers():
+    """Perfect Powers"""
+    for n in naturals():
+        if perfect_power(n):
+            yield n
 
 
 # Wrappers for some common polygonal numbers
