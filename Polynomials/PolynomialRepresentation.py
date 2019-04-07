@@ -94,37 +94,48 @@ def poly_print(P):
 
 
 # Add two polynomiala modulo some number
-def poly_add(P, Q, m = 2):
-    
+def poly_add(P, Q, m = 0):
+        
     pad = max(len(P),len(Q))
     
     P = poly_pad(P,pad)
     Q = poly_pad(Q,pad)
     
     out = []
-    for x,y in zip(P,Q):
-        out.append( (x+y) % m)
     
+    if m == 0:
+        for x,y in zip(P,Q):
+            out.append( x+y )
+    else:
+        for x,y in zip(P,Q):
+            out.append( (x+y) % m)
+
+    poly_norm(out)
+
     return out
     
 
 
 # Multiply two polynomials modulo some number
-def poly_mult(P, Q, m = 2):
+def poly_mult(P, Q, m = 0):
     
-    L = [0]*(len(P)+len(Q))
+    out = [0]*(len(P)+len(Q))
     
-    for i in range(len(P)):
-        for j in range(len(Q)):
-            L[i+j] += P[i]*Q[j]
-            L[i+j] = L[i+j] % m
     
-    for x in L[::-1]:
-        if x == 0:
-            L.pop()
-        else:
-            break
-    return L
+    if m == 0:
+        for i in range(len(P)):
+            for j in range(len(Q)):
+                out[i+j] += P[i]*Q[j]
+                out[i+j] = out[i+j]
+    else:
+        for i in range(len(P)):
+            for j in range(len(Q)):
+                out[i+j] += P[i]*Q[j]
+                out[i+j] = out[i+j] % m
+    
+    poly_norm(out)
+
+    return out
 
 # Divide two polynomial modulo some number
 def poly_divmod(P, Q, m = 2):

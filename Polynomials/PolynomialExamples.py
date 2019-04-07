@@ -1,4 +1,4 @@
-from PolynomialRepresentation import poly_norm, poly_degree, poly_pad, \
+from Polynomials.PolynomialRepresentation import poly_norm, poly_degree, poly_pad, \
                                      poly_print, poly_add, poly_mult, \
                                      poly_divmod, eq_print
 
