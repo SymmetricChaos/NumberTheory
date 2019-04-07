@@ -1,4 +1,4 @@
-from Sequences.Naturals import naturals, integers
+from Sequences.Simple import naturals, integers
 from Other.Choose import choose
 from Other.PerfectPower import perfect_power
 

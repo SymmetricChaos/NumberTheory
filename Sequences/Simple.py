@@ -26,10 +26,10 @@ def integers():
 def arithmetic(b=0,n=1):
     """Arithmetic Sequence"""
     
-    if type(b) not int:
+    if type(b) != int:
         raise Exception("b must be an integer")
     
-    if type(n) not int:
+    if type(n) != int:
         raise Exception("n must be an integer")
         
     out = b
@@ -43,10 +43,10 @@ def arithmetic(b=0,n=1):
 def geometric(b=1,n=2):
     """Geometric Sequence"""
     
-    if type(b) not int:
+    if type(b) != int:
         raise Exception("b must be an integer")
     
-    if type(n) not int:
+    if type(n) != int:
         raise Exception("n must be an integer")
         
     out = b

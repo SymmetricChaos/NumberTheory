@@ -1,4 +1,4 @@
-from Sequences.Naturals import naturals
+from Sequences.Simple import naturals
 from Other.Factorization import factorization
 
 ## Generator that returns primes (not my work)
