@@ -7,7 +7,7 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
                                 polygonal, gen_polygonal, cen_polygonal, \
                                 simplicial, perfect_powers
 
-from Sequences.Naturals import naturals, integers
+from Sequences.Simple import naturals, integers, arithmetic, geometric
                                  
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree
@@ -22,8 +22,10 @@ from Sequences.Factorials import factorials, alternating_factorials
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
-__all__=["lucas","fibonacci","naturals","pell","pell_lucas","primes","primorials",
-         "tribonacci","P_fibonacci", "PQ_fibonacci","padovan","integers",
+__all__=["lucas","fibonacci",
+         "naturals","integers","arithmetic","geometric",
+         "pell","pell_lucas","primes","primorials",
+         "tribonacci","P_fibonacci", "PQ_fibonacci","padovan",
          "triangular", "gen_triangular", "cen_triangular",
          "square", "gen_square", "cen_square",
          "pentagonal","cen_pentagonal","gen_pentagonal",
