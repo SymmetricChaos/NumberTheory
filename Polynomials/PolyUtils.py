@@ -20,18 +20,23 @@ def eq_print(P,width=0):
     
 
 # Convert the polynomial to the normal form by removing trailing zeroes
-def poly_norm(P):
+def poly_norm(P,mod=0):
+    P = P.copy()
     while P[-1] == 0:
         if len(P) == 1:
             break
         P.pop()
+    if mod != 0:
+        for i in range(len(P)):
+            P[i] = P[i] % mod
+    return P
+        
 
 
 # Determine the degree of a polynomial
 def poly_degree(P):
-    P = P.copy()
-    poly_norm(P)
-    
+    P = poly_norm(P)
+   
     # The zero polynomial is treated as having degree -1
     if P[-1] == 0:
         return -1
@@ -49,7 +54,7 @@ def poly_pad(P,n):
 
 
 def poly_print(P,mod):
-    
+    """Show the polynomial in descending form as it would be written"""
     # Get the degree of the polynomial in case it is in non-normal form
     d = poly_degree(P)
     
@@ -99,6 +104,7 @@ def poly_print(P,mod):
         return out
 
 def poly_repr(P,mod):
+    """Show the list and modulus"""
     out = str(P) + " mod {}".format(mod)
     return out
     
@@ -150,17 +156,14 @@ def poly_mult(P, Q, m = 0):
 
 # Divide two polynomial modulo some number
 def poly_divmod(P, Q, m = 2):
-    # Don't modify the inputs
-    P = P[:]
-    Q = Q[:]
-    
+
     # Remove unnecessary zeroes
-    poly_norm(P)
-    poly_norm(Q)
+    P = poly_norm(P)
+    Q = poly_norm(Q)
     
     # Record the degree of the polynomials
-    dP = len(P)-1
-    dQ = len(Q)-1
+    dP = poly_degree(P)
+    dQ = poly_degree(Q)
     
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
@@ -169,7 +172,7 @@ def poly_divmod(P, Q, m = 2):
         qt = [0]*dP
         while dP >= dQ:
             d = [0]*(dP - dQ) + Q
-            mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m) #P[-1] // d[-1]
+            mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m)
             d = [co*mult for co in d]
             P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
             poly_norm(P)
