@@ -25,7 +25,7 @@ def poly_norm(P):
         if len(P) == 1:
             break
         P.pop()
-        
+    
 
 
 # Determine the degree of a polynomial
