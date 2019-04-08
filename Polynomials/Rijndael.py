@@ -1,18 +1,24 @@
-from PolynomialRepresentation import poly_add, poly_divmod, poly_print
+from PolynomialOOP import polynomial
 
 # The finite field GF(2^8) with 256 elements has various expressions
 
+def rij_print(P):
+    s = ""
+    for i in reversed(P.coef):
+        s += str(i)
+    print(s)
+        
 
-def Rijndael_add(P,Q):
+def rij_add(P,Q):
     
     # The Rijndael polynomial 
-    R = [1,1,0,1,1,0,0,0,1]
+    R = polynomial([1,1,0,1,1,0,0,0,1],2)
     
-    S = poly_add(P,Q,2)
-    S = poly_divmod(S,R,2)
-    
-    
-    poly_print(S[1])
-    
+    return (P+Q) % R
 
-Rijndael_add([0,1,1,0,1,1,1],[1,0,1,0,1])
+P = polynomial([0,1,1,0,1,1,1],2)
+Q = polynomial([1,0,1,0,1],2)
+
+rij_print(P)
+rij_print(Q)
+rij_print(rij_add(P,Q))
