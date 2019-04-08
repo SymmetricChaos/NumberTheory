@@ -7,12 +7,20 @@ def degree(poly):
     else:
         return len(poly.coef)-1
 
+def set_modulus(n):
+    runtime_constants[0] == n
+
+runtime_constants = [0]
+
 class polynomial:
     
     
-    def __init__(self,coef,modulus=0):
+    def __init__(self,coef,modulus=None):
         self.coef = coef
-        self.modulus = modulus
+        if modulus == None:
+            self.modulus = runtime_constants[0]
+        else:
+            self.modulus = modulus
         self.norm()
         
     def norm(self):
@@ -82,17 +90,19 @@ class polynomial:
 
     
     def __divmod__(self,poly):
-        """Get the """
+        """Get the quotient and modulus of one polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return polynomial(a,self.modulus), polynomial(b,self.modulus)
 
 
     def __floordiv__(self,poly):
+        """Get the quotient of one polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return polynomial(a,self.modulus)
     
 
     def __mod__(self,poly):
+        """Get the modulus of one polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return polynomial(b,self.modulus)
     
