@@ -16,6 +16,13 @@ def rij_add(P,Q):
     
     return (P+Q) % R
 
+def rij_mult(P,Q):
+    
+    # The Rijndael polynomial 
+    R = polynomial([1,1,0,1,1,0,0,0,1],2)
+    
+    return (P*Q) % R
+
 P = polynomial([0,1,1,0,1,1,1],2)
 Q = polynomial([1,0,1,0,1],2)
 

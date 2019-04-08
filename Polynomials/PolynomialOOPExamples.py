@@ -1,5 +1,5 @@
 from Polynomials.PolynomialOOP import *
-
+from numpy import linspace
 A = polynomial([1,2,3,10],5)
 B = polynomial([4,3,4,2],5)
 C = polynomial([1,2,3,4],5)
@@ -10,7 +10,7 @@ print(A+B)
 
 print(A*B)
 
-print(A.evaluate([1,1.1,1.2]))
+print(A.evaluate(linspace(-5,5,20)))
 
 
 R = polynomial([9,6,7,1,3,4,5],9)
