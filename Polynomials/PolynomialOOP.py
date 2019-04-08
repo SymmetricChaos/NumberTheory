@@ -10,7 +10,7 @@ def degree(poly):
 class polynomial:
     
     def __init__(self,coef,modulus=0):
-        self.coef = poly_norm(coef,modulus)
+        self.coef = coef
         self.modulus = modulus
     
     def __str__(self):
@@ -60,27 +60,45 @@ class polynomial:
 
     
     def __divmod__(self,poly):
-        print(self.coef)
-        print(poly.coef)
-        div,mod = poly_divmod(self.coef,poly.coef,self.modulus)
-        return polynomial(div,self.modulus), polynomial(mod,self.modulus)
+        a,b = poly_divmod(self.coef,poly.coef,self.modulus)
+        return polynomial(a,self.modulus), polynomial(b,self.modulus)
+
+    def __floordiv__(self,poly):
+        a,b = poly_divmod(self.coef,poly.coef,self.modulus)
+        return polynomial(a,self.modulus)
     
+    def __mod__(self,poly):
+        a,b = poly_divmod(self.coef,poly.coef,self.modulus)
+        return polynomial(b,self.modulus)
+    
+
     def evaluate(self,x):
         out = 0
         for pwr,coef in enumerate(self.coef):
             out += coef*(x**pwr) % self.modulus
         return out % self.modulus
-    
+
 A = polynomial([1,2,3,4],5)
 B = polynomial([4,3,4,2],5)
 C = polynomial([1,2,3,4],5)
 print(A)
-print(B)
+print(repr(A))
+
 print(A+B)
 
-print(A)
-print(B)
 print(A*B)
-print(divmod(A,C))
 
-print(dir(1))
+print(A.evaluate(2))
+
+#from Polynomials.PolynomialRepresentation import poly_divmod1
+#R = [9,6,7,1,3,4,5]
+#S = [1,1,0,1,1,0,0,0,1]
+#print(poly_divmod1(S,R,9))
+
+
+R = polynomial([9,6,7,1,3,4,5],9)
+S = polynomial([1,1,0,1,1,0,0,0,1],9)
+print(S//R)
+print(S%R)
+
+#print(dir(1.1))

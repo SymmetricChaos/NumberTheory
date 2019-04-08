@@ -20,22 +20,18 @@ def eq_print(P,width=0):
     
 
 # Convert the polynomial to the normal form by removing trailing zeroes
-def poly_norm(P,mod=0):
-    P = P.copy()
+def poly_norm(P):
     while P[-1] == 0:
         if len(P) == 1:
             break
         P.pop()
-    if mod != 0:
-        for i in range(len(P)):
-            P[i] = P[i] % mod
-    return P
         
 
 
 # Determine the degree of a polynomial
 def poly_degree(P):
-    P = poly_norm(P)
+    P = P.copy()
+    poly_norm(P)
    
     # The zero polynomial is treated as having degree -1
     if P[-1] == 0:
@@ -156,14 +152,18 @@ def poly_mult(P, Q, m = 0):
 
 # Divide two polynomial modulo some number
 def poly_divmod(P, Q, m = 2):
-
+    # Don't modify the inputs
+    P = P[:]
+    Q = Q[:]
+    
     # Remove unnecessary zeroes
-    P = poly_norm(P)
-    Q = poly_norm(Q)
+    poly_norm(P)
+    poly_norm(Q)
+    
     
     # Record the degree of the polynomials
-    dP = poly_degree(P)
-    dQ = poly_degree(Q)
+    dP = len(P)-1
+    dQ = len(Q)-1
     
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
@@ -172,7 +172,7 @@ def poly_divmod(P, Q, m = 2):
         qt = [0]*dP
         while dP >= dQ:
             d = [0]*(dP - dQ) + Q
-            mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m)
+            mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m) #P[-1] // d[-1]
             d = [co*mult for co in d]
             P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
             poly_norm(P)
@@ -186,3 +186,9 @@ def poly_divmod(P, Q, m = 2):
     poly_norm(rm)
     
     return qt,rm
+
+
+def numeric_check(x):
+    """Check if a variable is an integer or float"""
+    if isinstance(x, (int, float)) == False:
+        raise TypeError("Must be float or integer")

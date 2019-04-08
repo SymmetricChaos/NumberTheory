@@ -138,7 +138,7 @@ def poly_mult(P, Q, m = 0):
     return out
 
 # Divide two polynomial modulo some number
-def poly_divmod(P, Q, m = 2):
+def poly_divmod1(P, Q, m = 2):
     # Don't modify the inputs
     P = P[:]
     Q = Q[:]
