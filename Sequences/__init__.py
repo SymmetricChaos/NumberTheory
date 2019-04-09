@@ -22,7 +22,10 @@ from Sequences.Factorials import factorials, alternating_factorials
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
-__all__=["lucas","fibonacci",
+from Sequences.Utils import offset, partial, seq_max
+
+__all__=["offset","partial","seq_max",
+         "lucas","fibonacci",
          "naturals","integers","arithmetic","geometric",
          "pell","pell_lucas","primes","primorials",
          "tribonacci","P_fibonacci", "PQ_fibonacci","padovan",

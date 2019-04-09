@@ -37,26 +37,16 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
  
 
         
-def min_max(sequence,min_val=None,max_val=None,**kwargs):
+def seq_max(sequence,max_val=None,**kwargs):
 
-    if type(min_val) != int and type(min_val) != None:
-        raise Exception("n_vals must be an integer or infinite")
     if type(max_val) != int and type(max_val) != None:
         raise Exception("offset must be an integer or infinite")
-    
-    if min_val == None:
-        min_val = float("-inf")
     
     if max_val == None:
         max_val = float("inf")
     
-    if min_val > max_val:
-        raise Exception("min_val cannot be greather than max_val")
-        
     for val in sequence(**kwargs):
-        if val >= min_val:
-            yield val
-          
+        yield val          
         if val > max_val:
             break
 
