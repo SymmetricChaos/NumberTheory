@@ -1,6 +1,10 @@
 from PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                       poly_divmod, poly_norm
 
+
+runtime_constants = {"modulus" : 0,
+                     "show_mod" : True}
+
 def degree(poly):
     if poly.coef[-1] == 0:
         return -1
@@ -8,9 +12,8 @@ def degree(poly):
         return len(poly.coef)-1
 
 def set_modulus(n):
-    runtime_constants[0] == n
+    runtime_constants["modulus"] == n
 
-runtime_constants = [0]
 
 class polynomial:
     
@@ -18,7 +21,7 @@ class polynomial:
     def __init__(self,coef,modulus=None):
         self.coef = coef
         if modulus == None:
-            self.modulus = runtime_constants[0]
+            self.modulus = runtime_constants["modulus"]
         else:
             self.modulus = modulus
         self.norm()

@@ -1,21 +1,22 @@
-from Polynomials.PolynomialOOP import *
-from numpy import linspace
-A = polynomial([1,2,3,10],5)
-B = polynomial([4,3,4,2],5)
-C = polynomial([1,2,3,4],5)
+from Polynomials.PolynomialOOP import polynomial, set_modulus
+
+#set_modulus(9)
+#print(runtime_constants)
+
+A = polynomial([7,2,0,8],9)
+B = polynomial([10,1,9],9)
+
+print("If we write\npolynomial([7,2,0,8],9)\nthat represents")
 print(A)
-print(repr(A))
+print("\nIf we use a coefficient that is too large it will be reduced. So if we write\npolynomial([10,1,9],9)\nthat represents")
+print(B)
 
-print(A+B)
+print("\nWe can do a lot of familiar arithmetic using polynomials. In the following examples\nA = ",A,"\nB = ",B)
 
-print(A*B)
-
-print(A.evaluate(linspace(-5,5,20)))
-
-
-R = polynomial([9,6,7,1,3,4,5],9)
-S = polynomial([1,1,0,1,1,0,0,0,1],9)
-print(S//R)
-print(S%R)
+print()
+print("A + B = ",A+B)
+print("A * B = ",A*B)
+print("A / B = ",A//B)
+print("A % B = ",A%B)
 
 #print(dir(1.1))
