@@ -1,12 +1,17 @@
 # For elliptic curves over finite fields.
 
-def elliptic_nonsingular(a,b):
-    if 4*a**3 + 27*b**2 == 0:
-        raise Exception("Elliptic curves must be non-singular")
+from ModularArithmetic import modinv
+
+def elliptic_nonsingular(a,b,field):
+    if (4*a**3 + 27*b**2) % field == 0:
+        return False
+    return True
 
 def elliptic_points(a,b,field):
-    elliptic_nonsingular(a,b)
-    out = [(0,0)]
+    if elliptic_nonsingular(a,b) == False:
+        raise Exception("Elliptic curves must be non-singular")
+        
+    out = [(0,0),(float('inf'),float('inf'))]
     for i in range(field):
         R = (i**3 + a*i + b) % field
         for j in range(field):
@@ -15,14 +20,15 @@ def elliptic_points(a,b,field):
                 out.append((i,j))
     return out
 
-
 class elliptic:
     
     def __init__(self,a,b,field):
-        elliptic_nonsingular(a,b)
         self.a = a
         self.b = b
         self.field = field
         self.points = elliptic_points(a,b,field)
 
-print(elliptic_points(1,-1,61))
+def elliptic_add(P,Q,curve):
+    if P not in curve.points or Q not in curve.points:
+        raise Exception('Points must be elements of the curve')
+    
