@@ -8,7 +8,7 @@ def elliptic_nonsingular(a,b,field):
     return True
 
 def elliptic_points(a,b,field):
-    if elliptic_nonsingular(a,b) == False:
+    if elliptic_nonsingular(a,b,field) == False:
         raise Exception("Elliptic curves must be non-singular")
         
     out = [(0,0),(float('inf'),float('inf'))]
@@ -31,4 +31,23 @@ class elliptic:
 def elliptic_add(P,Q,curve):
     if P not in curve.points or Q not in curve.points:
         raise Exception('Points must be elements of the curve')
+
+    if P == Q:
+        tp = (3*P[0]*P[0]+curve.a) * (2*P[1])
+        m = modinv(tp, curve.field )
+    else:
+        tp = (P[1]-Q[1])*(P[0]-Q[0])
+        m = modinv(tp, curve.field )
     
+    x = (m*m - P[0] - Q[0]) % curve.field
+    y = (P[1] + m*(x - P[0])) % curve.field
+    
+    if (x,y) not in curve.points:
+        raise Exception('Something went wrong. The point {} is not on the curve.'.format((x,y)))
+    
+    return (x,y)
+
+curve = elliptic(2,3,97)
+
+
+print(elliptic_add((3,6),(3,6),curve))

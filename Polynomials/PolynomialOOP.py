@@ -26,12 +26,14 @@ class polynomial:
             self.modulus = modulus
         self.norm()
         
+        
     def norm(self):
         """Normalize the representation"""
         poly_norm(self.coef)
         if self.modulus != 0:
             for i in range(len(self.coef)):
                 self.coef[i] = self.coef[i] % self.modulus
+
 
     def __str__(self):
         """Print nicely in descending written form"""
