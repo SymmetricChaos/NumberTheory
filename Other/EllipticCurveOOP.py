@@ -41,6 +41,13 @@ def elliptic_add(P,Q,curve):
     if P == elliptic_inv(Q,curve):
         return (float('inf'),float('inf'))
 
+    # Account for the additive identity
+    if P == (float('inf'),float('inf')):
+        return Q
+    if Q == (float('inf'),float('inf')):
+        return P
+
+
     if P == Q:
         m = (3*P[0]*P[0]+curve.a) * modinv(2*P[1], curve.field)
         
@@ -69,18 +76,14 @@ def elliptic_mult(P,n,curve):
     else:
         out = P
         for i in range(n-1):
-            out = elliptic_add(P,out,curve)
+            out = elliptic_add(out,P,curve)
 
     return out
     
 
 curve = elliptic(2,3,97)
 P = (3,6)
-Q = (3,6)
+Q = (80,10)
 
-print(P)
-print(Q)
-
-print(elliptic_add(P,Q,curve))
 for i in range(10):
-    print(elliptic_mult(P,i,curve))
+    print(elliptic_mult(Q,i,curve))
