@@ -42,11 +42,10 @@ def elliptic_add(P,Q,curve):
         return (float('inf'),float('inf'))
 
     if P == Q:
-        tp = (3*P[0]*P[0]+curve.a) * (2*P[1])
-        m = modinv(tp, curve.field )
+        m = (3*P[0]*P[0]+curve.a) * modinv(2*P[1], curve.field)
+        
     else:
-        tp = (P[1]-Q[1])*(P[0]-Q[0])
-        m = modinv(tp, curve.field )
+        m = (P[1]-Q[1])*modinv( P[0]-Q[0], curve.field )
     
     x = (m*m - P[0] - Q[0]) % curve.field
     y = -(P[1] + m*(x - P[0])) % curve.field
@@ -68,14 +67,14 @@ def elliptic_mult(P,n,curve):
         return P
     
     else:
-        for i in range(n):
-            P = elliptic_add(P,P,curve)
+        out = P
+        for i in range(n-1):
+            out = elliptic_add(P,out,curve)
 
-    return P
+    return out
     
 
 curve = elliptic(2,3,97)
-print(curve.points)
 P = (3,6)
 Q = (3,6)
 
@@ -83,3 +82,5 @@ print(P)
 print(Q)
 
 print(elliptic_add(P,Q,curve))
+for i in range(10):
+    print(elliptic_mult(P,i,curve))
