@@ -20,6 +20,10 @@ def elliptic_points(a,b,field):
                 out.append((i,j))
     return out
 
+def elliptic_inv(P,curve):
+    return (P[0],curve.field-P[1])
+
+
 class elliptic:
     
     def __init__(self,a,b,field):
@@ -27,6 +31,7 @@ class elliptic:
         self.b = b
         self.field = field
         self.points = elliptic_points(a,b,field)
+
 
 def elliptic_add(P,Q,curve):
     if P not in curve.points or Q not in curve.points:
@@ -51,8 +56,23 @@ def elliptic_add(P,Q,curve):
     
     return (x,y)
 
-def elliptic_inv(P,curve):
-    return (P[0],curve.field-P[1])
+
+def elliptic_mult(P,n,curve):
+    if P not in curve.points:
+        raise Exception('Point must be elements of the curve')
+    
+    if n == 0:
+        return (0,0)
+    
+    if n == 1:
+        return P
+    
+    else:
+        for i in range(n):
+            P = elliptic_add(P,P,curve)
+
+    return P
+    
 
 curve = elliptic(2,3,97)
 print(curve.points)
