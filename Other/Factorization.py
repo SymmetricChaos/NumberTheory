@@ -1,4 +1,6 @@
 from math import sqrt, ceil
+from Computation.Roots import int_root, is_square
+
 
 # Needed to avoid circular reference with sequences
 def _primes_():
@@ -71,3 +73,15 @@ def aliquot_sum(n):
     if n == 1:
         return 0
     return sum(factorization(n)[:-1])
+
+
+def fermats_method(n):
+    a = int_root(n)
+    
+    while True:
+        a += 1
+        b2 = a**2-n
+        if is_square(b2):
+            break
+    
+    return a-int_root(b2), a+int_root(b2)
