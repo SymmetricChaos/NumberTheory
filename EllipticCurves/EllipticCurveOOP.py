@@ -68,7 +68,7 @@ def elliptic_mult(P,n,curve):
         raise Exception('Point must be elements of the curve')
     
     if n == 0:
-        return (0,0)
+        return (float('inf'),float('inf'))
     
     if n == 1:
         return P
@@ -81,9 +81,3 @@ def elliptic_mult(P,n,curve):
     return out
     
 
-curve = elliptic(2,3,97)
-P = (3,6)
-Q = (80,10)
-
-for i in range(10):
-    print(elliptic_mult(Q,i,curve))
