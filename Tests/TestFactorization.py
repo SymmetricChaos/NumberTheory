@@ -1,7 +1,7 @@
 from Other.Factorization import fermats_method, fermat_and_trial
 from time import time
 
-n = 16057 * 49613 * 3251
+n = 80460230041
 
 print('Searching for a factor of {}'.format(n))
 

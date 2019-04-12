@@ -75,15 +75,23 @@ def aliquot_sum(n):
     return sum(factorization(n)[:-1])
 
 
-def fermats_method(n,iters=1000000):
+def fermats_method(n,iters=0):
     a = int_root(n)
     fct = False
-    for i in range(iters):
-        a += 1
-        b2 = a**2-n
-        if is_square(b2):
-            fct = True
-            break
+    if iters == 0:
+        while True:
+            a += 1
+            b2 = a**2-n
+            if is_square(b2):
+                fct = True
+                break
+    else:
+        for i in range(iters):
+            a += 1
+            b2 = a**2-n
+            if is_square(b2):
+                fct = True
+                break
     
     if fct == True:
         return a-int_root(b2), a+int_root(b2)
@@ -92,7 +100,6 @@ def fermats_method(n,iters=1000000):
 
 
 def fermat_and_trial(n,lim=None):
-    
     
     a = int_root(n)
     
