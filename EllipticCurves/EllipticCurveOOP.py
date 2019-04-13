@@ -11,7 +11,7 @@ def elliptic_points(a,b,field):
     if elliptic_nonsingular(a,b,field) == False:
         raise Exception("Elliptic curves must be non-singular")
         
-    out = [(0,0),(float('inf'),float('inf'))]
+    out = [(float('inf'),float('inf'))]
     for i in range(field):
         R = (i**3 + a*i + b) % field
         for j in range(field):

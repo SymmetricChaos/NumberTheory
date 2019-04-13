@@ -66,6 +66,9 @@ def lcm(*args):
 # Use egcd to calculate the modular multiplicative inverse
 def modinv(a, m):
     """Modular Multiplicative Inverse"""
+    
+    a = a % m
+    
     g, x, y = egcd(a, m)
     if g != 1:
         raise Exception('modular inverse does not exist')
