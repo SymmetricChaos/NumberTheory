@@ -1,8 +1,10 @@
-from EllipticCurveOOP import elliptic, elliptic_mult
+from EllipticCurveOOP import elliptic, elliptic_mult, elliptic_add
 
 curve = elliptic(2,3,97)
 P = (3,6)
-Q = (80,10)
+Gs = []
 
-for i in range(10):
-    print(elliptic_mult(Q,i,curve))
+print(curve.points)
+
+for i in range(3):
+    print(elliptic_mult(P,i,curve))
