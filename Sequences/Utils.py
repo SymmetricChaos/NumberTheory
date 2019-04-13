@@ -2,6 +2,7 @@ from math import ceil, sqrt
 
 # Skip the first few values of a sequence
 def offset(sequence,offset=0,**kwargs):
+    """Skip the first few values of a sequence"""
     if type(offset) != int:
         raise Exception("offset must be an integer")
         
@@ -15,7 +16,8 @@ def offset(sequence,offset=0,**kwargs):
 
 # Return some number of values with some offset
 def partial(sequence,num_vals=0,offset=0,**kwargs):
-
+    """Return num_val values from a sequence after skipping offset of them"""
+    
     if type(num_vals) != int:
         raise Exception("n_vals must be an integer")
     if type(offset) != int:
@@ -36,11 +38,9 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
         if ctr >= offset:
             yield val
             
- 
-
-        
+# Return values from a sequence until it returns a value above some maximum
 def seq_max(sequence,max_val=None,**kwargs):
-
+    """Return vals until max_val reached"""
     if type(max_val) != int and type(max_val) != None:
         raise Exception("offset must be an integer or infinite")
     
@@ -52,8 +52,10 @@ def seq_max(sequence,max_val=None,**kwargs):
         if val > max_val:
             break
 
+# Print the docstring with the sequence name then the first 20 numbers unless 
+# a number greater than 1000 is found
 def show_vals(sequence,**kwargs):
-    
+    """Values of sequence until value passes 1000 or until 20 values printed"""
     print(sequence.__doc__,end="")
     
     if kwargs == {}:
@@ -63,15 +65,15 @@ def show_vals(sequence,**kwargs):
         for i,j in kwargs.items():
             print("{} = {}".format(i,j),end="  ")
         print()
-        
+    
     part = partial(sequence,20,**kwargs)
     
     L = []
     
     for i in part:
+        L.append(i)
         if i > 1000:
             break
-        L.append(i)
         
     print(*L,sep=", ")
         

@@ -56,7 +56,7 @@ def rough(B):
             
 
 def highly_composite():
-    """High Composite Numbers"""
+    """Highly Composite Numbers"""
     F = 0
     for i in naturals(1):
         L = len(factorization(i))
