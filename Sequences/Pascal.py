@@ -1,4 +1,4 @@
-from Other.Choose import choose
+from Sequences.Utils import choose
 
 def pascal():
     """Pascal's Triangle"""
