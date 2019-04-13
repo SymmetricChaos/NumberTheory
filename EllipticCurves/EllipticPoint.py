@@ -21,6 +21,10 @@ def elliptic_points(a,b,field):
 
 class Elliptic_Curve:
     def __init__(self,a,b,f):
+        
+        if elliptic_nonsingular(a,b,f) == False:
+            raise Exception("Elliptic curves must be non-singular")
+   
         self.a = a
         self.b = b
         self.f = f
@@ -65,6 +69,8 @@ class Elliptic_Point:
     def identity(self):
         return Elliptic_Point(float('inf'),float('inf'),self.curve)
 
+    def coords(self):
+        return self.x, self.y
     
     def __add__(self,other):
         if self.curve != other.curve:
@@ -101,9 +107,35 @@ class Elliptic_Point:
                 out += self
             return out
     
-C = Elliptic_Curve(2,3,97)
-#print(C.points())
-a = Elliptic_Point(3,6,C)
-b = Elliptic_Point(3,6,C)
-print(a+b)
-print(a*6)
+def cyclic_subgroup(a):
+    G = []
+    t = a
+    while True:
+        G.append(t)
+        t = a+t
+        if t == a:
+            break
+    return G
+
+def cyclic_subgroups(C):
+    
+    ps = C.points()
+    Gs = []
+    
+    for i in ps[2:]:
+        P = Elliptic_Point(i[0],i[1],C)
+        Gs.append(cyclic_subgroup(P))
+    
+    return Gs
+        
+        
+    
+    
+C = Elliptic_Curve(2,5,223)
+P = C.points()
+a = Elliptic_Point(P[12][0],P[12][1],C)
+
+print([str(i) for i in cyclic_subgroup(a)])
+print()
+print([len(g) for g in cyclic_subgroups(C)])
+    
