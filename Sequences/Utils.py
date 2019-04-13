@@ -1,3 +1,5 @@
+from math import ceil, sqrt
+
 # Skip the first few values of a sequence
 def offset(sequence,offset=0,**kwargs):
     if type(offset) != int:
@@ -76,6 +78,31 @@ def show_vals(sequence,**kwargs):
     print("\n")
 
 
+# Copy of factorization function to prevent reference issues
+def factorization(n,nontrivial=False):
+    """All Unique Factors"""
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    lim = ceil(sqrt(n))+1
+    
+    # Either include or don't include trivial factors
+    if nontrivial == True:
+        L = []
+    else:
+        L = [1,n]
+    
+    
+    for i in range(2,lim):
+        f,r = divmod(n,i)
+        if r == 0:
+            L.append(i)
+            L.append(f)
+            
+    L = list(set(L))
+    L.sort()
+    
+    return L
 
 # Legacy of a more complicated method
         

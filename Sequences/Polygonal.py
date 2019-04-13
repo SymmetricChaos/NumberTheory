@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals, integers
 from Other.Choose import choose
-from Other.PerfectPower import perfect_power
+from math import floor, log2
+from Sequences.Primes import primes
 
 def polygonal(S):
     """Polygonal Numbers"""
@@ -29,13 +30,30 @@ def simplicial(D):
         yield choose(n+D,D)
 
 
+
 def perfect_powers():
     """Perfect Powers"""
-    for n in naturals():
-        if perfect_power(n):
-            yield n
-
-
+    
+    yield 0
+    yield 1
+    
+    for n in naturals(2):
+        
+        lim = floor(log2(n))+2
+        
+        for i in primes():
+            ctr = 2
+            while True:
+                pwr = ctr**i
+                if pwr > n:
+                    break
+                if pwr == n:
+                    yield n
+                    break
+                ctr += 1
+            if i > lim:
+                break
+    
 # Wrappers for some common polygonal numbers
 def triangular():
     """Triangular Numbers"""

@@ -38,7 +38,7 @@ def arithmetic(b=0,n=1):
         
         yield out
         
-        ctr += n
+        out += n
         
 def geometric(b=1,n=2):
     """Geometric Sequence"""
@@ -55,4 +55,4 @@ def geometric(b=1,n=2):
         
         yield out
         
-        ctr *= n
+        out *= n

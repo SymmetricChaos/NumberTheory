@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Other.Factorization import factorization
+from Sequences.Utils import factorization
 
 ## Generator that returns primes (not my work)
 def primes():
