@@ -1,4 +1,4 @@
-from ModularArithmetic import modinv
+from ModularArithmetic import modinv, residue_points
 
 def elliptic_nonsingular(a,b,field):
     if (4*a**3 + 27*b**2) % field == 0:
@@ -6,16 +6,21 @@ def elliptic_nonsingular(a,b,field):
     return True
 
 def elliptic_points(a,b,field):
+    
     if elliptic_nonsingular(a,b,field) == False:
         raise Exception("Elliptic curves must be non-singular")
-        
+
+    D = residue_points(field)
+    
     out = [(float('inf'),float('inf'))]
+    
     for i in range(field):
-        R = (i**3 + a*i + b) % field
-        for j in range(field):
-            L = (j**2) % field
-            if R == L:
-                out.append((i,j))
+        Y = (i**3 + a*i + b) % field
+        if str(Y) not in D:
+            continue
+        else:
+            for y in D[str(Y)]:
+                out.append((i,y))
     return out
 
 
