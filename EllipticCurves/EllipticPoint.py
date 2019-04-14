@@ -129,7 +129,7 @@ def cyclic_subgroups(C):
         
     
     
-C = Elliptic_Curve(2,5,223)
+C = Elliptic_Curve(2,3,223)
 P = C.points()
 a = Elliptic_Point(P[12][0],P[12][1],C)
 
