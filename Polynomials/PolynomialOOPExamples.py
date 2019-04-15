@@ -1,4 +1,4 @@
-from Polynomials.PolynomialOOP import polynomial, set_modulus
+from Polynomials.PolynomialOOP import polynomial#, set_modulus, runtime_constants
 
 #set_modulus(9)
 #print(runtime_constants)
@@ -18,5 +18,5 @@ print("A + B = ",A+B)
 print("A * B = ",A*B)
 print("A / B = ",A//B)
 print("A % B = ",A%B)
+print("dx A  = ",A.derivative())
 
-#print(dir(1.1))

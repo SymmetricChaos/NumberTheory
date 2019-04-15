@@ -1,7 +1,7 @@
 from EllipticCurves.EllipticPoint import Elliptic_Curve, Elliptic_Point, cyclic_subgroup, cyclic_subgroups
 
 
-a, b, f = 2, 3, 29
+a, b, f = 12, 4, 37
 C = Elliptic_Curve(a,b,f)
 P = C.points()
 p = Elliptic_Point(P[8][0],P[8][1],C)
