@@ -1,5 +1,5 @@
 from PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
-                      poly_divmod, poly_norm
+                      poly_divmod, poly_norm, poly_derivative
 
 
 runtime_constants = {"modulus" : 0,
@@ -111,6 +111,11 @@ class polynomial:
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return polynomial(b,self.modulus)
     
+
+    def derivative(self):
+        c = poly_derivative(self.coef)
+        return polynomial(c,self.modulus)
+
 
     def evaluate(self,X):
         """Evaluate the polynomial at a given point or points"""

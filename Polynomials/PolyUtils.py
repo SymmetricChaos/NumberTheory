@@ -187,8 +187,15 @@ def poly_divmod(P, Q, m = 2):
     
     return qt,rm
 
+def poly_derivative(P):
+    P = P.copy()
+    for i in range(len(P)):
+        P[i] *= i
+    return P[1:]
+
 
 def numeric_check(x):
     """Check if a variable is an integer or float"""
     if isinstance(x, (int, float)) == False:
         raise TypeError("Must be float or integer")
+        
