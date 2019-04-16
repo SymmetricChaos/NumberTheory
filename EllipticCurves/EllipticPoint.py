@@ -95,7 +95,7 @@ class Elliptic_Point:
     
     def __mul__(self,scalar):
         if scalar == 0:
-            return self.curve.identity()
+            return self.curve.identity
         if scalar == 1:
             return self
         else:
