@@ -32,13 +32,11 @@ class Elliptic_Curve:
         self.a = a
         self.b = b
         self.f = f
+        self.identity = Elliptic_Point(float('inf'),float('inf'),self)
     
     def points(self):
         return elliptic_points(self.a, self.b, self.f)
-    
-    def identity(self):
-        return Elliptic_Point(float('inf'),float('inf'),self)
-    
+       
     def __eq__(self,other):
         if self.a != other.a or self.b != other.b or self.f != other.f:
             return False
@@ -55,9 +53,6 @@ class Elliptic_Point:
         self.x = x
         self.y = y
         self.coords = (x,y)
-        self.a = curve.a
-        self.b = curve.b
-        self.f = curve.f
         self.curve = curve
     
     def __str__(self):
@@ -66,20 +61,20 @@ class Elliptic_Point:
     def __eq__(self,other):
         
         if self.x == other.x and self.y == other.y:
-            if self.a == other.a and self.b == other.b:
-                if self.f == other.f:
+            if self.curve.a == other.curve.a and self.curve.b == other.curve.b:
+                if self.curve.f == other.curve.f:
                     return True
         return False
     
     def inv(self):
-        return Elliptic_Point(self.x, (self.f-self.y) % self.f, self.curve)
+        return Elliptic_Point(self.x, (self.curve.f-self.y) % self.curve.f, self.curve)
     
     def __add__(self,other):
         if self.curve != other.curve:
             raise Exception("Points are from different curves")
     
         if self == other.inv():
-            return self.curve.identity()
+            return self.curve.identity
 
         
         # Account for the additive identity
@@ -89,18 +84,18 @@ class Elliptic_Point:
             return self
     
         if self == other:
-            m = (3*self.x*self.x+self.a) * modinv(2*self.y, self.f)
+            m = (3*self.x*self.x+self.curve.a) * modinv(2*self.y, self.curve.f)
         else:
-            m = (self.y-other.y)*modinv( self.x-other.x, self.f )
+            m = (self.y-other.y)*modinv( self.x-other.x, self.curve.f )
     
         
-        x = (m*m - self.x - other.x) % self.f
-        y = -(self.y + m*(x - self.x)) % self.f
+        x = (m*m - self.x - other.x) % self.curve.f
+        y = -(self.y + m*(x - self.x)) % self.curve.f
         return Elliptic_Point(x, y, self.curve)
     
     def __mul__(self,scalar):
         if scalar == 0:
-            return self.identity()
+            return self.curve.identity()
         if scalar == 1:
             return self
         else:
