@@ -1,3 +1,3 @@
+from Polynomials.PolynomialOOP import polynomial
 
-
-__all__=[]
+__all__=["polynomial"]
