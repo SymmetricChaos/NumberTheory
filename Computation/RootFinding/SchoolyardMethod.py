@@ -4,7 +4,7 @@
 # subtract the step size and check again. If the sign has flipped divide the
 # step size in half and begin again.
 
-def simple_method(f,val,tol=.01,max_iter=10000):
+def schoolyard_method(f,val,tol=.01,max_iter=10000):
     """When does f(x) = val?"""
     x = val
     s = x/2
@@ -24,20 +24,40 @@ def simple_method(f,val,tol=.01,max_iter=10000):
                 s = s/2
 
     return x
+	
+def schoolyard_method_convergents(f,val,tol=.01,max_iter=10000):
+    """When does f(x) = val?"""
+    x = val
+    s = x/2
+    for i in range(max_iter):
+		yield x
+        if abs(f(x)-val) < tol:
+            return x
+        
+        if f(x) > val:
+            x -= s
+            if f(x) < val:
+                s = s/2
+            
+        if f(x) < val:
+            x += s
+            if f(x) > val:
+                s = s/2
 
-from math import log2, sqrt
 
-def f1(x):
-    return x**2
+#from math import log2, sqrt
 
-def f2(x):
-    return 2**x
+#def f1(x):
+#    return x**2
 
-N = 835
-print(simple_method(f1,N))
-print(sqrt(N))
+#def f2(x):
+#    return 2**x
 
-print(simple_method(f2,N))
-print(log2(N))
+#N = 1835
+#print(schoolyard_method(f1,N))
+#print(sqrt(N))
+
+#print(schoolyard_method(f2,N))
+#print(log2(N))
 
 
