@@ -1,3 +1,7 @@
+# Converts a decimal integer into a list of integers representing the digits of 
+# the number in another base. This allows it to represent numbers in arbitrarily
+#  large bases.
+
 def baseConvert(n,b,bigendian=False):
     """Convert a decimal integer to another base."""
     if b < 1:
