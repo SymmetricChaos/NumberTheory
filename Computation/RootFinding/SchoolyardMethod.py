@@ -30,7 +30,7 @@ def schoolyard_method_convergents(f,val,tol=.01,max_iter=10000):
     x = val
     s = x/2
     for i in range(max_iter):
-		yield x
+        yield x
         if abs(f(x)-val) < tol:
             return x
         
