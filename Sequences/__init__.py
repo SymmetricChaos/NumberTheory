@@ -14,7 +14,6 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
 
 from Sequences.Pascal import pascal
 
-from Sequences.Catalan import catalan
 
 from Sequences.Bell import bell
 
@@ -23,6 +22,8 @@ from Sequences.Factorials import factorials, alternating_factorials
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
 from Sequences.Utils import offset, partial, seq_max
+
+from Sequences.Combinatorics import catalan, derangements
 
 __all__=["offset","partial","seq_max",
          "lucas","fibonacci",
@@ -40,4 +41,5 @@ __all__=["offset","partial","seq_max",
          "factorials", "alternating_factorials",
          "aliquot", "abundant", "deficient", "perfect",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree"]
+         "squarefree",
+         "derangements"]
