@@ -19,7 +19,7 @@ def primes():
             del D[q]
         q += 1
 
-
+# Cumulative product of prime numbers.
 def primorials():
     """Primoral Numbers"""
 
@@ -30,7 +30,7 @@ def primorials():
         
         out *= i
 
-
+# Positive integers with no prime factors greater than B.
 def smooth(B):
     """Smooth Numbers"""
     for n in naturals(1):
@@ -43,6 +43,7 @@ def smooth(B):
                 break
 
 
+# Positive integers with no prime factors less than B.
 def rough(B):
     """Rough Numbers"""
     for n in naturals(1):
@@ -54,7 +55,7 @@ def rough(B):
         if r:
             yield n
             
-
+# Integers that have more factors than any small positive integer.
 def highly_composite():
     """Highly Composite Numbers"""
     F = 0
@@ -64,13 +65,14 @@ def highly_composite():
             F = L
             yield i
 
-
+# Number of divisors for each positive integer.
 def divisors():
     """Number of Divisors"""
     for i in naturals(1):
         yield len(factorization(i))
         
-        
+# Numbers that have no more than one prime factors. Equivalently those that are
+# not divisible by any square number.
 def squarefree():
     """Squarefree Numbers"""
     for n in naturals(1):
@@ -80,4 +82,8 @@ def squarefree():
             if (i**2) > n:
                 yield n
                 break
+
+#def squarefree_kernel():
+#    """Squarefree Kernels"""
+#       for n in naturals(1):
         
