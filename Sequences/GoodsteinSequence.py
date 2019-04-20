@@ -99,12 +99,15 @@ def hered_to_dec(s):
     return eval(code)
 
 ## Calculate the Goodstein sequence for n out to x terms
-def goodstein_sequence(n,x):
+def goodstein_sequence(n):
+    """Goodstein Sequence"""
     yield n
     t = n
-    for i in range(2,x):
-        H = hered_base(t,i)
-        H = H.replace(str(i),str(i+1))
+    ctr = 1
+    while True:
+        ctr += 1
+        H = hered_base(t,ctr)
+        H = H.replace(str(ctr),str(ctr+1))
         H += " - 1"
         t = hered_to_dec(H)
         yield t
@@ -118,8 +121,10 @@ def goodstein_sequence(n,x):
 #print("\n")
 
 
-
-print("Goodstein Sequence")
-for b,i in enumerate(goodstein_sequence(4,100000000)):
-    if b % 1000000 == 0:
-        print("{:<5}    = {}".format(i,hered_base(i,b+2)))
+#for X in range(4,17):
+#    print("Goodstein Sequence")
+#    for b,i in enumerate(goodstein_sequence(X)):
+#        if b > 10:
+#            break
+#        print(i)
+#        #print("{:<5}    = {}".format(i,hered_base(i,b+2)))
