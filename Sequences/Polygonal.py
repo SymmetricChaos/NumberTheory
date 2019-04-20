@@ -7,7 +7,7 @@ from Sequences.Primes import primes
 def polygonal(S):
     """Polygonal Numbers"""
     
-    must_be_pos_int(S)
+    must_be_pos_int(S=S)
     
     for n in naturals():
         
@@ -16,7 +16,7 @@ def polygonal(S):
 def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
-    must_be_pos_int(S)
+    must_be_pos_int(S=S)
     
     for n in integers():
         
@@ -25,7 +25,7 @@ def gen_polygonal(S):
 def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
-    must_be_pos_int(S)
+    must_be_pos_int(S=S)
     
     for n in naturals():
         yield (S*n)//2 * (n-1)+1
@@ -33,7 +33,7 @@ def cen_polygonal(S):
 def simplicial(D):    
     """Simplicial Numbers"""
     
-    must_be_pos_int(D)
+    must_be_pos_int(D=D)
     
     for n in naturals():
         yield choose(n+D,D)
