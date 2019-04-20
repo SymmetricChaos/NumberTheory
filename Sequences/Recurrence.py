@@ -1,3 +1,5 @@
+from Sequences.Utils import must_be_int
+
 def fibonacci():
     """Fibonacci Numbers"""
     a = 0
@@ -19,6 +21,9 @@ def lucas():
       
 def P_fibonacci(P):
     """P-Fibonacci Numbers"""
+    
+    must_be_int(P=P)
+    
     a = 0
     b = 1
     
@@ -28,6 +33,9 @@ def P_fibonacci(P):
         
 def PQ_fibonacci(P,Q):
     """P,Q-Fibonacci Numbers"""
+    
+    must_be_int(P=P,Q=Q)
+    
     a = 0
     b = 1
     
@@ -37,6 +45,9 @@ def PQ_fibonacci(P,Q):
 
 def P_lucas(P):
     """P-Lucas Numbers"""
+    
+    must_be_int(P=P)
+    
     a = 2
     b = P
     
@@ -46,6 +57,9 @@ def P_lucas(P):
         
 def PQ_lucas(P,Q):
     """P,Q-Lucas Numbers"""
+    
+    must_be_int(P=P,Q=Q)
+    
     a = 2
     b = P
     
