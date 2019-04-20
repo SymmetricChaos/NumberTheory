@@ -3,7 +3,7 @@ from Utils import must_be_int,must_be_pos_int
 def naturals(n=0):
     """Natural Numbers"""
     
-    must_be_int(n)
+    must_be_pos_int(n=n)
     
     ctr = n
     
@@ -44,7 +44,7 @@ def arithmetic(b=0,n=1):
 def geometric(b=1,n=2):
     """Geometric Sequence"""
     
-    must_be_int(b=b,n=n)
+    must_be_pos_int(b=b,n=n)
         
     out = b
     
@@ -55,7 +55,7 @@ def geometric(b=1,n=2):
         out *= n
         
 def powers(n):
-    
+    """Powers of N"""
     must_be_pos_int(n=n)
     
     pw = 1
