@@ -1,5 +1,10 @@
+from Utils import must_be_int,must_be_pos_int
+
 def naturals(n=0):
     """Natural Numbers"""
+    
+    must_be_int(n)
+    
     ctr = n
     
     while True:
@@ -26,11 +31,7 @@ def integers():
 def arithmetic(b=0,n=1):
     """Arithmetic Sequence"""
     
-    if type(b) != int:
-        raise Exception("b must be an integer")
-    
-    if type(n) != int:
-        raise Exception("n must be an integer")
+    must_be_int(b=b,n=n)
         
     out = b
     
@@ -43,11 +44,7 @@ def arithmetic(b=0,n=1):
 def geometric(b=1,n=2):
     """Geometric Sequence"""
     
-    if type(b) != int:
-        raise Exception("b must be an integer")
-    
-    if type(n) != int:
-        raise Exception("n must be an integer")
+    must_be_int(b=b,n=n)
         
     out = b
     
@@ -56,3 +53,15 @@ def geometric(b=1,n=2):
         yield out
         
         out *= n
+        
+def powers(n):
+    
+    must_be_pos_int(n=n)
+    
+    pw = 1
+    
+    while True:
+        yield pw
+        
+        pw *= n
+        

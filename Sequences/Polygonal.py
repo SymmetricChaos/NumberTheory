@@ -30,7 +30,6 @@ def simplicial(D):
         yield choose(n+D,D)
 
 
-
 def perfect_powers():
     """Perfect Powers"""
     
