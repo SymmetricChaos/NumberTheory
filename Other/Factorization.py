@@ -1,5 +1,5 @@
 from math import sqrt, ceil
-from Computation.Roots import int_root, is_square
+from Computation.RootFinding import int_root, is_square
 
 
 # Needed to avoid circular reference with sequences
@@ -25,7 +25,7 @@ def factorization(n,nontrivial=False):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
-    lim = ceil(sqrt(n))+1
+    lim = int_root(n)+1
     
     # Either include or don't include trivial factors
     if nontrivial == True:
