@@ -1,10 +1,13 @@
 from Sequences.Simple import naturals, integers
-from Sequences.Utils import choose
+from Sequences.Utils import choose, must_be_pos_int
 from math import floor, log2
 from Sequences.Primes import primes
 
+
 def polygonal(S):
     """Polygonal Numbers"""
+    
+    must_be_pos_int(S)
     
     for n in naturals():
         
@@ -13,6 +16,8 @@ def polygonal(S):
 def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
+    must_be_pos_int(S)
+    
     for n in integers():
         
         yield ( n**2*(S-2)-n*(S-4) ) // 2
@@ -20,11 +25,15 @@ def gen_polygonal(S):
 def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
+    must_be_pos_int(S)
+    
     for n in naturals():
         yield (S*n)//2 * (n-1)+1
         
-def simplicial(D):
+def simplicial(D):    
     """Simplicial Numbers"""
+    
+    must_be_pos_int(D)
     
     for n in naturals():
         yield choose(n+D,D)
