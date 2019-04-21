@@ -1,4 +1,4 @@
-from Utils import must_be_int,must_be_pos_int
+from Sequences.Utils import must_be_int,must_be_pos_int
 
 def naturals(n=0):
     """Natural Numbers"""
