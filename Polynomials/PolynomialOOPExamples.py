@@ -20,3 +20,10 @@ print("A / B = ",A//B)
 print("A % B = ",A%B)
 #print("dx A  = ",A.derivative())
 
+
+
+C = A // B
+D = A % B
+
+if A == C*B+D:
+    print("Division works correctly")

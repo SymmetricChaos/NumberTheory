@@ -5,12 +5,6 @@ from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
 runtime_constants = {"modulus" : 0,
                      "show_mod" : True}
 
-def degree(poly):
-    if poly.coef[-1] == 0:
-        return -1
-    else:
-        return len(poly.coef)-1
-
 def set_modulus(n):
     runtime_constants["modulus"] == n
 
@@ -87,7 +81,7 @@ class polynomial:
 
     def __eq__(self,poly):
         """Check if two polynomial have the same coefficient and are over the same field"""
-        if degree(self) == degree(poly):
+        if len(self) == len(poly):
             if all([x == y for x,y in zip(self.coef,poly.coef)]):
                 if self.modulus == poly.modulus:
                     return True

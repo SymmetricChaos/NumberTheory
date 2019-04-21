@@ -77,7 +77,14 @@ def poly_print(P,mod):
         if pwr == d:
             if sgn == "+":
                 sgn = ""
-            s = "{}{}x^{}".format(sgn,val,pwr)
+            
+            # Handle powers of 1 and zero that appear as the first term
+            if pwr == 1:
+                s = "{}{}x".format(sgn,val)
+            elif pwr == 0:
+                s = "{}{}".format(sgn,val)
+            else:
+                s = "{}{}x^{}".format(sgn,val,pwr)
         
         # If power is 1 just show x rather than x^1
         elif pwr == 1:
@@ -171,14 +178,18 @@ def poly_divmod(P, Q, m = 0):
     # Use euclidean division of m = 0, representing no modulus
     if m == 0:
         if dP >= dQ:
-            qt = [0]*dP
+            qt = []
             while dP >= dQ:
-                d = [0]*(dP - dQ) + Q
-                mult = qt[dP - dQ] = P[-1] // d[-1]
-                d = [co*mult for co in d]
-                P = [ (coeffP - coeffd) for coeffP, coeffd in zip(P, d)]
-                poly_norm(P)
-                dP = len(P)-1
+                
+                mult = P[-1] // Q[-1]
+                qt = [mult] + qt
+                if mult != 0:
+                    d = [mult * u for u in Q]
+                    P = [u-v for u,v in zip(P,Q)]
+                    
+                P.pop()
+                Q.pop(0)
+                
             rm = P
         else:
             qt = [0]
