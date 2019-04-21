@@ -167,26 +167,22 @@ def poly_divmod(P, Q, m = 0):
     poly_norm(P)
     poly_norm(Q)
     
-    
-    # Record the degree of the polynomials
-    dP = len(P)-1
-    dQ = len(Q)-1
-    
+    # Check for division by zero    
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
     
     # Use euclidean division for m = 0, representing no modulus
     if m == 0:
-        if dP >= dQ:
+        if len(P) >= len(Q):
             qt = []
-            while dP >= dQ:
+            while len(P) >= len(Q) and len(Q) > 1:
                 
                 mult = P[-1] // Q[-1]
                 qt = [mult] + qt
                 if mult != 0:
                     d = [mult * u for u in Q]
-                    P = [u-v for u,v in zip(P,Q)]
-                    
+                    P = [u-v for u,v in zip(P,d)]
+
                 P.pop()
                 Q.pop(0)
                 
@@ -196,6 +192,8 @@ def poly_divmod(P, Q, m = 0):
             rm = P
     # Otherwise use modular arithmetic
     else:
+        dP = len(P)-1
+        dQ = len(Q)-1
         if dP >= dQ:
             qt = [0]*dP
             while dP >= dQ:
