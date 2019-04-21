@@ -113,6 +113,7 @@ class polynomial:
     
 
     def derivative(self):
+        """Calculate the derivative of the polynomial"""
         c = poly_derivative(self.coef)
         return polynomial(c,self.modulus)
 
@@ -124,5 +125,8 @@ class polynomial:
         out = [0]*len(X)
         for pwr,coef in enumerate(self.coef):
             for pos,x in enumerate(X):
-                out[pos] = (out[pos] + coef*(x**pwr)) % self.modulus
+                if self.modulus != 0:
+                    out[pos] = (out[pos] + coef*(x**pwr)) % self.modulus
+                else:
+                    out[pos] = (out[pos] + coef*(x**pwr))
         return out

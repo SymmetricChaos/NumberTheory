@@ -151,7 +151,7 @@ def poly_mult(P, Q, m = 0):
     return out
 
 # Divide two polynomial modulo some number
-def poly_divmod(P, Q, m = 2):
+def poly_divmod(P, Q, m = 0):
     # Don't modify the inputs
     P = P[:]
     Q = Q[:]
@@ -168,19 +168,36 @@ def poly_divmod(P, Q, m = 2):
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
     
-    if dP >= dQ:
-        qt = [0]*dP
-        while dP >= dQ:
-            d = [0]*(dP - dQ) + Q
-            mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m) #P[-1] // d[-1]
-            d = [co*mult for co in d]
-            P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
-            poly_norm(P)
-            dP = len(P)-1
-        rm = [i % m for i in P]
+    # Use euclidean division of m = 0, representing no modulus
+    if m == 0:
+        if dP >= dQ:
+            qt = [0]*dP
+            while dP >= dQ:
+                d = [0]*(dP - dQ) + Q
+                mult = qt[dP - dQ] = P[-1] // d[-1]
+                d = [co*mult for co in d]
+                P = [ (coeffP - coeffd) for coeffP, coeffd in zip(P, d)]
+                poly_norm(P)
+                dP = len(P)-1
+            rm = P
+        else:
+            qt = [0]
+            rm = P
+    # Otherwise use modular arithmetic
     else:
-        qt = [0]
-        rm = [i % m for i in P]
+        if dP >= dQ:
+            qt = [0]*dP
+            while dP >= dQ:
+                d = [0]*(dP - dQ) + Q
+                mult = qt[dP - dQ] = P[-1] * modinv(d[-1],m)
+                d = [co*mult for co in d]
+                P = [ (coeffP - coeffd) % m for coeffP, coeffd in zip(P, d)]
+                poly_norm(P)
+                dP = len(P)-1
+            rm = [i % m for i in P]
+        else:
+            qt = [0]
+            rm = [i % m for i in P]
     
     poly_norm(qt)
     poly_norm(rm)
