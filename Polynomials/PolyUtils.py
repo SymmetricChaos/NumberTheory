@@ -157,7 +157,7 @@ def poly_mult(P, Q, m = 0):
 
     return out
 
-# Divide two polynomial modulo some number
+# Divide two polynomials modulo some number
 def poly_divmod(P, Q, m = 0):
     # Don't modify the inputs
     P = P[:]
@@ -175,7 +175,7 @@ def poly_divmod(P, Q, m = 0):
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
     
-    # Use euclidean division of m = 0, representing no modulus
+    # Use euclidean division for m = 0, representing no modulus
     if m == 0:
         if dP >= dQ:
             qt = []
