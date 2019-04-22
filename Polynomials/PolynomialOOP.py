@@ -54,6 +54,16 @@ class polynomial:
             L = poly_add(self.coef,[poly],self.modulus)
             return polynomial(L,self.modulus)    
 
+    def __sub__(self,poly):
+        """Add an integer or polynomial to a polynomial using the modulus of the first argument"""
+        if type(poly) == polynomial:
+            L = poly_add(self.coef,[-c for c in poly.coef],self.modulus)
+            return polynomial(L,self.modulus)
+        
+        if type(poly) == int:
+            L = poly_add(self.coef,[-poly],self.modulus)
+            return polynomial(L,self.modulus)    
+
 
     def __mul__(self,poly):
         """Multiply a polynomial by an integer or polynomial using the modulus of the first argument"""
