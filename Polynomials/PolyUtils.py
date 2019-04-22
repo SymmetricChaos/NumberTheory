@@ -167,6 +167,8 @@ def poly_divmod(P, Q, m = 0):
     poly_norm(P)
     poly_norm(Q)
     
+    Q = [0]*(len(P)-len(Q)) + Q
+    
     # Check for division by zero    
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
@@ -175,7 +177,11 @@ def poly_divmod(P, Q, m = 0):
     if m == 0:
         if len(P) >= len(Q):
             qt = []
-            while len(P) >= len(Q) and len(Q) > 1:
+
+            while len(P) >= len(Q):
+                
+                if len(P) == 1 or len(Q) == 1:
+                    break
                 
                 mult = P[-1] // Q[-1]
                 qt = [mult] + qt
@@ -207,7 +213,7 @@ def poly_divmod(P, Q, m = 0):
         else:
             qt = [0]
             rm = [i % m for i in P]
-    
+
     poly_norm(qt)
     poly_norm(rm)
     
