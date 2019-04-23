@@ -21,12 +21,11 @@ def eq_print(P,width=0):
 
 # Convert the polynomial to the normal form by removing trailing zeroes
 def poly_norm(P):
-    while P[-1] == 0:
+    while P[-1] == 0 and len(P) > 1:
         if len(P) == 1:
             break
         P.pop()
-    
-
+        
 
 # Determine the degree of a polynomial
 def poly_degree(P):
@@ -164,10 +163,10 @@ def poly_divmod(P, Q, m = 0):
     Q = Q[:]
     
     # Remove unnecessary zeroes
-    poly_norm(P)
-    poly_norm(Q)
+    dP = poly_degree(P)
+    dQ = poly_degree(Q)
     
-    Q = [0]*(len(P)-len(Q)) + Q
+    #Q = [0]*(len(P)-len(Q)) + Q
     
     # Check for division by zero    
     if poly_degree(Q) == -1:
@@ -175,27 +174,20 @@ def poly_divmod(P, Q, m = 0):
     
     # Use euclidean division for m = 0, representing no modulus
     if m == 0:
-        if len(P) >= len(Q):
-            qt = []
-
-            while len(P) >= len(Q):
-                
-                if len(P) == 1 or len(Q) == 1:
-                    break
-                
-                mult = P[-1] // Q[-1]
-                qt = [mult] + qt
-                if mult != 0:
-                    d = [mult * u for u in Q]
-                    P = [u-v for u,v in zip(P,d)]
-
-                P.pop()
-                Q.pop(0)
-                
-            rm = P
+        if dP >= dQ:
+            qt = [0] * dP
+            while dP >= dQ:
+                d = [0]*(dP - dQ) + Q
+                mult = qt[dP - dQ] = P[-1] / d[-1]
+                d = [coeff*mult for coeff in d]
+                P = [ coeffN - coeffd for coeffN, coeffd in zip(P, d)]
+                poly_norm(P)
+                dP = poly_degree(P)
         else:
             qt = [0]
-            rm = P
+        return qt, P
+    
+
     # Otherwise use modular arithmetic
     else:
         dP = len(P)-1
@@ -214,9 +206,9 @@ def poly_divmod(P, Q, m = 0):
             qt = [0]
             rm = [i % m for i in P]
 
-    poly_norm(qt)
-    poly_norm(rm)
-    
+    #poly_norm(qt)
+    #poly_norm(rm)
+    #print(qt)
     return qt,rm
 
 def poly_derivative(P):
