@@ -223,3 +223,21 @@ def numeric_check(x):
     if isinstance(x, (int, float)) == False:
         raise TypeError("Must be float or integer")
         
+#def poly_euclid_div(P,Q):
+#    
+#    qt = [0]*len(P)
+#    rm = P
+#    d = poly_degree(Q)
+#    c = Q[-1]
+#    while poly_degree(rm) >= d:
+#        s = rm[-1]//c
+#        qt[poly_degree(rm)-d] = s
+#        rm = [r-s*q for q,r in zip(Q,rm)]
+#    return (qt, rm)
+#
+#cA = [-42,0,-12,1]
+#cB = [5,-3,1]
+#cC = poly_euclid_div(cA,cB)
+#print(cC)
+#
+#print(poly_add(poly_mult(cB,cC[0]),cC[1]))
