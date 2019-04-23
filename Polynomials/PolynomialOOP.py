@@ -11,7 +11,6 @@ def set_modulus(n):
 
 class polynomial:
     
-    
     def __init__(self,coef,modulus=None):
         self.coef = coef
         if modulus == None:
@@ -64,6 +63,10 @@ class polynomial:
             L = poly_add(self.coef,[-poly],self.modulus)
             return polynomial(L,self.modulus)    
 
+    def __neg__(self):
+        """Additive inverse of each coefficient"""
+        L = [-c for c in self.coef]
+        return polynomial(L,self.modulus)
 
     def __mul__(self,poly):
         """Multiply a polynomial by an integer or polynomial using the modulus of the first argument"""

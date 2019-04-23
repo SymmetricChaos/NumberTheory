@@ -1,29 +1,33 @@
-from Polynomials.PolynomialOOP import polynomial#, set_modulus, runtime_constants
+from Polynomials.PolynomialOOP import polynomial
 
-#set_modulus(9)
-#print(runtime_constants)
+cA = [-14,0,-12,1]
+cB = [5,-3,1]
+A = polynomial(cA)
+B = polynomial(cB)
 
-A = polynomial([7,2,0,5],11)
-B = polynomial([12,1,3],11)
+print("For computation it is easiest to store polynomial is ascending order starting with the lowest coefficient. When writing them out is it traditional to do so starting with the highest coefficient.")
 
-print("If we write\npolynomial([7,2,0,5],11)\nthat represents")
-print(A)
-print("\nIf we use a coefficient that is too large it will be reduced. So if we write\npolynomial([12,1,3],11)\nthat represents")
-print(B)
+print("\nBecause of this \npolynomial({}) = {}".format(cA,A))
 
-print("\nWe can do a lot of familiar arithmetic using polynomials. In the following examples\nA = ",A,"\nB = ",B)
+print("\n\nWe can do a lot of familiar arithmetic using polynomials. In the following examples\nA = ",A,"\nB = ",B)
 
-print()
-print("A + B = ",A+B)
-print("A * B = ",A*B)
-print("A / B = ",A//B)
-print("A % B = ",A%B)
-#print("dx A  = ",A.derivative())
+print("\n")
+print("A +  B =",A+B)
+print("A -  B =",A-B)
+print("A *  B =",A*B)
+print("A // B =",A//B)
+print("A %  B =",A%B)
+print("B ** 2 =",B**2)
 
+#C = A // B
+#D = A % B
+#if A == C*B+D:
+#    print("\nDivision works correctly")
+#else:
+#    print("\nSomething went wrong with division")
+#    print("C * B =", C*B)
 
-
-C = A // B
-D = A % B
-
-if A == C*B+D:
-    print("Division works correctly")
+print("\nThe derivative is also available.")
+print("A' =",A.derivative())
+print("\nAs is negation.")
+print("-A =",-A)
