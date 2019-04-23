@@ -1,6 +1,10 @@
 from PolynomialOOP import polynomial
 from random import randint
 
+# S: the secret
+# n: the number of people to share with
+# k: the number of pieces needed to decipher
+# p: the order of the field used, a prime
 def shamir(S,n,k,p):
     
     if p <= S:
