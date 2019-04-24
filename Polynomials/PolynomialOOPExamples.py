@@ -12,12 +12,12 @@ print("\nBecause of this \npolynomial({}) = {}".format(cA,A))
 print("\n\nWe can do a lot of familiar arithmetic using polynomials. In the following examples\nA = ",A,"\nB = ",B)
 
 print("\n")
-print("A +  B =",A+B)
-print("A -  B =",A-B)
-print("A *  B =",A*B)
-print("A // B =",A//B)
-print("A %  B =",A%B)
-print("B ** 2 =",B**2)
+print("A + B =",A+B)
+print("A - B =",A-B)
+print("A * B =",A*B)
+print("A / B =",A//B)
+print("A % B =",A%B)
+print("A ^ 2 =",A**2)
 
 #C = A // B
 #D = A % B
