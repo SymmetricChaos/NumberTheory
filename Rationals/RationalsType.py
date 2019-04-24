@@ -2,7 +2,7 @@ from ModularArithmetic import gcd, lcm
 
 class Rational:
     
-    def __init__(self,n,d):
+    def __init__(self,n,d=1):
         self.n = n
         self.d = d
         self.simplify()
@@ -16,14 +16,13 @@ class Rational:
         return str(self.n) + "/" + str(self.d)
     
     def __mul__(self,multiplier):
+        
         if type(multiplier) == int:
-            n = self.n * multiplier
-            d = self.d
-            return Rational(n,d)
-        elif type(multiplier) == Rational:
-            n = self.n * multiplier.n
-            d = self.d * multiplier.d
-            return Rational(n,d)
+            multiplier = Rational(multiplier)
+        
+        n = self.n * multiplier.n
+        d = self.d * multiplier.d
+        return Rational(n,d)
         
     def __rmul__(self,multiplier):
         return self*multiplier
@@ -31,7 +30,7 @@ class Rational:
     def __add__(self,addend):
         
         if type(addend) == int:
-            addend = Rational(addend,1)
+            addend = Rational(addend)
         
         L = lcm(self.d,addend.d)
         
@@ -39,6 +38,9 @@ class Rational:
         d = L
         
         return Rational(n,d)
+    
+    def __radd__(self,addend):
+        return self+addend
         
     
 q = Rational(2,10)
@@ -49,4 +51,5 @@ print(q)
 print(q*q)
 print(q*3)
 print(3*q)
-print(q+q*q+1)
+print(1+q)
+print(q+1)
