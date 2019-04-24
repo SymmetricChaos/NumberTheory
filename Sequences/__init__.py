@@ -26,6 +26,8 @@ from Sequences.Combinatorics import catalan, derangements
 
 from Sequences.GoodsteinSequence import goodstein_sequence
 
+from Sequences.Grandi import grandi, grandi_sums
+
 __all__=["offset","partial","seq_max",
          "lucas","fibonacci",
          "naturals","integers","arithmetic","geometric",
@@ -44,4 +46,5 @@ __all__=["offset","partial","seq_max",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree",
          "derangements",
-         "goodstein_sequence"]
+         "goodstein_sequence",
+         "grandi", "grandi_sums"]
