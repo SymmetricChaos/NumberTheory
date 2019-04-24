@@ -12,23 +12,29 @@ class Rational:
         self.n = self.n//g
         self.d = self.d//g
     
+    
+    def __neg__(self):
+        return Rational(-self.n,self.d)
+    
+    
     def __str__(self):
         return str(self.n) + "/" + str(self.d)
     
+    
     def __mul__(self,multiplier):
-        
         if type(multiplier) == int:
             multiplier = Rational(multiplier)
         
         n = self.n * multiplier.n
         d = self.d * multiplier.d
         return Rational(n,d)
-        
+
+
     def __rmul__(self,multiplier):
         return self*multiplier
-    
+
+
     def __add__(self,addend):
-        
         if type(addend) == int:
             addend = Rational(addend)
         
@@ -38,10 +44,18 @@ class Rational:
         d = L
         
         return Rational(n,d)
-    
+
+
     def __radd__(self,addend):
         return self+addend
-        
+
+
+    def __sub__(self,addend):
+        return self + -addend
+
+
+    def __rsub__(self,addend):
+        return addend + -self
     
 q = Rational(2,10)
 
@@ -53,3 +67,4 @@ print(q*3)
 print(3*q)
 print(1+q)
 print(q+1)
+print(q-q)
