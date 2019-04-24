@@ -8,10 +8,12 @@ class Rational:
         self.simplify()
     
     def simplify(self):
-        g = gcd(self.n,self.d)
+        g = abs(gcd(self.n,self.d))
         self.n = self.n//g
         self.d = self.d//g
     
+    def inv(self):
+        return Rational(self.d,self.n)
     
     def __neg__(self):
         return Rational(-self.n,self.d)
@@ -27,6 +29,7 @@ class Rational:
         
         n = self.n * multiplier.n
         d = self.d * multiplier.d
+        
         return Rational(n,d)
 
 
@@ -47,7 +50,7 @@ class Rational:
 
 
     def __radd__(self,addend):
-        return self+addend
+        return self + addend
 
 
     def __sub__(self,addend):
@@ -57,14 +60,12 @@ class Rational:
     def __rsub__(self,addend):
         return addend + -self
     
-q = Rational(2,10)
-
-print(q)
-q.simplify()
-print(q)
-print(q*q)
-print(q*3)
-print(3*q)
-print(1+q)
-print(q+1)
-print(q-q)
+A = Rational(4,10)
+B = Rational(7,16)
+print(A)
+print(B)
+print(A+B)
+print(A-A)
+print(A*B)
+print(-A)
+print(A-B)
