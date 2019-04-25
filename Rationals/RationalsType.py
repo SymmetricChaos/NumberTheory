@@ -3,8 +3,8 @@ from ModularArithmetic import gcd
 class Rational:
     
     def __init__(self,n,d=1):
-        assert type(n) == int
-        assert type(d) == int
+        assert type(n) == int, "Numerator must be int."
+        assert type(d) == int, "Denominator must be int."
         if d < 0:
             d = abs(d)
             n = -n
@@ -73,16 +73,3 @@ class Rational:
                 return True
         return False
     
-A = Rational(4,-10)
-B = Rational(7,16)
-print(A)
-print(B)
-print(A+B)
-print(A-A)
-print(A*B)
-print(-A)
-print(A-B)
-print(A==A)
-print(A==B)
-print(A.inv()+A)
-print(A/B)
