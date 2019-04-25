@@ -52,6 +52,8 @@ class Rational:
 
 
     def __add__(self,addend):
+        if type(addend) == int:
+            addend = Rational(addend)
         
         n = self.n*addend.d + addend.n*self.d
         d = self.d*addend.d
@@ -60,6 +62,8 @@ class Rational:
 
 
     def __radd__(self,addend):
+        if type(addend) == int:
+            addend = Rational(addend)
         return self + addend
 
 
@@ -99,6 +103,27 @@ class Rational:
         f = self.fractional_part()
         return w,f
     
-#    def egyption_form(self):
-#        pass
-    
+    def egyptian_form(self):
+
+        
+        L = []
+        if self.n >= self.d:
+            w,f = self.mixed_form()
+            a = f.n
+            b = f.d
+            L.append(w)
+        else:
+            a = self.n
+            b = self.d
+
+        x = 2
+        while a > 0:
+            F1 = Rational(a*x,b*x)
+            F2 = Rational(-1,x)
+            s = F1+F2
+            if s.n >= 0:
+                a,b = s.n,s.d
+                L.append(Rational(1,x))
+            x += 1
+            
+        return L
