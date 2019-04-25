@@ -15,17 +15,18 @@ print("\n")
 print("A + B =",A+B)
 print("A - B =",A-B)
 print("A * B =",A*B)
-print("A / B =",A//B)
-print("A % B =",A%B)
 print("A ^ 2 =",A**2)
+print("A / B =",A/B)
+print("A % B =",A%B)
 
-#C = A // B
-#D = A % B
-#if A == C*B+D:
-#    print("\nDivision works correctly")
-#else:
-#    print("\nSomething went wrong with division")
-#    print("C * B =", C*B)
+C = A / B
+D = A % B
+if A == C*B+D:
+    print("\nDivision works correctly")
+else:
+    print("\nSomething went wrong with division")
+    print("C * B =", C*B)
+    print("C * B + D =",C*B+D)
 
 print("\nThe derivative is also available.")
 print("A' =",A.derivative())

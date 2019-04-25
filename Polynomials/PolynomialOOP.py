@@ -107,7 +107,7 @@ class polynomial:
         return polynomial(a,self.modulus), polynomial(b,self.modulus)
 
 
-    def __floordiv__(self,poly):
+    def __truediv__(self,poly):
         """Get the quotient of one polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return polynomial(a,self.modulus)
