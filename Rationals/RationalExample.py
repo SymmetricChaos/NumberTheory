@@ -1,8 +1,8 @@
 from RationalsType import Rational
 
 A = Rational(4,10)
-B = Rational(7,16)
-C = Rational(71,18)
+B = Rational(7,19)
+C = Rational(71,22)
 D = A/B
 
 print("Addition and Subtraction")
@@ -27,4 +27,4 @@ print(C,"=",sM)
 print("\nEgyptian Fraction Form")
 E = B.egyptian_form()
 sE = " + ".join([str(e) for e in E])
-print(sum(B.egyptian_form()),"=",sE)
+print(sum(E),"=",sE)

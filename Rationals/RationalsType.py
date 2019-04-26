@@ -30,13 +30,16 @@ class Rational:
 
     def __str__(self):
         return str(self.n) + "/" + str(self.d)
-    
+
+
     def __repr__(self):
         return str(self.n) + "/" + str(self.d)
 
 
     def __mul__(self,multiplier):
-        
+        if type(multiplier) == int:
+            multiplier = Rational(multiplier)
+            
         n = self.n * multiplier.n
         d = self.d * multiplier.d
         
@@ -44,10 +47,14 @@ class Rational:
 
 
     def __rmul__(self,multiplier):
+        if type(multiplier) == int:
+            multiplier = Rational(multiplier)
         return self*multiplier
 
 
     def __truediv__(self,divisor):
+        if type(divisor) == int:
+            divisor = Rational(divisor)
         return self*divisor.inv()
 
 
@@ -83,7 +90,7 @@ class Rational:
     
     
     def __pow__(self,power):
-        assert type(power) == int,"Only powers of integers supported"
+        assert type(power) == int,"Only powers of integers are supported"
         if power == 0:
             return Rational(1)
         if power == 1:
@@ -93,19 +100,23 @@ class Rational:
             d = self.d**power
             return Rational(n,d)
 
+    def whole_part(self):
+        return self.n // self.d
 
     def fractional_part(self):
         return Rational(self.n % self.d, self.d)
     
     
     def mixed_form(self):
+        """Whole and fractional part"""
         w = self.n // self.d
         f = self.fractional_part()
         return w,f
     
     def egyptian_form(self):
-
+        """List of unit fractions that sum to the fraction"""
         
+        # If the fraction is greater than one separate out the whole part
         L = []
         if self.n >= self.d:
             w,f = self.mixed_form()
@@ -116,6 +127,8 @@ class Rational:
             a = self.n
             b = self.d
 
+        # Test each possible unit fraction discarding it if it is too big
+        # Otherwise subtract it out until a unit fraction remains
         x = 2
         while a > 0:
             F1 = Rational(a*x,b*x)
