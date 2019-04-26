@@ -124,6 +124,9 @@ class Rational:
             if s.n >= 0:
                 a,b = s.n,s.d
                 L.append(Rational(1,x))
+                if a == 1:
+                    L.append(Rational(1,b))
+                    return L
             x += 1
             
         return L
