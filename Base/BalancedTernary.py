@@ -13,6 +13,7 @@ def balanced_ternary(n):
     return digits
     
 
+
 str_to_int = {"+": 1, "0": 0, "-": -1}
 int_to_str = {1: "+", 0: "0", -1: "-"}
 
@@ -40,6 +41,3 @@ class BalancedTernary:
 
     def __repr__(self):
         return "".join([int_to_str[s] for s in self.digits])
-
-
-    
