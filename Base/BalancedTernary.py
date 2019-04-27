@@ -42,8 +42,4 @@ class BalancedTernary:
         return "".join([int_to_str[s] for s in self.digits])
 
 
-for i in range(10000):
-    t = BalancedTernary(i)
-    print(i,t)
-    if int(t) != i:
-        break
+    
