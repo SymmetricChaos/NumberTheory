@@ -23,8 +23,7 @@ def full_adder(a,b,c=0):
     cout = a*b + (c*(a+b)%2)
     return s,cout
 
-ten_2 = Binary(10)
-print(ten_2)
+
 
 for x in [0,1]:
     for y in [0,1]:
