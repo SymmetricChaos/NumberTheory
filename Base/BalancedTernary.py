@@ -24,17 +24,26 @@ class BalancedTernary:
             self.digits = balanced_ternary(n)
         if type(n) == str:
             self.digits = [int_to_str[s] for s in n]
-    
+        self.digits.reverse()
+
+
     def __int__(self):
         out = 0
-        for pw,val in enumerate(self.digits):
-            out += val*3**pw
+        for pos,val in enumerate(self.digits[::-1]):
+            out += val*3**pos
         return out
-        
+
+
     def __str__(self):
         return "".join([int_to_str[s] for s in self.digits])
-    
+
+
     def __repr__(self):
         return "".join([int_to_str[s] for s in self.digits])
-    
-print(BalancedTernary(1012))
+
+
+for i in range(10000):
+    t = BalancedTernary(i)
+    print(i,t)
+    if int(t) != i:
+        break
