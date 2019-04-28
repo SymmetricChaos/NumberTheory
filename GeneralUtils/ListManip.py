@@ -13,14 +13,19 @@ def flatten(L):
 
 def equal_spacing(L,w,justify="right"):
     s = ""
-    if justify == "right":
+    if justify == "right" or justify == "r":
         for i in L:
             s += f"{i:>{w}}"
-    if justify == "left":
+    elif justify == "left" or justify == "l":
         for i in L:
             s += f"{i:<{w}}"
     else:
         raise Exception("Justify must be left or right.")
     print(s)
             
-equal_spacing([1,23,456],6)
+def equal_spacing_grid(L,w,justify="right"):
+    for r in L:
+        equal_spacing(r,w,justify)
+#equal_spacing([1,23,456],4,'left')
+#equal_spacing([1,23,456],4,'right')
+equal_spacing_grid([[1,23,456],[65,432,1]],5)
