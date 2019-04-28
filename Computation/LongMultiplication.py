@@ -15,9 +15,9 @@ def long_multiplication(A,B):
     dB = [int(i) for i in str(B)]
     
     rows = []
-    for sh,b in enumerate(dB[::-1]):
+    for sh,b in enumerate(reversed(dB)):
         R = [0]*(len(dA)+len(dB))
-        for pos,a in enumerate(dA[::-1]):
+        for pos,a in enumerate(reversed(dA)):
             R[-(sh+pos)-1] = a*b
         rows.append(R)
     
@@ -38,7 +38,7 @@ def long_multiplication(A,B):
     print()
     print("","  ".join([i for i in out]))
     print()
-    print(int(out))
+    return int(out)
         
         
 for i in range(5):
@@ -46,5 +46,7 @@ for i in range(5):
     B = randint(0,100000)
     print(A)
     print(B)
-    long_multiplication(A,B)
+    C = long_multiplication(A,B)
+    if C != A*B:
+        print("ERROR")
     print("\n\n")
