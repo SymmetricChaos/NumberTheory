@@ -31,3 +31,6 @@ class Binary:
         for pos,val in enumerate(self.digits[::-1]):
             out += val*2**pos
         return out
+    
+    def copy(self):
+        return Binary(self.digits)
