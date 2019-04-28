@@ -1,5 +1,6 @@
 # Flatten a list
 def flatten(L):
+    """Turn a list of iterable into a single list of their elements"""
     flat = []
     for sublist in L:
         try: 
@@ -11,7 +12,9 @@ def flatten(L):
                 flat.append(item)
     return flat
 
+
 def equal_spacing(L,w,justify="right"):
+    """Print a single string with the elements of the list spaced out"""
     s = ""
     if justify == "right" or justify == "r":
         for i in L:
@@ -22,10 +25,9 @@ def equal_spacing(L,w,justify="right"):
     else:
         raise Exception("Justify must be left or right.")
     print(s)
-            
+
+
 def equal_spacing_grid(L,w,justify="right"):
+    """Print a list of iterables into a grid"""
     for r in L:
         equal_spacing(r,w,justify)
-#equal_spacing([1,23,456],4,'left')
-#equal_spacing([1,23,456],4,'right')
-equal_spacing_grid([[1,23,456],[65,432,1]],5)
