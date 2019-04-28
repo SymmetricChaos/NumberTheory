@@ -78,7 +78,7 @@ def poly_factor_1L(P):
             
             
         
-Q = polynomial([-20,5,1,3,2])
+Q = polynomial([-20,5,1,3,5])
 print(Q)
 F = poly_factor_1L(Q)
 print(F)
