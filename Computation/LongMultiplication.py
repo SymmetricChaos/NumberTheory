@@ -1,3 +1,5 @@
+from GeneralUtils import equal_spacing, equal_spacing_grid
+
 def long_multiplication(A,B):
     # Get the digits
     dA = [int(i) for i in str(A)]
@@ -13,14 +15,10 @@ def long_multiplication(A,B):
             R[-(sh+pos)-1] = a*b
         rows.append(R)
     
-    # Show the rows
-    for row in rows:
-        #print("  ",end="")
-        for col in row:
-            print("{:>2}".format(col),end=" ")
-        print()
+    equal_spacing_grid(rows,3)
+
+    # Calculate the addition and
     
-    # Calculate the addition and 
     out = ""
     carry = 0
     C = []
@@ -32,19 +30,21 @@ def long_multiplication(A,B):
         carry = s // 10
         digit = s%10
         out = str(digit) + out
-        
+    
+    equal_spacing(reversed(C),3)
+    
     print()
-    print("","  ".join([i for i in out]))
-    print()
+    equal_spacing(out,3)
+    
     return int(out)
         
     
 from random import randint    
-for i in range(5):
+for i in range(3):
     A = randint(0,20000)
     B = randint(0,A)
     print(f"{A:>7}")
-    print(f"x{B:>6}\n\n")
+    print(f"x{B:>6}\n")
     C = long_multiplication(A,B)
     if C != A*B:
         print("ERROR")
