@@ -33,7 +33,7 @@ def ripple_add(A,B,w=8):
     # Perform the ripple addition of each pair of bits from right to left
     out = [0]*w
     c = 0
-    for i in range(w-1,-1,-1):
+    for i in reversed(range(w)):
         s, c = full_adder(A[i],B[i],c)
         out[i] = s
     
