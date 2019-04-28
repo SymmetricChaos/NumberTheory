@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 
 a = 2
 b = 3
-F = 51
+F = 53
 
 P = Elliptic_Curve(a,b,F).points()
 x = [p[0] for p in P]
