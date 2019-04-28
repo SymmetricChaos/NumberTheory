@@ -23,7 +23,7 @@ def long_multiplication(A,B):
     
     for row in rows:
         for col in row:
-            print("{:>2}".format(col),end="  ")
+            print("{:>2}".format(col),end=" ")
         print()
     
     out = ""
@@ -35,6 +35,9 @@ def long_multiplication(A,B):
         carry = s // 10
         digit = s%10
         out = str(digit) + out
+    print()
+    print("","  ".join([i for i in out]))
+    print()
     print(int(out))
         
         
