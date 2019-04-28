@@ -1,31 +1,27 @@
 from random import randint
 
-def add_with_carry(A,B):
-    assert A < 10
-    assert B < 10
-    s = A+B
-    return s//10, s%10
-
-def sum_with_carry(L):
-    s = sum(L)
-    return s//10, s%10
-
 def long_multiplication(A,B):
+    # Get the digits
     dA = [int(i) for i in str(A)]
     dB = [int(i) for i in str(B)]
     
+    # Go through the digits of each number backward doing single digit
+    # multiplication
     rows = []
     for sh,b in enumerate(reversed(dB)):
         R = [0]*(len(dA)+len(dB))
         for pos,a in enumerate(reversed(dA)):
+            # Store the results of the multiplication in a row
             R[-(sh+pos)-1] = a*b
         rows.append(R)
     
+    # Show the rows
     for row in rows:
         for col in row:
             print("{:>2}".format(col),end=" ")
         print()
     
+    # Calculate the addition and 
     out = ""
     carry = 0
     while len(rows[0]) > 0:
@@ -42,10 +38,10 @@ def long_multiplication(A,B):
         
         
 for i in range(5):
-    A = randint(0,100000)
-    B = randint(0,100000)
-    print(A)
-    print(B)
+    A = randint(0,20000)
+    B = randint(0,20000)
+    print(f"{A:>6}")
+    print(f"x{B:>5}\n")
     C = long_multiplication(A,B)
     if C != A*B:
         print("ERROR")
