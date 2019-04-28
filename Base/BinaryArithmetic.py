@@ -11,30 +11,33 @@ def full_adder(a,b,c=0):
     return s,cout
 
 def ripple_add(A,B,w=8):
-    
+    """Multi bit addition via ripple method"""
     assert type(A) == Binary
     assert type(B) == Binary
     assert len(A.digits) <= w
     assert len(B.digits) <= w
-    
+       
     A = A.digits.copy()
     B = B.digits.copy()
     
+    # prepend zeroes as needed
     while len(A) < w:
         A = [0] + A
     while len(B) < w:
         B = [0] + B
     
+    # Show the bits of the inputs
     print("".join([str(d) for d in A]))
     print("".join([str(d) for d in B]))
     
-    out = []
+    # Perform the ripple addition of each pair of bits from right to left
+    out = [0]*w
     c = 0
-    for i in range(w):
-        s, c = full_adder(A[w-i-1],B[w-i-1],c)
-        out.append(s)
-        
-    f = Binary(out[::-1])
+    for i in range(w-1,-1,-1):
+        s, c = full_adder(A[i],B[i],c)
+        out[i] = s
+    
+    f = Binary(out)
     print(f)
     
     if c == 1:
@@ -42,13 +45,7 @@ def ripple_add(A,B,w=8):
     
     return f
 
-    
-#
-#for x in [0,1]:
-#    for y in [0,1]:
-#        for z in [0,1]:
-#            print(x,y,z,full_adder(x,y,z))
 
-A = Binary(50880)
-B = Binary(32817)
+A = Binary(34564)
+B = Binary(22047)
 C = ripple_add(A,B,16)
