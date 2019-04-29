@@ -1,4 +1,5 @@
 from ModularArithmetic import gcd
+from SimplifiedDivision import long_division
 
 class Rational:
     
@@ -143,3 +144,7 @@ class Rational:
             x += 1
             
         return L
+    
+    def digits(self,n):
+        return long_division(self.n,self.d,prec=n)
+        

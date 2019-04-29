@@ -11,6 +11,3 @@ def cfrac(L):
         b = C.d
     return Rational(a,b)
 
-
-print(cfrac([1,1,1,1,1,1,1,1,1,1]))
-print(89/55)
