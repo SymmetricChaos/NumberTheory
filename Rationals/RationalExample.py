@@ -24,11 +24,6 @@ M = C.mixed_form()
 sM = " + ".join([str(m) for m in M])
 print(C,"=",sM)
 
-print("\nEgyptian Fraction Form")
-E = B.egyptian_form()
-sE = " + ".join([str(e) for e in E])
-print(sum(E),"=",sE)
-
 print("\nDecimal Digits")
 E = B.digits(10)
 print(B,"=",E)
