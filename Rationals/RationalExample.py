@@ -29,9 +29,6 @@ E = B.egyptian_form()
 sE = " + ".join([str(e) for e in E])
 print(sum(E),"=",sE)
 
-
-
-print("\nEgyptian Fraction Form")
-E = Rational(5,122).egyptian_form()
-sE = " + ".join([str(e) for e in E])
-print(sum(E),"=",sE)
+print("\nDecimal Digits")
+E = B.digits(10)
+print(B,"=",E)

@@ -1,5 +1,4 @@
 from ModularArithmetic import gcd
-from SimplifiedDivision import long_division
 
 class Rational:
     
@@ -145,6 +144,29 @@ class Rational:
             
         return L
     
+    # See the computation director for an explanation of the division algorithm
     def digits(self,n):
-        return long_division(self.n,self.d,prec=n)
+        N = self.n
+        D = self.d
+        
+        if(N % D == 0):
+            return(str(N//D))
+        
+        pos = 0
+        digits = []
+        m = []
+        ctr = 0
+        
+        for ctr in range(n):
+            digits.append(N//D)
+            N = (N % D)*10
+            m.append(N)
+        
+        if(pos == 0):
+            x1 = str(digits[0])
+            x2 = "".join(str(e) for e in digits[1:])
+            out = "{}.{}".format(x1,x2)
+            
+        return out
+    
         
