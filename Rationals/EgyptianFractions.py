@@ -1,8 +1,10 @@
 from RationalsType import Rational
+from Other import factorization, subset_sum
 
-def egyptian_form(rational):
-    """List of unit fractions that sum to the fraction"""
-    
+# Use the greedy algorithm to find an egyption fraction representation for a
+# fraction.
+def egyptian_form_greedy(rational):
+
     # If the fraction is greater than one separate out the whole part
     L = []
     if rational.n >= rational.d:
@@ -31,5 +33,32 @@ def egyptian_form(rational):
         
     return L
 
-A = Rational(15,23)
-print(egyptian_form(A))
+# Use sums of divisors to find egyptian fraction representations this always
+# if the denominator is a practical number
+def egyptian_form_practical(rational):
+    N = rational.n
+    D = rational.d
+    F = factorization(D)
+    S = subset_sum(F,N)
+    if S != ():
+        return [Rational(s,D) for s in S]
+    else:
+        return []
+        
+def egyptian_form(rational):
+    E = egyptian_form_practical(rational)
+    if E != []:
+        return E
+    else:
+        return egyptian_form_greedy(rational)
+    
+import random
+for i in range(20):
+    D = random.randint(3,100)
+    N = random.randint(2,D)
+    
+    A = Rational(N,D)
+    print(A)
+    E = egyptian_form(A)
+    print(E)
+    print()
