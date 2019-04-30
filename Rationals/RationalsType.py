@@ -94,12 +94,14 @@ class Rational:
         if d.n >= 0:
             return False
         return True
-        
+
+
     def __lt__(self, other):
         d = self-other
         if d.n > 0:
             return False
         return True
+
 
     def __ge__(self, other):
         d = self-other
@@ -142,8 +144,8 @@ class Rational:
         return w,f
     
     
-    # See the computation directory for an explanation of the division algorithm
     def digits(self,n):
+        """Return the decimal representation of the fraction out to n digits"""
         N = self.n
         D = self.d
         
