@@ -36,12 +36,25 @@ def egyptian_form_greedy(rational):
 # Use sums of divisors to find egyptian fraction representations this always
 # if the denominator is a practical number
 def egyptian_form_practical(rational):
+    
+    L = []
+        
+    if rational.n >= rational.d:
+        w,f = rational.mixed_form()
+        N = f.n
+        D = f.d
+        L.append(w)
+    
+    
     N = rational.n
     D = rational.d
     F = factorization(D)
     S = subset_sum(F,N)
     if S != ():
-        return [Rational(s,D) for s in S]
+        if L != []:
+            return [Rational(s,D) for s in S]
+        else:
+            return L + [Rational(s,D) for s in S]
     else:
         return []
         
@@ -54,8 +67,9 @@ def egyptian_form(rational):
     
 import random
 for i in range(20):
-    D = random.randint(3,100)
-    N = random.randint(2,D)
+    
+    N = random.randint(2,100)
+    D = random.randint(2,100)
     
     A = Rational(N,D)
     print(A)
