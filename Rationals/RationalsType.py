@@ -95,11 +95,25 @@ class Rational:
             return False
         return True
         
+    def __lt__(self, other):
+        d = self-other
+        if d.n > 0:
+            return False
+        return True
+
     def __ge__(self, other):
         d = self-other
         if d.n >= 0:
             return True
         return False
+    
+    
+    def __gt__(self, other):
+        d = self-other
+        if d.n > 0:
+            return True
+        return False
+    
     
     def __pow__(self,power):
         assert type(power) == int,"Only powers of integers are supported"

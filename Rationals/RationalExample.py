@@ -25,4 +25,10 @@ sM = " + ".join([str(m) for m in M])
 print(C,"=",sM)
 
 print("\nDecimal Digits")
+print(A,"=",A.digits(10))
 print(B,"=",B.digits(10))
+print(C,"=",C.digits(10))
+
+print("\nSize Comparison")
+print(A,">",B,"=",A>B)
+print(C,"<=",A,"=",C<=A)
