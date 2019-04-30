@@ -25,5 +25,4 @@ sM = " + ".join([str(m) for m in M])
 print(C,"=",sM)
 
 print("\nDecimal Digits")
-E = B.digits(10)
-print(B,"=",E)
+print(B,"=",B.digits(10))

@@ -100,8 +100,10 @@ class Rational:
             d = self.d**power
             return Rational(n,d)
 
+
     def whole_part(self):
         return self.n // self.d
+
 
     def fractional_part(self):
         return Rational(self.n % self.d, self.d)
@@ -113,9 +115,8 @@ class Rational:
         f = self.fractional_part()
         return w,f
     
-
     
-    # See the computation director for an explanation of the division algorithm
+    # See the computation directory for an explanation of the division algorithm
     def digits(self,n):
         N = self.n
         D = self.d
