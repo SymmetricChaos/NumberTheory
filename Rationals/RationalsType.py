@@ -134,6 +134,7 @@ class Rational:
     def __hash__(self):
         return hash(hash(self.n) + hash(self.d))
 
+
     def whole_part(self):
         return Rational(self.n // self.d)
 
@@ -173,5 +174,8 @@ class Rational:
             out = "{}.{}".format(x1,x2)
             
         return out
+    
+    def mediant(self,other):
+        return Rational(self.n + other.n, self.d + other.d)
     
         

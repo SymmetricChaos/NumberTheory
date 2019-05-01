@@ -15,6 +15,10 @@ print(A,"*",B,"=",A*B)
 print(A,"/",B,"=",A/B)
 print(A,"*",A.inv(),"=",A/A)
 
+print("\nMediant")
+print(A,"⊕",B,"=",A.mediant(B))
+
+
 print("\nInteger Powers")
 print(A,"**",3,"=",A**3)
 print(B,"**",4,"=",B**4)
