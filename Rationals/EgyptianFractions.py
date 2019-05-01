@@ -1,5 +1,6 @@
 from RationalsType import Rational
 from Other import factorization, subset_sum
+from PrimeNumbers import is_prime
 
 # Use the greedy algorithm to find an egyption fraction representation for a
 # fraction.
@@ -40,11 +41,15 @@ def egyptian_form_practical(rational):
         return []
 
 
-#def egyptian_form_prime(rational):
-#    if rational.n % 2 == 0:
-#        #2/p = 2/(p+1) + 2/(p*(p+1))
-#    else:
-#        return []
+def egyptian_form_prime(rational):
+    n = rational.n
+    d = rational.d
+    if n == 2:
+        A = Rational(2,d+1) 
+        B = Rational(2,d*(d+1))
+        return [A,B]
+    else:
+        return []
     
     
     
@@ -56,14 +61,23 @@ def egyptian_form(rational):
     if rational.n >= rational.d:
         w,rational = rational.mixed_form()
         L.append(w)
-    
+    if rational == 0:
+        return L
+        
+    if is_prime(rational.d) and rational.n == 2:
+        E = egyptian_form_prime(rational)
+        print("prime")
+        return L + E
+
     E = egyptian_form_practical(rational)
     if E != []:
-        E.sort()
-    else:
-        E = egyptian_form_greedy(rational)
+        E.sort(reverse = True)
+        print("practical")
+        return L + E
     
-    return L + E
+    print("greedy")
+    return L + egyptian_form_greedy(rational)
+
     
 import random
 for i in range(20):
@@ -72,7 +86,8 @@ for i in range(20):
     D = random.randint(2,100)
     
     A = Rational(N,D)
-    print(A)
     E = egyptian_form(A)
-    print(E)
+    print(A," = ", E)
+    if sum(E) != A:
+        raise Exception("SUM IS WRONG")
     print()
