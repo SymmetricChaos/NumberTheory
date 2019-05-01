@@ -83,6 +83,8 @@ class Rational:
 
 
     def __eq__(self,other):
+        if type(other) == int:
+            other = Rational(other)
         if self.n == other.n:
             if self.d == other.d:
                 return True
