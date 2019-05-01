@@ -131,6 +131,9 @@ class Rational:
             return Rational(n,d)
 
 
+    def __hash__(self):
+        return hash(hash(self.n) + hash(self.d))
+
     def whole_part(self):
         return Rational(self.n // self.d)
 
