@@ -1,6 +1,7 @@
 from RationalsType import Rational
 
 def farey_sequence(n):
+    """Rationals less than one with denominator less than n"""
     assert type(n) == int
     assert n > 0
         
