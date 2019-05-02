@@ -15,7 +15,3 @@ def farey_sequence(n):
             break
         S.append(Rational(p,q))
     return S
-
-for i in range(1,7):
-    F = farey_sequence(i)
-    print(F)
