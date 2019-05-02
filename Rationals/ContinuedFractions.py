@@ -11,3 +11,7 @@ def cfrac(L):
         b = C.d
     return Rational(a,b)
 
+def cfrac_convergents(L):
+    
+    for i in range(1,len(L)):
+        yield cfrac(L[:i])
