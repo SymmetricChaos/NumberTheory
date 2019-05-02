@@ -6,9 +6,6 @@ for i in harmonic_sequence(10):
 
 print()
 
-for i in range(1,6):
+for i in range(1,10):
     F = farey_sequence(i)
-    s = ""
-    for f in F:
-        s += str(f) + " "
-    print(s)
+    print(F)
