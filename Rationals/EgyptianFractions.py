@@ -29,7 +29,7 @@ def egyptian_form_greedy(rational):
 
 # Use sums of divisors to find egyptian fraction representations this always
 # if the denominator is a practical number
-def egyptian_form_practical(rational):
+def egyptian_form_factoring(rational):
     
     N = rational.n
     D = rational.d
@@ -52,7 +52,9 @@ def egyptian_form_prime(rational):
         return []
     
     
-    
+def egyptian_split(d):
+    """Egyptian representation for a fraction with a numerator of 2 and a denominator of d"""
+    return [Rational(1,d), Rational(1,d+1), Rational(1,d*(d+1))]
         
 def egyptian_form(rational):
     
@@ -69,7 +71,7 @@ def egyptian_form(rational):
         print("prime")
         return L + E
 
-    E = egyptian_form_practical(rational)
+    E = egyptian_form_factoring(rational)
     if E != []:
         E.sort(reverse = True)
         print("practical")
@@ -79,15 +81,3 @@ def egyptian_form(rational):
     return L + egyptian_form_greedy(rational)
 
     
-import random
-for i in range(20):
-    
-    N = random.randint(2,100)
-    D = random.randint(2,100)
-    
-    A = Rational(N,D)
-    E = egyptian_form(A)
-    print(A," = ", E)
-    if sum(E) != A:
-        raise Exception("SUM IS WRONG")
-    print()
