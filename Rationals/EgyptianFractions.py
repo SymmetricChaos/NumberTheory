@@ -36,7 +36,9 @@ def egyptian_form_factoring(rational):
     F = factorization(D)
     S = subset_sum(F,N)
     if S != ():
-        return [Rational(s,D) for s in S]
+        out = [Rational(s,D) for s in S]
+        out.sort(reverse = True)
+        return out
     else:
         return []
 
