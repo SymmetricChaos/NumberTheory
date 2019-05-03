@@ -54,10 +54,42 @@ def egyptian_form_prime(rational):
         return []
     
     
-def egyptian_split(d):
-    """Egyptian representation for a fraction with a numerator of 2 and a denominator of d"""
-    return [Rational(1,d), Rational(1,d+1), Rational(1,d*(d+1))]
+def egyptian_split(R):
+    """Split a fraction with a numerator of 1 or 2 into an Egyptian fraction"""
+    
+    if R.n == 2:
+        return [Rational(1,R.d), Rational(1,R.d+1), Rational(1,R.d*(R.d+1))]
+    if R.n == 1:
+        return [Rational(1,2*R.d), Rational(1,2*(R.d+1)), Rational(1,2*R.d*(R.d+1))]
         
+def egyptian_form_splitting(R):
+    """Create an Egyptian fraction representation using splitting"""
+    
+    a,b = divmod(R.n,2)
+    E = egyptian_split(Rational(2,R.d))
+    E = E*a
+    
+    if b == 1:
+        E += [Rational(1,R.d)]
+    
+    changed = True
+    while changed == True:
+        changed = False
+        for pos,e in enumerate(E):
+            if E.count(e) > 1:
+                changed = True
+                del E[pos]
+                E += egyptian_split(e)
+        if len(E) > 20:
+            break
+                
+                
+
+    E.sort(reverse = True)
+    
+    return E
+           
+    
 def egyptian_form(rational):
     
     # If the fraction is greater than one seperate out the whole part
