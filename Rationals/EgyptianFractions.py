@@ -74,7 +74,7 @@ def egyptian_form(rational):
     E = egyptian_form_factoring(rational)
     if E != []:
         E.sort(reverse = True)
-        print("practical")
+        print("factoring")
         return L + E
     
     print("greedy")
