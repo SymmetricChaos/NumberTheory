@@ -16,18 +16,21 @@ for i in range(5):
 
 
 print("\n\nFactoring Method")
-for i in range(5):
-    print()
+ctr = 0
+while ctr < 5:
     N = random.randint(2,100)
     D = random.randint(2,100)
     
     A = Rational(N,D)
+    if A.n == 1:
+        continue
     E = egyptian_form_factoring(A)
     
     if E == []:
-        print(A,"does not work")
+        continue
     else:
-    
+        ctr += 1
+        print()
         print(A," = ", E)
         if sum(E) != A:
             raise Exception("SUM IS WRONG")
