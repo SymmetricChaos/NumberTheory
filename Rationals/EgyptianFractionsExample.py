@@ -2,7 +2,8 @@ from EgyptianFractions import egyptian_form_factoring, egyptian_split
 from RationalsType import Rational
 import random
 
-
+def list_to_sum(L):
+    return " + ".join(str(l) for l in L)
 
 print("Splitting Method")
 for i in range(5):
@@ -10,7 +11,8 @@ for i in range(5):
     D = random.randint(3,100)
     A = Rational(2,D)
     E = egyptian_split(D)
-    print(A," = ",E)
+    print(A," = ",list_to_sum(E))
+    
     if sum(E) != A:
         raise Exception("SUM IS WRONG")
 
@@ -31,6 +33,6 @@ while ctr < 5:
     else:
         ctr += 1
         print()
-        print(A," = ", E)
+        print(A," = ", list_to_sum(E))
         if sum(E) != A:
             raise Exception("SUM IS WRONG")
