@@ -14,10 +14,12 @@ def egyptian_example(func):
         
         A = Rational(N,D)
         
+        # Ignore unit fractions
         if A.n == 1:
             continue
         
         else:
+            # Try to get an expansion
             E = func(A)
             if E != []:
                 ctr += 1

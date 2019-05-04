@@ -80,9 +80,9 @@ def egyptian_form_splitting(R):
                 changed = True
                 del E[pos]
                 E += egyptian_split(e)
-        # The splitting method is extremely bad so stop if it is getting ridiculous
-        if len(E) > 20:
-            return []
+            # The splitting method is extremely bad so stop if it is getting ridiculous
+            if len(E) > 20:
+                return []
                 
     E.sort(reverse = True)
     
