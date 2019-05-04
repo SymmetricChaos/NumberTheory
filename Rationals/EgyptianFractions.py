@@ -80,38 +80,10 @@ def egyptian_form_splitting(R):
                 changed = True
                 del E[pos]
                 E += egyptian_split(e)
+        # The splitting method is extremely bad so stop if it is getting ridiculous
         if len(E) > 20:
-            break
+            return []
                 
-                
-
     E.sort(reverse = True)
     
     return E
-           
-    
-def egyptian_form(rational):
-    
-    # If the fraction is greater than one seperate out the whole part
-    L = []
-    if rational.n >= rational.d:
-        w,rational = rational.mixed_form()
-        L.append(w)
-    if rational == 0:
-        return L
-        
-    if is_prime(rational.d) and rational.n == 2:
-        E = egyptian_form_prime(rational)
-        print("prime")
-        return L + E
-
-    E = egyptian_form_factoring(rational)
-    if E != []:
-        E.sort(reverse = True)
-        print("factoring")
-        return L + E
-    
-    print("greedy")
-    return L + egyptian_form_greedy(rational)
-
-    
