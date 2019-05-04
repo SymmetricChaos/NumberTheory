@@ -9,7 +9,7 @@ def set_modulus(n):
     runtime_constants["modulus"] == n
 
 
-class polynomial:
+class Polynomial:
     
     def __init__(self,coef,modulus=None):
         self.coef = coef
@@ -39,50 +39,50 @@ class polynomial:
 
 
     def __len__(self):
-        """Degree for nonzero polynomials"""
+        """Degree for nonzero Polynomials"""
         return len(self.coef)-1
 
 
     def __add__(self,poly):
-        """Add an integer or polynomial to a polynomial using the modulus of the first argument"""
-        if type(poly) == polynomial:
+        """Add an integer or Polynomial to a Polynomial using the modulus of the first argument"""
+        if type(poly) == Polynomial:
             L = poly_add(self.coef,poly.coef,self.modulus)
-            return polynomial(L,self.modulus)
+            return Polynomial(L,self.modulus)
         
         if type(poly) == int:
             L = poly_add(self.coef,[poly],self.modulus)
-            return polynomial(L,self.modulus)    
+            return Polynomial(L,self.modulus)    
 
     def __sub__(self,poly):
-        """Add an integer or polynomial to a polynomial using the modulus of the first argument"""
-        if type(poly) == polynomial:
+        """Add an integer or Polynomial to a Polynomial using the modulus of the first argument"""
+        if type(poly) == Polynomial:
             L = poly_add(self.coef,[-c for c in poly.coef],self.modulus)
-            return polynomial(L,self.modulus)
+            return Polynomial(L,self.modulus)
         
         if type(poly) == int:
             L = poly_add(self.coef,[-poly],self.modulus)
-            return polynomial(L,self.modulus)    
+            return Polynomial(L,self.modulus)    
 
     def __neg__(self):
         """Additive inverse of each coefficient"""
         L = [-c for c in self.coef]
-        return polynomial(L,self.modulus)
+        return Polynomial(L,self.modulus)
 
     def __mul__(self,poly):
-        """Multiply a polynomial by an integer or polynomial using the modulus of the first argument"""
-        if type(poly) == polynomial:
+        """Multiply a Polynomial by an integer or Polynomial using the modulus of the first argument"""
+        if type(poly) == Polynomial:
             L = poly_mult(self.coef,poly.coef,self.modulus)
-            return polynomial(L,self.modulus)
+            return Polynomial(L,self.modulus)
         
         if type(poly) == int:
             L = poly_mult(self.coef,[poly],self.modulus)
-            return polynomial(L,self.modulus)
+            return Polynomial(L,self.modulus)
 
 
     def __pow__(self,pwr):
-        """Multiply a polynomial by itself"""
+        """Multiply a Polynomial by itself"""
         if pwr == 0:
-            return polynomial([0],self.modulus)
+            return Polynomial([0],self.modulus)
         if pwr == 1:
             return self
         else:
@@ -93,7 +93,7 @@ class polynomial:
 
 
     def __eq__(self,poly):
-        """Check if two polynomial have the same coefficient and are over the same field"""
+        """Check if two Polynomial have the same coefficient and are over the same field"""
         if len(self) == len(poly):
             if all([x == y for x,y in zip(self.coef,poly.coef)]):
                 if self.modulus == poly.modulus:
@@ -102,31 +102,31 @@ class polynomial:
 
     
     def __divmod__(self,poly):
-        """Get the quotient and modulus of one polynomial by another"""
+        """Get the quotient and modulus of one Polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
-        return polynomial(a,self.modulus), polynomial(b,self.modulus)
+        return Polynomial(a,self.modulus), Polynomial(b,self.modulus)
 
 
     def __truediv__(self,poly):
-        """Get the quotient of one polynomial by another"""
+        """Get the quotient of one Polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
-        return polynomial(a,self.modulus)
+        return Polynomial(a,self.modulus)
     
 
     def __mod__(self,poly):
-        """Get the modulus of one polynomial by another"""
+        """Get the modulus of one Polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
-        return polynomial(b,self.modulus)
+        return Polynomial(b,self.modulus)
     
 
     def derivative(self):
-        """Calculate the derivative of the polynomial"""
+        """Calculate the derivative of the Polynomial"""
         c = poly_derivative(self.coef)
-        return polynomial(c,self.modulus)
+        return Polynomial(c,self.modulus)
 
 
     def evaluate(self,X):
-        """Evaluate the polynomial at a given point or points"""
+        """Evaluate the Polynomial at a given point or points"""
         if type(X) != list:
             X = [X]
         out = [0]*len(X)

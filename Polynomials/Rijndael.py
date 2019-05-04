@@ -1,4 +1,4 @@
-from PolynomialOOP import polynomial
+from PolynomialType import Polynomial
 
 # The finite field GF(2^8) with 256 elements has various expressions
 
@@ -12,19 +12,19 @@ def rij_print(P):
 def rij_add(P,Q):
     
     # The Rijndael polynomial 
-    R = polynomial([1,1,0,1,1,0,0,0,1],2)
+    R = Polynomial([1,1,0,1,1,0,0,0,1],2)
     
     return (P+Q) % R
 
 def rij_mult(P,Q):
     
     # The Rijndael polynomial 
-    R = polynomial([1,1,0,1,1,0,0,0,1],2)
+    R = Polynomial([1,1,0,1,1,0,0,0,1],2)
     
     return (P*Q) % R
 
-P = polynomial([0,1,1,0,1,1,1],2)
-Q = polynomial([1,0,1,0,1],2)
+P = Polynomial([0,1,1,0,1,1,1],2)
+Q = Polynomial([1,0,1,0,1],2)
 
 rij_print(P)
 rij_print(Q)

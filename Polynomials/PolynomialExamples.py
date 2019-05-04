@@ -1,9 +1,9 @@
-from Polynomials.PolynomialOOP import polynomial
+from Polynomials.PolynomialType import Polynomial
 
 cA = [-14,0,-12,1]
 cB = [5,-3,1]
-A = polynomial(cA)
-B = polynomial(cB)
+A = Polynomial(cA)
+B = Polynomial(cB)
 
 print("For computation it is easiest to store polynomial is ascending order starting with the lowest coefficient. When writing them out is it traditional to do so starting with the highest coefficient.")
 

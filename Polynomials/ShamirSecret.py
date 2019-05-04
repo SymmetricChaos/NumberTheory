@@ -1,4 +1,4 @@
-from PolynomialOOP import polynomial
+from PolynomialType import Polynomial
 from random import randint
 
 # S: the secret
@@ -14,7 +14,7 @@ def shamir(S,n,k,p):
         
     A = [S] + [randint(1,p) for i in range(k-1)]
     
-    PA = polynomial(A,p)
+    PA = Polynomial(A,p)
     
     ps = [(i,PA.evaluate(i)) for i in range(1,n+1)]
     

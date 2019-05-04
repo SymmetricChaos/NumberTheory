@@ -1,4 +1,4 @@
-from PolynomialOOP import polynomial
+from PolynomialTye import Polynomial
 from math import sqrt, floor
 from itertools import product as cart_product
 
@@ -36,7 +36,7 @@ def factor_at_root(P):
     n = len(P)
     for i in range(0,(n//2)+1):
         if P.evaluate(i)[0] == 0:
-            return polynomial([-i,1])
+            return Polynomial([-i,1])
     return P
 
 
@@ -47,7 +47,7 @@ def factor_at_nonzero(P):
         M = point_factors(P,i)
         Z = [flatten(z) for z in cart_product(Z,M)]
         for u in Z:
-            Q = polynomial(u)
+            Q = Polynomial(u)
             S = P//Q
             if len(S) == i and S.coef[-1] == 0:
                 return Q
@@ -78,7 +78,7 @@ def poly_factor_1L(P):
             
             
         
-Q = polynomial([-20,5,1,3,5])
+Q = Polynomial([-20,5,1,3,5])
 print(Q)
 F = poly_factor_1L(Q)
 print(F)
