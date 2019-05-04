@@ -53,6 +53,9 @@ def poly_print(P,mod):
     # Get the degree of the polynomial in case it is in non-normal form
     d = poly_degree(P)
     
+    if d == -1:
+        return f"0 (mod {mod})"
+    
     out = ""
     
     # Step through the ascending list of coefficients backward

@@ -2,19 +2,12 @@ from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                       poly_divmod, poly_norm, poly_derivative
 
 
-runtime_constants = {"modulus" : 0,
-                     "show_mod" : True}
-
-def set_modulus(n):
-    runtime_constants["modulus"] == n
-
-
 class Polynomial:
     
     def __init__(self,coef,modulus=None):
         self.coef = coef
         if modulus == None:
-            self.modulus = runtime_constants["modulus"]
+            self.modulus = 0
         else:
             self.modulus = modulus
         self.norm()
