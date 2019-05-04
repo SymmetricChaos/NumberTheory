@@ -10,5 +10,3 @@ def rising_factorial(x,n):
         out *= x+k
     return out
 
-print(falling_factorial(5,4))
-print(rising_factorial(5,4))
