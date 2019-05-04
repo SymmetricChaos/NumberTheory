@@ -15,10 +15,10 @@ def long_multiplication(A,B):
             R[-(sh+pos)-1] = a*b
         rows.append(R)
     
-    equal_spacing_grid(rows,3)
+    # Deep copy of rows
+    R = [rows[i].copy() for i in range(len(rows))]
 
-    # Calculate the addition and
-    
+    # Calculate the addition
     out = ""
     carry = 0
     C = []
@@ -30,9 +30,9 @@ def long_multiplication(A,B):
         carry = s // 10
         digit = s%10
         out = str(digit) + out
-    
-    equal_spacing(reversed(C),3)
-    
+
+    equal_spacing(reversed(["  Carries"]+C),3)
+    equal_spacing_grid(R,3)
     print()
     equal_spacing(out,3)
     
