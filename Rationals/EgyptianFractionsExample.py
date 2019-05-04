@@ -1,12 +1,15 @@
 from EgyptianFractions import egyptian_form_factoring, \
-                              egyptian_form_splitting
+                              egyptian_form_splitting, \
+                              egyptian_form_greedy
 from RationalsType import Rational
 import random
 
 def list_to_sum(L):
     return " + ".join(str(l) for l in L)
 
-def egyptian_example(func):
+def egyptian_example(func,title="",failure_explanation="that don't work"):
+    print(title)
+    rounds = 0
     ctr = 0
     while ctr < 5:
         D = random.randint(2,50)
@@ -19,6 +22,7 @@ def egyptian_example(func):
             continue
         
         else:
+            rounds += 1
             # Try to get an expansion
             E = func(A)
             if E != []:
@@ -27,11 +31,10 @@ def egyptian_example(func):
                 print(A," = ", list_to_sum(E))
                 if sum(E) != A:
                     raise Exception("SUM IS WRONG")
+    print("\n(Found {} fractions {})".format(rounds-ctr,failure_explanation))
 
-
-print("Splitting Method")
-egyptian_example(egyptian_form_splitting)
-
-
-print("\n\nFactoring Method")
-egyptian_example(egyptian_form_factoring)
+egyptian_example(egyptian_form_factoring,"Factoring Method")
+print("\n\n")
+egyptian_example(egyptian_form_splitting,"Splitting Method","that are too long")
+print("\n\n")
+egyptian_example(egyptian_form_greedy,"Greedy Method")
