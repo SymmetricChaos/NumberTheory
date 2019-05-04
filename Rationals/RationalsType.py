@@ -175,7 +175,3 @@ class Rational:
             
         return out
     
-    def mediant(self,other):
-        return Rational(self.n + other.n, self.d + other.d)
-    
-        

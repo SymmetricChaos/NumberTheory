@@ -1,4 +1,5 @@
 from RationalsType import Rational
+from RationalUtils import mediant
 
 A = Rational(4,10)
 B = Rational(7,19)
@@ -16,8 +17,9 @@ print(A,"/",B,"=",A/B)
 print(A,"*",A.inv(),"=",A/A)
 
 print("\nMediant")
-print(A,"⊕",B,"=",A.mediant(B))
-
+print(A,"⊕",B,"=",mediant(A,B))
+print(B,"⊕",C,"=",mediant(B,C))
+print(A,"⊕",A,"=",mediant(A,A))
 
 print("\nInteger Powers")
 print(A,"**",3,"=",A**3)
