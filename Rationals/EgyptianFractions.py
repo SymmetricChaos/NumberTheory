@@ -5,23 +5,24 @@ from PrimeNumbers import is_prime
 # Use the greedy algorithm to find an egyption fraction representation for a
 # fraction.
 def egyptian_form_greedy(rational):
-
-    a = rational.n
-    b = rational.d
+    
+    N = rational.n
+    D = rational.d
+    assert N < D
 
     L = []
     # Test each possible unit fraction discarding it if it is too big
     # Otherwise subtract it out until a unit fraction remains
     x = 2
-    while a > 0:
-        F1 = Rational(a*x,b*x)
+    while N > 0:
+        F1 = Rational(N*x,D*x)
         F2 = Rational(-1,x)
         s = F1+F2
         if s.n >= 0:
-            a,b = s.n,s.d
+            N,D = s.n,s.d
             L.append(Rational(1,x))
-            if a == 1:
-                L.append(Rational(1,b))
+            if N == 1:
+                L.append(Rational(1,D))
                 return L
         x += 1
         
@@ -33,6 +34,8 @@ def egyptian_form_factoring(rational):
     
     N = rational.n
     D = rational.d
+    assert N < D
+    
     F = factorization(D)
     S = subset_sum(F,N)
     if S != ():
@@ -44,11 +47,13 @@ def egyptian_form_factoring(rational):
 
 
 def egyptian_form_prime(rational):
-    n = rational.n
-    d = rational.d
-    if n == 2 and is_prime(d):
-        A = Rational(2,d+1) 
-        B = Rational(2,d*(d+1))
+    N = rational.n
+    D = rational.d
+    assert N < D
+    
+    if N == 2 and is_prime(D):
+        A = Rational(2,D+1) 
+        B = Rational(2,D*(D+1))
         return [A,B]
     else:
         return []
@@ -62,15 +67,23 @@ def egyptian_split(R):
     if R.n == 1:
         return [Rational(1,2*R.d), Rational(1,2*(R.d+1)), Rational(1,2*R.d*(R.d+1))]
         
-def egyptian_form_splitting(R):
+def egyptian_form_splitting(rational,lim=4):
     """Create an Egyptian fraction representation using splitting"""
     
-    a,b = divmod(R.n,2)
-    E = egyptian_split(Rational(2,R.d))
+    N = rational.n
+    D = rational.d
+    assert N < D
+    
+    # The splitting method is extremely bad so stop if it is getting ridiculous
+    if N > lim:
+        return []
+    
+    a,b = divmod(N,2)
+    E = egyptian_split(Rational(2,D))
     E = E*a
     
     if b == 1:
-        E += [Rational(1,R.d)]
+        E += [Rational(1,D)]
     
     changed = True
     while changed == True:
@@ -80,9 +93,7 @@ def egyptian_form_splitting(R):
                 changed = True
                 del E[pos]
                 E += egyptian_split(e)
-                # The splitting method is extremely bad so stop if it is getting ridiculous
-                if len(E) > 30:
-                    return []
+
                 
     E.sort(reverse = True)
     
