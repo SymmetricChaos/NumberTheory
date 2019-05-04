@@ -13,7 +13,7 @@ def egcd(a, b):
         g, y, x = egcd(b % a, a)
         return (g, x - (b // a) * y, y)
 
-# Determine the greatest common denominator for a set of numbers
+# Determine the greatest common denominator for a set of integers
 def gcd(*args):
     """Greatest Common Denominator"""
 
@@ -38,7 +38,7 @@ def gcd(*args):
     return gcd(a,b)
 
 
-# Determine the least common multiple for a set of numbers
+# Determine the least common multiple for a set of integers
 def lcm(*args):
     """Least Common Multiple"""
     
