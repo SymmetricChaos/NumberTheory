@@ -1,4 +1,4 @@
-from RationalsType import Rational
+from RationalType import Rational
 
 def harmonic_sequence(n):
     H = Rational(1,1)

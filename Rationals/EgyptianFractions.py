@@ -1,4 +1,4 @@
-from RationalsType import Rational
+from RationalType import Rational
 from Other import factorization, subset_sum
 from PrimeNumbers import is_prime
 

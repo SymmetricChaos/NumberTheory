@@ -1,4 +1,4 @@
-from RationalsType import Rational
+from RationalType import Rational
 from RationalUtils import mediant
 
 A = Rational(4,10)

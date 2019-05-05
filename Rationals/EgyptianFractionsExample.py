@@ -1,7 +1,7 @@
 from EgyptianFractions import egyptian_form_factoring, \
                               egyptian_form_splitting, \
                               egyptian_form_greedy
-from RationalsType import Rational
+from RationalType import Rational
 import random
 
 def list_to_sum(L):

@@ -1,4 +1,4 @@
-from RationalsType import Rational
+from RationalType import Rational
 
 def mediant(A,B):
     """Mediant of two rationals"""
@@ -6,7 +6,7 @@ def mediant(A,B):
     assert type(B) == Rational
     return Rational(A.n + B.n, A.d + B.d)
 
-def lcm(*args):
+def rational_lcm(*args):
     """Least common multiple of rationals"""
     # Handle the case that a list is provided
     if len(args) == 1 and type(args[0]) is list:

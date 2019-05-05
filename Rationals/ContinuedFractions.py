@@ -1,7 +1,8 @@
-from RationalsType import Rational
+from RationalType import Rational
 from math import floor
 
 def cfrac(L):
+    """Rational representation of a simple continued fraction"""
     a,b = L[-1],1
     del L[-1]
     for i in reversed(L):
@@ -13,6 +14,7 @@ def cfrac(L):
     return Rational(a,b)
 
 def cfrac_convergents(L):
+    """Rational convergents of a simple continued fraction."""
     N = [1,L[0]]
     D = [0,1]
     con = 2
@@ -26,8 +28,10 @@ def cfrac_convergents(L):
         yield Rational(N[-1],D[-1])
         
         con += 1
-        
+
+
 def cfrac_expansion(rational):
+    """Simple continued fraction expansion of rational"""
     assert type(rational) == Rational
     
     L = []
