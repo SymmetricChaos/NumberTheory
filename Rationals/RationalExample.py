@@ -4,7 +4,6 @@ from RationalUtils import mediant
 A = Rational(4,10)
 B = Rational(7,19)
 C = Rational(71,22)
-D = A/B
 
 print("Addition and Subtraction")
 print(A,"+",B,"=",A+B)

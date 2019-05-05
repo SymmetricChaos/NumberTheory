@@ -2,10 +2,8 @@ from EgyptianFractions import egyptian_form_factoring, \
                               egyptian_form_splitting, \
                               egyptian_form_greedy
 from RationalType import Rational
+from GeneralUtils import list_to_sum
 import random
-
-def list_to_sum(L):
-    return " + ".join(str(l) for l in L)
 
 def egyptian_example(func,title="",failure_explanation="that don't work"):
     print(title)

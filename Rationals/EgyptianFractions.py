@@ -58,7 +58,7 @@ def egyptian_form_prime(rational):
     else:
         return []
     
-    
+# Fractions of a certain form can be split into 
 def egyptian_split(R):
     """Split a fraction with a numerator of 1 or 2 into an Egyptian fraction"""
     
@@ -74,7 +74,8 @@ def egyptian_form_splitting(rational,lim=4):
     D = rational.d
     assert N < D
     
-    # The splitting method is extremely bad so stop if it is getting ridiculous
+    # The splitting method is extremely bad so don't even try if the result is
+    # guaranteed to be ridiculous.
     if N > lim:
         return []
     
