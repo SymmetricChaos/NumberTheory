@@ -38,3 +38,8 @@ print(C,"=",C.digits(10))
 print("\nSize Comparison")
 print(A,">",B,"=",A>B)
 print(C,"<=",A,"=",C<=A)
+
+print("\nContinued Fraction Expansion")
+print(A,"=",A.cfrac())
+print(B,"=",B.cfrac())
+print(C,"=",C.cfrac())

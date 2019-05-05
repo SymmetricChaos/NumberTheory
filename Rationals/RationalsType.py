@@ -136,7 +136,7 @@ class Rational:
 
 
     def whole_part(self):
-        return Rational(self.n // self.d)
+        return self.n // self.d
 
 
     def fractional_part(self):
@@ -174,4 +174,17 @@ class Rational:
             out = "{}.{}".format(x1,x2)
             
         return out
+    
+    def cfrac(self):
+        """Canonical simple continued fraction representation"""
+        tmp = Rational(self.n,self.d)
+        L = []
+        while True:
+            w,f = tmp.mixed_form()
+            L.append(w)
+            if f == 0:
+                break
+            tmp = f.inv()
+    
+        return L
     
