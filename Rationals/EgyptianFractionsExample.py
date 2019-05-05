@@ -33,6 +33,6 @@ def egyptian_example(func,title="",failure_explanation="that don't work"):
 
 egyptian_example(egyptian_form_factoring,"Factoring Method")
 print("\n\n")
-egyptian_example(egyptian_form_splitting,"Splitting Method","that are too long")
+egyptian_example(egyptian_form_splitting,"Splitting Method","that would be too long")
 print("\n\n")
 egyptian_example(egyptian_form_greedy,"Greedy Method")

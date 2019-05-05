@@ -1,13 +1,17 @@
 from FareySequence import farey_sequence
-from HarmonicSequence import harmonic_sequence
+from HarmonicSequence import harmonic_series, alternating_harmonic_series
 
 print("Partial Sums of the Harmonic Series")
-for i in harmonic_sequence(10):
-    print(i)
+for i in harmonic_series(9):
+    print(f"{str(i):<9}  {i.digits(5)}")
 
-print()
 
-print("Farey Sequences")
-for i in range(1,10):
+print("\nPartial Sums of the Alternating Harmonic Series")
+for i in alternating_harmonic_series(9):
+    print(f"{str(i):<9}  {i.digits(5)}")
+
+
+print("\nFarey Sequences")
+for i in range(1,5):
     F = farey_sequence(i)
     print(F)
