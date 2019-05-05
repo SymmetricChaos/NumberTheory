@@ -47,3 +47,10 @@ def tuples_to_lists(L):
     for w in range(W):
         out.append( [i[w] for i in L] )
     return out
+
+
+def list_to_sum(L):
+    """Turns a list into a summation"""
+    S = " + ".join(str(elem) for elem in L)
+    S = S.replace("+ -","- ")
+    return S
