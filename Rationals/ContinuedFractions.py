@@ -1,4 +1,5 @@
 from RationalsType import Rational
+from math import floor
 
 def cfrac(L):
     a,b = L[-1],1
@@ -36,5 +37,19 @@ def cfrac_expansion(rational):
         if f == 0:
             break
         rational = f.inv()
+
+    return L
+
+def cfrac_func(func,x,lim):
+    """Continued fraction for a function at some point. Stability not guaranteed.""
+    n = func(x)
+    L = []
+    for i in range(lim):
+        w = floor(n // 1)
+        x = n % 1
+        if x == 0:
+            break
+        L.append(w)
+        n = 1/x
 
     return L
