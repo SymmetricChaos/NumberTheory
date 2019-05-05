@@ -41,7 +41,7 @@ def cfrac_expansion(rational):
     return L
 
 def cfrac_func(func,x,lim):
-    """Continued fraction for a function at some point. Stability not guaranteed.""
+    """Continued fraction for a function at some point. Stability not guaranteed."""
     n = func(x)
     L = []
     for i in range(lim):

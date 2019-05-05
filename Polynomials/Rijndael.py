@@ -34,7 +34,6 @@ class Rijndael:
         for i in reversed(self.poly.coef):
             s += str(i)
         return s
-    
 
 
 P = Rijndael([0,1,1,0,1,1,1,1])
