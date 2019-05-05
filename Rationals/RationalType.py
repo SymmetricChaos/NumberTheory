@@ -154,10 +154,7 @@ class Rational:
         """Return the decimal representation of the fraction out to n digits"""
         N = self.n
         D = self.d
-        
-        if(N % D == 0):
-            return(str(N//D))
-        
+                
         pos = 0
         digits = []
         m = []
