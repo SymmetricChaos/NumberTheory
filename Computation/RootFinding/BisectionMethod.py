@@ -51,8 +51,3 @@ def bisection_method_convergents(a,b,func,iters=10):
             b = c
         yield c
 
-def f(x):
-    return x**3 - x - 2
-print(bisection_method(0,10,f))
-for i in bisection_method_convergents(1,10,f):
-    print(i)
