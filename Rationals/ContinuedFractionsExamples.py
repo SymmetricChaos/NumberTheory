@@ -8,8 +8,8 @@ for C in cfrac_convergents([1,1,1,1,1,1,1,1,1,1,1]):
     
     
 print("\n\nConvergents of √2")
-for C in cfrac_convergents([1,2,2,2,2,2,2]):
-    print("{:<7}  {}".format(str(C),C.digits(5)))
+for C in cfrac_convergents([1,2,2,2,2,2]):
+    print("{:<6}  {}".format(str(C),C.digits(5)))
 
 print("\nDifferences of Successive Convergents of √2")
 E = [i for i in cfrac_convergents([1,2,2,2,2,2,2])]
@@ -18,19 +18,17 @@ for i in range(len(E)-1):
     s = " " if d > 0 else ""
     print(f"{s}{str(d)}")
 
-A = Rational(534,342)
-print(f"\n\nContinued Fraction Representations of {str(A)}")
+A = Rational(20461,1793)
+print(f"\n\nContinued Fraction of {str(A)}")
 print(A.cfrac())
 
 
-print(f"\nContinued Convergents of {str(A)}")
+print(f"\nConvergents")
 for C in cfrac_convergents(A.cfrac()):
-    print("{:<6}  {}".format(str(C),C.digits(5)))
+    print(f"{str(C)}")
 
 
-print("\n\nContinued Fraction Representations for Square Roots")
+print("\n\nContinued Fraction for Square Roots")
 for i in [2,3,5,6,7,8]:
     E = cfrac_func(sqrt,i,5)
     print(f"√{i} ≈ {E} = {str(cfrac(E)):<7} ≈ {cfrac(E).digits(3)}")    
-
-
