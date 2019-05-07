@@ -43,19 +43,19 @@ def schoolyard_method_convergents(x,f,step=1,tol=.01,max_iter=100):
                 s = s/2
 
 
-from math import log2, sqrt
-
-N = 1835
-def f1(x):
-    return x**2 - N
-
-def f2(x):
-    return 2**x - N
-
-print(schoolyard_method(0,f1))
-print(sqrt(N))
-
-print(schoolyard_method(0,f2))
-print(log2(N))
-
-
+#from math import log2, sqrt
+#
+#N = 1835
+#def f1(x):
+#    return x**2 - N
+#
+#def f2(x):
+#    return 2**x - N
+#
+#print(schoolyard_method(0,f1))
+#print(sqrt(N))
+#
+#print(schoolyard_method(0,f2))
+#print(log2(N))
+#
+#
