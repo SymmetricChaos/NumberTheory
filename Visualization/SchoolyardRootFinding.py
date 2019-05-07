@@ -1,5 +1,5 @@
 from Polynomials import Polynomial
-from Computation.RootFinding import bisection_method_convergents
+from Computation.RootFinding import schoolyard_method_convergents
 from numpy import linspace
 import matplotlib.pyplot as plt
 
@@ -9,7 +9,7 @@ fig.set_size_inches(10, 6)
 P = Polynomial([-2,-1,0,1])
 print(P)
 
-x = linspace(0,2,30)
+x = linspace(-.5,2,30)
 y = P.evaluate(x)[0]
 
 def poly_eval(x):
@@ -17,7 +17,7 @@ def poly_eval(x):
 
 plt.plot(x,y)
 plt.axhline(0)
-con = bisection_method_convergents(0,2,poly_eval,10)
+con = schoolyard_method_convergents(0,poly_eval)
 prev = 0
 for ctr,pos in enumerate(con):
     plt.scatter(pos,poly_eval(pos),zorder=3,color='black')
