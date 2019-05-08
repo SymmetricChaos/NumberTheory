@@ -13,6 +13,7 @@ def is_composite(a,d,n,r):
 
 ## Wrapper function
 def miller_rabin_test(n,W=[2,3,5,7,11,13,17,19,23,29,31,37,41]):
+    """Miller-Rabin primality test"""
     ## Deal with even numbers first
     if n == 2:
         return True

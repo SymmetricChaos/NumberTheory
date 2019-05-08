@@ -2,6 +2,7 @@
 # prime.
 
 def lucas_lehmer_test(n):
+    """Lucas-Lehmer primality test"""
     if n == 2:
         return True
         
