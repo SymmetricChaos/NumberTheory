@@ -12,8 +12,11 @@ def is_composite(a,d,n,r):
     return True
 
 # Wrapper function
-def miller_rabin_test(n,W=[2,3,5,7,11,13,17,19,23,29,31,37,41]):
+def miller_rabin_test(n,W=[],silent=False):
     """Miller-Rabin primality test"""
+    
+    if W == []:
+        W = [2,3,5,7,11,13,17,19,23,29,31,37,41]
     
     # Deal with even numbers first
     if n == 2:
@@ -35,7 +38,7 @@ def miller_rabin_test(n,W=[2,3,5,7,11,13,17,19,23,29,31,37,41]):
         if is_composite(witness,d,n,r):
             return False
     
-    if n > (2**80):
+    if silent == False and n > (2**80):
         print("Test is only probable.")
         
     return True
