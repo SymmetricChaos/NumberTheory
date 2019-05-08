@@ -12,7 +12,3 @@ def lucas_lehmer_test(n):
         if s == 0:
             return True
     return False
-
-for i in range(3,110):
-    if lucas_lehmer_test(i):
-        print(f"2^{i}-1 = {2**i-1}")

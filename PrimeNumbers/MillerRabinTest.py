@@ -37,16 +37,3 @@ def miller_rabin_test(n,W=[2,3,5,7,11,13,17,19,23,29,31,37,41]):
     #    print("Test is only probable.")
         
     return True
-
-
-print("Lets try checking some Mersenne numbers for primality!")
-from LucasLehmer import LLPrimality
-for i in range(2,1001):
-    x = (2**i)-1
-    prLL = LLPrimality(i)
-    prMR = miller_rabin_test(x)
-    
-    if prLL == False:
-        if prMR == True:
-            print("Miller Rabin incorrectly identifies 2^{}-1 as prime".format(i))
-        
