@@ -99,7 +99,7 @@ def fermats_method(n,iters=0):
     return 1,n
 
 
-def fermat_and_trial(n,lim=None):
+def fermat_and_trial(n,lim=10):
     
     a = int_root(n)
     
@@ -107,6 +107,7 @@ def fermat_and_trial(n,lim=None):
         lim = a//2
     
     factor_found = False
+    pr = a
     while True:
         a += 1
         b2 = a**2-n
@@ -116,14 +117,16 @@ def fermat_and_trial(n,lim=None):
             factor_found = True
             break
     
-        if a - b < lim:
+        if pr-(a-b) < lim:
             break
+        
+        pr = a-b
         
     if factor_found == True:
         return a-int_root(b2), a+int_root(b2)
         
     else:
-        for i in range(2,lim):
+        for i in range(2,pr):
             if n % i == 0:
                 return i,n//i
     
