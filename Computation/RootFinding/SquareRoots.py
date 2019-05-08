@@ -44,6 +44,9 @@ def int_root(x):
     return b
 
 def is_square(x):
+    m = x % 20
+    if m not in [0,1,4,5,9,16]:
+        return False
     if int_root(x)**2 == x:
         return True
     return False
