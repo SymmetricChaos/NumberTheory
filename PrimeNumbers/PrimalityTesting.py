@@ -1,8 +1,7 @@
 from time import time
 from random import sample
 
-#from PrimeNumbers.MillerRabinTest import miller_rabin_test
-#from PrimeNumbers.LucasLehmerTest import lucas_lehmer_test
+from PrimeNumbers.MillerRabinTest import miller_rabin_test
 from PrimeNumbers.TrialDivision import trial_division_test, fermat_and_trial_test
 from PrimeNumbers.Primes import primes
 
@@ -26,16 +25,16 @@ from PrimeNumbers.Primes import primes
 
 prime_list = []
 for p in primes():
-    if p > 20000000:
+    if p > 100000000:
         break
     prime_list.append(p)
 print(len(prime_list))
 ctr = 0
-while ctr < 50:
+while ctr < 30:
 
     a,b = sample(prime_list,2)
     N = a*b
-    print(a,b)
+    print(f"{a} × {b}")
     print(N)
     ctr += 1
     t0 = time()
@@ -45,5 +44,9 @@ while ctr < 50:
     t0 = time()
     fermat_and_trial_test(N,25)
     print(f"Fermat Trial   {time()-t0:5f} seconds")
+        
+    t0 = time()
+    miller_rabin_test(N)
+    print(f"Miller Rabin   {time()-t0:5f} seconds")
     
     print()
