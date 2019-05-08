@@ -1,14 +1,22 @@
-from math import ceil, sqrt
+from Computation.RootFinding import int_root
 
-def trial_division_test(n):
+# Trial division is the simplest way of checking if a number is prime although
+# it runs in exponential time (pseudo-polynomial) it is quite fast for "small"
+# numbers and easy to implement. It is only necessary to check primes up to the
+# square root of the number in question.
+
+def trial_division_test(n,x=None):
     """Primality testing by trial division"""
     
     if n == 0 or n == 1:
         return False
     if n == 2 or n == 3 or n == 5:
         return True
-        
-    x = ceil(sqrt(n))+1
+    
+    if x == None:
+        x = int_root(n)+2
+    else:
+        x = min(int_root(n)+2,x)
     
     # Prime numbers up to 1000 have been pre-sieved.
     P = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
@@ -35,3 +43,38 @@ def trial_division_test(n):
             return False
     
     return True
+
+# Using both Fermat's factorization method and trial division together produces
+# a faster test for primality by exploiting the fact that Fermat's method can
+# exclude a large amount of numbers at once.
+
+
+def fermat_and_trial_test(n,lim=10):
+    
+    a = int_root(n)
+    
+    factor_found = False
+    pr = a
+    while True:
+        a += 1
+        b2 = a**2-n
+        b = int_root(b2)
+        
+        # If a factor is found the number is not prime
+        if b**2 == b2:
+            factor_found = True
+            break
+        
+        # Steps of fermat's method take significantly longer than trial division
+        # so at a certain point its not worth continuing.
+        if pr-(a-b) < lim:
+            break
+        
+        pr = a-b
+        
+    if factor_found == True:
+        return False
+
+    return trial_division_test(n,a-b)
+        
+
