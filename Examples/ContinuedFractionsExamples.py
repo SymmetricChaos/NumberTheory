@@ -1,5 +1,4 @@
-from Rationals import Rational
-from ContinuedFractions import cfrac_convergents,cfrac_func, cfrac
+from Rationals import Rational, cfrac_convergents,cfrac_func, cfrac
 from math import sqrt
 
 print("Convergents of the Golden Ratio")

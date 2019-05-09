@@ -1,7 +1,6 @@
-from EgyptianFractions import egyptian_form_factoring, \
-                              egyptian_form_splitting, \
-                              egyptian_form_greedy
-from RationalType import Rational
+
+from Rationals import Rational, egyptian_form_factoring, egyptian_form_splitting, \
+                      egyptian_form_greedy
 from GeneralUtils import list_to_sum
 import random
 

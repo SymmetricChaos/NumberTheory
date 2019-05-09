@@ -1,4 +1,4 @@
-from RationalType import Rational
+from Rationals.RationalType import Rational
 from math import floor
 
 def cfrac(L):
