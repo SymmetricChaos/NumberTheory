@@ -8,8 +8,13 @@ from ModularArithmetic import coprimes
 def show_congruences(g,m):
     # choose the width 
     W = len(str(m))
+    t = []
     for i in range(m):
-        print("{}^{:<{}} = {}".format(g,i,W,g**i % m))
+        pr = g**i % m
+        if pr in t:
+            break
+        t.append(pr)
+        print("{}^{:<{}} = {}".format(g,i,W,pr)) 
     print()
     
 def primitive_roots(m):
@@ -22,6 +27,8 @@ def primitive_roots(m):
     # Try each coprime number and see if it generates the set C
     # If it does write down that number otherwise try again
     for g in C:
+#        if g in out:
+#            break
         for i in range(m):
             L.append(g**i % m)
         
