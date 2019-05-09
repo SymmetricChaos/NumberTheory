@@ -1,4 +1,4 @@
-from RationalType import Rational
+from Rationals.RationalType import Rational
 
 def farey_sequence(n):
     """Rationals less than one with denominator less than n"""

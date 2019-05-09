@@ -1,5 +1,4 @@
-from RationalType import Rational
-from RationalUtils import mediant
+from Rationals import Rational, mediant
 
 A = Rational(4,10)
 B = Rational(7,19)

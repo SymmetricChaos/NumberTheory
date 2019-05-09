@@ -1,4 +1,4 @@
-from RationalType import Rational
+from Rationals.RationalType import Rational
 
 def mediant(A,B):
     """Mediant of two rationals"""

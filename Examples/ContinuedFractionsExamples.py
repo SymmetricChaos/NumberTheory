@@ -1,4 +1,4 @@
-from RationalType import Rational
+from Rationals import Rational
 from ContinuedFractions import cfrac_convergents,cfrac_func, cfrac
 from math import sqrt
 
