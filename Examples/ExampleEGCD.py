@@ -6,3 +6,5 @@ print(f"The GCD of the set {S} is {gcd(S)}")
 
 print("\n\nThe least common multiple is the smallest number that is a multiple of all of them.")
 print(f"The LCM of the set {S} is {lcm(S)}")
+
+print("\nIf the GCD is known then it is easy to find the LCM as it is the product of the set divided by their GCD.")
