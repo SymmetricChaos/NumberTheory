@@ -77,23 +77,23 @@ def aliquot_sum(n):
 
 def fermats_method(n,iters=0):
     a = int_root(n)
-    fct = False
+    factor_found = False
     if iters == 0:
         while True:
             a += 1
             b2 = a**2-n
             if is_square(b2):
-                fct = True
+                factor_found = True
                 break
     else:
         for i in range(iters):
             a += 1
             b2 = a**2-n
             if is_square(b2):
-                fct = True
+                factor_found = True
                 break
     
-    if fct == True:
+    if factor_found == True:
         return a-int_root(b2), a+int_root(b2)
     
     return 1,n
