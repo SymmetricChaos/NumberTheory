@@ -1,4 +1,4 @@
-from Computation.LongMultiplication import long_multiplication
+from Computation import long_multiplication
 from random import randint    
 
 for i in range(3):
