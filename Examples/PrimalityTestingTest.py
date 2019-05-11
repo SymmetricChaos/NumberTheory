@@ -27,6 +27,6 @@ def test_miller_rabin():
     for i in semiprime_list:
         miller_rabin_test(i)
 
-print(timeit("test_miller_rabin()", setup="from __main__ import test_miller_rabin",number=10))
-print(timeit("test_trial_div()", setup="from __main__ import test_trial_div",number=10))
-print(timeit("test_fermat_and_trial()", setup="from __main__ import test_fermat_and_trial",number=10))
+print(timeit("test_miller_rabin()", setup="from __main__ import test_miller_rabin",number=1))
+print(timeit("test_trial_div()", setup="from __main__ import test_trial_div",number=1))
+print(timeit("test_fermat_and_trial()", setup="from __main__ import test_fermat_and_trial",number=1))
