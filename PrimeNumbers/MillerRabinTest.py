@@ -37,8 +37,5 @@ def miller_rabin_test(n,W=[],silent=False):
         # number is composite and we return false
         if is_composite(witness,d,n,r):
             return False
-    
-    if silent == False and n > (2**80):
-        print("Test is only probable.")
-        
+            
     return True

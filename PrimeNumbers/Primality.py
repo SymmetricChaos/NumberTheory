@@ -1,13 +1,9 @@
+from PrimeNumbers.MillerRabinTest import miller_rabin_test
 from math import ceil, sqrt
+
 def is_prime(n):
-    if n == 0 or n == 1:
-        return False
-    if n == 2 or n == 3 or n == 5:
-        return True
-        
-    x = ceil(sqrt(n))+1
     
-    P = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
+    W = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 
          67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 
          139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 
          223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 
@@ -19,15 +15,15 @@ def is_prime(n):
          743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 
          839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 
          941, 947, 953, 967, 971, 977, 983, 991, 997]
-    
-    for i in P:
-        if n % i == 0:
-            return False
+
+    # First check small numbers since trial division terminates quickly
+    x = ceil(sqrt(n))+1
+    for i in W:
         if i >= x:
             return True
-
-    for i in range(1009,x,2):
         if n % i == 0:
             return False
-    
-    return True
+    # Otherwise use the Miller-Rabin test with the first 168 bases
+    # Random hardware errors are significantly more likely than the test finding
+    # a strong pseudo-prime. It is determinist for numbers up to at least 2^80
+    return miller_rabin_test(n,W)
