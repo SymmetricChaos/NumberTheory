@@ -9,8 +9,11 @@ def long_division_steps(N,D,prec=10):
     digits = []
     m = []
     
+    w1 = len(str(N))+1
+    w2 = len(str(D))
+    
     while(True):
-        print(f"{N:<4} / {D:<3}  =  {N//D} R {N%D}")
+        print(f"{N:<{w1}} / {D:<{w2}}  =  {N//D} R {N%D}")
 
         digits.append(N//D)
         
