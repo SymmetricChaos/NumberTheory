@@ -68,6 +68,7 @@ def prime_factorization(n):
 
 
 def aliquot_sum(n):
+    """Sum of all proper factors"""
     if n <= 0:
         raise Exception("Alquoit sum not defined") 
     if n == 1:
@@ -76,6 +77,7 @@ def aliquot_sum(n):
 
 
 def fermats_method(n,iters=0):
+    """Use Fermat's method to find a factor"""
     a = int_root(n)
     factor_found = False
     if iters == 0:
@@ -100,7 +102,7 @@ def fermats_method(n,iters=0):
 
 
 def fermat_and_trial(n,lim=20):
-    
+    """Find a factor of n using fermat's method with failover to trial division"""
     a = int_root(n)
     
     if lim == None:
