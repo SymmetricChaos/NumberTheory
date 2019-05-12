@@ -41,10 +41,12 @@ def long_division_steps(N,D,prec=10):
         out = "{}.{}({})".format(x1,x2,x3)
     return(out)
 
-
-import random
-N = random.randint(1,1000)
-D = random.randint(1,1000)
+N = int(input("Numerator:   "))
+D = int(input("Denominator: "))
+print()
+#import random
+#N = random.randint(1,1000)
+#D = random.randint(1,1000)
 Q = long_division_steps(N,D,prec=10)
 print(f"{N} / {D} = {Q}")
 print()
