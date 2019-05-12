@@ -99,7 +99,7 @@ def fermats_method(n,iters=0):
     return 1,n
 
 
-def fermat_and_trial(n,lim=10):
+def fermat_and_trial(n,lim=20):
     
     a = int_root(n)
     
@@ -132,3 +132,17 @@ def fermat_and_trial(n,lim=10):
     
     return 1,n
 
+
+def fermats_method_recursive(n):
+    """Use Fermat's method to calculate a prime factorzation"""
+    out = []
+    L = list(fermat_and_trial(n))
+    for i in L:
+        
+        a = fermat_and_trial(i)
+        if a[0] == 1:
+            out.append(a[1])
+        else:
+            L += a
+
+    return out
