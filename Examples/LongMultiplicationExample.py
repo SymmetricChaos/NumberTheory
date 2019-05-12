@@ -1,4 +1,4 @@
-from Computation import long_multiplication
+from Computation import long_multiplication_steps
 from random import randint    
 
 for i in range(3):
@@ -6,7 +6,7 @@ for i in range(3):
     B = randint(0,A)
     print(f"{A:>7}")
     print(f"x{B:>6}\n")
-    C = long_multiplication(A,B)
+    C = long_multiplication_steps(A,B)
     if C != A*B:
         print("ERROR")
     print("\n\n")
