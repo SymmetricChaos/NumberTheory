@@ -23,10 +23,10 @@ def baby_step_giant_step(a,b,m):
     
     for j in range(lim):
         table[pow(b,j,m)] = j
-        
-    fac = pow(b,lim*(m-2),m)
+    
+    c = pow(b,lim*(m-2),m)
     y = a
     for i in range(m):
-        y = ( a * pow(fac,i,m) ) % m
+        y = ( a * pow(c,i,m) ) % m
         if y in table:
             return i*lim+table[y]
