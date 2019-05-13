@@ -1,6 +1,6 @@
 from ModularArithmetic import primitive_roots, coprimes, show_congruences
 
-m = 18
+m = 31
 print("A number is coprime to another if and only if those numbers have no common factors.")
 print("\nOften we are most interested in the natural numbers coprime to and less than a given number.")
 print(f"\nFor example the numbers coprime to {m} are {coprimes(m)}")
