@@ -1,4 +1,5 @@
-from Other.Factorization import factorization
+from Other.Factorization import factorization, prime_factorization
+from PrimeNumbers import is_prime
 from Sequences import primes
 
 # Extended Euclidean algorithm
@@ -75,6 +76,7 @@ def modinv(a, m):
     else:
         return x % m
 
+
 # Calculate the numbers coprime to some modulus m
 def coprimes(m):
     """Numbers Coprime to Input"""
@@ -84,6 +86,7 @@ def coprimes(m):
             L.append(i)
     return L
 
+
 # Check if two numbers are coprime
 def coprime(p,q):
     """Check if inputs are coprime"""
@@ -91,12 +94,14 @@ def coprime(p,q):
         return True
     return False
 
+
 # Is there any number other than 1 than divides all elements of the set?
 def setwise_coprime(*args):
     """Check if inputs are setwise coprime"""
     if gcd(*args) == 1:
         return True
     return False
+
 
 # Is every pair of elements coprime?
 def pairwise_coprime(*args):
@@ -107,6 +112,7 @@ def pairwise_coprime(*args):
     if len(set(L)) == len(L):
         return True
     return False
+
 
 # Count of naturals coprime to n
 def totient(n):
@@ -122,3 +128,25 @@ def totient(n):
             D *= p
     
     return n*N//D
+
+
+def legendre_symbol(a,p):
+    """The Legendre Symbol"""
+    assert is_prime(p)
+    assert p != 2
+    out = pow(a,(p-1)//2,p)
+    if out == 1:
+        return 1
+    if out == 0:
+        return 0
+    else:
+        return -1
+
+
+def jacobi_symbol(a,n):
+    """The Jacobi Symbol"""
+    fac = prime_factorization(n)
+    out = 1
+    for f in fac:
+        out *= legendre_symbol(a,f)
+    return out
