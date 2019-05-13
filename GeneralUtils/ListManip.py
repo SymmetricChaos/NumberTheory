@@ -54,3 +54,9 @@ def list_to_sum(L):
     S = " + ".join(str(elem) for elem in L)
     S = S.replace("+ -","- ")
     return S
+
+
+def list_to_prod(L):
+    """Turns a list into a summation"""
+    S = " × ".join(str(elem) for elem in L)
+    return S
