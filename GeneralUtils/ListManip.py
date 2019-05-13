@@ -57,6 +57,12 @@ def list_to_sum(L):
 
 
 def list_to_prod(L):
-    """Turns a list into a summation"""
+    """Turns a list into a product"""
     S = " × ".join(str(elem) for elem in L)
+    return S
+
+
+def list_to_infix(L,operator="+"):
+    """Turns a list into a summation by some symbol"""
+    S = f" {operator} ".join(str(elem) for elem in L)
     return S
