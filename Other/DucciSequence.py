@@ -26,4 +26,4 @@ def show_ducci_sequence(L):
     for i in ducci_sequence(L):
         equal_spacing(i,w)
 
-show_ducci_sequence([52,99,78,67,25])
+#show_ducci_sequence([52,999,78,967,25,7])
