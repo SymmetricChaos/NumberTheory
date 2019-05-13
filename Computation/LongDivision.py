@@ -1,4 +1,4 @@
-def long_division(N,D,prec=10):
+def long_division(N,D,prec=10, silent=False):
     
     # N is divisible by D just return the result
     if(N % D == 0):
@@ -34,12 +34,10 @@ def long_division(N,D,prec=10):
         # onto the list.
         m.append(N)
         ctr += 1
-        if ctr > prec:
+        if ctr > prec and silent == False:
             print("PRECISION LIMIT REACHED")
             break
     
-    #print(digits)
-    #print(m)
     
     # If the position for the repeating decimal is zero it means that the decimal
     # actually terminates. So we only need to write down the whole number part
