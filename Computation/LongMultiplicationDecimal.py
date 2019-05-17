@@ -52,5 +52,6 @@ def long_multiplication_decimal(A,B):
     
     return out
 
-a = long_multiplication_decimal("109.12","2.10")
+a = long_multiplication_decimal("109.128238346","27.1089841")
 print(a)
+print(109.128238346*27.1089841)
