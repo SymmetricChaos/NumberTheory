@@ -1,5 +1,4 @@
 from math import sqrt,floor,gcd,log
-import numpy as np
 from PrimeNumbers import primes
 
 #  http://blog.fkraiem.org/2013/12/07/factoring-integers-factor-bases/
@@ -35,15 +34,13 @@ def vec2num(L,P):
         out *= j**i
     return out
     
-#  Now  the  exponent  vector  of  the  product  of  two  numbers  is  the  sum  of  their  exponent  vectors
-#  This  is  important  because  by  definition  a  number  is  square  if  every  element  of  the  exponent
-#  vector  is  even.
-
-P = [2,3,5,7,11,13]
-print(42,prime_exponent_vector(42,P))
-print(1050,prime_exponent_vector(1050,P))
-print(42*1050,prime_exponent_vector(42*1050,P))
-print("\n")
+# If the exponent vector is available for two numbers their exponent vector of
+# their product is just the pointwise sum of the exponent vectors
+#P = [2,3,5,7,11,13]
+#print(42,prime_exponent_vector(42,P))
+#print(1050,prime_exponent_vector(1050,P))
+#print(42*1050,prime_exponent_vector(42*1050,P))
+#print("\n")
 
 def dixon(N,P,S):
     
@@ -61,7 +58,7 @@ def dixon(N,P,S):
         x = (i*i) % N
         B = prime_exponent_vector(x,factor_base)
         if len(B)  >  0:
-            L.append(np.array(B))
+            L.append(B)
             K.append(i)
         if len(L) == S:
             break
@@ -74,16 +71,15 @@ def dixon(N,P,S):
                 X = [i//2 for i in S]
                 z1 = A*B%N
                 z2 = vec2num(X,factor_base)
-                print(X)
-                print(z2)
                 g = gcd(z1-z2,N)
                 if g != 1 and g !=  N:
                     return  g,N//g
+                
+    print("Unable to find non-trivial factors.")
 
 
-N = 22760978651
-#N = 84923
-P = 30
+N = 2276097865177
+P = 100
 S = 100
 out = dixon(N,P,S)
 print(out[0]*out[1])
@@ -91,5 +87,3 @@ print("Two factors  of {} are {}".format(N,out))
 
 I = 2.7**sqrt(log(N)*log(log(N)))
 print("Ideal  Factor  Base  Approximately {}".format(int(I)))
-
-print(2**30)
