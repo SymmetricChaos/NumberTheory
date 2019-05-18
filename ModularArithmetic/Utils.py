@@ -1,5 +1,4 @@
 from Other.Factorization import factorization, prime_factorization
-from GeneralUtils import sign
 from PrimeNumbers import is_prime
 from Sequences import primes
 
