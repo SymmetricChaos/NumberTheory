@@ -52,6 +52,9 @@ def long_multiplication_decimal(A,B):
     
     return out
 
-a = long_multiplication_decimal("109.128238346","27.1089841")
-print(a)
-print(109.128238346*27.1089841)
+A = "109.128238346"
+B = "7727.1089841"
+C = long_multiplication_decimal(A,B)
+print(A)
+print(B)
+print(C)
