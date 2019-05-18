@@ -1,10 +1,10 @@
-from Polynomials import polynomial
+from Polynomials import Polynomial
 from matplotlib import pyplot as plt
 
 coef = [7,2,12,9,3,31]
 F = 101
 
-P = polynomial(coef,F)
+P = Polynomial(coef,F)
 
 x = [i for i in range(101)]
 y = P.evaluate(x)
