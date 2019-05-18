@@ -1,6 +1,5 @@
-from  math  import  sqrt,floor,gcd,log
-import  numpy.linalg  as  npla
-import  numpy  as  np
+from math import sqrt,floor,gcd,log
+import numpy as np
 from PrimeNumbers import primes
 
 #  http://blog.fkraiem.org/2013/12/07/factoring-integers-factor-bases/
@@ -20,6 +19,15 @@ def prime_exponent_vector(x,P):
     if x != 1:
         return []
     return out
+
+def vector_sum(A,B):
+    return [a*b for a,b in zip(A,B)]
+
+def all_even(L):
+    for i in L:
+        if i % 2 == 1:
+            return False
+    return True
 
 def vec2num(L,P):
     out = 1
@@ -60,22 +68,28 @@ def dixon(N,P,S):
     
     for i in range(S):
         for j in  range(i):
-            if  sum((L[i]+L[j]) % 2) == 0:
+            S = vector_sum(L[i],L[j])
+            if  all_even(S):
                 A,B = K[i],K[j]
-                X = (L[i]+L[j])//2
+                X = [i//2 for i in S]
                 z1 = A*B%N
                 z2 = vec2num(X,factor_base)
+                print(X)
+                print(z2)
                 g = gcd(z1-z2,N)
                 if g != 1 and g !=  N:
                     return  g,N//g
 
 
-N = 2276097836
+N = 22760978651
 #N = 84923
-P = 50
+P = 30
 S = 100
 out = dixon(N,P,S)
+print(out[0]*out[1])
 print("Two factors  of {} are {}".format(N,out))
 
 I = 2.7**sqrt(log(N)*log(log(N)))
 print("Ideal  Factor  Base  Approximately {}".format(int(I)))
+
+print(2**30)
