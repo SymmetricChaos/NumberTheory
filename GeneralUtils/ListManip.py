@@ -21,6 +21,9 @@ def equal_spacing(L,w,justify="right"):
     elif justify == "left" or justify == "l":
         for i in L:
             s += f"{i:<{w}}"
+    elif justify == "center" or justify == "c":
+        for i in L:
+            s += f"{i}".center(w," ")
     else:
         raise Exception("Justify must be left or right.")
     print(s)
