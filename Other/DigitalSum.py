@@ -13,6 +13,8 @@ def digital_root(n):
         L = [int(i) for i in str(s)]
     return s
 
+
+
 def additive_persistence(n):
     steps = 0
     L = [int(i) for i in str(n)]
