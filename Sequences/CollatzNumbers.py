@@ -4,6 +4,7 @@ def collatz_step(n):
     return n//2
 
 def collatz_numbers():
+    """The length of the Collatz sequence starting at each counting number"""
     D = {1 : 0, 2 : 1, 4 : 2}
     
     n = 0
