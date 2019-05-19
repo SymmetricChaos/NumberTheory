@@ -124,38 +124,6 @@ def choose(n,k):
     return N//D
 
 
-def must_be_int(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) != int:
-            raise Exception("{} must be an integer".format(name))
-
-def must_be_pos(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) <= 0:
-            raise Exception("{} must be strictly positive".format(name))
-
-def must_be_pos_int(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) <= 0 or type(val) != int:
-            raise Exception("{} must be a strictly positive integer".format(name))
-
-
-def must_be_nonneg(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) < 0:
-            raise Exception("{} must be non-negative".format(name))
-
-def must_be_nonneg_int(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) < 0 or type(val) != int:
-            raise Exception("{} must be a non-negative integer".format(name))
-
-
-def must_be_int_or_inf(**kwargs):
-    for name,val in kwargs.items():
-        if type(val) != int or val != float('inf'):
-            raise Exception("{} must be an integer or Inf".format(name))
-
 
         
         

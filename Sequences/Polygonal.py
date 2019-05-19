@@ -1,5 +1,4 @@
 from Sequences.Simple import naturals, integers
-from Sequences.Utils import choose, must_be_pos_int
 from math import floor, log2
 from Sequences.Primes import primes
 
@@ -7,7 +6,8 @@ from Sequences.Primes import primes
 def polygonal(S):
     """Polygonal Numbers"""
     
-    must_be_pos_int(S=S)
+    assert type(S) == int
+    assert S > 0
     
     for n in naturals():
         
@@ -16,7 +16,8 @@ def polygonal(S):
 def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
-    must_be_pos_int(S=S)
+    assert type(S) == int
+    assert S > 0
     
     for n in integers():
         
@@ -25,18 +26,20 @@ def gen_polygonal(S):
 def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
-    must_be_pos_int(S=S)
+    assert type(S) == int
+    assert S > 0
     
     for n in naturals():
         yield (S*n)//2 * (n-1)+1
         
-def simplicial(D):    
+def simplicial(S):    
     """Simplicial Numbers"""
     
-    must_be_pos_int(D=D)
+    assert type(S) == int
+    assert S > 0
     
     for n in naturals():
-        yield choose(n+D,D)
+        yield choose(n+S,S)
 
 
 def perfect_powers():
