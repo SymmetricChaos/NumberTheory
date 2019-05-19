@@ -14,7 +14,6 @@ print("\n\nThe digital root of a number takes the successive digital sums of a n
 print("\nThe digital roots of some random numbers")
 for i in range(5):
     r = randint(lo,hi)
-    #if additive_persistence(r) > 2:
     print(r,end="")
     while r > 9:
         print(" ⟶ ",end="")
