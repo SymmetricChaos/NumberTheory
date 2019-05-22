@@ -47,9 +47,9 @@ def subset_sum_dynamic(L,N):
 
 import random
 for i in range(5):
-    L = [random.randint(0,100) for i in range(30)]
+    L = [random.randint(0,100) for i in range(25)]
     N = random.randint(0,1000) 
     print(N,L)
-    print(subset_sum_dynamic(L,N))
-    #print(subset_sum(L,N))
-    print()
+    S = subset_sum_dynamic(L,N)
+    print(sum(S),S)
+    print("\n\n")
