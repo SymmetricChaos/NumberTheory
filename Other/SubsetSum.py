@@ -15,8 +15,17 @@ def subset_sum(L,n):
             return i
     return ()
 
+def subset_sums(L,n):
+    """Find the subsets of L that  sum to n if they exists"""
+    
+    L.sort()
+    for i in list(powerset(L)):
+        if sum(i) == n:
+            yield i
+
+
 def is_subset_sum(s,pos,n,out=[]):
-    #print(out)
+    """Recursive function to find a subset sum"""
     # If we have gotten the sum down to zero than we have succeeded
     if n == 0:
         return out
@@ -40,16 +49,24 @@ def is_subset_sum(s,pos,n,out=[]):
 
 
 def subset_sum_dynamic(L,N):
-    
+    """Faster solution to subset sum"""
+    L.sort()
     return is_subset_sum(L,len(L),N)
     
-#print(subset_sum_dynamic([5,8,40,9,17,21,1,11,19],31))
-
 import random
+#for i in range(5):
+#    L = [random.randint(0,100) for i in range(25)]
+#    N = random.randint(0,1000) 
+#    print(N,L)
+#    S = subset_sum_dynamic(L,N)
+#    print(sum(S),S)
+#    print("\n\n")
+#    
+    
 for i in range(5):
-    L = [random.randint(0,100) for i in range(25)]
-    N = random.randint(0,1000) 
+    L = [random.randint(0,100) for i in range(10)]
+    N = random.randint(0,600) 
     print(N,L)
-    S = subset_sum_dynamic(L,N)
-    print(sum(S),S)
+    for i in subset_sums(L,N):
+        print(i)
     print("\n\n")
