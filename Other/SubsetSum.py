@@ -19,9 +19,14 @@ def subset_sums(L,n):
     """Find the subsets of L that  sum to n if they exists"""
     
     L.sort()
+    S = set()
     for i in list(powerset(L)):
         if sum(i) == n:
-            yield i
+            if str(i) in S:
+                continue
+            else:
+                S.add(str(i))
+                yield i
 
 
 def is_subset_sum(s,pos,n,out=[]):
@@ -51,6 +56,9 @@ def is_subset_sum(s,pos,n,out=[]):
 def subset_sum_dynamic(L,N):
     """Faster solution to subset sum"""
     L.sort()
+    for i in L:
+        if i < 0:
+            raise Exception("Doesn't work with negatives")
     return is_subset_sum(L,len(L),N)
     
 import random
@@ -62,11 +70,10 @@ import random
 #    print(sum(S),S)
 #    print("\n\n")
 #    
-    
-for i in range(5):
-    L = [random.randint(0,100) for i in range(10)]
-    N = random.randint(0,600) 
-    print(N,L)
-    for i in subset_sums(L,N):
-        print(i)
-    print("\n\n")
+#for i in range(5):
+#    L = [random.randint(-100,100) for i in range(10)]
+#    N = random.randint(-200,200) 
+#    print(N,L)
+#    for i in subset_sums(L,N):
+#        print(i)
+#    print("\n\n")
