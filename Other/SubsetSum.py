@@ -43,12 +43,12 @@ def is_subset_sum(s,pos,n,out=[]):
     # If the last element in the array is bigger than the sum then we only need
     # to consider branches without it.
     if (s[pos - 1] > n):
-        return is_subset_sum(s, pos - 1, n,out); 
+        return is_subset_sum(s, pos - 1, n,out)
     
     # Otherwise try removing the last element and try including the last
     # element. If either branch finds a sum then we succeed.
     # We are exploiting a clever feature of Python here. We can use many objects
-    # are inputs for logical operators. An empty list is evaluated as False while
+    # as inputs for logical operators. An empty list is evaluated as False while
     # any non-empty list is evaluated as True.
     return is_subset_sum(s,pos-1,n,out) or is_subset_sum(s, pos-1, n-s[pos-1],out+[s[pos-1]])
 
@@ -56,20 +56,21 @@ def is_subset_sum(s,pos,n,out=[]):
 def subset_sum_dynamic(L,N):
     """Faster solution to subset sum"""
     L.sort()
-    for i in L:
-        if i < 0:
-            raise Exception("Doesn't work with negatives")
+    if any([i < 0 for i in L]):
+        raise Exception("Doesn't work with negatives")
     return is_subset_sum(L,len(L),N)
     
 import random
-#for i in range(5):
-#    L = [random.randint(0,100) for i in range(25)]
-#    N = random.randint(0,1000) 
-#    print(N,L)
-#    S = subset_sum_dynamic(L,N)
-#    print(sum(S),S)
-#    print("\n\n")
-#    
+for i in range(5):
+    L = [random.randint(0,100) for i in range(25)]
+    N = random.randint(0,1000) 
+    print(N,L)
+    S = subset_sum_dynamic(L,N)
+    print(sum(S),S)
+    print("\n\n")
+
+subset_sum_dynamic([-1,100],99)
+
 #for i in range(5):
 #    L = [random.randint(-100,100) for i in range(10)]
 #    N = random.randint(-200,200) 
