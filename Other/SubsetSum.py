@@ -55,7 +55,7 @@ def is_subset_sum(s,pos,n,out=[]):
 
 def subset_sum_dynamic(L,N):
     """Faster solution to subset sum"""
-    L.sort()
+    L.sort(reverse=True)
     if any([i < 0 for i in L]):
         raise Exception("Doesn't work with negatives")
     return is_subset_sum(L,len(L),N)
@@ -69,12 +69,12 @@ for i in range(5):
     print(sum(S),S)
     print("\n\n")
 
-subset_sum_dynamic([-1,100],99)
+#subset_sum_dynamic([-1,100],99)
 
-#for i in range(5):
-#    L = [random.randint(-100,100) for i in range(10)]
-#    N = random.randint(-200,200) 
-#    print(N,L)
-#    for i in subset_sums(L,N):
-#        print(i)
-#    print("\n\n")
+for i in range(5):
+    L = [random.randint(-100,100) for i in range(10)]
+    N = random.randint(-200,200) 
+    print(N,L)
+    for i in subset_sums(L,N):
+        print(sum(i),i)
+    print("\n\n")
