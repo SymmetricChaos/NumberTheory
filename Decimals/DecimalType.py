@@ -5,16 +5,27 @@ class Decimal:
         for i in dec:
             if i not in ".0123456789":
                 raise Exception("Not a valid decimal")
-        if dec.count() > 1:
+        ds = dec.count(".")
+        if ds > 1:
             raise Exception("Not a valid decimal")
-            
+        if ds == 0:
+            dec += "."
+        
         while dec[0] == "0":
             dec = dec[1:]
         while dec[-1] == "0":
             dec = dec[:-1]
         
-        self.digits = dec
+        digits = []
+        decpos = 0
+        for ctr,i in enumerate(dec):
+            if i.isdecimal():
+                digits.append(int(i))
+            else:
+                decpos = ctr
 
+        self.digits = digits
+        self.decpos = decpos
 
 #    def inv(self):
 #
@@ -23,11 +34,15 @@ class Decimal:
 
 
     def __str__(self):
-        return self.digits
+        w = [str(i) for i in self.digits[:self.decpos]]
+        f = [str(i) for i in self.digits[self.decpos:]]
+        return "".join(w) + "." + "".join(f)
 
 
     def __repr__(self):
-        return self.digits
+        w = [str(i) for i in self.digits[:self.decpos]]
+        f = [str(i) for i in self.digits[self.decpos:]]
+        return "".join(w) + "." + "".join(f)
 
 
 #    def __mul__(self,multiplier):
@@ -81,3 +96,5 @@ class Decimal:
 #    
 #    def mixed_form(self):
 
+a = Decimal("1001.20")
+print(a)
