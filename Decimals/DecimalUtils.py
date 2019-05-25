@@ -4,23 +4,9 @@ def long_multiplication_decimal(A,B):
     assert type(A) == Decimal
     assert type(B) == Decimal
     
-    if "." in A:
-        decposA = len(A)-A.index(".")-1
-    else:
-        decposA = 0
-    if "." in B:
-        decposB = len(B)-B.index(".")-1
-    else:
-        decposB = 0
-    decpos = decposA + decposB
-    
-    A = A.replace(".","")
-    B = B.replace(".","")
-    
-    # Get the digits
-    dA = [int(i) for i in A]
-    dB = [int(i) for i in B]
-    
+    dA = A.digits
+    dB = B.digits
+
     # Go through the digits of each number backward doing single digit
     # multiplication
     rows = []
@@ -33,7 +19,7 @@ def long_multiplication_decimal(A,B):
     
 
     # Calculate the addition
-    out = ""
+    out = []
     carry = 0
     while len(rows[0]) > 0:
         s = carry
@@ -41,22 +27,25 @@ def long_multiplication_decimal(A,B):
             s += row.pop()
         carry = s // 10
         digit = s%10
-        out = str(digit) + out
+        out.append(digit)
+    out.reverse()
     
-    invdecpos = len(out)-decpos
-    out = out[:invdecpos] + "." + out[invdecpos:]
+    decpos = A.decpos + B.decpos
     
-    # Remove zeroes at the start and end
-    while out[0] == "0":
-        out = out[1:]
-    while out[-1] == "0":
-        out = out[:-1]
+    w = [str(i) for i in out[:decpos]]
+    f = [str(i) for i in out[decpos:]]
+    d = "".join(w) + "." + "".join(f)
     
-    return out
+    while d[0] == "0":
+        d = d[1:]
+    
+    print(d)
+    
 
-A = "109.128238346"
-B = "7727.1089841"
-C = long_multiplication_decimal(A,B)
+A = Decimal("109.12823")
+B = Decimal("772.10898")
 print(A)
 print(B)
+C = long_multiplication_decimal(A,B)
 print(C)
+print(109.12823*772.10898)
