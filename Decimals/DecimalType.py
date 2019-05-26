@@ -1,6 +1,6 @@
 class Decimal:
     
-    def __init__(self,digits=None,decpos=None):
+    def __init__(self,digits,precision=20):
         
         ds = digits.count(".")
         if ds > 1:
