@@ -11,13 +11,10 @@ def long_multiplication_decimal(A,B):
     else:
         decposB = 0
     decpos = decposA + decposB
-    
-    A = A.replace(".","")
-    B = B.replace(".","")
-    
+        
     # Get the digits
-    dA = [int(i) for i in A]
-    dB = [int(i) for i in B]
+    dA = [int(i) for i in A if i != "."]
+    dB = [int(i) for i in B if i != "."]
     
     # Go through the digits of each number backward doing single digit
     # multiplication
