@@ -14,7 +14,7 @@ def long_division_decimal(N,D,prec=15, silent=False):
     
     D = int(D.replace(".",""))
     N = [int(i) for i in N if i != "."]
-    while len(N) < prec:
+    while len(N) < prec+decpos:
         N.append(0)
     
     print()
@@ -24,7 +24,7 @@ def long_division_decimal(N,D,prec=15, silent=False):
     # Setup for doing some long division
     digits = []
     num = N[0]
-    for pos in range(prec-1):
+    for pos in range(prec+decpos-1):
         # Divide the numerator by the denominator and append the result to the
         # list of digits
         digits.append(num//D)
@@ -35,8 +35,8 @@ def long_division_decimal(N,D,prec=15, silent=False):
 
     out = "".join([str(i) for i in digits])
     out = out[:decpos] + "." + out[decpos:]
-#    while out[0] == "0":
-#        out = out[1:]
+    while out[0] == "0":
+        out = out[1:]
         
     return out
 
