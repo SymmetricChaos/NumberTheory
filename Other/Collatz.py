@@ -21,8 +21,21 @@ def collatz_inv_graph(n,levels):
         S = flatten(S)
         print(S)
 
+def collatz_inv_print(levels):
+    D = set([1])
+    S = [1]
+    for i in range(levels):
+        for m in S:
+            print(f"{collatz_inv(m)} → {m}")
+        S = [collatz_inv(m) for m in S]
+        S = set(flatten(S))
+        S = S-D
+        D = D|S
+        S = list(S)
+
+#
 #for i in collatz(119):
 #    print(i)
-#
-#
+
+
 #collatz_inv_graph(1,9)
