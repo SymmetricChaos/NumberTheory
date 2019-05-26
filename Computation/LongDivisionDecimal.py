@@ -51,5 +51,5 @@ A = "213.21"
 B = "12.15"
 print(A)
 print(B)
-print(long_division_decimal(A,B,10))
+print(long_division_decimal(A,B))
 print(float(A)/float(B))
