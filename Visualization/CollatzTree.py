@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+from math import log, floor
 
 def collatz_inv(n):
     if n % 6 == 4:
@@ -13,8 +13,8 @@ def collatz_tree_pos(L,narrowness=2):
         return [[8,x,y+1],[1,0,0]]
     a = collatz_inv(N)
     if len(a) == 1:
-        return [[a[0],x,y+1],[1,0,0]]
-    return [[a[0],x-1/(y**narrowness),y+1], [a[1],x+1/(y**narrowness),y+1]]
+        return [[a[0],x,y+1.3],[1,0,0]]
+    return [[a[0],x-1/(y**narrowness),y+1.618], [a[1],x+1/(y**narrowness),y+1]]
 
 
 def collatz_tree(levels,narrowness=2,text=True):
@@ -33,16 +33,14 @@ def collatz_tree(levels,narrowness=2,text=True):
                 new.append(t[1])
                 plt.plot( [pt[1],t[1][1]], [pt[2],t[1][2]],color='red')
         S += new
-    for i in S:
-        plt.scatter(i[1],i[2],color='red')
-        if text == True:
-            plt.text(i[1],i[2],str(i[0]))
+    if text == True:
+        for i in S:
+            plt.text(i[1],i[2],str(i[0]),ha='center',va='center',fontsize=15-floor(log(i[0],10)))
         
         
 fig = plt.figure()
-fig.set_size_inches(35, 20)
-collatz_tree(15,3,True)
-
+fig.set_size_inches(40, 20)
+collatz_tree(14,2.5,True)
 
 #for i in collatz_inv_graph(1,10):
 #    print(i)
