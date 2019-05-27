@@ -2,15 +2,11 @@ def long_multiplication_decimal(A,B):
     assert type(A) == str
     assert type(B) == str
     
+    decpos = 0
     if "." in A:
-        decposA = len(A)-A.index(".")-1
-    else:
-        decposA = 0
+        decpos += len(A)-A.index(".")-1
     if "." in B:
-        decposB = len(B)-B.index(".")-1
-    else:
-        decposB = 0
-    decpos = decposA + decposB
+        decpos += len(B)-B.index(".")-1
         
     # Get the digits
     dA = [int(i) for i in A if i != "."]
@@ -55,3 +51,4 @@ C = long_multiplication_decimal(A,B)
 print(A)
 print(B)
 print(C)
+print(float(A)*float(B))
