@@ -26,6 +26,3 @@ def exp_by_squaring(b,n,m=0):
         L.append(t)
         
     return prod([L[i] for i in p])
-
-#print(exp_by_squaring(2,471))
-#print(2**471)
