@@ -16,32 +16,7 @@ print(f"{b}^2  = {b}^1 * {b}^1")
 print(f"{b}^4  = {b}^2 * {b}^2")
 print(f"{b}^16 = {b}^4 * {b}^4")
 
-print("\nThis 'ladder' need only be climbed up about log2(n) steps.")
+print("\nThis 'ladder' need only be climbed up about log2(n) steps to get all the terms needed. The binary expansion of the number, which is easy enough to calculate, determines which terms are to be chosen.")
 
-def exp_by_squaring_example(b,n):
-    p = binary_partition(n)
-    #Multiplications needed
-    #print(len(p)+max(p)-1)
-    t = b
-    L = [f"{b}^1"]
-    for i in range(p[-1]):
-        t = t*t
-        L.append(f"2^{2**(i+1)}")
-    #print(L)
-    #print([L[i] for i in p])
-
-exp_by_squaring_example(2,471)
-
-
-
-#inds = binary_partition(471)
-#
-#L = ["2"]
-#for i in range(inds[-1]):
-#    L.append(f"2^{2**i}")
-#
-#print(L)
-#print([L[i] for i in inds])
-#
-#
-#print(exp_by_squaring(2,471))
+print(f"\nTo calculate {b}^{e} naievely requires {e-1} multiplications.")
+print(f"\nUsing the squaring method only {len(bpart)+max(bpart)-1} are needed.")
