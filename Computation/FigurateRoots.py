@@ -1,4 +1,6 @@
-# The figurate numbers can be described by a quadratic equation
+# The figurate numbers can be described by a quadratic 
+# equation. This makes it possible to find a root in terms
+# of figurate numbers other than squares
 
 # For example the triangular numbers
 # x = 0.5b(b+1)
@@ -41,3 +43,4 @@ for i in range(1,16):
     b = figurate_root(i,4)
     c = figurate_root(i,5)
     print(f"{i:<2}   {a:.3f}       {b:.3f}      {c:.3f}")
+    
