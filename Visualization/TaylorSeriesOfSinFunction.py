@@ -31,7 +31,8 @@ x = np.linspace(-5,5,100)
 y = np.cos(x)
 
 approx1 = [1]*len(x)
-approx2 = [1-.5*i**2 for i in x]
+approx2 = [1-(i**2)/2 for i in x]
+approx3 = [1-(i**2)/2+(i**4)/24 for i in x]
 
 fig = plt.figure()
 ax=fig.add_axes([0,0,1,1])
@@ -50,3 +51,12 @@ plt.ylim(-2,2)
 plt.plot(x,y)
 plt.plot(x,approx2)
 plt.title("Second Approximation")
+
+fig = plt.figure()
+ax=fig.add_axes([0,0,1,1])
+ax.set_axis_off()
+
+plt.ylim(-2,2)
+plt.plot(x,y)
+plt.plot(x,approx3)
+plt.title("Third Approximation")
