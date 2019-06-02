@@ -10,5 +10,6 @@ ax.plot([1,2,3,4], [2,3,4,8], lw=5)
 
 ax.scatter([2,3,4,1], [2,3,4,8], c="r", s=2500)
 
-ax.set_aspect('auto')
+#ax.set_aspect('auto')
+ax.set_aspect('equal')
 plt.show()
