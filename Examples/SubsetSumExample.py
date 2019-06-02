@@ -11,14 +11,3 @@ for i in range(3):
     S = subset_sum_dynamic(L,N)
     print(S)
     print("\n\n")
-
-
-
-#
-#for i in range(5):
-#    L = [random.randint(-100,100) for i in range(10)]
-#    N = random.randint(-200,200) 
-#    print(N,L)
-#    for i in subset_sums(L,N):
-#        print(sum(i),i)
-#    print("\n\n")
