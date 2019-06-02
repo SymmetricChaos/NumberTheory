@@ -41,5 +41,3 @@ def addition_chain_recur(N,L=[1],best=float('inf')):
 def addition_chain(n):
     """Find the shortest chain of additions to reach n"""
     return addition_chain_recur(n)
-
-print(addition_chain(174))
