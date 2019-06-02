@@ -114,6 +114,16 @@ def simple_recurrence(a,b):
         yield a
         a, b = b, a+b
         
+def sylvesters_sequence():
+    L = [2]
+    
+    while True:
+        yield L[-1]
+        t = 1
+        for i in L:
+            t *= i
+        L.append(t+1)
+
 #def partitions(n):
 #    if n == 0:
 #        return 1
