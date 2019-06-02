@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.Utils import factorization, must_be_pos_int
+from Sequences.Utils import factorization
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -33,9 +33,7 @@ def primorials():
 # Positive integers with no prime factors greater than B.
 def smooth(B):
     """Smooth Numbers"""
-    
-    must_be_pos_int(B=B)
-    
+        
     for n in naturals(1):
         out = n
         for f in range(2,B+1):
@@ -49,8 +47,6 @@ def smooth(B):
 # Positive integers with no prime factors less than B.
 def rough(B):
     """Rough Numbers"""
-    
-    must_be_pos_int(B=B)
     
     for n in naturals(1):
         r = True
