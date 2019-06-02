@@ -16,7 +16,7 @@ from Sequences.Pascal import pascal
 
 from Sequences.Bell import bell
 
-from Sequences.Factorials import factorials, alternating_factorials
+from Sequences.Factorials import factorials, alternating_factorials, kempner_function
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
@@ -43,7 +43,7 @@ __all__=["offset","partial","seq_max",
          "pascal",
          "catalan",
          "bell",
-         "factorials", "alternating_factorials",
+         "factorials", "alternating_factorials", "kempner_function",
          "aliquot", "abundant", "deficient", "perfect",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree",

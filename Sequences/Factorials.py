@@ -16,3 +16,12 @@ def alternating_factorials():
     for fac,p in zip(factorials(),cyc):
         out += fac*p
         yield abs(out)
+        
+def kempner_function():
+    L = []
+    for n,i in enumerate(factorials(),1):
+        L.append(i)
+        for ctr,f in enumerate(L,1):
+            if f % n == 0:
+                yield ctr
+                break
