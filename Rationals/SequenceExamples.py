@@ -2,7 +2,7 @@ from FareySequence import farey_sequence
 from HarmonicSequence import harmonic_series, alternating_harmonic_series
 
 print("Partial Sums of the Harmonic Series")
-for i in harmonic_series(9):
+for i in harmonic_series(10):
     print(f"{str(i):<9}  {i.digits(5)}")
 
 
