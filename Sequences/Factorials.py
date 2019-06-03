@@ -18,6 +18,7 @@ def alternating_factorials():
         yield abs(out)
         
 def kempner_function():
+    """Values of the Kempner Function"""
     L = []
     for n,i in enumerate(factorials(),1):
         L.append(i)
