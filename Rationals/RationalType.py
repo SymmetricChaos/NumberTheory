@@ -15,6 +15,7 @@ class Rational:
 
 
     def simplify(self):
+        """Convert fraction to simplest form"""
         g = abs(gcd(self.n,self.d))
         self.n = self.n//g
         self.d = self.d//g
@@ -137,12 +138,15 @@ class Rational:
 
     def __float__(self):
         return self.n/self.d
+    
 
     def whole_part(self):
+        """The whole part of the fraction"""
         return self.n // self.d
 
 
     def fractional_part(self):
+        """The fractional part of the fraction"""
         return Rational(self.n % self.d, self.d)
     
     
