@@ -13,5 +13,3 @@ def bernoulli_number(m):
             out += R*c*(-1)**v
     return out
 
-for i in range(50):
-    print(bernoulli_number(i))
