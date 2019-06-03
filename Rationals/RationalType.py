@@ -135,6 +135,9 @@ class Rational:
         return hash(hash(self.n) + hash(self.d))
 
 
+    def __float__(self):
+        return self.n/self.d
+
     def whole_part(self):
         return self.n // self.d
 
