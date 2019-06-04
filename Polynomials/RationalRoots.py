@@ -1,7 +1,7 @@
 # The rational root theorem makes it possible to determine all the rational
 # roots of a polynomial.
 
-from PolynomialType import Polynomial
+from Polynomials import Polynomial
 from Rationals import Rational
 from Other import factorization
 
@@ -24,10 +24,4 @@ def rational_roots(P):
             if r == Rational(0,1):
                 R.append(q)
     
-    return R
-
-                
-P = Polynomial([6,-7,0,1])
-
-print(P)
-print(rational_roots(P))
+    return list(set(R))
