@@ -146,4 +146,7 @@ class Polynomial:
                     out[pos] = (out[pos] + coef*(x**pwr)) % self.modulus
                 else:
                     out[pos] = (out[pos] + coef*(x**pwr))
+        
+        if len(out) == 1:
+            return out[0]
         return out
