@@ -106,7 +106,7 @@ def padovan():
         a, b, c = b, c, a+b
 
 def simple_recurrence(a,b):
-    
+    """Fibonnaci Type Sequence Starting with a and b"""
     assert type(a) == int
     assert type(b) == int
     
@@ -115,6 +115,7 @@ def simple_recurrence(a,b):
         a, b = b, a+b
         
 def sylvesters_sequence():
+    """Sylvester's Sequence"""
     L = [2]
     
     while True:
