@@ -5,16 +5,27 @@ from PolynomialType import Polynomial
 from Rationals import Rational
 from Other import factorization
 
+def rational_roots(P):
+    assert type(P) == Polynomial
+    
+    # Factor the leading and trailing coefficients
+    n = factorization(abs(P[0]))
+    n = n + [-i for i in n]
+    d = factorization(abs(P[-1]))
+
+    R = []
+
+    for i in n:
+        for j in d:
+            q = Rational(i,j)
+            r = P.evaluate(q)
+            if r[0] == Rational(0,1):
+                R.append(q)
+    
+    return R
+
+                
 P = Polynomial([-2,5,-5,3])
+
 print(P)
-
-
-n = factorization(abs(P[0]))
-d = factorization(abs(P[-1]))
-n = n + [-i for i in n]
-print(n,d)
-
-for i in n:
-    for j in d:
-        r = Rational(i,j)
-        print(r,P.evaluate(r))
+print(rational_roots(P))
