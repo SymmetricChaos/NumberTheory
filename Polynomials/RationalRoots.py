@@ -8,9 +8,10 @@ from Other import factorization
 P = Polynomial([-2,5,-5,3])
 print(P)
 
-n = factorization(2)
-d = factorization(3)
-n = [x for x in n] + [-x for x in n]
+
+n = factorization(abs(P[0]))
+d = factorization(abs(P[-1]))
+n = n + [-i for i in n]
 print(n,d)
 
 for i in n:
