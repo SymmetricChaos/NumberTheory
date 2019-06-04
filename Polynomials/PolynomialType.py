@@ -121,6 +121,11 @@ class Polynomial:
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return Polynomial(b,self.modulus)
     
+    
+    def __getitem__(self,n):
+        """Make polynomial accessible by indexing"""
+        return self.coef[n]
+    
 
     def derivative(self,silent=False):
         """Calculate the derivative of the polynomial"""
