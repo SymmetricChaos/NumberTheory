@@ -17,4 +17,4 @@ while ctr < 3:
         ctr += 1
         print()
         
-print("Polynomials do not necessarily have any ration roots.")
+print("Polynomials do not necessarily have any rational roots.")
