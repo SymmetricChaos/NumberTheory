@@ -66,8 +66,6 @@ class Rational:
             divisor = Rational(divisor)
         q = self*divisor.inv()
         v = q.n // q.d
-        if v < 0:
-            return v-1
         return v
 
 
@@ -159,10 +157,7 @@ class Rational:
     
     def __floor__(self):
         """Greatest smaller integer"""
-        v = self.n // self.d
-        if v < 0:
-            return v-1
-        return v
+        return self.n // self.d
 
 
     def whole_part(self):
