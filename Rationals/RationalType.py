@@ -59,6 +59,16 @@ class Rational:
         return self*divisor.inv()
 
 
+    def __floordiv__(self,divisor):
+        if type(divisor) == int:
+            divisor = Rational(divisor)
+        q = self*divisor.inv()
+        v = q.n // q.d
+        if v < 0:
+            return v-1
+        return v
+
+
     def __add__(self,addend):
         if type(addend) == int:
             addend = Rational(addend)
@@ -139,6 +149,19 @@ class Rational:
     def __float__(self):
         return self.n/self.d
     
+    
+    def __abs__(self):
+        """Absolute value"""
+        return Rational(abs(self.n),self.d)
+    
+    
+    def __floor__(self):
+        """Greatest smaller integer"""
+        v = self.n // self.d
+        if v < 0:
+            return v-1
+        return v
+
 
     def whole_part(self):
         """The whole part of the fraction"""
@@ -152,7 +175,7 @@ class Rational:
     
     def mixed_form(self):
         """Whole and fractional part"""
-        w = self.n // self.d
+        w = self.whole_part()
         f = self.fractional_part()
         return w,f
     

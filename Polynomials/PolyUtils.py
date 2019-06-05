@@ -54,7 +54,11 @@ def poly_print(P,mod):
     d = poly_degree(P)
     
     if d == -1:
-        return f"0 (mod {mod})"
+        if mod == 0:
+            return f"0"
+        else:
+            return f"0 (mod {mod})"
+
     
     out = ""
     
