@@ -1,5 +1,4 @@
-from FareySequence import farey_sequence
-from HarmonicSequence import harmonic_series, alternating_harmonic_series
+from Rationals import farey_sequence, harmonic_series, alternating_harmonic_series
 
 print("Partial Sums of the Harmonic Series")
 for i in harmonic_series(10):
