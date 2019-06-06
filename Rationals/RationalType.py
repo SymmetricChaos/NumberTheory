@@ -143,7 +143,7 @@ class Rational:
 
 
     def __hash__(self):
-        return hash(hash(self.n) + hash(self.d))
+        return hash(str(self))
 
 
     def __float__(self):
