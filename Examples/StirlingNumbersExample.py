@@ -1,11 +1,14 @@
 from Computation import stirling_numbers_1, stirling_numbers_2
+from GeneralUtils import equal_spacing
 
-for i in range(9):
+for i in range(8):
+    L = []
     for j in range(i+1):
-        print(stirling_numbers_1(i,j),end=" ")
-    print()
+        L.append(stirling_numbers_1(i,j))
+    equal_spacing(L,5,'left')
 print()
-for i in range(9):
+for i in range(8):
+    L = []
     for j in range(i+1):
-        print(stirling_numbers_2(i,j),end=" ")
-    print()
+        L.append(stirling_numbers_2(i,j))
+    equal_spacing(L,4,'left')
