@@ -1,4 +1,4 @@
-from Other.Factorization import factorization, prime_factorization
+from Computation.Factorization import factorization, prime_factorization
 from PrimeNumbers import is_prime
 from Sequences import primes
 

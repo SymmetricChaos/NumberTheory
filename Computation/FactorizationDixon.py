@@ -42,7 +42,7 @@ def vec2num(L,P):
 #print(42*1050,prime_exponent_vector(42*1050,P))
 #print("\n")
 
-def dixon(N,P,S):
+def dixon_factorization(N,P,S):
     
     factor_base = []
     for i in primes():
@@ -78,12 +78,12 @@ def dixon(N,P,S):
     print("Unable to find non-trivial factors.")
 
 
-N = 2276097865177
-P = 100
-S = 100
-out = dixon(N,P,S)
-print(out[0]*out[1])
-print("Two factors  of {} are {}".format(N,out))
-
-I = 2.7**sqrt(log(N)*log(log(N)))
-print("Ideal  Factor  Base  Approximately {}".format(int(I)))
+#N = 2276097865177
+#P = 100
+#S = 100
+#out = dixon_factorization(N,P,S)
+#print(out[0]*out[1])
+#print("Two factors  of {} are {}".format(N,out))
+#
+#I = 2.7**sqrt(log(N)*log(log(N)))
+#print("Ideal  Factor  Base  Approximately {}".format(int(I)))

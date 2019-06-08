@@ -17,8 +17,6 @@ def ducci_sequence(L):
     while L not in t:
         t.append(L)
         L = ducci_step(L)
-#        if L in t:
-#            break
         yield L
 
 def show_ducci_sequence(L):
