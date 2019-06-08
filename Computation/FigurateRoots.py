@@ -36,11 +36,11 @@ def figurate_root(n,S):
     B = S-2
     return ( A + sqrt( A**2 + B*8*n ) ) / (2*B)
 
-print("Various Figurate Roots\n")
-print("     Triangular  Square     Pentagonal")
-for i in range(1,16):
-    a = figurate_root(i,3)
-    b = figurate_root(i,4)
-    c = figurate_root(i,5)
-    print(f"{i:<2}   {a:.3f}       {b:.3f}      {c:.3f}")
-    
+#print("Various Figurate Roots\n")
+#print("     Triangular  Square     Pentagonal")
+#for i in range(1,16):
+#    a = figurate_root(i,3)
+#    b = figurate_root(i,4)
+#    c = figurate_root(i,5)
+#    print(f"{i:<2}   {a:.3f}       {b:.3f}      {c:.3f}")
+#    
