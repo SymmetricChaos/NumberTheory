@@ -85,7 +85,7 @@ class Polynomial:
     def __pow__(self,pwr):
         """Multiply a polynomial by itself"""
         if pwr == 0:
-            return Polynomial([0],self.modulus)
+            return Polynomial([1],self.modulus)
         if pwr == 1:
             return self
         else:
