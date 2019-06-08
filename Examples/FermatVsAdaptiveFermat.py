@@ -1,4 +1,4 @@
-from Other.Factorization import fermats_method, fermat_and_trial
+from Computation import fermats_method, fermat_and_trial
 from time import time
 
 n = 80460230041

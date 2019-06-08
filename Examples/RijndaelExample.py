@@ -1,4 +1,4 @@
-from PolynomialType import Polynomial
+from Polynomials import Polynomial
 
 # The finite field GF(2^8) with 256 elements has various expressions
 

@@ -1,5 +1,5 @@
 from Rationals.RationalType import Rational
-from Other import factorization, subset_sum
+from Computation import factorization, subset_sum
 from PrimeNumbers import is_prime
 
 # Use the greedy algorithm to find an egyption fraction representation for a

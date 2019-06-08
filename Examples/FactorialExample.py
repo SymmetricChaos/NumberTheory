@@ -1,4 +1,4 @@
-from Computation.RisingAndFallingFactorial import falling_factorial, rising_factorial
+from Combinatorics import falling_factorial, rising_factorial
 
 x = 5
 n = 5

@@ -3,7 +3,7 @@
 
 from Polynomials import Polynomial
 from Rationals import Rational
-from Other import factorization
+from Computation import factorization
 
 def rational_roots(P):
     assert type(P) == Polynomial

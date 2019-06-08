@@ -1,4 +1,4 @@
-from Other.Factorization import factorization, prime_factorization
+from Computation.Factorization import factorization, prime_factorization
 from GeneralUtils import list_to_prod
 
 N = 22200778

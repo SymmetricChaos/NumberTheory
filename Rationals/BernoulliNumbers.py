@@ -1,4 +1,4 @@
-from Other import choose
+from Combinatorics import choose
 from Rationals.RationalType import Rational
 
 def bernoulli_number(m):

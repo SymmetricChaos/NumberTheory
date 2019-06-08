@@ -1,4 +1,4 @@
-from Other import digital_sum, additive_persistence
+from Computation import digital_sum, additive_persistence
 from random import randint
 
 lo, hi = 100000000,999999999

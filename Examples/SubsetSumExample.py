@@ -1,4 +1,4 @@
-from Other import subset_sum_dynamic
+from Computation import subset_sum_dynamic
 import random
 
 

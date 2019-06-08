@@ -1,6 +1,6 @@
 from Rationals import bernoulli_number, Rational
 from Polynomials import Polynomial
-from Other import choose
+from Combinatorics import choose
 
 for n in range(1,9):
     P = Polynomial([0])

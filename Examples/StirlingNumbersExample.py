@@ -1,4 +1,4 @@
-from Computation import stirling_numbers_1, stirling_numbers_2
+from Combinatorics import stirling_numbers_1, stirling_numbers_2
 from GeneralUtils import equal_spacing
 
 for i in range(8):

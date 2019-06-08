@@ -1,4 +1,4 @@
-from Polynomials.PolynomialType import Polynomial
+from Polynomials import Polynomial
 
 cA = [-14,0,-12,1]
 cB = [5,-3,1]
