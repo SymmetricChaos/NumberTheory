@@ -34,60 +34,97 @@ class Polynomial:
         return len(self.coef)-1
 
 
-    def __add__(self,poly):
-        """Add a polynomial to a polynomial"""
-        if type(poly) == Polynomial:
-            if self.modulus != poly.modulus:
-                raise Exception("Modulus does not match.")
-            L = poly_add(self.coef,poly.coef,self.modulus)
-            return Polynomial(L,self.modulus)
-        
-        if type(poly) == int:
-            L = poly_add(self.coef,[poly],self.modulus)
-            return Polynomial(L,self.modulus)    
-
-
-    def __sub__(self,poly):
-        """Subtract a polynomial from a polynomial"""
-        if type(poly) == Polynomial:
-            if self.modulus != poly.modulus:
-                raise Exception("Modulus does not match.")
-            L = poly_add(self.coef,[-c for c in poly.coef],self.modulus)
-            return Polynomial(L,self.modulus)
-        
-        if type(poly) == int:
-            L = poly_add(self.coef,[-poly],self.modulus)
-            return Polynomial(L,self.modulus)    
-
-
     def __neg__(self):
         """Additive inverse of each coefficient"""
         L = [-c for c in self.coef]
         return Polynomial(L,self.modulus)
 
+    def __add__(self,poly):
+        """Add a polynomial to a polynomial"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+
+        L = poly_add(self.coef,poly.coef,self.modulus)
+        return Polynomial(L,self.modulus)
+
+
+    def __radd__(self,poly):
+        """Add a polynomial to a polynomial"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+
+        L = poly_add(self.coef,poly.coef,self.modulus)
+        return Polynomial(L,self.modulus)
+        
+
+    def __sub__(self,poly):
+        """Subtract a polynomial from a polynomial"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+
+        L = poly_add(self.coef,[-c for c in poly.coef],self.modulus)
+        return Polynomial(L,self.modulus)
+
+    def __rsub__(self,poly):
+        """Subtract a polynomial from a polynomial"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+
+        L = poly_add(self.coef,[-c for c in poly.coef],self.modulus)
+        return Polynomial(L,self.modulus)
+
 
     def __mul__(self,poly):
         """Multiply a polynomial by polynomial"""
-        if type(poly) == Polynomial:
-            if self.modulus != poly.modulus:
-                raise Exception("Modulus does not match.")
-            L = poly_mult(self.coef,poly.coef,self.modulus)
-            return Polynomial(L,self.modulus)
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+            
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+        L = poly_mult(self.coef,poly.coef,self.modulus)
+        return Polynomial(L,self.modulus)
+            
         
-        if type(poly) == int:
-            L = poly_mult(self.coef,[poly],self.modulus)
-            return Polynomial(L,self.modulus)
-    
     def __rmul__(self,poly):
-        """right multiplication"""
-        if type(poly) == Polynomial:
-            if self.modulus != poly.modulus:
-                raise Exception("Modulus does not match.")
-            L = poly_mult(self.coef,poly.coef,self.modulus)
-            return Polynomial(L,self.modulus)
-        else:
-            L = poly_mult(self.coef,[poly],self.modulus)
-            return Polynomial(L,self.modulus)
+        """Multiply a polynomial by polynomial"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+
+        L = poly_mult(self.coef,poly.coef,self.modulus)
+        return Polynomial(L,self.modulus)
+
+
+    def __truediv__(self,poly):
+        """Get the quotient of one polynomial by another"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+        
+        a,b = poly_divmod(self.coef,poly.coef,self.modulus)
+        return Polynomial(a,self.modulus)
+
+
+    def __rtruediv__(self,poly):
+        """Get the quotient of one polynomial by another"""
+        if type(poly) != Polynomial:
+            poly = Polynomial([poly])
+        if self.modulus != poly.modulus:
+            raise Exception("Modulus does not match.")
+        
+        a,b = poly_divmod(poly.coef,self.coef,self.modulus)
+        return Polynomial(a,self.modulus)
+
 
     def __pow__(self,pwr):
         """Multiply a polynomial by itself"""
@@ -115,17 +152,6 @@ class Polynomial:
         """Get the quotient and remainder of one polynomial by another"""
         a,b = poly_divmod(self.coef,poly.coef,self.modulus)
         return Polynomial(a,self.modulus), Polynomial(b,self.modulus)
-
-
-    def __truediv__(self,poly):
-        """Get the quotient of one polynomial by another"""
-        if type(poly) == Polynomial:
-            a,b = poly_divmod(self.coef,poly.coef,self.modulus)
-            return Polynomial(a,self.modulus)
-        elif self.modulus == 0:
-            return Polynomial([i/poly for i in self.coef],self.modulus)
-        else:
-            return Polynomial([modinv(i,self.modulus)*poly for i in self.coef],self.modulus)
 
 
     def __mod__(self,poly):

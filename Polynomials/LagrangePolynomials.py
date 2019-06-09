@@ -7,9 +7,8 @@ def lagrange_interpolation(L,func):
         out = Polynomial([func(j)])
         for m in L:
             if m != j:
-                d = Polynomial([1/(j-m)])
+                d = 1/(j-m)
                 X = Polynomial([-m,1])
-                out *= d*X
+                out *= X*d
         final += out
     return final
-            

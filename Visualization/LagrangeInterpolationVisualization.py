@@ -2,7 +2,7 @@ from Polynomials import lagrange_interpolation
 import matplotlib.pyplot as plt
 import numpy as np
 
-points = np.array([1,3,5,7])
+points = [1,3,5,7]
 function = lambda x: np.sin(x)
 
 

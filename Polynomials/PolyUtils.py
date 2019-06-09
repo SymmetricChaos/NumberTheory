@@ -173,12 +173,23 @@ def poly_divmod(P, Q, m = 0):
     dP = poly_degree(P)
     dQ = poly_degree(Q)
     
-    #Q = [0]*(len(P)-len(Q)) + Q
     
     # Check for division by zero    
     if poly_degree(Q) == -1:
         raise ZeroDivisionError
     
+    
+    if len(Q) == 1:
+        if m == 0:
+            return [p/Q[0] for p in P], [0]
+        else:
+            return [modinv(p,m)*Q[0] for p in P], [0]
+    if len(P) == 1:
+        if m == 0:
+            return [P[0]/q for q in Q], [0]
+        else:
+            return [P[0]*modinv(Q,m) for q in Q], [0]
+        
     # Use euclidean division for m = 0, representing no modulus
     if m == 0:
         if dP >= dQ:
