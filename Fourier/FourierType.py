@@ -3,7 +3,7 @@ from GeneralUtils import list_to_sum
 
 class Fourier:
     
-    def __init__(self,amp,freq,ph):
+    def __init__(self,amp=[1],freq=[1],ph=[0]):
         self.amp = amp
         self.freq = freq
         self.ph = ph
@@ -21,7 +21,7 @@ class Fourier:
             else:
                 f = ""
                 
-            if self.ph[i] != 1:
+            if self.ph[i] != 0:
                 p = f"+{self.ph[i]}"
             else:
                 p = ""
