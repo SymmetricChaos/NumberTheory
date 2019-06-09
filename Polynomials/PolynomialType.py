@@ -1,16 +1,13 @@
 from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                                   poly_divmod, poly_norm, poly_derivative
-
+from ModularArithmetic import modinv
 
 class Polynomial:
     
-    def __init__(self,coef,modulus=None):
+    def __init__(self,coef,modulus=0):
         assert type(coef) == list
         self.coef = coef
-        if modulus == None:
-            self.modulus = 0
-        else:
-            self.modulus = modulus
+        self.modulus = modulus
         self.norm()
         
         
@@ -80,7 +77,17 @@ class Polynomial:
         if type(poly) == int:
             L = poly_mult(self.coef,[poly],self.modulus)
             return Polynomial(L,self.modulus)
-
+    
+    def __rmul__(self,poly):
+        """right multiplication"""
+        if type(poly) == Polynomial:
+            if self.modulus != poly.modulus:
+                raise Exception("Modulus does not match.")
+            L = poly_mult(self.coef,poly.coef,self.modulus)
+            return Polynomial(L,self.modulus)
+        else:
+            L = poly_mult(self.coef,[poly],self.modulus)
+            return Polynomial(L,self.modulus)
 
     def __pow__(self,pwr):
         """Multiply a polynomial by itself"""
@@ -112,9 +119,14 @@ class Polynomial:
 
     def __truediv__(self,poly):
         """Get the quotient of one polynomial by another"""
-        a,b = poly_divmod(self.coef,poly.coef,self.modulus)
-        return Polynomial(a,self.modulus)
-    
+        if type(poly) == Polynomial:
+            a,b = poly_divmod(self.coef,poly.coef,self.modulus)
+            return Polynomial(a,self.modulus)
+        elif self.modulus == 0:
+            return Polynomial([i/poly for i in self.coef],self.modulus)
+        else:
+            return Polynomial([modinv(i,self.modulus)*poly for i in self.coef],self.modulus)
+
 
     def __mod__(self,poly):
         """Get the remainder of one polynomial divided by another"""
