@@ -1,4 +1,4 @@
-from Other.Factorization import factorization
+from Computation.Factorization import factorization
 import matplotlib.pyplot as plt
 from math import floor
 from numpy import linspace

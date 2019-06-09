@@ -1,4 +1,4 @@
-from Other.Collatz import collatz
+from Computation.Collatz import collatz
 import matplotlib.pyplot as plt
 
 init = 1121

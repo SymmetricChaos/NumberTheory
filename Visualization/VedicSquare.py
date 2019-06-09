@@ -1,4 +1,4 @@
-from Other.DigitalSum import digital_sum
+from Computation.DigitalSum import digital_sum
 import matplotlib.pyplot as plt
 from matplotlib.cm import rainbow
 
