@@ -1,4 +1,5 @@
 def dyck_inner(S,n,l,r):
+    """Recursive inner function for Dyck Words"""
 
     ## Check how many of each parenthesis we have
     a = S.count(l)
@@ -17,6 +18,7 @@ def dyck_inner(S,n,l,r):
 
 
 def dyck_words(n,word="()"):
+    """Return list of Dyck Words containing n pairs"""
     l = word[0]
     r = word[1]
     
