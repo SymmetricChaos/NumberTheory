@@ -21,7 +21,5 @@ def dyck_words(n,word="()"):
     """Return list of Dyck Words containing n pairs"""
     l = word[0]
     r = word[1]
-    
     return dyck_inner(l,n,l,r)
     
-print(dyck_words(4))
