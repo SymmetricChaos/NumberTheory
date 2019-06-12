@@ -4,6 +4,7 @@ fig = plt.figure()
 ax=fig.add_axes([0,0,1,1])
 ax.set_axis_off()
 
+#plt.ylim(-1,1)
 
 im = ax.imshow([[2,3,4,1], [2,4,4,2]], origin="lower", extent=[1,4,2,8])
 ax.plot([1,2,3,4], [2,3,4,8], lw=5)
