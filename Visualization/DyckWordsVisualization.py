@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 
 N = 5
 D = dyck_words(N)
+h = len(D)//5+1
 
-fig1, axs = plt.subplots(9, 5, figsize=(13, 16))
+fig1, axs = plt.subplots(h, 5, figsize=(13, h*2.5))
 word = 0
 for ax in axs:
     for a in ax:
@@ -21,4 +22,5 @@ for ax in axs:
                 if i == ")":
                     y[ctr] = y[ctr-1]-1
             a.plot(x,y)
+            a.bar(x,y,width=.1)
             word += 1
