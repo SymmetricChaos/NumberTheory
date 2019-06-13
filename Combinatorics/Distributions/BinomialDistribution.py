@@ -16,11 +16,6 @@ class BinomialDist:
         return binomial_eq(self.n,self.p,k)
     
     def __iter__(self):
-        for k in range(self.n):
+        for k in range(self.n+1):
             yield binomial_eq(self.n,self.p,k)
 
-            
-#D = BinomialDist(20,.7)
-#
-#for i in D:
-#    print(i)
