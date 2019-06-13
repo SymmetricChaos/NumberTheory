@@ -1,7 +1,7 @@
 from Combinatorics import dyck_words
 import matplotlib.pyplot as plt
 
-N = 5
+N = 4
 D = dyck_words(N)
 h = len(D)//5+1
 
