@@ -1,2 +1,2 @@
-from Combinatorics.Distributions.BinomialDistribution import binomial_distribution
-__all__=["binomial_distribution"]
+from Combinatorics.Distributions.BinomialDistribution import BinomialDist
+__all__=["BinomialDist"]
