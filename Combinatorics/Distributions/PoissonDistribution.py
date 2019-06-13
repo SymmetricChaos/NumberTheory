@@ -1,0 +1,22 @@
+from Combinatorics import factorial
+from math import exp
+
+def poisson_eq(l,k):
+     return (l**k*exp(-l))/factorial(k)
+
+
+class PoissonDist:
+    
+    def __init__(self,l):
+        self.l = l
+        self.mean = l
+        
+        
+    def  __getitem__(self,k):
+        return poisson_eq(self.l,k)
+    
+    def __iter__(self):
+        k = 0
+        while True:
+            yield poisson_eq(self.l,k)
+            k += 1
