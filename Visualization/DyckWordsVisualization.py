@@ -1,9 +1,12 @@
-from Combinatorics import dyck_words
+from Combinatorics import dyck_words, catalan
 import matplotlib.pyplot as plt
 
 N = 4
 D = dyck_words(N)
 h = len(D)//5+1
+
+print(catalan(N))
+print(len(D))
 
 fig1, axs = plt.subplots(h, 5, figsize=(13, h*2.5))
 word = 0
