@@ -6,6 +6,7 @@ from Combinatorics.RisingAndFallingFactorial import rising_factorial, falling_fa
 from Combinatorics.LobbNumbers import lobb_number
 from Combinatorics.DyckWords import dyck_words
 from Combinatorics.NarayanaNumbers import narayana_number
+from Combinatorics.CatalanNumbers import catalan
 __all__=["stirling_numbers_1", "stirling_numbers_2", "choose", "combo_pairs",
          "factorial", "rising_factorial", "falling_factorial", "lobb_number",
-         "dyck_words", "narayana_number"]
+         "dyck_words", "narayana_number","catalan"]
