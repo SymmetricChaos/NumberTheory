@@ -187,3 +187,6 @@ class Polynomial:
         if len(out) == 1:
             return out[0]
         return out
+    
+    def __round__(self,digits):
+        return Polynomial([round(i,digits) for i in self.coef],modulus=self.modulus)
