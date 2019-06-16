@@ -1,4 +1,4 @@
-from Base import Binary
+from Numerals import Binary
 
 def half_adder(a,b):
     """Single bit addition"""

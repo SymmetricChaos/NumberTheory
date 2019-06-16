@@ -7,5 +7,3 @@ def factoradic(n):
         ctr += 1
     L.reverse()
     return L
-
-print(factoradic(915467))

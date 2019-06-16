@@ -21,6 +21,7 @@ class BalancedTernary:
             
     
     def __init__(self,n):
+        self.n = n
         if type(n) == int:
             self.digits = balanced_ternary(n)
         if type(n) == str:
@@ -41,3 +42,7 @@ class BalancedTernary:
 
     def __repr__(self):
         return "".join([int_to_str[s] for s in self.digits])
+    
+    
+    def __add__(self,addend):
+        BalancedTernary(self.n+addend.n)

@@ -1,4 +1,4 @@
-from Base.BaseConvert import base_convert
+from Numerals.BaseConvert import base_convert
 
 def valid_binary(L):
     for i in L:
