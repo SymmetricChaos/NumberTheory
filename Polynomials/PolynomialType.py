@@ -1,6 +1,5 @@
 from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                                   poly_divmod, poly_norm, poly_derivative
-from ModularArithmetic import modinv
 
 class Polynomial:
     
