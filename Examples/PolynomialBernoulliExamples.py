@@ -13,5 +13,14 @@ print("")
 for i in range(2,6):
     Bin = Bern**i
     print(round(Bin,2))
+    
+print("""
+Let's see why with two coin flips (removing decimals for ease of reading)
+(6x + 4) * (6x + 4)
+6x*6x + 6x*4 + 6x*4 + 4*4
+36x^2 + 48x + 16
+""")
 
+print("The probability of independent events both happening comes from multiplying together the probability of each. This is exactly what happens when we distribute the coefficients for polynomial multiplication, every pair gets multiplied together.")
+print("\nWhen events are mutually exclusive the probability of both happening comes from adding them together. Since each possible permutation is mutually exclusive we can in fact add them together. That justifies summing terms with the same order.")
 b = BinomialDist(3,.4)
