@@ -7,6 +7,29 @@ def valid_digits(L,b):
             return False
     return True
 
+def baseN_sum(X,Y,base):
+    X = X[:]
+    Y = Y[:]
+    while len(X) < len(Y):
+        X.insert(0,0)
+    while len(Y) < len(X):
+        Y.insert(0,0)
+        
+    carry = 0
+    out = []
+    for a,b in zip(reversed(X),reversed(Y)):
+        carry, digit = divmod(a+b+carry,base)
+        out.append(digit)
+    out.append(carry)
+    
+    out.reverse()
+    
+    while out[0] == 0:
+        del out[0]
+    
+    return out
+        
+
 alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 class BaseN:
@@ -42,3 +65,8 @@ class BaseN:
         for pos,val in enumerate(self.digits[::-1]):
             out += val*self.b**pos
         return out
+    
+    def __add__(self,addend):
+        assert self.b == addend.b
+        d = baseN_sum(self.digits,addend.digits)
+        return BaseN(d,self.b)
