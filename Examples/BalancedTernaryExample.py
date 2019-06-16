@@ -1,4 +1,4 @@
-from Base import BalancedTernary
+from Numerals import BalancedTernary
 from random import randint
 
 print("Balanced Ternary is an alternative way of writing numbers.")
