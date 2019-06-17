@@ -72,8 +72,6 @@ def poly_print(P,mod):
         
         coe = P[pwr]
         val = abs(coe)
-#        if type(val) == float:
-#            val = round(val,3)
         sgn = "-" if coe//val == -1 else "+"
                 
         # When the coefficient is 1 or -1 don't print it unless it is the
