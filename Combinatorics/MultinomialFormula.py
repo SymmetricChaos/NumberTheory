@@ -2,6 +2,7 @@ from Combinatorics import factorial
 from GeneralUtils import prod
 
 def multinomial_formula(X,P):
+    assert len(X) == len(P)
     s = sum(X)
     f = factorial(s)
     pr1 = prod( [factorial(x) for x in X] )
