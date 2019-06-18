@@ -52,9 +52,9 @@ def long_addition_decimal(A,B):
         
     return out
 
-A = "4110.5"
-B = "3121.5"
-C = long_addition_decimal(A,B)
-print(A)
-print(B)
-print(C)
+#A = "4110.5"
+#B = "3121.5"
+#C = long_addition_decimal(A,B)
+#print(A)
+#print(B)
+#print(C)
