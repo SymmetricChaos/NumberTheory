@@ -13,11 +13,11 @@ print()
 for i in range(0,5):
     a = BalancedTernary(randint(-200,200))
     b = BalancedTernary(randint(-200,200))
-    print(f"{str(a):6}  *  {str(b):6}  =  {a*b}")
+    print(f"{str(a):>6}  *  {str(b):>6}  =  {a*b}")
     
 print()
 
 for i in range(0,5):
     a = BalancedTernary(randint(-200,200))
     b = BalancedTernary(randint(-200,200))
-    print(f"{str(a):6}  +  {str(b):6}  =  {a+b}")
+    print(f"{str(a):>6}  +  {str(b):>6}  =  {a+b}")
