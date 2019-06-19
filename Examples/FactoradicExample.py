@@ -19,13 +19,13 @@ def factoradic_permutation(L,f):
     
     F = factoradic(f)
     out = []
+    while len(L) > len(F):
+        out.append( L.pop(0) )
     for i in F:
         out.append( L.pop(i) ) 
-    while len(L) > 0:
-        out.append( L.pop(0) )
     return out
-    
 
-for i in range(20):
+
+for i in range(24):
     L = ["A","B","C","D"]
-    print("".join(factoradic_permutation(L,i)))
+    print("".join(factoradic_permutation(L,i)), factoradic(i))
