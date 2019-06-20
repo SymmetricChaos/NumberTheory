@@ -1,4 +1,4 @@
-from Numerals import factoradic, factoradic_permutation
+from Combinatorics import factoradic, factoradic_permutation
 
 print("The factoradic numbers are an unusual way of represent numbers. Usuaully numeral systems have place values that increase by powers of some integer. Factoradic numbers have place values that are successive factorials.")
 
