@@ -5,6 +5,8 @@ R1   = ["","I","II","III","IV","V","VI","VII","VIII","IX"]
 R10  = ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"]
 R100 = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"]
 
+R = [R1,R10,R100]
+
 def roman_to_int(n):
     out = 0
     L = []
@@ -30,13 +32,10 @@ def roman_to_int(n):
 def int_to_roman(n):
     
     d = [int(i) for i in str(n%1000)]
-    
-    L = ["M"]*(n//1000)
-    
-    L.append( R100[d[0]] )
-    L.append( R10[d[1]] )
-    L.append( R1[d[2]] )
-    
+    L = []
+    for i,j in enumerate(reversed(d)):
+        L.insert(0,R[i][j])
+    L = ["M"]*(n//1000) + L
     return "".join(L)
     
 
