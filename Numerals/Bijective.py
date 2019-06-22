@@ -9,6 +9,7 @@ def bijective_to_int(s,b):
         out += d*b**p
     return out
     
+
 def int_to_bijective_str(n,b,silent=False):
     assert b > 0, "Base must be greater than zero"
     if b >= 10 and not silent:
@@ -21,6 +22,7 @@ def int_to_bijective_str(n,b,silent=False):
         S.append(str(q0-q1*b))
         q0 = q1
     return "".join(reversed(S))
+
 
 def int_to_bijective_list(n,b):
     S = []
@@ -59,12 +61,3 @@ class BijectiveBase:
         
     def __int__(self):
         return self.n
-    
-    
-A = BijectiveBase(4354,20)
-B = BijectiveBase(1726,20)
-print(A," + ",B," = ",A+B)
-BijectiveBase.ALPHA = "ABCDEFGHJKLMNOPQRSTUVWXYZ"
-print(A," + ",B," = ",A+B)
-#print(bijective_to_int("3122",3))
-#print(int_to_bijective(98,3))

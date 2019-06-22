@@ -30,9 +30,11 @@ def baseN_sum(X,Y,base):
     return out
         
 
-alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 class BaseN:
+    
+    
+    alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
     def __init__(self,number,b):
         if type(number) == int:
@@ -48,14 +50,14 @@ class BaseN:
 
     def __str__(self):
         if self.b <= 36:
-            return "".join([alphabet[d] for d in self.digits])
+            return "".join([self.alphabet[d] for d in self.digits])
         else:
             return " ".join(str(d) for d in self.digits)
     
     
     def __repr__(self):
         if self.b <= 36:
-            return "".join([alphabet[d] for d in self.digits])
+            return "".join([self.alphabet[d] for d in self.digits])
         else:
             return " ".join(str(d) for d in self.digits)
 
