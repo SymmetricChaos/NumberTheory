@@ -9,7 +9,10 @@ def bijective_to_int(s,b):
         out += d*b**p
     return out
     
-def int_to_bijective(n,b):
+def int_to_bijective_str(n,b,silent=False):
+    assert b > 0, "Base must be greater than zero"
+    if b >= 10 and not silent:
+        print("Base uses multiple decimal digits. Reading may be ambigious.")
     S = []
     q0,q1 = n,0
     while n > 0:
@@ -18,18 +21,29 @@ def int_to_bijective(n,b):
         S.append(str(q0-q1*b))
         q0 = q1
     return "".join(reversed(S))
+
+def int_to_bijective_list(n,b):
+    S = []
+    q0,q1 = n,0
+    while n > 0:
+        n = ceil(n/b)-1
+        q1 = n
+        S.append(str(q0-q1*b))
+        q0 = q1
+    return reversed(S)
         
 class BijectiveBase:
     
     def __init__(self,n,b=2):
         self.n = n
         self.b = b
+            
     
     def __str__(self):
-        return int_to_bijective(self.n,self.b)
+        return int_to_bijective_str(self.n,self.b)
     
     def __repr__(self):
-        return int_to_bijective(self.n,self.b)
+        return int_to_bijective_str(self.n,self.b)
     
     def __add__(self,addend):
         assert self.b == addend.b
@@ -42,8 +56,8 @@ class BijectiveBase:
     def __int__(self):
         return self.n
     
-A = BijectiveBase(4354,5)
-B = BijectiveBase(1726,5)
+A = BijectiveBase(4354,9)
+B = BijectiveBase(1726,9)
 print(A)
 print(B)
 print(A+B)
