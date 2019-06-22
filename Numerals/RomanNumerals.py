@@ -1,13 +1,7 @@
-Roman = {"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
-
-# Ones, tens, and hundred digits
-R1   = ["","I","II","III","IV","V","VI","VII","VIII","IX"]
-R10  = ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"]
-R100 = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"]
-
-R = [R1,R10,R100]
-
 def roman_to_int(n):
+
+    Roman = {"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
+
     out = 0
     L = []
     
@@ -31,6 +25,13 @@ def roman_to_int(n):
 
 def int_to_roman(n):
     
+    # Ones, tens, and hundred digits
+    R1   = ["","I","II","III","IV","V","VI","VII","VIII","IX"]
+    R10  = ["","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"]
+    R100 = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"]
+    
+    R = [R1,R10,R100]
+    
     d = [int(i) for i in str(n%1000)]
     L = []
     for i,j in enumerate(reversed(d)):
@@ -39,6 +40,3 @@ def int_to_roman(n):
     return "".join(L)
     
 
-#print(roman_to_int("MCMLIV"))
-#
-#print(int_to_roman(1954))
