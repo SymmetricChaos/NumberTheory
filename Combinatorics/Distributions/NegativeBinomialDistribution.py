@@ -17,9 +17,3 @@ class NegativeBinomialDist:
         
     def  __getitem__(self,k):
         return neg_binomial_eq(self.r,self.p,k)
-    
-    def __iter__(self):
-        k = 0
-        while True:
-            yield neg_binomial_eq(self.r,self.p,k)
-            k += 1

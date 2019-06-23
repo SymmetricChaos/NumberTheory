@@ -15,9 +15,3 @@ class PoissonDist:
         
     def  __getitem__(self,k):
         return poisson_eq(self.l,k)
-    
-    def __iter__(self):
-        k = 0
-        while True:
-            yield poisson_eq(self.l,k)
-            k += 1

@@ -12,10 +12,3 @@ class GeometricDist:
         
     def  __getitem__(self,k):
         return geometric_eq(self.p,k)
-    
-    
-    def __iter__(self):
-        k = 0
-        while True:
-            yield geometric_eq(self.p,k)
-            k += 1
