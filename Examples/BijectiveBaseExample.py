@@ -1,5 +1,4 @@
 from Numerals import BijectiveBase
-from random import randint
 
 
 A = BijectiveBase(4354,9)
