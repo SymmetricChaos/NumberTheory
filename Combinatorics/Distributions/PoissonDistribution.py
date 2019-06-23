@@ -10,6 +10,7 @@ class PoissonDist:
     def __init__(self,l):
         self.l = l
         self.mean = l
+        self.var = l
         
         
     def  __getitem__(self,k):

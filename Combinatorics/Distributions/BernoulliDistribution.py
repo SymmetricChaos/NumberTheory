@@ -12,6 +12,7 @@ class BernoulliDist:
         self.p = p
         self.q = 1-p
         self.mean = p
+        self.var = p*(1-p)
         
         
     def  __getitem__(self,k):
