@@ -10,6 +10,7 @@ class BinomialDist:
         self.n = n
         self.p = p
         self.mean = n*p
+        self.var = n*p*(1-p)
         
         
     def  __getitem__(self,k):

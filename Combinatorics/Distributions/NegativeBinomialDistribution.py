@@ -12,6 +12,7 @@ class NegativeBinomialDist:
         self.p = p
         self.r = r
         self.mean = p*r/(1-p)
+        self.var = (p*r)/(1-p)**2
         
         
     def  __getitem__(self,k):

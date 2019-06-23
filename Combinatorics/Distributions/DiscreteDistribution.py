@@ -13,6 +13,7 @@ class DiscreteDist:
         self.b = b
         self.n = b-a+1
         self.mean = (a+b)/2
+        self.var = ((b-a+1)**2 - 1)/12
         
         
     def  __getitem__(self,k):
