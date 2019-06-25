@@ -11,9 +11,9 @@ class Tournament:
     
     def update(self,P1,P2,S1,S2):
         if P1 not in self.players:
-            raise Exception("First player unknown.")
+            raise Exception(f"Player {P1} unknown.")
         if P2 not in self.players:
-            raise Exception("First player unknown.")
+            raise Exception(f"Player {P2} unknown.")
         s = S1+S2
         a,b = elo_update(self.players[P1],self.players[P2],S1/s,S2/s,self.K)
         self.players[P1] = a
