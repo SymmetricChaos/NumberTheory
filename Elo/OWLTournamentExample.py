@@ -1,5 +1,4 @@
-from Tournament import Tournament, elo_ranks
-from random import gauss, randint
+from Tournament import Tournament
 
 players = ["PHI","LDN","NYE","BOS","SEO","GLA","SHD","HZS",
            "TOR","HOU","ATL","FLA","DAL","SFS","CHD","GZC",
@@ -36,4 +35,4 @@ T.update("ATL","TOR",3,1)
 T.update("NYE","VAL",3,2)
 T.update("SHD","BOS",3,1)
 
-elo_ranks(T)
+print(T)

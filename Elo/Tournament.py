@@ -22,8 +22,17 @@ class Tournament:
     def predict(self,P1,P2):
         return elo_expected(self.players[P1],self.players[P2])
 
+    def __str__(self):
+        L = sort_by_values(self.players)
+        out = ""
+        for i,j in reversed(L):
+            out += f"{i}: {j}\n"
+        return out
+
+
+
 def elo_ranks(tournament):
     p = tournament.players
     L = sort_by_values(p)
-    for i in reversed(L):
-        print(i)
+    L.reverse()
+    return L
