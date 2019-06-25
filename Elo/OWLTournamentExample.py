@@ -3,7 +3,7 @@ from Tournament import Tournament
 players = ["PHI","LDN","NYE","BOS","SEO","GLA","SHD","HZS",
            "TOR","HOU","ATL","FLA","DAL","SFS","CHD","GZC",
            "PAR","WAS","VAL","VAN"]
-T = Tournament(players)
+T = Tournament(players,start_score=1000,K=32)
 
     
 T.update("PHI","LDN",3,1)
@@ -36,3 +36,5 @@ T.update("NYE","VAL",3,2)
 T.update("SHD","BOS",3,1)
 
 print(T)
+
+print(T.predict("ATL","DAL"))
