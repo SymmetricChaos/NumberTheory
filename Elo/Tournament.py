@@ -18,15 +18,12 @@ class Tournament:
         a,b = elo_update(self.players[P1],self.players[P2],S1/s,S2/s,self.K)
         self.players[P1] = a
         self.players[P2] = b
+        
+    def predict(self,P1,P2):
+        return elo_expected(self.players[P1],self.players[P2])
 
 def elo_ranks(tournament):
     p = tournament.players
     L = sort_by_values(p)
     for i in reversed(L):
         print(i)
-
-#T = Tournament(["Alice","Bob"],32)
-#
-#print(T.players)
-#T.update("Alice","Bob",1,50)
-#print(T.players)
