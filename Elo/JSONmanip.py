@@ -1,9 +1,3 @@
-
-def match_score(D):
-    a = D["scores"][0]["value"]
-    b = D["scores"][1]["value"]
-    return a,b
-
 def map_score(D):
     a = 0
     b = 0
@@ -11,6 +5,21 @@ def map_score(D):
         a += i["points"][0]
         b += i["points"][1]
     return a,b
+
+def match_score(D):
+    a = D["scores"][0]["value"]
+    b = D["scores"][1]["value"]
+    return a,b
+
+def series_score(D):
+    a = D["scores"][0]["value"]
+    b = D["scores"][1]["value"]
+    if a > b:
+        return 1,0
+    if b > a:
+        return 0,1
+    if a == b:
+        return 0.5, 0.5
 
 def match_values(D):
     A = D["competitors"][0]["abbreviatedName"]
