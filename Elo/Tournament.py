@@ -3,7 +3,7 @@ from GeneralUtils import sort_by_values
 
 class Tournament:
     
-    def __init__(self,players,start_score=2000,K=32):
+    def __init__(self,players,start_score=1000,K=32):
         self.players = dict()
         for p in players:
             self.players[p] = start_score
