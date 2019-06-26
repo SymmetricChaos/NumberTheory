@@ -1,11 +1,11 @@
 import json
 from Tournament import Tournament
-from Elo.JSONmanip import match_scores, stage_regular
+from Elo.JSONmanip import all_matches, stage_regular
 
 with open("OWLmatches.json", "r") as read_file:
     data = json.load(read_file)
 
-S = match_scores(data)
+S = all_matches(data)
 stage_1 = stage_regular(S,1)
 stage_2 = stage_regular(S,2)
 
@@ -29,4 +29,3 @@ for i in stage_2:
     
 print("Stage 2 Standings")
 print(T)
-    
