@@ -9,6 +9,7 @@ S = all_matches(data)
 stage_1 = stage_regular(S,1)
 stage_2 = stage_regular(S,2)
 stage_3 = stage_regular(S,3)
+stage_4 = stage_regular(S,4)
 
 stages = [stage_1,stage_2,stage_3]
 
