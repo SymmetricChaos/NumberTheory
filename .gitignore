@@ -1,3 +1,4 @@
 *.pyc
 *.html
 Visualization/.ipynb_checkpoints/Taylor Series Notebook-checkpoint.ipynb
+*.json
