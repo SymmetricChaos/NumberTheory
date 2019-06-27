@@ -4,10 +4,25 @@ class Tropical:
         self.val = val
     
     def __add__(self,b):
-        return Tropical(min(self.val,b.val))
+        if type(b) == Tropical:
+            return Tropical(min(self.val,b.val))
+        else:
+            return Tropical(min(self.val,b))
+    
     
     def __mul__(self,b):
-        return Tropical(self.val + b.val)
+        if type(b) == Tropical:
+            return Tropical(self.val+b.val)
+        else:
+            return Tropical(self.val+b)
+    
     
     def __pow__(self,b):
-        return Tropical(self.val*b.val)
+        if type(b) == Tropical:
+            return Tropical(self.val*b.val)
+        else:
+            return Tropical(self.val*b)
+
+
+    def __str__(self):
+        return str(self.val)
