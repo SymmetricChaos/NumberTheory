@@ -1,4 +1,5 @@
 def map_score(D):
+    """Total points scored in a given series"""
     a = 0
     b = 0
     for i in D["games"]:
@@ -7,11 +8,13 @@ def map_score(D):
     return a,b
 
 def match_score(D):
+    """Total matches one"""
     a = D["scores"][0]["value"]
     b = D["scores"][1]["value"]
     return a,b
 
 def series_score(D):
+    """Returns 1 for winner and 0 for loser, .5 for ties"""
     a = D["scores"][0]["value"]
     b = D["scores"][1]["value"]
     if a > b:
@@ -22,6 +25,7 @@ def series_score(D):
         return 0.5, 0.5
 
 def match_values(D):
+    """Name of each team, score for each team, stage number, match format"""
     A = D["competitors"][0]["abbreviatedName"]
     B = D["competitors"][1]["abbreviatedName"]
     As,Bs = match_score(D)
@@ -32,6 +36,7 @@ def match_values(D):
 
 
 def all_matches(js,score_type="matches"):
+    """Return a list of match information for concluded matches"""
     out = []
     N = js["totalElements"]
     
@@ -42,6 +47,7 @@ def all_matches(js,score_type="matches"):
     return out
 
 def stage_regular(L,n):
+    """Extract the regular season matches from all_matches"""
     out = []
     for i in L:
         if i[5] == "regular_season":
@@ -50,6 +56,7 @@ def stage_regular(L,n):
     return out
                 
 def stage_playoff(L,n):
+    """Extract the playoff matches from all_matches"""
     out = []
     for i in L:
         if i[5] == "title_matches":
