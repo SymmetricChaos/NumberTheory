@@ -7,6 +7,7 @@ class Tournament:
         self.players = dict()
         for p in players:
             self.players[p] = start_score
+        self.start_score = start_score
         self.K = K
     
     def update(self,P1,P2,S1,S2):
@@ -29,6 +30,8 @@ class Tournament:
             out += f"{i}: {j}\n"
         return out
 
+    def copy(self):
+        return Tournament([i for i in self.players.keys()],self.start_score,self.K)
 
 
 def elo_ranks(tournament):
@@ -36,3 +39,5 @@ def elo_ranks(tournament):
     L = sort_by_values(p)
     L.reverse()
     return L
+#
+#def simulate_matches(T,L)
