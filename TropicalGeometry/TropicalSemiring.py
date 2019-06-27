@@ -4,7 +4,10 @@ class Tropical:
         self.val = val
     
     def __add__(self,b):
-        return min(self.val,b.val)
+        return Tropical(min(self.val,b.val))
     
     def __mul__(self,b):
-        return self.val + b.val
+        return Tropical(self.val + b.val)
+    
+    def __pow__(self,b):
+        return Tropical(self.val*b.val)
