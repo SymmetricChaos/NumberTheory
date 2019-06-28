@@ -18,17 +18,17 @@ def series_score(D):
     a = D["scores"][0]["value"]
     b = D["scores"][1]["value"]
     if a > b:
-        return 1,0
+        return 2,0
     if b > a:
-        return 0,1
-    if a == b:
-        return 0.5, 0.5
+        return 0,2
 
 def match_values(D):
     """Name of each team, score for each team, stage number, match format"""
     A = D["competitors"][0]["abbreviatedName"]
     B = D["competitors"][1]["abbreviatedName"]
-    As,Bs = match_score(D)
+    As1,Bs1 = match_score(D)
+    As2,Bs2 = series_score(D)
+    As,Bs = As1+As2, Bs1+Bs2
     Bs = D["scores"][1]["value"]
     stg = D["bracket"]["stage"]["tournament"]["attributes"]["program"]["stage"]["number"]
     frm = D["bracket"]["stage"]["tournament"]["attributes"]["program"]["stage"]["format"]
