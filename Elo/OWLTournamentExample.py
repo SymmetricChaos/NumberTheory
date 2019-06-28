@@ -1,5 +1,5 @@
 import json
-from Tournament import Tournament
+from Tournament import Tournament, elo_ranks
 from Elo.JSONmanip import all_matches, stage_regular
 
 with open("OWLmatches.json", "r") as read_file:
@@ -18,18 +18,19 @@ players = ["PHI","LDN","NYE","BOS","SEO","GLA","SHD","HZS",
            "PAR","WAS","VAL","VAN"]
 
 
-
 for n in range(3):
     T = Tournament(players,K=32)
-    for i in stages[n]:
-        T.update(i[0],i[1],i[2],i[3])
+    for match in stages[n]:
+        T.update(match)
     print(f"Stage {n+1} Elo Standings")
-    print(T)
+    elo_ranks(T)
 
 
 T = Tournament(players,K=32)
 for n in range(3):
-    for i in stages[n]:
-        T.update(i[0],i[1],i[2],i[3])
+    for match in stages[n]:
+        T.update(match)
 print("Season Elo Standings")
-print(T)
+elo_ranks(T)
+
+print(T.standings)
