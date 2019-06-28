@@ -40,7 +40,6 @@ class Tournament:
 
 
     #def simulate(self,matches):
-        
 
     def copy(self):
         return Tournament([i for i in self.standings.keys()],self.start_score,self.K)
@@ -50,6 +49,15 @@ class Tournament:
 
 def elo_ranks(tournament):
     L = sort_by_values(tournament.elo)
+    out = ""
+    for i,j in reversed(L):
+        out += f"{i}: {j}\n"
+    print(out)
+    
+    
+def standings(tournament):
+#    L = sorted(tournament.standings.items(), key=lambda x: (x[1][0], x[1][1]+x[1][0], x[1][2]))
+    L = sorted(tournament.standings.items(), key=lambda x: (x[1][0]/x[1][1], x[1][2]))
     out = ""
     for i,j in reversed(L):
         out += f"{i}: {j}\n"
