@@ -15,13 +15,17 @@ class Tropical:
             return Tropical(self.val+b.val)
         else:
             return Tropical(self.val+b)
-    
+        
     
     def __pow__(self,b):
         if type(b) == Tropical:
             return Tropical(self.val*b.val)
         else:
             return Tropical(self.val*b)
+
+
+    def __abs__(self):
+        return Tropical(abs(self.val))
 
 
     def __str__(self):

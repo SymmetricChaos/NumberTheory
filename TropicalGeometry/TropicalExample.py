@@ -1,9 +1,10 @@
 from TropicalSemiring import Tropical
-
+from Polynomials import Polynomial
 
 a = Tropical(1)
 b = Tropical(2)
 c = Tropical(3)
-c = Tropical(4)
 
-print(a**1 + b**2)
+T = Polynomial([a,b,c])
+
+print(a**0)
