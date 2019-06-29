@@ -71,17 +71,38 @@ def standings(tournament):
     
 
 def simulate(tournament,L):
+    # Copy the tournament so we don't modify what we have
+    # Also set K to 0 to freeze rankings
     T = tournament.copy()
     T.K = 0
     for players in L:
+        # Predict results
         p1p, p2p = T.predict(players[0],players[1])
-        r = random()
-        if r > p1p:
-            p1w = 0
-            p2w = 1
-        else:
-            p1w = 1
+        # Star score at zero
+        p1s, p2s = 0,0
+        for maps in range(4):
+            r = random()
+            if r > p1p:
+                p1s += 1
+            else:
+                p2s += 1
+        # Break a tie
+        if p1s == p2s:
+            r = random()
+            if r > p1p:
+                p1s += 1
+            else:
+                p2s += 1
+        # determine winner
+        if p1s > p2s:
             p2w = 0
-        fake_match = [players[0],players[1],p1w,p2w,r,1-r]
+            p1w = 1
+        if p1s < p2s:
+            p2w = 1
+            p1w = 
+        # Update the tournament with fake data
+        fake_match = [players[0],players[1],p1w,p2w,p1s,p2s]
         T.update(fake_match)
     standings(T)
+    
+    

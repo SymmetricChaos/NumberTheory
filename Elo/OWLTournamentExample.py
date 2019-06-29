@@ -35,5 +35,12 @@ print("Season Elo Standings")
 elo_ranks(T)
 standings(T)
 
-
-simulate(T,[["VAN","WAS"]])
+#g = [["DAL","NYE"],
+#     ["BOS","PHI"],
+#     ["FLA","HZS"],
+#     ["SHD","GZC"],
+#     ["GLA","VAN"],
+#     ["LDN","SFS"],
+#     ["HOU","TOR"],
+#     ["CDH","SEO"]]
+#simulate(T,g)
