@@ -110,5 +110,6 @@ def montecarlo_simulate(tournament,L,N):
     T = tournament.copy()
     for i in range(N):
         S = simulate(T,L)
-        standings(S)
+        pred = sorted(S.standings.items(), key=lambda x: (safe_div(x[1][0],x[1][1]), x[1][2]))
+        print([i[0] for i in reversed(pred)])
     
