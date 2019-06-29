@@ -1,5 +1,6 @@
 from EloSystem import elo_update, elo_expected
 from GeneralUtils import sort_by_values
+from random import random
 
 class Tournament:
     
@@ -14,7 +15,7 @@ class Tournament:
     
     def update(self,match_list):
         
-        P1,P2,P1wl,P2wl,P1maps,P2maps,P1points,P2points,stg,frm = match_list
+        P1,P2,P1wl,P2wl,P1maps,P2maps = match_list
         
         
         if P1 not in self.standings:
@@ -22,10 +23,10 @@ class Tournament:
         if P2 not in self.standings:
             raise Exception(f"Player {P2} unknown.")
         s = P1maps+P2maps
-#        s = P1wl+P2wl
         a,b = elo_update(self.elo[P1],self.elo[P2],P1maps/s,P2maps/s,self.K)
+#        s = P1wl+P2wl
 #        a,b = elo_update(self.elo[P1],self.elo[P2],P1wl/s,P2wl/s,self.K)
-        
+
         self.standings[P1][0] += P1wl
         self.standings[P1][1] += P2wl
         self.standings[P1][2] += P1maps-P2maps
@@ -42,9 +43,10 @@ class Tournament:
 
 
     def copy(self):
-        return Tournament([i for i in self.standings.keys()],self.start_score,self.K)
-
-
+        T = Tournament([i for i in self.standings.keys()],self.start_score,self.K)
+        T.elo = self.elo
+        T.standings = self.standings
+        return T
 
 
 def elo_ranks(tournament):
@@ -66,3 +68,20 @@ def standings(tournament):
     for i,j in reversed(L):
         out += f"{i}: {j}\n"
     print(out)
+    
+
+def simulate(tournament,L):
+    T = tournament.copy()
+    T.K = 0
+    for players in L:
+        p1p, p2p = T.predict(players[0],players[1])
+        r = random()
+        if r > p1p:
+            p1w = 0
+            p2w = 1
+        else:
+            p1w = 1
+            p2w = 0
+        fake_match = [players[0],players[1],p1w,p2w,r,1-r]
+        T.update(fake_match)
+    standings(T)
