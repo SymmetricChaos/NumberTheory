@@ -21,6 +21,13 @@ def winner_loser(D):
         return 1,0
     if b > a:
         return 0,1
+    
+def competitors(D):
+    A = D["competitors"][0]["abbreviatedName"]
+    B = D["competitors"][1]["abbreviatedName"]
+    stg = D["bracket"]["stage"]["tournament"]["attributes"]["program"]["stage"]["number"]
+    frm = D["bracket"]["stage"]["tournament"]["attributes"]["program"]["stage"]["format"]
+    return A,B,0,0,0,0,0,stg,frm
 
 def match_values(D):
     """Name of each team, score for each team, stage number, match format"""
@@ -43,6 +50,17 @@ def all_matches(js,score_type="matches"):
         D = js["content"][i]
         if D["status"] == "CONCLUDED":
             out.append( match_values(D) )
+    return out
+
+def upcoming_matches(js,score_type="matches"):
+    """Return a list of match information for upcoming matches"""
+    out = []
+    N = js["totalElements"]
+    
+    for i in range(N):
+        D = js["content"][i]
+        if D["status"] != "CONCLUDED":
+            out.append( competitors(D) )
     return out
 
 def stage_regular(L,n):

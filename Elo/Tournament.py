@@ -99,7 +99,7 @@ def simulate(tournament,L):
             p1w = 1
         if p1s < p2s:
             p2w = 1
-            p1w = 
+            p1w = 0
         # Update the tournament with fake data
         fake_match = [players[0],players[1],p1w,p2w,p1s,p2s]
         T.update(fake_match)

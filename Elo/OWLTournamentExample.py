@@ -1,6 +1,6 @@
 import json
 from Tournament import Tournament, elo_ranks, standings, simulate
-from Elo.JSONmanip import all_matches, stage_regular
+from Elo.JSONmanip import all_matches, stage_regular, upcoming_matches
 
 with open("OWLmatches.json", "r") as read_file:
     data = json.load(read_file)
@@ -24,6 +24,7 @@ for n in range(3):
         T.update(match[:6])
     print(f"Stage {n+1} Elo Standings")
     elo_ranks(T)
+    print("Stage Standings")
     standings(T)
 
 
@@ -33,14 +34,12 @@ for n in range(3):
         T.update(match[:6])
 print("Season Elo Standings")
 elo_ranks(T)
+print("Season Standings")
 standings(T)
 
-#g = [["DAL","NYE"],
-#     ["BOS","PHI"],
-#     ["FLA","HZS"],
-#     ["SHD","GZC"],
-#     ["GLA","VAN"],
-#     ["LDN","SFS"],
-#     ["HOU","TOR"],
-#     ["CDH","SEO"]]
-#simulate(T,g)
+
+U = upcoming_matches(data)
+stage_3u = stage_regular(U,3)
+g = [(i[0],i[1]) for i in stage_3u]
+print("Possible Stage Final Standings")
+simulate(T,g)
