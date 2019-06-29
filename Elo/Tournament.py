@@ -22,7 +22,9 @@ class Tournament:
         if P2 not in self.standings:
             raise Exception(f"Player {P2} unknown.")
         s = P1maps+P2maps
+#        s = P1wl+P2wl
         a,b = elo_update(self.elo[P1],self.elo[P2],P1maps/s,P2maps/s,self.K)
+#        a,b = elo_update(self.elo[P1],self.elo[P2],P1wl/s,P2wl/s,self.K)
         
         self.standings[P1][0] += P1wl
         self.standings[P1][1] += P2wl
@@ -39,8 +41,6 @@ class Tournament:
         return elo_expected(self.elo[P1],self.elo[P2])
 
 
-    #def simulate(self,matches):
-
     def copy(self):
         return Tournament([i for i in self.standings.keys()],self.start_score,self.K)
 
@@ -53,11 +53,15 @@ def elo_ranks(tournament):
     for i,j in reversed(L):
         out += f"{i}: {j}\n"
     print(out)
-    
+
+def safe_div(a,b):
+    try:
+        return a/b
+    except:
+        return a
     
 def standings(tournament):
-#    L = sorted(tournament.standings.items(), key=lambda x: (x[1][0], x[1][1]+x[1][0], x[1][2]))
-    L = sorted(tournament.standings.items(), key=lambda x: (x[1][0]/x[1][1], x[1][2]))
+    L = sorted(tournament.standings.items(), key=lambda x: (safe_div(x[1][0],x[1][1]), x[1][2]))
     out = ""
     for i,j in reversed(L):
         out += f"{i}: {j}\n"

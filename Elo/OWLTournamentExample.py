@@ -19,14 +19,15 @@ players = ["PHI","LDN","NYE","BOS","SEO","GLA","SHD","HZS",
 
 
 for n in range(3):
-    T = Tournament(players,K=32)
+    T = Tournament(players,K=40)
     for match in stages[n]:
         T.update(match)
     print(f"Stage {n+1} Elo Standings")
     elo_ranks(T)
+    standings(T)
 
 
-T = Tournament(players,K=32)
+T = Tournament(players,K=40)
 for n in range(3):
     for match in stages[n]:
         T.update(match)
