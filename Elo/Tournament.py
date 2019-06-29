@@ -1,6 +1,7 @@
 from EloSystem import elo_update, elo_expected
 from GeneralUtils import sort_by_values
 from random import random
+import copy
 
 class Tournament:
     
@@ -44,8 +45,8 @@ class Tournament:
 
     def copy(self):
         T = Tournament([i for i in self.standings.keys()],self.start_score,self.K)
-        T.elo = self.elo
-        T.standings = self.standings
+        T.elo = copy.deepcopy(self.elo)
+        T.standings = copy.deepcopy(self.standings)
         return T
 
 
@@ -103,6 +104,11 @@ def simulate(tournament,L):
         # Update the tournament with fake data
         fake_match = [players[0],players[1],p1w,p2w,p1s,p2s]
         T.update(fake_match)
-    standings(T)
+    return T
     
+def montecarlo_simulate(tournament,L,N):
+    T = tournament.copy()
+    for i in range(N):
+        S = simulate(T,L)
+        standings(S)
     
