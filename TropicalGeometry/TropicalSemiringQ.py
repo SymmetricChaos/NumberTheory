@@ -1,8 +1,14 @@
+from ModularArithmetic import gcd
+
 class Tropical:
     
     def __init__(self,a,b):
-        self.a = a
-        self.b = b
+        if b < 0:
+            b = abs(b)
+            a = -a
+        g = abs(gcd(a,b))
+        self.a = a//g
+        self.b = b//g
     
     # Comparisons
     def __le__(self,other):
@@ -30,25 +36,16 @@ class Tropical:
     def __pow__(self,other):
         return Tropical(self.a*other.a, self.b*other.b)
         
-#    def sym(self):
-#        return Tropical(1/self.val)
-#    
-#    
-#
-#    def __abs__(self):
-#        return Tropical(abs(self.val))
-#
-#
-#    def __str__(self):
-#        return str(self.a/self.b)
-#    
-#    
-#
-#    
-#    
-#    def __truediv__(self,b):
-#        return self * b.sym()
-#    
-#
-#    def __floordiv__(self,b):
-#        return self * b.sym()
+    def __truediv__(self,other):
+        return self * other.sym()
+    
+    # Other
+    def __str__(self):
+        return f"{self.a}/{self.b}"
+    
+    def sym(self):
+        return Tropical(self.b,self.a)
+    
+    def __abs__(self):
+        return Tropical(abs(self.a),abs(self.b))
+    
