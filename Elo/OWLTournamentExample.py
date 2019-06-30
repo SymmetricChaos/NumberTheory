@@ -18,12 +18,14 @@ players = ["PHI","LDN","NYE","BOS","SEO","GLA","SHD","HZS",
            "PAR","WAS","VAL","VAN"]
 
 
-for n in range(3):
-    T = Tournament(players,K=40)
-    for match in stages[n]:
-        T.update(match[:6])
-    print(f"Stage {n+1} Elo Standings")
-    elo_ranks(T)
+#for n in range(3):
+#    T = Tournament(players,K=40)
+#    for match in stages[n]:
+#        T.update(match[:6])
+#    print(f"Stage {n+1} Elo Standings")
+#    elo_ranks(T)
+
+
 
 T = Tournament(players,K=40)
 for n in range(3):
@@ -34,3 +36,4 @@ elo_ranks(T)
 print("Season Standings")
 standings(T)
 
+print(T.predict("VAN","WAS"))

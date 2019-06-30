@@ -23,10 +23,18 @@ class Tournament:
             raise Exception(f"Player {P1} unknown.")
         if P2 not in self.standings:
             raise Exception(f"Player {P2} unknown.")
-        s = P1maps+P2maps
-        a,b = elo_update(self.elo[P1],self.elo[P2],P1maps/s,P2maps/s,self.K)
-#        s = P1wl+P2wl
-#        a,b = elo_update(self.elo[P1],self.elo[P2],P1wl/s,P2wl/s,self.K)
+        
+        # Calculate the score for the purpose of Elo
+        # We give one point for each map win and four points for winning
+        # This credits a team for their ability to win but also includes
+        # information from how close the game was. Without the extra points
+        # for winning scores would move extremely little since 4-0 shutouts
+        # are so rare.
+        s = P1maps+P2maps+4
+        P1score = P1maps + 4*P1wl
+        P2score = P2maps + 4*P2wl
+        
+        a,b = elo_update(self.elo[P1],self.elo[P2],P1score/s,P2score/s,self.K)
 
         self.standings[P1][0] += P1wl
         self.standings[P1][1] += P2wl
