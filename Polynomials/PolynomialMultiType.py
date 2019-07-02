@@ -9,6 +9,7 @@ class Atom:
         
         self.s = s
         self.p = p
+        self.D = {"s":p}
         
     def __eq__(self,other):
         assert type(other) == Atom
@@ -29,6 +30,7 @@ class Atom:
         if self.p == 1:
             return f"{self.s}"
         return f"{self.s}^{self.p}"
+
     
 class Particle:
     """The product of some atoms"""
@@ -37,6 +39,11 @@ class Particle:
         assert type(A) == list
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
+        self.ss = [a.s for a in self.A]
+        self.ps = [a.p for a in self.A]
+        self.D = dict()
+        for i in self.A:
+            self.D[A.s] = A.p
         
     def __lt__(self,other):
         assert type(other) == Particle
@@ -49,6 +56,18 @@ class Particle:
         for a in self.A:
             out += str(a)
         return out
+    
+    def __mul__(self,other):
+        if type(other) == Atom:
+            if other.s in self.ss:
+                
+        elif type(other) == Particle:
+            for i in other.A:
+                if i.s in self.ss:
+                    
+            
+        else:
+            raise Exception("Can only multiply by an Atom or Particle")
         
     
 class PolyMult:
@@ -62,6 +81,6 @@ a = Atom("a",3)
 b = Atom("b",1)
 c = Atom("c",2)
 
-print(Particle([b,c,a]))
+print(Particle([b,a,c]))
 
 print(Particle([b,a]))
