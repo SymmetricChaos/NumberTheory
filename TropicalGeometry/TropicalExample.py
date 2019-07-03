@@ -17,12 +17,12 @@ print(f"{a}^{b} = {a**b}")
 
 print("\nThis is sufficient to define tropical polynomials.")
 
-P = TropicalPoly([4,1,2])
+P = TropicalPoly([4,1,2,9])
 print("\nTropical Polynomial")
 print(P)
 
 
-x = list(np.linspace(-2,6,51))
+x = list(np.linspace(-10,10,101))
 y = P.evaluate(x)
 
 plt.plot(x,y)
