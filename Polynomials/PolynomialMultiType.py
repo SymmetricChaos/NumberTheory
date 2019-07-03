@@ -9,7 +9,7 @@ class Atom:
         
         self.s = s
         self.p = p
-        self.D = {"s":p}
+        self.D = {s:p}
         
     def __eq__(self,other):
         assert type(other) == Atom
@@ -30,7 +30,17 @@ class Atom:
         if self.p == 1:
             return f"{self.s}"
         return f"{self.s}^{self.p}"
+    
+    def __mul__(self,other):
+        if type(other) == Atom:
+            # If they are Atom with the same indeterminate sum their powers
+            if other.s == self.s:
+                return Atom(self.s,self.p+other.p)
+            # If they have different indeterminates combine them as a particle
+            else:
+                return Particle([self,other])
 
+            
     
 class Particle:
     """The product of some atoms"""
@@ -39,14 +49,16 @@ class Particle:
         assert type(A) == list
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
-        self.ss = [a.s for a in self.A]
-        self.ps = [a.p for a in self.A]
         self.D = dict()
-        for i in self.A:
-            self.D[A.s] = A.p
+        for a in self.A:
+            self.D[a.s] = a.p
         
     def __lt__(self,other):
         assert type(other) == Particle
+        # First sort by number of indeterminates
+        if len(self.A) != len(other.A):
+            return True
+        # If they are equal sort by the coefficients
         x = sum([a.p for a in self.A])
         y = sum([a.p for a in other.A])
         return x < y
@@ -58,17 +70,12 @@ class Particle:
         return out
     
     def __mul__(self,other):
-        if type(other) == Atom:
-            if other.s in self.ss:
-                
-        elif type(other) == Particle:
-            for i in other.A:
-                if i.s in self.ss:
-                    
-            
-        else:
-            raise Exception("Can only multiply by an Atom or Particle")
         
+        if type(other) == Atom:
+            for i in self.A:
+                if i.s == other.s:
+                    i = i*other
+                
     
 class PolyMult:
     """Polynomial with various indeterminates"""
@@ -83,4 +90,6 @@ c = Atom("c",2)
 
 print(Particle([b,a,c]))
 
-print(Particle([b,a]))
+P = Particle([b,a])
+
+print(a*b)
