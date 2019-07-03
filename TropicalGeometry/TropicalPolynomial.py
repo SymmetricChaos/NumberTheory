@@ -4,8 +4,7 @@ class TropicalPoly:
     
     def __init__(self,coef):
         assert type(coef) == list
-        assert all([type(c) == Tropical for c in coef])
-        self.coef = coef
+        self.coef = [Tropical(c) for c in coef]
         
     def __getitem__(self,n):
         return self.coef[n]
