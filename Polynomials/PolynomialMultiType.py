@@ -32,13 +32,12 @@ class Atom:
         return f"{self.s}^{self.p}"
     
     def __mul__(self,other):
-        if type(other) == Atom:
-            # If they are Atom with the same indeterminate sum their powers
-            if other.s == self.s:
-                return Atom(self.s,self.p+other.p)
-            # If they have different indeterminates combine them as a particle
-            else:
-                return Particle([self,other])
+        # If they are Atom with the same indeterminate sum their powers
+        if other.s == self.s:
+            return Atom(self.s,self.p+other.p)
+        # If they have different indeterminates combine them as a particle
+        else:
+            return Particle([self,other])
 
             
     
@@ -69,12 +68,7 @@ class Particle:
             out += str(a)
         return out
     
-    def __mul__(self,other):
-        
-        if type(other) == Atom:
-            for i in self.A:
-                if i.s == other.s:
-                    i = i*other
+#    def __mul__(self,other):
                 
     
 class PolyMult:
