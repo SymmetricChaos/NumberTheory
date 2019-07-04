@@ -35,12 +35,11 @@ class Atom:
         # If they are Atom with the same indeterminate sum their powers
         if other.s == self.s:
             return Atom(self.s,self.p+other.p)
-        # If they have different indeterminates combine them as a particle
         else:
-            return Particle([self,other])
+            raise Exception("Not compatible")
 
-            
-    
+
+
 class Particle:
     """The product of some atoms"""
     
@@ -48,9 +47,7 @@ class Particle:
         assert type(A) == list
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
-        self.D = dict()
-        for a in self.A:
-            self.D[a.s] = a.p
+
         
     def __lt__(self,other):
         assert type(other) == Particle
@@ -68,7 +65,20 @@ class Particle:
             out += str(a)
         return out
     
-#    def __mul__(self,other):
+    def __mul__(self,other):
+        C = self.A.copy()
+        vartype = [c.s for c in C]
+        for a in other.A:
+            if a.s not in vartype:
+                C.append(a)
+            else:
+                for i in range(len(C)):
+                    if C[i].s == a.s:
+                        C[i] = C[i]*a
+        C = sorted(C)
+        return Particle(C)
+                        
+                
                 
     
 class PolyMult:
@@ -82,8 +92,9 @@ a = Atom("a",3)
 b = Atom("b",1)
 c = Atom("c",2)
 
-print(Particle([b,a,c]))
 
 P = Particle([b,a])
-
-print(a*b)
+Q = Particle([b,a,c])
+print(P)
+print(Q)
+print(P*Q)
