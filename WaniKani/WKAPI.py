@@ -11,18 +11,12 @@ def WKrequest(S,token):
     return J
 
 
+R = "reviews"
+J = WKrequest(R,wktoken)
+print(J["data"][0])
 
-J = WKrequest("reviews",wktoken)
+for i in range(1,10):
 
-for i in J["data"]:
-    print(i)
-    print()
-
-J = WKrequest("study_materials/2559",wktoken)
-
-for i in J["data"]:
-    print(i)
-    print()
-
+    J = WKrequest(f"subjects/{i}",wktoken)
     
-    
+    print(J["data"]["characters"])
