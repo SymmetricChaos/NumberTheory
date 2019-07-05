@@ -77,9 +77,16 @@ class Particle:
                         C[i] = C[i]*a
         C = sorted(C)
         return Particle(C)
-                        
-                
-                
+
+    def eval(self,V):
+        assert type(V) == dict
+        out = 0
+        for a in self.A:
+            if a.s in V:
+                out += V[a.s]**a.p
+        return out
+
+
     
 class PolyMult:
     """Polynomial with various indeterminates"""
@@ -98,3 +105,5 @@ Q = Particle([b,a,c])
 print(P)
 print(Q)
 print(P*Q)
+
+print(Q.eval({"a":2,"b":3,"c":4}))
