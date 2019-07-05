@@ -79,14 +79,15 @@ class Particle:
         return Particle(C)
 
     def eval(self,V):
+        """Evaluate all indeterminates of the Particle"""
         assert type(V) == dict
         out = 0
         for a in self.A:
-            if a.s in V:
-                out += V[a.s]**a.p
+            out += V[a.s]**a.p
         return out
 
-
+#    def reduce:
+#        """Evaluate some indeterminates of the Particle"""
     
 class PolyMult:
     """Polynomial with various indeterminates"""
