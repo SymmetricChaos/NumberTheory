@@ -92,8 +92,22 @@ class Particle:
 class PolyMult:
     """Polynomial with various indeterminates"""
     
-    def __init__(self,P,C):
-        pass
+    def __init__(self,P):
+        self.P = sorted(P)
+    
+    def __str__(self):
+        out = ""
+        for i in self.P:
+            out += str(i) + " + "
+        return out
+    
+    def eval(self,V):
+        """Evaluate each particle"""
+        assert type(V) == dict
+        out = 0
+        for p in self.P:
+            out += p.eval(V)
+        return out
 
 
 a = Atom("a",3)
@@ -108,3 +122,7 @@ print(Q)
 print(P*Q)
 
 print(Q.eval({"a":2,"b":3,"c":4}))
+
+
+Pol = PolyMult([P,Q,Particle([a])])
+print(Pol.eval({"a":2,"b":3,"c":4}))
