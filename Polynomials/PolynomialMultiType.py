@@ -1,7 +1,7 @@
 class Atom:
     """An indeterminate raised to a certain power"""
     
-    def __init__(self,s,p):
+    def __init__(self,s,p=1):
         assert type(s) == str
         assert s in "abcdefghijklmnopqrstuvwxyz"
         assert type(p) == int
@@ -36,17 +36,23 @@ class Atom:
         if other.s == self.s:
             return Atom(self.s,self.p+other.p)
         else:
-            raise Exception("Not compatible")
+            return Particle([self,other])
+            
+    def __pow__(self,other):
+        assert type(other) == int
+        assert other >= 0
+        return Atom(self.s,self.p*other)
 
 
 
 class Particle:
     """The product of some atoms"""
     
-    def __init__(self,A):
+    def __init__(self,A,C=1):
         assert type(A) == list
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
+        self.C = C
 
         
     def __lt__(self,other):
@@ -60,23 +66,42 @@ class Particle:
         return x < y
     
     def __str__(self):
-        out = ""
+        out = str(self.C) if self.C != 1 else ""
         for a in self.A:
             out += str(a)
         return out
     
     def __mul__(self,other):
-        C = self.A.copy()
-        vartype = [c.s for c in C]
-        for a in other.A:
-            if a.s not in vartype:
-                C.append(a)
+        # When multiplied by another particle merge their atoms then sort
+        if type(other) == Particle:
+            ownatoms = self.A.copy()
+            atomtypes = [c.s for c in ownatoms]
+            for a in other.A:
+                if a.s not in atomtypes:
+                    ownatoms.append(a)
+                else:
+                    for i in range(len(ownatoms)):
+                        if ownatoms[i].s == a.s:
+                            ownatoms[i] = ownatoms[i]*a
+            ownatoms = sorted(ownatoms)
+            return Particle(ownatoms)
+        
+        if type(other) == Atom:
+            ownatoms = self.A.copy()
+            atomtypes = [at.s for at in ownatoms]
+            if other.s not in atomtypes:
+                ownatoms.append(a)
             else:
-                for i in range(len(C)):
-                    if C[i].s == a.s:
-                        C[i] = C[i]*a
-        C = sorted(C)
-        return Particle(C)
+                for i in range(len(ownatoms)):
+                    if ownatoms[i].s == other.s:
+                        ownatoms[i] = ownatoms[i]*other
+            ownatoms = sorted(ownatoms)
+            return Particle(ownatoms)
+        
+        # When multiplied by an integer change the coefficient
+        if type(other) == int:
+            return Particle(self.A,self.C*other)
+        
 
     def eval(self,V):
         """Evaluate all indeterminates of the Particle"""
@@ -84,7 +109,7 @@ class Particle:
         out = 0
         for a in self.A:
             out += V[a.s]**a.p
-        return out
+        return out*self.C
 
 #    def reduce:
 #        """Evaluate some indeterminates of the Particle"""
@@ -110,19 +135,21 @@ class PolyMult:
         return out
 
 
-a = Atom("a",3)
-b = Atom("b",1)
-c = Atom("c",2)
+a = Atom("a")**3
+b = Atom("b")
+c = Atom("c")**2
 
 
 P = Particle([b,a])
-Q = Particle([b,a,c])
+Q = Particle([b,a,c],2)
 print(P)
 print(Q)
 print(P*Q)
+print(P*Q*a)
 
 print(Q.eval({"a":2,"b":3,"c":4}))
 
 
 Pol = PolyMult([P,Q,Particle([a])])
+print(Pol)
 print(Pol.eval({"a":2,"b":3,"c":4}))
