@@ -9,7 +9,6 @@ class Atom:
         
         self.s = s
         self.p = p
-        self.D = {s:p}
         
     def __eq__(self,other):
         assert type(other) == Atom
@@ -86,6 +85,7 @@ class Particle:
             ownatoms = sorted(ownatoms)
             return Particle(ownatoms)
         
+        #  When multiplied by an atom merge the atom of add it then sort
         if type(other) == Atom:
             ownatoms = self.A.copy()
             atomtypes = [at.s for at in ownatoms]
@@ -98,9 +98,8 @@ class Particle:
             ownatoms = sorted(ownatoms)
             return Particle(ownatoms)
         
-        # When multiplied by an integer change the coefficient
-        if type(other) == int:
-            return Particle(self.A,self.C*other)
+        # When multiplied by an number just change the coefficient
+        return Particle(self.A,self.C*other)
         
 
     def eval(self,V):
@@ -145,7 +144,7 @@ Q = Particle([b,a,c],2)
 print(P)
 print(Q)
 print(P*Q)
-print(P*Q*a)
+print(P*Q*a*3)
 
 print(Q.eval({"a":2,"b":3,"c":4}))
 
