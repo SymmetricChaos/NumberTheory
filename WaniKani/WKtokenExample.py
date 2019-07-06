@@ -1,1 +1,0 @@
-wktoken = {'Authorization': "Bearer <YOUR API KEY>} 
