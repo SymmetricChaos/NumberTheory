@@ -116,12 +116,12 @@ class Particle:
 class PolyMult:
     """Polynomial with various indeterminates"""
     
-    def __init__(self,P):
-        self.P = sorted(P)
+    def __init__(self,T):
+        self.T = sorted(T)
     
     def __str__(self):
         out = ""
-        for i in self.P:
+        for i in self.T:
             out += str(i) + " + "
         return out
     
@@ -129,9 +129,16 @@ class PolyMult:
         """Evaluate each particle"""
         assert type(V) == dict
         out = 0
-        for p in self.P:
+        for p in self.T:
             out += p.eval(V)
         return out
+    
+    def show(self):
+        out = ""
+        for term in self.T:
+            sgn = "-" if term.C < 0 else "+"
+            out +=  " " + sgn + " " + str(term)
+        print(out)
 
 
 a = Atom("a")**3
@@ -152,3 +159,4 @@ print(Q.eval({"a":2,"b":3,"c":4}))
 Pol = PolyMult([P,Q,Particle([a])])
 print(Pol)
 print(Pol.eval({"a":2,"b":3,"c":4}))
+Pol.show()
