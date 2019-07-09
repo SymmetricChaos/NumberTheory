@@ -64,6 +64,9 @@ class Particle:
         y = sum([a.p for a in other.A])
         return x < y
     
+    def __abs__(self):
+        return Particle(self.A,abs(self.C))
+    
     def __str__(self):
         out = str(self.C) if self.C != 1 else ""
         for a in self.A:
@@ -121,8 +124,9 @@ class PolyMult:
     
     def __str__(self):
         out = ""
-        for i in self.T:
-            out += str(i) + " + "
+        for term in self.T:
+            sgn = "-" if term.C < 0 else "+"
+            out +=  " " + sgn + " " + str(abs(term))
         return out
     
     def eval(self,V):
@@ -133,12 +137,7 @@ class PolyMult:
             out += p.eval(V)
         return out
     
-    def show(self):
-        out = ""
-        for term in self.T:
-            sgn = "-" if term.C < 0 else "+"
-            out +=  " " + sgn + " " + str(term)
-        print(out)
+
 
 
 a = Atom("a")**3
@@ -147,7 +146,7 @@ c = Atom("c")**2
 
 
 P = Particle([b,a])
-Q = Particle([b,a,c],2)
+Q = Particle([b,a,c],-2)
 print(P)
 print(Q)
 print(P*Q)
@@ -159,4 +158,3 @@ print(Q.eval({"a":2,"b":3,"c":4}))
 Pol = PolyMult([P,Q,Particle([a])])
 print(Pol)
 print(Pol.eval({"a":2,"b":3,"c":4}))
-Pol.show()
