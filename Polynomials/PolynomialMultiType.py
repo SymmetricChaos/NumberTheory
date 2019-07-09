@@ -112,6 +112,9 @@ class Particle:
         for a in self.A:
             out += V[a.s]**a.p
         return out*self.C
+    
+    def __add__(self,other):
+        return PolyMult([self,other])
 
 #    def reduce:
 #        """Evaluate some indeterminates of the Particle"""
