@@ -58,11 +58,11 @@ class Particle:
         assert type(other) == Particle
         # First sort by number of indeterminates
         if len(self.A) != len(other.A):
-            return True
+            return len(self.A) > len(other.A)
         # If they are equal sort by the coefficients
         x = sum([a.p for a in self.A])
         y = sum([a.p for a in other.A])
-        return x < y
+        return x > y
     
     def __abs__(self):
         return Particle(self.A,abs(self.C))
@@ -123,8 +123,8 @@ class PolyMult:
         self.T = sorted(T)
     
     def __str__(self):
-        out = ""
-        for term in self.T:
+        out = str(self.T[0])
+        for term in self.T[1:]:
             sgn = "-" if term.C < 0 else "+"
             out +=  " " + sgn + " " + str(abs(term))
         return out
