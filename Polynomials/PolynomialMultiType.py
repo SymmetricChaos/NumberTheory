@@ -31,12 +31,20 @@ class Atom:
         return f"{self.s}^{self.p}"
     
     def __mul__(self,other):
-        # If they are Atom with the same indeterminate sum their powers
-        if other.s == self.s:
-            return Atom(self.s,self.p+other.p)
-        else:
-            return Particle([self,other])
-            
+        if type(other) == Atom:
+            # If they are Atom with the same indeterminate sum their powers
+            if other.s == self.s:
+                return Atom(self.s,self.p+other.p)
+            else:
+                return Particle([self,other])
+        if type(other) == Particle:
+            return other*self
+        
+        return Particle([self],other)
+                
+    def __rmul__(self,other):
+        return self*other
+    
     def __pow__(self,other):
         assert type(other) == int
         assert other >= 0
@@ -86,24 +94,26 @@ class Particle:
                         if ownatoms[i].s == a.s:
                             ownatoms[i] = ownatoms[i]*a
             ownatoms = sorted(ownatoms)
-            return Particle(ownatoms)
+            return Particle(ownatoms,self.C)
         
         #  When multiplied by an atom merge the atom of add it then sort
         if type(other) == Atom:
             ownatoms = self.A.copy()
             atomtypes = [at.s for at in ownatoms]
             if other.s not in atomtypes:
-                ownatoms.append(a)
+                ownatoms.append(other)
             else:
                 for i in range(len(ownatoms)):
                     if ownatoms[i].s == other.s:
                         ownatoms[i] = ownatoms[i]*other
             ownatoms = sorted(ownatoms)
-            return Particle(ownatoms)
+            return Particle(ownatoms,self.C)
         
         # When multiplied by an number just change the coefficient
         return Particle(self.A,self.C*other)
-        
+    
+    def __rmul__(self,other):
+        return self*other
 
     def eval(self,V):
         """Evaluate all indeterminates of the Particle"""
@@ -114,7 +124,10 @@ class Particle:
         return out*self.C
     
     def __add__(self,other):
-        return PolyMult([self,other])
+        if type(other) == Atom:
+            return PolyMult([self,Particle([other])])
+        if type(other) == Particle:
+            return PolyMult([self,other])
 
 #    def reduce:
 #        """Evaluate some indeterminates of the Particle"""
@@ -143,21 +156,24 @@ class PolyMult:
 
 
 
-a = Atom("a")**3
+a = Atom("a")
 b = Atom("b")
-c = Atom("c")**2
+c = Atom("c")
 
+poly = 3*a*b**3+c**2
+print(poly)
 
-P = Particle([b,a])
-Q = Particle([b,a,c],-2)
-print(P)
-print(Q)
-print(P*Q)
-print(P*Q*a*3)
+#P = Particle([b,a])
+#Q = Particle([b,a,c],-2)
+#print(P)
+#print(Q)
+#print(P*Q)
+#print(P*Q*a*3)
+#
+#print(Q.eval({"a":2,"b":3,"c":4}))
+#
+#
+#Pol = PolyMult([P,Q,Particle([a])])
+#print(Pol)
+#print(Pol.eval({"a":2,"b":3,"c":4}))
 
-print(Q.eval({"a":2,"b":3,"c":4}))
-
-
-Pol = PolyMult([P,Q,Particle([a])])
-print(Pol)
-print(Pol.eval({"a":2,"b":3,"c":4}))
