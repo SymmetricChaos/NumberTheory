@@ -118,9 +118,9 @@ class Particle:
     def eval(self,V):
         """Evaluate all indeterminates of the Particle"""
         assert type(V) == dict
-        out = 0
+        out = 1
         for a in self.A:
-            out += V[a.s]**a.p
+            out *= V[a.s]**a.p
         return out*self.C
     
     def __add__(self,other):
@@ -146,7 +146,7 @@ class PolyMult:
         return out
     
     def eval(self,V):
-        """Evaluate each particle"""
+        """Evaluate each particle of the polynomial"""
         assert type(V) == dict
         out = 0
         for p in self.T:
@@ -163,4 +163,5 @@ c = Atom("c")
 poly = 3*a*b**3+c**2
 print(poly)
 print(poly.eval({"a":2,"b":3,"c":4}))
-
+#print(3*2*3**3+4**2)
+#print(3*2*(3**3))
