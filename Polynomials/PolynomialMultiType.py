@@ -49,6 +49,8 @@ class Atom:
         assert type(other) == int
         assert other >= 0
         return Atom(self.s,self.p*other)
+    
+#    def __add__(self,other):
 
 
 
@@ -128,6 +130,13 @@ class Particle:
             return PolyMult([self,Particle([other])])
         if type(other) == Particle:
             return PolyMult([self,other])
+        
+    def __sub__(self,other):
+        if type(other) == Atom:
+            return PolyMult([self,Particle([other*-1])])
+        if type(other) == Particle:
+            return PolyMult([self,other*-1])
+        return PolyMult([self],-other)
 
 #    def reduce:
 #        """Evaluate some indeterminates of the Particle"""
@@ -135,9 +144,9 @@ class Particle:
 class PolyMult:
     """Polynomial with various indeterminates"""
     
-    def __init__(self,T):
+    def __init__(self,T,con=0):
         self.T = sorted(T)
-    
+        self.con = con
     def __str__(self):
         out = str(self.T[0])
         for term in self.T[1:]:
@@ -160,8 +169,6 @@ a = Atom("a")
 b = Atom("b")
 c = Atom("c")
 
-poly = 3*a*b**3+c**2
+poly = 3*a*b**3-2*c**2
 print(poly)
 print(poly.eval({"a":2,"b":3,"c":4}))
-#print(3*2*3**3+4**2)
-#print(3*2*(3**3))
