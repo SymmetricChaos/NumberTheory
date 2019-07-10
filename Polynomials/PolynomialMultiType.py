@@ -162,18 +162,5 @@ c = Atom("c")
 
 poly = 3*a*b**3+c**2
 print(poly)
-
-#P = Particle([b,a])
-#Q = Particle([b,a,c],-2)
-#print(P)
-#print(Q)
-#print(P*Q)
-#print(P*Q*a*3)
-#
-#print(Q.eval({"a":2,"b":3,"c":4}))
-#
-#
-#Pol = PolyMult([P,Q,Particle([a])])
-#print(Pol)
-#print(Pol.eval({"a":2,"b":3,"c":4}))
+print(poly.eval({"a":2,"b":3,"c":4}))
 
