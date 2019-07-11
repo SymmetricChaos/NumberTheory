@@ -151,7 +151,7 @@ class Particle:
 class PolyMult:
     """Polynomial with various indeterminates"""
     
-    def __init__(self,terms,con=0):
+    def __init__(self,terms):
         self.terms = sorted(terms)
     
     def __str__(self):
@@ -169,12 +169,22 @@ class PolyMult:
             out += p.eval(V)
         return out
     
+    def merge(self):
+        """Merge together particles of the same kind"""
+        pass
+    
     def __mul__(self,other):
+        """Multiply together two polynomials"""
         out = []
         for p in self.terms:
             for q in other.terms:
                 out.append(p*q)
-        return out
+        return PolyMult(out)
+    
+    def __add__(self,other):
+        return PolyMult(self.terms+other.terms)
+    
+    
 
 a = Atom("a")
 b = Atom("b")
@@ -183,3 +193,4 @@ c = Atom("c")
 poly = 3*a*b**3-5
 print(poly)
 print(poly.eval({"a":2,"b":3,"c":4}))
+print(poly*poly)
