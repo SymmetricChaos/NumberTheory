@@ -139,9 +139,15 @@ class Particle:
             return PolyMult([self,other*-1])
         return PolyMult([self,Particle([],-other)])
 
-#    def reduce:
+#    def reduce(self,V):
 #        """Evaluate some indeterminates of the Particle"""
-    
+#        assert type(V) == dict
+#        out = 1
+#        for v in V.items():
+#            if v[0] in self.A:
+#                out *= A
+#        return out*self.coef
+
 class PolyMult:
     """Polynomial with various indeterminates"""
     
