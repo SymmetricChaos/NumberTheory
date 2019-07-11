@@ -57,11 +57,11 @@ class Atom:
 class Particle:
     """The product of some atoms"""
     
-    def __init__(self,A,C=1):
+    def __init__(self,A,coef=1):
         assert type(A) == list
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
-        self.C = C
+        self.coef = coef
 
         
     def __lt__(self,other):
@@ -75,10 +75,10 @@ class Particle:
         return x > y
     
     def __abs__(self):
-        return Particle(self.A,abs(self.C))
+        return Particle(self.A,abs(self.coef))
     
     def __str__(self):
-        out = str(self.C) if self.C != 1 else ""
+        out = str(self.coef) if self.coef != 1 else ""
         for a in self.A:
             out += str(a)
         return out
@@ -96,7 +96,7 @@ class Particle:
                         if ownatoms[i].s == a.s:
                             ownatoms[i] = ownatoms[i]*a
             ownatoms = sorted(ownatoms)
-            return Particle(ownatoms,self.C)
+            return Particle(ownatoms,self.coef)
         
         #  When multiplied by an atom merge the atom of add it then sort
         if type(other) == Atom:
@@ -109,10 +109,10 @@ class Particle:
                     if ownatoms[i].s == other.s:
                         ownatoms[i] = ownatoms[i]*other
             ownatoms = sorted(ownatoms)
-            return Particle(ownatoms,self.C)
+            return Particle(ownatoms,self.coef)
         
         # When multiplied by an number just change the coefficient
-        return Particle(self.A,self.C*other)
+        return Particle(self.A,self.coef*other)
     
     def __rmul__(self,other):
         return self*other
@@ -123,20 +123,21 @@ class Particle:
         out = 1
         for a in self.A:
             out *= V[a.s]**a.p
-        return out*self.C
+        return out*self.coef
     
     def __add__(self,other):
         if type(other) == Atom:
             return PolyMult([self,Particle([other])])
         if type(other) == Particle:
             return PolyMult([self,other])
+        return PolyMult([self,Particle([],other)])
         
     def __sub__(self,other):
         if type(other) == Atom:
             return PolyMult([self,Particle([other*-1])])
         if type(other) == Particle:
             return PolyMult([self,other*-1])
-        return PolyMult([self],-other)
+        return PolyMult([self,Particle([],-other)])
 
 #    def reduce:
 #        """Evaluate some indeterminates of the Particle"""
@@ -144,13 +145,13 @@ class Particle:
 class PolyMult:
     """Polynomial with various indeterminates"""
     
-    def __init__(self,T,con=0):
-        self.T = sorted(T)
-        self.con = con
+    def __init__(self,terms,con=0):
+        self.terms = sorted(terms)
+    
     def __str__(self):
-        out = str(self.T[0])
-        for term in self.T[1:]:
-            sgn = "-" if term.C < 0 else "+"
+        out = str(self.terms[0])
+        for term in self.terms[1:]:
+            sgn = "-" if term.coef < 0 else "+"
             out +=  " " + sgn + " " + str(abs(term))
         return out
     
@@ -158,17 +159,21 @@ class PolyMult:
         """Evaluate each particle of the polynomial"""
         assert type(V) == dict
         out = 0
-        for p in self.T:
+        for p in self.terms:
             out += p.eval(V)
         return out
     
-
-
+    def __mul__(self,other):
+        out = []
+        for p in self.terms:
+            for q in other.terms:
+                out.append(p*q)
+        return out
 
 a = Atom("a")
 b = Atom("b")
 c = Atom("c")
 
-poly = 3*a*b**3-2*c**2
+poly = 3*a*b**3-5
 print(poly)
 print(poly.eval({"a":2,"b":3,"c":4}))
