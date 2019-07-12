@@ -199,6 +199,8 @@ class PolyMult:
         return PolyMult(self.terms+other.terms)
     
     
+### TO MERGE HOW ABOUT MAKE A LIST OF PARTICLES WITH MATCHING IDS ADD THEM AND THE MERGE THE LISTS
+
 
 a = Atom("a")
 b = Atom("b")
