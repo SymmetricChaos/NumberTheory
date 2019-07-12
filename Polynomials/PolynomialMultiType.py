@@ -80,6 +80,12 @@ class Particle:
             out += str(a)
         return out
     
+    def __repr__(self):
+        out = str(self.coef) if self.coef != 1 else ""
+        for a in self.A:
+            out += str(a)
+        return out
+    
     def __mul__(self,other):
         # When multiplied by another particle merge their atoms then sort
         if type(other) == Particle:
@@ -200,20 +206,32 @@ c = Atom("c")
 
 poly = 3*a*b**3-5
 print(poly)
-print(poly.eval({"a":2,"b":3,"c":4}))
-print(poly*poly)
+#print(poly.eval({"a":2,"b":3,"c":4}))
+#print(poly*poly)
+pp = poly*poly*poly
 
-ab = 2*a
-print(ab)
-print(ab*ab)
+def poly_merge(L):
+    L = L.copy()
+    tempL = []
+#    print(L)
+    while len(L) > 0:
+        t = L.pop()
+#        print(L,tempL,t)
+        passed = True
+        for pos,val in enumerate(L):
+#            print("!")
+            if t.particle_id() == val.particle_id():
+#                print("!!")
+                tempL.append(Particle(val.A,val.coef+t.coef))
+                del L[pos]
+                passed = False
+                break
+        if passed:
+            tempL.append(t)
+#            print("!!!")
+    return PolyMult(tempL)
 
-#def poly_merge(L):
-#    L = L.copy()
-#    tempL = []
-#    while True:
-#        t = L.pop()
-#        for val in L:
-#            if t.particle_id() == val.particle_id():
-#                val += t
-#                break
-#            
+print()
+print(pp)
+print()
+print(poly_merge(pp.terms))
