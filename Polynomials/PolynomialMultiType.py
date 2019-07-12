@@ -49,9 +49,6 @@ class Atom:
         assert type(other) == int
         assert other >= 0
         return Atom(self.s,self.p*other)
-    
-#    def __add__(self,other):
-
 
 
 class Particle:
@@ -96,7 +93,7 @@ class Particle:
                         if ownatoms[i].s == a.s:
                             ownatoms[i] = ownatoms[i]*a
             ownatoms = sorted(ownatoms)
-            return Particle(ownatoms,self.coef)
+            return Particle(ownatoms,self.coef*other.coef)
         
         #  When multiplied by an atom merge the atom of add it then sort
         if type(other) == Atom:
@@ -139,6 +136,12 @@ class Particle:
             return PolyMult([self,other*-1])
         return PolyMult([self,Particle([],-other)])
 
+    def particle_id(self):
+        out = ""
+        for a in self.A:
+            out += str(a)
+        return out
+
 #    def reduce(self,V):
 #        """Evaluate some indeterminates of the Particle"""
 #        assert type(V) == dict
@@ -161,6 +164,8 @@ class PolyMult:
             out +=  " " + sgn + " " + str(abs(term))
         return out
     
+    
+    
     def eval(self,V):
         """Evaluate each particle of the polynomial"""
         assert type(V) == dict
@@ -169,10 +174,12 @@ class PolyMult:
             out += p.eval(V)
         return out
     
-    def merge(self):
-        """Merge together particles of the same kind"""
-        pass
-    
+#    def merge(self):
+#        """Merge together particles of the same kind"""
+#        ctr = 0
+#        while True:
+#            for 
+
     def __mul__(self,other):
         """Multiply together two polynomials"""
         out = []
@@ -182,6 +189,7 @@ class PolyMult:
         return PolyMult(out)
     
     def __add__(self,other):
+        """Add together two polynomials"""
         return PolyMult(self.terms+other.terms)
     
     
@@ -194,3 +202,18 @@ poly = 3*a*b**3-5
 print(poly)
 print(poly.eval({"a":2,"b":3,"c":4}))
 print(poly*poly)
+
+ab = 2*a
+print(ab)
+print(ab*ab)
+
+#def poly_merge(L):
+#    L = L.copy()
+#    tempL = []
+#    while True:
+#        t = L.pop()
+#        for val in L:
+#            if t.particle_id() == val.particle_id():
+#                val += t
+#                break
+#            
