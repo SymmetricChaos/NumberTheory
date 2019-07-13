@@ -134,7 +134,10 @@ class Particle:
         if type(other) == Atom:
             return PolyMult([self,Particle([other])])
         if type(other) == Particle:
-            return PolyMult([self,other])
+            if self.particle_id() == other.particle_id():
+                return Particle(self.A,self.coef+other.coef)
+            else:
+                return PolyMult([self,other])
         return PolyMult([self,Particle([],other)])
         
     def __sub__(self,other):
@@ -171,8 +174,6 @@ class PolyMult:
             sgn = "-" if term.coef < 0 else "+"
             out +=  " " + sgn + " " + str(abs(term))
         return out
-    
-    
     
     def eval(self,V):
         """Evaluate each particle of the polynomial"""
@@ -218,10 +219,14 @@ def particle_id(part):
 
 
 def poly_merge(L):
+    terms = []
     for k,g in groupby(L,particle_id):
-        print(k,list(g))
-        print()
-    
+        G = list(g)
+        t = G[0]
+        for i in G[1:]:
+            t += i
+        terms.append(t)
+    return PolyMult(terms)
 
 print()
 print(pp)
