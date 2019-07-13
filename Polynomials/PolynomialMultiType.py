@@ -77,6 +77,8 @@ class Particle:
         return Particle(self.A,abs(self.coef))
     
     def __str__(self):
+        if self.A == []:
+            return str(self.coef)
         out = str(self.coef) if self.coef != 1 else ""
         for a in self.A:
             out += str(a)
@@ -166,7 +168,7 @@ class PolyMult:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
-        self.terms = sorted(terms)
+        self.terms = poly_merge(sorted(terms))
     
     def __str__(self):
         out = str(self.terms[0])
@@ -191,11 +193,18 @@ class PolyMult:
 
     def __mul__(self,other):
         """Multiply together two polynomials"""
-        out = []
-        for p in self.terms:
-            for q in other.terms:
-                out.append(p*q)
-        return PolyMult(out)
+        if type(other) == PolyMult:
+            out = []
+            for p in self.terms:
+                for q in other.terms:
+                    out.append(p*q)
+            return PolyMult(out)
+        else:
+            out = []
+            for p in self.terms:
+                out.append(p*other)
+            return PolyMult(out)
+
     
     def __add__(self,other):
         """Add together two polynomials"""
@@ -206,7 +215,7 @@ a = Atom("a")
 b = Atom("b")
 c = Atom("c")
 
-poly = 3*a*b**3-5
+poly = a*b**2-1
 print(poly)
 #print(poly.eval({"a":2,"b":3,"c":4}))
 #print(poly*poly)
@@ -226,9 +235,7 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
-    return PolyMult(terms)
+    return terms
 
-print()
 print(pp)
-print()
-print(poly_merge(pp.terms))
+print(pp*a)
