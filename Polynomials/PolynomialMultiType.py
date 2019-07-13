@@ -1,3 +1,5 @@
+from itertools import groupby
+
 class Atom:
     """An indeterminate raised to a certain power"""
     
@@ -198,9 +200,6 @@ class PolyMult:
         """Add together two polynomials"""
         return PolyMult(self.terms+other.terms)
     
-    
-### TO MERGE HOW ABOUT MAKE A LIST OF PARTICLES WITH MATCHING IDS ADD THEM AND THE MERGE THE LISTS
-
 
 a = Atom("a")
 b = Atom("b")
@@ -212,26 +211,17 @@ print(poly)
 #print(poly*poly)
 pp = poly*poly*poly
 
+
+
+def particle_id(part):
+    return part.particle_id()
+
+
 def poly_merge(L):
-    L = L.copy()
-    tempL = []
-#    print(L)
-    while len(L) > 0:
-        t = L.pop()
-#        print(L,tempL,t)
-        passed = True
-        for pos,val in enumerate(L):
-#            print("!")
-            if t.particle_id() == val.particle_id():
-#                print("!!")
-                tempL.append(Particle(val.A,val.coef+t.coef))
-                del L[pos]
-                passed = False
-                break
-        if passed:
-            tempL.append(t)
-#            print("!!!")
-    return PolyMult(tempL)
+    for k,g in groupby(L,particle_id):
+        print(k,list(g))
+        print()
+    
 
 print()
 print(pp)
