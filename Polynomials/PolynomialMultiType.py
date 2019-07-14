@@ -11,7 +11,8 @@ class Atom:
         
         self.s = s
         self.p = p
-        
+
+
     def __eq__(self,other):
         assert type(other) == Atom
         if self.s == other.s and self.p == other.p:
@@ -195,14 +196,19 @@ class Particle:
             out += str(a)
         return out
 
-#    def reduce(self,V):
-#        """Evaluate some indeterminates of the Particle"""
-#        assert type(V) == dict
-#        out = 1
-#        for v in V.items():
-#            if v[0] in self.A:
-#                out *= A
-#        return out*self.coef
+
+    def reduce(self,V):
+        """Evaluate some indeterminates of the Particle"""
+        assert type(V) == dict
+        out = 1
+        temp_atoms = self.A.copy()
+        for v in V.items():
+            for pos,a in enumerate(self.A):
+                if v[0] == a.s:
+                    del temp_atoms[pos]
+                    out *= v[1]**a.p
+                    break
+        return Particle(temp_atoms,out*self.coef)
 
 class MVPoly:
     """Polynomial with various indeterminates"""
@@ -269,14 +275,15 @@ c = Atom("c")
 
 poly = a*b**2-1
 print(poly)
-#print(poly.eval({"a":2,"b":3,"c":4}))
-#print(poly*poly)
 pp = poly*poly*poly
 
 
 
 def particle_id(part):
     return part.particle_id()
+
+def atom_id(atom):
+    return atom.s
 
 
 def poly_merge(L):
@@ -290,5 +297,7 @@ def poly_merge(L):
     return terms
 
 print(pp)
-print(pp+(a-1))
-print(pp+1)
+
+p = 3*a**2*b**2
+print(p)
+print(p.reduce({"a":3}))
