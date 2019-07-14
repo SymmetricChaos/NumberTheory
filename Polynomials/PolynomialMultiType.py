@@ -32,6 +32,18 @@ class Atom:
             return f"{self.s}"
         return f"{self.s}^{self.p}"
     
+    def __add__(self,other):
+        return Particle([self]) + other
+    
+    def __radd__(self,other):
+        return Particle([self]) + other
+    
+    def __sub__(self,other):
+        return Particle([self]) - other
+    
+    def __rsub__(self,other):
+        return Particle([self]) - other
+    
     def __mul__(self,other):
         if type(other) == Atom:
             # If they are Atom with the same indeterminate sum their powers
@@ -238,4 +250,4 @@ def poly_merge(L):
     return terms
 
 print(pp)
-print(pp*a)
+print(pp*(a-1))
