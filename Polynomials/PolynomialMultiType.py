@@ -49,10 +49,6 @@ class Atom:
         return Particle([self]) - other
 
 
-    def __rsub__(self,other):
-        return Particle([self]) - other
-
-
     def __mul__(self,other):
         if type(other) == Atom:
             # If they are Atom with the same indeterminate sum their powers
@@ -282,9 +278,6 @@ pp = poly*poly*poly
 def particle_id(part):
     return part.particle_id()
 
-def atom_id(atom):
-    return atom.s
-
 
 def poly_merge(L):
     terms = []
@@ -301,3 +294,8 @@ print(pp)
 p = 3*a**2*b**2
 print(p)
 print(p.reduce({"a":3}))
+
+
+print(a+b)
+print(a+1)
+print((1+a)*(b-2)*(c+a))
