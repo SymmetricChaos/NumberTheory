@@ -27,7 +27,7 @@ class Atom:
 
     def __str__(self):
         if self.p == 1:
-            return f"{self.s}"
+            return f"{self.s}"            
         return f"{self.s}^{self.p}"
 
 
@@ -38,15 +38,23 @@ class Atom:
 
 
     def __add__(self,other):
+        """Addition of atoms with other objects"""
         return Particle([self]) + other
 
 
     def __radd__(self,other):
+        """Addition of atoms with other objects"""
         return Particle([self]) + other
 
 
     def __sub__(self,other):
+        """Subtraction other objects from atoms"""
         return Particle([self]) - other
+    
+    
+    def __rsub__(self,other):
+        """Subtraction of atoms from other objects"""
+        return Particle([self],-1) + other
 
 
     def __mul__(self,other):
@@ -109,7 +117,12 @@ class Particle:
     def __str__(self):
         if self.A == []:
             return str(self.coef)
-        out = str(self.coef) if self.coef != 1 else ""
+        if self.coef == 1:
+            out = ""
+        elif self.coef == -1:
+            out = "-"
+        else:
+            out = str(self.coef)
         for a in self.A:
             out += str(a)
         return out
@@ -299,3 +312,5 @@ print(p.reduce({"a":3}))
 print(a+b)
 print(a+1)
 print((1+a)*(b-2)*(c+a))
+
+print(1-a)
