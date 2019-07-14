@@ -146,20 +146,20 @@ class Particle:
     
     def __add__(self,other):
         if type(other) == Atom:
-            return PolyMult([self,Particle([other])])
+            return MVPoly([self,Particle([other])])
         if type(other) == Particle:
             if self.particle_id() == other.particle_id():
                 return Particle(self.A,self.coef+other.coef)
             else:
-                return PolyMult([self,other])
-        return PolyMult([self,Particle([],other)])
+                return MVPoly([self,other])
+        return MVPoly([self,Particle([],other)])
         
     def __sub__(self,other):
         if type(other) == Atom:
-            return PolyMult([self,Particle([other*-1])])
+            return MVPoly([self,Particle([other*-1])])
         if type(other) == Particle:
-            return PolyMult([self,other*-1])
-        return PolyMult([self,Particle([],-other)])
+            return MVPoly([self,other*-1])
+        return MVPoly([self,Particle([],-other)])
 
     def particle_id(self):
         out = ""
@@ -176,7 +176,7 @@ class Particle:
 #                out *= A
 #        return out*self.coef
 
-class PolyMult:
+class MVPoly:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
@@ -205,22 +205,22 @@ class PolyMult:
 
     def __mul__(self,other):
         """Multiply together two polynomials"""
-        if type(other) == PolyMult:
+        if type(other) == MVPoly:
             out = []
             for p in self.terms:
                 for q in other.terms:
                     out.append(p*q)
-            return PolyMult(out)
+            return MVPoly(out)
         else:
             out = []
             for p in self.terms:
                 out.append(p*other)
-            return PolyMult(out)
+            return MVPoly(out)
 
     
     def __add__(self,other):
         """Add together two polynomials"""
-        return PolyMult(self.terms+other.terms)
+        return MVPoly(self.terms+other.terms)
     
 
 a = Atom("a")
