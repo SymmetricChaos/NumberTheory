@@ -14,6 +14,7 @@ class Atom:
 
 
     def __eq__(self,other):
+        """Check that two atoms at the same"""
         assert type(other) == Atom
         if self.s == other.s and self.p == other.p:
             return True
@@ -21,17 +22,20 @@ class Atom:
 
 
     def __lt__(self,other):
+        """For sorting atoms"""
         assert type(other) == Atom
         return self.s < other.s
 
 
     def __str__(self):
+        """Print an atom"""
         if self.p == 1:
             return f"{self.s}"            
         return f"{self.s}^{self.p}"
 
 
     def __repr__(self):
+        """Print an atom"""
         if self.p == 1:
             return f"{self.s}"
         return f"{self.s}^{self.p}"
@@ -58,13 +62,16 @@ class Atom:
 
 
     def __mul__(self,other):
+        """Multiply atoms with other objects"""
         if type(other) == Atom:
-            # If they are Atom with the same indeterminate sum their powers
+            # Atoms with different indeterminate sum their powers
             if other.s == self.s:
                 return Atom(self.s,self.p+other.p)
             else:
+                # Atoms with different indeterminate form a particle
                 return Particle([self,other])
         if type(other) == Particle:
+            # When multiplied by a Particle use Particle multiplication
             return other*self
         
         return Particle([self],other)
@@ -75,6 +82,7 @@ class Atom:
 
 
     def __pow__(self,other):
+        """Integer exponentiation"""
         assert type(other) == int
         assert other >= 0
         return Atom(self.s,self.p*other)
