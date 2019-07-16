@@ -73,11 +73,12 @@ class Atom:
         if type(other) == Particle:
             # When multiplied by a Particle use Particle multiplication
             return other*self
-        
+        # If it is something else make a particle with self as the indeterminate and other as the coefficient
         return Particle([self],other)
 
 
     def __rmul__(self,other):
+        """Multiplication is commutative"""
         return self*other
 
 
@@ -97,8 +98,19 @@ class Particle:
         self.A = sorted(A)
         self.coef = coef
 
+
+    def __eq__(self,other):
+        """Check if two Particles have the same atoms"""
+        if len(self.A) == len(other.A):
+            for i,j in zip(self.A,other.A):
+                if i != j:
+                    return False
+            return True
+        return False
+    
         
     def __lt__(self,other):
+        """For sorting Particles"""
         assert type(other) == Particle
         # First sort by number of indeterminates
         if len(self.A) != len(other.A):
@@ -108,21 +120,14 @@ class Particle:
         y = sum([a.p for a in other.A])
         return x > y
     
-    
-    def __eq__(self,other):
-        if len(self.A) == len(other.A):
-            for i,j in zip(self.A,other.A):
-                if i != j:
-                    return False
-            return True
-        return False
-
 
     def __abs__(self):
+        """Particle with a positive coefficient"""
         return Particle(self.A,abs(self.coef))
 
 
     def __str__(self):
+        """Print the particle"""
         if self.A == []:
             return str(self.coef)
         if self.coef == 1:
@@ -137,10 +142,7 @@ class Particle:
 
 
     def __repr__(self):
-        out = str(self.coef) if self.coef != 1 else ""
-        for a in self.A:
-            out += str(a)
-        return out
+        return str(self)
 
 
     def __mul__(self,other):
@@ -176,6 +178,7 @@ class Particle:
 
 
     def __rmul__(self,other):
+        """Multiplication is commutative"""
         return self*other
 
 
@@ -243,6 +246,7 @@ class MVPoly:
     
     
     def __eq__(self,other):
+        """Check if two polynomials have identical Particles"""
         if len(self.terms) == len(other.terms):
             for i,j in zip(self.terms,other.terms):
                 if i != j:
@@ -321,4 +325,4 @@ print(a+b)
 print(a+1)
 print((1+a)*(b-2)*(c+a))
 
-print(1-a)
+print((1-a)*b)
