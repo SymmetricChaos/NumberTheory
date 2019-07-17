@@ -5,9 +5,9 @@ class Atom:
     
     def __init__(self,s,p=1):
         assert type(s) == str
-        assert s in "abcdefghijklmnopqrstuvwxyz"
+        assert len(s) == 1
         assert type(p) == int
-        assert p >= 0
+        assert p >= 1
         
         self.s = s
         self.p = p
@@ -288,16 +288,6 @@ class MVPoly:
         if type(other) == Atom:
             return self + Particle([other])
         return self + Particle([],other)
-    
-
-a = Atom("a")
-b = Atom("b")
-c = Atom("c")
-
-poly = a*b**2-1
-print(poly)
-pp = poly*poly*poly
-
 
 
 def particle_id(part):
@@ -313,16 +303,3 @@ def poly_merge(L):
             t += i
         terms.append(t)
     return terms
-
-print(pp)
-
-p = 3*a**2*b**2
-print(p)
-print(p.reduce({"a":3}))
-
-
-print(a+b)
-print(a+1)
-print((1+a)*(b-2)*(c+a))
-
-print((1-a)*b)
