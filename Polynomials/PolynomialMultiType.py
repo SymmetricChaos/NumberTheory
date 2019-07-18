@@ -53,6 +53,8 @@ class Atom:
 
     def __sub__(self,other):
         """Subtraction other objects from atoms"""
+        if type(other) == Atom:    
+            return Particle([self]) - Particle([other])
         return Particle([self]) - other
     
     
@@ -303,3 +305,11 @@ def poly_merge(L):
             t += i
         terms.append(t)
     return terms
+
+a = Atom("a")
+b = Atom("b")
+
+ab = a-b
+print(ab)
+print(type(ab))
+print(ab.terms)
