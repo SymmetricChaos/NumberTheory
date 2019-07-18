@@ -63,6 +63,10 @@ class Atom:
         return Particle([self],-1) + other
 
 
+    def __neg__(self):
+        return 0-self
+
+
     def __mul__(self,other):
         """Multiply atoms with other objects"""
         if type(other) == Atom:
@@ -236,7 +240,7 @@ class MVPoly:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
-        self.terms = poly_merge(sorted(terms))
+        self.terms = poly_trim(poly_merge(sorted(terms)))
 
 
     def __str__(self):
@@ -297,6 +301,7 @@ def particle_id(part):
 
 
 def poly_merge(L):
+    """Merge like terms"""
     terms = []
     for k,g in groupby(L,particle_id):
         G = list(g)
@@ -304,6 +309,14 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
+    return terms
+
+def poly_trim(L):
+    """Remove terms with coef 0"""
+    terms = []
+    for t in L:
+        if t.coef != 0:
+            terms.append(t)
     return terms
 
 a = Atom("a")
