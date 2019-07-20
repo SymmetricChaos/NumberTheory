@@ -16,9 +16,7 @@ class Atom:
     def __eq__(self,other):
         """Check that two atoms at the same"""
         assert type(other) == Atom
-        if self.s == other.s and self.p == other.p:
-            return True
-        return False
+        return self.s == other.s and self.p == other.p
 
 
     def __lt__(self,other):
@@ -107,12 +105,8 @@ class Particle:
 
     def __eq__(self,other):
         """Check if two Particles have the same atoms"""
-        if len(self.A) == len(other.A):
-            for i,j in zip(self.A,other.A):
-                if i != j:
-                    return False
-            return True
-        return False
+        assert type(other) == Particle
+        return self.A == other.A
     
         
     def __lt__(self,other):
@@ -133,7 +127,7 @@ class Particle:
 
 
     def __str__(self):
-        """Print the particle"""
+        """Print the Particle"""
         if self.A == []:
             return str(self.coef)
         if self.coef == 1:
@@ -240,10 +234,11 @@ class MVPoly:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
-        self.terms = poly_trim(poly_merge(sorted(terms)))
+        self.terms = poly_merge(sorted(terms))
 
 
     def __str__(self):
+        """Print the MVPoly"""
         out = str(self.terms[0])
         for term in self.terms[1:]:
             sgn = "-" if term.coef < 0 else "+"
@@ -253,12 +248,8 @@ class MVPoly:
     
     def __eq__(self,other):
         """Check if two polynomials have identical Particles"""
-        if len(self.terms) == len(other.terms):
-            for i,j in zip(self.terms,other.terms):
-                if i != j:
-                    return False
-            return True
-        return False
+        assert type(other) == MVPoly
+        return self.terms == other.terms
     
     
     def eval(self,V):
@@ -297,6 +288,7 @@ class MVPoly:
 
 
 def particle_id(part):
+    """Get the atoms of the particle"""
     return part.particle_id()
 
 
@@ -309,7 +301,7 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
-    return terms
+    return poly_trim(terms)
 
 def poly_trim(L):
     """Remove terms with coef 0"""
@@ -318,11 +310,3 @@ def poly_trim(L):
         if t.coef != 0:
             terms.append(t)
     return terms
-
-a = Atom("a")
-b = Atom("b")
-
-ab = a-b
-print(ab)
-print(type(ab))
-print(ab.terms)
