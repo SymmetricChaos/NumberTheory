@@ -289,7 +289,10 @@ class MVPoly:
 
 def particle_id(part):
     """Get the atoms of the particle"""
-    return part.particle_id()
+    out = ""
+    for a in part.A:
+        out += str(a)
+    return out
 
 
 def poly_merge(L):
