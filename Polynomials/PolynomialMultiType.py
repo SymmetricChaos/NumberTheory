@@ -183,15 +183,6 @@ class Particle:
         return self*other
 
 
-    def eval(self,V):
-        """Evaluate all indeterminates of the Particle"""
-        assert type(V) == dict
-        out = 1
-        for a in self.A:
-            out *= V[a.s]**a.p
-        return out*self.coef
-
-
     def __add__(self,other):
         if type(other) == Atom:
             return MVPoly([self,Particle([other])])
@@ -211,11 +202,13 @@ class Particle:
         return MVPoly([self,Particle([],-other)])
 
 
-    def particle_id(self):
-        out = ""
+    def eval(self,V):
+        """Evaluate all indeterminates of the Particle"""
+        assert type(V) == dict
+        out = 1
         for a in self.A:
-            out += str(a)
-        return out
+            out *= V[a.s]**a.p
+        return out*self.coef
 
 
     def reduce(self,V):
@@ -230,6 +223,7 @@ class Particle:
                     out *= v[1]**a.p
                     break
         return Particle(temp_atoms,out*self.coef)
+
 
 class MVPoly:
     """Polynomial with various indeterminates"""
@@ -275,6 +269,10 @@ class MVPoly:
             for p in self.terms:
                 out.append(p*other)
             return MVPoly(out)
+        
+    def __rmul__(self,other):
+        """Multiplication is commutative"""
+        return self * other
 
     
     def __add__(self,other):
@@ -286,7 +284,10 @@ class MVPoly:
         if type(other) == Atom:
             return self + Particle([other])
         return self + Particle([],other)
-
+    
+    def __radd__(self,other):
+        """Addition is commutative"""
+        return self + other
 
 def particle_id(part):
     """Get the atoms of the particle"""
