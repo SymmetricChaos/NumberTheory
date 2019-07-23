@@ -77,7 +77,8 @@ class Atom:
         if type(other) == Particle:
             # When multiplied by a Particle use Particle multiplication
             return other*self
-        # If it is something else make a particle with self as the indeterminate and other as the coefficient
+        # If it is something else make a particle with self as the '
+        #indeterminate and other as the coefficient
         return Particle([self],other)
 
 
