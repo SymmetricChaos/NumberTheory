@@ -187,7 +187,7 @@ class Particle:
         if type(other) == Atom:
             return MVPoly([self,Particle([other])])
         if type(other) == Particle:
-            if self.particle_id() == other.particle_id():
+            if particle_id(self) == particle_id(other):
                 return Particle(self.A,self.coef+other.coef)
             else:
                 return MVPoly([self,other])
