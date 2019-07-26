@@ -202,6 +202,18 @@ class Particle:
         return MVPoly([self,Particle([],-other)])
 
 
+    def __pow__(self,other):
+        assert type(other) == int
+        assert other >= 0
+        if other == 0:
+            return 1
+        else:
+            out = self
+            for i in range(other):
+                out *= self
+            return out
+
+
     def eval(self,V):
         """Evaluate all indeterminates of the Particle"""
         assert type(V) == dict
@@ -288,6 +300,19 @@ class MVPoly:
     def __radd__(self,other):
         """Addition is commutative"""
         return self + other
+    
+    def __pow__(self,other):
+        assert type(other) == int
+        assert other >= 0
+        if other == 0:
+            return 1
+        if other == 1:
+            return self
+        else:
+            out = self
+            for i in range(other-1):
+                out *= self
+            return out
 
 def particle_id(part):
     """Get the atoms of the particle"""
