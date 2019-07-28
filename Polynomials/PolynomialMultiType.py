@@ -119,6 +119,8 @@ class Particle:
         # If they are equal sort by the coefficients
         x = sum([a.p for a in self.A])
         y = sum([a.p for a in other.A])
+        if x == y:
+            return self.A[0] > other.A[0]
         return x > y
     
 
@@ -252,7 +254,7 @@ class MVPoly:
             out +=  " " + sgn + " " + str(abs(term))
         return out
     
-    
+
     def __eq__(self,other):
         """Check if two polynomials have identical Particles"""
         assert type(other) == MVPoly
@@ -331,7 +333,7 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
-    return poly_trim(terms)
+    return sorted(poly_trim(terms))
 
 def poly_trim(L):
     """Remove terms with coef 0"""
