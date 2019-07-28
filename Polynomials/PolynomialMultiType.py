@@ -338,7 +338,7 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
-    return sorted(poly_trim(terms))
+    return poly_trim(terms)
 
 def poly_trim(L):
     """Remove terms with coef 0"""

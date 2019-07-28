@@ -13,9 +13,3 @@ print(f"1-a = {1-a}")
 print(f"a*a+a*b = {a*a+a*b}")
 X = (a*a+a*b) * (a-c)
 print((a-b*c)**4)
-
-P = a*b + b*c + c + a
-Q = c + a
-
-print(P)
-print(Q)
