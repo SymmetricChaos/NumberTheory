@@ -113,14 +113,19 @@ class Particle:
     def __lt__(self,other):
         """For sorting Particles"""
         assert type(other) == Particle
-        # First sort by number of indeterminates
+        # If they have different numbers of indeterminates sort by which has
+        # more indeterminates
         if len(self.A) != len(other.A):
             return len(self.A) > len(other.A)
-        # If they are equal sort by the coefficients
+        # If they have the same number of indeterminates then check which has
+        # overall greater powers
         x = sum([a.p for a in self.A])
         y = sum([a.p for a in other.A])
+        # If the powers are overall the same then sort by the first atom of
+        # each particle
         if x == y:
             return self.A[0] > other.A[0]
+        # Otherwise sort by who has greater overall powers
         return x > y
     
 
