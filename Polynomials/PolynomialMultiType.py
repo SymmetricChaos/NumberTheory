@@ -209,6 +209,14 @@ class Particle:
         return MVPoly([self,Particle([],-other)])
 
 
+#    def __rsub__(self,other):
+#        if type(other) == Atom:
+#            return 
+#        if type(other) == Particle:
+#            return 
+#        return 
+
+
     def __pow__(self,other):
         assert type(other) == int
         assert other >= 0
@@ -219,6 +227,10 @@ class Particle:
             for i in range(other):
                 out *= self
             return out
+
+
+    def __neg__(self):
+        return 0-self
 
 
     def eval(self,V):
@@ -303,11 +315,29 @@ class MVPoly:
         if type(other) == Atom:
             return self + Particle([other])
         return self + Particle([],other)
-    
+
+
     def __radd__(self,other):
         """Addition is commutative"""
         return self + other
-    
+
+
+#    def __sub__(self,other):
+#        if type(other) == Atom:
+#            return 
+#        if type(other) == Particle:
+#            return 
+#        return 
+
+
+#    def __rsub__(self,other):
+#        if type(other) == Atom:
+#            return 
+#        if type(other) == Particle:
+#            return 
+#        return 
+
+
     def __pow__(self,other):
         assert type(other) == int
         assert other >= 0
@@ -320,6 +350,12 @@ class MVPoly:
             for i in range(other-1):
                 out *= self
             return out
+
+
+    def __neg__(self):
+        a = [-i for i in self.terms]
+        return MVPoly(a)
+
 
 def particle_id(part):
     """Get the atoms of the particle"""
