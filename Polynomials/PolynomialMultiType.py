@@ -277,15 +277,6 @@ class MVPoly:
         assert type(other) == MVPoly
         return self.terms == other.terms
     
-    
-    def eval(self,V):
-        """Evaluate each particle of the polynomial"""
-        assert type(V) == dict
-        out = 0
-        for p in self.terms:
-            out += p.eval(V)
-        return out
-
 
     def __mul__(self,other):
         """Multiply together two polynomials"""
@@ -355,6 +346,23 @@ class MVPoly:
     def __neg__(self):
         a = [-i for i in self.terms]
         return MVPoly(a)
+    
+    
+    def eval(self,V):
+        """Evaluate each particle of the polynomial"""
+        assert type(V) == dict
+        out = 0
+        for p in self.terms:
+            out += p.eval(V)
+        return out
+
+
+    def reduce(self,V):
+        """Partially evaluate all terms of the MVPoly"""
+        assert type(V) == dict
+        a = [t.reduce(V) for t in self.terms]
+        return MVPoly(a)
+
 
 
 def particle_id(part):
