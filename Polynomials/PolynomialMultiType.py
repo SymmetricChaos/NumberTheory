@@ -62,7 +62,7 @@ class Atom:
 
 
     def __neg__(self):
-        return 0-self
+        return -1*self
 
 
     def __mul__(self,other):

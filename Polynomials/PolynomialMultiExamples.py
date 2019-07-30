@@ -1,22 +1,62 @@
 from PolynomialMultiType import Atom
 #from NumberTheory.Rationals import Rational
-a = Atom("a")
-b = Atom("b")
-c = Atom("c")
 
+def atom_tests():
+    a = Atom("a")
+    b = Atom("b")
+    val = [a,-a,a**3,a*a,a*b,1-a,a-1,a+a] 
+    cor = ["a","-a","a^3","a^2","ab","-a + 1","a - 1","2a"]
 
-print(f"a = {a}")
-print(f"a*b = {a*b}")
-print(f"a*a = {a*a}")
-print(f"a**3 = {a**3}")
-print(f"1-a = {1-a}")
-print(f"a*a+a*b = {a*a+a*b}")
-print((a-b*c)**4)
+    ctr = 0
 
-print(-(a*b+c))
+    for test_val,correct_val in zip(val,cor):
+        if str(test_val) != correct_val:
+            print("Test Failed")
+            print(f"{test_val} should show as {correct_val}")
+            ctr += 1
 
-#print(a-a*b)
-#print(a*b-a)
+    print(f"{ctr} Atom Tests Failed")
+    
+    
+def particle_tests():
+    a = Atom("a")
+    b = Atom("b")
+    c = Atom("c")
+    ab = a*b
+    bc = c*b
+    val = [ab+ab,ab+bc,2*ab,ab+a]
+    cor = ["2ab","bc + ab","2ab","ab + a"]
+
+    ctr = 0
+
+    for test_val,correct_val in zip(val,cor):
+        if str(test_val) != correct_val:
+            print("Test Failed")
+            print(f"{test_val} should show as {correct_val}")
+            ctr += 1
+
+    print(f"{ctr} Particle Tests Failed")
+    
+#def mypoly_tests():
+#    a = Atom("a")
+#    b = Atom("b")
+#    c = Atom("c")
+#
+#    val = []
+#    cor = []
+#
+#    ctr = 0
+#
+#    for test_val,correct_val in zip(val,cor):
+#        if str(test_val) != correct_val:
+#            print("Test Failed")
+#            print(f"{test_val} should show as {correct_val}")
+#            ctr += 1
+#
+#    print(f"{ctr} MVPoly Tests Failed")
+
+atom_tests()
+particle_tests()
 
 #print()
 #X = (a*a+a*b) * (a-c)
