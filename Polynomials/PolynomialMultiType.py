@@ -260,7 +260,7 @@ class MVPoly:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
-        self.terms = sorted(poly_merge(terms))
+        self.terms = poly_merge(sorted(terms))
 
 
     def __str__(self):
@@ -291,12 +291,13 @@ class MVPoly:
             for p in self.terms:
                 out.append(p*other)
             return MVPoly(out)
-        
+
+
     def __rmul__(self,other):
         """Multiplication is commutative"""
         return self * other
 
-    
+
     def __add__(self,other):
         """MVPoly addition"""
         if type(other) == MVPoly:
@@ -374,15 +375,6 @@ def poly_merge(L):
         t = G[0]
         for i in G[1:]:
             t += i
-        terms.append(t)
-    return terms
-    return poly_trim(terms)
-
-
-def poly_trim(L):
-    """Remove terms with coef 0"""
-    terms = []
-    for t in L:
         if t.coef != 0:
             terms.append(t)
     return terms

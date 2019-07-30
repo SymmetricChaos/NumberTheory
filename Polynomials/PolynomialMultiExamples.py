@@ -50,7 +50,7 @@ def mvpoly_tests():
     Q = b**2 * c - 5
 
     
-    val = [P,Q,-P,P*2,P*c,P*Q,P+ab,P-ab,P+2]
+    val = [P,Q,-P,P*2,P*c,P*Q,P+ab,P-ab,P+2,P-2,2-P,a-P]
     cor = ["ab + 2c + 2",
            "b^2c - 5",
            "-ab - 2c - 2",
@@ -59,7 +59,10 @@ def mvpoly_tests():
            "ab^3c + 2b^2c^2 + 2b^2c - 5ab - 10c - 10",
            "2ab + 2c + 2",
            "2c + 2",
-           "ab + 2c + 4"]
+           "ab + 2c + 4",
+           "ab + 2c",
+           "-ab - 2c",
+           "-ab - 2c + a - 2"]
 
 
     ctr = 0
