@@ -245,15 +245,14 @@ class Particle:
     def reduce(self,V):
         """Evaluate some indeterminates of the Particle"""
         assert type(V) == dict
-        out = 1
-        temp_atoms = self.A.copy()
-        for v in V.items():
-            for pos,a in enumerate(self.A):
-                if v[0] == a.s:
-                    del temp_atoms[pos]
-                    out *= v[1]**a.p
-                    break
-        return Particle(temp_atoms,out*self.coef)
+        co = self.coef
+        new_atoms = []
+        for a in self.A:
+            if a.s in V:
+                co *= V[a.s]**a.p
+            else:
+                new_atoms.append(a)
+        return Particle(new_atoms,co)
 
 
 class MVPoly:

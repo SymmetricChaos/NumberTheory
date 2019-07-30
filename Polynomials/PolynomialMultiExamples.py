@@ -16,7 +16,10 @@ def atom_tests():
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
 
-    print(f"{ctr} Atom Tests Failed\n")
+    if ctr > 0:
+        print(f"{ctr} Atom Tests Failed\n")
+    else:
+        print("All test passed\n")
     
     
 def particle_tests():
@@ -37,7 +40,10 @@ def particle_tests():
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
 
-    print(f"{ctr} Particle Tests Failed\n")
+    if ctr > 0:
+        print(f"{ctr} Particle Tests Failed\n")
+    else:
+        print("All test passed\n")
     
 def mvpoly_tests():
     print("Begin MVPoly Tests")
@@ -72,8 +78,11 @@ def mvpoly_tests():
             print("Test Failed")
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
-
-    print(f"{ctr} MVPoly Tests Failed\n")
+    
+    if ctr > 0:
+        print(f"{ctr} MVPoly Tests Failed\n")
+    else:
+        print("All test passed\n")
 
 
 atom_tests()
@@ -82,8 +91,10 @@ mvpoly_tests()
 
 
 #print()
+#a = Atom("a")
+#b = Atom("b")
+#c = Atom("c")
 #X = (a*a+a*b) * (a-c)
 #print(X)
-#print(X.eval({"a":2,"b":1,"c":3}))
-#print(X.reduce({"a":2}))
-#print(X.reduce({"a":2,"c":3}))
+#print(X.reduce({"a":2,"c":-3}))
+
