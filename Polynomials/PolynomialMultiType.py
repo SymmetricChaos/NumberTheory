@@ -209,12 +209,12 @@ class Particle:
         return MVPoly([self,Particle([],-other)])
 
 
-#    def __rsub__(self,other):
-#        if type(other) == Atom:
-#            return 
-#        if type(other) == Particle:
-#            return 
-#        return 
+    def __rsub__(self,other):
+        if type(other) == Atom:
+            return MVPoly([-self,Particle([other])])
+        if type(other) == Particle:
+            return MVPoly([-self,other])
+        return MVPoly([-self,Particle([],other)])
 
 
     def __pow__(self,other):
@@ -230,7 +230,7 @@ class Particle:
 
 
     def __neg__(self):
-        return 0-self
+        return -1*self
 
 
     def eval(self,V):
