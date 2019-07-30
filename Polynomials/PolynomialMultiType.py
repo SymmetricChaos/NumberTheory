@@ -46,7 +46,7 @@ class Atom:
 
     def __radd__(self,other):
         """Addition of atoms with other objects"""
-        return Particle([self]) + other
+        return self+other
 
 
     def __sub__(self,other):
@@ -113,16 +113,20 @@ class Particle:
         # more indeterminates
         if len(self.A) != len(other.A):
             return len(self.A) > len(other.A)
-        # If they have the same number of indeterminates then check which has
+        # If they have the same number of indeterminates then sort by which has
         # overall greater powers
         x = sum([a.p for a in self.A])
         y = sum([a.p for a in other.A])
-        # If the powers are overall the same then sort by the first atom of
-        # each particle
-        if x == y:
-            return self.A[0] > other.A[0]
-        # Otherwise sort by who has greater overall powers
-        return x > y
+        if x != y:
+            return x > y
+        # If the powers are overall the same then sort by the leading atoms
+        for i,j in zip(self.A,other.A):
+            if i.s != j.s:
+                return i.s > j.s
+        # if that fails then sort by the powers of the atoms
+        for i,j in zip(self.A,other.A):
+            if i.p != j.p:
+                return i.p > j.p
     
 
     def __abs__(self):
@@ -187,6 +191,7 @@ class Particle:
 
 
     def __add__(self,other):
+        """Particle addition"""
         if type(other) == Atom:
             return MVPoly([self,Particle([other])])
         if type(other) == Particle:
@@ -194,9 +199,17 @@ class Particle:
                 return Particle(self.A,self.coef+other.coef)
             else:
                 return MVPoly([self,other])
+        if type(other) == MVPoly:
+            return MVPoly([self]+other.terms)
         return MVPoly([self,Particle([],other)])
 
+
+    def __radd__(self,other):
+        return other+self
+
+    
     def __sub__(self,other):
+        """Particle subtraction"""
         return self+(-other)
 
 
@@ -247,7 +260,7 @@ class MVPoly:
     """Polynomial with various indeterminates"""
     
     def __init__(self,terms):
-        self.terms = poly_merge(sorted(terms))
+        self.terms = sorted(poly_merge(terms))
 
 
     def __str__(self):
@@ -285,14 +298,14 @@ class MVPoly:
 
     
     def __add__(self,other):
-        """Add together two polynomials"""
+        """MVPoly addition"""
         if type(other) == MVPoly:
             return MVPoly(self.terms+other.terms)
         if type(other) == Particle:
             return MVPoly(self.terms+[other])
         if type(other) == Atom:
-            return self + Particle([other])
-        return self + Particle([],other)
+            return MVPoly(self.terms+[Particle([other])])
+        return MVPoly(self.terms+[Particle([],other)])
 
 
     def __radd__(self,other):
@@ -344,6 +357,7 @@ class MVPoly:
 
 
 
+
 def particle_id(part):
     """Get the atoms of the particle"""
     out = ""
@@ -361,7 +375,9 @@ def poly_merge(L):
         for i in G[1:]:
             t += i
         terms.append(t)
+    return terms
     return poly_trim(terms)
+
 
 def poly_trim(L):
     """Remove terms with coef 0"""

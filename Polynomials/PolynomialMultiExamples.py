@@ -2,6 +2,7 @@ from PolynomialMultiType import Atom
 #from NumberTheory.Rationals import Rational
 
 def atom_tests():
+    print("Begin Atom Tests")
     a = Atom("a")
     b = Atom("b")
     val = [a,-a,a**3,a*a,a*b,1-a,a-1,a+a] 
@@ -15,10 +16,11 @@ def atom_tests():
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
 
-    print(f"{ctr} Atom Tests Failed")
+    print(f"{ctr} Atom Tests Failed\n")
     
     
 def particle_tests():
+    print("Begin Particle Tests")
     a = Atom("a")
     b = Atom("b")
     c = Atom("c")
@@ -35,18 +37,20 @@ def particle_tests():
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
 
-    print(f"{ctr} Particle Tests Failed")
+    print(f"{ctr} Particle Tests Failed\n")
     
 def mvpoly_tests():
+    print("Begin MVPoly Tests")
     a = Atom("a")
     b = Atom("b")
     c = Atom("c")
     
     ab = a*b
-    P = a*b + 2*c + 2
+    P = ab + 2*c + 2
     Q = b**2 * c - 5
+
     
-    val = [P,Q,-P,P*2,P*c,P*Q,P+ab,P-ab]
+    val = [P,Q,-P,P*2,P*c,P*Q,P+ab,P-ab,P+2]
     cor = ["ab + 2c + 2",
            "b^2c - 5",
            "-ab - 2c - 2",
@@ -54,7 +58,9 @@ def mvpoly_tests():
            "abc + 2c^2 + 2c",
            "ab^3c + 2b^2c^2 + 2b^2c - 5ab - 10c - 10",
            "2ab + 2c + 2",
-           "2c + 2"]
+           "2c + 2",
+           "ab + 2c + 4"]
+
 
     ctr = 0
 
@@ -64,7 +70,8 @@ def mvpoly_tests():
             print(f"{test_val} should show as {correct_val}")
             ctr += 1
 
-    print(f"{ctr} MVPoly Tests Failed")
+    print(f"{ctr} MVPoly Tests Failed\n")
+
 
 atom_tests()
 particle_tests()
