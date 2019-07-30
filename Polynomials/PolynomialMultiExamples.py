@@ -24,8 +24,8 @@ def particle_tests():
     c = Atom("c")
     ab = a*b
     bc = c*b
-    val = [ab+ab,ab+bc,2*ab,ab+a]
-    cor = ["2ab","bc + ab","2ab","ab + a"]
+    val = [ab,bc,ab+ab,ab+bc,2*ab,ab+a,a+ab,ab**2]
+    cor = ["ab","bc","2ab","bc + ab","2ab","ab + a","ab + a","a^2b^2"]
 
     ctr = 0
 

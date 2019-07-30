@@ -224,7 +224,7 @@ class Particle:
             return 1
         else:
             out = self
-            for i in range(other):
+            for i in range(other-1):
                 out *= self
             return out
 
