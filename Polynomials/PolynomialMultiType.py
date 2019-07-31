@@ -233,17 +233,9 @@ class Particle:
         return -1*self
 
 
-    def eval(self,V):
-        """Evaluate all indeterminates of the Particle"""
-        assert type(V) == dict
-        out = 1
-        for a in self.A:
-            out *= V[a.s]**a.p
-        return out*self.coef
 
-
-    def reduce(self,V):
-        """Evaluate some indeterminates of the Particle"""
+    def evaluate(self,V):
+        """Evaluate some or all indeterminates of the Particle"""
         assert type(V) == dict
         co = self.coef
         new_atoms = []
@@ -340,19 +332,10 @@ class MVPoly:
         return MVPoly(a)
     
     
-    def eval(self,V):
-        """Evaluate each particle of the polynomial"""
-        assert type(V) == dict
-        out = 0
-        for p in self.terms:
-            out += p.eval(V)
-        return out
-
-
-    def reduce(self,V):
+    def evaluate(self,V):
         """Partially evaluate all terms of the MVPoly"""
         assert type(V) == dict
-        a = [t.reduce(V) for t in self.terms]
+        a = [t.evaluate(V) for t in self.terms]
         return MVPoly(a)
 
 
