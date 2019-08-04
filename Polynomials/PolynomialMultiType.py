@@ -81,6 +81,16 @@ class Atom:
     def __rmul__(self,other):
         """Multiplication is commutative"""
         return self*other
+    
+    
+#    def __divmod__(self,other):
+#        assert type(other) == Atom
+#        if self.s != other.s:
+#            raise Exception("Division of an atom by differnet atoms not yet supported")
+#        if self.p > other.p:
+#            return Atom(self.s,self.p-other.p)
+#        if self.p < other.p:
+#            raise Exception("Division of an atom by a larger atom not yet supported")
 
 
     def __pow__(self,other):
@@ -231,6 +241,10 @@ class Particle:
 
     def __neg__(self):
         return -1*self
+    
+    
+    def copy(self):
+        return Particle(self.A[:],self.coef)
 
 
     def evaluate(self,V):
@@ -266,6 +280,10 @@ class MVPoly:
     def __init__(self,terms):
         self.terms = poly_merge(sorted(terms))
 
+
+    def __len__(self):
+        """Numbers of terms used"""
+        return len(self.terms)
 
     def __str__(self):
         """Print the MVPoly"""
@@ -345,6 +363,10 @@ class MVPoly:
         return MVPoly(a)
     
     
+    def copy(self):
+        return MVPoly([t.copy() for t in self.terms])
+    
+    
     def evaluate(self,V):
         """Partially or entirely evaluate all terms of the MVPoly"""
         assert type(V) == dict
@@ -381,3 +403,23 @@ def poly_merge(L):
         if t.coef != 0:
             terms.append(t)
     return terms
+
+
+def particle_divmod(P,Q):
+    co,rco = divmod(P.coef,Q.coef)
+    A, rA = [],[]
+    for p in P.coef:
+        for q in Q.coef:
+            if p.s == q.s:
+                d,r = divmod(p,q)
+        print(p)
+
+#def integer_division(P,Q):
+#    P = P.copy()
+#    Q = Q.copy()
+#    out = []
+#    while True:
+#        if P[0] == Q[0]:
+#            P -= Q
+#        else:
+            
