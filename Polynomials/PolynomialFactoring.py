@@ -1,7 +1,7 @@
-from PolynomialTye import Polynomial
+from PolynomialType import Polynomial
 from math import sqrt, floor
 from itertools import product as cart_product
-
+from ModularArithmetic import gcd
 
 # Flatten a list
 def flatten(L):
@@ -18,7 +18,7 @@ def flatten(L):
 
 # Factors of the number that results from evalutating a polynomial at a point
 def point_factors(P,point):
-    E = P.evaluate(point)[0]
+    E = P.evaluate(point)
     
     out = set()
     for i in range(1,floor(sqrt(abs(E)))+1):
@@ -35,7 +35,7 @@ def point_factors(P,point):
 def factor_at_root(P):
     n = len(P)
     for i in range(0,(n//2)+1):
-        if P.evaluate(i)[0] == 0:
+        if P.evaluate(i) == 0:
             return Polynomial([-i,1])
     return P
 
@@ -48,7 +48,7 @@ def factor_at_nonzero(P):
         Z = [flatten(z) for z in cart_product(Z,M)]
         for u in Z:
             Q = Polynomial(u)
-            S = P//Q
+            S = P/Q
             if len(S) == i and S.coef[-1] == 0:
                 return Q
     return P
@@ -78,9 +78,13 @@ def poly_factor_1L(P):
             
             
         
-Q = Polynomial([-20,5,1,3,5])
+Q = Polynomial([-20,6,2,12])
+g = abs(gcd(Q.coef))
+print(Q)
+print(f"GCD = {g}")
+Q = Q/g
 print(Q)
 F = poly_factor_1L(Q)
 print(F)
-print(Q//F)
-print(F*(Q//F))
+print(Q/F)
+#print(F*(Q/F))

@@ -4,3 +4,4 @@ Visualization/.ipynb_checkpoints/Taylor Series Notebook-checkpoint.ipynb
 *.json
 WaniKani/WKtoken.py
 Polynomials/.ipynb_checkpoints/Multivariate Polynomials-checkpoint.ipynb
+addpath.py

@@ -94,7 +94,7 @@ print()
 a = Atom("a")
 b = Atom("b")
 c = Atom("c")
-X = (a*a+a*b) * (a-c+b)
+X = (a*a+a*b) * (a-c+b)*c
 print(X)
 print()
 print(X.evaluate({"a":2}))

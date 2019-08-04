@@ -29,8 +29,8 @@ class Polynomial:
 
 
     def __len__(self):
-        """Degree for nonzero polynomials"""
-        return len(self.coef)-1
+        """Number of coefficients"""
+        return len(self.coef)
 
 
     def __neg__(self):
@@ -190,3 +190,7 @@ class Polynomial:
     
     def __round__(self,digits):
         return Polynomial([round(i,digits) for i in self.coef],modulus=self.modulus)
+
+    def degree(self):
+        """Degree of the polynomial"""
+        return len(self)-1
