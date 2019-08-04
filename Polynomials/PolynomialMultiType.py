@@ -233,10 +233,8 @@ class Particle:
         return -1*self
 
 
-
     def evaluate(self,V):
         """Evaluate some or all indeterminates of the Particle"""
-        assert type(V) == dict
         co = self.coef
         new_atoms = []
         for a in self.A:
@@ -246,6 +244,21 @@ class Particle:
                 new_atoms.append(a)
         return Particle(new_atoms,co)
 
+
+    def derivative(self,T):
+        """Derivative of some of all intederminates of the Particle"""
+        co = self.coef
+        new_atoms = []
+        for a in self.A:
+            if a.s in T:
+                co *= a.p
+                if a.p == 1:
+                    continue
+                else:
+                    new_atoms.append(Atom(a.s,a.p-1))
+            else:
+                new_atoms.append(a)
+        return Particle(new_atoms,co)
 
 class MVPoly:
     """Polynomial with various indeterminates"""
@@ -333,9 +346,17 @@ class MVPoly:
     
     
     def evaluate(self,V):
-        """Partially evaluate all terms of the MVPoly"""
+        """Partially or entirely evaluate all terms of the MVPoly"""
         assert type(V) == dict
         a = [t.evaluate(V) for t in self.terms]
+        return MVPoly(a)
+
+
+    def derivative(self,T):
+        """Partial derivative"""
+        assert type(T) == list
+        assert all([type(t) == str for t in T])
+        a = [t.derivative(T) for t in self.terms]
         return MVPoly(a)
 
 
