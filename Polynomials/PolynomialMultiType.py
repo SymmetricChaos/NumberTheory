@@ -82,16 +82,6 @@ class Atom:
         """Multiplication is commutative"""
         return self*other
     
-    
-#    def __divmod__(self,other):
-#        assert type(other) == Atom
-#        if self.s != other.s:
-#            raise Exception("Division of an atom by differnet atoms not yet supported")
-#        if self.p > other.p:
-#            return Atom(self.s,self.p-other.p)
-#        if self.p < other.p:
-#            raise Exception("Division of an atom by a larger atom not yet supported")
-
 
     def __pow__(self,other):
         """Integer exponentiation"""
@@ -108,6 +98,7 @@ class Particle:
         assert all([type(a) == Atom for a in A])
         self.A = sorted(A)
         self.coef = coef
+        self.vars = set([a.s for a in self.A])
 
 
     def __eq__(self,other):
@@ -137,6 +128,10 @@ class Particle:
         for i,j in zip(self.A,other.A):
             if i.p != j.p:
                 return i.p > j.p
+    
+    def __len__(self):
+        """Number of indeterminates"""
+        return len(self.A)
     
 
     def __abs__(self):
@@ -279,7 +274,9 @@ class MVPoly:
     
     def __init__(self,terms):
         self.terms = poly_merge(sorted(terms))
-
+        self.vars = set()
+        for t in self.terms:
+            self.vars.update(t.vars)
 
     def __len__(self):
         """Numbers of terms used"""
@@ -405,21 +402,39 @@ def poly_merge(L):
     return terms
 
 
-def particle_divmod(P,Q):
-    co,rco = divmod(P.coef,Q.coef)
-    A, rA = [],[]
-    for p in P.coef:
-        for q in Q.coef:
-            if p.s == q.s:
-                d,r = divmod(p,q)
-        print(p)
 
-#def integer_division(P,Q):
-#    P = P.copy()
-#    Q = Q.copy()
-#    out = []
-#    while True:
-#        if P[0] == Q[0]:
-#            P -= Q
-#        else:
-            
+
+def particle_div(P,Q):
+    co = P.coef/Q.coef
+    out = Particle([],co)
+    for p in P.A:
+        if p.s not in Q.vars:
+            out *= p 
+    
+    for q in Q.A:
+        if q.s not in P.vars:
+            raise Exception(f"division of particle by indeterminates it does not contain is not yet supported")
+    
+    for p in P.A:
+        for q in Q.A:
+            if p.s == q.s:
+                if p.p > q.p:
+                    out *= Atom(p.s,p.p-q.p)
+                    break
+                elif p.p == q.p:
+                    break
+                else:
+                    raise Exception(f"division of atoms by the atom atom with a greater power is not yet supported")
+
+    return out
+      
+#a = Atom("a")
+#b = Atom("b")
+#c = Atom("c")
+#d = Atom("d")  
+#P = a*a*b*c
+#Q = a*b
+#
+#print(P)
+#print(Q)
+#print(particle_div(P,Q))

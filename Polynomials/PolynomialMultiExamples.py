@@ -105,3 +105,7 @@ print(X.evaluate({"b":-1,"c":-3}))
 print(X.evaluate({"a":2,"c":-3}))
 print(X.evaluate({"a":2,"b":-1,"c":-3}))
 print(X.derivative(["b","c"]))
+
+
+print("\n\n")
+
