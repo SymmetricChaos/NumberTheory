@@ -427,14 +427,35 @@ def particle_div(P,Q):
                     raise Exception(f"division of atoms by the atom atom with a greater power is not yet supported")
 
     return out
-      
+
+#def poly_div(P,Q):
+#    P = P.copy()
+#    Q = Q.copy()
+#    if len(Q) == 0:
+#        raise ZeroDivisionError
+#
+#    print(P)
+#    print(Q)
+#    print()
+#    out = MVPoly([])
+#    while len(P) > len(Q):
+#        div = particle_div(P.terms[0],Q.terms[0])
+##        print(P.terms[0])
+##        print(Q.terms[0])
+##        print(div)
+#        
+#        print(P)
+#        print(Q*div)
+#        out += div
+#        P = P-(Q*div)
+#        print()
+#    print()
+#    print(P)
+#    print(out)
+#
 #a = Atom("a")
 #b = Atom("b")
-#c = Atom("c")
-#d = Atom("d")  
-#P = a*a*b*c
-#Q = a*b
+#P = a**6 + 2*a**4 + 6*a - 9
+#Q = a**3 + 3
 #
-#print(P)
-#print(Q)
-#print(particle_div(P,Q))
+#poly_div(P,Q)
