@@ -454,7 +454,7 @@ def poly_div(P,Q):
             div = particle_div(P.terms[0],Q.terms[0])
         except Exception as e:
 #            print("HERE")
-#            print(e)
+            print(e)
             break
         
 
@@ -484,11 +484,11 @@ a = Atom("a")
 #print("Remainder:",r)
 #
 #print()
-
-P = a**6 + 2*a**4 + 8*a - 10
-Q = a**3 + 3
-print(P)
-print(Q)
-q,r = poly_div(P,Q)
-print("Quotient: ",q)
-print("Remainder:",r)
+#
+#P = a**6 + 2*a**4 + 8*a - 10
+#Q = a**3 + 3
+#print(P)
+#print(Q)
+#q,r = poly_div(P,Q)
+#print("Quotient: ",q)
+#print("Remainder:",r)
