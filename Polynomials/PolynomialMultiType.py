@@ -15,7 +15,8 @@ class Atom:
 
     def __eq__(self,other):
         """Check that two atoms at the same"""
-        assert type(other) == Atom
+        if type(other) != Atom:
+            return False
         return self.s == other.s and self.p == other.p
 
 
@@ -50,10 +51,14 @@ class Atom:
 
 
     def __sub__(self,other):
+        if self == other:
+            return MVPoly([])
         return self+(-other)
 
 
     def __rsub__(self,other):
+        if self == other:
+            return MVPoly([])
         return -self+other
     
     
@@ -103,7 +108,8 @@ class Particle:
 
     def __eq__(self,other):
         """Check if two Particles have the same atoms"""
-        assert type(other) == Particle
+        if type(other) != Particle:
+            return False
         return self.A == other.A
     
         
@@ -215,10 +221,14 @@ class Particle:
     
     def __sub__(self,other):
         """Particle subtraction"""
+        if self == other:
+            return MVPoly([])
         return self+(-other)
 
 
     def __rsub__(self,other):
+        if self == other:
+            return MVPoly([])
         return -self+other
     
 
@@ -284,6 +294,8 @@ class MVPoly:
 
     def __str__(self):
         """Print the MVPoly"""
+        if len(self) == 0:
+            return "0"
         out = str(self.terms[0])
         for term in self.terms[1:]:
             sgn = "-" if term.coef < 0 else "+"
@@ -293,7 +305,8 @@ class MVPoly:
 
     def __eq__(self,other):
         """Check if two polynomials have identical Particles"""
-        assert type(other) == MVPoly
+        if type(other) != MVPoly:
+            return False
         return self.terms == other.terms
     
 
@@ -405,7 +418,7 @@ def poly_merge(L):
 
 
 def particle_div(P,Q):
-    co = P.coef/Q.coef
+    co = P.coef//Q.coef
     out = Particle([],co)
     for p in P.A:
         if p.s not in Q.vars:
@@ -424,38 +437,58 @@ def particle_div(P,Q):
                 elif p.p == q.p:
                     break
                 else:
-                    raise Exception(f"division of atoms by the atom atom with a greater power is not yet supported")
+                    raise Exception(f"division of atoms by an atom with a greater power is not yet supported")
 
     return out
 
-#def poly_div(P,Q):
-#    P = P.copy()
-#    Q = Q.copy()
-#    if len(Q) == 0:
-#        raise ZeroDivisionError
-#
-#    print(P)
-#    print(Q)
+def poly_div(P,Q):
+    P = P.copy()
+    Q = Q.copy()
+    if len(Q) == 0:
+        raise ZeroDivisionError
 #    print()
-#    out = MVPoly([])
-#    while len(P) > len(Q):
-#        div = particle_div(P.terms[0],Q.terms[0])
-##        print(P.terms[0])
-##        print(Q.terms[0])
-##        print(div)
-#        
+    out = MVPoly([])
+    while len(P) >= len(Q):
 #        print(P)
-#        print(Q*div)
-#        out += div
-#        P = P-(Q*div)
-#        print()
-#    print()
-#    print(P)
-#    print(out)
+        try:
+            div = particle_div(P.terms[0],Q.terms[0])
+        except Exception as e:
+#            print("HERE")
+#            print(e)
+            break
+        
+
+        out += div
+        P = P-(Q*div)
+
+    return out,P
+
+a = Atom("a")
+
+#P = 2*a**2 - 5*a - 1
+#Q = a - 3
+#print(P)
+#print(Q)
+#q,r = poly_div(P,Q)
+#print("Quotient: ",q)
+#print("Remainder:",r)
 #
-#a = Atom("a")
-#b = Atom("b")
-#P = a**6 + 2*a**4 + 6*a - 9
-#Q = a**3 + 3
+#print()
+
+#P = a**2 - 3*a - 10
+#Q = a + 2
+#print(P)
+#print(Q)
+#q,r = poly_div(P,Q)
+#print("Quotient: ",q)
+#print("Remainder:",r)
 #
-#poly_div(P,Q)
+#print()
+
+P = a**6 + 2*a**4 + 8*a - 10
+Q = a**3 + 3
+print(P)
+print(Q)
+q,r = poly_div(P,Q)
+print("Quotient: ",q)
+print("Remainder:",r)
