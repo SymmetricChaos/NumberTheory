@@ -58,12 +58,16 @@ class Rational:
     def __truediv__(self,divisor):
         if type(divisor) == int:
             divisor = Rational(divisor)
+        if divisor.n == 0:
+            raise ZeroDivisionError 
         return self*divisor.inv()
 
 
     def __floordiv__(self,divisor):
         if type(divisor) == int:
             divisor = Rational(divisor)
+        if divisor.n == 0:
+            raise ZeroDivisionError 
         q = self*divisor.inv()
         v = q.n // q.d
         return v
