@@ -5,7 +5,8 @@ class Rational:
     def __init__(self,n,d=1):
         assert type(n) == int, "Numerator must be int."
         assert type(d) == int, "Denominator must be int."
-        assert d != 0, "Division by zero error."
+        if d != 0:
+            raise ZeroDivisionError
         if d < 0:
             d = abs(d)
             n = -n
@@ -58,16 +59,12 @@ class Rational:
     def __truediv__(self,divisor):
         if type(divisor) == int:
             divisor = Rational(divisor)
-        if divisor.n == 0:
-            raise ZeroDivisionError 
         return self*divisor.inv()
 
 
     def __floordiv__(self,divisor):
         if type(divisor) == int:
             divisor = Rational(divisor)
-        if divisor.n == 0:
-            raise ZeroDivisionError 
         q = self*divisor.inv()
         v = q.n // q.d
         return v
