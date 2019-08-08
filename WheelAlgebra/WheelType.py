@@ -19,7 +19,7 @@ class Wheel:
     
     def __str__(self):
         if self.b == 1:
-            return str(self.n)
+            return str(self.a)
         return str(self.a) + "/" + str(self.b)
     
     def __add__(self,other):
@@ -27,19 +27,31 @@ class Wheel:
         b = self.b*other.b
         return Wheel(a,b)
     
+    def __neg__(self):
+        return Wheel(-self.a,self.b)
+    
     def __mul__(self,other):
         a = self.a*other.a 
         b = self.b*other.b
         return Wheel(a,b)
     
+    def __truediv__(self,other):
+        return Wheel(self*other.inv)
+    
 x = Wheel(2,3)
 y = Wheel(3,5)
 z = Wheel(5,7)
-e = Wheel(0,1)
 
-print(x,y,x)
-print((x+y)*z+e*z)
-print(x*z + y*z)
+add_id = Wheel(0,1)
+mul_id = Wheel(1,1)
 
-a = Wheel(0,0)
-print(a*e)
+ab = Wheel(0,0)
+
+a = Wheel(1,0)
+
+print(f"{add_id} * {ab} = {add_id * ab}")
+print(f"{add_id} + {ab} = {add_id + ab}")
+print()
+print(f"{x} + {y} = {x + y}")
+
+print(f"{a} + {x} = {a + x}")
