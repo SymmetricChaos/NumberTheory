@@ -13,7 +13,6 @@ class Wheel:
             self.a = a
             self.b = b
         
-        
     def inv(self):
         return Wheel(self.b,self.a)
     
@@ -53,5 +52,7 @@ print(f"{add_id} * {ab} = {add_id * ab}")
 print(f"{add_id} + {ab} = {add_id + ab}")
 print()
 print(f"{x} + {y} = {x + y}")
-
-print(f"{a} + {x} = {a + x}")
+print(f"{x} * {z} = {x * z}")
+print()
+print(f"{a} + {y} = {a + y}")
+print(f"{a} * {y} = {a * y}")
