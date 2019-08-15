@@ -463,7 +463,7 @@ def poly_div(P,Q):
 
     return out,P
 
-a = Atom("a")
+#a = Atom("a")
 
 #P = 2*a**2 - 5*a - 1
 #Q = a - 3
