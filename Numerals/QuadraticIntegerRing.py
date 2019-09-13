@@ -3,8 +3,11 @@ class QuadraticInt:
         assert type(q) == int
         assert type(m) == int
         assert type(n) == int
+        # Quadratic extension
         self.q = q
+        # Multiple of the quadratic
         self.m = m
+        # Integer part
         self.n = n
 
 
@@ -34,8 +37,10 @@ class QuadraticInt:
 
     def __add__(self,other):
         if type(other) == int:
-            return QuadraticInt(self.q,self.m,self.n+other)
-        if type(other) == QuadraticInt:
+            return QuadraticInt(self.q,
+                                self.m,
+                                self.n+other)
+        elif type(other) == QuadraticInt:
             if from_same_ring(self,other):
                 return QuadraticInt(self.q,
                                     self.m+other.m,
@@ -60,11 +65,11 @@ class QuadraticInt:
             return QuadraticInt(self.q,
                                 self.m*other,
                                 self.n*other)
-        if type(other) == QuadraticInt:
+        elif type(other) == QuadraticInt:
             if from_same_ring(self,other):
                 return QuadraticInt(self.q,
-                                    self.n*other.m+self.n*other.n,
-                                    self.n*other.m+self.n*other.m*self.q)
+                                    self.n*other.m + other.n*self.m,
+                                    self.n*other.n + self.m*other.m*self.q)
             
     def __neg__(self):
         return self*-1
@@ -83,6 +88,6 @@ if __name__ == '__main__':
     print(q)
     print(3+q)
     print(q-1)
-    r = 1-q*2
+    r = 1+q*2
     print(r)
     print(r*q)
