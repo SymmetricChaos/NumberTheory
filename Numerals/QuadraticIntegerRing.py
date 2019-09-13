@@ -22,18 +22,32 @@ class QuadraticInt:
         # Just the quadratic
         elif self.m == 1 and self.n == 0:
             return f"√{self.q}"
-        # Integer part
-        elif self.m == 0 and self.n != 1:
-            return f"{self.n}"
-        # Qadratic part
-        elif self.m != 1 and self.n == 0:
-            return f"{self.m}√{self.q}"
-        elif self.m == 1 and self.n != 0:
-            return f"{self.n} + √{self.q}"
-        # Full number
+        # If the quadratic part is negative
+        elif self.m < 0:
+            # Unit case
+            if self.m == -1:
+                if self.n == 0:
+                    return f"-√{self.q}"
+                else:
+                    return f"{self.n} - √{self.q}"
+            # General case
+            if self.n == 0:
+                return f"-{self.m}√{self.q}"
+            else:
+                return f"{self.n} - {abs(self.m)}√{self.q}"
+        # Of the quadratic part is positive
         else:
-            return f"{self.n} + {self.m}√{self.q}"
-
+            # Unit case
+            if self.m == 1:
+                if self.n == 0:
+                    return f"√{self.q}"
+                else:
+                    return f"{self.n} + √{self.q}"
+            # General case
+            if self.n == 0:
+                return f"{self.m}√{self.q}"
+            else:
+                return f"{self.n} + {self.m}√{self.q}"
 
     def __add__(self,other):
         if type(other) == int:
@@ -59,7 +73,6 @@ class QuadraticInt:
         return -self + other
 
     
-    # Multiplication by other QuadInts doesn't work
     def __mul__(self,other):
         if type(other) == int:
             return QuadraticInt(self.q,
@@ -70,7 +83,10 @@ class QuadraticInt:
                 return QuadraticInt(self.q,
                                     self.n*other.m + other.n*self.m,
                                     self.n*other.n + self.m*other.m*self.q)
-            
+
+    def __rmul__(self,other):
+        return self*other
+        
     def __neg__(self):
         return self*-1
 #    Its a ring so no division needed
@@ -86,8 +102,12 @@ def from_same_ring(A,B):
 if __name__ == '__main__':
     q = QuadraticInt(5)
     print(q)
-    print(3+q)
-    print(q-1)
-    r = 1+q*2
-    print(r)
-    print(r*q)
+    print(1+0*q)
+    print(0*q)
+    print(1+q)
+    print(1-q)
+    print(1-2*q)
+    
+    
+    
+    
