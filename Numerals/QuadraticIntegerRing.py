@@ -99,6 +99,7 @@ def from_same_ring(A,B):
 
 if __name__ == '__main__':
     q = QuadraticInt(5)
+    r = 2 + q
     print(q)
     print(1+0*q)
     print(0*q)
@@ -106,6 +107,9 @@ if __name__ == '__main__':
     print(1-q)
     print(1-2*q)
     print(q*q)
+    print(r)
+    print(r*q)
+    print(r*r)
     
     
     
