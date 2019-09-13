@@ -21,20 +21,49 @@ class QuadraticInt:
         # Integer part
         elif self.m == 0 and self.n != 1:
             return f"{self.n}"
-        # Quadratuc part
+        # Qadratic part
         elif self.m != 1 and self.n == 0:
             return f"{self.m}√{self.q}"
+        elif self.m == 1 and self.n != 0:
+            return f"{self.n} + √{self.q}"
         # Full number
         else:
             return f"{self.n} + {self.m}√{self.q}"
 
-    
-    def from_same_ring(self,other):
-        assert type(other) == QuadraticInt
-        assert other.q == self.q
 
-#    def __add__
-#    def __sub__
+    def __add__(self,other):
+        if type(other) == int:
+            return QuadraticInt(self.q,self.m,self.n+other)
+        if type(other) == QuadraticInt:
+            if from_same_ring(self,other):
+                return QuadraticInt(self.q,
+                                    self.m+other.m,
+                                    self.n+other.n)
+
+
+    def __radd__(self,other):
+        return self + other
+    
+    
+    def __sub__(self,other):
+        return self + -other
+    
+    def __rsub__(self,other):
+        return -self + other
+    
 #    def __mul__
 #    Its a ring so no division needed
 #    Maybe factoring
+
+
+def from_same_ring(A,B):
+    if type(A) == QuadraticInt:
+        if type(B) == QuadraticInt:
+            return A.q == B.q
+    return False
+
+if __name__ == '__main__':
+    q = QuadraticInt(5)
+    print(q)
+    print(3+q)
+    print(q-1)
