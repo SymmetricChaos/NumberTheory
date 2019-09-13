@@ -1,10 +1,10 @@
 class QuadraticInt:
     def __init__(self,q,m=1,n=0):
         assert type(q) == int
-        assert q > 1
         assert type(m) == int
         assert type(n) == int
         # Quadratic extension
+        # Should probably test that q is squarefree
         self.q = q
         # Multiple of the quadratic
         self.m = m
@@ -99,17 +99,13 @@ def from_same_ring(A,B):
 
 if __name__ == '__main__':
     q = QuadraticInt(5)
-    r = 2 + q
-    print(q)
-    print(1+0*q)
-    print(0*q)
-    print(1+q)
-    print(1-q)
-    print(1-2*q)
-    print(q*q)
-    print(r)
-    print(r*q)
-    print(r*r)
-    
-    
+    print(f"q            = {q}")
+    print(f"1+0*q        = {1+0*q}")
+    print(f"0*q          = {0*q}")
+    print(f"1+q          = {1+q}")
+    print(f"1-q          = {1-q}")
+    print(f"1-2*q        = {1-2*q}")
+    print(f"q*q          = {q*q}")
+    print(f"q*(2+q)      = {q*(2+q)}")
+    print(f"(2+q)*(2+q)  = {(2+q)*(2+q)}")
     
