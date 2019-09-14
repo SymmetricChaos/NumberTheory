@@ -48,7 +48,7 @@ def poly_pad(P,n):
 
 
 
-def poly_print(P,mod):
+def poly_print(P,mod=0):
     """Show the polynomial in descending form as it would be written"""
     # Get the degree of the polynomial in case it is in non-normal form
     d = poly_degree(P)
