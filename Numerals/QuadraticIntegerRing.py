@@ -29,7 +29,7 @@ class QuadraticInt:
                 return f"-{self.m}√{self.q}"
             else:
                 return f"{self.n} - {abs(self.m)}√{self.q}"
-        # Of the quadratic part is positive
+        # If the quadratic part is positive
         else:
             # Unit case
             if self.m == 1:
@@ -99,13 +99,15 @@ def from_same_ring(A,B):
 
 if __name__ == '__main__':
     q = QuadraticInt(5)
-    print(f"q            = {q}")
-    print(f"1+0*q        = {1+0*q}")
-    print(f"0*q          = {0*q}")
-    print(f"1+q          = {1+q}")
-    print(f"1-q          = {1-q}")
-    print(f"1-2*q        = {1-2*q}")
-    print(f"q*q          = {q*q}")
-    print(f"q*(2+q)      = {q*(2+q)}")
-    print(f"(2+q)*(2+q)  = {(2+q)*(2+q)}")
-    
+    print(f"q              = {q}")
+    print(f"1+0*q          = {1+0*q}")
+    print(f"0*q            = {0*q}")
+    print(f"1+q            = {1+q}")
+    print(f"1-q            = {1-q}")
+    print(f"1-2*q          = {1-2*q}")
+    print(f"q*q            = {q*q}")
+    print(f"q+q            = {q+q}")
+    print(f"q*(2+q)        = {q*(2+q)}")
+    print(f"(2+q)*(3+2*q)  = {(2+q)*(3+2*q)}")
+    print(f"(2+q)*(3-2*q)  = {(2+q)*(3-2*q)}")
+    print(f"(2+q)+(3+2*q)  = {(2+q)+(3+2*q)}")
