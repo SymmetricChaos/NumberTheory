@@ -1,21 +1,20 @@
+# Polynomials over the ordinary ring of integers.
+
 from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                                   poly_divmod, poly_norm, poly_derivative
 
-class Polynomial:
+class IntPolynomial:
     
-    def __init__(self,coef,modulus=0):
+    def __init__(self,coef):
         assert type(coef) == list
+        
         self.coef = coef
-        self.modulus = modulus
-        self.norm()
+        self.normalize()
         
         
-    def norm(self):
+    def normalize(self):
         """Normalize the representation"""
         poly_norm(self.coef)
-        if self.modulus != 0:
-            for i in range(len(self.coef)):
-                self.coef[i] = self.coef[i] % self.modulus
 
 
     def __str__(self):
@@ -36,18 +35,16 @@ class Polynomial:
     def __neg__(self):
         """Additive inverse of each coefficient"""
         L = [-c for c in self.coef]
-        return Polynomial(L,self.modulus)
+        return IntPolynomial(L)
 
 
     def __add__(self,poly):
         """Add a polynomial to a polynomial"""
-        if type(poly) != Polynomial:
-            poly = Polynomial([poly])
-        if self.modulus != poly.modulus:
-            raise Exception("Modulus does not match.")
+        if type(poly) != IntPolynomial:
+            poly = IntPolynomial([poly])
 
-        L = poly_add(self.coef,poly.coef,self.modulus)
-        return Polynomial(L,self.modulus)
+        L = poly_add(self.coef,poly.coef)
+        return IntPolynomial(L)
 
 
     def __radd__(self,poly):
