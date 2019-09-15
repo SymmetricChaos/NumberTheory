@@ -86,6 +86,14 @@ class QuadraticInt:
 
     def __neg__(self):
         return self*-1
+    
+    
+    def norm(self):
+        return self.n*self.n - self.q*self.m*self.m
+
+
+    def conjugate(self):
+        return QuadraticInt(self.q,-self.m,self.n)
 
 
 
@@ -98,7 +106,7 @@ def from_same_ring(A,B):
 
 
 if __name__ == '__main__':
-    q = QuadraticInt(5)
+    q = QuadraticInt(3)
     print(f"q              = {q}")
     print(f"1+0*q          = {1+0*q}")
     print(f"0*q            = {0*q}")
