@@ -5,6 +5,8 @@
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
                                   poly_divmod, poly_norm, poly_derivative
+from ModularArithmetic import gcd
+from math import copysign
 
 class IntPolynomial:
     
@@ -15,10 +17,9 @@ class IntPolynomial:
         self.coef = coef
         self.normalize()
         
-        
-    def normalize(self):
-        """Normalize the representation"""
-        poly_norm(self.coef)
+    def __getitem__(self,n):
+        """Make polynomial accessible by indexing"""
+        return self.coef[n]
 
 
     def __str__(self):
@@ -27,8 +28,8 @@ class IntPolynomial:
 
 
     def __repr__(self):
-        """Show literal contents in acending form"""
-        return poly_repr(self.coef)
+        """Print nicely in descending written form"""
+        return poly_print(self.coef)
 
 
     def __len__(self):
@@ -177,11 +178,13 @@ class IntPolynomial:
 #        """Get the remainder of one polynomial divided by another"""
 #        a,b = poly_divmod(self.coef,poly.coef)
 #        return IntPolynomial(b)
-    
-    
-    def __getitem__(self,n):
-        """Make polynomial accessible by indexing"""
-        return self.coef[n]
+
+    def normalize(self):
+        """Remove trailing zeroes"""
+        while self.coef[-1] == 0 and len(self.coef) > 1:
+            if len(self.coef) == 1:
+                break
+            self.coef.pop()
     
 
     def derivative(self,silent=False):
@@ -209,6 +212,29 @@ class IntPolynomial:
     def degree(self):
         """Degree of the polynomial"""
         return len(self)-1
-    
+
+
     def is_monic(self):
+        """Check if the polynomial is monic"""
         return self[-1] == 1 or self[-1] == -1
+    
+    
+    def content(self):
+        """GCD of the coefficients, negative if leading coef is negative"""
+        return gcd([self.coef]) * int(copysign(1,self[-1]))
+    
+    
+    def primitive_part(self):
+        """Divide out the content"""
+        return IntPolynomial([c//self.content() for c in self.coef])
+
+
+if __name__ == '__main__':
+    P = IntPolynomial([0,2,4,6,-2,0,0])
+    Q = P*14
+    print(P)
+    print(Q)
+    print(P.is_monic())
+    print(Q.content())
+    print(Q.primitive_part())
+    print(Q)
