@@ -3,8 +3,7 @@
 ## To do 
 
 
-from Polynomials.PolyUtils import poly_print, poly_add, poly_repr, poly_mult, \
-                                  poly_divmod, poly_norm, poly_derivative
+from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from ModularArithmetic import gcd
 from math import copysign
 
@@ -97,22 +96,57 @@ class IntPolynomial:
         return IntPolynomial(L)
 
 
-#    def __truediv__(self,poly):
-#        """Get the quotient of one polynomial by another"""
-#        if type(poly) == int:
-#            poly = IntPolynomial([poly])
-#        
-#        a,b = poly_divmod(self.coef,poly.coef)
-#        return IntPolynomial(a)
-#
-#
-#    def __rtruediv__(self,poly):
-#        """Get the quotient of one polynomial by another"""
-#        if type(poly) == int:
-#            poly = IntPolynomial([poly])
-#        
-#        a,b = poly_divmod(poly.coef,self.coef)
-#        return IntPolynomial(a)
+    def __floordiv__(self,poly):
+        """Integer division of polynomials"""
+        
+        # Cast integer to poly if needed
+        if type(poly) == int:
+            poly = IntPolynomial([poly])
+        
+        # Check for division by zero    
+        if poly.coef == [0]:
+            raise ZeroDivisionError
+        
+        # We can only divide a longer polynomial by a shorter one
+        if len(self) < len(poly):
+            return IntPolynomial([0])
+        
+        # Copy inputs
+        P = self.coef[:]
+        Q = poly.coef[:]
+        
+        # Integer case, an IntPolynomial could have length one on its own and
+        # thus represent an integer
+        if len(poly) == 1:
+            c = self.content()
+            if c % poly.coef[0] == 0:
+                return IntPolynomial([p//Q[0] for p in P])
+            else:
+                raise Exception(f"Integer division of {self} by {poly} is not defined")
+        # Use euclidean division algorithm
+        else:
+            # Check that division is defined
+            for p in P:
+                if p % Q[-1] != 0:
+                    raise Exception(f"Integer division of {self} by {poly} is not defined")
+            
+            dP = len(P)-1
+            dQ = len(Q)-1
+            if dP >= dQ:
+                qt = [0] * dP
+                while dP >= dQ:
+                    
+                    d = [0]*(dP - dQ) + Q
+                    mult = qt[dP - dQ] = P[-1] // d[-1]
+                    d = [coeff*mult for coeff in d]
+                    P = [ coeffN - coeffd for coeffN, coeffd in zip(P, d)]
+                    while P[-1] == 0 and len(P) > 1:
+                        if len(P) == 1:
+                            break
+                        P.pop()
+                    dP = len(P)-1
+            
+            return IntPolynomial(qt)
 
 
     def __pow__(self,pwr):
@@ -146,7 +180,7 @@ class IntPolynomial:
 #        # Copy inputs
 #        P = self.coef[:]
 #        Q = poly.coef[:]
-#        
+##        
 #        # Integer cases 
 #        # THESE SEEM WRONG
 #        if len(Q) == 1:
@@ -229,12 +263,16 @@ class IntPolynomial:
         return IntPolynomial([c//self.content() for c in self.coef])
 
 
+
 if __name__ == '__main__':
-    P = IntPolynomial([0,2,4,6,-2,0,0])
-    Q = P*14
+    P = IntPolynomial([0,2,4,6,2,0,0])
+    Q = P*3
+    R = IntPolynomial([1,1])
     print(P)
     print(Q)
     print(P.is_monic())
     print(Q.content())
     print(Q.primitive_part())
+    print(Q.primitive_part().is_monic())
     print(Q)
+    print(f"{P} // {R} = {P//R}")
