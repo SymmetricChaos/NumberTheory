@@ -16,8 +16,15 @@ class IntPolynomial:
         self.coef = coef
         self.normalize()
         
+
     def __getitem__(self,n):
         """Make polynomial accessible by indexing"""
+        return self.coef[n]
+
+
+    def __setitem__(self,n,val):
+        """Allow valid coefficients to be set"""
+        assert type(val) == int, "Coefficients must be integers"
         return self.coef[n]
 
 
@@ -54,7 +61,7 @@ class IntPolynomial:
     def __radd__(self,poly):
         """Polynomial addition is commutative"""
         return self + poly
-        
+
 
     def __sub__(self,poly):
         """Subtract a polynomial from a polynomial"""
@@ -81,8 +88,8 @@ class IntPolynomial:
             
         L = poly_mult(self.coef,poly.coef)
         return IntPolynomial(L)
-            
-        
+
+
     def __rmul__(self,poly):
         """Multiply a polynomial by polynomial"""
         return self*poly
@@ -95,7 +102,8 @@ class IntPolynomial:
         if pwr == 1:
             return self
         else:
-            assert type(pwr) == int
+            assert type(pwr) == int, f"{pwr} is not an integer"
+            assert type(pwr) > 0, f"{pwr} is negative"
             out = self.copy()
             for i in range(pwr-1):
                 out *= self
@@ -109,13 +117,14 @@ class IntPolynomial:
                 return True
         return False
 
-    
+
     def __divmod__(self,poly):
         """Algorithm for euclidean division of polynomials"""
         
         # Cast integer to poly if needed
         if type(poly) == int:
             poly = IntPolynomial([poly])
+        assert type(poly) == IntPolynomial, f"Could not cast {poly} to integer polynomial"
         
         # Check for division by zero    
         if poly.coef == [0]:
@@ -173,16 +182,16 @@ class IntPolynomial:
         """Remainder of integer division of polynomials"""
         a,b = divmod(self,poly)
         return b
-    
-    
+
+
     def normalize(self):
         """Remove trailing zeroes"""
         while self.coef[-1] == 0 and len(self.coef) > 1:
             if len(self.coef) == 1:
                 break
             self.coef.pop()
-            
-            
+
+
     def copy(self):
         """Copy the polynomial"""
         return IntPolynomial(self.coef[:])
@@ -208,7 +217,7 @@ class IntPolynomial:
         if len(out) == 1:
             return out[0]
         return out
-    
+
 
     def degree(self):
         """Degree of the polynomial"""
@@ -218,13 +227,13 @@ class IntPolynomial:
     def is_monic(self):
         """Check if the polynomial is monic"""
         return self[-1] == 1 or self[-1] == -1
-    
-    
+
+
     def content(self):
         """GCD of the coefficients, negative if leading coef is negative"""
         return gcd([self.coef]) * int(copysign(1,self[-1]))
-    
-    
+
+
     def primitive_part(self):
         """Divide out the content"""
         return IntPolynomial([c//self.content() for c in self.coef])
@@ -242,7 +251,8 @@ if __name__ == '__main__':
     print(Q.primitive_part())
     print(Q.primitive_part().is_monic())
     print(Q)
-    print(f"{P}  //  {R} = {P//R}")
-    print(f"{P}  %  {R} = {P%R}")
+    print(f"P = {P}")
+    print(f"P // {R} = {P//R}")
+    print(f"P % {R} = {P%R}")
     print(P+1)
     print(1+P)
