@@ -28,6 +28,14 @@ class IntPolynomial:
         return self.coef[n]
 
 
+    def __call__(self,x):
+        """Evaluate the polynomial at a given point"""
+        out = 0
+        for pwr,coef in enumerate(self.coef):
+            out = out + coef*(x**pwr)
+        
+        return out
+
     def __str__(self):
         """Print nicely in descending written form"""
         return poly_print(self.coef)
@@ -120,24 +128,24 @@ class IntPolynomial:
 
     def __divmod__(self,poly):
         """Algorithm for euclidean division of polynomials"""
-        
+
         # Cast integer to poly if needed
         if type(poly) == int:
             poly = IntPolynomial([poly])
         assert type(poly) == IntPolynomial, f"Could not cast {poly} to integer polynomial"
-        
+
         # Check for division by zero    
         if poly.coef == [0]:
             raise ZeroDivisionError
-        
+
         # We can only divide a longer polynomial by a shorter one
         if len(self) < len(poly):
             return IntPolynomial([0]), self.copy()
-        
+
         # Copy inputs
         P = self.coef[:]
         Q = poly.coef[:]
-        
+
         # Integer case, an IntPolynomial could have length one on its own and
         # thus represent an integer
         if len(poly) == 1:
@@ -152,7 +160,7 @@ class IntPolynomial:
             for p in P:
                 if p % Q[-1] != 0:
                     raise Exception(f"Integer division of {self} by {poly} is not defined")
-            
+
             dP = len(P)-1
             dQ = len(Q)-1
             if dP >= dQ:
@@ -206,14 +214,12 @@ class IntPolynomial:
 
 
     def evaluate(self,X):
-        """Evaluate the polynomial at a given point or points"""
-        if type(X) != list:
-            X = [X]
+        """Evaluate the polynomial at a given list of points"""
+        assert type(X) == list
         out = [0]*len(X)
         for pwr,coef in enumerate(self.coef):
             for pos,x in enumerate(X):
                 out[pos] = (out[pos] + coef*(x**pwr))
-        
         if len(out) == 1:
             return out[0]
         return out
@@ -256,3 +262,4 @@ if __name__ == '__main__':
     print(f"P % {R} = {P%R}")
     print(P+1)
     print(1+P)
+    print( P(1) )
