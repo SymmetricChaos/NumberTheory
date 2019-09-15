@@ -52,12 +52,8 @@ class IntPolynomial:
 
 
     def __radd__(self,poly):
-        """Add a polynomial to a polynomial"""
-        if type(poly) != IntPolynomial:
-            poly = IntPolynomial([poly])
-
-        L = poly_add(self.coef,poly.coef)
-        return IntPolynomial(L)
+        """Polynomial addition is commutative"""
+        return self + poly
         
 
     def __sub__(self,poly):
@@ -89,15 +85,33 @@ class IntPolynomial:
         
     def __rmul__(self,poly):
         """Multiply a polynomial by polynomial"""
-        if type(poly) == int:
-            poly = IntPolynomial([poly])
-
-        L = poly_mult(self.coef,poly.coef)
-        return IntPolynomial(L)
+        return self*poly
 
 
-    def __floordiv__(self,poly):
-        """Integer division of polynomials"""
+    def __pow__(self,pwr):
+        """Multiply a polynomial by itself"""
+        if pwr == 0:
+            return IntPolynomial([1])
+        if pwr == 1:
+            return self
+        else:
+            assert type(pwr) == int
+            out = self.copy()
+            for i in range(pwr-1):
+                out *= self
+        return out
+
+
+    def __eq__(self,poly):
+        """Check if two polynomials have the same coefficients"""
+        if len(self) == len(poly):
+            if all([x == y for x,y in zip(self.coef,poly.coef)]):
+                return True
+        return False
+
+    
+    def __divmod__(self,poly):
+        """Algorithm for euclidean division of polynomials"""
         
         # Cast integer to poly if needed
         if type(poly) == int:
@@ -109,7 +123,7 @@ class IntPolynomial:
         
         # We can only divide a longer polynomial by a shorter one
         if len(self) < len(poly):
-            return IntPolynomial([0])
+            return IntPolynomial([0]), self.copy()
         
         # Copy inputs
         P = self.coef[:]
@@ -120,7 +134,7 @@ class IntPolynomial:
         if len(poly) == 1:
             c = self.content()
             if c % poly.coef[0] == 0:
-                return IntPolynomial([p//Q[0] for p in P])
+                return IntPolynomial([p//Q[0] for p in P]), IntPolynomial([0])
             else:
                 raise Exception(f"Integer division of {self} by {poly} is not defined")
         # Use euclidean division algorithm
@@ -146,80 +160,33 @@ class IntPolynomial:
                         P.pop()
                     dP = len(P)-1
             
-            return IntPolynomial(qt)
+            return IntPolynomial(qt), IntPolynomial(P)
 
 
-    def __pow__(self,pwr):
-        """Multiply a polynomial by itself"""
-        if pwr == 0:
-            return IntPolynomial([1])
-        if pwr == 1:
-            return self
-        else:
-            out = self
-            for i in range(pwr-1):
-                out *= self
-        return out
+    def __floordiv__(self,poly):
+        """Integer division of polynomials"""
+        a,b = divmod(self,poly)
+        return a
 
 
-    def __eq__(self,poly):
-        """Check if two polynomials have the same coefficients"""
-        if len(self) == len(poly):
-            if all([x == y for x,y in zip(self.coef,poly.coef)]):
-                return True
-        return False
-
+    def __mod__(self,poly):
+        """Remainder of integer division of polynomials"""
+        a,b = divmod(self,poly)
+        return b
     
-#    def __divmod__(self,poly):
-#        """Get the quotient and remainder of one polynomial by another"""
-#        
-#        # Check for division by zero    
-#        if poly.coef == [0]
-#            raise ZeroDivisionError
-#        
-#        # Copy inputs
-#        P = self.coef[:]
-#        Q = poly.coef[:]
-##        
-#        # Integer cases 
-#        # THESE SEEM WRONG
-#        if len(Q) == 1:
-#            return [p/Q[0] for p in P], [0]
-#
-#        if len(P) == 1:
-#            return [P[0]/q for q in Q], [0]
-#            
-#        # Use euclidean division
-#        dP = poly_degree(P)
-#        dQ = poly_degree(Q)
-#        if dP >= dQ:
-#            qt = [0] * dP
-#            while dP >= dQ:
-#                d = [0]*(dP - dQ) + Q
-#                mult = qt[dP - dQ] = P[-1] / d[-1]
-#                d = [coeff*mult for coeff in d]
-#                P = [ coeffN - coeffd for coeffN, coeffd in zip(P, d)]
-#                poly_norm(P)
-#                dP = poly_degree(P)
-#        else:
-#            qt = [0]
-#        return qt, P
-#    
-#        return IntPolynomial(a), IntPolynomial(b)
-
-#
-#    def __mod__(self,poly):
-#        """Get the remainder of one polynomial divided by another"""
-#        a,b = poly_divmod(self.coef,poly.coef)
-#        return IntPolynomial(b)
-
+    
     def normalize(self):
         """Remove trailing zeroes"""
         while self.coef[-1] == 0 and len(self.coef) > 1:
             if len(self.coef) == 1:
                 break
             self.coef.pop()
-    
+            
+            
+    def copy(self):
+        """Copy the polynomial"""
+        return IntPolynomial(self.coef[:])
+
 
     def derivative(self,silent=False):
         """Calculate the formal derivative of the polynomial"""
@@ -275,4 +242,7 @@ if __name__ == '__main__':
     print(Q.primitive_part())
     print(Q.primitive_part().is_monic())
     print(Q)
-    print(f"{P} // {R} = {P//R}")
+    print(f"{P}  //  {R} = {P//R}")
+    print(f"{P}  %  {R} = {P%R}")
+    print(P+1)
+    print(1+P)
