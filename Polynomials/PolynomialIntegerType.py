@@ -6,6 +6,7 @@
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from ModularArithmetic import gcd
 from math import copysign
+from Computation.Factorization import factorization
 
 class IntPolynomial:
     
@@ -205,12 +206,12 @@ class IntPolynomial:
         return IntPolynomial(self.coef[:])
 
 
-    def derivative(self,silent=False):
+    def derivative(self):
         """Calculate the formal derivative of the polynomial"""
-        C = self.coef.copy()
-        for i in range(len(C)):
-            C[i] *= i
-        return IntPolynomial(C[1:])
+        co = self.coef.copy()
+        for i in range(len(co)):
+            co[i] *= i
+        return IntPolynomial(co[1:])
 
 
     def evaluate(self,X):
@@ -220,8 +221,6 @@ class IntPolynomial:
         for pwr,coef in enumerate(self.coef):
             for pos,x in enumerate(X):
                 out[pos] = (out[pos] + coef*(x**pwr))
-        if len(out) == 1:
-            return out[0]
         return out
 
 
@@ -235,31 +234,50 @@ class IntPolynomial:
         return self[-1] == 1 or self[-1] == -1
 
 
-    def content(self):
-        """GCD of the coefficients, negative if leading coef is negative"""
-        return gcd([self.coef]) * int(copysign(1,self[-1]))
+def content(poly):
+    """GCD of the coefficients, negative if leading coef is negative"""
+    assert type(poly) == IntPolynomial
+    return gcd(poly.coef) * int(copysign(1,poly[-1]))
 
 
-    def primitive_part(self):
-        """Divide out the content"""
-        return IntPolynomial([c//self.content() for c in self.coef])
+def primitive_part(poly):
+    """Divide out the content"""
+    assert type(poly) == IntPolynomial
+    cont = content(poly)
+    return IntPolynomial([c//cont for c in poly])
 
+
+def rational_roots(poly):
+    """Find all rational roots"""
+    A0 = factorization(poly[0])
+    Af = factorization(poly[-1])
+    R = set()
+    for i in A0:
+        for j in Af:
+            # Test each possible root
+            if poly(i/j) == 0:
+                R.add(i/j)
+            if poly(-i/j) == 0:
+                R.add(-i/j)
+    return R
 
 
 if __name__ == '__main__':
-    P = IntPolynomial([0,2,4,6,2,0,0])
+    P = IntPolynomial([0,2,0,-6,2,0,0])
     Q = P*3
     R = IntPolynomial([1,1])
     print(P)
     print(Q)
     print(P.is_monic())
-    print(Q.content())
-    print(Q.primitive_part())
-    print(Q.primitive_part().is_monic())
+    print(content(Q))
+    print(primitive_part(Q))
+    print(primitive_part(Q).is_monic())
     print(Q)
     print(f"P = {P}")
     print(f"P // {R} = {P//R}")
     print(f"P % {R} = {P%R}")
     print(P+1)
     print(1+P)
-    print( P(1) )
+    print(f"P(2) = {P(2)}")
+    S = IntPolynomial([3,2,3,2])
+    print(rational_roots(S))
