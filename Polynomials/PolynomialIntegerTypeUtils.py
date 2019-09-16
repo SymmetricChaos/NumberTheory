@@ -40,7 +40,8 @@ def poly_print_simple(poly,pretty=False):
                 if pretty == False:
                     s = f"{sgn}{val}x^{pwr}"
                 else:
-                    s = f"{sgn}{val}x$^{pwr}$"
+                    s = f"{sgn}{val}x$^{{{pwr}}}$"
+                    
         
         # If the power is 1 just show x rather than x^1
         elif pwr == 1:
@@ -55,7 +56,6 @@ def poly_print_simple(poly,pretty=False):
             if pretty == False:
                 s = f" {sgn} {val}x^{pwr}"
             else:
-                s = f" {sgn} {val}x$^{pwr}$"
-        
+                s = f" {sgn} {val}x$^{{{pwr}}}$"
         out += s
     return out
