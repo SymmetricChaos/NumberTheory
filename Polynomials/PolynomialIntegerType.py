@@ -1,9 +1,8 @@
 # Univariate polynomials over the ordinary ring of integers.
 
-## To do 
-
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
+from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
 from ModularArithmetic import gcd
 from math import copysign
 from Computation.Factorization import factorization
@@ -39,7 +38,7 @@ class IntPolynomial:
 
     def __str__(self):
         """Print nicely in descending written form"""
-        return poly_print(self.coef)
+        return poly_print_simple(self)
 
 
     def __repr__(self):
@@ -239,8 +238,8 @@ class IntPolynomial:
         co = primitive_part(self)
         self.coef = co
         
-#    def pretty_name():
-#       TODO string that works with Pythons TeX formatting
+    def pretty_name(self):
+        return poly_print_simple(self,pretty=True)
 
 def content(poly):
     """GCD of the coefficients, negative if leading coef is negative"""
@@ -293,4 +292,4 @@ if __name__ == '__main__':
     print(Q)
     Q.make_primitive()
     print(Q)
-    print(r"x$^2$")
+    print(Q.pretty_name())
