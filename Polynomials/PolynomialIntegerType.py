@@ -238,7 +238,9 @@ class IntPolynomial:
         """Convert polynomial to primitive form"""
         co = primitive_part(self)
         self.coef = co
-
+        
+#    def pretty_name():
+#       TODO string that works with Pythons TeX formatting
 
 def content(poly):
     """GCD of the coefficients, negative if leading coef is negative"""
@@ -268,6 +270,7 @@ def rational_roots(poly):
     return R
 
 
+
 if __name__ == '__main__':
     P = IntPolynomial([0,2,0,-6,2,0,0])
     Q = P*3
@@ -290,3 +293,4 @@ if __name__ == '__main__':
     print(Q)
     Q.make_primitive()
     print(Q)
+    print(r"x$^2$")
