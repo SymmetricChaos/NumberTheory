@@ -34,8 +34,8 @@ class IntPolynomial:
         out = 0
         for pwr,coef in enumerate(self.coef):
             out = out + coef*(x**pwr)
-        
         return out
+
 
     def __str__(self):
         """Print nicely in descending written form"""
@@ -232,6 +232,12 @@ class IntPolynomial:
     def is_monic(self):
         """Check if the polynomial is monic"""
         return self[-1] == 1 or self[-1] == -1
+    
+    
+    def make_primitive(self):
+        """Convert polynomial to primitive form"""
+        co = primitive_part(self)
+        self.coef = co
 
 
 def content(poly):
@@ -281,3 +287,6 @@ if __name__ == '__main__':
     print(f"P(2) = {P(2)}")
     S = IntPolynomial([3,2,3,2])
     print(rational_roots(S))
+    print(Q)
+    Q.make_primitive()
+    print(Q)
