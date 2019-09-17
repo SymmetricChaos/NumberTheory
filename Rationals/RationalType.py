@@ -5,7 +5,7 @@ class Rational:
     def __init__(self,n,d=1):
         assert type(n) == int, "Numerator must be int."
         assert type(d) == int, "Denominator must be int."
-        if d != 0:
+        if d == 0:
             raise ZeroDivisionError
         if d < 0:
             d = abs(d)

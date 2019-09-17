@@ -3,20 +3,25 @@
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
-from ModularArithmetic import gcd
-from math import copysign
-from Computation.Factorization import factorization
+#from ModularArithmetic import gcd
+#from math import copysign
+#from Computation.Factorization import factorization
 from Rationals.RationalType import Rational
 
-class QPolynomial:
+class QPoly:
     
     def __init__(self,coef):
         assert type(coef) == list
+        self.coef = []
         for c in coef:
-            assert type(c) == int or type(c) == Rational
-        self.coef = coef
+            if type(c) == int:
+                self.coef.append(Rational(c))
+            elif type(c) == Rational:
+                self.coef.append(c)
+            else:
+                raise Exception("Coefficients must be integer or rational")
         self.normalize()
-        
+
 
     def __getitem__(self,n):
         """Make polynomial accessible by indexing"""
@@ -25,8 +30,8 @@ class QPolynomial:
 
     def __setitem__(self,n,val):
         """Allow valid coefficients to be set"""
-        assert type(c) == int or type(c) == Rational, "Coefficients must be integers or rationals"
-        return self.coef[n]
+        assert type(val) == int or type(val) == Rational, "Coefficients must be integers or rationals"
+        self.coef[n] = val
 
 
     def __call__(self,x):
@@ -55,16 +60,16 @@ class QPolynomial:
     def __neg__(self):
         """Additive inverse of each coefficient"""
         L = [-c for c in self.coef]
-        return IntPolynomial(L)
+        return QPoly(L)
 
 
     def __add__(self,poly):
         """Add a polynomial to a polynomial"""
-        if type(poly) != IntPolynomial:
-            poly = IntPolynomial([poly])
+        if type(poly) != QPoly:
+            poly = QPoly([poly])
 
         L = poly_add(self.coef,poly.coef)
-        return IntPolynomial(L)
+        return QPoly(L)
 
 
     def __radd__(self,poly):
@@ -74,29 +79,29 @@ class QPolynomial:
 
     def __sub__(self,poly):
         """Subtract a polynomial from a polynomial"""
-        if type(poly) != IntPolynomial:
-            poly = IntPolynomial([poly])
+        if type(poly) != QPoly:
+            poly = QPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
-        return IntPolynomial(L,self)
+        return QPoly(L,self)
 
 
     def __rsub__(self,poly):
         """Subtract a polynomial from a polynomial"""
         if type(poly)  == int:
-            poly = IntPolynomial([poly])
+            poly = QPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
-        return IntPolynomial(L)
+        return QPoly(L)
 
 
     def __mul__(self,poly):
         """Multiply a polynomial by polynomial"""
         if type(poly)  == int:
-            poly = IntPolynomial([poly])
+            poly = QPoly([poly])
             
         L = poly_mult(self.coef,poly.coef)
-        return IntPolynomial(L)
+        return QPoly(L)
 
 
     def __rmul__(self,poly):
@@ -107,7 +112,7 @@ class QPolynomial:
     def __pow__(self,pwr):
         """Multiply a polynomial by itself"""
         if pwr == 0:
-            return IntPolynomial([1])
+            return QPoly([1])
         if pwr == 1:
             return self
         else:
@@ -131,9 +136,9 @@ class QPolynomial:
         """Algorithm for euclidean division of polynomials"""
 
         # Cast integer to poly if needed
-        if type(poly) == int:
-            poly = IntPolynomial([poly])
-        assert type(poly) == IntPolynomial, f"Could not cast {poly} to integer polynomial"
+        if type(poly) == int or type(poly) == Rational:
+            poly = QPoly([poly])
+        assert type(poly) == QPoly, f"Could not cast {poly} to integer polynomial"
 
         # Check for division by zero    
         if poly.coef == [0]:
@@ -141,7 +146,7 @@ class QPolynomial:
 
         # We can only divide a longer polynomial by a shorter one
         if len(self) < len(poly):
-            return IntPolynomial([0]), self.copy()
+            return QPoly([0]), self.copy()
 
         # Copy inputs
         P = self.coef[:]
@@ -152,7 +157,7 @@ class QPolynomial:
         if len(poly) == 1:
             c = self.content()
             if c % poly.coef[0] == 0:
-                return IntPolynomial([p//Q[0] for p in P]), IntPolynomial([0])
+                return QPoly([p//Q[0] for p in P]), QPoly([0])
             else:
                 raise Exception(f"Integer division of {self} by {poly} is not defined")
         # Use euclidean division algorithm
@@ -178,7 +183,7 @@ class QPolynomial:
                         P.pop()
                     dP = len(P)-1
             
-            return IntPolynomial(qt), IntPolynomial(P)
+            return QPoly(qt), QPoly(P)
 
 
     def __floordiv__(self,poly):
@@ -203,7 +208,7 @@ class QPolynomial:
 
     def copy(self):
         """Copy the polynomial"""
-        return IntPolynomial(self.coef[:])
+        return QPoly(self.coef[:])
 
 
     def derivative(self):
@@ -211,7 +216,7 @@ class QPolynomial:
         co = self.coef.copy()
         for i in range(len(co)):
             co[i] *= i
-        return IntPolynomial(co[1:])
+        return QPoly(co[1:])
 
 
     def evaluate(self,X):
@@ -233,64 +238,50 @@ class QPolynomial:
         """Check if the polynomial is monic"""
         return self[-1] == 1 or self[-1] == -1
     
-    
-    def make_primitive(self):
-        """Convert polynomial to primitive form"""
-        co = primitive_part(self)
-        self.coef = co
-        
+
     def pretty_name(self):
         return poly_print_simple(self,pretty=True)
 
-def content(poly):
-    """GCD of the coefficients, negative if leading coef is negative"""
-    assert type(poly) == IntPolynomial
-    return gcd(poly.coef) * int(copysign(1,poly[-1]))
+
+#    def make_primitive(self):
+#        """Convert polynomial to primitive form"""
+#        co = primitive_part(self)
+#        self.coef = co
+        
 
 
-def primitive_part(poly):
-    """Divide out the content"""
-    assert type(poly) == IntPolynomial
-    cont = content(poly)
-    return IntPolynomial([c//cont for c in poly])
 
-
-def rational_roots(poly):
-    """Find all rational roots"""
-    A0 = factorization(poly[0])
-    Af = factorization(poly[-1])
-    R = set()
-    for i in A0:
-        for j in Af:
-            # Test each possible root
-            if poly(i/j) == 0:
-                R.add(i/j)
-            if poly(-i/j) == 0:
-                R.add(-i/j)
-    return R
+#def content(poly):
+#    """GCD of the coefficients, negative if leading coef is negative"""
+#    assert type(poly) == QPoly
+#    return gcd(poly.coef) * int(copysign(1,poly[-1]))
+#
+#
+#def primitive_part(poly):
+#    """Divide out the content"""
+#    assert type(poly) == QPoly
+#    cont = content(poly)
+#    return QPoly([c//cont for c in poly])
+#
+#
+#def rational_roots(poly):
+#    """Find all rational roots"""
+#    A0 = factorization(poly[0])
+#    Af = factorization(poly[-1])
+#    R = set()
+#    for i in A0:
+#        for j in Af:
+#            # Test each possible root
+#            if poly(i/j) == 0:
+#                R.add(i/j)
+#            if poly(-i/j) == 0:
+#                R.add(-i/j)
+#    return R
 
 
 
 if __name__ == '__main__':
-    P = IntPolynomial([0,2,0,-6,2,0,0])
-    Q = P*3
-    R = IntPolynomial([1,1])
-    print(P)
-    print(Q)
-    print(P.is_monic())
-    print(content(Q))
-    print(primitive_part(Q))
-    print(primitive_part(Q).is_monic())
-    print(Q)
-    print(f"P = {P}")
-    print(f"P // {R} = {P//R}")
-    print(f"P % {R} = {P%R}")
-    print(P+1)
-    print(1+P)
+    P = QPoly([0,2,0,-6,2,0,0])
+    P[1] /= 3
+    print(f"P    = {P}")
     print(f"P(2) = {P(2)}")
-    S = IntPolynomial([3,2,3,2])
-    print(rational_roots(S))
-    print(Q)
-    Q.make_primitive()
-    print(Q)
-    print(Q.pretty_name())
