@@ -163,7 +163,6 @@ class QPoly:
             if dP >= dQ:
                 qt = [0] * dP
                 while dP >= dQ:
-                    
                     d = [0]*(dP - dQ) + Q
                     mult = qt[dP - dQ] = P[-1] / d[-1]
                     d = [coeff*mult for coeff in d]
@@ -234,27 +233,14 @@ class QPoly:
         return poly_print_simple(self,pretty=True)
 
 
-#    def make_primitive(self):
-#        """Convert polynomial to primitive form"""
-#        co = primitive_part(self)
-#        self.coef = co
-        
-
-
-
-#def content(poly):
-#    """GCD of the coefficients, negative if leading coef is negative"""
-#    assert type(poly) == QPoly
-#    return gcd(poly.coef) * int(copysign(1,poly[-1]))
-#
-#
-#def primitive_part(poly):
-#    """Divide out the content"""
-#    assert type(poly) == QPoly
-#    cont = content(poly)
-#    return QPoly([c//cont for c in poly])
-#
-#
+    def make_monic(self):
+        """Convert polynomial to primitive form"""
+        self.coef = QPoly([p/self.coef[-1] for p in self.coef])
+    
+    
+def monic(poly):
+    assert type(poly) == QPoly
+    return QPoly([p/poly.coef[-1] for p in poly.coef])
 #def rational_roots(poly):
 #    """Find all rational roots"""
 #    A0 = factorization(poly[0])
@@ -272,9 +258,11 @@ class QPoly:
 
 
 if __name__ == '__main__':
-    P = QPoly([0,2,0,-6,2,0,0])
+    P = QPoly([0,2,0,-6,-2,0,0])
     P[1] /= 3
     print(f"P    = {P}")
     print(f"P(2) = {P(2)}")
     print(P//3)
     print(P//QPoly([0,1,2]))
+    print(P)
+    print(monic(P))
