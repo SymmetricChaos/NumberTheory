@@ -152,21 +152,12 @@ class QPoly:
         P = self.coef[:]
         Q = poly.coef[:]
 
-        # Integer case, an IntPolynomial could have length one on its own and
-        # thus represent an integer
+        # Case of a single int or rational
         if len(poly) == 1:
-            c = self.content()
-            if c % poly.coef[0] == 0:
-                return QPoly([p//Q[0] for p in P]), QPoly([0])
-            else:
-                raise Exception(f"Integer division of {self} by {poly} is not defined")
-        # Use euclidean division algorithm
+            return QPoly([p/Q[0] for p in P]), QPoly([0])
+        # Use polynomial division algorithm, rationals are a field so this is
+        # always defined
         else:
-            # Check that division is defined
-            for p in P:
-                if p % Q[-1] != 0:
-                    raise Exception(f"Integer division of {self} by {poly} is not defined")
-
             dP = len(P)-1
             dQ = len(Q)-1
             if dP >= dQ:
@@ -174,7 +165,7 @@ class QPoly:
                 while dP >= dQ:
                     
                     d = [0]*(dP - dQ) + Q
-                    mult = qt[dP - dQ] = P[-1] // d[-1]
+                    mult = qt[dP - dQ] = P[-1] / d[-1]
                     d = [coeff*mult for coeff in d]
                     P = [ coeffN - coeffd for coeffN, coeffd in zip(P, d)]
                     while P[-1] == 0 and len(P) > 1:
@@ -182,10 +173,10 @@ class QPoly:
                             break
                         P.pop()
                     dP = len(P)-1
-            
             return QPoly(qt), QPoly(P)
 
 
+    # Still using floor division since there can be a remainder
     def __floordiv__(self,poly):
         """Integer division of polynomials"""
         a,b = divmod(self,poly)
@@ -285,3 +276,5 @@ if __name__ == '__main__':
     P[1] /= 3
     print(f"P    = {P}")
     print(f"P(2) = {P(2)}")
+    print(P//3)
+    print(P//QPoly([0,1,2]))
