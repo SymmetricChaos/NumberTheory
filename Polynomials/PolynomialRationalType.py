@@ -1,4 +1,4 @@
-# Univariate polynomials with coefficients in the ordinary ring of integers
+# Univariate polynomials over the ordinary ring of integers.
 
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
@@ -6,13 +6,14 @@ from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
 from ModularArithmetic import gcd
 from math import copysign
 from Computation.Factorization import factorization
+from Rationals.RationalType import Rational
 
-class IntPolynomial:
+class QPolynomial:
     
     def __init__(self,coef):
         assert type(coef) == list
         for c in coef:
-            assert type(c) == int
+            assert type(c) == int or type(c) == Rational
         self.coef = coef
         self.normalize()
         
@@ -24,8 +25,8 @@ class IntPolynomial:
 
     def __setitem__(self,n,val):
         """Allow valid coefficients to be set"""
-        assert type(val) == int, "Coefficients must be integers"
-        self.coef[n] = val
+        assert type(c) == int or type(c) == Rational, "Coefficients must be integers or rationals"
+        return self.coef[n]
 
 
     def __call__(self,x):
