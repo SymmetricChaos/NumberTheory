@@ -1,4 +1,4 @@
-# Univariate polynomials over the ordinary ring of integers.
+# Univariate polynomials with coefficients from the field of rationals
 
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
@@ -202,11 +202,20 @@ class QPoly:
 
 
     def derivative(self):
-        """Calculate the formal derivative of the polynomial"""
+        """Calculate the derivative of the polynomial"""
         co = self.coef.copy()
         for i in range(len(co)):
             co[i] *= i
         return QPoly(co[1:])
+
+
+    def integral(self,C=0):
+        """Calculate the integral of the polynomial"""
+        co = self.coef.copy()
+        co.insert(C,0)
+        for pos,val in enumerate(co[1:],start=1):
+            co[pos] = val/(pos)
+        return QPoly(co)
 
 
     def evaluate(self,X):
@@ -241,6 +250,8 @@ class QPoly:
 def monic(poly):
     assert type(poly) == QPoly
     return QPoly([p/poly.coef[-1] for p in poly.coef])
+
+
 #def rational_roots(poly):
 #    """Find all rational roots"""
 #    A0 = factorization(poly[0])
@@ -266,3 +277,8 @@ if __name__ == '__main__':
     print(P//QPoly([0,1,2]))
     print(P)
     print(monic(P))
+    print()
+    Q = QPoly([-5,1,-3])
+    print(Q)
+    print(Q.integral())
+    print(Q.derivative())
