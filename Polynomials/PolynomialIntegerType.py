@@ -7,7 +7,7 @@ from ModularArithmetic import gcd
 from math import copysign
 from Computation.Factorization import factorization
 
-class IntPolynomial:
+class ZPoly:
     
     def __init__(self,coef):
         assert type(coef) == list
@@ -54,16 +54,16 @@ class IntPolynomial:
     def __neg__(self):
         """Additive inverse of each coefficient"""
         L = [-c for c in self.coef]
-        return IntPolynomial(L)
+        return ZPoly(L)
 
 
     def __add__(self,poly):
         """Add a polynomial to a polynomial"""
-        if type(poly) != IntPolynomial:
-            poly = IntPolynomial([poly])
+        if type(poly) != ZPoly:
+            poly = ZPoly([poly])
 
         L = poly_add(self.coef,poly.coef)
-        return IntPolynomial(L)
+        return ZPoly(L)
 
 
     def __radd__(self,poly):
@@ -73,29 +73,29 @@ class IntPolynomial:
 
     def __sub__(self,poly):
         """Subtract a polynomial from a polynomial"""
-        if type(poly) != IntPolynomial:
-            poly = IntPolynomial([poly])
+        if type(poly) != ZPoly:
+            poly = ZPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
-        return IntPolynomial(L,self)
+        return ZPoly(L,self)
 
 
     def __rsub__(self,poly):
         """Subtract a polynomial from a polynomial"""
         if type(poly)  == int:
-            poly = IntPolynomial([poly])
+            poly = ZPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
-        return IntPolynomial(L)
+        return ZPoly(L)
 
 
     def __mul__(self,poly):
         """Multiply a polynomial by polynomial"""
         if type(poly)  == int:
-            poly = IntPolynomial([poly])
+            poly = ZPoly([poly])
             
         L = poly_mult(self.coef,poly.coef)
-        return IntPolynomial(L)
+        return ZPoly(L)
 
 
     def __rmul__(self,poly):
@@ -106,7 +106,7 @@ class IntPolynomial:
     def __pow__(self,pwr):
         """Multiply a polynomial by itself"""
         if pwr == 0:
-            return IntPolynomial([1])
+            return ZPoly([1])
         if pwr == 1:
             return self
         else:
@@ -131,8 +131,8 @@ class IntPolynomial:
 
         # Cast integer to poly if needed
         if type(poly) == int:
-            poly = IntPolynomial([poly])
-        assert type(poly) == IntPolynomial, f"Could not cast {poly} to integer polynomial"
+            poly = ZPoly([poly])
+        assert type(poly) == ZPoly, f"Could not cast {poly} to integer polynomial"
 
         # Check for division by zero    
         if poly.coef == [0]:
@@ -140,18 +140,18 @@ class IntPolynomial:
 
         # We can only divide a longer polynomial by a shorter one
         if len(self) < len(poly):
-            return IntPolynomial([0]), self.copy()
+            return ZPoly([0]), self.copy()
 
         # Copy inputs
         P = self.coef[:]
         Q = poly.coef[:]
 
-        # Integer case, an IntPolynomial could have length one on its own and
+        # Integer case, an ZPoly could have length one on its own and
         # thus represent an integer
         if len(poly) == 1:
             c = self.content()
             if c % poly.coef[0] == 0:
-                return IntPolynomial([p//Q[0] for p in P]), IntPolynomial([0])
+                return ZPoly([p//Q[0] for p in P]), ZPoly([0])
             else:
                 raise Exception(f"Integer division of {self} by {poly} is not defined")
         # Use euclidean division algorithm
@@ -177,7 +177,7 @@ class IntPolynomial:
                         P.pop()
                     dP = len(P)-1
             
-            return IntPolynomial(qt), IntPolynomial(P)
+            return ZPoly(qt), ZPoly(P)
 
 
     def __floordiv__(self,poly):
@@ -202,7 +202,7 @@ class IntPolynomial:
 
     def copy(self):
         """Copy the polynomial"""
-        return IntPolynomial(self.coef[:])
+        return ZPoly(self.coef[:])
 
 
     def derivative(self):
@@ -210,7 +210,7 @@ class IntPolynomial:
         co = self.coef.copy()
         for i in range(len(co)):
             co[i] *= i
-        return IntPolynomial(co[1:])
+        return ZPoly(co[1:])
 
 
     def evaluate(self,X):
@@ -241,17 +241,19 @@ class IntPolynomial:
     def pretty_name(self):
         return poly_print_simple(self,pretty=True)
 
+
+
 def content(poly):
     """GCD of the coefficients, negative if leading coef is negative"""
-    assert type(poly) == IntPolynomial
+    assert type(poly) == ZPoly
     return gcd(poly.coef) * int(copysign(1,poly[-1]))
 
 
 def primitive_part(poly):
     """Divide out the content"""
-    assert type(poly) == IntPolynomial
+    assert type(poly) == ZPoly
     cont = content(poly)
-    return IntPolynomial([c//cont for c in poly])
+    return ZPoly([c//cont for c in poly])
 
 
 def rational_roots(poly):
@@ -268,12 +270,21 @@ def rational_roots(poly):
                 R.add(-i/j)
     return R
 
-
+def complete_the_square(poly):
+    """Returns a tuple (x,y,z) such that x*y+z = poly"""
+    assert type(poly) == ZPoly
+    assert len(poly) == 3, "Must be a quadratic"
+    assert poly[1] % 2 == 0, "Second coefficient must be even"
+    a = poly[2]
+    h = poly[1]//(2*a)
+    k = poly[0]-a*(h*h)
+    
+    return a, ZPoly([h,1]), k
 
 if __name__ == '__main__':
-    P = IntPolynomial([0,2,0,-6,2,0,0])
+    P = ZPoly([0,2,0,-6,2,0,0])
     Q = P*3
-    R = IntPolynomial([1,1])
+    R = ZPoly([1,1])
     print(P)
     print(Q)
     print(P.is_monic())
@@ -287,9 +298,7 @@ if __name__ == '__main__':
     print(P+1)
     print(1+P)
     print(f"P(2) = {P(2)}")
-    S = IntPolynomial([3,2,3,2])
+    S = ZPoly([3,2,3,2])
     print(rational_roots(S))
     print(Q)
-    Q.make_primitive()
-    print(Q)
-    print(Q.pretty_name())
+    print(complete_the_square(ZPoly([27,12,3])))
