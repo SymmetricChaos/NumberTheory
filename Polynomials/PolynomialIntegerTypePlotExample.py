@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from Polynomials.PolynomialIntegerType import IntPolynomial
+from Polynomials.PolynomialIntegerType import ZPoly
 
-P = IntPolynomial([0,2,3,0,-116,20,-18,-6,1,0,1])
+P = ZPoly([0,2,3,0,-116,20,-18,-6,1,0,1])
 
 x = list(np.linspace(-2.5,2.5,101))
 y = P.evaluate(x)
