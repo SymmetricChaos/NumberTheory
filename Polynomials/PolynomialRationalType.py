@@ -209,7 +209,7 @@ class QPoly:
         return QPoly(co[1:])
 
 
-    def integral(self,C=0):
+    def integral(self,C):
         """Calculate the integral of the polynomial"""
         co = self.coef.copy()
         co.insert(C,0)
@@ -273,12 +273,13 @@ if __name__ == '__main__':
     P[1] /= 3
     print(f"P    = {P}")
     print(f"P(2) = {P(2)}")
-    print(P//3)
+    print(f"P//3 = {P//3}")
     print(P//QPoly([0,1,2]))
     print(P)
     print(monic(P))
     print()
     Q = QPoly([-5,1,-3])
-    print(Q)
-    print(Q.integral())
-    print(Q.derivative())
+    print(f"Q          = {Q}")
+    print(f"integral   = {Q.integral(0)}")
+    print(f"derivative = {Q.derivative()}")
+#    print(Q^2)

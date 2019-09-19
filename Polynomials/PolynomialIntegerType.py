@@ -270,6 +270,7 @@ def rational_roots(poly):
                 R.add(-i/j)
     return R
 
+
 def complete_the_square(poly):
     """Returns a tuple (x,y,z) such that x*y+z = poly"""
     assert type(poly) == ZPoly
@@ -280,6 +281,8 @@ def complete_the_square(poly):
     k = poly[0]-a*(h*h)
     
     return a, ZPoly([h,1]), k
+
+
 
 if __name__ == '__main__':
     P = ZPoly([0,2,0,-6,2,0,0])
@@ -302,3 +305,4 @@ if __name__ == '__main__':
     print(rational_roots(S))
     print(Q)
     print(complete_the_square(ZPoly([27,12,3])))
+#    print(Q^2)
