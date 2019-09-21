@@ -3,7 +3,7 @@ from Polynomials.PolynomialRationalType import QPoly
 ## TODO: rational fractions will be ratios of QPoly
 ## TODO: rational expressions will be sums of rational fraction
 
-def RationalFrac:
+class RationalFrac:
     
     def __init__(self,n,d):
         assert type(n) == QPoly
@@ -28,3 +28,12 @@ def RationalFrac:
     #LaTeX formatting
     def pretty_name(self):
         return 
+
+
+class RationalExp:
+    
+    def __init__(self,L):
+        assert type(L) == list
+        for r in L:
+            assert type(r) == QPoly
+        self.L = L

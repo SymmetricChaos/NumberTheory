@@ -1,6 +1,9 @@
 # Univariate polynomials with coefficients from the field of rationals
 
 
+## TODO: Polynomial GCD
+## TODO: Factorization
+
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
 #from ModularArithmetic import gcd
