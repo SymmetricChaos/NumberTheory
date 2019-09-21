@@ -20,12 +20,12 @@ class RationalFrac:
     def simplify(self):
         pass
 
-
-    def evaluate(self,X):
-        assert type(X) == list
-        N = self.n.evaluate(X)
-        D = self.d.evaluate(X)
-        return [float(a)/float(b) for a,b in zip(N,D)]
+#    TODO: Floats cause errors here gotta fix that
+#    def evaluate(self,X):
+#        assert type(X) == list
+#        N = self.n.evaluate(X)
+#        D = self.d.evaluate(X)
+#        return [float(a)/float(b) for a,b in zip(N,D)]
 
 
     def pretty_name(self):
@@ -48,10 +48,10 @@ if __name__ == '__main__':
     print(R)
     
     
-    import matplotlib.pyplot as plt
-    import numpy as np
-
-    x = list(np.linspace(-2.5,2.5,101))
-    y = R.evaluate(x)
+#    import matplotlib.pyplot as plt
+#    import numpy as np
+#
+#    x = list(np.linspace(-2.5,2.5,101))
+#    y = R.evaluate(x)
 #    plt.plot(x,y)
-    plt.title(R.pretty_name())
+#    plt.title(R.pretty_name())

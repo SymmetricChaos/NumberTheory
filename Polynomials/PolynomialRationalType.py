@@ -3,6 +3,8 @@
 
 ## TODO: Polynomial GCD
 ## TODO: Factorization
+## TODO: Rational roots
+## TODO: Lagrange interpolation
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
@@ -68,7 +70,7 @@ class QPoly:
 
     def __add__(self,poly):
         """Add a polynomial to a polynomial"""
-        if type(poly) != QPoly:
+        if type(poly)  == int or type(poly) == Rational:
             poly = QPoly([poly])
 
         L = poly_add(self.coef,poly.coef)
@@ -82,7 +84,7 @@ class QPoly:
 
     def __sub__(self,poly):
         """Subtract a polynomial from a polynomial"""
-        if type(poly) != QPoly:
+        if type(poly)  == int or type(poly) == Rational:
             poly = QPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
@@ -91,7 +93,7 @@ class QPoly:
 
     def __rsub__(self,poly):
         """Subtract a polynomial from a polynomial"""
-        if type(poly)  == int:
+        if type(poly)  == int or type(poly) == Rational:
             poly = QPoly([poly])
 
         L = poly_add(self.coef,[-c for c in poly.coef])
@@ -100,7 +102,7 @@ class QPoly:
 
     def __mul__(self,poly):
         """Multiply a polynomial by polynomial"""
-        if type(poly)  == int:
+        if type(poly)  == int or type(poly) == Rational:
             poly = QPoly([poly])
             
         L = poly_mult(self.coef,poly.coef)
@@ -141,7 +143,7 @@ class QPoly:
         # Cast integer to poly if needed
         if type(poly) == int or type(poly) == Rational:
             poly = QPoly([poly])
-        assert type(poly) == QPoly, f"Could not cast {poly} to integer polynomial"
+        assert type(poly) == QPoly, f"Could not cast {poly} to rational polynomial"
 
         # Check for division by zero    
         if poly.coef == [0]:
@@ -251,24 +253,23 @@ class QPoly:
     
     
 def monic(poly):
+    """Return the monic version of the polynomial with positive leading coef"""
     assert type(poly) == QPoly
     return QPoly([p/poly.coef[-1] for p in poly.coef])
 
 
-#def rational_roots(poly):
-#    """Find all rational roots"""
-#    A0 = factorization(poly[0])
-#    Af = factorization(poly[-1])
-#    R = set()
-#    for i in A0:
-#        for j in Af:
-#            # Test each possible root
-#            if poly(i/j) == 0:
-#                R.add(i/j)
-#            if poly(-i/j) == 0:
-#                R.add(-i/j)
-#    return R
-
+def lagrange_interpolation(X,Y):
+    """Lagrange Polynomial"""
+    final = QPoly([0])
+    for x,y in zip(X,Y):
+        out = QPoly([y])
+        for m in X:
+            if m != x:
+                d = Rational(1,(x-m))
+                P = QPoly([-m,1])
+                out *= P*d
+        final += out
+    return final
 
 
 if __name__ == '__main__':
@@ -287,3 +288,4 @@ if __name__ == '__main__':
     print(f"derivative = {Q.derivative()}")
 #    print(Q^2)
     print(type(Q(1)))
+    print(lagrange_interpolation([1,2,3],[1,8,27]))
