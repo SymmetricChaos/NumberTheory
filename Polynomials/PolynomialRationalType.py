@@ -8,8 +8,8 @@
 
 from Polynomials.PolyUtils import poly_print, poly_add, poly_mult
 from Polynomials.PolynomialIntegerTypeUtils import poly_print_simple
-#from ModularArithmetic import gcd
-#from math import copysign
+from ModularArithmetic import gcd
+from math import copysign
 #from Computation.Factorization import factorization
 from Rationals.RationalType import Rational
 
@@ -247,10 +247,19 @@ class QPoly:
         return poly_print_simple(self,pretty=True)
 
 
-    def make_monic(self):
-        """Convert polynomial to primitive form"""
-        self.coef = QPoly([p/self.coef[-1] for p in self.coef])
-    
+
+def content(poly):
+    """GCD of the coefficients, negative if leading coef is negative"""
+    assert type(poly) == QPoly
+    return gcd(poly.coef) * int(copysign(1,poly[-1]))
+
+
+def primitive_part(poly):
+    """Divide out the content"""
+    assert type(poly) == QPoly
+    cont = content(poly)
+    return QPoly([c//cont for c in poly])
+
     
 def monic(poly):
     """Return the monic version of the polynomial with positive leading coef"""
@@ -287,5 +296,4 @@ if __name__ == '__main__':
     print(f"integral   = {Q.integral(0)}")
     print(f"derivative = {Q.derivative()}")
 #    print(Q^2)
-    print(type(Q(1)))
     print(lagrange_interpolation([1,2,3],[1,8,27]))
