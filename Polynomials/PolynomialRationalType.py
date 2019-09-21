@@ -286,3 +286,4 @@ if __name__ == '__main__':
     print(f"integral   = {Q.integral(0)}")
     print(f"derivative = {Q.derivative()}")
 #    print(Q^2)
+    print(type(Q(1)))
