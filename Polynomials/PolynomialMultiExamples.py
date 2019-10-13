@@ -109,4 +109,3 @@ print(X.derivative(["b","c"]))
 
 
 print("\n\n")
-

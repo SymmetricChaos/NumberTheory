@@ -91,7 +91,7 @@ class Atom:
     def __pow__(self,other):
         """Integer exponentiation"""
         assert type(other) == int
-        assert other >= 0
+        assert other >= 1
         return Atom(self.s,self.p*other)
 
 
