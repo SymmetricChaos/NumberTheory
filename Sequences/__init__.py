@@ -30,6 +30,8 @@ from Sequences.Grandi import grandi, grandi_sums
 
 from Sequences.CollatzNumbers import collatz_numbers
 
+from Sequences.Recaman import recaman
+
 __all__=["offset","partial","seq_max",
          "lucas","fibonacci",
          "naturals","integers","arithmetic","geometric",
@@ -50,4 +52,5 @@ __all__=["offset","partial","seq_max",
          "derangements",
          "goodstein_sequence",
          "grandi", "grandi_sums",
-         "collatz_numbers"]
+         "collatz_numbers",
+         "recaman"]
