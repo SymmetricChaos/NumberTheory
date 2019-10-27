@@ -190,23 +190,6 @@ def poly_divmod(P, Q, m = 0):
         else:
             return [P[0]*modinv(Q,m) for q in Q], [0]
         
-    # Use euclidean division for m = 0, representing no modulus
-    if m == 0:
-        if dP >= dQ:
-            qt = [0] * dP
-            while dP >= dQ:
-                d = [0]*(dP - dQ) + Q
-                mult = qt[dP - dQ] = P[-1] / d[-1]
-                d = [coeff*mult for coeff in d]
-                P = [ coeffN - coeffd for coeffN, coeffd in zip(P, d)]
-                poly_norm(P)
-                dP = poly_degree(P)
-        else:
-            qt = [0]
-        return qt, P
-    
-
-    # Otherwise use modular arithmetic
     else:
         dP = len(P)-1
         dQ = len(Q)-1
