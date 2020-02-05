@@ -5,20 +5,22 @@ class Wheel:
     def __init__(self,a,b):
         assert type(a) == int
         assert type(b) == int
-        if b != 0:
-            g = abs(gcd(a,b))
-            self.a = a//g
-            self.b = b//g
-        else:
-            self.a = a
-            self.b = b
+        self.a = a
+        self.b = b
+#        if b != 0:
+#            g = abs(gcd(a,b))
+#            self.a = a//g
+#            self.b = b//g
+#        else:
+#            self.a = a
+#            self.b = b
         
     def inv(self):
         return Wheel(self.b,self.a)
     
     def __str__(self):
-        if self.b == 1:
-            return str(self.a)
+#        if self.b == 1:
+#            return str(self.a)
         return str(self.a) + "/" + str(self.b)
     
     def __add__(self,other):
