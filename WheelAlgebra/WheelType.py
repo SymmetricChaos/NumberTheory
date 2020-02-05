@@ -37,22 +37,37 @@ class Wheel:
     def __truediv__(self,other):
         return Wheel(self*other.inv)
     
-x = Wheel(2,3)
-y = Wheel(3,5)
-z = Wheel(5,7)
+#    def __eq__(self,other):
+#        if self.a == other.a:
+#            if self.b == other.b:
+#                return True
+#        return False
 
-add_id = Wheel(0,1)
-mul_id = Wheel(1,1)
 
-ab = Wheel(0,0)
-
-a = Wheel(1,0)
-
-print(f"{add_id} * {ab} = {add_id * ab}")
-print(f"{add_id} + {ab} = {add_id + ab}")
-print()
-print(f"{x} + {y} = {x + y}")
-print(f"{x} * {z} = {x * z}")
-print()
-print(f"{a} + {y} = {a + y}")
-print(f"{a} * {y} = {a * y}")
+if __name__ == '__main__':
+    print("A wheel is a structure in which division is always defined, even division by zero")
+    print("This has some strange consequences. In a field, the usual way of doing arithmetic, zero is an absorbing element. That means anything times zero is zero. However this is no longer true in a wheel.")
+    
+    
+    
+    x = Wheel(2,3)
+    y = Wheel(3,5)
+    z = Wheel(5,7)
+    
+    add_id = Wheel(0,1)
+    mul_id = Wheel(1,1)
+    
+    nullity = Wheel(0,0)
+    
+    a = Wheel(1,0)
+    
+    print(f"{add_id} * {nullity} = {add_id * nullity}")
+    print(f"{add_id} + {nullity} = {add_id + nullity}")
+    print()
+    print(f"{x} + {y} = {x + y}")
+    print(f"{x} * {z} = {x * z}")
+    print()
+    print(f"{a} + {y} = {a + y}")
+    print(f"{a} * {y} = {a * y}")
+    print(f"{x} + {nullity} = {x + nullity}")
+    print(f"{a} * {add_id} = {x * add_id}")
