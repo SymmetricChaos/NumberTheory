@@ -16,7 +16,7 @@ def abundant():
         if sum(factorization(ctr)[:-1]) > ctr:
             yield ctr
         ctr += 1
-        
+
 def deficient():
     """Deficient Numbers"""
     ctr = 1
@@ -24,7 +24,7 @@ def deficient():
         if sum(factorization(ctr)[:-1]) < ctr:
             yield ctr
         ctr += 1
-        
+
 def perfect():
     """Perfect Numbers"""
     ctr = 1

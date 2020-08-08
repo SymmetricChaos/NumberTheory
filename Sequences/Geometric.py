@@ -16,7 +16,7 @@ def nonhypotenuse():
                 break
 
 
-# Much more memory efficient
+# Much faster more memory efficient
 def raw_hypotenuse():
     """Primitive Hypotenuse Numbers without order and with repetitions"""
     

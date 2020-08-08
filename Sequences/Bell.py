@@ -6,7 +6,7 @@ def bell():
     R1 = [1,2]
     
     while True:
-
+        
         yield R0[0]
         
         R2 = [R1[-1]]

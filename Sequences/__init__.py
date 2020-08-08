@@ -15,15 +15,13 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
                              divisors, squarefree, euclid_mullin, squarefree_kernel, \
                              pythagorean_primes
 
-from Sequences.Pascal import pascal
-
 from Sequences.Bell import bell
 
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
-from Sequences.Combinatorics import catalan, derangements
+from Sequences.Combinatorics import catalan, derangements, pascal, partition
 
 from Sequences.GoodsteinSequence import goodstein_sequence
 
@@ -45,7 +43,7 @@ __all__=["offset","partial","seq_max",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",
          
-         "pascal",
+         
          
          "bell",
          
@@ -59,7 +57,7 @@ __all__=["offset","partial","seq_max",
          
          "aliquot", "abundant", "deficient", "perfect",
          
-         "catalan","derangements",
+         "catalan","derangements","pascal","partition",
          
          "goodstein_sequence",
          

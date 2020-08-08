@@ -12,25 +12,15 @@ def naturals(n=0):
         ctr += 1
         
 
-def integers(n=0):
+def integers():
     """Integers"""
     
-    assert type(n) == int
-    assert n >= 0
+    yield 0
     
-    ctr = n*2-1
-    n = n
-    
-    while True:
-        
+    for n in naturals(1):
         yield n
-        
-        ctr += 1
-        if ctr % 2 == 0:
-            n -= ctr
-        else:
-            n += ctr
-        
+        yield -n
+
 
 def arithmetic(b=0,n=1):
     """Arithmetic Sequence"""

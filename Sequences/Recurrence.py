@@ -6,7 +6,7 @@ def fibonacci():
     while True:
         yield a
         a, b = b, a+b
-        
+
 def lucas():
     """Lucas Numbers"""
     a = 2
@@ -16,7 +16,6 @@ def lucas():
         yield a
         a, b = b, a+b
 
-      
 def P_fibonacci(P):
     """P-Fibonacci Numbers"""
     
@@ -28,7 +27,7 @@ def P_fibonacci(P):
     while True:
         yield a
         a, b = b, a+P*b
-        
+
 def PQ_fibonacci(P,Q):
     """P,Q-Fibonacci Numbers"""
     
@@ -53,7 +52,7 @@ def P_lucas(P):
     while True:
         yield a
         a, b = b, a+P*b
-        
+
 def PQ_lucas(P,Q):
     """P,Q-Lucas Numbers"""
     
@@ -84,7 +83,7 @@ def pell_lucas():
     while True:
         yield a
         a, b = b, a+2*b
-        
+
 def tribonacci():
     """Tribonacci Numbers"""
     a = 0
@@ -94,7 +93,7 @@ def tribonacci():
     while True:
         yield a
         a, b, c = b, c, a+b+c
-        
+
 def padovan():
     """Padovan Numbers"""
     a = 1
@@ -113,7 +112,7 @@ def simple_recurrence(a,b):
     while True:
         yield a
         a, b = b, a+b
-        
+
 def sylvesters_sequence():
     """Sylvester's Sequence"""
     L = [2]
@@ -125,26 +124,3 @@ def sylvesters_sequence():
             t *= i
         L.append(t+1)
 
-#def partitions(n):
-#    if n == 0:
-#        return 1
-#    if n < 0:
-#        return 0
-#    else:
-#        s = 0
-#        k = 0
-#        ctr = 1
-#        while True:
-#            if ctr % 2 == 1:
-#                k += ctr
-#            else:
-#                k -= ctr
-#            pent = k*(3*k-1)//2
-#            if pent > n:
-#                break
-#            s += partitions(n-pent)*(-1)**(k+1)
-#            ctr += 1
-#            
-#    return s
-#
-#print(partitions(15))

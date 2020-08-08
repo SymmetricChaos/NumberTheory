@@ -37,7 +37,7 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
           
         if ctr >= offset:
             yield val
-            
+
 # Return values from a sequence until it returns a value above some maximum
 def seq_max(sequence,max_val=None,**kwargs):
     """Return vals until max_val reached"""
