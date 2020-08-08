@@ -15,6 +15,23 @@ def nonhypotenuse():
                 yield n
                 break
 
+
+# Much more memory efficient
+def raw_hypotenuse():
+    """Primitive Hypotenuse Numbers without order and with repetitions"""
+    
+    for m in naturals(1):
+        lim = m*m+1 # smallest number that can be produced in this round
+        if m % 2 == 0:
+            for n in range(1,m,2):
+                if gcd(m,n) == 1:
+                    yield m*m+n*n
+        else:
+            for n in range(2,m,2):
+                if gcd(m,n) == 1:
+                    yield m*m+n*n
+
+
 def hypotenuse():
     """Primitive Hypotenuse Numbers"""
     

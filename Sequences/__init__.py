@@ -33,7 +33,7 @@ from Sequences.CollatzNumbers import collatz_numbers
 
 from Sequences.Recaman import recaman
 
-from Sequences.Geometric import hypotenuse, nonhypotenuse
+from Sequences.Geometric import hypotenuse, nonhypotenuse, raw_hypotenuse
 
 __all__=["offset","partial","seq_max",
          
@@ -69,4 +69,4 @@ __all__=["offset","partial","seq_max",
          
          "recaman",
          
-         "hypotenuse", "nonhypotenuse"]
+         "hypotenuse", "nonhypotenuse", "raw_hypotenuse"]
