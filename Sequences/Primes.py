@@ -25,7 +25,7 @@ def primes():
 # Cumulative product of prime numbers.
 def primorials():
     """Primoral Numbers"""
-
+    
     out = 1
     for i in primes():
         
@@ -34,10 +34,18 @@ def primorials():
         out *= i
 
 
+def pythagorean_primes():
+    """Pythagorean Primes"""
+    
+    for p in primes():
+        if (p-1)%4 == 0:
+            yield p
+
+
 # Positive integers with no prime factors greater than B.
 def smooth(B):
     """Smooth Numbers"""
-        
+    
     for n in naturals(1):
         out = n
         for f in range(2,B+1):
@@ -96,19 +104,6 @@ def squarefree():
                 break
 
 
-def euclid_mullin():
-    """Euclid-Mullin Sequence"""
-    
-    P = 2
-    
-    while True:
-        for i in primes():
-            if (P+1) % i == 0:
-                yield i
-                P = P*i
-                break
-
-
 def squarefree_kernel():
     """Squarefree Kernels"""
     
@@ -125,3 +120,18 @@ def squarefree_kernel():
             if n == 1:
                 yield K
                 break
+
+
+def euclid_mullin():
+    """Euclid-Mullin Sequence"""
+    
+    P = 2
+    
+    while True:
+        for i in primes():
+            if (P+1) % i == 0:
+                yield i
+                P = P*i
+                break
+
+

@@ -4,7 +4,8 @@ from Sequences import naturals, fibonacci, lucas, pell, pell_lucas, tribonacci, 
                       gen_pentagonal, perfect_powers, primes, primorials,\
                       pascal, bell, catalan, factorials, alternating_factorials, \
                       divisors, squarefree, aliquot, highly_composite, perfect, \
-                      derangements, recaman, euclid_mullin
+                      derangements, recaman, euclid_mullin, pythagorean_primes, \
+                      hypotenuse, nonhypotenuse
 
 
 from Sequences.Utils import show_vals
@@ -18,5 +19,6 @@ for seq in [naturals, integers,
             primes, primorials, pascal, bell, catalan,
             factorials, alternating_factorials, divisors,
             squarefree, perfect_powers, aliquot, highly_composite,
-            perfect, derangements, recaman, euclid_mullin]:
+            perfect, derangements, recaman, euclid_mullin, pythagorean_primes,
+            hypotenuse, nonhypotenuse]:
     show_vals(seq)

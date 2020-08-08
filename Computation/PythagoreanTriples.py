@@ -19,9 +19,9 @@ def mn_pairs(lim):
         if m > lim:
             break
 
-#print("Primitive Pythagorean Triples")
-#for m,n in mn_pairs(12):
-#    par = m%2 + n%2
-#    if gcd(m,n) == 1 and par != 2:
-#        T = euclid_triple(m,n)
-#        print(T)
+# print("Primitive Pythagorean Triples")
+# for m,n in mn_pairs(12):
+#     par = m%2 + n%2
+#     if gcd(m,n) == 1 and par != 2:
+#         T = euclid_triple(m,n)
+#         print(T)

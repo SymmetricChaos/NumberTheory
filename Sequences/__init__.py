@@ -12,7 +12,8 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
 from Sequences.Simple import naturals, integers, arithmetic, geometric
                                  
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
-                             divisors, squarefree, euclid_mullin, squarefree_kernel
+                             divisors, squarefree, euclid_mullin, squarefree_kernel, \
+                             pythagorean_primes
 
 from Sequences.Pascal import pascal
 
@@ -32,6 +33,8 @@ from Sequences.CollatzNumbers import collatz_numbers
 
 from Sequences.Recaman import recaman
 
+from Sequences.Geometric import hypotenuse, nonhypotenuse
+
 __all__=["offset","partial","seq_max",
          
          "lucas","fibonacci","pell","pell_lucas","tribonacci","P_fibonacci", 
@@ -40,7 +43,7 @@ __all__=["offset","partial","seq_max",
          "naturals","integers","arithmetic","geometric",
          
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree", "euclid_mullin", "squarefree_kernel",
+         "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",
          
          "pascal",
          
@@ -64,4 +67,6 @@ __all__=["offset","partial","seq_max",
          
          "collatz_numbers",
          
-         "recaman"]
+         "recaman",
+         
+         "hypotenuse", "nonhypotenuse"]
