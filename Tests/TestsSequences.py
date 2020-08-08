@@ -19,6 +19,6 @@ for seq in [naturals, integers,
             primes, primorials, pascal, bell, catalan,
             factorials, alternating_factorials, divisors,
             squarefree, perfect_powers, aliquot, highly_composite,
-            perfect, derangements, recaman, euclid_mullin, pythagorean_primes,
+            perfect, derangements, recaman, pythagorean_primes,
             hypotenuse, nonhypotenuse]:
     show_vals(seq)

@@ -15,22 +15,30 @@ def nonhypotenuse():
                 yield n
                 break
 
-
 def hypotenuse():
     """Primitive Hypotenuse Numbers"""
     
+    L = []
     for m in naturals(1):
-        print("!")
+        lim = m*m+1 # smallest number that can be produced in this round
         if m % 2 == 0:
-            for n in range(1,m):
+            for n in range(1,m,2):
                 if gcd(m,n) == 1:
-                    yield m*m+n*n
+                    p = m*m+n*n
+                    if p in L:
+                        continue
+                    else:
+                        L.append(p)
         else:
             for n in range(2,m,2):
                 if gcd(m,n) == 1:
-                    yield m*m+n*n
-
-for n,v in enumerate(hypotenuse()):
-    if n > 20:
-        break
-    print(v)
+                    p = m*m+n*n
+                    if p in L:
+                        continue
+                    else:
+                        L.append(p)
+        L.sort()
+        for i in L:
+            if i > lim:
+                break
+            yield L.pop(0)
