@@ -10,7 +10,7 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
 from Sequences.Simple import naturals, integers, arithmetic, geometric
                                  
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
-                             divisors, squarefree
+                             divisors, squarefree, euclid_mullin
 
 from Sequences.Pascal import pascal
 
@@ -43,13 +43,12 @@ __all__=["offset","partial","seq_max",
          "polygonal","cen_polygonal","gen_polygonal",
          "simplicial","perfect_powers",
          "pascal",
-         "catalan",
          "bell",
          "factorials", "alternating_factorials", "kempner_function",
          "aliquot", "abundant", "deficient", "perfect",
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree",
-         "derangements",
+         "squarefree", "euclid_mullin",
+         "catalan","derangements",
          "goodstein_sequence",
          "grandi", "grandi_sums",
          "collatz_numbers",

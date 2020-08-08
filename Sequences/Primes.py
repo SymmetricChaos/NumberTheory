@@ -1,10 +1,12 @@
 from Sequences.Simple import naturals
 from Sequences.Utils import factorization
+from collections import defaultdict
 
 ## Generator that returns primes (not my work)
 def primes():
     """Prime Numbers"""
-    D = {}
+    
+    D = defaultdict(list)
     q = 2
     
     while True:
@@ -15,9 +17,10 @@ def primes():
             D[q * q] = [q]
         else:
             for p in D[q]:
-                D.setdefault(p + q, []).append(p)
+                D[p+q].append(p)
             del D[q]
         q += 1
+
 
 # Cumulative product of prime numbers.
 def primorials():
@@ -29,6 +32,7 @@ def primorials():
         yield out
         
         out *= i
+
 
 # Positive integers with no prime factors greater than B.
 def smooth(B):
@@ -56,10 +60,12 @@ def rough(B):
                 break
         if r:
             yield n
-            
+
+
 # Integers that have more factors than any small positive integer.
 def highly_composite():
     """Highly Composite Numbers"""
+    
     F = 0
     for i in naturals(1):
         L = len(factorization(i))
@@ -67,16 +73,20 @@ def highly_composite():
             F = L
             yield i
 
+
 # Number of divisors for each positive integer.
 def divisors():
     """Number of Divisors"""
+    
     for i in naturals(1):
         yield len(factorization(i))
-        
+
+
 # Numbers that have no more than one prime factors. Equivalently those that are
 # not divisible by any square number.
 def squarefree():
     """Squarefree Numbers"""
+    
     for n in naturals(1):
         for i in naturals(2):
             if n % i**2 == 0:
@@ -85,7 +95,19 @@ def squarefree():
                 yield n
                 break
 
-#def squarefree_kernel():
-#    """Squarefree Kernels"""
-#       for n in naturals(1):
-        
+
+def euclid_mullin():
+    """Euclid-Mullin Sequence"""
+    
+    P = 2
+    
+    while True:
+        for i in primes():
+            if (P+1) % i == 0:
+                yield i
+                P = P*i
+                break
+
+
+# def squarefree_kernel():
+#     """Squarefree Kernels"""
