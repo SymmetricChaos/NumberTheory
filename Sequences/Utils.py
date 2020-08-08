@@ -80,7 +80,7 @@ def show_vals(sequence,**kwargs):
     print("\n")
 
 
-# Copy of factorization function to prevent reference issues
+# Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
     """All Unique Factors"""
     if type(n) != int:
@@ -106,6 +106,7 @@ def factorization(n,nontrivial=False):
     
     return L
 
+
 # Copy of choose function to prevent reference issues
 def choose(n,k):
     """Binomial coefficient"""
@@ -125,8 +126,7 @@ def choose(n,k):
 
 
 
-        
-        
+
 # Legacy of a more complicated method
         
 #def sequence_maker(generator):

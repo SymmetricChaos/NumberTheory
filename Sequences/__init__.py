@@ -1,3 +1,5 @@
+from Sequences.Utils import offset, partial, seq_max
+
 from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci, \
                                  P_fibonacci, PQ_fibonacci, padovan
                                  
@@ -10,7 +12,7 @@ from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
 from Sequences.Simple import naturals, integers, arithmetic, geometric
                                  
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
-                             divisors, squarefree, euclid_mullin
+                             divisors, squarefree, euclid_mullin, squarefree_kernel
 
 from Sequences.Pascal import pascal
 
@@ -19,8 +21,6 @@ from Sequences.Bell import bell
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
-
-from Sequences.Utils import offset, partial, seq_max
 
 from Sequences.Combinatorics import catalan, derangements
 
@@ -33,23 +33,35 @@ from Sequences.CollatzNumbers import collatz_numbers
 from Sequences.Recaman import recaman
 
 __all__=["offset","partial","seq_max",
-         "lucas","fibonacci",
+         
+         "lucas","fibonacci","pell","pell_lucas","tribonacci","P_fibonacci", 
+         "PQ_fibonacci","padovan",
+         
          "naturals","integers","arithmetic","geometric",
-         "pell","pell_lucas","primes","primorials",
-         "tribonacci","P_fibonacci", "PQ_fibonacci","padovan",
+         
+         "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
+         "squarefree", "euclid_mullin", "squarefree_kernel",
+         
+         "pascal",
+         
+         "bell",
+         
          "triangular", "gen_triangular", "cen_triangular",
          "square", "gen_square", "cen_square",
          "pentagonal","cen_pentagonal","gen_pentagonal",
          "polygonal","cen_polygonal","gen_polygonal",
          "simplicial","perfect_powers",
-         "pascal",
-         "bell",
+         
          "factorials", "alternating_factorials", "kempner_function",
+         
          "aliquot", "abundant", "deficient", "perfect",
-         "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree", "euclid_mullin",
+         
          "catalan","derangements",
+         
          "goodstein_sequence",
+         
          "grandi", "grandi_sums",
+         
          "collatz_numbers",
+         
          "recaman"]

@@ -109,5 +109,19 @@ def euclid_mullin():
                 break
 
 
-# def squarefree_kernel():
-#     """Squarefree Kernels"""
+def squarefree_kernel():
+    """Squarefree Kernels"""
+    
+    for n in naturals(1):
+        K = 1
+        
+        for p in primes():
+            
+            if n % p == 0:
+                K *= p
+                while n % p == 0:
+                    n //= p
+            
+            if n == 1:
+                yield K
+                break
