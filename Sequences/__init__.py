@@ -1,16 +1,14 @@
-from Sequences.Utils import offset, partial, seq_max, make_triangle
+from Sequences.Utils import offset, partial, seq_max, make_triangle, show_start
 
 from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci, \
                                  PQ_fibonacci, PQ_lucas, padovan, simple_recurrence, \
                                  sylvesters_sequence, random_recurrence
 
-from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
-                                square, gen_square, cen_square, \
-                                pentagonal, cen_pentagonal, gen_pentagonal, \
+from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, cen_polygonal, \
-                                simplicial, perfect_powers
+                                simplicial, perfect_powers, exponent
 
-from Sequences.Simple import naturals, integers, arithmetic, geometric
+from Sequences.Simple import naturals, integers, arithmetic, geometric, powers
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, euclid_mullin, squarefree_kernel, \
@@ -33,22 +31,19 @@ from Sequences.Recaman import recaman
 
 from Sequences.Geometric import hypotenuse, nonhypotenuse, raw_hypotenuse
 
-__all__=["offset","partial","seq_max","make_triangle",
+__all__=["partial","seq_max","make_triangle","show_start","offset",
          
          "lucas","fibonacci","pell","pell_lucas","tribonacci","PQ_lucas",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
          "random_recurrence",
          
-         "naturals","integers","arithmetic","geometric",
+         "naturals","integers","arithmetic","geometric","powers",
          
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",
          
-         "triangular", "gen_triangular", "cen_triangular",
-         "square", "gen_square", "cen_square",
-         "pentagonal","cen_pentagonal","gen_pentagonal",
-         "polygonal","cen_polygonal","gen_polygonal",
-         "simplicial","perfect_powers",
+         "triangular","square","pentagonal","gen_pentagonal","polygonal","exponent",
+         "cen_polygonal","gen_polygonal","simplicial","perfect_powers",
          
          "factorials", "alternating_factorials", "kempner_function",
          

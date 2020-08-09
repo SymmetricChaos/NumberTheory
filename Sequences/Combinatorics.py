@@ -1,4 +1,4 @@
-from Sequences.Utils import choose, make_triangle
+from Sequences.Utils import choose
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 

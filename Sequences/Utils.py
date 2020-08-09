@@ -1,7 +1,16 @@
 from math import ceil, sqrt
 
+def offset(sequence,offset=0):
+    
+    for i in range(offset):
+        next(sequence)
+    
+    for i in sequence:
+        yield i
+
+
 # Return some number of values with some offset
-def partial(sequence,num_vals=0,offset=0,**kwargs):
+def partial(sequence,num_vals=0,offset=0):
     """Return num_val values from a sequence after skipping offset of them"""
     
     if type(num_vals) != int:
@@ -14,46 +23,39 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
     if offset < 0:
         raise Exception("offset must be nonnegative")
     
-    if num_vals == 0:
-        num_vals = float('inf')
     
-    for ctr,val in enumerate(sequence(**kwargs)):
-        if ctr >= num_vals+offset:
-            break
-          
-        if ctr >= offset:
-            yield val
+    for i in range(offset):
+        next(sequence)
+    
+    if num_vals == 0:
+        for i in sequence:
+            yield i
+    
+    else:
+        for i in range(num_vals):
+            yield next(sequence)
+
 
 # Return values from a sequence until it returns a value above some maximum
-def seq_max(sequence,max_val=None,**kwargs):
+def seq_max(sequence,max_val=None):
     """Return vals until max_val reached"""
-    
     if type(max_val) != int and type(max_val) != None:
         raise Exception("offset must be an integer or infinite")
     
     if max_val == None:
         max_val = float("inf")
     
-    for val in sequence(**kwargs):
+    for val in sequence:
         yield val          
-        if val > max_val:
+        if abs(val) > max_val:
             break
 
 # Print the docstring with the sequence name then the first 20 numbers unless 
 # a number greater than 1000 is found
-def show_vals(sequence,**kwargs):
+def show_start(sequence):
     """Values of sequence until value passes 1000 or until 20 values printed"""
-    print(sequence.__doc__,end="")
     
-    if kwargs == {}:
-        print()
-    else:
-        print(":",end=" ")
-        for i,j in kwargs.items():
-            print("{} = {}".format(i,j),end="  ")
-        print()
-    
-    part = partial(sequence,20,**kwargs)
+    part = partial(sequence,20)
     
     L = []
     
@@ -70,7 +72,6 @@ def show_vals(sequence,**kwargs):
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
     """All Unique Factors"""
-    
     if type(n) != int:
         raise Exception("n must be an integer") 
     
@@ -81,6 +82,7 @@ def factorization(n,nontrivial=False):
         L = []
     else:
         L = [1,n]
+    
     
     for i in range(2,lim):
         f,r = divmod(n,i)

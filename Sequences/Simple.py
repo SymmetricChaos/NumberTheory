@@ -35,7 +35,8 @@ def arithmetic(b=0,n=1):
         yield out
         
         out += n
-        
+
+
 def geometric(b=1,n=2):
     """Geometric Sequence"""
     
@@ -49,9 +50,11 @@ def geometric(b=1,n=2):
         yield out
         
         out *= n
-        
+
+
 def powers(n):
     """Powers of N"""
+    
     assert type(n) == int
     assert n >= 0
     

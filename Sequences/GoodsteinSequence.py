@@ -98,7 +98,7 @@ def hered_to_dec(s):
     code = parser.expr(s).compile()
     return eval(code)
 
-## Calculate the Goodstein sequence for n out to x terms
+## Calculate the Goodstein sequence for n
 def goodstein_sequence(n):
     """Goodstein Sequence"""
     yield n
@@ -112,19 +112,3 @@ def goodstein_sequence(n):
         t = hered_to_dec(H)
         yield t
 
-# import random
-#print("Examples of Hereditary Base-3 Notation")
-#for i in range(9):
-#    t = random.randint(10,1000)
-#    H = heredbase(t,3)
-#    print("{:<3}  =  {}".format(t,H))
-#print("\n")
-
-
-#for X in range(4,17):
-#    print("Goodstein Sequence")
-#    for b,i in enumerate(goodstein_sequence(X)):
-#        if b > 10:
-#            break
-#        print(i)
-#        #print("{:<5}    = {}".format(i,hered_base(i,b+2)))

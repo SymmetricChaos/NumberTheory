@@ -14,6 +14,7 @@ def polygonal(S):
         
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
+
 def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
@@ -24,6 +25,7 @@ def gen_polygonal(S):
         
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
+
 def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
@@ -33,11 +35,14 @@ def cen_polygonal(S):
     for n in naturals():
         yield (S*n)//2 * (n-1)+1
 
+
 def simplicial(S):
     """Simplicial Numbers"""
     
     assert type(S) == int
     assert S > 0
+    
+    yield 0
     
     for n in naturals():
         yield choose(n+S,S)
@@ -66,48 +71,34 @@ def perfect_powers():
             if i > lim:
                 break
 
+
+def exponent(e=1):
+    """Exponent Numbers"""
+    
+    for n in naturals():
+        yield n**e
+
+
 # Wrappers for some common polygonal numbers
 def triangular():
     """Triangular Numbers"""
     for p in polygonal(3):
         yield p
 
-def gen_triangular():
-    """Generalized Triangular Numbers"""
-    for p in gen_polygonal(3):
-        yield p
-
-def cen_triangular():
-    """Centered Triangular Numbers"""
-    for p in cen_polygonal(3):
-        yield p
-
+# Square is calculated more efficiently
 def square():
     """Square Numbers"""
-    for p in polygonal(4):
-        yield p
+    for n in naturals():
+        yield n*n
 
-def gen_square():
-    """Generalized Square Numbers"""
-    for p in gen_polygonal(4):
-        yield p
-
-def cen_square():
-    """Centered Square Numbers"""
-    for p in cen_polygonal(4):
-        yield p
 
 def pentagonal():
     """Pentagonal Numbers"""
     for p in polygonal(5):
         yield p
 
+
 def gen_pentagonal():
     """Generalized Pentagonal Numbers"""
     for p in gen_polygonal(5):
-        yield p
-
-def cen_pentagonal():
-    """Centered Pentagonal Numbers"""
-    for p in cen_polygonal(5):
         yield p
