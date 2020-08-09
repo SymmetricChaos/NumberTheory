@@ -1,19 +1,5 @@
 from math import ceil, sqrt
 
-# Skip the first few values of a sequence
-def offset(sequence,offset=0,**kwargs):
-    """Skip the first few values of a sequence"""
-    if type(offset) != int:
-        raise Exception("offset must be an integer")
-        
-    if offset < 0:
-        raise Exception("offset must be nonnegative")
-        
-    for ctr,val in enumerate(sequence(**kwargs)):
-          
-        if ctr >= offset:
-            yield val 
-
 # Return some number of values with some offset
 def partial(sequence,num_vals=0,offset=0,**kwargs):
     """Return num_val values from a sequence after skipping offset of them"""
@@ -41,6 +27,7 @@ def partial(sequence,num_vals=0,offset=0,**kwargs):
 # Return values from a sequence until it returns a value above some maximum
 def seq_max(sequence,max_val=None,**kwargs):
     """Return vals until max_val reached"""
+    
     if type(max_val) != int and type(max_val) != None:
         raise Exception("offset must be an integer or infinite")
     
@@ -83,6 +70,7 @@ def show_vals(sequence,**kwargs):
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
     """All Unique Factors"""
+    
     if type(n) != int:
         raise Exception("n must be an integer") 
     
@@ -93,7 +81,6 @@ def factorization(n,nontrivial=False):
         L = []
     else:
         L = [1,n]
-    
     
     for i in range(2,lim):
         f,r = divmod(n,i)
@@ -134,24 +121,3 @@ def make_triangle(seq,n):
         T.append(L)
         ctr += 1
     return T
-
-
-# Legacy of a more complicated method
-        
-#def sequence_maker(generator):
-#    
-#    def S(num_vals=0,offset=0,**kwargs):
-#        
-#        sequence_params(num_vals, offset)
-#                
-#        if num_vals == 0:
-#            num_vals = float('inf')
-#            
-#        for ctr,val in enumerate(generator(**kwargs)):
-#            if ctr >= num_vals+offset:
-#                break
-#            
-#            if ctr >= offset:
-#                yield val
-#    S.__name__ = generator.__name__
-#    return S
