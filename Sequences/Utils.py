@@ -125,6 +125,15 @@ def choose(n,k):
     return N//D
 
 
+def make_triangle(seq,n):
+    """First n rows of the triangular arrangement of seq"""
+    T = []
+    ctr = 1
+    for i in range(n):
+        L = [next(seq) for c in range(ctr)]
+        T.append(L)
+        ctr += 1
+    return T
 
 
 # Legacy of a more complicated method

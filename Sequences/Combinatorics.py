@@ -1,6 +1,5 @@
-from Sequences.Utils import choose
+from Sequences.Utils import choose, make_triangle
 from Sequences.Polygonal import gen_pentagonal
-from Sequences.Utils import offset
 from Sequences.Simple import naturals
 
 def derangements():
@@ -18,6 +17,7 @@ def derangements():
         S[0], S[1] = S[1], d
         yield d
 
+
 def catalan():
     """Catalan Numbers"""
     
@@ -32,6 +32,7 @@ def catalan():
         
         n += 1
 
+
 def pascal():
     """Pascal's Triangle"""
     
@@ -45,6 +46,7 @@ def pascal():
             k = 0
         else:
             k += 1
+
 
 def partition():
     """Partition Number"""
@@ -70,3 +72,16 @@ def partition():
                 sign *= -1
             
             k += sign*D[n-i]
+
+
+def euler():
+    """Euler's Triangle"""
+    
+    for m in naturals(1):
+        for n in range(m):
+            S = 0
+            sign = -1
+            for k in range(n+1):
+                sign *= -1
+                S += sign*choose(m+1,k)*(n+1-k)**m
+            yield S

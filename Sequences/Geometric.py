@@ -21,7 +21,6 @@ def raw_hypotenuse():
     """Primitive Hypotenuse Numbers without order and with repetitions"""
     
     for m in naturals(1):
-        lim = m*m+1 # smallest number that can be produced in this round
         if m % 2 == 0:
             for n in range(1,m,2):
                 if gcd(m,n) == 1:

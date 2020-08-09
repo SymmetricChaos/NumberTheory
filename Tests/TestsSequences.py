@@ -5,7 +5,7 @@ from Sequences import naturals, fibonacci, lucas, pell, pell_lucas, tribonacci, 
                       pascal, bell, catalan, factorials, alternating_factorials, \
                       divisors, squarefree, aliquot, highly_composite, perfect, \
                       derangements, recaman, pythagorean_primes, \
-                      hypotenuse, nonhypotenuse, raw_hypotenuse, partition
+                      hypotenuse, nonhypotenuse, partition
 
 
 from Sequences.Utils import show_vals
