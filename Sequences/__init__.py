@@ -1,7 +1,8 @@
 from Sequences.Utils import offset, partial, seq_max, make_triangle
 
 from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci, \
-                                 P_fibonacci, PQ_fibonacci, padovan
+                                 PQ_fibonacci, PQ_lucas, padovan, simple_recurrence, \
+                                 sylvesters_sequence, random_recurrence
 
 from Sequences.Polygonal import triangular, gen_triangular, cen_triangular, \
                                 square, gen_square, cen_square, \
@@ -15,14 +16,12 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
                              divisors, squarefree, euclid_mullin, squarefree_kernel, \
                              pythagorean_primes
 
-from Sequences.Bell import bell
-
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
 from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
-                                    euler
+                                    euler, bell
 
 from Sequences.GoodsteinSequence import goodstein_sequence
 
@@ -34,17 +33,16 @@ from Sequences.Recaman import recaman
 
 from Sequences.Geometric import hypotenuse, nonhypotenuse, raw_hypotenuse
 
-__all__=["offset","partial","seq_max", "make_triangle",
+__all__=["offset","partial","seq_max","make_triangle",
          
-         "lucas","fibonacci","pell","pell_lucas","tribonacci","P_fibonacci", 
-         "PQ_fibonacci","padovan",
+         "lucas","fibonacci","pell","pell_lucas","tribonacci","PQ_lucas",
+         "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
+         "random_recurrence",
          
          "naturals","integers","arithmetic","geometric",
          
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",
-         
-         "bell",
          
          "triangular", "gen_triangular", "cen_triangular",
          "square", "gen_square", "cen_square",
@@ -56,7 +54,7 @@ __all__=["offset","partial","seq_max", "make_triangle",
          
          "aliquot", "abundant", "deficient", "perfect",
          
-         "catalan","derangements","pascal","partition","euler",
+         "catalan","derangements","pascal","partition","euler","bell",
          
          "goodstein_sequence",
          
