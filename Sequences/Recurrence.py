@@ -130,3 +130,13 @@ def random_recurrence(a=1,b=1):
         else:
             yield a
             a,b = b,a-b
+
+
+def leonardo():
+    """Leonardo Numbers"""
+    
+    a,b = 1,1
+    
+    while True:
+        yield a
+        a,b = b,a+b+1

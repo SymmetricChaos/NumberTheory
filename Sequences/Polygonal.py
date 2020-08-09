@@ -85,6 +85,7 @@ def triangular():
     for p in polygonal(3):
         yield p
 
+
 # Square is calculated more efficiently
 def square():
     """Square Numbers"""

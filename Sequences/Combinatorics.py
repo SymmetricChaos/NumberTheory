@@ -93,7 +93,7 @@ def bell():
         R0, R1 = R1, R2
 
 
-def euler():
+def eulerian():
     """Euler's Triangle"""
     
     for m in naturals(1):

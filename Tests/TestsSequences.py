@@ -6,8 +6,8 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       pentagonal, gen_pentagonal, simplicial, perfect_powers, exponent, \
                       cen_polygonal, factorials, alternating_factorials, kempner_function, \
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
-                      pascal, partition, bell, euler, hypotenuse, nonhypotenuse, \
-                      collatz_numbers, recaman
+                      pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
+                      collatz_numbers, recaman, leonardo
                       
 
 
@@ -28,6 +28,7 @@ tests = [("Natural Numbers",naturals()),
          ("Sylvesters Sequence",sylvesters_sequence()),
          ("Pell Numbers",pell()),
          ("Pell-Lucas Numbers (co-Pell Numbers)",pell_lucas()),
+         ("Leonardo Numbers",leonardo()),
          ("Primes",primes()),
          ("Primorals",primorials()),
          ("5-Smooth Numbers",smooth(5)),
@@ -57,7 +58,7 @@ tests = [("Natural Numbers",naturals()),
          ("Pascal's Triangle",pascal()),
          ("Partition Numbers",partition()),
          ("Bell Numbers",bell()),
-         ("Euler's Triangle",euler()),
+         ("Euler's Triangle",eulerian()),
          ("Hypotenuse Numbers",hypotenuse()),
          ("Nonhypotenuse Numbers",nonhypotenuse()),
          ("Collatz Numbers",collatz_numbers()),
