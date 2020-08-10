@@ -7,7 +7,8 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       cen_polygonal, factorials, alternating_factorials, kempner_function, \
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
-                      collatz_numbers, recaman, leonardo, fermat
+                      collatz_numbers, recaman, leonardo, fermat, prime_divisors, \
+                      unique_prime_divisors, double_factorials
                       
 
 
@@ -35,6 +36,8 @@ tests = [("Natural Numbers",naturals()),
          ("5-Rough Numbers",rough(5)),
          ("Highly Composite Numbers",highly_composite()),
          ("Count of Divisors",divisors()),
+         ("Count of Prime Divisors",prime_divisors()),
+         ("Count of Unique Prime Divisors",unique_prime_divisors()),
          ("Square-Free Numbers",squarefree()),
          ("Square-Free Kernels",squarefree_kernel()),
          ("Pythagorean Primes",pythagorean_primes()),
@@ -47,6 +50,7 @@ tests = [("Natural Numbers",naturals()),
          ("Cubic Numbers",exponent(3)),
          ("Centered Triangular",cen_polygonal(3)),
          ("Factorial Numbers",factorials()),
+         ("Double Factorial Numbers",double_factorials()),
          ("Alternating Factorial Numbers",alternating_factorials()),
          ("Kempner Function",kempner_function()),
          ("Aliquot Sums",aliquot()),
