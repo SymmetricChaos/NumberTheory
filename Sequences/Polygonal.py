@@ -72,14 +72,7 @@ def perfect_powers():
                 break
 
 
-def exponent(e=1):
-    """Exponent Numbers"""
-    
-    for n in naturals():
-        yield n**e
-
-
-# Wrappers for some common polygonal numbers
+###  Wrappers for some common polygonal numbers ###
 def triangular():
     """Triangular Numbers"""
     for p in polygonal(3):
@@ -99,6 +92,7 @@ def pentagonal():
         yield p
 
 
+# Used in calculating partitions
 def gen_pentagonal():
     """Generalized Pentagonal Numbers"""
     for p in gen_polygonal(5):

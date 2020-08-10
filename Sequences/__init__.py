@@ -6,9 +6,10 @@ from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci,
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
-                                exponent, cen_polygonal
+                                cen_polygonal
 
-from Sequences.Simple import naturals, integers, arithmetic, geometric, powers
+from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
+                             exponent, fermat
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, euclid_mullin, squarefree_kernel, \
@@ -37,7 +38,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
          "random_recurrence","leonardo",
          
-         "naturals","integers","arithmetic","geometric","powers",
+         "naturals","integers","arithmetic","geometric","powers","fermat",
          
          "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
          "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",

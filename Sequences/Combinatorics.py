@@ -78,6 +78,7 @@ def partition():
 # Bell numbers count the partitions of a set with n elements
 def bell():
     """Bell Numbers"""
+    
     R0 = [1]
     R1 = [1,2]
     

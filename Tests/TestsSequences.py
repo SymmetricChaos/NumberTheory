@@ -7,7 +7,7 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       cen_polygonal, factorials, alternating_factorials, kempner_function, \
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
-                      collatz_numbers, recaman, leonardo
+                      collatz_numbers, recaman, leonardo, fermat
                       
 
 
@@ -20,8 +20,8 @@ tests = [("Natural Numbers",naturals()),
          ("Powers of 3",powers(3)),
          ("Fibonnaci Numbers",fibonacci()),
          ("Lucas Numbers",lucas()),
-         ("PQ Fibonnaci Numbers (3,1)",PQ_fibonacci(1,3)),
-         ("PQ Lucas Numbers (3,1)",PQ_lucas(1,3)),
+         ("PQ Fibonnaci Numbers (3,2)",PQ_fibonacci(3,2)),
+         ("PQ Lucas Numbers (3,2)",PQ_lucas(3,2)),
          ("Simple Recurrence (2,5)",simple_recurrence(2,5)),
          ("Tribonacci",tribonacci()),
          ("Padovan",padovan()),
@@ -63,7 +63,8 @@ tests = [("Natural Numbers",naturals()),
          ("Nonhypotenuse Numbers",nonhypotenuse()),
          ("Collatz Numbers",collatz_numbers()),
          ("Recaman Sequence",recaman()),
-          ]
+         ("Fermat Numbers",fermat())
+        ]
 
 for name,seq in tests:
     print(name)
