@@ -9,6 +9,7 @@ def aliquot():
         yield sum(factorization(ctr)[:-1])
         ctr += 1
 
+
 def abundant():
     """Abundant Numbers"""
     ctr = 1
@@ -17,6 +18,7 @@ def abundant():
             yield ctr
         ctr += 1
 
+
 def deficient():
     """Deficient Numbers"""
     ctr = 1
@@ -24,6 +26,7 @@ def deficient():
         if sum(factorization(ctr)[:-1]) < ctr:
             yield ctr
         ctr += 1
+
 
 def perfect():
     """Perfect Numbers"""

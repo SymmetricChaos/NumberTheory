@@ -83,7 +83,6 @@ def highly_composite():
             yield i
 
 
-# Number of divisors for each positive integer.
 def divisors():
     """Number of Divisors"""
     
@@ -91,8 +90,37 @@ def divisors():
         yield len(factorization(i))
 
 
-# Numbers that have no more than one prime factors. Equivalently those that are
-# not divisible by any square number.
+def prime_divisors():
+    """Number of Prime Divisors with Multiplicity"""
+    
+    for n in naturals(1):
+        ctr = 0
+        for p in primes():
+            while n % p == 0:
+                ctr += 1
+                n = n // p
+            if n == 1:
+                yield ctr
+                break
+
+
+def unique_prime_divisors():
+    """Number of Unique Prime Divisors"""
+    
+    for n in naturals(1):
+        ctr = 0
+        for p in primes():
+            if n % p == 0:
+                ctr += 1
+            while n % p == 0:
+                n = n // p
+            if n == 1:
+                yield ctr
+                break
+
+
+# Numbers that have no more than one prime factors. 
+# Equivalently numbers those that are not divisible by any square number.
 def squarefree():
     """Squarefree Numbers"""
     
@@ -105,6 +133,8 @@ def squarefree():
                 break
 
 
+# The product of the unique prime factors of a number
+# Equivalently the largest squarefree number that is a factor
 def squarefree_kernel():
     """Squarefree Kernels"""
     
@@ -135,5 +165,3 @@ def euclid_mullin():
                 yield i
                 P = P*i
                 break
-
-
