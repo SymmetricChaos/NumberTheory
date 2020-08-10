@@ -25,9 +25,11 @@ def catalan():
     while True:
         N = 1
         D = 1
+        
         for k in range(2,n+1):
             N *= n+k
             D *= k
+        
         yield N//D
         
         n += 1
@@ -83,9 +85,7 @@ def bell():
     R1 = [1,2]
     
     while True:
-        
         yield R0[0]
-        
         R2 = [R1[-1]]
         
         for i in R1:
@@ -101,7 +101,26 @@ def eulerian():
         for n in range(m):
             S = 0
             sign = -1
+            
             for k in range(n+1):
                 sign *= -1
                 S += sign*choose(m+1,k)*(n+1-k)**m
+            
             yield S
+
+
+def gould():
+    """Gould's Sequence"""
+    
+    ctr = 1
+    P = pascal()
+    
+    while True:
+        val = 0
+        
+        for i in range(ctr):
+            if next(P) % 2 == 1:
+                val += 1
+        
+        yield val
+        ctr += 1

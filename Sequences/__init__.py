@@ -21,17 +21,19 @@ from Sequences.Factorials import factorials, alternating_factorials, kempner_fun
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
 from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
-                                    eulerian, bell
-
-from Sequences.GoodsteinSequence import goodstein_sequence
-
-from Sequences.Grandi import grandi, grandi_sums
+                                    eulerian, bell, gould
 
 from Sequences.CollatzNumbers import collatz_numbers
 
 from Sequences.Recaman import recaman
 
 from Sequences.Geometric import hypotenuse, nonhypotenuse, raw_hypotenuse
+
+from Sequences.BinarySequences import thue_morse
+
+from Sequences.Pseudorandom import LCG, LFG
+
+
 
 __all__=["partial","seq_max","make_triangle","show_start","offset",
          
@@ -41,25 +43,26 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          
          "naturals","integers","arithmetic","geometric","powers","fermat",
          
-         "primes", "primorials", "smooth", "rough", "highly_composite", "divisors",
-         "squarefree", "euclid_mullin", "squarefree_kernel", "pythagorean_primes",
-         "prime_divisors", "unique_prime_divisors",
+         "primes","primorials","smooth","rough","highly_composite", "divisors",
+         "squarefree","euclid_mullin","squarefree_kernel","pythagorean_primes",
+         "prime_divisors","unique_prime_divisors",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal","exponent",
          "gen_polygonal","simplicial","perfect_powers","cen_polygonal",
          
-         "factorials", "alternating_factorials", "kempner_function","double_factorials",
+         "factorials", "alternating_factorials","kempner_function","double_factorials",
          
-         "aliquot", "abundant", "deficient", "perfect",
+         "aliquot" "abundant","deficient","perfect",
          
-         "catalan","derangements","pascal","partition","eulerian","bell",
-         
-         "goodstein_sequence",
-         
-         "grandi", "grandi_sums",
+         "catalan","derangements","pascal","partition","eulerian","bell","gould",
          
          "collatz_numbers",
          
          "recaman",
          
-         "hypotenuse", "nonhypotenuse", "raw_hypotenuse"]
+         "hypotenuse", "nonhypotenuse","raw_hypotenuse",
+         
+         "thue_morse",
+         
+         "LCG","LFG"
+         ]

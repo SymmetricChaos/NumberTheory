@@ -8,9 +8,8 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
                       collatz_numbers, recaman, leonardo, fermat, prime_divisors, \
-                      unique_prime_divisors, double_factorials
+                      unique_prime_divisors, double_factorials, gould
                       
-
 
 from Sequences.Utils import show_start
 
@@ -60,6 +59,7 @@ tests = [("Natural Numbers",naturals()),
          ("Derangements",derangements()),
          ("Catalan Numbers",catalan()),
          ("Pascal's Triangle",pascal()),
+         ("Gould's Sequence",gould())
          ("Partition Numbers",partition()),
          ("Bell Numbers",bell()),
          ("Euler's Triangle",eulerian()),
