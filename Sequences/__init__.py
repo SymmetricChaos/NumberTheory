@@ -12,7 +12,7 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              exponent, fermat
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
-                             divisors, squarefree, euclid_mullin, squarefree_kernel, \
+                             divisors, squarefree, squarefree_kernel, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites
 
@@ -45,7 +45,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "naturals","integers","arithmetic","geometric","powers","fermat",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
-         "squarefree","euclid_mullin","squarefree_kernel","pythagorean_primes",
+         "squarefree","squarefree_kernel","pythagorean_primes",
          "prime_divisors","unique_prime_divisors","composites",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal","exponent",

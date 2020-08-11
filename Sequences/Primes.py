@@ -4,7 +4,7 @@ from collections import defaultdict
 
 ## Generator that returns primes (not my work)
 def primes():
-    """Prime Numbers"""
+    """Prime Numbers: Positive integers with exactly two factors"""
     
     D = defaultdict(list)
     q = 2
@@ -24,7 +24,7 @@ def primes():
 
 
 def composites():
-    """Composite Numbers"""
+    """Composite Numbers: Positive integers with more than two factors"""
     
     for n in naturals(4):
         for p in primes:
@@ -35,7 +35,7 @@ def composites():
 
 # Cumulative product of prime numbers.
 def primorials():
-    """Primoral Numbers"""
+    """Primoral Numbers: Cumulative product of primes"""
     
     out = 1
     for i in primes():
@@ -46,16 +46,20 @@ def primorials():
 
 
 def pythagorean_primes():
-    """Pythagorean Primes"""
+    """Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle"""
     
     for p in primes():
         if (p-1)%4 == 0:
             yield p
 
 
-# Positive integers with no prime factors greater than B.
 def smooth(B):
-    """Smooth Numbers"""
+    """
+    Smooth Numbers: Positive integers with no prime factors greater than B
+    
+    Args:
+        B -- largest prime factor allowed
+    """
     
     for n in naturals(1):
         out = n
@@ -69,9 +73,13 @@ def smooth(B):
                 break
 
 
-# Positive integers with no prime factors less than B.
 def rough(B):
-    """Rough Numbers"""
+    """
+    Rough Numbers: Positive integers with no prime factors less than B
+    
+    Args:
+        B -- smallest prime factor allowed
+    """
     
     for n in naturals(1):
         r = True
@@ -85,9 +93,8 @@ def rough(B):
             yield n
 
 
-# Integers that have more factors than any small positive integer.
 def highly_composite():
-    """Highly Composite Numbers"""
+    """Highly Composite Numbers: Positive integers that have more factors than any smaller positive integer"""
     
     F = 0
     for i in naturals(1):
@@ -99,14 +106,14 @@ def highly_composite():
 
 
 def divisors():
-    """Number of Divisors"""
+    """Number of Divisors: Count of divisors for each positive integer"""
     
     for i in naturals(1):
         yield len(factorization(i))
 
 
 def prime_divisors():
-    """Number of Prime Divisors with Multiplicity"""
+    """Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer"""
     
     for n in naturals(1):
         ctr = 0
@@ -122,7 +129,7 @@ def prime_divisors():
 
 
 def unique_prime_divisors():
-    """Number of Unique Prime Divisors"""
+    """Number of Unique Prime Divisors: Count of unique prime factors for each positive integer"""
     
     for n in naturals(1):
         ctr = 0
@@ -139,10 +146,8 @@ def unique_prime_divisors():
                 break
 
 
-# Numbers that have no more than one prime factors. 
-# Equivalently numbers those that are not divisible by any square number.
 def squarefree():
-    """Squarefree Numbers"""
+    """Squarefree Numbers: Positive integers not divisible by any prime more than once"""
     
     for n in naturals(1):
         for i in naturals(2):
@@ -154,10 +159,8 @@ def squarefree():
                 break
 
 
-# The product of the unique prime factors of a number
-# Equivalently the largest squarefree number that is a factor
 def squarefree_kernel():
-    """Squarefree Kernels"""
+    """Squarefree Kernels: Largest squarefree factor of each positive integer"""
     
     for n in naturals(1):
         K = 1
@@ -174,15 +177,15 @@ def squarefree_kernel():
                 break
 
 
-# Very slow
-def euclid_mullin():
-    """Euclid-Mullin Sequence"""
-    
-    P = 2
-    
-    while True:
-        for i in primes():
-            if (P+1) % i == 0:
-                yield i
-                P = P*i
-                break
+## Too slow to use
+# def euclid_mullin():
+#     """Euclid-Mullin Sequence: Least prime factor of the product of the previous terms"""
+#    
+#     P = 2
+#    
+#     while True:
+#         for i in primes():
+#             if (P+1) % i == 0:
+#                 yield i
+#                 P = P*i
+#                 break

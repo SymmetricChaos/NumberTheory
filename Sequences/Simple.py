@@ -5,7 +5,7 @@ def naturals(offset=0):
     Natural Numbers: Nonnegative whole numbers
     
     Args:
-        offset (int) -- nonnegative integer specifying first value returned
+        offset -- nonnegative integer specifying first value returned
     """
     
     require_integers(["offset"],[offset])
@@ -34,8 +34,8 @@ def arithmetic(a,n):
     Arithmetic Sequence: Integers with constant difference
     
     Args:
-        a (int) -- starting value\n
-        n (int) -- common difference
+        a -- starting value\n
+        n -- common difference
     """
     
     require_integers(["a","n"],[a,n])
@@ -54,8 +54,8 @@ def geometric(a,n):
     Geometric Sequence: Integers with constant ratio
     
     Args:
-        a (int) -- starting values\n
-        n (int) -- common ratio
+        a -- starting values\n
+        n -- common ratio
     """
     
     require_integers(["a","n"],[a,n])
@@ -74,10 +74,10 @@ def arithmetrico_geometric(a,n,b,m):
     Arithmetrico-Geometric Sequence: Product of an arithmetic sequence with a geometric sequence
     
     Args:
-        a (int) -- starting value for arithmetic sequence\n
-        n (int) -- common difference for arithmetic sequence\n
-        b (int) -- starting value for geometric sequence\n
-        m (int) -- common ratio for geometric sequence
+        a -- starting value for arithmetic sequence\n
+        n -- common difference for arithmetic sequence\n
+        b -- starting value for geometric sequence\n
+        m -- common ratio for geometric sequence
     """
     
     require_integers(["a","n","b","m"],[a,n,b,m])
@@ -92,7 +92,7 @@ def powers(n):
     Powers of N: Special case of Geometric Sequence
     
     Args:
-        n (int) -- constant multiple
+        n -- constant multiple
     """
     
     require_integers(["n"],[n])
@@ -111,7 +111,7 @@ def exponent(e):
     Exponent Numbers: All naturals raised to the same exponent
     
     Args:
-        e (int) -- exponent to raise each natural number to
+        e -- exponent to raise each natural number to
     """
     
     assert type(e) == int
