@@ -1,19 +1,26 @@
-def naturals(n=0):
-    """Natural Numbers"""
+from Sequences.NiceErrorChecking import require_integers
+
+def naturals(offset=0):
+    """
+    Natural Numbers: Nonnegative whole numbers
     
-    assert type(n) == int
-    assert n >= 0
+    Args:
+        offset (int) -- nonnegative integer specifying first value returned
+    """
     
-    ctr = n
+    require_integers(["offset"],[offset])
+    assert offset >= 0
+    
+    ctr = offset
     
     while True:
         yield ctr
         
         ctr += 1
-        
+
 
 def integers():
-    """Integers"""
+    """Integers: All integers starting with zero then with positive before negative"""
     
     yield 0
     
@@ -22,13 +29,18 @@ def integers():
         yield -n
 
 
-def arithmetic(b=0,n=1):
-    """Arithmetic Sequence"""
+def arithmetic(a,n):
+    """
+    Arithmetic Sequence: Integers with constant difference
     
-    assert type(b) == int
-    assert type(n) == int
+    Args:
+        a (int) -- starting value\n
+        n (int) -- common difference
+    """
+    
+    require_integers(["a","n"],[a,n])
         
-    out = b
+    out = a
     
     while True:
         
@@ -37,13 +49,18 @@ def arithmetic(b=0,n=1):
         out += n
 
 
-def geometric(b=1,n=2):
-    """Geometric Sequence"""
+def geometric(a,n):
+    """
+    Geometric Sequence: Integers with constant ratio
     
-    assert type(b) == int
-    assert type(n) == int
+    Args:
+        a (int) -- starting values\n
+        n (int) -- common ratio
+    """
+    
+    require_integers(["a","n"],[a,n])
         
-    out = b
+    out = a
     
     while True:
         
@@ -52,10 +69,33 @@ def geometric(b=1,n=2):
         out *= n
 
 
-def powers(n):
-    """Powers of N"""
+def arithmetrico_geometric(a,n,b,m):
+    """
+    Arithmetrico-Geometric Sequence: Product of an arithmetic sequence with a geometric sequence
     
-    assert type(n) == int
+    Args:
+        a (int) -- starting value for arithmetic sequence\n
+        n (int) -- common difference for arithmetic sequence\n
+        b (int) -- starting value for geometric sequence\n
+        m (int) -- common ratio for geometric sequence
+    """
+    
+    require_integers(["a","n","b","m"],[a,n,b,m])
+    
+    for ari,geo in zip(arithmetic(a,n),geometric(b,m)):
+        
+        yield ari*geo
+
+
+def powers(n):
+    """
+    Powers of N: Special case of Geometric Sequence
+    
+    Args:
+        n (int) -- constant multiple
+    """
+    
+    require_integers(["n"],[n])
     assert n >= 0
     
     pw = 1
@@ -66,8 +106,13 @@ def powers(n):
         pw *= n
 
 
-def exponent(e=1):
-    """Exponent Numbers"""
+def exponent(e):
+    """
+    Exponent Numbers: All naturals raised to the same exponent
+    
+    Args:
+        e (int) -- exponent to raise each natural number to
+    """
     
     assert type(e) == int
     assert e >= 0
@@ -77,7 +122,7 @@ def exponent(e=1):
 
 
 def fermat():
-    """Fermat Numbers"""
+    """Fermat Numbers: 2^2^n+1 for n in naturals"""
     
     for n in naturals():
         yield 2**2**n+1

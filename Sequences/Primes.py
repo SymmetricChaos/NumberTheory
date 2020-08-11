@@ -23,6 +23,16 @@ def primes():
         q += 1
 
 
+def composites():
+    """Composite Numbers"""
+    
+    for n in naturals(4):
+        for p in primes:
+            if n % p == 0:
+                yield n
+                break
+
+
 # Cumulative product of prime numbers.
 def primorials():
     """Primoral Numbers"""
@@ -49,9 +59,11 @@ def smooth(B):
     
     for n in naturals(1):
         out = n
+        
         for f in range(2,B+1):
             while n % f == 0:
                 n = n // f
+            
             if n == 1:
                 yield out
                 break
@@ -63,10 +75,12 @@ def rough(B):
     
     for n in naturals(1):
         r = True
+        
         for f in range(2,B):
             if n % f == 0:
                 r = False
                 break
+        
         if r:
             yield n
 
@@ -78,6 +92,7 @@ def highly_composite():
     F = 0
     for i in naturals(1):
         L = len(factorization(i))
+        
         if L > F:
             F = L
             yield i
@@ -95,10 +110,12 @@ def prime_divisors():
     
     for n in naturals(1):
         ctr = 0
+        
         for p in primes():
             while n % p == 0:
                 ctr += 1
                 n = n // p
+            
             if n == 1:
                 yield ctr
                 break
@@ -109,11 +126,14 @@ def unique_prime_divisors():
     
     for n in naturals(1):
         ctr = 0
+        
         for p in primes():
             if n % p == 0:
                 ctr += 1
+            
             while n % p == 0:
                 n = n // p
+            
             if n == 1:
                 yield ctr
                 break
@@ -128,6 +148,7 @@ def squarefree():
         for i in naturals(2):
             if n % i**2 == 0:
                 break
+            
             if (i**2) > n:
                 yield n
                 break
