@@ -3,26 +3,23 @@ from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
 def derangements():
-    """Derangement numbers"""
+    """Derangement Numbers: Permutations with no element in its original position"""
     
     yield 1
     yield 0
     
     S = [1,0]
     
-    ctr = 0
-    while True:
-        ctr += 1
-        d = ctr * (S[0]+S[1])
+    for n in naturals(1):
+        d = n * (S[0]+S[1])
         S[0], S[1] = S[1], d
         yield d
 
 
 def catalan():
-    """Catalan Numbers"""
+    """Catalan Numbers: Number of non-crossing partitions of a set with n elements"""
     
-    n = 0
-    while True:
+    for n in naturals():
         N = 1
         D = 1
         
@@ -31,16 +28,14 @@ def catalan():
             D *= k
         
         yield N//D
-        
-        n += 1
 
 
 def pascal():
-    """Pascal's Triangle"""
+    """Pascal's Triangle: Number triangle with binomial coefficients"""
     
     n, k = 0, 0
+    
     while True:
-        
         yield choose(n,k)
                
         if n == k:
@@ -50,14 +45,12 @@ def pascal():
             k += 1
 
 
-# Number of ways to add naturals greater than 0 to get n
 def partition():
-    """Partition Number"""
+    """Partition Number: Number of ways to add naturals greater than 0 to get n"""
     
     D = [1]
     
     for n in naturals(1):
-        
         yield D[-1]
         
         P = gen_pentagonal()
@@ -77,9 +70,8 @@ def partition():
             k += sign*D[n-i]
 
 
-# Bell numbers count the partitions of a set with n elements
 def bell():
-    """Bell Numbers"""
+    """Bell Numbers: Number of equivalence classes on a set with n elements"""
     
     R0 = [1]
     R1 = [1,2]
@@ -95,7 +87,7 @@ def bell():
 
 
 def eulerian():
-    """Euler's Triangle"""
+    """Eulerian Numbers: Triangle with number of permutations of a set with n elements where there are m increases"""
     
     for m in naturals(1):
         for n in range(m):
@@ -110,17 +102,15 @@ def eulerian():
 
 
 def gould():
-    """Gould's Sequence"""
+    """Gould's Sequence: Number of odd values on the nth row of Pascal's Triangle"""
     
-    ctr = 1
     P = pascal()
     
-    while True:
+    for n in naturals(1):
         val = 0
         
-        for i in range(ctr):
+        for i in range(n):
             if next(P) % 2 == 1:
                 val += 1
         
         yield val
-        ctr += 1

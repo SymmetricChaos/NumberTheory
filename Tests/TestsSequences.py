@@ -59,7 +59,7 @@ tests = [("Natural Numbers",naturals()),
          ("Derangements",derangements()),
          ("Catalan Numbers",catalan()),
          ("Pascal's Triangle",pascal()),
-         ("Gould's Sequence",gould())
+         ("Gould's Sequence",gould()),
          ("Partition Numbers",partition()),
          ("Bell Numbers",bell()),
          ("Euler's Triangle",eulerian()),
