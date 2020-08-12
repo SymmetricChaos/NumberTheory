@@ -1,4 +1,4 @@
-from Sequences.NiceErrorChecking import require_integers
+from Sequences.NiceErrorChecking import require_integers, require_nonnegative
 
 def naturals(offset=0):
     """
@@ -9,7 +9,7 @@ def naturals(offset=0):
     """
     
     require_integers(["offset"],[offset])
-    assert offset >= 0
+    require_nonnegative(["offset"],[offset])
     
     ctr = offset
     
@@ -63,7 +63,6 @@ def geometric(a,n):
     out = a
     
     while True:
-        
         yield out
         
         out *= n
@@ -96,7 +95,7 @@ def powers(n):
     """
     
     require_integers(["n"],[n])
-    assert n >= 0
+    require_nonnegative(["n"],[n])
     
     pw = 1
     
@@ -106,16 +105,16 @@ def powers(n):
         pw *= n
 
 
-def exponent(e):
+def power_function(e):
     """
-    Exponent Numbers: All naturals raised to the same exponent
+    Power Function: Each non-negative natural raised to the same exponent
     
     Args:
         e -- exponent to raise each natural number to
     """
     
-    assert type(e) == int
-    assert e >= 0
+    require_integers(["e"],[e])
+    require_nonnegative(["e"],[e])
     
     for n in naturals():
         yield n**e

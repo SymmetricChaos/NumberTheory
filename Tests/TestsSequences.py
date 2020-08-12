@@ -8,7 +8,7 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
                       collatz_numbers, recaman, leonardo, fermat, prime_divisors, \
-                      unique_prime_divisors, double_factorials, gould
+                      unique_prime_divisors, double_factorials, gould, prime_counting
                       
 
 from Sequences.Utils import show_start
@@ -30,6 +30,7 @@ tests = [("Natural Numbers",naturals()),
          ("Pell-Lucas Numbers (co-Pell Numbers)",pell_lucas()),
          ("Leonardo Numbers",leonardo()),
          ("Primes",primes()),
+         ("Prime Counting Functions",prime_counting()),
          ("Primorals",primorials()),
          ("5-Smooth Numbers",smooth(5)),
          ("5-Rough Numbers",rough(5)),

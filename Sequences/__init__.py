@@ -9,10 +9,10 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
                                 cen_polygonal
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
-                             exponent, fermat
+                             power_function, fermat
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
-                             divisors, squarefree, squarefree_kernel, \
+                             divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites
 
@@ -42,10 +42,10 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
          "random_recurrence","leonardo",
          
-         "naturals","integers","arithmetic","geometric","powers","fermat",
+         "naturals","integers","arithmetic","geometric","powers","fermat","power_function",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
-         "squarefree","squarefree_kernel","pythagorean_primes",
+         "squarefree","squarefree_kernel","pythagorean_primes","prime_counting",
          "prime_divisors","unique_prime_divisors","composites",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal","exponent",

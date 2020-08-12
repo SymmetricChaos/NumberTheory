@@ -3,7 +3,7 @@ from Sequences.Utils import factorization
 
 
 def aliquot():
-    """Aliquot Numbers"""
+    """Aliquot Numbers: Sum of divisors for each positive integer"""
     ctr = 1
     while True:
         yield sum(factorization(ctr)[:-1])
@@ -11,7 +11,7 @@ def aliquot():
 
 
 def abundant():
-    """Abundant Numbers"""
+    """Abundant Numbers: Positive integers that are less than their sum of divisors"""
     ctr = 1
     while True:
         if sum(factorization(ctr)[:-1]) > ctr:
@@ -20,7 +20,7 @@ def abundant():
 
 
 def deficient():
-    """Deficient Numbers"""
+    """Deficient Numbers: Positive integers that are greater than their sum of divisors"""
     ctr = 1
     while True:
         if sum(factorization(ctr)[:-1]) < ctr:
@@ -29,7 +29,7 @@ def deficient():
 
 
 def perfect():
-    """Perfect Numbers"""
+    """Perfect Numbers: Positive integer that are equal to their sum of divisors"""
     ctr = 1
     while True:
         if sum(factorization(ctr)[:-1]) == ctr:

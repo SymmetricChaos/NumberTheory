@@ -169,6 +169,7 @@ def squarefree_kernel():
             
             if n % p == 0:
                 K *= p
+                
                 while n % p == 0:
                     n //= p
             
@@ -176,6 +177,19 @@ def squarefree_kernel():
                 yield K
                 break
 
+
+def prime_counting():
+    """Prime Counting Function: Count of primes less than each non-negative integer"""
+    
+    ctr = 0
+    cur = 0
+    
+    for p in primes():
+        for i in range(p-cur):
+            yield ctr
+        
+        ctr += 1
+        cur = p
 
 ## Too slow to use
 # def euclid_mullin():
