@@ -39,7 +39,7 @@ def kempner_function():
 
 
 def double_factorials():
-    """Double Factorials"""
+    """Double Factorials: Double factorial of each non-negative integer"""
     
     odd = 1
     even = 2
@@ -57,4 +57,30 @@ def double_factorials():
         even_ctr += 2
         
         odd = odd*odd_ctr
+        even = even*even_ctr
+
+
+def odd_double_factorials():
+    """Odd Double Factorials: Double factorial of each odd non-negative integer"""
+    
+    odd = 1
+    odd_ctr = 1
+    
+    while True:
+        yield odd
+        odd_ctr += 2
+        odd = odd*odd_ctr
+
+
+def even_double_factorials():
+    """Even Double Factorials: Double factorial of each even non-negative integer"""
+    
+    even = 2
+    even_ctr = 2
+    
+    yield 1
+    
+    while True:
+        yield even
+        even_ctr += 2
         even = even*even_ctr
