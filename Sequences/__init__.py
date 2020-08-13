@@ -9,7 +9,7 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
                                 cen_polygonal
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
-                             power_function, fermat
+                             power_function, fermat, even, gen_even, odd, gen_odd
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
@@ -17,7 +17,7 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
                              composites
 
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function, \
-                                 double_factorials
+                                 double_factorials, even_double_factorials, odd_double_factorials
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect
 
@@ -43,6 +43,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "random_recurrence","leonardo",
          
          "naturals","integers","arithmetic","geometric","powers","fermat","power_function",
+         "even","gen_even","odd","gen_odd",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes","prime_counting",
@@ -52,6 +53,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "gen_polygonal","simplicial","perfect_powers","cen_polygonal",
          
          "factorials","alternating_factorials","kempner_function","double_factorials",
+         "even_double_factorials","odd_double_factorials",
          
          "aliquot","abundant","deficient","perfect",
          
@@ -66,4 +68,4 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "thue_morse",
          
          "LCG","LFG"
-         ]
+        ]

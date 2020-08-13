@@ -34,7 +34,7 @@ def arithmetic(a,n):
     Arithmetic Sequence: Integers with constant difference
     
     Args:
-        a -- starting value\n
+        a -- starting value
         n -- common difference
     """
     
@@ -54,7 +54,7 @@ def geometric(a,n):
     Geometric Sequence: Integers with constant ratio
     
     Args:
-        a -- starting values\n
+        a -- starting values
         n -- common ratio
     """
     
@@ -125,3 +125,37 @@ def fermat():
     
     for n in naturals():
         yield 2**2**n+1
+
+
+### Wrappers for common cases ###
+def evens():
+    """Even Numbers: Non-negative integers divisible by 2"""
+    
+    for i in arithmetic(0,2):
+        yield i
+
+
+def gen_evens():
+    """Even Numbers: Integers divisible by 2"""
+    
+    yield 0
+    
+    for i in arithmetic(2,2):
+        yield i
+        yield -i
+
+
+def odds():
+    """Odd Numbers: Non-negative integers not divisible by 2"""
+    
+    for i in arithmetic(1,2):
+        yield i
+
+
+def gen_odds():
+    """Odd Numbers: Integers not divisible by 2"""
+    
+    for i in arithmetic(1,2):
+        yield i
+        yield -i
+
