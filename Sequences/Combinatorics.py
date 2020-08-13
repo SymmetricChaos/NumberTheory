@@ -114,3 +114,11 @@ def gould():
                 val += 1
         
         yield val
+
+
+# Generalized cake numbers? Uses binomial coefficients
+def cake():
+    """Cake Numbers: Maximum number of pieces produced when cutting a cube with exactly n planes"""
+    
+    for n in naturals():
+        yield (n*n*n+5*n+6)//6

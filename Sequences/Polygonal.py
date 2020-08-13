@@ -8,7 +8,7 @@ def polygonal(S):
     """Polygonal Numbers"""
     
     assert type(S) == int
-    assert S > 0
+    assert S > 1
     
     for n in naturals():
         
@@ -19,7 +19,7 @@ def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
     assert type(S) == int
-    assert S > 0
+    assert S > 1
     
     for n in integers():
         
@@ -30,7 +30,7 @@ def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
     assert type(S) == int
-    assert S > 0
+    assert S > 1
     
     for n in naturals():
         yield (S*n)//2 * (n-1)+1
@@ -40,7 +40,7 @@ def simplicial(S):
     """Simplicial Numbers"""
     
     assert type(S) == int
-    assert S > 0
+    assert S > 1
     
     yield 0
     
@@ -72,6 +72,22 @@ def perfect_powers():
                 break
 
 
+def doubly_polygonal(S):
+    
+    cur = 0
+    P = polygonal(S)
+    
+    for s in polygonal(S):
+        skip = s-cur-1
+        
+        for n in range(skip):
+            next(P)
+        
+        yield next(P)
+        
+        cur = s
+
+
 ###  Wrappers for some common polygonal numbers ###
 def triangular():
     """Triangular Numbers"""
@@ -79,7 +95,6 @@ def triangular():
         yield p
 
 
-# Square is calculated more efficiently
 def square():
     """Square Numbers"""
     for n in naturals():

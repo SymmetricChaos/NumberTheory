@@ -1,5 +1,6 @@
 from itertools import cycle
 
+
 def factorials():
     """Factorial Numbers: Product of the the first n positive integers"""
     
@@ -26,9 +27,10 @@ def alternating_factorials():
 
 
 def kempner_function():
-    """Values of the Kempner Function"""
+    """Kempner Function: For each positive integer the index of the argument of the smallest factorial it is a factor of"""
     
     L = []
+    
     for n,i in enumerate(factorials(),1):
         L.append(i)
         
@@ -68,6 +70,7 @@ def odd_double_factorials():
     
     while True:
         yield odd
+        
         odd_ctr += 2
         odd = odd*odd_ctr
 
@@ -82,5 +85,6 @@ def even_double_factorials():
     
     while True:
         yield even
+        
         even_ctr += 2
         even = even*even_ctr
