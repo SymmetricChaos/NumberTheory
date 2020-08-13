@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.Utils import factorization
 from collections import defaultdict
+from Sequences.NiceErrorChecking import require_integers, require_positive
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -61,6 +62,9 @@ def smooth(B):
         B -- largest prime factor allowed
     """
     
+    require_integers("B",B)
+    require_positive("B",B)
+    
     for n in naturals(1):
         out = n
         
@@ -80,6 +84,9 @@ def rough(B):
     Args:
         B -- smallest prime factor allowed
     """
+    
+    require_integers("B",B)
+    require_positive("B",B)
     
     for n in naturals(1):
         r = True
@@ -166,7 +173,6 @@ def squarefree_kernel():
         K = 1
         
         for p in primes():
-            
             if n % p == 0:
                 K *= p
                 
@@ -190,6 +196,7 @@ def prime_counting():
         
         ctr += 1
         cur = p
+
 
 ## Too slow to use
 # def euclid_mullin():
