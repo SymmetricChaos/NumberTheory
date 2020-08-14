@@ -9,7 +9,7 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
                                 cen_polygonal
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
-                             power_function, fermat, even, gen_even, odd, gen_odd
+                             power_function, fermat, evens, gen_evens, odds, gen_odds
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
@@ -43,7 +43,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          "random_recurrence","leonardo",
          
          "naturals","integers","arithmetic","geometric","powers","fermat","power_function",
-         "even","gen_even","odd","gen_odd",
+         "evens","gen_evens","odds","gen_odds",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes","prime_counting",

@@ -62,8 +62,8 @@ def smooth(B):
         B -- largest prime factor allowed
     """
     
-    require_integers("B",B)
-    require_positive("B",B)
+    require_integers(["B"],[B])
+    require_positive(["B"],[B])
     
     for n in naturals(1):
         out = n
@@ -85,8 +85,8 @@ def rough(B):
         B -- smallest prime factor allowed
     """
     
-    require_integers("B",B)
-    require_positive("B",B)
+    require_integers(["B"],[B])
+    require_positive(["B"],[B])
     
     for n in naturals(1):
         r = True
@@ -196,6 +196,22 @@ def prime_counting():
         
         ctr += 1
         cur = p
+
+
+# def totients():
+#     def totient(n):
+#     """Euler's Totient Function"""
+#     N = 1
+#     D = 1
+#     for p in primes():
+#         if p > n:
+#             break
+        
+#         if n % p == 0:
+#             N *= (p-1)
+#             D *= p
+    
+#     return n*N//D
 
 
 ## Too slow to use

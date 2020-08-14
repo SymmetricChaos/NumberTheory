@@ -3,7 +3,7 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       padovan, sylvesters_sequence, pell, pell_lucas, primes, \
                       primorials, smooth, rough, highly_composite, divisors, squarefree, \
                       squarefree_kernel, pythagorean_primes, triangular, square, \
-                      pentagonal, gen_pentagonal, simplicial, perfect_powers, exponent, \
+                      pentagonal, gen_pentagonal, simplicial, perfect_powers, power_function, \
                       cen_polygonal, factorials, alternating_factorials, kempner_function, \
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
@@ -47,7 +47,7 @@ tests = [("Natural Numbers",naturals()),
          ("Generalized Pentagonal Numbers",gen_pentagonal()),
          ("Tetrahedral Numbers",simplicial(3)),
          ("Perfect Powers",perfect_powers()),
-         ("Cubic Numbers",exponent(3)),
+         ("Cubic Numbers",power_function(3)),
          ("Centered Triangular",cen_polygonal(3)),
          ("Factorial Numbers",factorials()),
          ("Double Factorial Numbers",double_factorials()),

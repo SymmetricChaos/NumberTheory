@@ -8,8 +8,8 @@ from Sequences.NiceErrorChecking import require_integers, require_positive
 def polygonal(S):
     """Polygonal Numbers"""
     
-    require_integers("S",S)
-    require_positive("S",S)
+    require_integers(["S"],[S])
+    require_positive(["S"],[S])
     
     for n in naturals():
         yield ( n**2*(S-2)-n*(S-4) ) // 2
@@ -18,8 +18,8 @@ def polygonal(S):
 def gen_polygonal(S):
     """Generalized Polygonal Numbers"""
     
-    require_integers("S",S)
-    require_positive("S",S)
+    require_integers(["S"],[S])
+    require_positive(["S"],[S])
     
     for n in integers():
         yield ( n**2*(S-2)-n*(S-4) ) // 2
@@ -28,8 +28,8 @@ def gen_polygonal(S):
 def cen_polygonal(S):
     """Centered Polygonal Numbers"""
     
-    require_integers("S",S)
-    require_positive("S",S)
+    require_integers(["S"],[S])
+    require_positive(["S"],[S])
     
     for n in naturals():
         yield (S*n) // 2 * (n-1)+1
@@ -38,8 +38,8 @@ def cen_polygonal(S):
 def simplicial(N):
     """Simplicial Numbers: Generalization of triangular numbers to N dimensions"""
     
-    require_integers("N",N)
-    require_positive("N",N)
+    require_integers(["N"],[N])
+    require_positive(["N"],[N])
     
     yield 0
     
@@ -78,8 +78,8 @@ def perfect_powers():
 def doubly_polygonal(S):
     """Doubly Polygonal Numbers"""
     
-    require_integers("S",S)
-    require_positive("S",S)
+    require_integers(["S"],[S])
+    require_positive(["S"],[S])
     
     cur = 0
     P = polygonal(S)

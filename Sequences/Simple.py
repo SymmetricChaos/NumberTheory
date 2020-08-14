@@ -1,22 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
-
-def naturals(offset=0):
-    """
-    Natural Numbers: Nonnegative whole numbers
-    
-    Args:
-        offset -- nonnegative integer specifying first value returned
-    """
-    
-    require_integers(["offset"],[offset])
-    require_nonnegative(["offset"],[offset])
-    
-    ctr = offset
-    
-    while True:
-        yield ctr
-        
-        ctr += 1
+from itertools import count
 
 
 def integers():
@@ -39,14 +22,9 @@ def arithmetic(a,n):
     """
     
     require_integers(["a","n"],[a,n])
-        
-    out = a
     
-    while True:
-        
-        yield out
-        
-        out += n
+    for i in count(a,n):
+        yield i
 
 
 def geometric(a,n):
@@ -128,15 +106,30 @@ def fermat():
 
 
 ### Wrappers for common cases ###
+def naturals(offset=0):
+    """
+    Natural Numbers: Nonnegative whole numbers, special case of arithmetic
+    
+    Args:
+        offset -- nonnegative integer specifying first value returned
+    """
+    
+    require_integers(["offset"],[offset])
+    require_nonnegative(["offset"],[offset])
+    
+    for a in arithmetic(offset,1):
+        yield a
+
+
 def evens():
-    """Even Numbers: Non-negative integers divisible by 2"""
+    """Even Numbers: Non-negative integers divisible by 2, special case of arithmetic"""
     
     for i in arithmetic(0,2):
         yield i
 
 
 def gen_evens():
-    """Even Numbers: Integers divisible by 2"""
+    """Even Numbers: Integers divisible by 2, special case of arithmetic"""
     
     yield 0
     
@@ -146,14 +139,14 @@ def gen_evens():
 
 
 def odds():
-    """Odd Numbers: Non-negative integers not divisible by 2"""
+    """Odd Numbers: Non-negative integers not divisible by 2, special case of arithmetic"""
     
     for i in arithmetic(1,2):
         yield i
 
 
 def gen_odds():
-    """Odd Numbers: Integers not divisible by 2"""
+    """Odd Numbers: Integers not divisible by 2, special case of arithmetic"""
     
     for i in arithmetic(1,2):
         yield i

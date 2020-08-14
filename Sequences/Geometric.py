@@ -3,7 +3,7 @@ from Sequences.Simple import naturals
 from math import gcd
 
 def nonhypotenuse():
-    """Nonhypotenuse Numbers"""
+    """Nonhypotenuse Numbers: Positive integers that cannot be the hypotenuse of a Pythagorean triple"""
     
     for n in naturals(1):
         for p in pythagorean_primes():
@@ -17,7 +17,7 @@ def nonhypotenuse():
 
 # Much faster more memory efficient
 def raw_hypotenuse():
-    """Primitive Hypotenuse Numbers without order and with repetitions"""
+    """Primitive Hypotenuse Numbers generated using Eucild's method, memory efficient but includes repeats and not sorted"""
     
     for m in naturals(1):
         if m % 2 == 0:
@@ -32,7 +32,7 @@ def raw_hypotenuse():
 
 
 def hypotenuse():
-    """Primitive Hypotenuse Numbers"""
+    """Primitive Hypotenuse Numbers: Positive integers that can be the hypotenuse of a primitive Pythagorean triple"""
     
     L = []
     
