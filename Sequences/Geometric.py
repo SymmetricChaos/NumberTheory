@@ -15,22 +15,6 @@ def nonhypotenuse():
                 break
 
 
-# Much faster more memory efficient
-def raw_hypotenuse():
-    """Primitive Hypotenuse Numbers generated using Eucild's method, memory efficient but includes repeats and not sorted"""
-    
-    for m in naturals(1):
-        if m % 2 == 0:
-            for n in range(1,m,2):
-                if gcd(m,n) == 1:
-                    yield m*m+n*n
-        
-        else:
-            for n in range(2,m,2):
-                if gcd(m,n) == 1:
-                    yield m*m+n*n
-
-
 def hypotenuse():
     """Primitive Hypotenuse Numbers: Positive integers that can be the hypotenuse of a primitive Pythagorean triple"""
     
@@ -67,3 +51,18 @@ def hypotenuse():
                 break
             
             yield L.pop(0)
+
+
+def raw_hypotenuse():
+    """Primitive Hypotenuse Numbers: As hypotenuse but without filtering or sorting, memory efficient"""
+    
+    for m in naturals(1):
+        if m % 2 == 0:
+            for n in range(1,m,2):
+                if gcd(m,n) == 1:
+                    yield m*m+n*n
+        
+        else:
+            for n in range(2,m,2):
+                if gcd(m,n) == 1:
+                    yield m*m+n*n

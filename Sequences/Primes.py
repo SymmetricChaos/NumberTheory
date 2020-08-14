@@ -198,20 +198,25 @@ def prime_counting():
         cur = p
 
 
-# def totients():
-#     def totient(n):
-#     """Euler's Totient Function"""
-#     N = 1
-#     D = 1
-#     for p in primes():
-#         if p > n:
-#             break
-        
-#         if n % p == 0:
-#             N *= (p-1)
-#             D *= p
+def totients():
+    """Totients: Count of positive integers coprime to each positive integer"""
     
-#     return n*N//D
+    P = []
+    pr = primes()
+    P.append(next(pr))
+    
+    for n in naturals(1):
+        while P[-1] <= n:
+            P.append(next(pr))
+        
+        N,D = 1,1
+        
+        for p in P[:-1]:
+            if n%p == 0:
+                N *= (p-1)
+                D *= p
+        
+        yield n*N//D
 
 
 ## Too slow to use

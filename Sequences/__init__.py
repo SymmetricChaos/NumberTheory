@@ -14,7 +14,7 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
-                             composites
+                             composites, totients
 
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function, \
                                  double_factorials, even_double_factorials, odd_double_factorials
@@ -47,7 +47,7 @@ __all__=["partial","seq_max","make_triangle","show_start","offset",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes","prime_counting",
-         "prime_divisors","unique_prime_divisors","composites",
+         "prime_divisors","unique_prime_divisors","composites","totients",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal","exponent",
          "gen_polygonal","simplicial","perfect_powers","cen_polygonal",

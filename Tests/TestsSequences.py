@@ -8,7 +8,8 @@ from Sequences import naturals, integers, arithmetic, geometric, powers, fibonac
                       aliquot, abundant, deficient, perfect, derangements, catalan, \
                       pascal, partition, bell, eulerian, hypotenuse, nonhypotenuse, \
                       collatz_numbers, recaman, leonardo, fermat, prime_divisors, \
-                      unique_prime_divisors, double_factorials, gould, prime_counting
+                      unique_prime_divisors, double_factorials, gould, prime_counting, \
+                      totients
                       
 
 from Sequences.Utils import show_start
@@ -68,7 +69,8 @@ tests = [("Natural Numbers",naturals()),
          ("Nonhypotenuse Numbers",nonhypotenuse()),
          ("Collatz Numbers",collatz_numbers()),
          ("Recaman Sequence",recaman()),
-         ("Fermat Numbers",fermat())
+         ("Fermat Numbers",fermat()),
+         ("Totients",totients())
         ]
 
 for name,seq in tests:
