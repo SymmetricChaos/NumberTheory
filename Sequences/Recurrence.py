@@ -1,7 +1,7 @@
-from random import uniform
+from NiceErrorChecking import require_integers
 
 def fibonacci():
-    """Fibonacci Numbers"""
+    """Fibonacci Sequence"""
     
     a = 0
     b = 1
@@ -12,7 +12,7 @@ def fibonacci():
 
 
 def lucas():
-    """Lucas Numbers"""
+    """Lucas Sequence"""
     
     a = 2
     b = 1
@@ -23,10 +23,15 @@ def lucas():
 
 
 def PQ_fibonacci(P=1,Q=1):
-    """P,Q-Fibonacci Numbers"""
+    """
+    P,Q-Fibonacci Sequence
     
-    assert type(P) == int
-    assert type(Q) == int
+    Args:
+        P -- multiplier for second addend
+        Q -- multiplier for first addend
+    """
+    
+    require_integers(["P","Q"],[P,Q])
     
     a = 0
     b = 1
@@ -37,10 +42,15 @@ def PQ_fibonacci(P=1,Q=1):
 
 
 def PQ_lucas(P=1,Q=1):
-    """P,Q-Lucas Numbers"""
+    """
+    P,Q-Lucas Sequence
+
+    Args:
+        P -- multiplier for second addend
+        Q -- multiplier for first addend
+    """
     
-    assert type(P) == int
-    assert type(Q) == int
+    require_integers(["P","Q"],[P,Q])
     
     a = 2
     b = P
@@ -73,7 +83,7 @@ def pell_lucas():
 
 
 def tribonacci():
-    """Tribonacci Numbers"""
+    """Tribonacci Sequence"""
     
     a = 0
     b = 0
@@ -85,7 +95,7 @@ def tribonacci():
 
 
 def padovan():
-    """Padovan Numbers"""
+    """Padovan Sequence"""
     
     a = 1
     b = 1
@@ -97,14 +107,52 @@ def padovan():
 
 
 def simple_recurrence(a,b):
-    """Fibonnaci Type Sequence Starting with a and b"""
+    """
+    Additive recurrence based relation on two terms
     
-    assert type(a) == int
-    assert type(b) == int
+    Args:
+        a -- first term
+        b -- second term
+    """
+    
+    require_integers(["a","b"],[a,b])
     
     while True:
         yield a
         a, b = b, a+b
+
+
+def PQ_simple_recurrence(a,b,P,Q):
+    """
+    Additive recurrence based relation on two terms
+    
+    Args:
+        a -- first term
+        b -- second term
+        P -- multiplier for second addend
+        Q -- multiplier for first addend
+    """
+    
+    require_integers(["a","b","P","Q"],[a,b,P,Q])
+    
+    while True:
+        yield a
+        a, b = b, Q*a+P*b
+
+
+def arbitrary_recurrence(S,func):
+    """
+    Recurrence based sequence given a starting tuple and a function
+    
+    Args:
+        S -- Starting tuple
+        func -- A function that takes a tuple with the same length of S and
+                returns a tuple of the same length
+    """
+    
+    while True:
+        yield S[0]
+        S = func(S)
 
 
 def sylvesters_sequence():
@@ -115,21 +163,11 @@ def sylvesters_sequence():
     while True:
         yield L[-1]
         t = 1
+        
         for i in L:
             t *= i
+        
         L.append(t+1)
-
-
-def random_recurrence(a=1,b=1):
-    """Random Recurrence Sequence"""
-    
-    while True:
-        if uniform(0,1) > .5:
-            yield a
-            a,b = b,a+b
-        else:
-            yield a
-            a,b = b,a-b
 
 
 def leonardo():

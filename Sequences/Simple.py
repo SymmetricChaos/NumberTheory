@@ -51,9 +51,9 @@ def arithmetrico_geometric(a,n,b,m):
     Arithmetrico-Geometric Sequence: Product of an arithmetic sequence with a geometric sequence
     
     Args:
-        a -- starting value for arithmetic sequence\n
-        n -- common difference for arithmetic sequence\n
-        b -- starting value for geometric sequence\n
+        a -- starting value for arithmetic sequence
+        n -- common difference for arithmetic sequence
+        b -- starting value for geometric sequence
         m -- common ratio for geometric sequence
     """
     
@@ -151,4 +151,3 @@ def gen_odds():
     for i in arithmetic(1,2):
         yield i
         yield -i
-

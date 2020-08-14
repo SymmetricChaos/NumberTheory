@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, integers, arithmetic
-from Sequences.Utils import choose
+from Sequences.MathUtils import choose
 from math import floor, log2
 from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive

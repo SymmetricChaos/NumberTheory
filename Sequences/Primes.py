@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.Utils import factorization
+from Sequences.MathUtils import factorization
 from collections import defaultdict
 from Sequences.NiceErrorChecking import require_integers, require_positive
 

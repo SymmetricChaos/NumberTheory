@@ -1,4 +1,4 @@
-from Sequences.Utils import factorization
+from Sequences.MathUtils import factorization
 
 
 

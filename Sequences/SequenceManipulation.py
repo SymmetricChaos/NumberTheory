@@ -1,4 +1,4 @@
-from math import ceil, sqrt
+
 
 def offset(sequence,offset=0):
     
