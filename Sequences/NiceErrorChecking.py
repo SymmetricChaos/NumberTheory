@@ -19,7 +19,7 @@ def require_nonnegative(K,L):
             out += f"{k} must be non-negative\n"
     
     if out != "":
-        raise TypeError(out)
+        raise ValueError(out)
 
 
 def require_positive(K,L):
@@ -31,4 +31,4 @@ def require_positive(K,L):
             out += f"{k} must be positive\n"
     
     if out != "":
-        raise TypeError(out)
+        raise ValueError(out)

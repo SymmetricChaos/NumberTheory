@@ -10,7 +10,7 @@ def offset(sequence,offset=0):
 
 
 # Return some number of values with some offset
-def partial(sequence,num_vals=0,offset=0):
+def segment(sequence,num_vals=0,offset=0):
     """Return num_val values from a sequence after skipping offset of them"""
     
     if type(num_vals) != int:
@@ -36,31 +36,16 @@ def partial(sequence,num_vals=0,offset=0):
             yield next(sequence)
 
 
-# Return values from a sequence until it returns a value above some maximum
-def seq_max(sequence,max_val=None):
-    """Return vals until max_val reached"""
-    if type(max_val) != int and type(max_val) != None:
-        raise Exception("offset must be an integer or infinite")
-    
-    if max_val == None:
-        max_val = float("inf")
-    
-    for val in sequence:
-        yield val          
-        if abs(val) > max_val:
-            break
-
-# Print the docstring with the sequence name then the first 20 numbers unless 
-# a number greater than 1000 is found
 def show_start(sequence):
     """Values of sequence until value passes 1000 or until 20 values printed"""
     
-    part = partial(sequence,20)
+    part = segment(sequence,20)
     
     L = []
     
     for i in part:
         L.append(i)
+        
         if i > 1000:
             break
         
@@ -72,6 +57,7 @@ def show_start(sequence):
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
     """All Unique Factors"""
+    
     if type(n) != int:
         raise Exception("n must be an integer") 
     
@@ -86,6 +72,7 @@ def factorization(n,nontrivial=False):
     
     for i in range(2,lim):
         f,r = divmod(n,i)
+        
         if r == 0:
             L.append(i)
             L.append(f)
@@ -99,10 +86,11 @@ def factorization(n,nontrivial=False):
 # Copy of choose function to prevent reference issues
 def choose(n,k):
     """Binomial coefficient"""
+    
     if n < k:
-        raise Exception("n cannot be less than k")
+        raise ValueError("n cannot be less than k")
     if k < 0:
-        raise Exception("k must be nonnegative")
+        raise ValueError("k must be nonnegative")
         
     # Calculate the numerator and denominator seperately in order to avoid loss
     # of precision for large numbers.
@@ -114,12 +102,34 @@ def choose(n,k):
     return N//D
 
 
-def make_triangle(seq,n):
-    """First n rows of the triangular arrangement of seq"""
-    T = []
+def make_triangle(seq):
+    """Standard triangular arrangement of seq"""
+    
     ctr = 1
-    for i in range(n):
+    
+    while True:
         L = [next(seq) for c in range(ctr)]
-        T.append(L)
         ctr += 1
-    return T
+        yield L
+
+
+def partial_sums(sequence,S=0):
+    """Partial sums of the sequence"""
+    
+    if type(S) != int:
+        raise Exception("S must be an integer")
+    
+    for term in sequence:
+        S += term
+        yield S
+
+
+def partial_products(sequence,S=1):
+    """Partial products of the sequence"""
+    
+    if type(S) != int:
+        raise Exception("S must be an integer")
+    
+    for term in sequence:
+        S *= term
+        yield S

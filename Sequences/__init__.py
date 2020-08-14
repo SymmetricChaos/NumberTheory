@@ -1,4 +1,5 @@
-from Sequences.Utils import offset, partial, seq_max, make_triangle, show_start
+from Sequences.Utils import offset, segment, make_triangle, show_start, partial_sums, \
+                            partial_products
 
 from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci, \
                                  PQ_fibonacci, PQ_lucas, padovan, simple_recurrence, \
@@ -36,7 +37,8 @@ from Sequences.Pseudorandom import LCG, LFG
 
 
 
-__all__=["partial","seq_max","make_triangle","show_start","offset",
+__all__=["segment","make_triangle","show_start","offset","partial_sums",
+         "partial_products",
          
          "lucas","fibonacci","pell","pell_lucas","tribonacci","PQ_lucas",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
