@@ -21,7 +21,8 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
 from Sequences.Factorials import factorials, alternating_factorials, kempner_function, \
                                  double_factorials, even_double_factorials, odd_double_factorials
 
-from Sequences.Aliquot import aliquot, abundant, deficient, perfect
+from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
+                              abundance, deficiency
 
 from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
                                     eulerian, bell, gould
@@ -58,7 +59,8 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "factorials","alternating_factorials","kempner_function","double_factorials",
          "even_double_factorials","odd_double_factorials",
          
-         "aliquot","abundant","deficient","perfect",
+         "aliquot","abundant","deficient","perfect","aliquot_recurrence","abundance",
+         "deficiency",
          
          "catalan","derangements","pascal","partition","eulerian","bell","gould",
          

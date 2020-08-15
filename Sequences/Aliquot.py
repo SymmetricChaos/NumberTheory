@@ -11,6 +11,14 @@ def aliquot():
         yield _aliquot_sum(n)
 
 
+def aliquot_recurrence(N):
+    """Aliquot Sequence of N: Recurrence relation of which each term of the Aliquot sum of the previous"""
+    
+    while True:
+        yield N
+        N = _aliquot_sum(N)
+
+
 def abundant():
     """Abundant Numbers: Positive integers that are less than their Aliquot sum"""
     
@@ -64,6 +72,10 @@ if __name__ == '__main__':
     print("Aliquot Sums")
     simple_test(aliquot(),10,
                 "0, 1, 1, 3, 1, 6, 1, 7, 4, 8")
+    
+    print("\nAliquot Sequence of 276")
+    simple_test(aliquot_recurrence(276),9,
+                "276, 396, 696, 1104, 1872, 3770, 3790, 3050, 2716")
     
     print("\nAbundant Numbers")
     simple_test(abundant(),10,
