@@ -84,3 +84,15 @@ def partial_products(sequence,S=1):
     for term in sequence:
         S *= term
         yield S
+
+
+def simple_test(sequence,N,check):
+    
+    L = [str(i) for i in segment(sequence,N)]
+    S = ", ".join(L)
+    if S == check:
+        print(S)
+    else:
+        print("ERROR")
+        print(f"Expected: {check}")
+        print(f"Produced: {S}")

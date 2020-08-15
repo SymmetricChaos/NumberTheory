@@ -90,6 +90,11 @@ def smooth(B):
                 break
 
 
+def hamming():
+    for i in smooth(5):
+        yield i
+
+
 def rough(B):
     """
     Rough Numbers: Positive integers with no prime factors less than B
@@ -102,16 +107,16 @@ def rough(B):
     require_positive(["B"],[B])
     
     P = [p for p in takewhile(lambda x: x < B,primes())]
-    print(P)
+    
     for n in naturals(1):
-        r = True
+        confirm = True
         
         for f in P:
             if n % f == 0:
-                r = False
+                confirm = False
                 break
         
-        if r:
+        if confirm:
             yield n
 
 
@@ -246,3 +251,42 @@ def totients():
             del D[q]
         
         q += 1
+
+
+if __name__ == '__main__':
+    from Sequences.SequenceManipulation import simple_test
+    
+    print("Primes")
+    simple_test(primes(),10,
+                "2, 3, 5, 7, 11, 13, 17, 19, 23, 29")
+    
+    print("\nComposites")
+    simple_test(composites(),10,
+                "4, 6, 8, 9, 10, 12, 14, 15, 16, 18")
+    
+    print("\nPrimorials")
+    simple_test(primorials(),8,
+                "1, 2, 6, 30, 210, 2310, 30030, 510510")
+    
+    print("\nPythagorean_Primes")
+    simple_test(pythagorean_primes(),10,
+                "5, 13, 17, 29, 37, 41, 53, 61, 73, 89")
+
+    print("\n5-Smooth (Hamming)")
+    simple_test(smooth(5),11,
+                "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15")
+
+    print("\n5-Rough")
+    simple_test(rough(5),10,
+                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
+
+    print("\nHighly Composite")
+    simple_test(highly_composite(),10,
+                "1, 2, 4, 6, 12, 24, 36, 48, 60, 120")
+
+    print("\nSum-of-Divisors (Sigma)")
+    simple_test(divisors(),10,
+                "1, 2, 2, 3, 2, 4, 2, 4, 3, 4")
+
+
+
