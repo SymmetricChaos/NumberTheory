@@ -201,33 +201,27 @@ def prime_counting():
 def totients():
     """Totients: Count of positive integers coprime to each positive integer"""
     
-    P = []
-    pr = primes()
-    P.append(next(pr))
+    D = defaultdict(list)
+    q = 2
     
-    for n in naturals(1):
-        while P[-1] <= n:
-            P.append(next(pr))
+    yield 1
+    
+    while True:
+        if q not in D:
+            yield q-1
+            D[q + q] = [q]
         
-        N,D = 1,1
+        else:
+            n,d = 1,1
+            
+            for p in D[q]:
+                D[p+q].append(p)
+                
+                n *= (p-1)
+                d *= p
+            
+            yield q*n//d
+            
+            del D[q]
         
-        for p in P[:-1]:
-            if n%p == 0:
-                N *= (p-1)
-                D *= p
-        
-        yield n*N//D
-
-
-## Too slow to use
-# def euclid_mullin():
-#     """Euclid-Mullin Sequence: Least prime factor of the product of the previous terms"""
-#    
-#     P = 2
-#    
-#     while True:
-#         for i in primes():
-#             if (P+1) % i == 0:
-#                 yield i
-#                 P = P*i
-#                 break
+        q += 1
