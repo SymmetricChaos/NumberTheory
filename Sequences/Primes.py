@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factorization
 from collections import defaultdict
+from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
 
 ## Generator that returns primes (not my work)
@@ -27,11 +28,21 @@ def primes():
 def composites():
     """Composite Numbers: Positive integers with more than two factors"""
     
-    for n in naturals(4):
-        for p in primes:
-            if n % p == 0:
-                yield n
-                break
+    D = defaultdict(list)
+    q = 2
+    
+    while True:
+        
+        if q not in D:
+            D[q * q] = [q]
+        
+        else:
+            yield q
+            for p in D[q]:
+                D[p+q].append(p)
+            del D[q]
+        
+        q += 1
 
 
 # Cumulative product of prime numbers.
@@ -65,10 +76,12 @@ def smooth(B):
     require_integers(["B"],[B])
     require_positive(["B"],[B])
     
+    P = [p for p in takewhile(lambda x: x <= B,primes())]
+    
     for n in naturals(1):
         out = n
         
-        for f in range(2,B+1):
+        for f in P:
             while n % f == 0:
                 n = n // f
             
@@ -88,10 +101,12 @@ def rough(B):
     require_integers(["B"],[B])
     require_positive(["B"],[B])
     
+    P = [p for p in takewhile(lambda x: x < B,primes())]
+    print(P)
     for n in naturals(1):
         r = True
         
-        for f in range(2,B):
+        for f in P:
             if n % f == 0:
                 r = False
                 break
@@ -138,19 +153,25 @@ def prime_divisors():
 def unique_prime_divisors():
     """Number of Unique Prime Divisors: Count of unique prime factors for each positive integer"""
     
-    for n in naturals(1):
-        ctr = 0
+    D = defaultdict(list)
+    q = 2
+    
+    yield 1
+    
+    while True:
+        if q not in D:
+            yield 1
+            D[q + q] = [q]
         
-        for p in primes():
-            if n % p == 0:
-                ctr += 1
+        else:
+            yield len(D[q])
             
-            while n % p == 0:
-                n = n // p
+            for p in D[q]:
+                D[p+q].append(p)
             
-            if n == 1:
-                yield ctr
-                break
+            del D[q]
+        
+        q += 1
 
 
 def squarefree():

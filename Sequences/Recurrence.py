@@ -140,6 +140,16 @@ def PQ_simple_recurrence(a,b,P,Q):
         a, b = b, Q*a+P*b
 
 
+def leonardo():
+    """Leonardo Numbers"""
+    
+    a,b = 1,1
+    
+    while True:
+        yield a
+        a,b = b,a+b+1
+
+
 def arbitrary_recurrence(S,func):
     """
     Recurrence based sequence given a starting tuple and a function
@@ -168,13 +178,3 @@ def sylvesters_sequence():
             t *= i
         
         L.append(t+1)
-
-
-def leonardo():
-    """Leonardo Numbers"""
-    
-    a,b = 1,1
-    
-    while True:
-        yield a
-        a,b = b,a+b+1
