@@ -1,7 +1,7 @@
 from Sequences.SequenceManipulation import offset, segment, make_triangle, show_start, \
                                            partial_sums, partial_products
 
-from Sequences.Recurrence import fibonacci, lucas, pell, pell_lucas, tribonacci, \
+from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  PQ_fibonacci, PQ_lucas, padovan, simple_recurrence, \
                                  sylvesters_sequence, leonardo, arbitrary_recurrence, \
                                  PQ_simple_recurrence
@@ -42,7 +42,7 @@ from Sequences.Pseudorandom import LCG, LFG
 __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "partial_products",
          
-         "lucas","fibonacci","pell","pell_lucas","tribonacci","PQ_lucas",
+         "lucas","fibonacci","pell","companion_pell","tribonacci","PQ_lucas",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
          "random_recurrence","leonardo","arbitrary_recurrence","PQ_simple_recurrence",
          

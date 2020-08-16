@@ -1,4 +1,4 @@
-from NiceErrorChecking import require_integers
+from NiceErrorChecking import require_integers, require_geq
 
 def fibonacci():
     """Fibonacci Sequence"""
@@ -71,8 +71,8 @@ def pell():
         a, b = b, a+2*b
 
 
-def pell_lucas():
-    """Pell-Lucas Numbers"""
+def companion_pell():
+    """Companion Pell Numbers"""
     
     a = 2
     b = 2
@@ -80,30 +80,6 @@ def pell_lucas():
     while True:
         yield a
         a, b = b, a+2*b
-
-
-def tribonacci():
-    """Tribonacci Sequence"""
-    
-    a = 0
-    b = 0
-    c = 1
-    
-    while True:
-        yield a
-        a, b, c = b, c, a+b+c
-
-
-def padovan():
-    """Padovan Sequence"""
-    
-    a = 1
-    b = 1
-    c = 1
-    
-    while True:
-        yield a
-        a, b, c = b, c, a+b
 
 
 def simple_recurrence(a,b):
@@ -150,6 +126,55 @@ def leonardo():
         a,b = b,a+b+1
 
 
+def tribonacci():
+    """Tribonacci Sequence"""
+    
+    a = 0
+    b = 0
+    c = 1
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+b+c
+
+
+def multi_fibonacci(n):
+    """Higher Order Fibonacci Sequence"""
+    
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],2)
+    
+    S = [0]*(n-1)+[1]
+    
+    while True:
+        yield S[0]
+        S = S[1:] + [sum(S)]
+
+
+def padovan():
+    """Padovan Sequence"""
+    
+    a = 1
+    b = 0
+    c = 0
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+b
+
+
+def padovan_spiral():
+    """Padovan's Spiral Sequence"""
+    
+    a = 1
+    b = 1
+    c = 1
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+b
+
+
 def arbitrary_recurrence(S,func):
     """
     Recurrence based sequence given a starting tuple and a function
@@ -178,3 +203,55 @@ def sylvesters_sequence():
             t *= i
         
         L.append(t+1)
+
+
+
+
+
+if __name__ == '__main__':
+    from Sequences.SequenceManipulation import simple_test
+    
+    print("Fibonacci Sequence")
+    simple_test(fibonacci(),10,
+                "0, 1, 1, 2, 3, 5, 8, 13, 21, 34")
+    
+    print("\nLucas Sequence")
+    simple_test(lucas(),10,
+                "2, 1, 3, 4, 7, 11, 18, 29, 47, 76")
+    
+    print("\n(2,3)-Fibonacci Sequence")
+    simple_test(PQ_fibonacci(2,3),10,
+                "0, 1, 2, 7, 20, 61, 182, 547, 1640, 4921")
+    
+    print("\n(2,3)-Lucas Sequence")
+    simple_test(PQ_lucas(2,3),10,
+                "2, 2, 10, 26, 82, 242, 730, 2186, 6562, 19682")
+    
+    print("\nPell Numbers")
+    simple_test(pell(),10,
+                "0, 1, 2, 5, 12, 29, 70, 169, 408, 985")
+    
+    print("\nCompanion Pell Numbers")
+    simple_test(companion_pell(),10,
+                "2, 2, 6, 14, 34, 82, 198, 478, 1154, 2786")
+    
+    print("\nSimple Recurrence for a = 7, b = 9")
+    simple_test(simple_recurrence(7,9),10,
+                "7, 9, 16, 25, 41, 66, 107, 173, 280, 453")
+    
+    print("\nTribonacci")
+    simple_test(tribonacci(),10,
+                "0, 0, 1, 1, 2, 4, 7, 13, 24, 44")
+    
+    print("\nTetranacci")
+    simple_test(multi_fibonacci(4),10,
+                "0, 0, 0, 1, 1, 2, 4, 8, 15, 29")
+    
+    print("\nPadovan")
+    simple_test(padovan(),10,
+                "1, 0, 0, 1, 0, 1, 1, 1, 2, 2")
+    
+    print("\nPadovan's Spiral")
+    simple_test(padovan_spiral(),10,
+                "1, 1, 1, 2, 2, 3, 4, 5, 7, 9")
+    

@@ -32,3 +32,27 @@ def require_positive(K,L):
     
     if out != "":
         raise ValueError(out)
+
+
+def require_geq(K,L,n):
+    
+    out = ""
+    
+    for k,l in zip(K,L):
+        if l < n:
+            out += f"{k} must be greater than or equal to {n}\n"
+    
+    if out != "":
+        raise ValueError(out)
+
+
+def require_leq(K,L,n):
+    
+    out = ""
+    
+    for k,l in zip(K,L):
+        if l > n:
+            out += f"{k} must be less than or equal to {n}\n"
+    
+    if out != "":
+        raise ValueError(out)

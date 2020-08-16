@@ -161,7 +161,7 @@ def unique_prime_divisors():
     D = defaultdict(list)
     q = 2
     
-    yield 1
+    yield 0
     
     while True:
         if q not in D:
@@ -253,6 +253,9 @@ def totients():
         q += 1
 
 
+
+
+
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
@@ -268,25 +271,47 @@ if __name__ == '__main__':
     simple_test(primorials(),8,
                 "1, 2, 6, 30, 210, 2310, 30030, 510510")
     
-    print("\nPythagorean_Primes")
+    print("\nPythagorean Primes")
     simple_test(pythagorean_primes(),10,
                 "5, 13, 17, 29, 37, 41, 53, 61, 73, 89")
-
+    
     print("\n5-Smooth (Hamming)")
     simple_test(smooth(5),11,
                 "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15")
-
+    
     print("\n5-Rough")
     simple_test(rough(5),10,
                 "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
-
+    
     print("\nHighly Composite")
     simple_test(highly_composite(),10,
                 "1, 2, 4, 6, 12, 24, 36, 48, 60, 120")
-
-    print("\nSum-of-Divisors (Sigma)")
+    
+    print("\nNumber of Divisors")
     simple_test(divisors(),10,
                 "1, 2, 2, 3, 2, 4, 2, 4, 3, 4")
-
-
+    
+    print("\nNumber of Prime Divisors (with multiplicity)")
+    simple_test(prime_divisors(),10,
+                "0, 1, 1, 2, 1, 2, 1, 3, 2, 2")
+    
+    print("\nNumber of Unique Prime Divisors")
+    simple_test(unique_prime_divisors(),10,
+                "0, 1, 1, 1, 1, 2, 1, 1, 1, 2")
+    
+    print("\nSquarefree Numbers")
+    simple_test(squarefree(),10,
+                "1, 2, 3, 5, 6, 7, 10, 11, 13, 14")
+    
+    print("\nSquarefree Kernels")
+    simple_test(squarefree_kernel(),10,
+                "1, 2, 3, 2, 5, 6, 7, 2, 3, 10")
+    
+    print("\nPrime Counting Function")
+    simple_test(prime_counting(),10,
+                "0, 0, 1, 2, 2, 3, 3, 4, 4, 4")
+    
+    print("\nTotients")
+    simple_test(totients(),10,
+                "1, 1, 2, 2, 4, 2, 6, 4, 6, 4")
 
