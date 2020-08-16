@@ -64,38 +64,23 @@ def arithmetrico_geometric(a,n,b,m):
         yield ari*geo
 
 
-def powers(n):
+def polynomial(coef):
     """
-    Powers of N: Special case of Geometric Sequence
+    Polynomial Function: Integer polynomial evaluated at each non-negative integer
     
     Args:
-        n -- constant multiple
+        coef -- coefficients of the polynomial is ascending order, all integers
     """
     
-    require_integers(["n"],[n])
-    require_nonnegative(["n"],[n])
-    
-    pw = 1
-    
-    while True:
-        yield pw
-        
-        pw *= n
-
-
-def power_function(e):
-    """
-    Power Function: Each non-negative natural raised to the same exponent
-    
-    Args:
-        e -- exponent to raise each natural number to
-    """
-    
-    require_integers(["e"],[e])
-    require_nonnegative(["e"],[e])
+    for c in coef:
+        if type(c) != int:
+            raise TypeError("All coefficients must be integers")
     
     for n in naturals():
-        yield n**e
+        out = 0
+        for e,c in enumerate(coef):
+            out += c*n**e
+        yield out
 
 
 def fermat():
@@ -119,6 +104,21 @@ def naturals(offset=0):
     
     for a in arithmetic(offset,1):
         yield a
+
+
+def powers(n):
+    """
+    Powers of N: Special case of Geometric Sequence
+    
+    Args:
+        n -- constant multiple
+    """
+    
+    require_integers(["n"],[n])
+    require_nonnegative(["n"],[n])
+    
+    for g in geometric(1,n):
+        yield g
 
 
 def evens():
@@ -151,3 +151,51 @@ def gen_odds():
     for i in arithmetic(1,2):
         yield i
         yield -i
+
+
+
+
+
+if __name__ == '__main__':
+    from Sequences.SequenceManipulation import simple_test
+    
+    print("Natural Numbers")
+    simple_test(naturals(),10,
+                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9")
+    
+    print("\nIntegers")
+    simple_test(integers(),10,
+                "0, 1, -1, 2, -2, 3, -3, 4, -4, 5")
+    
+    print("\nEvens Naturals")
+    simple_test(evens(),10,
+                "0, 2, 4, 6, 8, 10, 12, 14, 16, 18")
+    
+    print("\nEven Integers")
+    simple_test(gen_evens(),10,
+                "0, 2, -2, 4, -4, 6, -6, 8, -8, 10")
+    
+    print("\nOdd Naturals")
+    simple_test(odds(),10,
+                "1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
+    
+    print("\nOdd Integers")
+    simple_test(gen_odds(),10,
+                "1, -1, 3, -3, 5, -5, 7, -7, 9, -9")
+    
+    print("\nPolynomial 2x^2 - 10x + 1")
+    simple_test(polynomial([1,-10,2]),9,
+                "1, -7, -11, -11, -7, 1, 13, 29, 49")
+    
+    print("\nArithmetic Sequence 5+2n")
+    simple_test(arithmetic(5,2),10,
+                "5, 7, 9, 11, 13, 15, 17, 19, 21, 23")
+    
+    print("\nGeometric Sequence 5*2^n")
+    simple_test(geometric(5,2),8,
+                "5, 10, 20, 40, 80, 160, 320, 640")
+    
+    
+    
+    
+    

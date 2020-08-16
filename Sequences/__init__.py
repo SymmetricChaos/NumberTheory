@@ -11,7 +11,7 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
                                 cen_polygonal
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
-                             power_function, fermat, evens, gen_evens, odds, gen_odds
+                             polynomial, fermat, evens, gen_evens, odds, gen_odds
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
@@ -46,7 +46,7 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
          "random_recurrence","leonardo","arbitrary_recurrence","PQ_simple_recurrence",
          
-         "naturals","integers","arithmetic","geometric","powers","fermat","power_function",
+         "naturals","integers","arithmetic","geometric","powers","fermat","polynomial",
          "evens","gen_evens","odds","gen_odds",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",

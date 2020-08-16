@@ -181,8 +181,7 @@ def arbitrary_recurrence(S,func):
     
     Args:
         S -- Starting tuple
-        func -- A function that takes a tuple with the same length of S and
-                returns a tuple of the same length
+        func -- A function that that will take in S and return the next value of S
     """
     
     while True:
@@ -191,18 +190,14 @@ def arbitrary_recurrence(S,func):
 
 
 def sylvesters_sequence():
-    """Sylvester's Sequence"""
+    """Sylvester's Sequence: Product of previous terms plus 1"""
     
-    L = [2]
+    v = 2
     
     while True:
-        yield L[-1]
-        t = 1
+        yield v
         
-        for i in L:
-            t *= i
-        
-        L.append(t+1)
+        v = v*v-v+1
 
 
 
@@ -254,4 +249,8 @@ if __name__ == '__main__':
     print("\nPadovan's Spiral")
     simple_test(padovan_spiral(),10,
                 "1, 1, 1, 2, 2, 3, 4, 5, 7, 9")
+    
+    print("\nSylvester's Sequence")
+    simple_test(sylvesters_sequence(),6,
+                "2, 3, 7, 43, 1807, 3263443")
     
