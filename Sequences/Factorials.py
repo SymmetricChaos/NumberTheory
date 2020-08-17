@@ -1,8 +1,12 @@
+from SequenceManipulation import offset
 from itertools import cycle
 
 
 def factorials():
-    """Factorial Numbers: Product of the the first n positive integers"""
+    """
+    Factorial Numbers: Product of the the first n positive integers\n
+    OEIS A000142
+    """
     
     ctr = 1
     out = 1
@@ -15,19 +19,43 @@ def factorials():
         yield out
 
 
-def alternating_factorials():
-    """Alternating Factorial Numbers"""
+def alternating_factorials_1():
+    """
+    Alternating Factorial Numbers\n
+    OEIS A005165
+    """
     
     cyc = cycle([1,-1])
+    F = offset(factorials(),1)
     out = 0
     
-    for fac,p in zip(factorials(),cyc):
-        out += fac*p
+    yield 0
+    
+    for f,s in zip(F,cyc):
+        out += f*s
         yield abs(out)
 
 
+def alternating_factorials_2():
+    """
+    Alternating Factorial Numbers\n
+    OEIS A058006
+    """
+    
+    cyc = cycle([1,-1])
+    F = factorials()
+    out = 0
+    
+    for f,s in zip(F,cyc):
+        out += f*s
+        yield out
+
+
 def kempner_function():
-    """Kempner Function: For each positive integer the index of the argument of the smallest factorial it is a factor of"""
+    """
+    Kempner Function: For each positive integer the index of the argument of the smallest factorial it is a factor of\n
+    
+    """
     
     L = []
     
@@ -41,7 +69,10 @@ def kempner_function():
 
 
 def double_factorials():
-    """Double Factorials: Double factorial of each non-negative integer"""
+    """
+    Double Factorials: Double factorial of each non-negative integer\n
+    
+    """
     
     odd = 1
     even = 2
@@ -63,7 +94,10 @@ def double_factorials():
 
 
 def odd_double_factorials():
-    """Odd Double Factorials: Double factorial of each odd non-negative integer"""
+    """
+    Odd Double Factorials: Double factorial of each odd non-negative integer\n
+    
+    """
     
     odd = 1
     odd_ctr = 1
@@ -76,7 +110,10 @@ def odd_double_factorials():
 
 
 def even_double_factorials():
-    """Even Double Factorials: Double factorial of each even non-negative integer"""
+    """
+    Even Double Factorials: Double factorial of each even non-negative integer\n
+    
+    """
     
     even = 2
     even_ctr = 2
@@ -88,3 +125,23 @@ def even_double_factorials():
         
         even_ctr += 2
         even = even*even_ctr
+
+
+
+
+
+if __name__ == '__main__':
+    from Sequences.SequenceManipulation import simple_test
+    
+    print("Factorials")
+    simple_test(factorials(),8,
+                "1, 1, 2, 6, 24, 120, 720, 5040")
+    
+    print("\nAlternating Factorials (A005165)")
+    simple_test(alternating_factorials_1(),8,
+                "0, 1, 1, 5, 19, 101, 619, 4421")
+    
+    print("\nAlternating Factorials (A058006)")
+    simple_test(alternating_factorials_2(),8,
+                "1, 0, 2, -4, 20, -100, 620, -4420")
+    

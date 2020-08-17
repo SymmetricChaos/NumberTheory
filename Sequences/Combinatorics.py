@@ -3,7 +3,10 @@ from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
 def derangements():
-    """Derangement Numbers: Permutations with no element in its original position"""
+    """
+    Derangement Numbers: Permutations with no element in its original position\n
+    OEIS A000166
+    """
     
     yield 1
     yield 0
@@ -17,7 +20,10 @@ def derangements():
 
 
 def catalan():
-    """Catalan Numbers: Number of non-crossing partitions of a set with n elements"""
+    """
+    Catalan Numbers: Number of non-crossing partitions of a set with n elements\n
+    OEIS A000108
+    """
     
     for n in naturals():
         N = 1
@@ -31,7 +37,10 @@ def catalan():
 
 
 def pascal():
-    """Pascal's Triangle: Number triangle with binomial coefficients"""
+    """
+    Pascal's Triangle: Number triangle with binomial coefficients\n
+    OEIS A007318
+    """
     
     n, k = 0, 0
     
@@ -46,7 +55,10 @@ def pascal():
 
 
 def gould():
-    """Gould's Sequence: Number of odd values on the nth row of Pascal's Triangle"""
+    """
+    Gould's Sequence: Number of odd values on the nth row of Pascal's Triangle\n
+    OEIS A001316
+    """
     
     P = pascal()
     
@@ -61,7 +73,10 @@ def gould():
 
 
 def eulerian():
-    """Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases"""
+    """
+    Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases\n
+    OEIS A008292
+    """
     
     for m in naturals(1):
         for n in range(m):
@@ -76,7 +91,10 @@ def eulerian():
 
 
 def partition():
-    """Partition Number: Number of ways to add naturals greater than 0 to get n"""
+    """
+    Partition Number: Number of ways to add naturals greater than 0 to get n\n
+    OEIS A000041
+    """
     
     D = [1]
     
@@ -101,7 +119,10 @@ def partition():
 
 
 def bell():
-    """Bell Numbers: Number of equivalence classes on a set with n elements"""
+    """
+    Bell Numbers: Number of equivalence classes on a set with n elements\n
+    OEIS A000110
+    """
     
     R0 = [1]
     R1 = [1,2]
@@ -118,7 +139,10 @@ def bell():
 
 # Generalized cake numbers? Uses binomial coefficients
 def cake():
-    """Cake Numbers: Maximum number of pieces produced when cutting a cube with exactly n planes"""
+    """
+    Cake Numbers: Maximum number of pieces produced when cutting a cube with exactly n planes\n
+    OEIS A000125
+    """
     
     for n in naturals():
         yield (n*n*n+5*n+6)//6

@@ -17,8 +17,9 @@ from Sequences.Primes import primes, primorials, smooth, rough, highly_composite
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients
 
-from Sequences.Factorials import factorials, alternating_factorials, kempner_function, \
-                                 double_factorials, even_double_factorials, odd_double_factorials
+from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
+                                 kempner_function, double_factorials, even_double_factorials, \
+                                 odd_double_factorials
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
                               abundance, deficiency
@@ -58,8 +59,9 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "prime_counting","prime_divisors","unique_prime_divisors",
          "composites","totients",
          
-         "factorials","alternating_factorials","kempner_function",
-         "double_factorials","even_double_factorials","odd_double_factorials",
+         "factorials","alternating_factorials_1","alternating_factorials_2",
+         "kempner_function","double_factorials","even_double_factorials",
+         "odd_double_factorials",
          
          "aliquot","abundant","deficient","perfect","aliquot_recurrence",
          "abundance","deficiency",

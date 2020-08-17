@@ -1,7 +1,10 @@
 from NiceErrorChecking import require_integers, require_geq
 
 def fibonacci():
-    """Fibonacci Sequence: Sum of successive terms, special case of a Lucas Sequence of the 1st Kind"""
+    """
+    Fibonacci Sequence: Sum of successive terms, special case of a Lucas Sequence of the 1st kind\n
+    OEIS A000045
+    """
     
     a = 0
     b = 1
@@ -12,7 +15,10 @@ def fibonacci():
 
 
 def lucas():
-    """Lucas Numbers: Sum of successive terms, special case of a Lucas Sequence of the 2nd Kind"""
+    """
+    Lucas Numbers: Sum of successive terms, special case of a Lucas Sequence of the 2nd kind\n
+    OEIS A000032
+    """
     
     a = 2
     b = 1
@@ -59,7 +65,10 @@ def PQ_lucas_2(P=1,Q=-1):
 
 
 def pell():
-    """Pell Numbers"""
+    """
+    Pell Numbers: Denominators of the continued fraction converts of the square root of two\n
+    OEIS A000129
+    """
     
     a = 0
     b = 1
@@ -70,7 +79,10 @@ def pell():
 
 
 def companion_pell():
-    """Companion Pell Numbers"""
+    """
+    Companion Pell Numbers: Numerators of the continued fraction converts of the square root of two\n
+    OEIS A002203
+    """
     
     a = 2
     b = 2
@@ -97,7 +109,10 @@ def simple_recurrence(a,b):
 
 
 def leonardo():
-    """Leonardo Numbers"""
+    """
+    Leonardo Numbers\n
+    OEIS A001595
+    """
     
     a,b = 1,1
     
@@ -107,7 +122,10 @@ def leonardo():
 
 
 def tribonacci():
-    """Tribonacci Sequence"""
+    """
+    Tribonacci Sequence\n
+    OEIS A000073
+    """
     
     a = 0
     b = 0
@@ -119,7 +137,7 @@ def tribonacci():
 
 
 def multi_fibonacci(n):
-    """Higher Order Fibonacci Sequence"""
+    """Higher Order Fibonacci Sequences"""
     
     require_integers(["n"],[n])
     require_geq(["n"],[n],2)
@@ -132,7 +150,10 @@ def multi_fibonacci(n):
 
 
 def padovan():
-    """Padovan Sequence"""
+    """
+    Padovan Sequence\n
+    OEIS A000931
+    """
     
     a = 1
     b = 0
@@ -143,21 +164,11 @@ def padovan():
         a, b, c = b, c, a+b
 
 
-def narayana():
-    """Narayana Sequence"""
-    
-    a = 1
-    b = 1
-    c = 1
-    
-    while True:
-        yield a
-        a, b, c = b, c, a+c
-
-
-
 def padovan_spiral():
-    """Padovan's Spiral Sequence"""
+    """
+    Padovan's Spiral Sequence\n
+    OEIS A134816
+    """
     
     a = 1
     b = 1
@@ -168,9 +179,38 @@ def padovan_spiral():
         a, b, c = b, c, a+b
 
 
+def narayana():
+    """
+    Narayana's Sequence\n
+    OEIS A000930
+    """
+    
+    a = 1
+    b = 1
+    c = 1
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+c
+
+
+def sylvesters_sequence():
+    """
+    Sylvester's Sequence: Product of previous terms plus one\n
+    OEIS A000058
+    """
+    
+    v = 2
+    
+    while True:
+        yield v
+        
+        v = v*v-v+1
+
+
 def arbitrary_recurrence(S,func):
     """
-    Recurrence based sequence given a starting list and a function
+    Recurrence based sequences given a starting list and a function
     
     Args:
         S -- Starting list
@@ -188,17 +228,6 @@ def arbitrary_recurrence(S,func):
     while True:
         yield S[0]
         S = S[1:] + [func(S)]
-
-
-def sylvesters_sequence():
-    """Sylvester's Sequence: Product of previous terms plus 1"""
-    
-    v = 2
-    
-    while True:
-        yield v
-        
-        v = v*v-v+1
 
 
 
@@ -230,6 +259,10 @@ if __name__ == '__main__':
     print("\nCompanion Pell Numbers")
     simple_test(companion_pell(),10,
                 "2, 2, 6, 14, 34, 82, 198, 478, 1154, 2786")
+    
+    print("\nLeonardo Numbers")
+    simple_test(leonardo(),10,
+                "1, 1, 3, 5, 9, 15, 25, 41, 67, 109")
     
     print("\nSimple Recurrence for a = 7, b = 9")
     simple_test(simple_recurrence(7,9),10,

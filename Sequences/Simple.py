@@ -1,9 +1,19 @@
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
-from itertools import count
+from itertools import count, repeat
+
+
+def constant(n):
+    """Constant Sequences: Returns n forever"""
+    
+    for i in repeat(n):
+        yield i
 
 
 def integers():
-    """Integers: All integers starting with zero then with positive before negative"""
+    """
+    Integers: All integers starting with zero then with positive before negative\n
+    OEIS A001057
+    """
     
     yield 0
     
@@ -14,7 +24,7 @@ def integers():
 
 def arithmetic(a,n):
     """
-    Arithmetic Sequence: Integers with constant difference
+    Arithmetic Sequences: Integers with constant difference
     
     Args:
         a -- starting value
@@ -29,7 +39,7 @@ def arithmetic(a,n):
 
 def geometric(a,n):
     """
-    Geometric Sequence: Integers with constant ratio
+    Geometric Sequences: Integers with constant ratio
     
     Args:
         a -- starting values
@@ -48,7 +58,7 @@ def geometric(a,n):
 
 def arithmetrico_geometric(a,n,b,m):
     """
-    Arithmetrico-Geometric Sequence: Product of an arithmetic sequence with a geometric sequence
+    Arithmetrico-Geometric Sequences: Product of an arithmetic sequence with a geometric sequence
     
     Args:
         a -- starting value for arithmetic sequence
@@ -66,7 +76,7 @@ def arithmetrico_geometric(a,n,b,m):
 
 def polynomial(coef):
     """
-    Polynomial Function: Integer polynomial evaluated at each non-negative integer
+    Polynomial Functions: Integer polynomial evaluated at each non-negative integer
     
     Args:
         coef -- coefficients of the polynomial is ascending order, all integers
@@ -84,7 +94,10 @@ def polynomial(coef):
 
 
 def fermat():
-    """Fermat Numbers: 2^2^n+1 for n in naturals"""
+    """
+    Fermat Numbers: 2^2^n+1 for n in naturals\n
+    OEIS A000215
+    """
     
     for n in naturals():
         yield 2**2**n+1
@@ -108,7 +121,7 @@ def naturals(offset=0):
 
 def powers(n):
     """
-    Powers of N: Special case of Geometric Sequence
+    Powers of N: Special case of geometric
     
     Args:
         n -- constant multiple
@@ -122,14 +135,20 @@ def powers(n):
 
 
 def evens():
-    """Even Numbers: Non-negative integers divisible by 2, special case of arithmetic"""
+    """
+    Even Numbers: Non-negative integers divisible by 2, special case of arithmetic\n
+    OEIS A005843
+    """
     
     for i in arithmetic(0,2):
         yield i
 
 
 def gen_evens():
-    """Even Numbers: Integers divisible by 2, special case of arithmetic"""
+    """
+    Even Numbers: Integers divisible by 2, special case of arithmetic\n
+    OEIS A137501 (differs by including zero only once)
+    """
     
     yield 0
     
@@ -139,14 +158,20 @@ def gen_evens():
 
 
 def odds():
-    """Odd Numbers: Non-negative integers not divisible by 2, special case of arithmetic"""
+    """
+    Odd Numbers: Non-negative integers not divisible by 2, special case of arithmetic\n
+    OEIS A005408
+    """
     
     for i in arithmetic(1,2):
         yield i
 
 
 def gen_odds():
-    """Odd Numbers: Integers not divisible by 2, special case of arithmetic"""
+    """
+    Odd Numbers: Integers not divisible by 2, special case of arithmetic\n
+    OEIS A296063
+    """
     
     for i in arithmetic(1,2):
         yield i
@@ -167,7 +192,7 @@ if __name__ == '__main__':
     simple_test(integers(),10,
                 "0, 1, -1, 2, -2, 3, -3, 4, -4, 5")
     
-    print("\nEvens Naturals")
+    print("\nEven Naturals")
     simple_test(evens(),10,
                 "0, 2, 4, 6, 8, 10, 12, 14, 16, 18")
     
@@ -203,3 +228,6 @@ if __name__ == '__main__':
     simple_test(fermat(),6,
                 "3, 5, 17, 257, 65537, 4294967297")
     
+    print("\nThe Zero Sequence")
+    simple_test(constant(0), 10,
+                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
