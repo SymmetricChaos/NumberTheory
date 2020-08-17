@@ -31,7 +31,7 @@ from Sequences.CollatzNumbers import collatz_numbers
 
 from Sequences.Recaman import recaman
 
-from Sequences.Geometric import hypotenuse, nonhypotenuse, raw_hypotenuse
+from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
 from Sequences.BinarySequences import thue_morse
 
@@ -73,7 +73,7 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          
          "recaman",
          
-         "hypotenuse","nonhypotenuse","raw_hypotenuse",
+         "primitive_hypotenuse","nonhypotenuse","hypotenuse",
          
          "thue_morse",
          

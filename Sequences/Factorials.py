@@ -70,7 +70,7 @@ def kempner():
 def double_factorials():
     """
     Double Factorials: Double factorial of each non-negative integer\n
-    
+    OEIS A006882
     """
     
     odd = 1
@@ -95,7 +95,7 @@ def double_factorials():
 def odd_double_factorials():
     """
     Odd Double Factorials: Double factorial of each odd non-negative integer\n
-    
+    OEIS A001147
     """
     
     odd = 1
@@ -111,7 +111,7 @@ def odd_double_factorials():
 def even_double_factorials():
     """
     Even Double Factorials: Double factorial of each even non-negative integer\n
-    
+    OEIS A000165
     """
     
     even = 2
@@ -147,4 +147,16 @@ if __name__ == '__main__':
     print("\nKempner Function")
     simple_test(kempner(),10,
                 "1, 2, 3, 4, 5, 3, 7, 4, 6, 5")
+    
+    print("\nDouble Factorials")
+    simple_test(double_factorials(),10,
+                "1, 1, 2, 3, 8, 15, 48, 105, 384, 945")
+    
+    print("\nOdd Double Factorials")
+    simple_test(odd_double_factorials(),7,
+                "1, 3, 15, 105, 945, 10395, 135135")
+    
+    print("\nEven Double Factorials")
+    simple_test(even_double_factorials(),7,
+                "1, 2, 8, 48, 384, 3840, 46080")
     
