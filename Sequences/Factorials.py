@@ -1,4 +1,5 @@
 from SequenceManipulation import offset
+from Sequences.Simple import naturals
 from itertools import cycle
 
 
@@ -51,20 +52,18 @@ def alternating_factorials_2():
         yield out
 
 
-def kempner_function():
+def kempner():
     """
-    Kempner Function: For each positive integer the index of the argument of the smallest factorial it is a factor of\n
-    
+    Kempner Numbers: smallest positive integer m such that n divides m!\n
+    OEIS A002034
     """
     
-    L = []
+    yield 1
     
-    for n,i in enumerate(factorials(),1):
-        L.append(i)
-        
-        for ctr,f in enumerate(L,1):
-            if f % n == 0:
-                yield ctr
+    for n in naturals(2):
+        for i,f in enumerate(factorials()):
+            if f%n == 0:
+                yield i
                 break
 
 
@@ -144,4 +143,8 @@ if __name__ == '__main__':
     print("\nAlternating Factorials (A058006)")
     simple_test(alternating_factorials_2(),8,
                 "1, 0, 2, -4, 20, -100, 620, -4420")
+    
+    print("\nKempner Function")
+    simple_test(kempner(),10,
+                "1, 2, 3, 4, 5, 3, 7, 4, 6, 5")
     
