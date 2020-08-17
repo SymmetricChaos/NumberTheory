@@ -1,7 +1,7 @@
 from NiceErrorChecking import require_integers, require_geq
 
 def fibonacci():
-    """Fibonacci Sequence"""
+    """Fibonacci Sequence: Sum of successive terms, special case of a Lucas Sequence of the 1st Kind"""
     
     a = 0
     b = 1
@@ -12,7 +12,7 @@ def fibonacci():
 
 
 def lucas():
-    """Lucas Sequence"""
+    """Lucas Numbers: Sum of successive terms, special case of a Lucas Sequence of the 2nd Kind"""
     
     a = 2
     b = 1
@@ -22,9 +22,9 @@ def lucas():
         a, b = b, a+b
 
 
-def PQ_fibonacci(P=1,Q=1):
+def PQ_lucas_1(P=1,Q=-1):
     """
-    P,Q-Fibonacci Sequence
+    Lucas Sequence of the first kind sometimes abbreviated U
     
     Args:
         P -- multiplier for second addend
@@ -33,18 +33,17 @@ def PQ_fibonacci(P=1,Q=1):
     
     require_integers(["P","Q"],[P,Q])
     
-    a = 0
-    b = 1
+    a,b = 0,1
     
     while True:
         yield a
-        a, b = b, Q*a+P*b
+        a, b = b, P*b-Q*a
 
 
-def PQ_lucas(P=1,Q=1):
+def PQ_lucas_2(P=1,Q=-1):
     """
-    P,Q-Lucas Sequence
-
+    Lucas Sequence of the second kind sometimes abbreviated V
+    
     Args:
         P -- multiplier for second addend
         Q -- multiplier for first addend
@@ -52,12 +51,11 @@ def PQ_lucas(P=1,Q=1):
     
     require_integers(["P","Q"],[P,Q])
     
-    a = 2
-    b = P
+    a, b = 2, P
     
     while True:
         yield a
-        a, b = b, Q*a+P*b
+        a, b = b, P*b-Q*a
 
 
 def pell():
@@ -96,24 +94,6 @@ def simple_recurrence(a,b):
     while True:
         yield a
         a, b = b, a+b
-
-
-def PQ_simple_recurrence(a,b,P,Q):
-    """
-    Additive recurrence based relation on two terms
-    
-    Args:
-        a -- first term
-        b -- second term
-        P -- multiplier for second addend
-        Q -- multiplier for first addend
-    """
-    
-    require_integers(["a","b","P","Q"],[a,b,P,Q])
-    
-    while True:
-        yield a
-        a, b = b, Q*a+P*b
 
 
 def leonardo():
@@ -231,17 +211,17 @@ if __name__ == '__main__':
     simple_test(fibonacci(),10,
                 "0, 1, 1, 2, 3, 5, 8, 13, 21, 34")
     
-    print("\nLucas Sequence")
+    print("\nLucas Numbers")
     simple_test(lucas(),10,
                 "2, 1, 3, 4, 7, 11, 18, 29, 47, 76")
     
-    print("\n(2,3)-Fibonacci Sequence")
-    simple_test(PQ_fibonacci(2,3),10,
-                "0, 1, 2, 7, 20, 61, 182, 547, 1640, 4921")
+    print("\nLucas Sequence U(-1,3)")
+    simple_test(PQ_lucas_1(-1,3),10,
+                "0, 1, -1, -2, 5, 1, -16, 13, 35, -74")
     
-    print("\n(2,3)-Lucas Sequence")
-    simple_test(PQ_lucas(2,3),10,
-                "2, 2, 10, 26, 82, 242, 730, 2186, 6562, 19682")
+    print("\nLucas Sequence V(3,-5)")
+    simple_test(PQ_lucas_2(3,-5),9,
+                "2, 3, 19, 72, 311, 1293, 5434, 22767, 95471")
     
     print("\nPell Numbers")
     simple_test(pell(),10,
