@@ -195,7 +195,11 @@ if __name__ == '__main__':
     simple_test(geometric(5,2),8,
                 "5, 10, 20, 40, 80, 160, 320, 640")
     
+    print("\nArithmetrico-Geometric Sequence (1+2n)*(2*3^n)")
+    simple_test(arithmetrico_geometric(1,2,3,4),7,
+                "3, 36, 240, 1344, 6912, 33792, 159744")
     
-    
-    
+    print("\nFermat Numbers")
+    simple_test(fermat(),6,
+                "3, 5, 17, 257, 65537, 4294967297")
     
