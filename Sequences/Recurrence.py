@@ -163,6 +163,19 @@ def padovan():
         a, b, c = b, c, a+b
 
 
+def narayana():
+    """Narayana Sequence"""
+    
+    a = 1
+    b = 1
+    c = 1
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+c
+
+
+
 def padovan_spiral():
     """Padovan's Spiral Sequence"""
     
@@ -177,16 +190,24 @@ def padovan_spiral():
 
 def arbitrary_recurrence(S,func):
     """
-    Recurrence based sequence given a starting tuple and a function
+    Recurrence based sequence given a starting list and a function
     
     Args:
-        S -- Starting tuple
+        S -- Starting list
         func -- A function that that will take in S and return the next value of S
     """
     
+    if type(S) != list:
+        raise Exception(f"S must be of type list not {type(S)}")
+    
+    for i in S:
+        if type(i) != int:
+            raise Exception(f"All elements of S must be of type int not {type(i)}")
+    
+    
     while True:
         yield S[0]
-        S = func(S)
+        S = S[1:] + [func(S)]
 
 
 def sylvesters_sequence():
@@ -253,4 +274,14 @@ if __name__ == '__main__':
     print("\nSylvester's Sequence")
     simple_test(sylvesters_sequence(),6,
                 "2, 3, 7, 43, 1807, 3263443")
+    
+    print("\nNarayana's Sequence")
+    simple_test(narayana(),10,
+                "1, 1, 1, 2, 3, 4, 6, 9, 13, 19")
+    
+    from math import floor, sqrt
+    print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
+    simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),10,
+                "1, 1, 1, 4, 5, 7, 12, 14, 18, 25")
+    
     
