@@ -17,7 +17,7 @@ def integers():
     
     yield 0
     
-    for n in naturals(1):
+    for n in counting():
         yield n
         yield -n
 
@@ -93,6 +93,25 @@ def polynomial(coef):
         yield out
 
 
+def gen_polynomial(coef):
+    """
+    Polynomial Functions: Integer polynomial evaluated at each integer
+    
+    Args:
+        coef -- coefficients of the polynomial is ascending order, all integers
+    """
+    
+    for c in coef:
+        if type(c) != int:
+            raise TypeError("All coefficients must be integers")
+    
+    for i in integers():
+        out = 0
+        for e,c in enumerate(coef):
+            out += c*i**e
+        yield out
+
+
 def fermat():
     """
     Fermat Numbers: 2^2^n+1 for n in naturals\n
@@ -108,15 +127,34 @@ def naturals(offset=0):
     """
     Natural Numbers: Nonnegative whole numbers, special case of arithmetic
     
-    Args:
-        offset -- nonnegative integer specifying first value returned
+     Args:
+        offset -- nonnegative integer how many naturals to skip before starting
+        
+    OEIS A001477 (with default offset)
     """
     
     require_integers(["offset"],[offset])
     require_nonnegative(["offset"],[offset])
     
-    for a in arithmetic(offset,1):
-        yield a
+    for i in count(offset,1):
+        yield i
+
+
+def counting(offset=0):
+    """
+    Counting Numbers: Positive whole numbers, special case of arithmetic
+    
+    Args:
+        offset -- nonnegative integer how many counting numbers to skip before starting
+        
+    OEIS A000027 (with default offset)
+    """
+    
+    require_integers(["offset"],[offset])
+    require_nonnegative(["offset"],[offset])
+    
+    for i in count(offset+1,1):
+        yield i
 
 
 def powers(n):
@@ -184,7 +222,11 @@ def gen_odds():
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
-    print("Natural Numbers")
+    print("Counting Numbers")
+    simple_test(counting(),10,
+                "1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+    
+    print("\nNatural Numbers")
     simple_test(naturals(),10,
                 "0, 1, 2, 3, 4, 5, 6, 7, 8, 9")
     
@@ -208,9 +250,13 @@ if __name__ == '__main__':
     simple_test(gen_odds(),10,
                 "1, -1, 3, -3, 5, -5, 7, -7, 9, -9")
     
-    print("\nPolynomial 2x^2 - 10x + 1")
+    print("\nPolynomial 2x^2 - 10x + 1 Evaluated at Naturals")
     simple_test(polynomial([1,-10,2]),9,
                 "1, -7, -11, -11, -7, 1, 13, 29, 49")
+    
+    print("\nPolynomial 2x^2 - 10x + 1 Evaluated at Integers")
+    simple_test(gen_polynomial([1,-10,2]),9,
+                "1, -7, 13, -11, 29, -11, 49, -7, 73")
     
     print("\nArithmetic Sequence 5+2n")
     simple_test(arithmetic(5,2),10,
