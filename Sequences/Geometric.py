@@ -33,10 +33,8 @@ def primitive_hypotenuse():
             for n in range(1,m,2):
                 if gcd(m,n) == 1:
                     p = m*m+n*n
-                    if p in L:
-                        continue
                     
-                    else:
+                    if p not in L:
                         L.append(p)
         
         else:
@@ -44,10 +42,7 @@ def primitive_hypotenuse():
                 if gcd(m,n) == 1:
                     p = m*m+n*n
                     
-                    if p in L:
-                        continue
-                    
-                    else:
+                    if p not in L:
                         L.append(p)
         
         L.sort()
