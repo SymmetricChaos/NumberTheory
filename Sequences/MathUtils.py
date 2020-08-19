@@ -51,3 +51,18 @@ def choose(n,k):
         N *= (n+1-i)
         D *= i
     return N//D
+
+
+def _bits_to_int(bits):
+    """Convert a list of 0s and 1s representing a bigendian binary integer"""
+    
+    n = 0
+    p = 1
+    
+    for b in bits:
+        if b != 0:
+            n += p
+        
+        p *= 2
+    
+    return n

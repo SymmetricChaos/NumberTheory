@@ -36,7 +36,7 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
 from Sequences.BinarySequences import thue_morse
 
-from Sequences.Pseudorandom import LCG, LFG
+from Sequences.Pseudorandom import LCG, LFG, FLFSR, FLFSR_bits
 
 
 
@@ -78,5 +78,5 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          
          "thue_morse",
          
-         "LCG","LFG"
+         "LCG","LFG","FLFSR","FLFSR_bits"
         ]
