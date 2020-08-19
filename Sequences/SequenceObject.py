@@ -1,3 +1,5 @@
+# Sequence object with slightly more functional behavior
+# Maybe useful
 
 class Sequence:
     
@@ -5,7 +7,6 @@ class Sequence:
         
         if not callable(sequence):
             raise Exception("Sequence should be a function")
-        
         if not iter(sequence()):
             raise Exception("Sequence must be an iterator when called")
         

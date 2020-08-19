@@ -33,8 +33,8 @@ def LFG(a,b,m,func):
         a,b = b,func(a,b)%m
 
 
-def FLFSR_bits(vector,taps):
-    """Fibonacci Linear Feedback Shift Register: Returns the lowest order bit at each step"""
+def LFSR_bits(vector,taps):
+    """Linear Feedback Shift Register: Returns the lowest order bit at each step"""
     
     _check_LFSR_args(vector,taps)
     
@@ -43,8 +43,8 @@ def FLFSR_bits(vector,taps):
         vector = vector[1:] + [sum([vector[i] for i in taps])%2]
 
 
-def FLFSR(vector,taps):
-    """Fibonacci Linear Feedback Shift Register: Returns the state at each step"""
+def LFSR(vector,taps):
+    """Linear Feedback Shift Register: Returns the state at each step"""
     
     _check_LFSR_args(vector,taps)
     
@@ -67,11 +67,11 @@ if __name__ == '__main__':
     simple_test(LFG(9,27,97,lambda x,y:x*y),10,
                 "9, 27, 49, 62, 31, 79, 24, 53, 11, 1")
     
-    print("\nFibonacci Linear Feedback Shift Register")
-    simple_test(FLFSR_bits([1,0,0,1],[0,3]),10,
+    print("\nLinear Feedback Shift Register")
+    simple_test(LFSR_bits([1,0,0,1],[0,3]),10,
                 "1, 0, 0, 1, 0, 0, 0, 1, 1, 1")
     
-    print("\nFibonacci Linear Feedback Shift Register")
-    simple_test(FLFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),10,
+    print("\nLinear Feedback Shift Register")
+    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),10,
                 "105, 180, 218, 237, 118, 187, 221, 110, 55, 155")
     
