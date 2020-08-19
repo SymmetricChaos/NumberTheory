@@ -5,7 +5,7 @@ from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_nonnegative
 
 
-def polygonal(S):
+def polygonal(S=1):
     """Polygonal Numbers"""
     
     require_integers(["S"],[S])
@@ -15,7 +15,7 @@ def polygonal(S):
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
 
-def gen_polygonal(S):
+def gen_polygonal(S=1):
     """Generalized Polygonal Numbers"""
     
     require_integers(["S"],[S])
@@ -25,7 +25,7 @@ def gen_polygonal(S):
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
 
-def cen_polygonal(S):
+def cen_polygonal(S=1):
     """Centered Polygonal Numbers"""
     
     require_integers(["S"],[S])
@@ -35,7 +35,7 @@ def cen_polygonal(S):
         yield (S*n) // 2 * (n-1)+1
 
 
-def simplicial(N):
+def simplicial(N=1):
     """Simplicial Numbers: Generalization of triangular numbers to N dimensions"""
     
     require_integers(["N"],[N])
@@ -75,7 +75,7 @@ def perfect_powers():
                 break
 
 
-def doubly_polygonal(S):
+def doubly_polygonal(S=1):
     """Doubly Polygonal Numbers"""
     
     require_integers(["S"],[S])
@@ -95,7 +95,7 @@ def doubly_polygonal(S):
         cur = s
 
 
-def hypercube(e):
+def hypercube(e=0):
     """Hypercube Numbers: Each non-negative integer raised to the power of e"""
     
     require_integers(["e"],[e])
@@ -105,7 +105,7 @@ def hypercube(e):
         yield n**e
 
 
-def gen_hypercube(e):
+def gen_hypercube(e=0):
     """Generalized Hypercube Numbers: Each integer raised to the power of e"""
     
     require_integers(["e"],[e])

@@ -2,6 +2,21 @@ from MathUtils import _bits_to_int
 
 # Obviously these are all VERY inefficient
 
+def _check_LFSR_args(vector,taps):
+    
+    if type(vector) != list:
+        raise Exception("The vector must be a list")
+    if type(taps) != list:
+        raise Exception("The taps must be a list")
+    
+    for v in vector:
+        if v not in (0,1):
+            raise Exception("Vector must consist only of 1s and 0s")
+    for t in taps:
+        if t >= len(vector):
+            raise Exception("Taps must be valid positions in the vector")
+
+
 def LCG(x,a,c,m):
     """Linear Congruential Generator"""
     
@@ -21,17 +36,7 @@ def LFG(a,b,m,func):
 def FLFSR_bits(vector,taps):
     """Fibonacci Linear Feedback Shift Register: Returns the lowest order bit at each step"""
     
-    if type(vector) != list:
-        raise Exception("The vector must be a list")
-    if type(taps) != list:
-        raise Exception("The taps must be a list")
-    
-    for v in vector:
-        if v not in (0,1):
-            raise Exception("Vector must consist only of 1s and 0s")
-    for t in taps:
-        if t >= len(vector):
-            raise Exception("Taps must be valid positions in the vector")
+    _check_LFSR_args(vector,taps)
     
     while True:
         yield vector[0]
@@ -41,17 +46,7 @@ def FLFSR_bits(vector,taps):
 def FLFSR(vector,taps):
     """Fibonacci Linear Feedback Shift Register: Returns the state at each step"""
     
-    if type(vector) != list:
-        raise Exception("The vector must be a list")
-    if type(taps) != list:
-        raise Exception("The taps must be a list")
-    
-    for v in vector:
-        if v not in (0,1):
-            raise Exception("Vector must consist only of 1s and 0s")
-    for t in taps:
-        if t >= len(vector):
-            raise Exception("Taps must be valid positions in the vector")
+    _check_LFSR_args(vector,taps)
     
     while True:
         yield _bits_to_int(vector)

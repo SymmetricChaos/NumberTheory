@@ -87,6 +87,7 @@ def partial_products(sequence,S=1):
 
 
 def simple_test(sequence,N,check):
+    """Check the first few terms of a sequence against a known good source like the OEIS"""
     
     L = [str(i) for i in segment(sequence,N)]
     S = ", ".join(L)
@@ -96,3 +97,13 @@ def simple_test(sequence,N,check):
         print("ERROR")
         print(f"Expected: {check}")
         print(f"Produced: {S}")
+
+
+def skips(sequence,n):
+    """Yields sequence but skipping n terms each time, starts with first element"""
+    
+    while True:
+        yield next(sequence)
+        
+        for i in range(n):
+            next(sequence)
