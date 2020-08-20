@@ -53,6 +53,7 @@ def primitive_hypotenuse():
             
             yield L.pop(0)
 
+
 def hypotenuse():
     """
     Hypotenuse Numbers: Positive integers which are the hypotenuse of some Pythagoean triple\n
