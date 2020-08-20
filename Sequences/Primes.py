@@ -6,7 +6,10 @@ from Sequences.NiceErrorChecking import require_integers, require_positive
 
 ## Generator that returns primes (not my work)
 def primes():
-    """Prime Numbers: Positive integers with exactly two factors"""
+    """
+    Prime Numbers: Positive integers with exactly two factors
+    OEIS A000040
+    """
     
     D = defaultdict(list)
     q = 2
@@ -26,7 +29,10 @@ def primes():
 
 
 def composites():
-    """Composite Numbers: Positive integers with more than two factors"""
+    """
+    Composite Numbers: Positive integers with more than two factors
+    OEIS A002808
+    """
     
     D = defaultdict(list)
     q = 2
@@ -45,9 +51,11 @@ def composites():
         q += 1
 
 
-# Cumulative product of prime numbers.
 def primorials():
-    """Primoral Numbers: Cumulative product of primes"""
+    """
+    Primoral Numbers: Cumulative product of primes
+    OEIS A002110
+    """
     
     out = 1
     for i in primes():
@@ -58,7 +66,10 @@ def primorials():
 
 
 def pythagorean_primes():
-    """Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle"""
+    """
+    Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle
+    OEIS A002144
+    """
     
     for p in primes():
         if (p-1)%4 == 0:
@@ -68,6 +79,8 @@ def pythagorean_primes():
 def smooth(B):
     """
     Smooth Numbers: Positive integers with no prime factors greater than B
+    
+    OEIS A003586, A051037, A002473, A051038, A080197, A080681, A080682, A080683
     
     Args:
         B -- largest prime factor allowed
@@ -91,6 +104,11 @@ def smooth(B):
 
 
 def hamming():
+    """
+    Hamming Numbers: The 5-Smooth numbers also known as the Regular Numbers
+    OEIS A051037
+    """
+    
     for i in smooth(5):
         yield i
 
@@ -98,6 +116,8 @@ def hamming():
 def rough(B):
     """
     Rough Numbers: Positive integers with no prime factors less than B
+    
+    OEIS A000027, A005408, A007310, A007775, A008364, A008365, A008366, A166061, A166063
     
     Args:
         B -- smallest prime factor allowed
@@ -121,7 +141,10 @@ def rough(B):
 
 
 def highly_composite():
-    """Highly Composite Numbers: Positive integers that have more factors than any smaller positive integer"""
+    """
+    Highly Composite Numbers: Positive integers that have more factors than any smaller positive integer
+    OEIS A002182
+    """
     
     F = 0
     for i in naturals(1):
@@ -133,14 +156,20 @@ def highly_composite():
 
 
 def divisors():
-    """Number of Divisors: Count of divisors for each positive integer"""
+    """
+    Number of Divisors: Count of divisors for each positive integer
+    OEIS A000005
+    """
     
     for i in naturals(1):
         yield len(factorization(i))
 
 
 def prime_divisors():
-    """Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer"""
+    """
+    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
+    OEIS A001222
+    """
     
     for n in naturals(1):
         ctr = 0
@@ -156,7 +185,10 @@ def prime_divisors():
 
 
 def unique_prime_divisors():
-    """Number of Unique Prime Divisors: Count of unique prime factors for each positive integer"""
+    """
+    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer
+    OEIS A001221
+    """
     
     D = defaultdict(list)
     q = 2
@@ -180,7 +212,10 @@ def unique_prime_divisors():
 
 
 def squarefree():
-    """Squarefree Numbers: Positive integers not divisible by any prime more than once"""
+    """
+    Squarefree Numbers: Positive integers not divisible by any prime more than once
+    OEIS A005117
+    """
     
     for n in naturals(1):
         for i in naturals(2):
@@ -193,7 +228,10 @@ def squarefree():
 
 
 def squarefree_kernel():
-    """Squarefree Kernels: Largest squarefree factor of each positive integer"""
+    """
+    Squarefree Kernels: Largest squarefree factor of each positive integer
+    OEIS A007947
+    """
     
     for n in naturals(1):
         K = 1
