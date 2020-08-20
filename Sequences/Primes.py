@@ -211,7 +211,10 @@ def squarefree_kernel():
 
 
 def prime_counting():
-    """Prime Counting Function: Count of primes less than each non-negative integer"""
+    """
+    Prime Counting Function: Count of primes less than each non-negative integer
+    OEIS A000720
+    """
     
     ctr = 0
     cur = 0
@@ -224,8 +227,28 @@ def prime_counting():
         cur = p
 
 
+
+def prime_characteristic():
+    """
+    Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0
+    OEIS A010051
+    """
+    
+    cur = 1
+    
+    for p in primes():
+        for i in range(p-cur):
+            yield 0
+            
+        yield 1
+        cur = p+1
+
+
 def totients():
-    """Totients: Count of positive integers coprime to each positive integer"""
+    """
+    Totients: Count of positive integers coprime to each positive integer
+    OEIS A000010
+    """
     
     D = defaultdict(list)
     q = 2
@@ -310,6 +333,10 @@ if __name__ == '__main__':
     print("\nPrime Counting Function")
     simple_test(prime_counting(),10,
                 "0, 0, 1, 2, 2, 3, 3, 4, 4, 4")
+    
+    print("\nCharacteristic Function of the Primes")
+    simple_test(prime_characteristic(),10,
+                "0, 1, 1, 0, 1, 0, 1, 0, 0, 0")
     
     print("\nTotients")
     simple_test(totients(),10,

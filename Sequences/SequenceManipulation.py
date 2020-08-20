@@ -1,5 +1,4 @@
 
-
 def offset(sequence,n=0):
     """Skip the first n terms of a sequence"""
     

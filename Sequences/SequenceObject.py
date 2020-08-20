@@ -1,6 +1,8 @@
-from NiceErrorChecking import require_iterable, require_callable
+from Sequences.NiceErrorChecking import require_iterable, require_callable
 
-# Sequence object with slightly more functional behavior
+# Sequence object with slightly more functional behavior. Specifically it is
+# not a generator. If a Sequence is created it uses a new generator each time
+# it is called
 # Maybe useful
 
 class Sequence:
@@ -17,4 +19,3 @@ class Sequence:
     def __call__(self,*args,**kwargs):
         for i in self.sequence(*args,**kwargs):
             yield i
-
