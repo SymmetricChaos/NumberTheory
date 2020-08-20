@@ -1,3 +1,5 @@
+from NiceErrorChecking import require_iterable, require_callable
+
 # Sequence object with slightly more functional behavior
 # Maybe useful
 
@@ -5,10 +7,8 @@ class Sequence:
     
     def __init__(self,sequence,index=None):
         
-        if not callable(sequence):
-            raise Exception("Sequence should be a function")
-        if not iter(sequence()):
-            raise Exception("Sequence must be an iterator when called")
+        require_callable(["sequence"],[sequence])
+        require_iterable(["sequence()"],[sequence()])
         
         self.sequence = sequence
         self.index = index

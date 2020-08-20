@@ -1,8 +1,9 @@
 
 
-def offset(sequence,offset=0):
+def offset(sequence,n=0):
+    """Skip the first n terms of a sequence"""
     
-    for i in range(offset):
+    for i in range(n):
         next(sequence)
     
     for i in sequence:
@@ -11,7 +12,10 @@ def offset(sequence,offset=0):
 
 # Return some number of values with some offset
 def segment(sequence,num_vals=0,offset=0):
-    """Return num_val values from a sequence after skipping offset of them"""
+    """
+    Return num_val values from a sequence after skipping offset of them
+    If num_vals is left as zero the entire sequence is returned
+    """
     
     if type(num_vals) != int:
         raise Exception("n_vals must be an integer")
@@ -37,9 +41,9 @@ def segment(sequence,num_vals=0,offset=0):
 
 
 def show_start(sequence):
-    """Values of sequence until value passes 1000 or until 20 values printed"""
+    """Values of sequence until value passes 1000 or until 15 values printed"""
     
-    part = segment(sequence,20)
+    part = segment(sequence,15)
     L = []
     
     for i in part:
@@ -83,6 +87,19 @@ def partial_products(sequence,S=1):
     
     for term in sequence:
         S *= term
+        yield S
+
+
+def partial_operations(sequence,S,operation):
+    """Partial values of a sequence using some binary operation"""
+    
+    if type(S) != int:
+        raise TypeError("S must be an integer")
+    if not callable(operation):
+        raise TypeError("operation must be an function representing a binary operation")
+    
+    for term in sequence:
+        S = operation(S,term)
         yield S
 
 

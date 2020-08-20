@@ -1,3 +1,4 @@
+## Type Errors ##
 def require_integers(K,L):
     
     out = ""
@@ -10,6 +11,31 @@ def require_integers(K,L):
         raise TypeError(out)
 
 
+def require_callable(K,L):
+    
+    out = ""
+    
+    for k,l in zip(K,L):
+        if not callable(l):
+            out += f"{k} must be a function or other callable object\n"
+    
+    if out != "":
+        raise TypeError(out)
+
+
+def require_iterable(K,L):
+    
+    out = ""
+    
+    for k,l in zip(K,L):
+        if not iter(l):
+            out += f"{k} must be a list, tuple, generator, or other iterable object\n"
+    
+    if out != "":
+        raise TypeError(out)
+
+
+## Value Errors ##
 def require_nonnegative(K,L):
     
     out = ""
@@ -34,6 +60,8 @@ def require_positive(K,L):
         raise ValueError(out)
 
 
+# To avoid potential confusion only no strictly greater than or strictly less
+# checking functions are provided.
 def require_geq(K,L,n):
     
     out = ""

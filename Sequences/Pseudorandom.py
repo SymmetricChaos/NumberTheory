@@ -32,17 +32,6 @@ def LFG(a,b,m,func):
         yield a
         a,b = b,func(a,b)%m
 
-
-def LFSR_bits(vector,taps):
-    """Linear Feedback Shift Register: Returns the lowest order bit at each step"""
-    
-    _check_LFSR_args(vector,taps)
-    
-    while True:
-        yield vector[0]
-        vector = vector[1:] + [sum([vector[i] for i in taps])%2]
-
-
 def LFSR(vector,taps):
     """Linear Feedback Shift Register: Returns the state at each step"""
     
@@ -66,10 +55,6 @@ if __name__ == '__main__':
     print("\nLagged Fibonacci Generator")
     simple_test(LFG(9,27,97,lambda x,y:x*y),10,
                 "9, 27, 49, 62, 31, 79, 24, 53, 11, 1")
-    
-    print("\nLinear Feedback Shift Register")
-    simple_test(LFSR_bits([1,0,0,1],[0,3]),10,
-                "1, 0, 0, 1, 0, 0, 0, 1, 1, 1")
     
     print("\nLinear Feedback Shift Register")
     simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),10,
