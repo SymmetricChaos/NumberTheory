@@ -1,29 +1,50 @@
 from Simple import naturals
-from collections import deque
 
-# Unsure is this kind of memoization is clever or silly
+
 def evil():
     """
     Evil Numbers: Non-negative integers with an even number of 1s in their binary expansion
     OEIS A001969
     """
     
-    L = deque([0])
-    
-    yield 0
-    
-    for n in naturals(1):
+    for n in naturals():
+        m = n
+        s = 0
+        while m != 0:
+            m,r = divmod(m,2)
+            s += r
         
-        m,r = divmod(n,2)
-        
-        if r == 0:
-            L.popleft()
-        
-        s = (L[0]+r)%2
-        L.append(s)
+        s = s%2
         
         if s == 0:
             yield n
+
+# Too proud of this clever memoization to delete it but its hard to read, uses
+# a lot of memory, and (based on some crude testing) it is at best faster by a 
+# fraction of a second if millions of values are needed.
+#from collections import deque
+# def evil_alt():
+#     """
+#     Evil Numbers: Non-negative integers with an even number of 1s in their binary expansion
+#     OEIS A001969
+#     """
+#    
+#     L = deque([0])
+#    
+#     yield 0
+#    
+#     for n in naturals(1):
+#        
+#         m,r = divmod(n,2)
+#        
+#         if r == 0:
+#             L.popleft()
+#        
+#         s = (L[0]+r)%2
+#         L.append(s)
+#        
+#         if s == 0:
+#             yield n
 
 
 def odious():
@@ -32,17 +53,14 @@ def odious():
     OEIS A000069
     """
     
-    L = deque([0])
-    
-    for n in naturals(1):
+    for n in naturals():
+        m = n
+        s = 0
+        while m != 0:
+            m,r = divmod(m,2)
+            s += r
         
-        m,r = divmod(n,2)
-        
-        if r == 0:
-            L.popleft()
-        
-        s = (L[0]+r)%2
-        L.append(s)
+        s = s%2
         
         if s == 1:
             yield n
