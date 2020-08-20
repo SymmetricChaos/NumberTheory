@@ -1,30 +1,29 @@
 from Simple import naturals
+from collections import deque
 
-# Not sure if this is faster but memoization means it is less computation
+# Unsure is this kind of memoization is clever or silly
 def evil():
     """
     Evil Numbers: Non-negative integers with an even number of 1s in their binary expansion
     OEIS A001969
     """
     
-    L = {0:0}
+    L = deque([0])
     
     yield 0
     
     for n in naturals(1):
-        s = 0
-        m = n
         
-        while m != 0:
-            m,r = divmod(m,2)
-            s += r
-            if m in L:
-                s = (s+L[m])%2
-                break
+        m,r = divmod(n,2)
+        
+        if r == 0:
+            L.popleft()
+        
+        s = (L[0]+r)%2
+        L.append(s)
         
         if s == 0:
             yield n
-            L[n] = s
 
 
 def odious():
@@ -33,24 +32,20 @@ def odious():
     OEIS A000069
     """
     
-    L = {1:1}
+    L = deque([0])
     
-    yield 1
-    
-    for n in naturals(2):
-        s = 0
-        m = n
+    for n in naturals(1):
         
-        while m != 0:
-            m,r = divmod(m,2)
-            s += r
-            if m in L:
-                s = (s+L[m])%2
-                break
+        m,r = divmod(n,2)
+        
+        if r == 0:
+            L.popleft()
+        
+        s = (L[0]+r)%2
+        L.append(s)
         
         if s == 1:
             yield n
-            L[n] = s
 
 
 
