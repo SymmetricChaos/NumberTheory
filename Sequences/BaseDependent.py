@@ -10,6 +10,7 @@ def evil():
     for n in naturals():
         m = n
         s = 0
+        
         while m != 0:
             m,r = divmod(m,2)
             s += r
@@ -56,6 +57,7 @@ def odious():
     for n in naturals():
         m = n
         s = 0
+        
         while m != 0:
             m,r = divmod(m,2)
             s += r
@@ -66,6 +68,20 @@ def odious():
             yield n
 
 
+def binary_weight():
+    """
+    Binary Weight: Count of 1s in the binary expansion of each non-negative integer
+    OEIS A000120
+    """
+    
+    for n in naturals():
+        s=0
+        
+        while n != 0:
+            n,r = divmod(n,2)
+            s += r
+        
+        yield s
 
 
 if __name__ == '__main__':
@@ -78,3 +94,7 @@ if __name__ == '__main__':
     print("\nOdious Numbers")
     simple_test(odious(),14,
                 "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26")
+    
+    print("\nBinary Weights")
+    simple_test(binary_weight(),14,
+                "0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3")

@@ -37,7 +37,6 @@ def choose(n,k):
     if type(k) != int:
         raise TypeError("k must be an integer")
     
-    
     if n < k:
         raise ValueError("n cannot be less than k")
     if k < 0:
