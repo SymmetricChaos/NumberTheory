@@ -28,16 +28,13 @@ from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_rec
 from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
                                     eulerian, bell, gould
 
-from Sequences.CollatzNumbers import collatz_numbers
-
-from Sequences.Recaman import recaman
-
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
 from Sequences.BinarySequences import thue_morse
 
 from Sequences.Pseudorandom import LCG, LFG, LFSR
 
+from Sequences.Weird import collatz, collatz_sequence, recaman
 
 
 __all__=["segment","make_triangle","show_start","offset","partial_sums",
@@ -70,13 +67,11 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "catalan","derangements","pascal","partition","eulerian","bell",
          "gould",
          
-         "collatz_numbers",
-         
-         "recaman",
-         
          "primitive_hypotenuse","nonhypotenuse","hypotenuse",
          
          "thue_morse",
          
-         "LCG","LFG","LFSR"
+         "LCG","LFG","LFSR",
+         
+         "collatz","collatz_sequence","recaman"
         ]
