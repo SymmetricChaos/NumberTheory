@@ -1,3 +1,4 @@
+from itertools import islice
 
 def offset(sequence,n=0):
     """Skip the first n terms of a sequence"""
@@ -16,27 +17,8 @@ def segment(sequence,num_vals=0,offset=0):
     If num_vals is left as zero the entire sequence is returned
     """
     
-    if type(num_vals) != int:
-        raise Exception("n_vals must be an integer")
-    if type(offset) != int:
-        raise Exception("offset must be an integer")
-            
-    if num_vals < 0:
-        raise Exception("n_vals must be nonnegative")
-    if offset < 0:
-        raise Exception("offset must be nonnegative")
-    
-    
-    for i in range(offset):
-        next(sequence)
-    
-    if num_vals == 0:
-        for i in sequence:
-            yield i
-    
-    else:
-        for i in range(num_vals):
-            yield next(sequence)
+    for i in islice(sequence, offset, num_vals):
+        yield i
 
 
 def show_start(sequence):
@@ -52,7 +34,6 @@ def show_start(sequence):
             break
         
     print(*L,sep=", ")
-        
     print("\n")
 
 
@@ -107,6 +88,7 @@ def simple_test(sequence,N,check):
     
     L = [str(i) for i in segment(sequence,N)]
     S = ", ".join(L)
+    
     if S == check:
         print(S)
     else:

@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals
 from math import gcd
-from itertools import dropwhile
+
 
 def _collatz_step(n):
     if n % 2 == 1:
@@ -76,7 +76,7 @@ def collatz_longest():
 def collatz_all():
     """
     All Collatz Sequences: Concatenation of the non-repeating part of each Collatz sequence
-    
+    OEIS A070165
     """
     
     for n in naturals(1):
@@ -126,6 +126,8 @@ def cantor_pairs():
 
 
 
+
+
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
@@ -152,4 +154,3 @@ if __name__ == '__main__':
     print("\nIntegers that represent the Cantor pairing function a of fully reduced proper fraction")
     simple_test(cantor_pairs(),10,
                 "8, 13, 18, 19, 26, 32, 33, 34, 41, 43")
-    
