@@ -24,7 +24,7 @@ def factorization(n):
 
 def all_factorizations_inner(n,m=1):
     
-    F = [f for f in factorization(n) if f > m]
+    F = [f for f in factorization(n) if f >= m]
     
     if len(F) == 0:
         yield [n]
@@ -36,11 +36,9 @@ def all_factorizations_inner(n,m=1):
 
 
 def all_factorizations(n):
-    S = set([])
+    S = set([(n,)])
     for i in all_factorizations_inner(n):
         S.add(tuple(sorted(i)))
-    S = list(S)
-    S = sorted(S,key=lambda x: x[0])
     return S
 
 
@@ -51,5 +49,10 @@ def prod(L):
     return p
 
 
-for i in all_factorizations(216):
-    print(" × ".join([str(t) for t in i]))
+for x in range(25):
+    print()
+    L = []
+    for i in all_factorizations(x+1):
+        L.append(" × ".join([str(t) for t in i]))
+    for i in sorted(L,key=len):
+        print(i)

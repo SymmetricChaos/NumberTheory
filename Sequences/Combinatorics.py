@@ -1,4 +1,4 @@
-from Sequences.MathUtils import choose
+from Sequences.MathUtils import choose, factorization
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -148,13 +148,33 @@ def cake():
         yield (n*n*n+5*n+6)//6
 
 
-# def multiplicative_partition():
-#     """
-#     Multiplicative Partition Numbers: Count of unique factorizations of each positive integer ignoring 1\n
-#     OEIS A001055
-#     """
+def multiplicative_partition():
+    """
+    Multiplicative Partition Numbers: Sets of integers, not including one, that have a product of n\n
+    OEIS A001055
+    """
     
+    def all_factorizations_inner(n,m=1):
+        F = [f for f in factorization(n,nontrivial=True) if f >= m]
+        
+        if len(F) == 0:
+            yield [n]
+        
+        else:
+            for f in F:
+                for a in all_factorizations_inner(n//f,f):
+                    yield [f] + a
     
+    def num_factorizations(n):
+        S = set([(n,)])
+        
+        for i in all_factorizations_inner(n):
+            S.add(tuple(sorted(i)))
+        
+        return len(S)
+    
+    for n in naturals(1):
+        yield num_factorizations(n)
 
 
 
@@ -193,4 +213,8 @@ if __name__ == '__main__':
     print("\nCake Numbers")
     simple_test(cake(),9,
                 "1, 2, 4, 8, 15, 26, 42, 64, 93")
+    
+    print("\nMultiplicative Partitions")
+    simple_test(multiplicative_partition(),10,
+                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2")
     

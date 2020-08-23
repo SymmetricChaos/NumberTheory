@@ -3,6 +3,27 @@ import json
 
 # https://oeis.org/wiki/JSON_Format,_Compressed_Files
 
+def show_dict(D,superdict=""):
+    """
+    Recursively show the contents of a dictionary or iterable that make contain
+    other dictionaries or iterables
+    """
+    if type(D) == dict:
+        if len(D) == 0:
+            print(f"{superdict}: {D}")
+        for key,val in D.items():
+            show_dict(val,superdict=f"{superdict}['{key}']")
+    
+    elif type(D) in (list,tuple):
+        if len(D) == 0:
+            print(f"{superdict}: {D}")
+        for n,i in enumerate(D):
+            show_dict(i,superdict=f"{superdict}[{n}]")
+    
+    else:
+        print(f"{superdict}: {D}")
+
+
 def get_OEIS_JSON(A):
 
     if A > 999999:
@@ -22,6 +43,8 @@ def get_OEIS_JSON(A):
         raise Exception(f"Error {J['code']} {J['error']}\nRequest: {rqsrting}")
     return J
 
-A = get_OEIS_JSON(0)
+A = get_OEIS_JSON(5)
 
-print(A)
+# show_dict(A)
+print(f"name: {A['results'][0]['name']}")
+print(f"data: {A['results'][0]['data']}")

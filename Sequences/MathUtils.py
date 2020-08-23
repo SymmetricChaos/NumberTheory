@@ -1,4 +1,4 @@
-from math import ceil, sqrt
+from math import floor, sqrt
 
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
@@ -7,7 +7,7 @@ def factorization(n,nontrivial=False):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
-    lim = ceil(sqrt(n))+1
+    lim = floor(sqrt(n))+1
     
     # Either include or don't include trivial factors
     if nontrivial == True:
