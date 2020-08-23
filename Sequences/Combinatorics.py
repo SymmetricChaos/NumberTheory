@@ -148,6 +148,14 @@ def cake():
         yield (n*n*n+5*n+6)//6
 
 
+# def multiplicative_partition():
+#     """
+#     Multiplicative Partition Numbers: Count of unique factorizations of each positive integer ignoring 1\n
+#     OEIS A001055
+#     """
+    
+    
+
 
 
 

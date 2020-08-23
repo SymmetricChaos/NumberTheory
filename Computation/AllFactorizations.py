@@ -1,5 +1,6 @@
 from math import floor, sqrt
 
+
 def factorization(n):
     """All Unique Factors"""
     if type(n) != int:
@@ -48,6 +49,7 @@ def prod(L):
     for i in L:
         p *= i
     return p
+
 
 for i in all_factorizations(216):
     print(" × ".join([str(t) for t in i]))
