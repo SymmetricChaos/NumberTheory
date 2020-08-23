@@ -13,13 +13,15 @@ def get_OEIS_JSON(A):
     while len(Astr) < 6:
         Astr = "0"+Astr
     
-    resp = requests.get(f"https://oeis.org/search?q=id:A{Astr}&fmt=json")
+    rqsrting = f"https://oeis.org/search?q=id:A{Astr}&fmt=json"
+    
+    resp = requests.get(rqsrting)
     
     J = json.loads(resp.content.decode('utf-8'))
     if "error" in J:
-        raise Exception(f"Error {J['code']} {J['error']}\nRequest: {sfurl+S}")
+        raise Exception(f"Error {J['code']} {J['error']}\nRequest: {rqsrting}")
     return J
 
-A = get_OEIS_JSON(1)
+A = get_OEIS_JSON(0)
 
 print(A)
