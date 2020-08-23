@@ -1,5 +1,4 @@
 from math import floor, sqrt
-from itertools import product, combinations, chain
 
 def factorization(n):
     """All Unique Factors"""
@@ -39,7 +38,10 @@ def all_factorizations(n):
     S = set([])
     for i in all_factorizations_inner(n):
         S.add(tuple(sorted(i)))
+    S = list(S)
+    S = sorted(S,key=lambda x: x[0])
     return S
+
 
 def prod(L):
     p = 1
@@ -47,7 +49,5 @@ def prod(L):
         p *= i
     return p
 
-for i in all_factorizations(36):
-    print(i)
-
-print(len(all_factorizations(36)))
+for i in all_factorizations(216):
+    print(" × ".join([str(t) for t in i]))
