@@ -36,22 +36,27 @@ def catalan():
         yield N//D
 
 
+# Building the triangle using only addition and index look ups is about 100 
+# times faster than calculating the binomial coefficients directly on my
+# machine
 def pascal():
     """
     Pascal's Triangle: Number triangle with binomial coefficients\n
     OEIS A007318
     """
     
-    n, k = 0, 0
+    L = [0,1,0]
+    
+    yield 1
     
     while True:
-        yield choose(n,k)
-               
-        if n == k:
-            n += 1
-            k = 0
-        else:
-            k += 1
+        T = [0]
+        for i in range(len(L)-1):
+            x = L[i]+L[i+1]
+            T.append(x)
+            yield x
+        T.append(0)
+        L = T
 
 
 def gould():
@@ -137,10 +142,20 @@ def bell():
         R0, R1 = R1, R2
 
 
+def lazy_caterer():
+    """
+    Lazy Caterer Numbers: Maximum number of pieces produced when cutting a circle with exactly n lines\n
+    OEIS A000124
+    """
+    
+    for n in naturals():
+        yield (n*(n+1))//2+1
+
+
 # Generalized cake numbers? Uses binomial coefficients
 def cake():
     """
-    Cake Numbers: Maximum number of pieces produced when cutting a cube with exactly n planes\n
+    Cake Numbers: Maximum number of pieces produced when cutting a sphere with exactly n planes\n
     OEIS A000125
     """
     
@@ -148,6 +163,7 @@ def cake():
         yield (n*n*n+5*n+6)//6
 
 
+# Potentially memoizeable
 def multiplicative_partition():
     """
     Multiplicative Partition Numbers: Sets of integers, not including one, that have a product of n\n
@@ -180,7 +196,7 @@ def multiplicative_partition():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.SequenceManipulation import simple_test, segment
     
     print("Derangement Numbers")
     simple_test(derangements(),9,
@@ -210,9 +226,13 @@ if __name__ == '__main__':
     simple_test(bell(),9,
                 "1, 1, 2, 5, 15, 52, 203, 877, 4140")
     
+    print("\nLazy Caterer's Numbers")
+    simple_test(lazy_caterer(),10,
+                "1, 2, 4, 7, 11, 16, 22, 29, 37, 46")
+    
     print("\nCake Numbers")
-    simple_test(cake(),9,
-                "1, 2, 4, 8, 15, 26, 42, 64, 93")
+    simple_test(cake(),10,
+                "1, 2, 4, 8, 15, 26, 42, 64, 93, 130")
     
     print("\nMultiplicative Partitions")
     simple_test(multiplicative_partition(),10,
