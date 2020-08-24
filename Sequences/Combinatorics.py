@@ -39,15 +39,14 @@ def catalan():
 # Building the triangle using only addition and index look ups is about 100 
 # times faster than calculating the binomial coefficients directly on my
 # machine
+# There  is probably a way to do this is place
 def pascal():
     """
     Pascal's Triangle: Number triangle with binomial coefficients\n
     OEIS A007318
     """
     
-    L = [0,1,0]
-    
-    yield 1
+    L = [1,0]
     
     while True:
         T = [0]
@@ -77,22 +76,24 @@ def gould():
         yield val
 
 
+# Memoized version is about 1000 times faster than the explicit formula as that
+# involved both computing a binomial coefficient and exponentiation
 def eulerian():
     """
     Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases\n
     OEIS A008292
     """
     
-    for m in naturals(1):
-        for n in range(m):
-            S = 0
-            sign = -1
-            
-            for k in range(n+1):
-                sign *= -1
-                S += sign*choose(m+1,k)*(n+1-k)**m
-            
-            yield S
+    L = [1,0]
+    
+    for a in naturals(1):
+        T = []
+        for b in range(a):
+            x = (a-b)*L[b-1] + (b+1)*L[b]
+            T.append(x)
+            yield x
+        T.append(0)
+        L = T
 
 
 def partition():
@@ -196,7 +197,7 @@ def multiplicative_partition():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test, segment
+    from Sequences.SequenceManipulation import simple_test
     
     print("Derangement Numbers")
     simple_test(derangements(),9,
@@ -237,4 +238,3 @@ if __name__ == '__main__':
     print("\nMultiplicative Partitions")
     simple_test(multiplicative_partition(),10,
                 "1, 1, 1, 2, 1, 2, 1, 3, 2, 2")
-    
