@@ -3,7 +3,10 @@ from itertools import count, repeat
 
 
 def constant(n):
-    """Constant Sequences: Returns n forever"""
+    """
+    Constant Sequences: Returns n forever
+    OEIS A000004, A000012, A007395, A010701
+    """
     
     for i in repeat(n):
         yield i
@@ -70,7 +73,6 @@ def arithmetrico_geometric(a,n,b,m):
     require_integers(["a","n","b","m"],[a,n,b,m])
     
     for ari,geo in zip(arithmetic(a,n),geometric(b,m)):
-        
         yield ari*geo
 
 
@@ -88,8 +90,10 @@ def polynomial(coef):
     
     for n in naturals():
         out = 0
+        
         for e,c in enumerate(coef):
             out += c*n**e
+        
         yield out
 
 
@@ -107,8 +111,10 @@ def gen_polynomial(coef):
     
     for i in integers():
         out = 0
+        
         for e,c in enumerate(coef):
             out += c*i**e
+        
         yield out
 
 
@@ -216,6 +222,9 @@ def gen_odds():
         yield -i
 
 
+
+
+
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
@@ -263,7 +272,7 @@ if __name__ == '__main__':
     simple_test(geometric(5,2),8,
                 "5, 10, 20, 40, 80, 160, 320, 640")
     
-    print("\nArithmetrico-Geometric Sequence (1+2n)*(2*3^n)")
+    print("\nArithmetrico-Geometric Sequence (1+2n)*(3*4^n)")
     simple_test(arithmetrico_geometric(1,2,3,4),7,
                 "3, 36, 240, 1344, 6912, 33792, 159744")
     

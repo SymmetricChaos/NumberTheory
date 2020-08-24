@@ -1,4 +1,4 @@
-from math import floor, isqrt
+from math import isqrt
 
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):

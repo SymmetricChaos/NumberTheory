@@ -1,4 +1,4 @@
-from Sequences.MathUtils import choose, factorization
+from Sequences.MathUtils import factorization
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
