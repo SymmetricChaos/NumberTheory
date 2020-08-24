@@ -292,9 +292,9 @@ if __name__ == '__main__':
     simple_test(narayana(),10,
                 "1, 1, 1, 2, 3, 4, 6, 9, 13, 19")
     
-    from math import floor, sqrt
-    print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
-    simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),10,
-                "1, 1, 1, 4, 5, 7, 12, 14, 18, 25")
+    from math import isqrt
+    print("\nArbitrary Reccurence with f(a,b,c) = 2⌊√(a+b+c)⌋+a\nand initial state 1, 2, 3")
+    simple_test(arbitrary_recurrence([1,2,3],lambda x: 2*isqrt(x[0]+x[1]+x[2])+x[0]),10,
+                "1, 2, 3, 5, 8, 11, 13, 18, 23, 27")
     
     

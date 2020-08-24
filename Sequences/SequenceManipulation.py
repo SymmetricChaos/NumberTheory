@@ -1,4 +1,6 @@
 from itertools import islice
+from math import prod
+from time import time
 
 def offset(sequence,n=0):
     """Skip the first n terms of a sequence"""
@@ -10,7 +12,6 @@ def offset(sequence,n=0):
         yield i
 
 
-# Return some number of values with some offset
 def segment(sequence,num_vals=0,offset=0):
     """
     Return num_val values from a sequence after skipping offset of them
@@ -38,7 +39,13 @@ def show_start(sequence):
 
 
 def make_triangle(sequence):
-    """Standard triangular arrangement of seq"""
+    """
+    Standard triangular arrangement of the sequence
+    1
+    2 3
+    4 5 6
+    7 8 9 10
+    """
     
     ctr = 1
     
@@ -46,6 +53,28 @@ def make_triangle(sequence):
         L = [next(sequence) for c in range(ctr)]
         ctr += 1
         yield L
+
+
+def triangle_sums(sequence):
+    """Sums of the rows of the standard triangular arrangement of the sequence"""
+    
+    ctr = 1
+    
+    while True:
+        L = [next(sequence) for c in range(ctr)]
+        ctr += 1
+        yield sum(L)
+
+
+def triangle_products(sequence):
+    """Products of the rows of the standard triangular arrangement of the sequence"""
+    
+    ctr = 1
+    
+    while True:
+        L = [next(sequence) for c in range(ctr)]
+        ctr += 1
+        yield prod(L)
 
 
 def partial_sums(sequence,S=0):
@@ -70,19 +99,20 @@ def partial_products(sequence,S=1):
         yield S
 
 
-def partial_operations(sequence,S,operation):
-    """Partial values of a sequence using some binary operation"""
+def skips(sequence,n):
+    """Yields sequence but skipping n terms each time, starts with first element"""
     
-    if type(S) != int:
-        raise TypeError("S must be an integer")
-    if not callable(operation):
-        raise TypeError("operation must be an function representing a binary operation")
-    
-    for term in sequence:
-        S = operation(S,term)
-        yield S
+    while True:
+        yield next(sequence)
+        
+        for i in range(n):
+            next(sequence)
 
 
+
+
+
+# For testing purposes
 def simple_test(sequence,N,check):
     """Check the first few terms of a sequence against a known good source like the OEIS"""
     
@@ -97,11 +127,12 @@ def simple_test(sequence,N,check):
         print(f"Produced: {S}")
 
 
-def skips(sequence,n):
-    """Yields sequence but skipping n terms each time, starts with first element"""
+def speed_compare(sequences,n,reps=1):
     
-    while True:
-        yield next(sequence)
-        
-        for i in range(n):
-            next(sequence)
+    for number,S in enumerate(sequences,1):
+        print(f"Sequence {number}")
+        t0 = time()
+        for r in range(reps):
+            for t in segment(S,n):
+                pass
+        print(time()-t0)

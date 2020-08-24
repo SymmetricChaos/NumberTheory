@@ -24,22 +24,19 @@ def catalan():
     Catalan Numbers: Number of non-crossing partitions of a set with n elements\n
     OEIS A000108
     """
+    C = 1
     
-    for n in naturals():
-        N = 1
-        D = 1
-        
-        for k in range(2,n+1):
-            N *= n+k
-            D *= k
-        
-        yield N//D
+    yield 1
+    
+    for n in naturals(1):
+        yield C
+        C = C*(4*n+2)//(n+2)
 
 
 # Building the triangle using only addition and index look ups is about 100 
 # times faster than calculating the binomial coefficients directly on my
 # machine
-# There  is probably a way to do this is place
+# There is probably a way to do this is place
 def pascal():
     """
     Pascal's Triangle: Number triangle with binomial coefficients\n
@@ -76,8 +73,10 @@ def gould():
         yield val
 
 
-# Memoized version is about 1000 times faster than the explicit formula as that
-# involved both computing a binomial coefficient and exponentiation
+# As with Pascal's triangle I found this memoized version to be vastly faster
+# than directly calculating the values, which involved both binomial
+# coefficients and exponentiation
+
 def eulerian():
     """
     Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases\n
@@ -153,7 +152,7 @@ def lazy_caterer():
         yield (n*(n+1))//2+1
 
 
-# Generalized cake numbers? Uses binomial coefficients
+# Generalized cake numbers?
 def cake():
     """
     Cake Numbers: Maximum number of pieces produced when cutting a sphere with exactly n planes\n
@@ -192,6 +191,7 @@ def multiplicative_partition():
     
     for n in naturals(1):
         yield num_factorizations(n)
+
 
 
 

@@ -1,4 +1,4 @@
-from math import floor, sqrt
+from math import floor, isqrt
 
 # Copy of factorization function from Computation to prevent reference issues
 def factorization(n,nontrivial=False):
@@ -7,7 +7,7 @@ def factorization(n,nontrivial=False):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
-    lim = floor(sqrt(n))+1
+    lim = isqrt(n)+1
     
     # Either include or don't include trivial factors
     if nontrivial == True:
