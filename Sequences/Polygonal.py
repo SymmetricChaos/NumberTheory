@@ -6,7 +6,14 @@ from Sequences.NiceErrorChecking import require_integers, require_positive, requ
 
 
 def polygonal(S=1):
-    """Polygonal Numbers"""
+    """
+    Polygonal Numbers: Numbers that form a polygon with S sides in the usual way
+    
+    Args:
+        S -- Number of sides
+    
+    OEIS A000217, A000290, A000326
+    """
     
     require_integers(["S"],[S])
     require_positive(["S"],[S])
@@ -16,7 +23,14 @@ def polygonal(S=1):
 
 
 def gen_polygonal(S=1):
-    """Generalized Polygonal Numbers"""
+    """
+    Generalized Polygonal Numbers: Generalization of polygonal number formula to integers
+    
+    Args:
+        S -- Number of sides
+    
+    OEIS A001318
+    """
     
     require_integers(["S"],[S])
     require_positive(["S"],[S])
@@ -26,17 +40,32 @@ def gen_polygonal(S=1):
 
 
 def cen_polygonal(S=1):
-    """Centered Polygonal Numbers"""
+    """
+    Centered Polygonal Numbers: Numbers that form a polygon with S sides that is centered on an object
+    
+    Args:
+        S -- Number of sides
+    
+    OEIS A005448, A001844, A005891, A003215, A069099, A016754, A060544, A062786, A069125, A003154
+    """
     
     require_integers(["S"],[S])
     require_positive(["S"],[S])
     
     for n in naturals(1):
-        yield (S*n) // 2 * (n-1)+1
+        yield (S*(n*n-n)) // 2 +1
 
 
+# Should find a mroe efficient way avoiding the choose function
 def simplicial(N=1):
-    """Simplicial Numbers: Generalization of triangular numbers to N dimensions"""
+    """
+    Simplicial Numbers: Generalization of triangular numbers to N dimensions
+    
+    Args:
+        N -- Dimension of the simplex
+    
+    OEIS A000292
+    """
     
     require_integers(["N"],[N])
     require_positive(["N"],[N])
@@ -48,7 +77,10 @@ def simplicial(N=1):
 
 
 def perfect_powers():
-    """Perfect Powers: Non-negative integers that can be written as a a perfect power"""
+    """
+    Perfect Powers: Non-negative integers that can be written as a perfect power
+    OEIS A001597 (when offset by 1)
+    """
     
     yield 0
     yield 1
@@ -76,7 +108,14 @@ def perfect_powers():
 
 
 def doubly_polygonal(S=1):
-    """Doubly Polygonal Numbers"""
+    """
+    Doubly Polygonal Numbers: Polygonal numbers that 
+    
+    Args:
+        S -- Number of sides
+    
+    OEIS A000583, A002817, A063249, A232713
+    """
     
     require_integers(["S"],[S])
     require_positive(["S"],[S])
@@ -96,7 +135,14 @@ def doubly_polygonal(S=1):
 
 
 def hypercube(e=0):
-    """Hypercube Numbers: Each non-negative integer raised to the power of e"""
+    """
+    Hypercube Numbers: Each non-negative integer raised to the power of e
+    
+    Args:
+        e -- exponent to raise each non-negative integer to
+    
+    OEIS
+    """
     
     require_integers(["e"],[e])
     require_nonnegative(["e"],[e])
@@ -106,7 +152,13 @@ def hypercube(e=0):
 
 
 def gen_hypercube(e=0):
-    """Generalized Hypercube Numbers: Each integer raised to the power of e"""
+    """
+    Generalized Hypercube Numbers: Each integer raised to the power of e
+    
+    Args:
+        e -- exponent to raise each integer to
+    
+    """
     
     require_integers(["e"],[e])
     require_nonnegative(["e"],[e])
@@ -117,7 +169,10 @@ def gen_hypercube(e=0):
 
 ### More efficient calculation for common polygonal numbers ###
 def triangular():
-    """Triangular Numbers"""
+    """
+    Triangular Numbers: Cumulative sums of the non-negative integers
+    OEIS: A000217
+    """
     
     S = 0
     
@@ -127,7 +182,10 @@ def triangular():
 
 
 def square():
-    """Square Numbers"""
+    """
+    Square Numbers: Cumulative sums of the non-negative odd numbers
+    OEIS A000290
+    """
     
     S = 0
     
@@ -136,15 +194,31 @@ def square():
         S += a
 
 
+def cubic():
+    """
+    Cubic Numbers: Numbers that are arranged to form a cube in the usual way
+    OEIS A000578
+    """
+    
+    for n in naturals():
+        yield n*n*n
+
+
 def pentagonal():
-    """Pentagonal Numbers"""
+    """
+    Pentagonal Numbers
+    OEIS A000326
+    """
     
     for n in naturals():
         yield (3*n*n-n)//2
 
 
 def gen_pentagonal():
-    """Generalized Pentagonal Numbers"""
+    """
+    Generalized Pentagonal Numbers
+    OEIS A001318
+    """
     
     for i in integers():
         yield (3*i*i-i)//2
@@ -180,9 +254,9 @@ if __name__ == '__main__':
     simple_test(gen_polygonal(8),10,
                 "0, 1, 5, 8, 16, 21, 33, 40, 56, 65")
     
-    print("\nCentered Square Numbers")
-    simple_test(cen_polygonal(4),10,
-                "1, 5, 13, 25, 41, 61, 85, 113, 145, 181")
+    print("\nCentered Triangular Numbers")
+    simple_test(cen_polygonal(3),10,
+                "1, 4, 10, 19, 31, 46, 64, 85, 109, 136")
     
     print("\nTetrahedral Numbers")
     simple_test(simplicial(3),10,
@@ -198,7 +272,7 @@ if __name__ == '__main__':
                 "0, 1, 35, 210, 715, 1820, 3876, 7315")
     
     print("\nCubic Numbers")
-    simple_test(hypercube(3),9,
+    simple_test(cubic(),9,
                 "0, 1, 8, 27, 64, 125, 216, 343, 512")
     
     print("\nGeneralized Cubic Numbers")
