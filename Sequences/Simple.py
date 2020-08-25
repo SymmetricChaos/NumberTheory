@@ -286,3 +286,4 @@ if __name__ == '__main__':
     simple_test(constant(0), 10,
                 "0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
     
+    
