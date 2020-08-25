@@ -19,6 +19,14 @@ def collatz_sequence(n):
         n = _collatz_step(n)
         yield n
 
+def collatz_map():
+    """
+    Map of the Collatz Function
+    """
+    
+    for n in naturals():
+        yield _collatz_step(n)
+
 
 def collatz_all():
     """
@@ -75,20 +83,19 @@ def collatz_longest():
     OEIS A006877
     """
     
-    D = {1 : 0, 2 : 1, 4 : 2}
+    D = {1 : 0}
     
     rec = -1
     
     for n in naturals(1):
-        if n not in D:
-            ctr = n
-            length = 0
-            
-            while ctr not in D:
-                ctr = _collatz_step(ctr)
-                length += 1
-            
-            D[n] = D[ctr] + length
+        ctr = n
+        length = 0
+        
+        while ctr not in D:
+            ctr = _collatz_step(ctr)
+            length += 1
+        
+        D[n] = D[ctr] + length
         
         if D[n] > rec:
             yield n
@@ -113,9 +120,9 @@ def collatz_highpoint():
             cur_rec = max(cur_rec,val)
             val = _collatz_step(val)
         
-        
         cur_rec = max(cur_rec,val)
         D[n] = max(D[val],cur_rec)
+        
         yield D[n]
 
 
@@ -138,9 +145,9 @@ def collatz_highwater():
             cur_rec = max(cur_rec,val)
             val = _collatz_step(val)
         
-        
         cur_rec = max(cur_rec,val)
         D[n] = max(D[val],cur_rec)
+        
         if cur_rec > rec:
             yield D[n]
             rec = cur_rec
@@ -194,33 +201,37 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Recaman's Sequence")
-    simple_test(recaman(),10,
-                "0, 1, 3, 6, 2, 7, 13, 20, 12, 21")
+    simple_test(recaman(),15,
+                "0, 1, 3, 6, 2, 7, 13, 20, 12, 21, 11, 22, 10, 23, 9")
+    
+    print("\nCollatz Map")
+    simple_test(collatz_map(),16,
+                "0, 4, 1, 10, 2, 16, 3, 22, 4, 28, 5, 34, 6, 40, 7, 46")
+    
+    print("\nCollatz Sequence of 7")
+    simple_test(collatz_sequence(7),17,
+                "7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1")
     
     print("\nLength of the Collatz Sequences")
-    simple_test(collatz_length(),10,
-                "0, 1, 7, 2, 5, 8, 16, 3, 19, 6")
+    simple_test(collatz_length(),16,
+                "0, 1, 7, 2, 5, 8, 16, 3, 19, 6, 14, 9, 9, 17, 17, 4")
     
     print("\nHighly Collatz Numbers")
-    simple_test(collatz_longest(),10,
-                "1, 2, 3, 6, 7, 9, 18, 25, 27, 54")
+    simple_test(collatz_longest(),14,
+                "1, 2, 3, 6, 7, 9, 18, 25, 27, 54, 73, 97, 129, 171")
     
     print("\nAll Collatz Sequences")
-    simple_test(collatz_all(),10,
-                "1, 2, 1, 3, 10, 5, 16, 8, 4, 2")
+    simple_test(collatz_all(),17,
+                "1, 2, 1, 3, 10, 5, 16, 8, 4, 2, 1, 4, 2, 1, 5, 16, 8")
     
-    print("\nCollatz Sequence of 163")
-    simple_test(collatz_sequence(163),10,
-                "163, 490, 245, 736, 368, 184, 92, 46, 23, 70")
-    
-    print("\nCollatz High Point")
-    simple_test(collatz_highpoint(),10,
-                "1, 2, 16, 4, 16, 16, 52, 8, 52, 16")
+    print("\nCollatz High Points")
+    simple_test(collatz_highpoint(),14,
+                "1, 2, 16, 4, 16, 16, 52, 8, 52, 16, 52, 16, 40, 52")
     
     print("\nCollatz High Water Marks")
     simple_test(collatz_highwater(),10,
                 "1, 2, 16, 52, 160, 9232, 13120, 39364, 41524, 250504")
     
     print("\nIntegers that represent the Cantor pairing function a of fully reduced proper fraction")
-    simple_test(cantor_pairs(),10,
-                "8, 13, 18, 19, 26, 32, 33, 34, 41, 43")
+    simple_test(cantor_pairs(),14,
+                "8, 13, 18, 19, 26, 32, 33, 34, 41, 43, 50, 52, 53, 62")
