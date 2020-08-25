@@ -24,15 +24,9 @@ def show_dict(D,superdict=""):
         print(f"{superdict}: {D}")
 
 
-def get_OEIS_JSON(A):
-
-    if A > 999999:
-        raise Exception("All A-Numbers are less than 1000000")
+def OEIS_A(A):
     
     Astr = str(A)
-    
-    while len(Astr) < 6:
-        Astr = "0"+Astr
     
     rqsrting = f"https://oeis.org/search?q=id:A{Astr}&fmt=json"
     
@@ -43,7 +37,20 @@ def get_OEIS_JSON(A):
         raise Exception(f"Error {J['code']} {J['error']}\nRequest: {rqsrting}")
     return J
 
-A = get_OEIS_JSON(5)
+def OEIS_search(search):
+    
+    search = str(search)
+    
+    rqsrting = f"https://oeis.org/search?q={search}&fmt=json"
+    
+    resp = requests.get(rqsrting)
+    
+    J = json.loads(resp.content.decode('utf-8'))
+    if "error" in J:
+        raise Exception(f"Error {J['code']} {J['error']}\nRequest: {rqsrting}")
+    return J
+
+A = OEIS_A(5)
 
 # show_dict(A)
 print(f"name: {A['results'][0]['name']}")

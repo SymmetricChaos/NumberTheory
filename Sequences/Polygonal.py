@@ -64,7 +64,7 @@ def simplicial(N=1):
     Args:
         N -- Dimension of the simplex
     
-    OEIS A000292
+    OEIS A000292, A000332
     """
     
     require_integers(["N"],[N])
@@ -170,7 +170,7 @@ def gen_hypercube(e=0):
 ### More efficient calculation for common polygonal numbers ###
 def triangular():
     """
-    Triangular Numbers: Cumulative sums of the non-negative integers
+    Triangular Numbers
     OEIS: A000217
     """
     
@@ -183,7 +183,7 @@ def triangular():
 
 def square():
     """
-    Square Numbers: Cumulative sums of the non-negative odd numbers
+    Square Numbers
     OEIS A000290
     """
     
@@ -196,7 +196,7 @@ def square():
 
 def cubic():
     """
-    Cubic Numbers: Numbers that are arranged to form a cube in the usual way
+    Cubic Numbers
     OEIS A000578
     """
     
