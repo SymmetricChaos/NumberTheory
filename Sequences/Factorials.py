@@ -22,7 +22,7 @@ def factorials():
 
 def alternating_factorials_1():
     """
-    Alternating Factorial Numbers\n
+    Alternating Factorial Numbers: Absolute value of each term\n
     OEIS A005165
     """
     
@@ -39,7 +39,7 @@ def alternating_factorials_1():
 
 def alternating_factorials_2():
     """
-    Alternating Factorial Numbers\n
+    Alternating Factorial Numbers: Integer value of each term\n
     OEIS A058006
     """
     
@@ -54,7 +54,7 @@ def alternating_factorials_2():
 
 def kempner():
     """
-    Kempner Numbers: smallest positive integer m such that n divides m!\n
+    Kempner Numbers: Smallest positive integer m such that n divides m!\n
     OEIS A002034
     """
     

@@ -169,6 +169,8 @@ def powers(n):
     
     Args:
         n -- constant multiple
+        
+    OEIS A000079
     """
     
     require_integers(["n"],[n])
@@ -283,3 +285,4 @@ if __name__ == '__main__':
     print("\nThe Zero Sequence")
     simple_test(constant(0), 10,
                 "0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
+    

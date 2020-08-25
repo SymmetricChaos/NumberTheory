@@ -3,6 +3,7 @@ from Sequences.MathUtils import factorization
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
+from math import prod
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -12,9 +13,8 @@ def primes():
     """
     
     D = defaultdict(list)
-    q = 2
     
-    while True:
+    for q in naturals(2):
         
         if q not in D:
             yield q
@@ -24,8 +24,6 @@ def primes():
             for p in D[q]:
                 D[p+q].append(p)
             del D[q]
-        
-        q += 1
 
 
 def composites():
@@ -35,9 +33,8 @@ def composites():
     """
     
     D = defaultdict(list)
-    q = 2
     
-    while True:
+    for q in naturals(2):
         
         if q not in D:
             D[q * q] = [q]
@@ -47,8 +44,6 @@ def composites():
             for p in D[q]:
                 D[p+q].append(p)
             del D[q]
-        
-        q += 1
 
 
 def primorials():
@@ -58,11 +53,34 @@ def primorials():
     """
     
     out = 1
-    for i in primes():
         
+    for i in primes():
         yield out
         
         out *= i
+
+
+def compositorial():
+    """
+    Compositorial Numbers: Cumulative product of composite numbers
+    OEIS A036691
+    """
+    
+    out = 1
+    
+    for i in composites():
+        yield out
+        
+        out *= i
+
+
+def prime_powers():
+    """
+    Prime Powers: Powers of prime numbers
+    OEIS A000961
+    """
+    
+    pass
 
 
 def pythagorean_primes():
@@ -233,19 +251,26 @@ def squarefree_kernel():
     OEIS A007947
     """
     
-    for n in naturals(1):
-        K = 1
-        
-        for p in primes():
-            if n % p == 0:
-                K *= p
-                
-                while n % p == 0:
-                    n //= p
+    D = defaultdict(list)
+    q = 2
+    
+    yield 1
+    
+    while True:
+        if q not in D:
+            yield q
             
-            if n == 1:
-                yield K
-                break
+            D[q + q] = [q]
+        
+        else:
+            yield prod(D[q])
+            
+            for p in D[q]:
+                D[p+q].append(p)
+            
+            del D[q]
+        
+        q += 1
 
 
 def prime_counting():
@@ -332,6 +357,10 @@ if __name__ == '__main__':
     simple_test(primorials(),8,
                 "1, 2, 6, 30, 210, 2310, 30030, 510510")
     
+    print("\nCompositorial")
+    simple_test(compositorial(),7,
+                "1, 4, 24, 192, 1728, 17280, 207360")
+    
     print("\nPythagorean Primes")
     simple_test(pythagorean_primes(),10,
                 "5, 13, 17, 29, 37, 41, 53, 61, 73, 89")
@@ -376,7 +405,3 @@ if __name__ == '__main__':
     simple_test(prime_characteristic(),10,
                 "0, 1, 1, 0, 1, 0, 1, 0, 0, 0")
     
-    print("\nTotients")
-    simple_test(totients(),10,
-                "1, 1, 2, 2, 4, 2, 6, 4, 6, 4")
-
