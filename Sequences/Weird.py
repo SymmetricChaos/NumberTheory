@@ -42,6 +42,41 @@ def cantor_pairs():
                 L.append( (a+b)*(a+b+1)//2+b )
 
 
+def gcd_numbers():
+    """
+    Triangle by rows of the GCD for each pair of positive integers
+    OEIS A003989
+    """
+    
+    for n in naturals(1):
+        for x in range(1,n):
+            yield gcd(n,x)
+
+
+def _eculid_step(a,b):
+    if a > b:
+        return (a-b,b)
+    return (a,b-a)
+
+
+def gcd_steps():
+    """
+    Triangle by rows for each pair of positive integers with how long it takes Euclid's GCD algorithm to terminate
+    OEIS A072030
+    """
+    
+    for n in naturals(1):
+        for x in range(1,n):
+            m = n
+            ctr = 0
+            
+            while m != x:
+                m,x = _eculid_step(m,x)
+                ctr += 1
+            
+            yield ctr
+
+
 
 
 
@@ -55,3 +90,12 @@ if __name__ == '__main__':
     print("\nIntegers that represent the Cantor pairing function a of fully reduced proper fraction")
     simple_test(cantor_pairs(),14,
                 "8, 13, 18, 19, 26, 32, 33, 34, 41, 43, 50, 52, 53, 62")
+    
+    print("\nGCD Numbers")
+    simple_test(gcd_numbers(),18,
+                "1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1")
+    
+    print("\nEuclid's GCD Steps")
+    simple_test(gcd_steps(),18,
+                "1, 2, 2, 3, 1, 3, 4, 3, 3, 4, 5, 2, 1, 2, 5, 6, 4, 4")
+    
