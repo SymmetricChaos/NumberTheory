@@ -34,9 +34,11 @@ from Sequences.BinarySequences import thue_morse
 
 from Sequences.Pseudorandom import LCG, LFG, LFSR
 
-from Sequences.Weird import collatz_length, collatz_longest, collatz_sequence, \
-                            recaman, collatz_map, collatz_all, collatz_highpoint, \
+from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
+                            collatz_map, collatz_all, collatz_highpoint, \
                             collatz_highwater
+
+from Sequences.Weird import recaman
 
 
 __all__=["segment","make_triangle","show_start","offset","partial_sums",
@@ -77,6 +79,8 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          
          "LCG","LFG","LFSR",
          
-         "collatz_length","collatz_longest","collatz_sequence","recaman",
-         "collatz_map", "collatz_all", "collatz_highpoint", "collatz_highwater"
+         "collatz_length","collatz_longest","collatz_sequence",
+         "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
+         
+         "recaman"
         ]
