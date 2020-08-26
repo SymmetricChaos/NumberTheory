@@ -290,7 +290,6 @@ def prime_counting():
         cur = p
 
 
-
 def prime_characteristic():
     """
     Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0

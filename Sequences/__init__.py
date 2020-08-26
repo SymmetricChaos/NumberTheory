@@ -7,16 +7,16 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribona
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
-                                cen_polygonal
+                                cen_polygonal, cubic
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
                              polynomial, fermat, evens, gen_evens, odds, gen_odds, \
-                             counting
+                             counting, constant, arithmetrico_geometric, gen_polynomial
 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
-                             composites, totients
+                             composites, totients, compositorial, prime_characteristic
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -34,7 +34,9 @@ from Sequences.BinarySequences import thue_morse
 
 from Sequences.Pseudorandom import LCG, LFG, LFSR
 
-from Sequences.Weird import collatz_length, collatz_longest, collatz_sequence, recaman
+from Sequences.Weird import collatz_length, collatz_longest, collatz_sequence, \
+                            recaman, collatz_map, collatz_all, collatz_highpoint, \
+                            collatz_highwater
 
 
 __all__=["segment","make_triangle","show_start","offset","partial_sums",
@@ -47,15 +49,17 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
          "exponent","gen_polygonal","simplicial","perfect_powers",
-         "cen_polygonal",
+         "cen_polygonal","cubic",
          
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
+         "constant","arithmetrico_geometric","gen_polynomial",
          
          "primes","primorials","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes",
          "prime_counting","prime_divisors","unique_prime_divisors",
-         "composites","totients",
+         "composites","totients","compositorial","hamming",
+         "prime_characteristic",
          
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
@@ -73,5 +77,6 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          
          "LCG","LFG","LFSR",
          
-         "collatz_length","collatz_longest","collatz_sequence","recaman"
+         "collatz_length","collatz_longest","collatz_sequence","recaman",
+         "collatz_map", "collatz_all", "collatz_highpoint", "collatz_highwater"
         ]

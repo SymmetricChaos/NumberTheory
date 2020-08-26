@@ -11,6 +11,7 @@ def _collatz_step(n):
 def collatz_sequence(n):
     """
     Collatz Sequence of n: Iteratively apply the Collatz function to n
+    OEIS 
     """
     
     yield n
@@ -19,9 +20,11 @@ def collatz_sequence(n):
         n = _collatz_step(n)
         yield n
 
+
 def collatz_map():
     """
     Map of the Collatz Function
+    OEIS A006370
     """
     
     for n in naturals():
