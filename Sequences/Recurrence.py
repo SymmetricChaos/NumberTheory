@@ -224,7 +224,6 @@ def arbitrary_recurrence(S,func):
         if type(i) != int:
             raise Exception(f"All elements of S must be of type int not {type(i)}")
     
-    
     while True:
         yield S[0]
         S = S[1:] + [func(S)]

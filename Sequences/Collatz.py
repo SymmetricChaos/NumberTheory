@@ -1,4 +1,6 @@
 from Sequences.Simple import naturals
+from Sequences.NiceErrorChecking import require_integers, require_positive
+
 
 def _collatz_step(n):
     q,r = divmod(n,2)
@@ -20,6 +22,9 @@ def collatz_sequence(n):
     OEIS 
     """
     
+    require_integers(["n"],[n])
+    require_positive(["n"],[n])
+    
     yield n
     
     while n != 1:
@@ -32,6 +37,9 @@ def reduced_collatz_sequence(n):
     Reduced Collatz Sequence of n: Iteratively apply the Collatz function to n but with an addition division by 2 for odd numbers
     OEIS 
     """
+    
+    require_integers(["n"],[n])
+    require_positive(["n"],[n])
     
     yield n
     
@@ -81,10 +89,7 @@ def collatz_length():
     OEIS A006577, A008908
     """
     
-    D = {}
-    
-    for i in range(16):
-        D[2**i] = i
+    D = {1:0}
     
     for n in naturals(1):
         if n in D:
@@ -102,6 +107,7 @@ def collatz_length():
             
             length = D[ctr] + length
             D[n] = length
+            
             yield D[n]
             
             for num in seen:
@@ -116,7 +122,6 @@ def collatz_longest():
     """
     
     D = {1 : 0}
-    
     rec = -1
     
     for n in naturals(1):
@@ -158,7 +163,6 @@ def collatz_highpoint():
         yield D[n]
 
 
-
 def collatz_highwater():
     """
     High-Water Mark of the Collatz Sequences: Record values for the high points of Collatz sequences
@@ -167,6 +171,7 @@ def collatz_highwater():
     
     D = {1 : 1}
     rec = 0
+    
     yield 1
     
     for n in naturals(2):
@@ -183,6 +188,10 @@ def collatz_highwater():
         if cur_rec > rec:
             yield D[n]
             rec = cur_rec
+
+
+
+
 
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
@@ -219,7 +228,7 @@ if __name__ == '__main__':
     simple_test(collatz_highpoint(),14,
                 "1, 2, 16, 4, 16, 16, 52, 8, 52, 16, 52, 16, 40, 52")
     
-    print("\nCollatz High Water Marks")
+    print("\nCollatz High-Water Marks")
     simple_test(collatz_highwater(),10,
                 "1, 2, 16, 52, 160, 9232, 13120, 39364, 41524, 250504")
     

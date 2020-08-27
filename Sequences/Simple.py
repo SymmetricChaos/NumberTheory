@@ -8,6 +8,8 @@ def constant(n):
     OEIS A000004, A000012, A007395, A010701
     """
     
+    require_integers(["n"],[n])
+    
     for i in repeat(n):
         yield i
 
