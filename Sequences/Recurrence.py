@@ -194,7 +194,7 @@ def narayana():
         a, b, c = b, c, a+c
 
 
-def sylvesters_sequence():
+def sylvester():
     """
     Sylvester's Sequence: Product of previous terms plus one\n
     OEIS A000058
@@ -285,7 +285,7 @@ if __name__ == '__main__':
                 "1, 1, 1, 2, 2, 3, 4, 5, 7, 9")
     
     print("\nSylvester's Sequence")
-    simple_test(sylvesters_sequence(),6,
+    simple_test(sylvester(),6,
                 "2, 3, 7, 43, 1807, 3263443")
     
     print("\nNarayana's Sequence")

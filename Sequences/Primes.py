@@ -3,7 +3,7 @@ from Sequences.MathUtils import factorization
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
-from math import prod
+from math import prod, gcd
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -338,6 +338,19 @@ def totients():
         q += 1
 
 
+def coprimes():
+    """
+    Triangle of coprime pairs: 1 is the pair is coprimes and 0 if not
+    """
+    
+    for m in naturals(1):
+        for n in range(1,m+1):
+            if gcd(m,n) == 1:
+                yield 1
+            else:
+                yield 0
+
+
 
 
 
@@ -403,4 +416,8 @@ if __name__ == '__main__':
     print("\nCharacteristic Function of the Primes")
     simple_test(prime_characteristic(),10,
                 "0, 1, 1, 0, 1, 0, 1, 0, 0, 0")
+    
+    print("\nCharacteristic Triangle of Coprimes")
+    simple_test(coprimes(),10,
+                "1, 1, 0, 1, 1, 0, 1, 0, 1, 0")
     

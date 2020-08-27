@@ -3,7 +3,7 @@ from Sequences.SequenceManipulation import offset, segment, make_triangle, show_
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  PQ_lucas_1, PQ_lucas_2, padovan, simple_recurrence, \
-                                 sylvesters_sequence, leonardo, arbitrary_recurrence
+                                 sylvester, leonardo, arbitrary_recurrence
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
@@ -35,8 +35,8 @@ from Sequences.BinarySequences import thue_morse
 from Sequences.Pseudorandom import LCG, LFG, LFSR
 
 from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
-                            collatz_map, collatz_all, collatz_highpoint, \
-                            collatz_highwater
+                              collatz_map, collatz_all, collatz_highpoint, \
+                              collatz_highwater
 
 from Sequences.Weird import recaman
 
@@ -44,10 +44,9 @@ from Sequences.Weird import recaman
 __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "partial_products",
          
-         "lucas","fibonacci","pell","companion_pell","tribonacci","PQ_lucas",
-         "PQ_fibonacci","padovan","simple_recurrence","sylvesters_sequence",
-         "random_recurrence","leonardo","arbitrary_recurrence","PQ_lucas_1",
-         "PQ_lucas_2",
+         "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
+         "padovan","simple_recurrence","sylvester","PQ_lucas_1","PQ_lucas_2",
+         "arbitrary_recurrence",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
          "exponent","gen_polygonal","simplicial","perfect_powers",
