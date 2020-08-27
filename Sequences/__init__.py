@@ -16,7 +16,8 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
 from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
-                             composites, totients, compositorial, prime_characteristic
+                             composites, totients, compositorial, prime_characteristic, \
+                             coprime_characteristic
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -60,7 +61,7 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "squarefree","squarefree_kernel","pythagorean_primes",
          "prime_counting","prime_divisors","unique_prime_divisors",
          "composites","totients","compositorial","hamming",
-         "prime_characteristic",
+         "prime_characteristic","coprime_characteristic",
          
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",

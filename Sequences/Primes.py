@@ -338,9 +338,10 @@ def totients():
         q += 1
 
 
-def coprimes():
+def coprime_characteristic():
     """
-    Triangle of coprime pairs: 1 is the pair is coprimes and 0 if not
+    Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not
+    OEIS A054521
     """
     
     for m in naturals(1):
@@ -349,6 +350,32 @@ def coprimes():
                 yield 1
             else:
                 yield 0
+
+
+def coprimes(n):
+    """
+    All positive integers coprime to n
+    """
+    
+    require_integers(["n"],[n])
+    require_positive(["n"],[n])
+    
+    F = []
+    for p in primes():
+        if n%p == 0:
+            F.append(p)
+        if p >= n:
+            break
+    
+    def divby(n,F):
+        for f in F:
+            if x%f == 0:
+                return False
+        return True
+    
+    for x in naturals(1):
+        if divby(x,F):
+            yield x
 
 
 
@@ -418,6 +445,10 @@ if __name__ == '__main__':
                 "0, 1, 1, 0, 1, 0, 1, 0, 0, 0")
     
     print("\nCharacteristic Triangle of Coprimes")
-    simple_test(coprimes(),10,
+    simple_test(coprime_characteristic(),10,
                 "1, 1, 0, 1, 1, 0, 1, 0, 1, 0")
+    
+    print("\nNaturals Coprime to 24")
+    simple_test(coprimes(24),10,
+                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
     

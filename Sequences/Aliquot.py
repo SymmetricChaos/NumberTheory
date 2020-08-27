@@ -19,6 +19,14 @@ def aliquot():
         yield _aliquot_sum(n)
 
 
+def untouchable():
+    """
+    Untouchable Numbers: Non-negative integers that cannot be an aliquot sum
+    OEIS A005114
+    """
+    
+    pass
+
 def aliquot_recurrence(N):
     """
     Aliquot Sequence of N: Recurrence relation of which each term of the aliquot sum of the previous
