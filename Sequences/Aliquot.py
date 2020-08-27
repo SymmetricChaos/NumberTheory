@@ -1,3 +1,4 @@
+from Sequences.NiceErrorChecking import require_integers, require_positive
 from Sequences.MathUtils import factorization
 from Sequences.Simple import naturals
 
@@ -9,14 +10,22 @@ def _sum_divisors(n):
 
 
 def aliquot():
-    """Aliquot Numbers: Sum of proper divisors for each positive integer"""
+    """
+    Aliquot Numbers: Sum of proper divisors for each positive integer
+    OEIS A001065
+    """
     
     for n in naturals(1):
         yield _aliquot_sum(n)
 
 
 def aliquot_recurrence(N):
-    """Aliquot Sequence of N: Recurrence relation of which each term of the aliquot sum of the previous"""
+    """
+    Aliquot Sequence of N: Recurrence relation of which each term of the aliquot sum of the previous
+    """
+    
+    require_integers(["N"],[N])
+    require_positive(["N"],[N])
     
     while True:
         yield N
@@ -24,7 +33,10 @@ def aliquot_recurrence(N):
 
 
 def abundant():
-    """Abundant Numbers: Positive integers that are less than their aliquot sum"""
+    """
+    Abundant Numbers: Positive integers that are less than their aliquot sum
+    OEIS A005101
+    """
     
     for n in naturals(1):
         if _aliquot_sum(n) > n:
@@ -32,15 +44,23 @@ def abundant():
 
 
 def abundance():
-    """Abundance: The aliquot sum of each positive number minus that number"""
+    """
+    Abundance: The aliquot sum of each positive number minus that number
+    OEIS A033880
+    """
     
     for n in naturals(1):
         yield _aliquot_sum(n)-n
 
 
 def deficient():
-    """Deficient Numbers: Positive integers that are greater than their aliquot sum"""
+    """
+    Deficient Numbers: Positive integers that are greater than their aliquot sum
+    OEIS A005100
+    """
+    
     ctr = 1
+    
     while True:
         if sum(factorization(ctr)[:-1]) < ctr:
             yield ctr
@@ -48,14 +68,20 @@ def deficient():
 
 
 def deficiency():
-    """Deficiency: Each positive integer minus its aliquot sum"""
+    """
+    Deficiency: Each positive integer minus its aliquot sum
+    OEIS A033879
+    """
     
     for n in naturals(1):
         yield n-_aliquot_sum(n)
 
 
 def perfect():
-    """Perfect Numbers: Positive integers that are equal to their aliquot sum"""
+    """
+    Perfect Numbers: Positive integers that are equal to their aliquot sum
+    OEIS A000396
+    """
     
     # There are currently (2020) only 51 known perfect numbers and the first 47
     # of those are sequential so, since they're hard to find, we cheat a bit.
@@ -71,27 +97,38 @@ def perfect():
 
 
 def highly_abundant():
-    """Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer"""
+    """
+    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
+    OEIS A002093
+    """
     
     M = 0
     
     for n in naturals(1):
         m = _sum_divisors(n)
+        
         if m > M:
             M = m
             yield n
 
 
 def superabundant():
-    """Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer"""
+    """
+    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
+    OEIS A004394
+    """
     
     M = 0
     
     for n in naturals(1):
         m = _sum_divisors(n)/n
+        
         if m > M:
             M = m
             yield n
+
+
+
 
 
 if __name__ == '__main__':
