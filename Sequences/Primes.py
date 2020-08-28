@@ -1,4 +1,4 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, arithmetic
 from Sequences.MathUtils import factorization
 from collections import defaultdict
 from itertools import takewhile
@@ -378,6 +378,36 @@ def coprimes(n):
             yield x
 
 
+def lucky():
+    
+    yield 1
+    yield 3
+    
+    # Terms of the sequence and where in the cycle each is
+    terms = [3]
+    ctrs = [2]
+    
+    # Update the cycles positions
+    # If any cycle has reached zero we're not at a lucky number and no later 
+    # cycles will be updated since the value has been sieved out before that
+    # number is known
+    def update():
+        for n,t in enumerate(terms):
+            ctrs[n] = (ctrs[n]+1)%t
+            if ctrs[n] == 0:
+                return False
+        return True
+    
+    # Which lucky number we're currently looking for
+    # This sets where the cycle for a newly found lucky number begins
+    nth = 3
+    
+    for o in arithmetic(5,2):
+        if update():
+            terms.append(o)
+            ctrs.append(nth)
+            nth += 1
+            yield o
 
 
 
@@ -451,4 +481,8 @@ if __name__ == '__main__':
     print("\nNaturals Coprime to 24")
     simple_test(coprimes(24),10,
                 "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
+    
+    print("\nLucky Numbers")
+    simple_test(lucky(),10,
+                "1, 3, 7, 9, 13, 15, 21, 25, 31, 33")
     
