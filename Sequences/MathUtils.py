@@ -28,6 +28,33 @@ def factorization(n,nontrivial=False):
     return L
 
 
+def prime_factorization(n):
+    """Prime Factorization: Crude brute-force method"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    # Either include or don't include trivial factors
+    L = []
+    
+    while n % 2 == 0:
+        L.append(2)
+        n //= 2
+    
+    d = 3
+    
+    while n != 1:
+        while n % d == 0:
+            L.append(d)
+            n //= d
+        d += 2
+    
+    if n != 1:
+        L.append(n)
+    
+    return L
+
+
 # Copy of choose function to prevent reference issues
 def choose(n,k):
     """Binomial coefficient"""
@@ -46,9 +73,11 @@ def choose(n,k):
     # of precision for large numbers.
     N = 1
     D = 1
+    
     for i in range(1,k+1):
         N *= (n+1-i)
         D *= i
+    
     return N//D
 
 
@@ -65,3 +94,7 @@ def _bits_to_int(bits):
         p *= 2
     
     return n
+
+
+if __name__ == '__main__':
+    print(prime_factorization(75600))

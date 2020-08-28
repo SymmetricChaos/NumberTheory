@@ -379,6 +379,10 @@ def coprimes(n):
 
 
 def lucky():
+    """
+    Lucky Numbers: Prime-like integers resulting from a modified sieve of Eratosthenes
+    OEIS A000959
+    """
     
     yield 1
     yield 3
@@ -404,10 +408,11 @@ def lucky():
     
     for o in arithmetic(5,2):
         if update():
+            yield o
+            
             terms.append(o)
             ctrs.append(nth)
             nth += 1
-            yield o
 
 
 
