@@ -1,4 +1,4 @@
-from Sequences.MathUtils import factorization
+from Sequences.MathUtils import nontrivial_factors
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -171,7 +171,7 @@ def multiplicative_partition():
     """
     
     def all_factorizations_inner(n,m=1):
-        F = [f for f in factorization(n,nontrivial=True) if f >= m]
+        F = [f for f in nontrivial_factors(n) if f >= m]
         
         if len(F) == 0:
             yield [n]

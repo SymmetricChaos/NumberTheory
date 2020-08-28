@@ -1,29 +1,7 @@
 from math import isqrt
 
 
-def aliquot_parts(n):
-    """All Unique Factors except n itself"""
-    
-    if type(n) != int:
-        raise Exception("n must be an integer") 
-    
-    lim = isqrt(n)+1
-    
-    L = [1]
-    
-    for i in range(2,lim):
-        f,r = divmod(n,i)
-        
-        if r == 0:
-            L.append(i)
-            L.append(f)
-    
-    L.sort()
-    
-    return L
-
-
-def factorization(n):
+def factors(n):
     """All Unique Factors"""
     
     if type(n) != int:
@@ -31,21 +9,42 @@ def factorization(n):
     
     lim = isqrt(n)+1
     
-    L = [1,n]
+    S = set([1,n])
     
     for i in range(2,lim):
         f,r = divmod(n,i)
         
         if r == 0:
-            L.append(i)
-            L.append(f)
+            S.add(i)
+            S.add(f)
     
-    L.sort()
-    
-    return L
+    return S
 
 
-def nontrivial_factorization(n):
+def aliquot_parts(n):
+    """All Unique Factors except n itself"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer")
+    
+    if n == 1:
+        return set([])
+    
+    lim = isqrt(n)+1
+    
+    S = set([1])
+    
+    for i in range(2,lim):
+        f,r = divmod(n,i)
+        
+        if r == 0:
+            S.add(i)
+            S.add(f)
+    
+    return S
+
+
+def nontrivial_factors(n):
     """All Non-Trivial Factors"""
     
     if type(n) != int:
@@ -53,18 +52,16 @@ def nontrivial_factorization(n):
     
     lim = isqrt(n)+1
     
-    L = []
+    S = set([])
     
     for i in range(2,lim):
         f,r = divmod(n,i)
         
         if r == 0:
-            L.append(i)
-            L.append(f)
+            S.add(i)
+            S.add(f)
     
-    L.sort()
-    
-    return L
+    return S
 
 
 def prime_factorization(n):
@@ -86,6 +83,7 @@ def prime_factorization(n):
         while n % d == 0:
             L.append(d)
             n //= d
+        
         d += 2
     
     if n != 1:
@@ -160,10 +158,14 @@ def digital_root(n,b=10):
 
 
 if __name__ == '__main__':
-    print("Factors of 75600")
-    print(factorization(16))
-    print("\nPrime Factorization of 75600")
-    print(prime_factorization(7560))
+    print("Factors of 378")
+    print(factors(378))
     
-    print(digital_sum(17560))
-    print(digital_root(17560))
+    print("\nAliquot Parts of 378")
+    print(aliquot_parts(378))
+    
+    print("\nAliqot Parts of 378")
+    print(nontrivial_factors(378))
+    
+    print("\nPrime Factorization of 378")
+    print(prime_factorization(378))

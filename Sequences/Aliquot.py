@@ -1,12 +1,14 @@
 from Sequences.NiceErrorChecking import require_integers, require_positive
-from Sequences.MathUtils import factorization
+from Sequences.MathUtils import factors, aliquot_parts
 from Sequences.Simple import naturals
 
-def _aliquot_sum(n):
-    return sum(factorization(n)[:-1])
 
-def _sum_divisors(n):
-    return sum(factorization(n))
+def _aliquot_sum(n):
+    return sum(aliquot_parts(n))
+
+
+def _divisors_sum(n):
+    return sum(factors(n))
 
 
 def aliquot():
@@ -26,6 +28,7 @@ def untouchable():
     """
     
     pass
+
 
 def aliquot_recurrence(N):
     """
@@ -70,7 +73,7 @@ def deficient():
     ctr = 1
     
     while True:
-        if sum(factorization(ctr)[:-1]) < ctr:
+        if _aliquot_sum(ctr) < ctr:
             yield ctr
         ctr += 1
 
@@ -113,7 +116,7 @@ def highly_abundant():
     M = 0
     
     for n in naturals(1):
-        m = _sum_divisors(n)
+        m = _divisors_sum(n)
         
         if m > M:
             M = m
@@ -129,7 +132,7 @@ def superabundant():
     M = 0
     
     for n in naturals(1):
-        m = _sum_divisors(n)/n
+        m = _divisors_sum(n)/n
         
         if m > M:
             M = m

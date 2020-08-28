@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factorization
+from Sequences.MathUtils import factors
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
@@ -166,7 +166,7 @@ def highly_composite():
     
     F = 0
     for i in naturals(1):
-        L = len(factorization(i))
+        L = len(factors(i))
         
         if L > F:
             F = L
@@ -180,7 +180,7 @@ def divisors():
     """
     
     for i in naturals(1):
-        yield len(factorization(i))
+        yield len(factors(i))
 
 
 def prime_divisors():
