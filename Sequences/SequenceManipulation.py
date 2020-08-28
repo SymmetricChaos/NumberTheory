@@ -1,4 +1,4 @@
-from itertools import islice
+from itertools import islice, cycle
 from math import prod
 from time import time
 
@@ -109,6 +109,28 @@ def skips(sequence,n):
             next(sequence)
 
 
+def sequence_apply(sequence,func):
+    """Apply some function to each term of a sequence and yield the result"""
+    
+    for s in sequence:
+        yield func(s)
+
+
+def interleave(*sequences):
+    """Interleave some sequences in a round-robin style, interleaving ends if any iterator ends"""
+    
+    nexts = cycle(iter(s).__next__ for s in sequences)
+    
+    try:
+        for N in nexts:
+            yield N()
+    
+    except StopIteration:
+        pass
+
+
+
+
 
 
 
@@ -136,3 +158,10 @@ def speed_compare(sequences,n,reps=1):
             for t in segment(S,n):
                 pass
         print(time()-t0)
+
+
+
+
+
+if __name__ == '__main__':
+    print([i for i in interleave([1,2,3,4,5,6,7],[1,4,9,16,25,36,49])])
