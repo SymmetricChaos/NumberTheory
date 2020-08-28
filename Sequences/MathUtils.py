@@ -1,19 +1,15 @@
 from math import isqrt
 
-# Copy of factorization function from Computation to prevent reference issues
-def factorization(n,nontrivial=False):
-    """All Unique Factors"""
+
+def aliquot_parts(n):
+    """All Unique Factors except n itself"""
     
     if type(n) != int:
         raise Exception("n must be an integer") 
     
     lim = isqrt(n)+1
     
-    # Either include or don't include trivial factors
-    if nontrivial == True:
-        L = []
-    else:
-        L = [1,n]
+    L = [1]
     
     for i in range(2,lim):
         f,r = divmod(n,i)
@@ -21,8 +17,51 @@ def factorization(n,nontrivial=False):
         if r == 0:
             L.append(i)
             L.append(f)
-            
-    L = list(set(L))
+    
+    L.sort()
+    
+    return L
+
+
+def factorization(n):
+    """All Unique Factors"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    lim = isqrt(n)+1
+    
+    L = [1,n]
+    
+    for i in range(2,lim):
+        f,r = divmod(n,i)
+        
+        if r == 0:
+            L.append(i)
+            L.append(f)
+    
+    L.sort()
+    
+    return L
+
+
+def nontrivial_factorization(n):
+    """All Non-Trivial Factors"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    lim = isqrt(n)+1
+    
+    L = []
+    
+    for i in range(2,lim):
+        f,r = divmod(n,i)
+        
+        if r == 0:
+            L.append(i)
+            L.append(f)
+    
     L.sort()
     
     return L
@@ -57,7 +96,7 @@ def prime_factorization(n):
 
 # Copy of choose function to prevent reference issues
 def choose(n,k):
-    """Binomial coefficient"""
+    """Binomial Coefficient"""
     
     if type(n) != int:
         raise TypeError("n must be an integer")
@@ -96,5 +135,35 @@ def _bits_to_int(bits):
     return n
 
 
+def digital_sum(n,b=10):
+    """Sum of the digits of n in base b"""
+    
+    s = 0
+    
+    while n != 0:
+        n,r = divmod(n,b)
+        s += r
+    
+    return s
+
+
+def digital_root(n,b=10):
+    """Final value of the iteration of digital sums of n in base b"""
+    
+    while n >= b:
+        n = digital_sum(n,b)
+    
+    return n
+
+
+
+
+
 if __name__ == '__main__':
-    print(prime_factorization(75600))
+    print("Factors of 75600")
+    print(factorization(16))
+    print("\nPrime Factorization of 75600")
+    print(prime_factorization(7560))
+    
+    print(digital_sum(17560))
+    print(digital_root(17560))

@@ -1,5 +1,6 @@
 from Simple import naturals, evens, powers
 from SequenceManipulation import offset
+from MathUtils import digital_sum, digital_root
 
 def evil():
     """
@@ -146,6 +147,26 @@ def base_length(B):
             yield n
 
 
+def digital_sums(B):
+    """
+    Digital Sums: Sum of the digits of each non-negative integer in base B
+    OEIS A007953
+    """
+    
+    for n in naturals():
+        yield digital_sum(n,B)
+
+
+def digital_roots(B):
+    """
+    Digital Roots: Final value of the iteration of digital sums of n in base b
+    OEIS A010888
+    """
+    
+    for n in naturals():
+        yield digital_root(n,B)
+
+
 
 
 
@@ -179,3 +200,12 @@ if __name__ == '__main__':
     print("\nRuler Sequence")
     simple_test(ruler(),14,
                 "0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1")
+    
+    print("\nDigital Sums (Base 10)")
+    simple_test(digital_sums(10),20,
+                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+    
+    print("\nDigital Roots (Base 10)")
+    simple_test(digital_roots(10),20,
+                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1")
+    
