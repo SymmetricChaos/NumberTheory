@@ -200,41 +200,41 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Derangement Numbers")
-    simple_test(derangements(),9,
-                "1, 0, 1, 2, 9, 44, 265, 1854, 14833")
+    simple_test(derangements(),11,
+                "1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961")
     
     print("\nCatalan Numbers")
-    simple_test(catalan(),9,
-                "1, 1, 2, 5, 14, 42, 132, 429, 1430")
+    simple_test(catalan(),11,
+                "1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796")
     
     print("\nPascal's Triangle by Rows")
-    simple_test(pascal(),10,
-                "1, 1, 1, 1, 2, 1, 1, 3, 3, 1")
+    simple_test(pascal(),18,
+                "1, 1, 1, 1, 2, 1, 1, 3, 3, 1, 1, 4, 6, 4, 1, 1, 5, 10")
     
     print("\nGould's Sequence")
-    simple_test(gould(),10,
-                "1, 2, 2, 4, 2, 4, 4, 8, 2, 4")
+    simple_test(gould(),18,
+                "1, 2, 2, 4, 2, 4, 4, 8, 2, 4, 4, 8, 4, 8, 8, 16, 2, 4")
     
     print("\nEulerian Triangle by Rows")
-    simple_test(eulerian(),10,
-                "1, 1, 1, 1, 4, 1, 1, 11, 11, 1")
+    simple_test(eulerian(),16,
+                "1, 1, 1, 1, 4, 1, 1, 11, 11, 1, 1, 26, 66, 26, 1, 1")
     
     print("\nPartition Numbers")
-    simple_test(partition(),10,
-                "1, 1, 2, 3, 5, 7, 11, 15, 22, 30")
+    simple_test(partition(),15,
+                "1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135")
     
     print("\nBell Numbers")
-    simple_test(bell(),9,
-                "1, 1, 2, 5, 15, 52, 203, 877, 4140")
+    simple_test(bell(),11,
+                "1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975")
     
     print("\nLazy Caterer's Numbers")
-    simple_test(lazy_caterer(),10,
-                "1, 2, 4, 7, 11, 16, 22, 29, 37, 46")
+    simple_test(lazy_caterer(),14,
+                "1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56, 67, 79, 92")
     
     print("\nCake Numbers")
-    simple_test(cake(),10,
-                "1, 2, 4, 8, 15, 26, 42, 64, 93, 130")
+    simple_test(cake(),13,
+                "1, 2, 4, 8, 15, 26, 42, 64, 93, 130, 176, 232, 299")
     
     print("\nMultiplicative Partitions")
-    simple_test(multiplicative_partition(),10,
-                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2")
+    simple_test(multiplicative_partition(),18,
+                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")

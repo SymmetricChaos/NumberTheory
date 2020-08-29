@@ -140,9 +140,11 @@ def harmonic_numerators():
     
     for i in naturals(2):
         yield n0
+        
         n = n0*i+ 1*d0
         d = d0*i
         g = gcd(n,d)
+        
         n,d = n//g,d//g
         n0, d0 = n,d
 
@@ -157,9 +159,11 @@ def harmonic_denominators():
     
     for i in naturals(2):
         yield d0
+        
         n = n0*i+ 1*d0
         d = d0*i
         g = gcd(n,d)
+        
         n,d = n//g,d//g
         n0, d0 = n,d
 
@@ -180,9 +184,11 @@ def gen_harmonic_numerators(m):
     
     for i in naturals(2):
         yield n0
+        
         n = n0*i+ 1*d0
         d = d0*(i**m)
         g = gcd(n,d)
+        
         n,d = n//g,d//g
         n0, d0 = n,d
 
@@ -203,9 +209,11 @@ def gen_harmonic_denominators(m):
     
     for i in naturals(2):
         yield d0
+        
         n = n0*i+ 1*d0
         d = d0*(i**m)
         g = gcd(n,d)
+        
         n,d = n//g,d//g
         n0, d0 = n,d
 
@@ -316,32 +324,32 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Counting Numbers")
-    simple_test(counting(),10,
-                "1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+    simple_test(counting(),15,
+                "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15")
     
     print("\nNatural Numbers")
-    simple_test(naturals(),10,
-                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9")
+    simple_test(naturals(),15,
+                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14")
     
     print("\nIntegers")
-    simple_test(integers(),10,
-                "0, 1, -1, 2, -2, 3, -3, 4, -4, 5")
+    simple_test(integers(),15,
+                "0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7")
     
     print("\nEven Naturals")
-    simple_test(evens(),10,
-                "0, 2, 4, 6, 8, 10, 12, 14, 16, 18")
+    simple_test(evens(),14,
+                "0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26")
     
     print("\nEven Integers")
-    simple_test(gen_evens(),10,
-                "0, 2, -2, 4, -4, 6, -6, 8, -8, 10")
+    simple_test(gen_evens(),14,
+                "0, 2, -2, 4, -4, 6, -6, 8, -8, 10, -10, 12, -12, 14")
     
     print("\nOdd Naturals")
-    simple_test(odds(),10,
-                "1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
+    simple_test(odds(),14,
+                "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27")
     
     print("\nOdd Integers")
-    simple_test(gen_odds(),10,
-                "1, -1, 3, -3, 5, -5, 7, -7, 9, -9")
+    simple_test(gen_odds(),14,
+                "1, -1, 3, -3, 5, -5, 7, -7, 9, -9, 11, -11, 13, -13")
     
     print("\nPolynomial 2x^2 - 10x + 1 Evaluated at Naturals")
     simple_test(polynomial([1,-10,2]),9,
@@ -356,16 +364,20 @@ if __name__ == '__main__':
                 "5, 7, 9, 11, 13, 15, 17, 19, 21, 23")
     
     print("\nGeometric Sequence 5*2^n")
-    simple_test(geometric(5,2),8,
-                "5, 10, 20, 40, 80, 160, 320, 640")
+    simple_test(geometric(5,2),10,
+                "5, 10, 20, 40, 80, 160, 320, 640, 1280, 2560")
     
-    print("\nArithmetrico-Geometric Sequence (1+2n)*(3*4^n)")
-    simple_test(arithmetrico_geometric(1,2,3,4),7,
-                "3, 36, 240, 1344, 6912, 33792, 159744")
+    print("\nArithmetrico-Geometric Sequence (1+2n)(3*4^n)")
+    simple_test(arithmetrico_geometric(1,2,3,4),9,
+                "3, 36, 240, 1344, 6912, 33792, 159744, 737280, 3342336")
+    
+    print("\nPowers of 3")
+    simple_test(powers(3),11,
+                "1, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049")
     
     print("\nFermat Numbers")
-    simple_test(fermat(),6,
-                "3, 5, 17, 257, 65537, 4294967297")
+    simple_test(fermat(),7,
+                "3, 5, 17, 257, 65537, 4294967297, 18446744073709551617")
     
     print("\nHarmonic Numerators")
     simple_test(harmonic_numerators(),11,
@@ -383,7 +395,6 @@ if __name__ == '__main__':
     simple_test(gen_harmonic_denominators(2),8,
                 "1, 4, 36, 72, 1800, 10800, 529200, 4233600")
     
-    
     print("\nThe Zero Sequence")
-    simple_test(constant(0), 10,
-                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
+    simple_test(constant(0), 18,
+                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
