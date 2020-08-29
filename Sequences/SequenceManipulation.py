@@ -162,11 +162,3 @@ def speed_compare(sequences,n,reps=1):
                 pass
         
         print(time()-t0)
-
-
-
-
-
-if __name__ == '__main__':
-    print([i for i in interleave([1,2,3,4,5,6,7],[1,4,9,16,25,36,49])])
-    
