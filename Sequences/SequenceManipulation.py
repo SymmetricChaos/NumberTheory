@@ -2,6 +2,7 @@ from itertools import islice, cycle
 from math import prod
 from time import time
 
+
 def offset(sequence,n=0):
     """Skip the first n terms of a sequence"""
     
@@ -41,10 +42,10 @@ def show_start(sequence):
 def make_triangle(sequence):
     """
     Standard triangular arrangement of the sequence
-    1
-    2 3
-    4 5 6
-    7 8 9 10
+    0
+    1 2
+    3 4 5
+    6 7 8 9
     """
     
     ctr = 1
@@ -153,10 +154,13 @@ def speed_compare(sequences,n,reps=1):
     
     for number,S in enumerate(sequences,1):
         print(f"Sequence {number}")
+        
         t0 = time()
+        
         for r in range(reps):
             for t in segment(S,n):
                 pass
+        
         print(time()-t0)
 
 
@@ -165,3 +169,4 @@ def speed_compare(sequences,n,reps=1):
 
 if __name__ == '__main__':
     print([i for i in interleave([1,2,3,4,5,6,7],[1,4,9,16,25,36,49])])
+    

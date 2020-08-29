@@ -64,6 +64,21 @@ def PQ_lucas_2(P=1,Q=-1):
         a, b = b, P*b-Q*a
 
 
+def signature_function(signature):
+    """
+    Recursive Signature Function: Generalization of the PQ-Lucas Sequences
+    """
+    
+    L = [0]*(len(signature)-1)
+    L += [1]
+    C = [i for i in reversed(signature)]
+    
+    while True:
+        yield L[-1]
+        L.append(sum([a*b for a,b in zip(L,C)]))
+        L.pop(0)
+
+
 def pell():
     """
     Pell Numbers: Denominators of the continued fraction converts of the square root of two\n
@@ -251,6 +266,10 @@ if __name__ == '__main__':
     simple_test(PQ_lucas_2(3,-5),9,
                 "2, 3, 19, 72, 311, 1293, 5434, 22767, 95471")
     
+    print("\nSignature Sequence {3,1,1}")
+    simple_test(signature_function([3,1,1]),10,
+                "1, 3, 10, 34, 115, 389, 1316, 4452, 15061, 50951")
+    
     print("\nPell Numbers")
     simple_test(pell(),10,
                 "0, 1, 2, 5, 12, 29, 70, 169, 408, 985")
@@ -295,5 +314,4 @@ if __name__ == '__main__':
     print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
     simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),10,
                 "1, 1, 1, 4, 5, 7, 12, 14, 18, 25")
-    
     
