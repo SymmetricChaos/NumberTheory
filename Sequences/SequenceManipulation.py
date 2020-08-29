@@ -1,4 +1,4 @@
-from itertools import islice, cycle
+from itertools import islice, cycle, count
 from math import prod
 from time import time
 
@@ -48,33 +48,24 @@ def make_triangle(sequence):
     6 7 8 9
     """
     
-    ctr = 1
-    
-    while True:
-        L = [next(sequence) for c in range(ctr)]
-        ctr += 1
+    for n in count():
+        L = [next(sequence) for c in range(n)]
         yield L
 
 
 def triangle_sums(sequence):
     """Sums of the rows of the standard triangular arrangement of the sequence"""
     
-    ctr = 1
-    
-    while True:
-        L = [next(sequence) for c in range(ctr)]
-        ctr += 1
+    for n in count():
+        L = [next(sequence) for c in range(n)]
         yield sum(L)
 
 
 def triangle_products(sequence):
     """Products of the rows of the standard triangular arrangement of the sequence"""
     
-    ctr = 1
-    
-    while True:
-        L = [next(sequence) for c in range(ctr)]
-        ctr += 1
+    for n in count():
+        L = [next(sequence) for c in range(n)]
         yield prod(L)
 
 
@@ -133,8 +124,6 @@ def interleave(*sequences):
 
 
 
-
-
 # For testing purposes
 def simple_test(sequence,N,check):
     """Check the first few terms of a sequence against a known good source like the OEIS"""
@@ -146,8 +135,8 @@ def simple_test(sequence,N,check):
         print(S)
     else:
         print("ERROR")
-        print(f"Expected: {check}")
-        print(f"Produced: {S}")
+        print(f"Expected:\n{check}")
+        print(f"Produced:\n{S}")
 
 
 def speed_compare(sequences,n,reps=1):
