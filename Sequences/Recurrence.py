@@ -67,6 +67,9 @@ def PQ_lucas_2(P=1,Q=-1):
 def signature_function(signature):
     """
     Recursive Signature Function: Generalization of the PQ-Lucas Sequences
+    
+    Args:
+        signature -- tuple used to multiply terms of the recurrence
     """
     
     L = [0]*(len(signature)-1)
@@ -251,67 +254,67 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Fibonacci Sequence")
-    simple_test(fibonacci(),10,
-                "0, 1, 1, 2, 3, 5, 8, 13, 21, 34")
+    simple_test(fibonacci(),15,
+                "0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377")
     
     print("\nLucas Numbers")
-    simple_test(lucas(),10,
-                "2, 1, 3, 4, 7, 11, 18, 29, 47, 76")
+    simple_test(lucas(),14,
+                "2, 1, 3, 4, 7, 11, 18, 29, 47, 76, 123, 199, 322, 521")
     
     print("\nLucas Sequence U(-1,3)")
-    simple_test(PQ_lucas_1(-1,3),10,
-                "0, 1, -1, -2, 5, 1, -16, 13, 35, -74")
+    simple_test(PQ_lucas_1(-1,3),13,
+                "0, 1, -1, -2, 5, 1, -16, 13, 35, -74, -31, 253, -160")
     
     print("\nLucas Sequence V(3,-5)")
-    simple_test(PQ_lucas_2(3,-5),9,
-                "2, 3, 19, 72, 311, 1293, 5434, 22767, 95471")
+    simple_test(PQ_lucas_2(3,-5),10,
+                "2, 3, 19, 72, 311, 1293, 5434, 22767, 95471, 400248")
     
     print("\nSignature Sequence {3,1,1}")
     simple_test(signature_function([3,1,1]),10,
                 "1, 3, 10, 34, 115, 389, 1316, 4452, 15061, 50951")
     
     print("\nPell Numbers")
-    simple_test(pell(),10,
-                "0, 1, 2, 5, 12, 29, 70, 169, 408, 985")
+    simple_test(pell(),12,
+                "0, 1, 2, 5, 12, 29, 70, 169, 408, 985, 2378, 5741")
     
     print("\nCompanion Pell Numbers")
-    simple_test(companion_pell(),10,
-                "2, 2, 6, 14, 34, 82, 198, 478, 1154, 2786")
+    simple_test(companion_pell(),11,
+                "2, 2, 6, 14, 34, 82, 198, 478, 1154, 2786, 6726")
     
     print("\nLeonardo Numbers")
-    simple_test(leonardo(),10,
-                "1, 1, 3, 5, 9, 15, 25, 41, 67, 109")
+    simple_test(leonardo(),13,
+                "1, 1, 3, 5, 9, 15, 25, 41, 67, 109, 177, 287, 465")
     
     print("\nSimple Recurrence for a = 7, b = 9")
-    simple_test(simple_recurrence(7,9),10,
-                "7, 9, 16, 25, 41, 66, 107, 173, 280, 453")
+    simple_test(simple_recurrence(7,9),12,
+                "7, 9, 16, 25, 41, 66, 107, 173, 280, 453, 733, 1186")
     
     print("\nTribonacci")
-    simple_test(tribonacci(),10,
-                "0, 0, 1, 1, 2, 4, 7, 13, 24, 44")
+    simple_test(tribonacci(),14,
+                "0, 0, 1, 1, 2, 4, 7, 13, 24, 44, 81, 149, 274, 504")
     
     print("\nTetranacci")
-    simple_test(multi_fibonacci(4),10,
-                "0, 0, 0, 1, 1, 2, 4, 8, 15, 29")
+    simple_test(multi_fibonacci(4),14,
+                "0, 0, 0, 1, 1, 2, 4, 8, 15, 29, 56, 108, 208, 401")
     
     print("\nPadovan")
-    simple_test(padovan(),10,
-                "1, 0, 0, 1, 0, 1, 1, 1, 2, 2")
+    simple_test(padovan(),17,
+                "1, 0, 0, 1, 0, 1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12, 16")
     
     print("\nPadovan's Spiral")
-    simple_test(padovan_spiral(),10,
-                "1, 1, 1, 2, 2, 3, 4, 5, 7, 9")
+    simple_test(padovan_spiral(),16,
+                "1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12, 16, 21, 28, 37, 49")
     
     print("\nSylvester's Sequence")
-    simple_test(sylvester(),6,
-                "2, 3, 7, 43, 1807, 3263443")
+    simple_test(sylvester(),7,
+                "2, 3, 7, 43, 1807, 3263443, 10650056950807")
     
     print("\nNarayana's Sequence")
-    simple_test(narayana(),10,
-                "1, 1, 1, 2, 3, 4, 6, 9, 13, 19")
+    simple_test(narayana(),15,
+                "1, 1, 1, 2, 3, 4, 6, 9, 13, 19, 28, 41, 60, 88, 129")
     
     from math import sqrt, floor
     print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
-    simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),10,
-                "1, 1, 1, 4, 5, 7, 12, 14, 18, 25")
+    simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
+                "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
     
