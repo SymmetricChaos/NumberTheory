@@ -264,7 +264,7 @@ def counting(offset=0):
 
 def powers(n):
     """
-    Powers of N: Special case of geometric
+    Powers of n: Special case of geometric
     
     Args:
         n -- constant multiple
@@ -278,6 +278,23 @@ def powers(n):
     
     for g in geometric(1,n):
         yield g
+
+
+def nth_powers(e):
+    """
+    Each non-negative integer raised to the power of n
+    
+    Args:
+        e -- exponent
+        
+    OEIS 
+    """
+    
+    require_integers(["e"],[e])
+    require_nonnegative(["e"],[e])
+    
+    for n in naturals():
+        yield n**e
 
 
 def evens():

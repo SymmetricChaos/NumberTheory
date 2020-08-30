@@ -158,6 +158,7 @@ def gen_hypercube(e=0):
     Args:
         e -- exponent to raise each integer to
     
+    OEIS
     """
     
     require_integers(["e"],[e])
@@ -165,6 +166,25 @@ def gen_hypercube(e=0):
     
     for i in integers():
         yield i**e
+
+
+def pronic():
+    """
+    Pronic Numbers: Sums of consecutive non-negative integers
+    OEIS A002378
+    """
+    
+    for n in naturals():
+        yield n*(n+1)
+
+
+def rectangular(d):
+    """
+    Rectangular Numbers: Generalization of Pronic Numbers
+    """
+    
+    for n in naturals():
+        yield n*(n+d)
 
 
 ### More efficient calculation for common polygonal numbers ###
@@ -278,3 +298,13 @@ if __name__ == '__main__':
     print("\nGeneralized Cubic Numbers")
     simple_test(gen_hypercube(3),9,
                 "0, 1, -1, 8, -8, 27, -27, 64, -64")
+    
+    print("\nPronic Numbers")
+    simple_test(pronic(),13,
+                "0, 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156")
+    
+    print("\nRectangular Numbers d = 2")
+    simple_test(rectangular(2),13,
+                "0, 3, 8, 15, 24, 35, 48, 63, 80, 99, 120, 143, 168")
+    
+    

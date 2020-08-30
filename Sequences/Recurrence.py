@@ -157,7 +157,8 @@ def tribonacci():
 
 def multi_fibonacci(n):
     """
-    Higher Order Fibonacci Sequences
+    Higher Order Fibonacci Sequences\n
+    OEIS A000073, A000078, A001591, A001592
     """
     
     require_integers(["n"],[n])
