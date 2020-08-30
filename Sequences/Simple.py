@@ -176,6 +176,9 @@ def gen_harmonic_numerators(m):
         m -- exponent for the numerators of the terms
     """
     
+    require_integers(["m"],[m])
+    require_nonnegative(["m"],[m])
+    
     if m == 0:
         for i in naturals(1):
             yield i
@@ -200,6 +203,9 @@ def gen_harmonic_denominators(m):
     Args:
         m -- exponent for the numerators of the terms
     """
+    
+    require_integers(["m"],[m])
+    require_nonnegative(["m"],[m])
     
     if m == 0:
         for i in naturals(1):
@@ -263,7 +269,8 @@ def powers(n):
     Args:
         n -- constant multiple
         
-    OEIS A000079
+    OEIS A000079, A000244, A000302, A000351, A000400, A000420, A001018-A001027, 
+         A001029, A009964-A009992, A011557, A159991, A165800
     """
     
     require_integers(["n"],[n])
@@ -391,7 +398,7 @@ if __name__ == '__main__':
     simple_test(gen_harmonic_numerators(2),8,
                 "1, 3, 13, 11, 127, 427, 13789, 79939")
     
-    print("\nHGeneralized Harmonic Denominators of Order 2")
+    print("\nGeneralized Harmonic Denominators of Order 2")
     simple_test(gen_harmonic_denominators(2),8,
                 "1, 4, 36, 72, 1800, 10800, 529200, 4233600")
     

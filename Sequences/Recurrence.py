@@ -1,4 +1,5 @@
-from NiceErrorChecking import require_integers, require_geq
+from NiceErrorChecking import require_integers, require_geq, require_positive
+from math import floor, ceil
 
 def fibonacci():
     """
@@ -247,6 +248,86 @@ def arbitrary_recurrence(S,func):
         S = S[1:] + [func(S)]
 
 
+def pisot_E(a,b):
+    """
+    Pisot E-Sequence\n
+    OEIS A008776, A020701, A020720, A020707, A020706, A020695, A020729,
+         A010904, A010916, A007699, A010900, A010903, A010912, A010914,
+         A020711, A020717, A010901, A010902, A010905, A010907, A010911,
+         A010913, A020708, A020721, A048575, A010908, A010909, A010910,
+         A010915, A010917, A010924, A014001, A014002, A014003, A014004,
+         A014005, A014006, A014007, A014008, A020704, A020709, A020712,
+         A020713, A020716, A020718, A274951, A275628, A276396
+    """
+    
+    require_integers(["a","b"],[a,b])
+    require_positive(["a"],[a])
+    if a >= b:
+        raise ValueError("The first two terms of Pisot sequence must be increasing")
+    
+    while True:
+        yield a
+        a,b = b,floor((b*b)/a + .5)
+
+
+def pisot_L(a,b):
+    """
+    Pisot L-Sequence\n
+    OEIS A008776, A018910, A020737, A020707, A020706, A020729, A048577,
+         A048578, A048580, A020717, A020743, A048583, A048584, A048585,
+         A048586, A020730, A020734, A020736, A048575, A048582, A048587,
+         A048588, A048590, A277084, A048576, A048579, A048589, A048591,
+         A048592, A121605, A277088, A277089
+    """
+    
+    require_integers(["a","b"],[a,b])
+    require_positive(["a"],[a])
+    if a >= b:
+        raise ValueError("The first two terms of Pisot sequence must be increasing")
+    
+    while True:
+        yield a
+        a,b = b,ceil((b*b)/a)
+
+
+def pisot_P(a,b):
+    """
+    Pisot P-Sequence\n
+    OEIS A008776, A020701, A021006, A020720, A020707, A020727, A020729,
+         A021001, A010912, A020711, A048625, A010901, A020708, A020721,
+         A021008, A021013, A048626, A020704, A020712, A020713, A020716,
+         A020718, A020744, A021004, A021011
+    """
+    
+    require_integers(["a","b"],[a,b])
+    require_positive(["a"],[a])
+    if a >= b:
+        raise ValueError("The first two terms of Pisot sequence must be increasing")
+    
+    while True:
+        yield a
+        a,b = b,ceil((b*b)/a - .5)
+
+def pisot_T(a,b):
+    """
+    Pisot T-Sequence\n
+    OEIS A008776, A010925, A020707, A010919, A018919, A020729, A010920,
+         A018921, A020742, A020745, A018914, A020746, A010922, A018915,
+         A018917, A018918, A018920, A018922, A019492, A020747, A020748,
+         A020749, A020750, A018923, A020728, A020732, A020741, A020744,
+         A020751, A020752, A022034, A022039, A275904, A278681, A278692,
+         A278764
+    """
+    
+    require_integers(["a","b"],[a,b])
+    require_positive(["a"],[a])
+    if a >= b:
+        raise ValueError("The first two terms of Pisot sequence must be increasing")
+    
+    while True:
+        yield a
+        a,b = b,floor((b*b)/a)
+
 
 
 
@@ -317,4 +398,8 @@ if __name__ == '__main__':
     print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
     simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
                 "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
+    
+    print("\nPisot E-Sequence for (3,5)")
+    simple_test(pisot_E(2,6),10,
+                "2, 6, 18, 54, 162, 486, 1458, 4374, 13122, 39366")
     
