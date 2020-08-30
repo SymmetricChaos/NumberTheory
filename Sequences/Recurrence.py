@@ -29,7 +29,7 @@ def lucas():
         a, b = b, a+b
 
 
-def PQ_lucas_1(P=1,Q=-1):
+def lucas_U(P=1,Q=-1):
     """
     Lucas Sequence of the first kind sometimes abbreviated U
     
@@ -47,7 +47,7 @@ def PQ_lucas_1(P=1,Q=-1):
         a, b = b, P*b-Q*a
 
 
-def PQ_lucas_2(P=1,Q=-1):
+def lucas_V(P=1,Q=-1):
     """
     Lucas Sequence of the second kind sometimes abbreviated V
     
@@ -156,7 +156,9 @@ def tribonacci():
 
 
 def multi_fibonacci(n):
-    """Higher Order Fibonacci Sequences"""
+    """
+    Higher Order Fibonacci Sequences
+    """
     
     require_integers(["n"],[n])
     require_geq(["n"],[n],2)
@@ -250,7 +252,12 @@ def arbitrary_recurrence(S,func):
 
 def pisot_E(a,b):
     """
-    Pisot E-Sequence\n
+    Pisot E-Sequence
+    
+    Args:
+        a -- first term
+        b -- second term
+    
     OEIS A008776, A020701, A020720, A020707, A020706, A020695, A020729,
          A010904, A010916, A007699, A010900, A010903, A010912, A010914,
          A020711, A020717, A010901, A010902, A010905, A010907, A010911,
@@ -272,7 +279,12 @@ def pisot_E(a,b):
 
 def pisot_L(a,b):
     """
-    Pisot L-Sequence\n
+    Pisot L-Sequence
+    
+    Args:
+        a -- first term
+        b -- second term
+    
     OEIS A008776, A018910, A020737, A020707, A020706, A020729, A048577,
          A048578, A048580, A020717, A020743, A048583, A048584, A048585,
          A048586, A020730, A020734, A020736, A048575, A048582, A048587,
@@ -292,7 +304,12 @@ def pisot_L(a,b):
 
 def pisot_P(a,b):
     """
-    Pisot P-Sequence\n
+    Pisot P-Sequence
+    
+    Args:
+        a -- first term
+        b -- second term
+    
     OEIS A008776, A020701, A021006, A020720, A020707, A020727, A020729,
          A021001, A010912, A020711, A048625, A010901, A020708, A020721,
          A021008, A021013, A048626, A020704, A020712, A020713, A020716,
@@ -308,9 +325,15 @@ def pisot_P(a,b):
         yield a
         a,b = b,ceil((b*b)/a - .5)
 
+
 def pisot_T(a,b):
     """
-    Pisot T-Sequence\n
+    Pisot T-Sequence
+    
+    Args:
+        a -- first term
+        b -- second term
+    
     OEIS A008776, A010925, A020707, A010919, A018919, A020729, A010920,
          A018921, A020742, A020745, A018914, A020746, A010922, A018915,
          A018917, A018918, A018920, A018922, A019492, A020747, A020748,
@@ -326,7 +349,8 @@ def pisot_T(a,b):
     
     while True:
         yield a
-        a,b = b,floor((b*b)/a)
+        a,b = b,(b*b)//a
+
 
 
 
@@ -343,11 +367,11 @@ if __name__ == '__main__':
                 "2, 1, 3, 4, 7, 11, 18, 29, 47, 76, 123, 199, 322, 521")
     
     print("\nLucas Sequence U(-1,3)")
-    simple_test(PQ_lucas_1(-1,3),13,
+    simple_test(lucas_U(-1,3),13,
                 "0, 1, -1, -2, 5, 1, -16, 13, 35, -74, -31, 253, -160")
     
     print("\nLucas Sequence V(3,-5)")
-    simple_test(PQ_lucas_2(3,-5),10,
+    simple_test(lucas_V(3,-5),10,
                 "2, 3, 19, 72, 311, 1293, 5434, 22767, 95471, 400248")
     
     print("\nSignature Sequence {3,1,1}")
@@ -399,7 +423,10 @@ if __name__ == '__main__':
     simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
                 "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
     
-    print("\nPisot E-Sequence for (3,5)")
-    simple_test(pisot_E(2,6),10,
-                "2, 6, 18, 54, 162, 486, 1458, 4374, 13122, 39366")
+    print("\nPisot E-Sequence for (8,21)")
+    simple_test(pisot_E(8,21),10,
+                "8, 21, 55, 144, 377, 987, 2584, 6765, 17711, 46368")
     
+    print("\nPisot L-Sequence for (8,21)")
+    simple_test(pisot_L(8,21),10,
+                "8, 21, 56, 150, 402, 1078, 2891, 7754, 20798, 55785")

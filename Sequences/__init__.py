@@ -2,7 +2,7 @@ from Sequences.SequenceManipulation import offset, segment, make_triangle, show_
                                            partial_sums, partial_products
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
-                                 PQ_lucas_1, PQ_lucas_2, padovan, simple_recurrence, \
+                                 lucas_U, lucas_V, padovan, simple_recurrence, \
                                  sylvester, leonardo, arbitrary_recurrence
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
@@ -46,7 +46,7 @@ __all__=["segment","make_triangle","show_start","offset","partial_sums",
          "partial_products",
          
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
-         "padovan","simple_recurrence","sylvester","PQ_lucas_1","PQ_lucas_2",
+         "padovan","simple_recurrence","sylvester","lucas_U","lucas_V",
          "arbitrary_recurrence",
          
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
