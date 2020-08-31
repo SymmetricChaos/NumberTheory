@@ -139,6 +139,26 @@ def superabundant():
             yield n
 
 
+def amicable_pairs():
+    """
+    Amicable Pairs:\n
+    OEIS
+    """
+    
+    lower = set([])
+    
+    for n in naturals(220):
+        b = _aliquot_sum(n)
+        
+        if b <= n or b in lower:
+            continue
+        
+        if _aliquot_sum(b) == n:
+            lower.add(n)
+            yield n
+            yield b
+
+
 
 
 
@@ -180,4 +200,8 @@ if __name__ == '__main__':
     print("\nSuperabdundant Numbers")
     simple_test(superabundant(),10,
                 "1, 2, 4, 6, 12, 24, 36, 48, 60, 120")
+    
+    print("\nAmicable Pairs")
+    simple_test(amicable_pairs(),9,
+                "220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232")
     

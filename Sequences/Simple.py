@@ -235,7 +235,7 @@ def naturals(offset=0):
      Args:
         offset -- nonnegative integer how many naturals to skip before starting
         
-    OEIS A001477 (with default offset)
+    OEIS A001477
     """
     
     require_integers(["offset"],[offset])
@@ -252,7 +252,7 @@ def counting(offset=0):
     Args:
         offset -- nonnegative integer how many counting numbers to skip before starting
         
-    OEIS A000027 (with default offset)
+    OEIS A000027
     """
     
     require_integers(["offset"],[offset])
