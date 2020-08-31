@@ -22,7 +22,7 @@ def integers():
     
     yield 0
     
-    for n in counting():
+    for n in count(1):
         yield n
         yield -n
 

@@ -1,4 +1,5 @@
 from itertools import islice, cycle, count, zip_longest, chain, accumulate
+from math import comb
 import operator
 from math import prod
 from time import time
@@ -26,7 +27,7 @@ def segment(sequence,offset=0,num_vals=None):
 def offset(sequence,offset):
     """Skip the first n terms of a sequence"""
     
-    return islice(sequence, offset, 0)
+    return islice(sequence, offset, None)
 
 
 def skips(sequence,step):
@@ -77,10 +78,6 @@ def partial_products(sequence,S=None):
     """Partial products of the sequence"""
     
     return accumulate(sequence,operator.mul,initial=S)
-
-
-
-
 
 
 
@@ -145,3 +142,89 @@ def triangle_products(sequence):
     
     for R in make_triangle(sequence):
         yield prod(R)
+
+
+def pairwise_sum(sequence1,sequence2):
+    """
+    Sum two sequences pairwise
+    """
+    
+    for a,b in zip(sequence1,sequence2):
+        yield a+b
+
+
+def pairwise_prod(sequence1,sequence2):
+    """
+    Multiply together two sequences pairwise 
+    """
+    
+    for a,b in zip(sequence1,sequence2):
+        yield a*b
+
+
+def pairwise_apply(sequence1,sequence2,func,*args,**kwargs):
+    """
+    Combine two sequences pairwise using some function
+    """
+    
+    for a,b in zip(sequence1,sequence2):
+        yield func(a,b,args,kwargs)
+
+
+
+
+
+# Sequence transforms
+def binomial_transform(sequence,invert=False):
+    """
+    Binomial transform (or its inverse) of a sequence
+    """
+    
+    S = []
+    
+    if invert:
+        for n in count():
+            S.append(next(sequence))
+            out = 0
+            
+            if n % 2 == 1:
+                sign = cycle([-1,1])
+            else:
+                sign = cycle([1,-1])
+            
+            for k,s in enumerate(S):
+                if s == 0:
+                    continue
+                out += next(sign)*comb(n,k)*s
+            
+            yield out
+    
+    else:
+        
+        for n in count():
+            S.append(next(sequence))
+            out = 0
+            
+            for k,s in enumerate(S):
+                out += comb(n,k)*s
+            
+            yield out
+
+
+def convolution(sequence1,sequence2):
+    """
+    Convolution of two sequences
+    """
+    
+    S1 = []
+    S2 = []
+    
+    while True:
+        S1.append(next(sequence1))
+        S2.append(next(sequence2))
+        
+        out = 0
+        for a,b in zip(S1,reversed(S2)):
+            out += a*b
+        
+        yield out

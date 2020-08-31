@@ -1,5 +1,9 @@
-from Sequences.SequenceManipulation import offset, segment, make_triangle, \
-                                           partial_sums, partial_products
+from Sequences.SequenceManipulation import sequence_slice, segment, offset, skips, \
+                                           chunk_by_n, prepend, sequence_apply, \
+                                           interleave, partial_sums, partial_products, \
+                                           make_triangle, triangle_sums, triangle_products, \
+                                           binomial_transform, convolution, pairwise_sum, \
+                                           pairwise_prod, pairwise_apply
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  lucas_U, lucas_V, padovan, simple_recurrence, \
@@ -50,8 +54,11 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_roots
 
 
-__all__=["segment","make_triangle","offset","partial_sums",
-         "partial_products",
+__all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
+         "sequence_apply","interleave","partial_sums","partial_products",
+         "make_triangle","triangle_sums","triangle_products",
+         "binomial_transform","convolution","pairwise_sum","pairwise_prod",
+         "pairwise_apply",
          
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V",

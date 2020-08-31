@@ -1,12 +1,17 @@
-from SequenceManipulation import simple_test, interleave, sequence_apply, chunk_by_n, partial_sums
-from Simple import naturals, constant
-from Recurrence import companion_pell
+from SequenceManipulation import *
+from Simple import naturals, constant, powers
+from Recurrence import companion_pell, fibonacci
 from Aliquot import amicable_pairs
 
 A142150 = interleave(naturals(0),constant(0))
 A001333 = sequence_apply(companion_pell(),lambda x: x//2)
 A259180 = chunk_by_n(amicable_pairs(),2)
 A000217 = partial_sums(naturals())
+binom_trans1 = binomial_transform(constant(1))
+binom_trans2 = binomial_transform(powers(2),invert=True)
+A001629 = convolution(fibonacci(),fibonacci())
+sum_fib_nat = pairwise_sum(naturals(),fibonacci())
+
 
 print("A142150")
 simple_test(A142150,10,"0, 0, 1, 0, 2, 0, 3, 0, 4, 0")
@@ -19,3 +24,15 @@ simple_test(A259180,4,"(220, 284), (1184, 1210), (2620, 2924), (5020, 5564)")
 
 print("\nA000217")
 simple_test(A000217,10,"0, 1, 3, 6, 10, 15, 21, 28, 36, 45")
+
+print("\nBinomial Transform of the 1s Sequence")
+simple_test(binom_trans1,10,"1, 2, 4, 8, 16, 32, 64, 128, 256, 512")
+
+print("\nInverse Binomial Transform of the Powers of Two")
+simple_test(binom_trans2,10,"1, 1, 1, 1, 1, 1, 1, 1, 1, 1")
+
+print("\nFirst Convolved Fibonacci Sequence")
+simple_test(A001629,10,"0, 0, 1, 2, 5, 10, 20, 38, 71, 130")
+
+print("\nPairwise Sum of the Fibonacci Sequence and the Natural Numbers")
+simple_test(sum_fib_nat,10,"0, 2, 3, 5, 7, 10, 14, 20, 29, 43")
