@@ -1,4 +1,4 @@
-from Sequences.SequenceManipulation import offset, segment, make_triangle, show_start, \
+from Sequences.SequenceManipulation import offset, segment, make_triangle, \
                                            partial_sums, partial_products
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
@@ -50,7 +50,7 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_roots
 
 
-__all__=["segment","make_triangle","show_start","offset","partial_sums",
+__all__=["segment","make_triangle","offset","partial_sums",
          "partial_products",
          
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
