@@ -9,7 +9,7 @@ from Sequences.SequenceManipulation import partial_prods, prepend
 ## Generator that returns primes (not my work)
 def primes():
     """
-    Prime Numbers: Positive integers with exactly two factors
+    Prime Numbers: Positive integers with exactly two factors\n
     OEIS A000040
     """
     
@@ -29,7 +29,7 @@ def primes():
 
 def composites():
     """
-    Composite Numbers: Positive integers with more than two factors
+    Composite Numbers: Positive integers with more than two factors\n
     OEIS A002808
     """
     
@@ -49,7 +49,7 @@ def composites():
 
 def primorials():
     """
-    Primoral Numbers: Cumulative product of primes
+    Primoral Numbers: Cumulative product of primes\n
     OEIS A002110
     """
     
@@ -58,7 +58,7 @@ def primorials():
 
 def compositorial():
     """
-    Compositorial Numbers: Cumulative product of composite numbers
+    Compositorial Numbers: Cumulative product of composite numbers\n
     OEIS A036691
     """
     
@@ -67,7 +67,7 @@ def compositorial():
 
 def prime_powers():
     """
-    Prime Powers: Powers of prime numbers
+    Prime Powers: Powers of prime numbers\n
     OEIS A000961
     """
     
@@ -91,7 +91,7 @@ def prime_powers():
 
 def pythagorean_primes():
     """
-    Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle
+    Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle\n
     OEIS A002144
     """
     
@@ -129,7 +129,7 @@ def smooth(B):
 
 def hamming():
     """
-    Hamming Numbers: The 5-Smooth numbers also known as the Regular Numbers
+    Hamming Numbers: The 5-Smooth numbers also known as the Regular Numbers\n
     OEIS A051037
     """
     
@@ -166,7 +166,7 @@ def rough(B):
 
 def highly_composite():
     """
-    Highly Composite Numbers: Positive integers that have more factors than any smaller positive integer
+    Highly Composite Numbers: Positive integers that have more factors than any smaller positive integer\n
     OEIS A002182
     """
     
@@ -181,7 +181,7 @@ def highly_composite():
 
 def divisors():
     """
-    Number of Divisors: Count of divisors for each positive integer
+    Number of Divisors: Count of divisors for each positive integer\n
     OEIS A000005
     """
     
@@ -191,7 +191,7 @@ def divisors():
 
 def prime_divisors():
     """
-    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
+    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer\n
     OEIS A001222
     """
     
@@ -210,7 +210,7 @@ def prime_divisors():
 
 def unique_prime_divisors():
     """
-    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer
+    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer\n
     OEIS A001221
     """
     
@@ -237,7 +237,7 @@ def unique_prime_divisors():
 
 def squarefree():
     """
-    Squarefree Numbers: Positive integers not divisible by any prime more than once
+    Squarefree Numbers: Positive integers not divisible by any prime more than once\n
     OEIS A005117
     """
     
@@ -253,7 +253,7 @@ def squarefree():
 
 def squarefree_kernel():
     """
-    Squarefree Kernels: Largest squarefree factor of each positive integer
+    Squarefree Kernels: Largest squarefree factor of each positive integer\n
     OEIS A007947
     """
     
@@ -281,7 +281,7 @@ def squarefree_kernel():
 
 def prime_counting():
     """
-    Prime Counting Function: Count of primes less than each non-negative integer
+    Prime Counting Function: Count of primes less than each non-negative integer\n
     OEIS A000720
     """
     
@@ -298,7 +298,7 @@ def prime_counting():
 
 def prime_characteristic():
     """
-    Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0
+    Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0\n
     OEIS A010051
     """
     
@@ -314,7 +314,7 @@ def prime_characteristic():
 
 def totients():
     """
-    Totients: Count of positive integers coprime to each positive integer
+    Totients: Count of positive integers coprime to each positive integer\n
     OEIS A000010
     """
     
@@ -346,7 +346,7 @@ def totients():
 
 def coprime_characteristic():
     """
-    Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not
+    Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not\n
     OEIS A054521
     """
     
@@ -386,7 +386,7 @@ def coprimes(n):
 
 def lucky():
     """
-    Lucky Numbers: Prime-like integers resulting from a modified sieve of Eratosthenes
+    Lucky Numbers: Prime-like integers resulting from a modified sieve of Eratosthenes\n
     OEIS A000959
     """
     
@@ -412,6 +412,7 @@ def lucky():
     # This sets where the cycle for a newly found lucky number begins
     nth = 3
     
+    # Go through the odds greater than 5 looking for lucky numbers
     for o in arithmetic(5,2):
         if update():
             yield o
@@ -425,7 +426,7 @@ def lucky():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test, speed_compare
+    from Sequences.SequenceManipulation import simple_test
     
     print("Primes")
     simple_test(primes(),10,
