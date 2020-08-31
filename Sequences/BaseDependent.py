@@ -1,5 +1,5 @@
-from Simple import naturals, evens, powers
-from SequenceManipulation import offset
+from Sequences.Simple import naturals, evens, powers
+from Sequences.SequenceManipulation import offset
 from MathUtils import digital_sum, digital_root
 
 def evil():
@@ -132,7 +132,7 @@ def digital_sums(B):
 
 def digital_roots(B):
     """
-    Digital Roots: Final value of the iteration of digital sums of n in base b
+    Digital Roots: Final value of the iteration of digital sums of each non-negative integer in base b
     OEIS A010888
     """
     
@@ -147,38 +147,38 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Evil Numbers")
-    simple_test(evil(),14,
-                "0, 3, 5, 6, 9, 10, 12, 15, 17, 18, 20, 23, 24, 27")
+    simple_test(evil(),15,
+                "0, 3, 5, 6, 9, 10, 12, 15, 17, 18, 20, 23, 24, 27, 29")
     
     print("\nOdious Numbers")
-    simple_test(odious(),14,
-                "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26")
+    simple_test(odious(),15,
+                "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28")
     
     print("\nBinary Weights")
-    simple_test(binary_weight(),14,
-                "0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3")
+    simple_test(binary_weight(),18,
+                "0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2")
     
     print("\nComplementary Binary Weights")
-    simple_test(co_binary_weight(),14,
-                "1, 0, 1, 0, 2, 1, 1, 0, 3, 2, 2, 1, 2, 1")
+    simple_test(co_binary_weight(),18,
+                "1, 0, 1, 0, 2, 1, 1, 0, 3, 2, 2, 1, 2, 1, 1, 0, 4, 3")
     
     print("\nBinary Lengths")
-    simple_test(binary_length(),14,
-                "1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4")
+    simple_test(binary_length(),18,
+                "1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5")
     
     print("\nTernary Lengths")
-    simple_test(base_length(3),14,
-                "1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3")
+    simple_test(base_length(3),18,
+                "1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4")
     
     print("\nRuler Sequence")
-    simple_test(ruler(),14,
-                "0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1")
+    simple_test(ruler(),18,
+                "0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1")
     
-    print("\nDigital Sums (Base 10)")
-    simple_test(digital_sums(10),20,
-                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+    print("\nDigital Sums (Base 3)")
+    simple_test(digital_sums(3),18,
+                "0, 1, 2, 1, 2, 3, 2, 3, 4, 1, 2, 3, 2, 3, 4, 3, 4, 5")
     
-    print("\nDigital Roots (Base 10)")
-    simple_test(digital_roots(10),20,
-                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1")
+    print("\nDigital Roots (Base 3)")
+    simple_test(digital_roots(3),18,
+                "0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1")
     

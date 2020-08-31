@@ -280,21 +280,13 @@ def powers(n):
         yield g
 
 
-def nth_powers(e):
+def self_powers():
     """
-    Each non-negative integer raised to the power of n
-    
-    Args:
-        e -- exponent
-        
-    OEIS 
+    Self Powers: Each non-negative integer raised to the power of itself
     """
-    
-    require_integers(["e"],[e])
-    require_nonnegative(["e"],[e])
     
     for n in naturals():
-        yield n**e
+        yield n**n
 
 
 def evens():
@@ -348,48 +340,48 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Counting Numbers")
-    simple_test(counting(),15,
-                "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15")
+    simple_test(counting(),16,
+                "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16")
     
     print("\nNatural Numbers")
-    simple_test(naturals(),15,
-                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14")
+    simple_test(naturals(),16,
+                "0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15")
     
     print("\nIntegers")
-    simple_test(integers(),15,
-                "0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7")
+    simple_test(integers(),16,
+                "0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5, 6, -6, 7, -7, 8")
     
     print("\nEven Naturals")
-    simple_test(evens(),14,
-                "0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26")
+    simple_test(evens(),15,
+                "0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28")
     
     print("\nEven Integers")
     simple_test(gen_evens(),14,
                 "0, 2, -2, 4, -4, 6, -6, 8, -8, 10, -10, 12, -12, 14")
     
     print("\nOdd Naturals")
-    simple_test(odds(),14,
-                "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27")
+    simple_test(odds(),15,
+                "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29")
     
     print("\nOdd Integers")
     simple_test(gen_odds(),14,
                 "1, -1, 3, -3, 5, -5, 7, -7, 9, -9, 11, -11, 13, -13")
     
     print("\nPolynomial 2x^2 - 10x + 1 Evaluated at Naturals")
-    simple_test(polynomial([1,-10,2]),9,
-                "1, -7, -11, -11, -7, 1, 13, 29, 49")
+    simple_test(polynomial([1,-10,2]),13,
+                "1, -7, -11, -11, -7, 1, 13, 29, 49, 73, 101, 133, 169")
     
     print("\nPolynomial 2x^2 - 10x + 1 Evaluated at Integers")
-    simple_test(gen_polynomial([1,-10,2]),9,
-                "1, -7, 13, -11, 29, -11, 49, -7, 73")
+    simple_test(gen_polynomial([1,-10,2]),13,
+                "1, -7, 13, -11, 29, -11, 49, -7, 73, 1, 101, 13, 133")
     
     print("\nArithmetic Sequence 5+2n")
-    simple_test(arithmetic(5,2),10,
-                "5, 7, 9, 11, 13, 15, 17, 19, 21, 23")
+    simple_test(arithmetic(5,2),14,
+                "5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31")
     
     print("\nGeometric Sequence 5*2^n")
-    simple_test(geometric(5,2),10,
-                "5, 10, 20, 40, 80, 160, 320, 640, 1280, 2560")
+    simple_test(geometric(5,2),11,
+                "5, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120")
     
     print("\nArithmetrico-Geometric Sequence (1+2n)(3*4^n)")
     simple_test(arithmetrico_geometric(1,2,3,4),9,
@@ -412,13 +404,17 @@ if __name__ == '__main__':
                 "1, 2, 6, 12, 60, 20, 140, 280, 2520, 2520, 27720")
     
     print("\nGeneralized Harmonic Numerators of Order 2")
-    simple_test(gen_harmonic_numerators(2),8,
-                "1, 3, 13, 11, 127, 427, 13789, 79939")
+    simple_test(gen_harmonic_numerators(2),10,
+                "1, 3, 13, 11, 127, 427, 13789, 79939, 550339, 4360579")
     
     print("\nGeneralized Harmonic Denominators of Order 2")
-    simple_test(gen_harmonic_denominators(2),8,
-                "1, 4, 36, 72, 1800, 10800, 529200, 4233600")
+    simple_test(gen_harmonic_denominators(2),9,
+                "1, 4, 36, 72, 1800, 10800, 529200, 4233600, 38102400")
     
     print("\nThe Zero Sequence")
     simple_test(constant(0), 18,
                 "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0")
+    
+    print("\nSelf Powers")
+    simple_test(self_powers(), 9,
+                "1, 1, 4, 27, 256, 3125, 46656, 823543, 16777216")

@@ -164,7 +164,7 @@ if __name__ == '__main__':
     print("\nAliquot Parts of 378")
     print(aliquot_parts(378))
     
-    print("\nAliqot Parts of 378")
+    print("\nNon-trivial Factors of 378")
     print(nontrivial_factors(378))
     
     print("\nPrime Factorization of 378")

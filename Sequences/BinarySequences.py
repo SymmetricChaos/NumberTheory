@@ -1,15 +1,31 @@
-def thue_morse(s=0):
+def thue_morse():
     """
     Thue-Morse Sequence
-    OEIS A010060, A010059
+    OEIS A010060
     """
     
-    if s not in (0,1):
-        raise ValueError("The Thue-Morse Sequence must start with either 0 or 1")
+    S = [0]
     
-    S = [s]
+    yield 0
     
-    yield s
+    while True:
+        new = []
+        
+        for s in S:
+            yield (s+1)%2
+            new.append((s+1)%2)
+            
+        S += new
+
+def co_thue_morse():
+    """
+    Complement of the Thue-Morse Sequence
+    OEIS A010059
+    """
+    
+    S = [1]
+    
+    yield 1
     
     while True:
         new = []
@@ -21,13 +37,14 @@ def thue_morse(s=0):
         S += new
 
 
+
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Thue-Morse Sequence")
-    simple_test(thue_morse(0),16,
+    simple_test(thue_morse(),16,
                 "0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0")
     
     print("\nComplement of the Thue-Morse Sequence")
-    simple_test(thue_morse(1),16,
+    simple_test(co_thue_morse(),16,
                 "1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1")
