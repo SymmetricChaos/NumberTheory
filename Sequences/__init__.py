@@ -1,6 +1,6 @@
 from Sequences.SequenceManipulation import sequence_slice, segment, offset, skips, \
                                            chunk_by_n, prepend, sequence_apply, \
-                                           interleave, partial_sums, partial_products, \
+                                           interleave, partial_sums, partial_prods, \
                                            make_triangle, triangle_sums, triangle_products, \
                                            binomial_transform, convolution, pairwise_sum, \
                                            pairwise_prod, pairwise_apply
@@ -55,7 +55,7 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
 
 
 __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
-         "sequence_apply","interleave","partial_sums","partial_products",
+         "sequence_apply","interleave","partial_sums","partial_prods",
          "make_triangle","triangle_sums","triangle_products",
          "binomial_transform","convolution","pairwise_sum","pairwise_prod",
          "pairwise_apply",

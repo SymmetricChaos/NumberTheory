@@ -4,6 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
 from math import prod, gcd
+from Sequences.SequenceManipulation import partial_prods, prepend
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -52,12 +53,7 @@ def primorials():
     OEIS A002110
     """
     
-    out = 1
-        
-    for i in primes():
-        yield out
-        
-        out *= i
+    return prepend(1,partial_prods(primes()))
 
 
 def compositorial():
@@ -66,12 +62,7 @@ def compositorial():
     OEIS A036691
     """
     
-    out = 1
-    
-    for i in composites():
-        yield out
-        
-        out *= i
+    return prepend(1,partial_prods(composites()))
 
 
 def prime_powers():
@@ -80,7 +71,22 @@ def prime_powers():
     OEIS A000961
     """
     
-    pass
+    yield 1
+    
+    D = defaultdict(list)
+    
+    for q in naturals(2):
+        if q not in D:
+            yield q
+            D[q + q] = [q]
+        
+        else:
+            if len(D[q]) == 1:
+                yield q
+            
+            for p in D[q]:
+                D[p+q].append(p)
+            del D[q]
 
 
 def pythagorean_primes():
@@ -419,7 +425,7 @@ def lucky():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.SequenceManipulation import simple_test, speed_compare
     
     print("Primes")
     simple_test(primes(),10,
@@ -430,13 +436,18 @@ if __name__ == '__main__':
                 "4, 6, 8, 9, 10, 12, 14, 15, 16, 18")
     
     print("\nPrimorials")
-    simple_test(primorials(),8,
-                "1, 2, 6, 30, 210, 2310, 30030, 510510")
+    simple_test(primorials(),9,
+                "1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690")
     
     print("\nCompositorial")
-    simple_test(compositorial(),7,
-                "1, 4, 24, 192, 1728, 17280, 207360")
+    simple_test(compositorial(),9,
+                "1, 4, 24, 192, 1728, 17280, 207360, 2903040, 43545600")
     
+    print("\nPrime Powers")
+    simple_test(prime_powers(),16,
+                "1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27")
+    
+    prime_powers
     print("\nPythagorean Primes")
     simple_test(pythagorean_primes(),10,
                 "5, 13, 17, 29, 37, 41, 53, 61, 73, 89")
@@ -492,4 +503,3 @@ if __name__ == '__main__':
     print("\nLucky Numbers")
     simple_test(lucky(),10,
                 "1, 3, 7, 9, 13, 15, 21, 25, 31, 33")
-    
