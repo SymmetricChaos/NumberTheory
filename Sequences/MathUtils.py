@@ -154,6 +154,66 @@ def digital_root(n,b=10):
     return n
 
 
+def int_to_digits(n,B=10):
+    """
+    Convert the integer n to its digits in base B
+    Finite generator
+    """
+    
+    n = abs(n)
+    D = []
+    
+    while n != 0:
+        n,r = divmod(n,B)
+        D.append(r)
+    
+    for i in reversed(D):
+        yield i
+
+
+def frac_to_digits(n,d,B=10):
+    """
+    Convert the fraction n/d to its digits in base B
+    Infintie generator
+    """
+    
+    n = abs(n)
+    
+    if n//d > 9:
+        for i in int_to_digits(n//d):
+            yield i
+        n = (n % d) * B
+    
+    while True:
+        n,r = divmod(n,d)
+        yield n
+        n = r*B
+
+
+def repeating_part(n,d,B=10):
+    """
+    Repeating part of the fraction n/d in base B
+    """
+    
+    # Get rid of the integer part
+    if n > d:
+        n = n%d*B
+    
+    digits = []
+    remainders = []
+    
+    while n not in remainders:
+        remainders.append(n)
+        q,r = divmod(n,d)
+        digits.append(q)
+        n = r*B
+    
+    for p,rem in enumerate(remainders):
+        if rem == n:
+            break
+        
+    return digits[p:]
+
 
 
 
@@ -169,3 +229,11 @@ if __name__ == '__main__':
     
     print("\nPrime Factorization of 378")
     print(prime_factorization(378))
+    
+    print("\nFirst 18 digits of 92/7 ≈ 13.1428 to digits")
+    F = frac_to_digits(92,7)
+    print([next(F) for i in range(18)])
+    
+    print("\nRepeating digits of 92/7")
+    print(repeating_part(92,7))
+    

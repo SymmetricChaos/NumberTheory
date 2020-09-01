@@ -141,7 +141,7 @@ def harmonic_numerators():
     for i in naturals(2):
         yield n0
         
-        n = n0*i+ 1*d0
+        n = n0*i+d0
         d = d0*i
         g = gcd(n,d)
         
@@ -160,7 +160,7 @@ def harmonic_denominators():
     for i in naturals(2):
         yield d0
         
-        n = n0*i+ 1*d0
+        n = n0*i+d0
         d = d0*i
         g = gcd(n,d)
         
@@ -188,7 +188,7 @@ def gen_harmonic_numerators(m):
     for i in naturals(2):
         yield n0
         
-        n = n0*i+ 1*d0
+        n = n0*i+d0
         d = d0*(i**m)
         g = gcd(n,d)
         
@@ -216,7 +216,7 @@ def gen_harmonic_denominators(m):
     for i in naturals(2):
         yield d0
         
-        n = n0*i+ 1*d0
+        n = n0*i+d0
         d = d0*(i**m)
         g = gcd(n,d)
         

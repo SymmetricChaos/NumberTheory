@@ -1,4 +1,4 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, arithmetic
 from math import gcd
 
 def recaman():
@@ -77,6 +77,19 @@ def gcd_steps():
             yield ctr
 
 
+def nonadditive():
+    """
+    No term is the sum of any previous distinct pair
+    OEIS A033627
+    """
+    
+    yield 1
+    yield 2
+    
+    for a in arithmetic(4,3):
+        yield a
+
+
 
 
 
@@ -98,4 +111,8 @@ if __name__ == '__main__':
     print("\nEuclid's GCD Steps")
     simple_test(gcd_steps(),18,
                 "1, 2, 2, 3, 1, 3, 4, 3, 3, 4, 5, 2, 1, 2, 5, 6, 4, 4")
+    
+    print("\nNonadditive")
+    simple_test(nonadditive(),15,
+                "1, 2, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40")
     

@@ -5,7 +5,7 @@ from NiceErrorChecking import require_integers, require_geq
 
 def evil():
     """
-    Evil Numbers: Non-negative integers with an even number of 1s in their binary expansion
+    Evil Numbers: Non-negative integers with an even number of 1s in their binary expansion\n
     OEIS A001969
     """
     
@@ -25,7 +25,7 @@ def evil():
 
 def odious():
     """
-    Odious Numbers: Non-negative integers with an odd number of 1s in their binary expansion
+    Odious Numbers: Non-negative integers with an odd number of 1s in their binary expansion\n
     OEIS A000069
     """
     
@@ -45,7 +45,7 @@ def odious():
 
 def binary_weight():
     """
-    Binary Weight: Count of 1s in the binary expansion of each non-negative integer
+    Binary Weight: Count of 1s in the binary expansion of each non-negative integer\n
     OEIS A000120
     """
     
@@ -61,7 +61,7 @@ def binary_weight():
 
 def co_binary_weight():
     """
-    Binary Weight: Count of 0s in the binary expansion of each non-negative integer
+    Binary Weight: Count of 0s in the binary expansion of each non-negative integer\n
     OEIS A023416
     """
     
@@ -81,7 +81,7 @@ def co_binary_weight():
 
 def ruler():
     """
-    Ruler Sequence: Largest power of 2 dividing each positive integer, also height of gradation at each position of an infinite ruler
+    Ruler Sequence: Largest power of 2 dividing each positive integer, also height of gradation at each position of an infinite ruler\n
     OEIS A000120
     """
     
@@ -96,7 +96,7 @@ def ruler():
 
 def binary_length():
     """
-    Binary Length: Bits in the binary representation of each non-negative integer
+    Binary Length: Bits in the binary representation of each non-negative integer\n
     OEIS A070939
     """
     
@@ -110,7 +110,7 @@ def binary_length():
 
 def base_length(B):
     """
-    Binary Length: Symbols in the representation of each non-negative integer in base B
+    Binary Length: Symbols in the representation of each non-negative integer in base B\n
     OEIS A070939
     """
     
@@ -127,7 +127,7 @@ def base_length(B):
 
 def digital_sums(B):
     """
-    Digital Sums: Sum of the digits of each non-negative integer in base B
+    Digital Sums: Sum of the digits of each non-negative integer in base B\n
     OEIS A007953
     """
     
@@ -140,7 +140,7 @@ def digital_sums(B):
 
 def digital_roots(B):
     """
-    Digital Roots: Final value of the iteration of digital sums of each non-negative integer in base b
+    Digital Roots: Final value of the iteration of digital sums of each non-negative integer in base b\n
     OEIS A010888
     """
     require_integers(["B"],[B])
@@ -152,7 +152,7 @@ def digital_roots(B):
 
 def palindrome(B):
     """
-    Palindrome Numbers: Non-negative integers that are palindromes in base B
+    Palindrome Numbers: Non-negative integers that are palindromes in base B\n
     OEIS A002113, A006995
     """
     
