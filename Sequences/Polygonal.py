@@ -168,7 +168,7 @@ def gen_hypercube(e=0):
         yield i**e
 
 
-def pronic():
+def oblong():
     """
     Pronic Numbers: Sums of consecutive non-negative integers
     OEIS A002378
@@ -300,7 +300,7 @@ if __name__ == '__main__':
                 "0, 1, -1, 8, -8, 27, -27, 64, -64, 125, -125, 216")
     
     print("\nPronic Numbers")
-    simple_test(pronic(),13,
+    simple_test(oblong(),13,
                 "0, 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156")
     
     print("\nRectangular Numbers d=2")

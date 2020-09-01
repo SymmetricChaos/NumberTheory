@@ -111,6 +111,19 @@ def companion_pell():
         a, b = b, a+2*b
 
 
+def jacobsthal():
+    """
+    Jacobsthal Numbers:
+    OEIS A001045
+    """
+    
+    a,b = 0,1
+    
+    while True:
+        yield a
+        a,b = b,2*a+b
+
+
 def simple_recurrence(a,b):
     """
     Additive recurrence based relation on two terms
@@ -386,6 +399,10 @@ if __name__ == '__main__':
     print("\nCompanion Pell Numbers")
     simple_test(companion_pell(),11,
                 "2, 2, 6, 14, 34, 82, 198, 478, 1154, 2786, 6726")
+    
+    print("\nJacobsthal Numbers")
+    simple_test(jacobsthal(),13,
+                "0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365")
     
     print("\nLeonardo Numbers")
     simple_test(leonardo(),13,

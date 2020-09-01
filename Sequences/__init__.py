@@ -13,7 +13,7 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribona
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
                                 cen_polygonal, cubic, doubly_polygonal, hypercube, \
-                                gen_hypercube, pronic, rectangular
+                                gen_hypercube, oblong, rectangular
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
                              polynomial, fermat, evens, gen_evens, odds, gen_odds, \
@@ -67,7 +67,7 @@ __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
          "exponent","gen_polygonal","simplicial","perfect_powers",
          "cen_polygonal","cubic","doubly_polygonal","hypercube",
-         "gen_hypercube","pronic","rectangular",
+         "gen_hypercube","oblong","rectangular",
          
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
