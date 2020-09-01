@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.SequenceManipulation import offset
 from MathUtils import digital_sum, digital_root
+from NiceErrorChecking import require_integers, require_geq
 
 def evil():
     """
@@ -110,7 +111,11 @@ def binary_length():
 def base_length(B):
     """
     Binary Length: Symbols in the representation of each non-negative integer in base B
+    OEIS A070939
     """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
     
     for i in range(B):
         yield 1
@@ -126,6 +131,9 @@ def digital_sums(B):
     OEIS A007953
     """
     
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
     for n in naturals():
         yield digital_sum(n,B)
 
@@ -135,9 +143,40 @@ def digital_roots(B):
     Digital Roots: Final value of the iteration of digital sums of each non-negative integer in base b
     OEIS A010888
     """
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
     
     for n in naturals():
         yield digital_root(n,B)
+
+
+def palindrome(B):
+    """
+    Palindrome Numbers: Non-negative integers that are palindromes in base B
+    OEIS A002113, A006995
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    if B == 10:
+        for n in naturals():
+            if str(n) == str(n)[::-1]:
+                yield n
+    
+    else:
+        for n in naturals():
+            m = n
+            d = []
+            
+            while n != 0:
+                n,r = divmod(n,B)
+                d.append(str(r))
+            
+            s = "".join(d)
+            
+            if s == s[::-1]:
+                yield m
 
 
 
@@ -181,4 +220,8 @@ if __name__ == '__main__':
     print("\nDigital Roots (Base 3)")
     simple_test(digital_roots(3),18,
                 "0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1")
+    
+    print("\nPalindromes (Base 2)")
+    simple_test(palindrome(2),15,
+                "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
     
