@@ -92,32 +92,6 @@ def prime_factorization(n):
     return L
 
 
-# Copy of choose function to prevent reference issues
-def choose(n,k):
-    """Binomial Coefficient"""
-    
-    if type(n) != int:
-        raise TypeError("n must be an integer")
-    if type(k) != int:
-        raise TypeError("k must be an integer")
-    
-    if n < k:
-        raise ValueError("n cannot be less than k")
-    if k < 0:
-        raise ValueError("k must be nonnegative")
-        
-    # Calculate the numerator and denominator seperately in order to avoid loss
-    # of precision for large numbers.
-    N = 1
-    D = 1
-    
-    for i in range(1,k+1):
-        N *= (n+1-i)
-        D *= i
-    
-    return N//D
-
-
 def _bits_to_int(bits):
     """Convert a list of 0s and 1s representing a bigendian binary integer"""
     
@@ -211,8 +185,29 @@ def repeating_part(n,d,B=10):
     for p,rem in enumerate(remainders):
         if rem == n:
             break
-        
+    
     return digits[p:]
+
+
+def inds_where(L,val):
+    """
+    All indices of list L that equal val
+    """
+    
+    return [i for i in range(len(L)) if L[i] == val]
+
+
+def first_where(L,val):
+    """
+    First index of list L that equals val
+    """
+    
+    for pos,l in enumerate(L):
+        if l == val:
+            return pos
+    
+    return None
+
 
 
 

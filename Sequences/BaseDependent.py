@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.SequenceManipulation import offset
-from MathUtils import digital_sum, digital_root
+from MathUtils import digital_sum, digital_root, repeating_part
 from NiceErrorChecking import require_integers, require_geq
 
 def evil():
@@ -179,6 +179,17 @@ def palindrome(B):
                 yield m
 
 
+def fraction_periods(B):
+    """
+    Repeating period of each unit fraction in base B
+    OEIS A007732
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    for n in naturals(1):
+        yield len(repeating_part(1,n,B))
 
 
 
@@ -225,3 +236,6 @@ if __name__ == '__main__':
     simple_test(palindrome(2),15,
                 "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
     
+    print("\nRepeating Unit Fraction Length (Base 10)")
+    simple_test(fraction_periods(10),17,
+                "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")

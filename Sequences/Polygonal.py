@@ -1,6 +1,5 @@
 from Sequences.Simple import naturals, integers, arithmetic
-from Sequences.MathUtils import choose
-from math import floor, log2
+from math import floor, log2, comb
 from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_nonnegative
 
@@ -73,7 +72,7 @@ def simplicial(N=1):
     yield 0
     
     for n in naturals():
-        yield choose(n+N,N)
+        yield comb(n+N,N)
 
 
 def perfect_powers():
@@ -141,7 +140,7 @@ def hypercube(e=0):
     Args:
         e -- exponent to raise each non-negative integer to
     
-    OEIS
+    OEIS A000290, A000578, A000583, A000584, A001014, A001015
     """
     
     require_integers(["e"],[e])
@@ -282,7 +281,6 @@ if __name__ == '__main__':
     simple_test(simplicial(3),13,
                 "0, 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286, 364")
     
-    # Differs from the OEIS definition by inclusion of 0
     print("\nPerfect Powers")
     simple_test(perfect_powers(),15,
                 "0, 1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 64, 81, 100")
@@ -295,9 +293,9 @@ if __name__ == '__main__':
     simple_test(cubic(),12,
                 "0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331")
     
-    print("\nGeneralized Cubic Numbers")
-    simple_test(gen_hypercube(3),12,
-                "0, 1, -1, 8, -8, 27, -27, 64, -64, 125, -125, 216")
+    print("\n4th Powers")
+    simple_test(hypercube(4),11,
+                "0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561, 10000")
     
     print("\nPronic Numbers")
     simple_test(oblong(),13,
