@@ -429,12 +429,12 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Primes")
-    simple_test(primes(),10,
-                "2, 3, 5, 7, 11, 13, 17, 19, 23, 29")
+    simple_test(primes(),15,
+                "2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47")
     
     print("\nComposites")
-    simple_test(composites(),10,
-                "4, 6, 8, 9, 10, 12, 14, 15, 16, 18")
+    simple_test(composites(),15,
+                "4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25")
     
     print("\nPrimorials")
     simple_test(primorials(),9,
@@ -450,57 +450,57 @@ if __name__ == '__main__':
     
     prime_powers
     print("\nPythagorean Primes")
-    simple_test(pythagorean_primes(),10,
-                "5, 13, 17, 29, 37, 41, 53, 61, 73, 89")
+    simple_test(pythagorean_primes(),13,
+                "5, 13, 17, 29, 37, 41, 53, 61, 73, 89, 97, 101, 109")
     
     print("\n5-Smooth (Hamming)")
-    simple_test(smooth(5),11,
-                "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15")
+    simple_test(smooth(5),16,
+                "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25")
     
     print("\n5-Rough")
-    simple_test(rough(5),10,
-                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
+    simple_test(rough(5),14,
+                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41")
     
     print("\nHighly Composite")
-    simple_test(highly_composite(),10,
-                "1, 2, 4, 6, 12, 24, 36, 48, 60, 120")
+    simple_test(highly_composite(),13,
+                "1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360")
     
     print("\nNumber of Divisors")
-    simple_test(divisors(),10,
-                "1, 2, 2, 3, 2, 4, 2, 4, 3, 4")
+    simple_test(divisors(),18,
+                "1, 2, 2, 3, 2, 4, 2, 4, 3, 4, 2, 6, 2, 4, 4, 5, 2, 6")
     
     print("\nNumber of Prime Divisors (with multiplicity)")
-    simple_test(prime_divisors(),10,
-                "0, 1, 1, 2, 1, 2, 1, 3, 2, 2")
+    simple_test(prime_divisors(),18,
+                "0, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 3, 1, 2, 2, 4, 1, 3")
     
     print("\nNumber of Unique Prime Divisors")
-    simple_test(unique_prime_divisors(),10,
-                "0, 1, 1, 1, 1, 2, 1, 1, 1, 2")
+    simple_test(unique_prime_divisors(),18,
+                "0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 1, 2")
     
     print("\nSquarefree Numbers")
-    simple_test(squarefree(),10,
-                "1, 2, 3, 5, 6, 7, 10, 11, 13, 14")
+    simple_test(squarefree(),15,
+                "1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22")
     
     print("\nSquarefree Kernels")
-    simple_test(squarefree_kernel(),10,
-                "1, 2, 3, 2, 5, 6, 7, 2, 3, 10")
+    simple_test(squarefree_kernel(),16,
+                "1, 2, 3, 2, 5, 6, 7, 2, 3, 10, 11, 6, 13, 14, 15, 2")
     
     print("\nPrime Counting Function")
-    simple_test(prime_counting(),10,
-                "0, 0, 1, 2, 2, 3, 3, 4, 4, 4")
+    simple_test(prime_counting(),18,
+                "0, 0, 1, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 6, 7")
     
     print("\nCharacteristic Function of the Primes")
-    simple_test(prime_characteristic(),10,
-                "0, 1, 1, 0, 1, 0, 1, 0, 0, 0")
+    simple_test(prime_characteristic(),18,
+                "0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0")
     
     print("\nCharacteristic Triangle of Coprimes")
-    simple_test(coprime_characteristic(),10,
-                "1, 1, 0, 1, 1, 0, 1, 0, 1, 0")
+    simple_test(coprime_characteristic(),18,
+                "1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0")
     
     print("\nNaturals Coprime to 24")
-    simple_test(coprimes(24),10,
-                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29")
+    simple_test(coprimes(24),14,
+                "1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41")
     
     print("\nLucky Numbers")
-    simple_test(lucky(),10,
-                "1, 3, 7, 9, 13, 15, 21, 25, 31, 33")
+    simple_test(lucky(),15,
+                "1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63")

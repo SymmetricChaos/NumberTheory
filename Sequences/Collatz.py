@@ -204,13 +204,13 @@ if __name__ == '__main__':
     simple_test(reduced_collatz_map(),16,
                 "0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7, 23")
     
-    print("\nCollatz Sequence of 7")
-    simple_test(collatz_sequence(7),17,
-                "7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1")
+    print("\nCollatz Sequence of 11")
+    simple_test(collatz_sequence(11),18,
+                "11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1")
     
-    print("\nReduced Collatz Sequence of 7")
-    simple_test(reduced_collatz_sequence(7),12,
-                "7, 11, 17, 26, 13, 20, 10, 5, 8, 4, 2, 1")
+    print("\nReduced Collatz Sequence of 11")
+    simple_test(reduced_collatz_sequence(11),18,
+                "11, 17, 26, 13, 20, 10, 5, 8, 4, 2, 1")
     
     print("\nLength of the Collatz Sequences")
     simple_test(collatz_length(),16,

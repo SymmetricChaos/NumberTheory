@@ -133,30 +133,30 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Factorials")
-    simple_test(factorials(),8,
-                "1, 1, 2, 6, 24, 120, 720, 5040")
+    simple_test(factorials(),11,
+                "1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800")
     
     print("\nAlternating Factorials (A005165)")
-    simple_test(alternating_factorials_1(),8,
-                "0, 1, 1, 5, 19, 101, 619, 4421")
+    simple_test(alternating_factorials_1(),11,
+                "0, 1, 1, 5, 19, 101, 619, 4421, 35899, 326981, 3301819")
     
     print("\nAlternating Factorials (A058006)")
-    simple_test(alternating_factorials_2(),8,
-                "1, 0, 2, -4, 20, -100, 620, -4420")
+    simple_test(alternating_factorials_2(),10,
+                "1, 0, 2, -4, 20, -100, 620, -4420, 35900, -326980")
     
     print("\nKempner Function")
-    simple_test(kempner(),10,
-                "1, 2, 3, 4, 5, 3, 7, 4, 6, 5")
+    simple_test(kempner(),17,
+                "1, 2, 3, 4, 5, 3, 7, 4, 6, 5, 11, 4, 13, 7, 5, 6, 17")
     
     print("\nDouble Factorials")
-    simple_test(double_factorials(),10,
-                "1, 1, 2, 3, 8, 15, 48, 105, 384, 945")
+    simple_test(double_factorials(),12,
+                "1, 1, 2, 3, 8, 15, 48, 105, 384, 945, 3840, 10395")
     
     print("\nOdd Double Factorials")
-    simple_test(odd_double_factorials(),7,
-                "1, 3, 15, 105, 945, 10395, 135135")
+    simple_test(odd_double_factorials(),9,
+                "1, 3, 15, 105, 945, 10395, 135135, 2027025, 34459425")
     
     print("\nEven Double Factorials")
-    simple_test(even_double_factorials(),7,
-                "1, 2, 8, 48, 384, 3840, 46080")
+    simple_test(even_double_factorials(),9,
+                "1, 2, 8, 48, 384, 3840, 46080, 645120, 10321920")
     

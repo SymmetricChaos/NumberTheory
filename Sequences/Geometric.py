@@ -77,14 +77,14 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Nonhypotenuse Numbers")
-    simple_test(nonhypotenuse(),10,
-                "1, 2, 3, 4, 6, 7, 8, 9, 11, 12")
+    simple_test(nonhypotenuse(),16,
+                "1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 21")
     
     print("\nPrimitive Hypotenuse Numbers")
-    simple_test(primitive_hypotenuse(),10,
-                "5, 13, 17, 25, 29, 37, 41, 53, 61, 65")
+    simple_test(primitive_hypotenuse(),14,
+                "5, 13, 17, 25, 29, 37, 41, 53, 61, 65, 73, 85, 89, 97")
     
     print("\nHypotenuse Numbers")
-    simple_test(hypotenuse(),10,
-                "5, 10, 13, 15, 17, 20, 25, 26, 29, 30")
+    simple_test(hypotenuse(),14,
+                "5, 10, 13, 15, 17, 20, 25, 26, 29, 30, 34, 35, 37, 39")
     
