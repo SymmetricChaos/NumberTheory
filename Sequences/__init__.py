@@ -53,6 +53,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     ruler, binary_length, base_length, digital_sums, \
                                     digital_roots
 
+from Sequences.Constant import pi_digits
+
 
 __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "sequence_apply","interleave","partial_sums","partial_prods",
@@ -103,5 +105,7 @@ __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "recaman",
          
          "evil","odious","binary_weight","co_binary_weight","ruler",
-         "binary_length","base_length","digital_sums","digital_roots"
+         "binary_length","base_length","digital_sums","digital_roots",
+         
+         "pi_digits"
         ]
