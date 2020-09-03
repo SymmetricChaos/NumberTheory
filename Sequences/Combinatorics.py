@@ -2,6 +2,7 @@ from Sequences.MathUtils import nontrivial_factors
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
+
 def derangements():
     """
     Derangement Numbers: Permutations with no element in its original position\n
@@ -17,6 +18,23 @@ def derangements():
         d = n * (S[0]+S[1])
         S[0], S[1] = S[1], d
         yield d
+
+
+def even_permutations():
+    """
+    Even Permutation Numbers: Number of even permutations of n elements\n
+    OEIS A001710
+    """
+    
+    yield 1
+    yield 1
+    yield 1
+    
+    out = 3
+    
+    for n in naturals(4):
+        yield out
+        out = out * n
 
 
 def catalan():
@@ -93,6 +111,27 @@ def eulerian():
             yield x
         T.append(0)
         L = T
+
+
+def recontres():
+    """
+    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
+    OEIS A008290
+    """
+    
+    P = pascal()
+    dr = derangements()
+    D = []
+    
+    for n in naturals():
+        D.append(next(dr))
+        yield D[-1]
+        
+        # Skip the next value of P
+        next(P)
+        
+        for k in range(1,n+1):
+            yield D[n-k]*next(P)
 
 
 def partition():
@@ -238,3 +277,11 @@ if __name__ == '__main__':
     print("\nMultiplicative Partitions")
     simple_test(multiplicative_partition(),18,
                 "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
+    
+    print("\nEven Permutations")
+    simple_test(even_permutations(),11,
+                "1, 1, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
+    
+    print("\nRecontres Numbers")
+    simple_test(recontres(),17,
+                "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
