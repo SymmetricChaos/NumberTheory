@@ -20,6 +20,7 @@ def pi_digits():
         if 4 * q + r - t < m * t:
             yield m
             q, r, t, k, m, x = 10*q, 10*(r-m*t), t, k, (10*(3*q+r))//t - 10*m, x
+        
         else:
             q, r, t, k, m, x = q*k, (2*q+r)*x, t*x, k+1, (q*(7*k+2)+r*x)//(t*x), x+2
 
@@ -68,18 +69,41 @@ def sqrt_digits(n,B):
 
 
 
-# def root_digits(a,n,B):
-#     """
+def root_digits(n,p,B):
+    """
+    Digits of the pth root of n in base B
+    OEIS
+    """
     
-#     OEIS
-#     """
+    require_integers(["n","p","B"],[n,p,B])
+    require_nonnegative(["n"],[n])
+    require_geq(["p","B"],[p,B],2)
     
-#     digits = int_to_digits(a,B)
+    Bpow = B**p
+    chunks = [i for i in int_to_digits(n,Bpow)]
     
-#     x,y,r = 0,0,0
+    r,y = 0,0
     
-#     while True:
+    for d in chain(chunks,constant(0)):
+        c = Bpow*r+d
+        x = 0
         
+        for i in range(B):
+            x += 1
+            t = (B*y+x)**n - (Bpow*y**n)
+            if t > c:
+                x -= 1
+                break
+        
+        y1 = B*y+x
+        r1 = c - ((B*y+x)**n - Bpow*y**n)
+        
+        r,y = r1,y1
+        
+        yield x
+        
+        if r == 0:
+            break
 
 
 
@@ -97,3 +121,7 @@ if __name__ == '__main__':
     print("\nBits of the Square Root of 2")
     simple_test(sqrt_digits(2,2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
+    
+    print("\nDecimal Digits of the Cube Root of 3")
+    simple_test(root_digits(3,3,10),18,
+                "1, 4, 4, 2, 2, 4, 9, 5, 7, 0, 3, 0, 7, 4, 0, 8, 3, 8")

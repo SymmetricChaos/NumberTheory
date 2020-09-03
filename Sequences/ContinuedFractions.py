@@ -22,7 +22,6 @@ def continued_fraction_convergents(S):
     d0,d1 = 1,0
     
     for c in S:
-        
         n0,n1 = n1,c*n1 + n0
         d0,d1 = d1,c*d1 + d0
         
