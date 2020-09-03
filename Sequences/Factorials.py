@@ -9,14 +9,12 @@ def factorials():
     OEIS A000142
     """
     
-    ctr = 1
     out = 1
     
     yield out
     
-    while True:
-        out = out * ctr
-        ctr += 1
+    for n in naturals(1):
+        out = out * n
         yield out
 
 

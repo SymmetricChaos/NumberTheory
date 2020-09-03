@@ -1,7 +1,10 @@
 from Sequences.MathUtils import int_to_digits
-from NiceErrorChecking import require_integers, require_nonnegative, require_positive
+from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain
 from Sequences.Simple import constant
+
+# Would like to restrict this to streaming algorithms that can keep producing 
+# digits
 
 # This is a spigot algorithm for pi
 # On my machine its almost instantaneous out to about 1500 digits
@@ -31,7 +34,7 @@ def sqrt_digits(n,B):
     
     require_integers(["n","B"],[n,B])
     require_nonnegative(["n"],[n])
-    require_positive(["B"],[B])
+    require_geq(["B"],[B],2)
     
     if n == 0:
         yield 0
@@ -44,7 +47,6 @@ def sqrt_digits(n,B):
     
     chunks = [i for i in int_to_digits(n,Bsq)]
     
-    # While digits of the number are available
     for d in chain(chunks,constant(0)):
         c = Bsq*r+d
         x = 0
@@ -90,7 +92,7 @@ if __name__ == '__main__':
                 "3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3")
     
     print("\nDecimal Digits of the Square Root of 2")
-    simple_test(sqrt_digits(3,10),18,
+    simple_test(sqrt_digits(2,10),18,
                 "1, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
     print("\nBits of the Square Root of 2")
