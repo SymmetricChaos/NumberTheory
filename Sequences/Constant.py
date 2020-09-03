@@ -83,7 +83,6 @@ def sqrt_digits(n,B):
 
 
 
-
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
@@ -98,4 +97,3 @@ if __name__ == '__main__':
     print("\nBits of the Square Root of 2")
     simple_test(sqrt_digits(2,2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
-    
