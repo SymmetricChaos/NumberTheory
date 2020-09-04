@@ -11,7 +11,7 @@ from Sequences.Simple import constant
 # I do not understand this algorithm right now
 def pi_digits():
     """
-    Decimal Digits of Pi
+    Decimal Digits of Pi\n
     OEIS A000796
     """
     
@@ -37,12 +37,6 @@ def sqrt_digits(n,B):
     require_nonnegative(["n"],[n])
     require_geq(["B"],[B],2)
     
-    if n == 0:
-        yield 0
-    
-    if n == 1:
-        yield 1
-    
     Bsq = B*B
     p,r = 0,0
     
@@ -50,7 +44,7 @@ def sqrt_digits(n,B):
     
     for d in chain(chunks,constant(0)):
         c = Bsq*r+d
-        x = 0
+        x = -1
         
         for i in range(B):
             x += 1
@@ -68,19 +62,18 @@ def sqrt_digits(n,B):
             break
 
 
-
-def root_digits(n,p,B):
+def root_digits(n,a,B):
     """
-    Digits of the pth root of n in base B
+    Digits of the nth root of a in base B
     OEIS
     """
     
-    require_integers(["n","p","B"],[n,p,B])
-    require_nonnegative(["n"],[n])
-    require_geq(["p","B"],[p,B],2)
+    require_integers(["a","n","B"],[a,n,B])
+    require_nonnegative(["a"],[a])
+    require_geq(["n","B"],[n,B],2)
     
-    Bpow = B**p
-    chunks = [i for i in int_to_digits(n,Bpow)]
+    Bpow = B**n
+    chunks = [i for i in int_to_digits(a,Bpow)]
     
     r,y = 0,0
     
@@ -90,13 +83,13 @@ def root_digits(n,p,B):
         
         for i in range(B):
             x += 1
-            t = (B*y+x)**n - (Bpow*y**n)
-            if t > c:
+            
+            if (B*y+x)**n - (Bpow*y**n) > c:
                 x -= 1
                 break
         
         y1 = B*y+x
-        r1 = c - ((B*y+x)**n - Bpow*y**n)
+        r1 = c - ((B*y+x)**n - (Bpow*y**n))
         
         r,y = r1,y1
         
@@ -107,6 +100,8 @@ def root_digits(n,p,B):
 
 
 
+
+
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
@@ -114,7 +109,7 @@ if __name__ == '__main__':
     simple_test(pi_digits(),18,
                 "3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3")
     
-    print("\nDecimal Digits of the Square Root of 2")
+    print("\nSquare Root of 2")
     simple_test(sqrt_digits(2,10),18,
                 "1, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
@@ -122,6 +117,10 @@ if __name__ == '__main__':
     simple_test(sqrt_digits(2,2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
     
-    print("\nDecimal Digits of the Cube Root of 3")
+    print("\nCube Root of 3")
     simple_test(root_digits(3,3,10),18,
                 "1, 4, 4, 2, 2, 4, 9, 5, 7, 0, 3, 0, 7, 4, 0, 8, 3, 8")
+    
+    print("\n4th Root of 2")
+    simple_test(root_digits(4,2,10),18,
+                "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
