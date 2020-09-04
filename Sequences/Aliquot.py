@@ -111,6 +111,7 @@ def pseudoperfect():
                 yield n
                 break
 
+
 # Must be a more efficient way to generate these
 def weird():
     """
@@ -220,7 +221,7 @@ if __name__ == '__main__':
     simple_test(pseudoperfect(),14,
                 "6, 12, 18, 20, 24, 28, 30, 36, 40, 42, 48, 54, 56, 60")
     
-    print("\nWeird Numbers (very laborious to compute)")
+    print("\nWeird Numbers (infinite but very laborious to compute)")
     simple_test(weird(),2,
                 "70, 836")
     

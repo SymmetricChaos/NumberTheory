@@ -26,6 +26,7 @@ def recaman():
 def cantor_pairs():
     """
     Integers that represent the Cantor pairing function a of fully reduced proper fraction
+    OEIS A337308
     """
     
     L = []
