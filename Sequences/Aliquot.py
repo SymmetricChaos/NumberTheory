@@ -1,15 +1,6 @@
 from Sequences.NiceErrorChecking import require_integers, require_positive
-from Sequences.MathUtils import factors, aliquot_parts
+from Sequences.MathUtils import factors, aliquot_parts, sum_of_divisors, powerset, aliquot_sum
 from Sequences.Simple import naturals
-
-
-def _aliquot_sum(n):
-    return sum(aliquot_parts(n))
-
-
-def _divisors_sum(n):
-    return sum(factors(n))
-
 
 def aliquot():
     """
@@ -18,7 +9,7 @@ def aliquot():
     """
     
     for n in naturals(1):
-        yield _aliquot_sum(n)
+        yield aliquot_sum(n)
 
 
 def untouchable():
@@ -40,7 +31,7 @@ def aliquot_recurrence(N):
     
     while True:
         yield N
-        N = _aliquot_sum(N)
+        N = aliquot_sum(N)
 
 
 def abundant():
@@ -50,7 +41,7 @@ def abundant():
     """
     
     for n in naturals(1):
-        if _aliquot_sum(n) > n:
+        if aliquot_sum(n) > n:
             yield n
 
 
@@ -61,7 +52,7 @@ def abundance():
     """
     
     for n in naturals(1):
-        yield _aliquot_sum(n)-n
+        yield aliquot_sum(n)-n
 
 
 def deficient():
@@ -73,7 +64,7 @@ def deficient():
     ctr = 1
     
     while True:
-        if _aliquot_sum(ctr) < ctr:
+        if aliquot_sum(ctr) < ctr:
             yield ctr
         ctr += 1
 
@@ -85,7 +76,7 @@ def deficiency():
     """
     
     for n in naturals(1):
-        yield n-_aliquot_sum(n)
+        yield n-aliquot_sum(n)
 
 
 def perfect():
@@ -107,6 +98,38 @@ def perfect():
         yield 2**(p-1)*(2**(p)-1)
 
 
+def pseudoperfect():
+    """
+    Pseudoperfect Numbers: Positive integers such that some subset of the proper factors sum to n\n
+    OEIS A005835
+    """
+    
+    for n in naturals(2):
+        F = aliquot_parts(n)
+        for s in powerset(F):
+            if sum(s) == n:
+                yield n
+                break
+
+# Must be a more efficient way to generate these
+def weird():
+    """
+    Weird Numbers: Positive integers that are abundant but not pseudoperfect\n
+    OEIS 
+    """
+    
+    def _is_pseudoperfect(n):
+        F = aliquot_parts(n)
+        for s in powerset(F):
+            if sum(s) == n:
+                return True
+        return False
+    
+    for a in abundant():
+        if not _is_pseudoperfect(a):
+            yield a
+
+
 def highly_abundant():
     """
     Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
@@ -116,7 +139,7 @@ def highly_abundant():
     M = 0
     
     for n in naturals(1):
-        m = _divisors_sum(n)
+        m = sum_of_divisors(n)
         
         if m > M:
             M = m
@@ -125,14 +148,14 @@ def highly_abundant():
 
 def superabundant():
     """
-    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
+    Super Abundant Numbers: Positive integers such that the sum of divisors divided by n is greater than for every smaller positive integer
     OEIS A004394
     """
     
     M = 0
     
     for n in naturals(1):
-        m = _divisors_sum(n)/n
+        m = sum_of_divisors(n)/n
         
         if m > M:
             M = m
@@ -148,12 +171,12 @@ def amicable_pairs():
     lower = set([])
     
     for n in naturals(220):
-        b = _aliquot_sum(n)
+        b = aliquot_sum(n)
         
         if b <= n or b in lower:
             continue
         
-        if _aliquot_sum(b) == n:
+        if aliquot_sum(b) == n:
             lower.add(n)
             yield n
             yield b
@@ -192,6 +215,14 @@ if __name__ == '__main__':
     print("\nPerfect Numbers")
     simple_test(perfect(),7,
                 "6, 28, 496, 8128, 33550336, 8589869056, 137438691328")
+    
+    print("\nPseudoperfect Numbers")
+    simple_test(pseudoperfect(),14,
+                "6, 12, 18, 20, 24, 28, 30, 36, 40, 42, 48, 54, 56, 60")
+    
+    print("\nWeird Numbers (very laborious to compute)")
+    simple_test(weird(),2,
+                "70, 836")
     
     print("\nHighly Abdundant Numbers")
     simple_test(highly_abundant(),15,

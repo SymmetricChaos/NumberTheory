@@ -1,5 +1,5 @@
 from math import isqrt
-
+from itertools import chain, combinations
 
 def factors(n):
     """All Unique Factors"""
@@ -22,7 +22,7 @@ def factors(n):
 
 
 def aliquot_parts(n):
-    """All Unique Factors except n itself"""
+    """The proper factors of n"""
     
     if type(n) != int:
         raise Exception("n must be an integer")
@@ -90,6 +90,40 @@ def prime_factorization(n):
         L.append(n)
     
     return L
+
+
+def sum_of_divisors(n,p=1):
+    """
+    Sum of the divisors of n, including itself, raised to the specified power
+    Also known as the sigma function
+    """
+    
+    if p == 0:
+        return len(factors(n))
+    
+    elif p == 1:
+        return sum(factors(n))
+    
+    else:
+        return sum([f**p for f in factors(n)])
+
+
+def aliquot_sum(n,p=1):
+    """
+    Sum of the proper divisors of n raised to the specified power
+    """
+    
+    if p == 0:
+        return len(aliquot_parts(n))
+    
+    elif p == 1:
+        return sum(aliquot_parts(n))
+    
+    else:
+        return sum([f**p for f in aliquot_parts(n)])
+
+
+
 
 
 def _bits_to_int(bits):
@@ -209,6 +243,10 @@ def first_where(L,val):
     return None
 
 
+def powerset(L):
+    L = list(L)
+    return chain.from_iterable(combinations(L, r) for r in range(len(L)+1))
+
 
 
 
@@ -232,3 +270,5 @@ if __name__ == '__main__':
     print("\nRepeating digits of 92/7")
     print(repeating_part(92,7))
     
+    print("\nPowerset of {1,2,3,4}")
+    print([i for i in powerset({1,2,3})])
