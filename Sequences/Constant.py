@@ -6,6 +6,73 @@ from Sequences.Simple import constant
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
 
+#Add together real numbers
+def real_sum(R1,R2,B):
+    """
+    Streaming sum of two iterables that represent the digits of numbers in base B
+    """
+    
+    # Extend with zeros if finite
+    R1e = chain(R1,constant(0))
+    R2e = chain(R2,constant(0))
+    
+    D = []
+    
+    for a,b in zip(R1e,R2e):
+        t = a+b
+        
+        if t <= B-1:
+            while len(D) > 0:
+                yield D.pop(0)
+        
+        if t > B-1:
+            D[-1] += 1
+        
+        D.append(t%B)
+
+
+def real_diff(R1,R2,B):
+    """
+    Streaming difference of two iterables that represent the digits of numbers in base B
+    """
+    
+    # Extend with zeros if finite
+    R1e = chain(R1,constant(0))
+    R2e = chain(R2,constant(0))
+    D = []
+    
+    for a,b in zip(R1e,R2e):
+        t = a-b
+        
+        if t < 0:
+            D[-1] -= 1
+            D.append(t%B)
+        else:
+            while len(D) > 0:
+                yield D.pop(0)
+            D.append(t%B)
+
+
+# Divide a real number by a positive natural number interpreting both in base B
+def real_div_nat(R,n,B):
+    
+    # Extend with zeros if finite
+    Re = chain(R,constant(0))
+    
+    r = 0
+    
+    for a in Re:
+        r += a
+        if r < n:
+            r *= B
+            yield 0
+        
+        else:
+            q,r = divmod(r,n)
+            r *= 10
+            yield q
+
+
 # This is a spigot algorithm for pi
 # On my machine its almost instantaneous out to about 1500 digits
 # I do not understand this algorithm right now
@@ -124,3 +191,15 @@ if __name__ == '__main__':
     print("\n4th Root of 2")
     simple_test(root_digits(4,2,10),18,
                 "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
+    
+    print("\n2√2")
+    simple_test(real_sum(sqrt_digits(2,10),sqrt_digits(2,10),10),18,
+                "2, 8, 2, 8, 4, 2, 7, 1, 2, 4, 7, 4, 6, 1, 9, 0, 0, 9")
+    
+    print("\n√(2)/2")
+    simple_test(real_div_nat(sqrt_digits(2,10),2,10),18,
+                "0, 7, 0, 7, 1, 0, 6, 7, 8, 1, 1, 8, 6, 5, 4, 7, 5, 2")
+    
+    print("\n√2 - ∛2")
+    simple_test(real_diff(root_digits(2,2,10),root_digits(3,2,10),10),18,
+                "0, 1, 5, 4, 2, 9, 2, 5, 1, 2, 4, 7, 8, 2, 2, 1, 8, 8")
