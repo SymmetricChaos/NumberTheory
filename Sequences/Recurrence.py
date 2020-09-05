@@ -1,5 +1,6 @@
 from NiceErrorChecking import require_integers, require_geq, require_positive
 from math import floor, ceil
+from collections import Counter
 
 def fibonacci():
     """
@@ -366,6 +367,24 @@ def pisot_T(a,b):
         a,b = b,(b*b)//a
 
 
+def ulam():
+    
+    T = [1,2]
+    S = Counter({3:1})
+    
+    yield 1
+    yield 2
+    
+    while True:
+        new = min([v for v,c in S.items() if c == 1])
+        yield new
+        T.append(new)
+        
+        for term in T[:-1]:
+            S[new+term] += 1
+        
+        del S[new]
+
 
 
 
@@ -448,3 +467,7 @@ if __name__ == '__main__':
     print("\nPisot L-Sequence for (8,21)")
     simple_test(pisot_L(8,21),10,
                 "8, 21, 56, 150, 402, 1078, 2891, 7754, 20798, 55785")
+    
+    print("\nUlam Sequence")
+    simple_test(ulam(),15,
+                "1, 2, 3, 4, 6, 8, 11, 13, 16, 18, 26, 28, 36, 38, 47")

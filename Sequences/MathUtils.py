@@ -175,8 +175,20 @@ def int_to_digits(n,B=10):
         n,r = divmod(n,B)
         D.append(r)
     
-    for i in reversed(D):
-        yield i
+    return [i for i in reversed(D)]
+
+
+def digits_to_int(D,B=10):
+    """Convert a list of digits in base B to an integer"""
+    
+    n = 0
+    p = 1
+    
+    for d in D:
+        n += d*p
+        p *= B
+    
+    return n
 
 
 def frac_to_digits(n,d,B=10):
@@ -272,3 +284,4 @@ if __name__ == '__main__':
     
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
+    

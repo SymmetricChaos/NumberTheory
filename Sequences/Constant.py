@@ -40,7 +40,7 @@ def sqrt_digits(n,B):
     Bsq = B*B
     p,r = 0,0
     
-    chunks = [i for i in int_to_digits(n,Bsq)]
+    chunks = int_to_digits(n,Bsq)
     
     for d in chain(chunks,constant(0)):
         c = Bsq*r+d
@@ -73,7 +73,7 @@ def root_digits(n,a,B):
     require_geq(["n","B"],[n,B],2)
     
     Bpow = B**n
-    chunks = [i for i in int_to_digits(a,Bpow)]
+    chunks = int_to_digits(a,Bpow)
     
     r,y = 0,0
     
