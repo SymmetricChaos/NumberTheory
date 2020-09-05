@@ -1,6 +1,7 @@
 from Sequences.NiceErrorChecking import require_integers, require_positive
-from Sequences.MathUtils import factors, aliquot_parts, sum_of_divisors, powerset, aliquot_sum
-from Sequences.Simple import naturals
+from Sequences.MathUtils import aliquot_parts, sum_of_divisors, powerset, aliquot_sum, prime_factorization
+from Sequences.Simple import naturals, arithmetic
+from collections import Counter
 
 def aliquot():
     """
@@ -183,6 +184,29 @@ def amicable_pairs():
             yield b
 
 
+def practical():
+    """
+    Practical Numbers: Positive integers with factors that can be summed to any smaller positive integer\n
+    OEIS
+    """
+    
+    def srinivasan_ineq(a):
+        F = prime_factorization(a)
+        C = Counter(F)
+        P = 2**(C[2]+1)-1
+        del C[2]
+        for p,n in C.items():
+            if p > P+1:
+                return False
+            P *= (p**(n+1)-1)//(p-1)
+        return True
+    
+    yield 1
+    
+    for a in arithmetic(2,2):
+        if srinivasan_ineq(a):
+            yield a
+
 
 
 
@@ -236,4 +260,8 @@ if __name__ == '__main__':
     print("\nAmicable Pairs")
     simple_test(amicable_pairs(),9,
                 "220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232")
+    
+    print("\nPractical Numbers")
+    simple_test(practical(),15,
+                "1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40")
     
