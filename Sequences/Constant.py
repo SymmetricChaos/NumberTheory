@@ -9,7 +9,7 @@ from Sequences.Simple import constant
 #Add together real numbers
 def real_sum(R1,R2,B):
     """
-    Streaming sum of two iterables that represent the digits of numbers in base B
+    Sum of two iterables that represent real numbers in base B
     """
     
     # Extend with zeros if finite
@@ -33,7 +33,7 @@ def real_sum(R1,R2,B):
 
 def real_diff(R1,R2,B):
     """
-    Streaming difference of two iterables that represent the digits of numbers in base B
+    Difference of two iterables that represent real numbers in base B
     """
     
     # Extend with zeros if finite
@@ -53,8 +53,32 @@ def real_diff(R1,R2,B):
             D.append(t%B)
 
 
-# Divide a real number by a positive natural number interpreting both in base B
+def real_prod(R1,R2,B):
+    """
+    Product of two iterables that represent real numbers in base B
+    """
+    
+    # Extend with zeros if finite
+    R1e = chain(R1,constant(0))
+    R2e = chain(R2,constant(0))
+    D1 = []
+    D2 = []
+    
+    for n,(a,b) in enumerate(zip(R1e,R2e)):
+        
+        D2.append(b)
+        for d2 in D2:
+            yield d2*a
+        
+        D1.append(a)
+        
+        yield a*b
+
+
 def real_div_nat(R,n,B):
+    """
+    Quotient of an iterable that represent a real numbers in base B by a positive natural in base B
+    """
     
     # Extend with zeros if finite
     Re = chain(R,constant(0))
@@ -166,13 +190,33 @@ def root_digits(n,a,B):
             break
 
 
+def phi(B):
+    """
+    Digits of the golden ratio in base B
+    """
+    
+    # Digits of the square root of 5
+    S = sqrt_digits(5,B)
+    
+    # Skip the first two and yield 1 then 6
+    next(S)
+    next(S)
+    
+    yield 1
+    yield 6
+    
+    # Divide remaining part by 2
+    for d in real_div_nat(S,2,B):
+        yield d
+
+
 
 
 
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
-    print("Decimal Digits of Pi")
+    print("Pi")
     simple_test(pi_digits(),18,
                 "3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3")
     
@@ -203,3 +247,9 @@ if __name__ == '__main__':
     print("\n√2 - ∛2")
     simple_test(real_diff(root_digits(2,2,10),root_digits(3,2,10),10),18,
                 "0, 1, 5, 4, 2, 9, 2, 5, 1, 2, 4, 7, 8, 2, 2, 1, 8, 8")
+    
+    print("\nThe Golden Ratio")
+    simple_test(phi(10),18,
+                "1, 6, 1, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9, 8, 9, 4, 8, 4")
+    
+    
