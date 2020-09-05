@@ -7,7 +7,7 @@ from Sequences.Simple import constant
 # digits
 
 #Add together real numbers
-def real_sum(R1,R2,B):
+def real_sum(R1,R2,B=10):
     """
     Sum of two iterables that represent real numbers in base B
     """
@@ -31,7 +31,7 @@ def real_sum(R1,R2,B):
         D.append(t%B)
 
 
-def real_diff(R1,R2,B):
+def real_diff(R1,R2,B=10):
     """
     Difference of two iterables that represent real numbers in base B
     """
@@ -46,55 +46,71 @@ def real_diff(R1,R2,B):
         
         if t < 0:
             D[-1] -= 1
-            D.append(t%B)
+            
         else:
             while len(D) > 0:
                 yield D.pop(0)
-            D.append(t%B)
+                
+        D.append(t%B)
 
 
-def real_prod(R1,R2,B):
+# def real_prod(R1,R2,B):
+#     """
+#     Product of two iterables that represent real numbers in base B
+#     """
+#    
+#     # Extend with zeros if finite
+#     R1e = chain(R1,constant(0))
+#     R2e = chain(R2,constant(0))
+#     D1 = []
+#     D2 = []
+#    
+#     for n,(a,b) in enumerate(zip(R1e,R2e)):
+#        
+#         D2.append(b)
+#         for d2 in D2:
+#             yield d2*a
+#        
+#         D1.append(a)
+#        
+#         yield a*b
+
+
+def real_prod_nat(R,n,B=10):
     """
-    Product of two iterables that represent real numbers in base B
+    Product of an iterable that represent a real numbers in base B by a positive natural in base B
     """
     
-    # Extend with zeros if finite
-    R1e = chain(R1,constant(0))
-    R2e = chain(R2,constant(0))
-    D1 = []
-    D2 = []
+    D = []
     
-    for n,(a,b) in enumerate(zip(R1e,R2e)):
+    for a in R:
+        q,r = divmod(a*n,B)
         
-        D2.append(b)
-        for d2 in D2:
-            yield d2*a
+        if q == 0:
+            while len(D) > 0:
+                yield D.pop(0)
         
-        D1.append(a)
+        else:
+            D[-1] += q
         
-        yield a*b
+        D.append(r)
 
 
-def real_div_nat(R,n,B):
+def real_div_nat(R,n,B=10):
     """
     Quotient of an iterable that represent a real numbers in base B by a positive natural in base B
     """
     
-    # Extend with zeros if finite
-    Re = chain(R,constant(0))
-    
     r = 0
     
-    for a in Re:
-        r += a
-        if r < n:
-            r *= B
-            yield 0
+    for a in R:
+        r = (r*B)+a
+        q,r = divmod(r,n)
         
-        else:
-            q,r = divmod(r,n)
-            r *= 10
-            yield q
+        yield q
+
+
+
 
 
 # This is a spigot algorithm for pi
@@ -116,9 +132,9 @@ def pi_digits():
             q, r, t, k, m, x = q*k, (2*q+r)*x, t*x, k+1, (q*(7*k+2)+r*x)//(t*x), x+2
 
 
-def sqrt_digits(n,B):
+def sqrt_digits(n,B=10):
     """
-    Digits of the square root of n in base B
+    Digits of the square root of n in base B\n
     OEIS A002193, A002194, A002163, A010465, A010466, A010467, A010464, 
          A010472, A010468, A010490, A010469, A010470, A010471, A010477,
          A010473, A010524, A010474
@@ -148,14 +164,11 @@ def sqrt_digits(n,B):
         p = B*p+x
         
         yield x
-        
-        if r == 0:
-            break
 
 
-def root_digits(n,a,B):
+def root_digits(n,a,B=10):
     """
-    Digits of the nth root of a in base B
+    Digits of the nth root of a in base B\n
     OEIS
     """
     
@@ -190,13 +203,15 @@ def root_digits(n,a,B):
             break
 
 
-def phi(B):
+# Not sure why this doesn't work in other bases
+def phi_digits():
     """
-    Digits of the golden ratio in base B
+    Phi: Digits of the golden ratio\n
+    OEIS A001622
     """
     
     # Digits of the square root of 5
-    S = sqrt_digits(5,B)
+    S = sqrt_digits(5,10)
     
     # Skip the first two and yield 1 then 6
     next(S)
@@ -206,7 +221,7 @@ def phi(B):
     yield 6
     
     # Divide remaining part by 2
-    for d in real_div_nat(S,2,B):
+    for d in real_div_nat(S,2,10):
         yield d
 
 
@@ -216,40 +231,43 @@ def phi(B):
 if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
-    print("Pi")
+    print("Pi, the Circle Constant")
     simple_test(pi_digits(),18,
                 "3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, 3, 2, 3")
     
+    print("\nTau, Twice Pi")
+    simple_test(real_prod_nat(pi_digits(),2,),18,
+                "6, 2, 8, 3, 1, 8, 5, 3, 0, 7, 1, 7, 9, 5, 8, 6, 4, 7")
+    
+    print("\nPhi, The Golden Ratio")
+    simple_test(phi_digits(),18,
+                "1, 6, 1, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9, 8, 9, 4, 8, 4")
+    
     print("\nSquare Root of 2")
-    simple_test(sqrt_digits(2,10),18,
+    simple_test(sqrt_digits(2),18,
                 "1, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
     print("\nBits of the Square Root of 2")
-    simple_test(sqrt_digits(2,2),18,
+    simple_test(sqrt_digits(2,B=2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
     
     print("\nCube Root of 3")
-    simple_test(root_digits(3,3,10),18,
+    simple_test(root_digits(3,3),18,
                 "1, 4, 4, 2, 2, 4, 9, 5, 7, 0, 3, 0, 7, 4, 0, 8, 3, 8")
     
     print("\n4th Root of 2")
-    simple_test(root_digits(4,2,10),18,
+    simple_test(root_digits(4,2),18,
                 "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
     
     print("\n2√2")
-    simple_test(real_sum(sqrt_digits(2,10),sqrt_digits(2,10),10),18,
+    simple_test(real_sum(sqrt_digits(2),sqrt_digits(2)),18,
                 "2, 8, 2, 8, 4, 2, 7, 1, 2, 4, 7, 4, 6, 1, 9, 0, 0, 9")
     
     print("\n√(2)/2")
-    simple_test(real_div_nat(sqrt_digits(2,10),2,10),18,
+    simple_test(real_div_nat(sqrt_digits(2),2),18,
                 "0, 7, 0, 7, 1, 0, 6, 7, 8, 1, 1, 8, 6, 5, 4, 7, 5, 2")
     
     print("\n√2 - ∛2")
-    simple_test(real_diff(root_digits(2,2,10),root_digits(3,2,10),10),18,
+    simple_test(real_diff(root_digits(2,2),root_digits(3,2)),18,
                 "0, 1, 5, 4, 2, 9, 2, 5, 1, 2, 4, 7, 8, 2, 2, 1, 8, 8")
-    
-    print("\nThe Golden Ratio")
-    simple_test(phi(10),18,
-                "1, 6, 1, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9, 8, 9, 4, 8, 4")
-    
     
