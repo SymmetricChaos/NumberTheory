@@ -367,13 +367,22 @@ def pisot_T(a,b):
         a,b = b,(b*b)//a
 
 
-def ulam():
+def ulam(u=1,v=2):
+    """
+    Ulam Sequence
     
-    T = [1,2]
-    S = Counter({3:1})
+    Args:
+        u -- first term
+        v -- second term
     
-    yield 1
-    yield 2
+    OEIS 
+    """
+    
+    T = [u,v]
+    S = Counter({u+v:1})
+    
+    yield u
+    yield v
     
     while True:
         new = min([v for v,c in S.items() if c == 1])
@@ -384,6 +393,7 @@ def ulam():
             S[new+term] += 1
         
         del S[new]
+
 
 
 
@@ -460,14 +470,26 @@ if __name__ == '__main__':
     simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
                 "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
     
-    print("\nPisot E-Sequence for (8,21)")
+    print("\nPisot E-Sequence(8,21)")
     simple_test(pisot_E(8,21),10,
                 "8, 21, 55, 144, 377, 987, 2584, 6765, 17711, 46368")
     
-    print("\nPisot L-Sequence for (8,21)")
+    print("\nPisot L-Sequence(8,21)")
     simple_test(pisot_L(8,21),10,
                 "8, 21, 56, 150, 402, 1078, 2891, 7754, 20798, 55785")
+    
+    print("\nPisot P-Sequence(8,21)")
+    simple_test(pisot_P(8,21),10,
+                "8, 21, 55, 144, 377, 987, 2584, 6765, 17711, 46368")
+    
+    print("\nPisot T-Sequence(8,21)")
+    simple_test(pisot_P(8,21),10,
+                "8, 21, 55, 144, 377, 987, 2584, 6765, 17711, 46368")
     
     print("\nUlam Sequence")
     simple_test(ulam(),15,
                 "1, 2, 3, 4, 6, 8, 11, 13, 16, 18, 26, 28, 36, 38, 47")
+    
+    print("\n(1,3)-Ulam Sequence")
+    simple_test(ulam(1,3),15,
+                "1, 3, 4, 5, 6, 8, 10, 12, 17, 21, 23, 28, 32, 34, 39")
