@@ -46,6 +46,50 @@ def abundant():
             yield n
 
 
+def primitive_abundant_1():
+    """
+    Primitive Abundant Numbers: Positive integers that are abundant but have only deficient factors
+    OEIS A071395
+    """
+    
+    P = perfect()
+    next_p = next(P)
+    A = set([])
+    
+    for n in naturals(1):
+        if n >= next_p:
+            A.add(next_p)
+            next_p = next(P)
+        
+        F = aliquot_parts(n)
+        
+        if sum(F) > n:
+            if any([f in A for f in F]):
+                continue
+            
+            yield n
+            A.add(n)
+
+
+def primitive_abundant_2():
+    """
+    Primitive Abundant Numbers: Positive integers that are abundant but no abundant factors
+    OEIS A091191
+    """
+    
+    A = set([])
+    
+    for n in naturals(1):
+        F = aliquot_parts(n)
+        
+        if sum(F) > n:
+            if any([f in A for f in F]):
+                continue
+            
+            yield n
+            A.add(n)
+
+
 def abundance():
     """
     Abundance: The aliquot sum of each positive number minus that number
@@ -54,6 +98,38 @@ def abundance():
     
     for n in naturals(1):
         yield aliquot_sum(n)-n
+
+
+def highly_abundant():
+    """
+    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
+    OEIS A002093
+    """
+    
+    M = 0
+    
+    for n in naturals(1):
+        m = sum_of_divisors(n)
+        
+        if m > M:
+            M = m
+            yield n
+
+
+def superabundant():
+    """
+    Super Abundant Numbers: Positive integers such that the sum of divisors divided by n is greater than for every smaller positive integer
+    OEIS A004394
+    """
+    
+    M = 0
+    
+    for n in naturals(1):
+        m = sum_of_divisors(n)/n
+        
+        if m > M:
+            M = m
+            yield n
 
 
 def deficient():
@@ -132,38 +208,6 @@ def weird():
             yield a
 
 
-def highly_abundant():
-    """
-    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
-    OEIS A002093
-    """
-    
-    M = 0
-    
-    for n in naturals(1):
-        m = sum_of_divisors(n)
-        
-        if m > M:
-            M = m
-            yield n
-
-
-def superabundant():
-    """
-    Super Abundant Numbers: Positive integers such that the sum of divisors divided by n is greater than for every smaller positive integer
-    OEIS A004394
-    """
-    
-    M = 0
-    
-    for n in naturals(1):
-        m = sum_of_divisors(n)/n
-        
-        if m > M:
-            M = m
-            yield n
-
-
 def amicable_pairs():
     """
     Amicable Pairs:\n
@@ -226,6 +270,22 @@ if __name__ == '__main__':
     simple_test(abundant(),14,
                 "12, 18, 20, 24, 30, 36, 40, 42, 48, 54, 56, 60, 66, 70")
     
+    print("\nPrimitive Abundant Numbers (Type 1, all deficient factors)")
+    simple_test(primitive_abundant_1(),12,
+                "20, 70, 88, 104, 272, 304, 368, 464, 550, 572, 650, 748")
+    
+    print("\nPrimitive Abundant Numbers (Type 2, no abundant factors)")
+    simple_test(primitive_abundant_2(),13,
+                "12, 18, 20, 30, 42, 56, 66, 70, 78, 88, 102, 104, 114")
+    
+    print("\nHighly Abdundant Numbers")
+    simple_test(highly_abundant(),15,
+                "1, 2, 3, 4, 6, 8, 10, 12, 16, 18, 20, 24, 30, 36, 42")
+    
+    print("\nSuperabdundant Numbers")
+    simple_test(superabundant(),13,
+                "1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360")
+    
     print("\nAbundance")
     simple_test(abundance(),14,
                 "-1, -1, -2, -1, -4, 0, -6, -1, -5, -2, -10, 4, -12, -4")
@@ -249,14 +309,6 @@ if __name__ == '__main__':
     print("\nWeird Numbers (infinite but very laborious to compute)")
     simple_test(weird(),2,
                 "70, 836")
-    
-    print("\nHighly Abdundant Numbers")
-    simple_test(highly_abundant(),15,
-                "1, 2, 3, 4, 6, 8, 10, 12, 16, 18, 20, 24, 30, 36, 42")
-    
-    print("\nSuperabdundant Numbers")
-    simple_test(superabundant(),13,
-                "1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360")
     
     print("\nAmicable Pairs")
     simple_test(amicable_pairs(),9,
