@@ -36,8 +36,9 @@ from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_rec
                               weird, highly_abundant, superabundant, amicable_pairs, \
                               practical
 
-from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
-                                    eulerian, bell, gould
+from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
+                                    eulerian, bell, gould, even_permutation, \
+                                    lazy_caterer, cake, multiplicative_partition
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
@@ -55,62 +56,78 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     ruler, binary_length, base_length, digital_sums, \
                                     digital_roots, fraction_period, palindrome
 
-from Sequences.Constant import pi_digits
+from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits
 
 
-__all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
+__all__=[#MANIPS
+         "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "sequence_apply","interleave","partial_sums","partial_prods",
          "make_triangle","triangle_sums","triangle_products",
          "binomial_transform","convolution","pairwise_sum","pairwise_prod",
          "pairwise_apply",
          
+         #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V",
          "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
          
+         #POLYGONAL
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
          "exponent","gen_polygonal","simplicial","perfect_powers",
          "cen_polygonal","cubic","doubly_polygonal","hypercube",
          "gen_hypercube","oblong","rectangular",
          
+         #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
          "constant","arithmetrico_geometric","gen_polynomial","self_powers",
          "harmonic_numerators", "harmonic_denominators",
          "gen_harmonic_numerators", "gen_harmonic_denominators",
          
+         #PRIME
          "primes","primorial","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes",
          "prime_counting","prime_divisors","unique_prime_divisors",
          "composites","totients","compositorial","hamming","cototients",
          "prime_characteristic","coprime_characteristic",
          
+         #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
          "odd_double_factorials",
          
+         #ALIQUOT
          "aliquot","abundant","deficient","perfect","aliquot_recurrence",
          "abundance","deficiency","untouchable","pseudoperfect","weird",
          "highly_abundant","superabundant","amicable_pairs","practical",
          
-         "catalan","derangements","pascal","partition","eulerian","bell",
-         "gould",
+         #COMBINATORIC
+         "catalan","derangement","pascal","partition","eulerian","bell",
+         "gould","recontres","even_permutation","lazy_caterer","cake",
+         "multiplicative_partition",
          
+         #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse",
          
+         #BINARY
          "thue_morse","co_thue_morse",
          
+         #PRNG
          "LCG","LFG","LFSR",
          
+         #COLLATZ
          "collatz_length","collatz_longest","collatz_sequence",
          "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
          "reduced_collatz_sequence","reduced_collatz_map",
          
+         #WEIRD
          "recaman",
          
+         #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",
          "binary_length","base_length","digital_sums","digital_roots",
          "palindrome","fraction_period",
          
-         "pi_digits"
+         #CONSTANT
+         "pi_digits","sqrt_digits","root_digits","phi_digits"
         ]

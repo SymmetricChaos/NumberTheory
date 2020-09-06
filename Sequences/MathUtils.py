@@ -1,5 +1,11 @@
 from math import isqrt
-from itertools import chain, combinations
+from itertools import chain, combinations, repeat
+
+
+
+###################
+## FACTORIZATION ##
+###################
 
 def factors(n):
     """All Unique Factors"""
@@ -21,7 +27,8 @@ def factors(n):
     return S
 
 
-def aliquot_parts(n):
+
+def proper_divisors(n):
     """The proper factors of n"""
     
     if type(n) != int:
@@ -42,6 +49,12 @@ def aliquot_parts(n):
             S.add(f)
     
     return S
+
+
+# I just think the name is neat
+def aliquot_parts(n):
+    """Alias for Proper Divisors"""
+    return proper_divisors(n)
 
 
 def nontrivial_factors(n):
@@ -70,7 +83,6 @@ def prime_factorization(n):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
-    # Either include or don't include trivial factors
     L = []
     
     while n % 2 == 0:
@@ -126,6 +138,110 @@ def aliquot_sum(n,p=1):
 
 
 
+############################
+## REAL VALUED ARITHMETIC ##
+############################
+
+def real_sum(R1,R2,B=10):
+    """
+    Sum of two iterables that represent real numbers in base B
+    """
+    
+    # Extend with zeros if finite
+    R1e = chain(R1,repeat(0))
+    R2e = chain(R2,repeat(0))
+    
+    D = []
+    
+    for a,b in zip(R1e,R2e):
+        t = a+b
+        
+        if t <= B-1:
+            while len(D) > 0:
+                yield D.pop(0)
+        
+        if t > B-1:
+            D[-1] += 1
+        
+        D.append(t%B)
+
+
+def real_diff(R1,R2,B=10):
+    """
+    Difference of two iterables that represent real numbers in base B
+    """
+    
+    # Extend with zeros if finite
+    R1e = chain(R1,repeat(0))
+    R2e = chain(R2,repeat(0))
+    D = []
+    
+    for a,b in zip(R1e,R2e):
+        t = a-b
+        
+        if t < 0:
+            D[-1] -= 1
+            
+        else:
+            while len(D) > 0:
+                yield D.pop(0)
+                
+        D.append(t%B)
+
+
+def real_prod_nat(R,n,B=10):
+    """
+    Product of an iterable that represent a real numbers in base B by a positive natural in base B
+    """
+    
+    D = []
+    
+    for a in R:
+        q,r = divmod(a*n,B)
+        
+        if q == 0:
+            while len(D) > 0:
+                yield D.pop(0)
+        
+        else:
+            D[-1] += q
+        
+        D.append(r)
+
+
+def real_div_nat(R,n,B=10):
+    """
+    Quotient of an iterable that represent a real numbers in base B by a positive natural in base B
+    """
+    
+    r = 0
+    
+    for a in R:
+        r = (r*B)+a
+        q,r = divmod(r,n)
+        
+        yield q
+
+
+# def real_prod(R1,R2,B):
+#     """
+#     Product of two iterables that represent real numbers in base B
+#     """
+
+
+# def real_div(R1,R2,B):
+#     """
+#     Product of two iterables that represent real numbers in base B
+#     """
+
+
+
+
+
+#################
+## CONVERSIONS ##
+#################
+
 def _bits_to_int(bits):
     """Convert a list of 0s and 1s representing a bigendian binary integer"""
     
@@ -133,9 +249,7 @@ def _bits_to_int(bits):
     p = 1
     
     for b in bits:
-        if b != 0:
-            n += p
-        
+        n += p
         p *= 2
     
     return n
@@ -210,6 +324,14 @@ def frac_to_digits(n,d,B=10):
         n = r*B
 
 
+
+
+
+###################
+## GENERAL STUFF ##
+###################
+
+
 def repeating_part(n,d,B=10):
     """
     Repeating part of the fraction n/d in base B
@@ -258,6 +380,7 @@ def first_where(L,val):
 def powerset(L):
     L = list(L)
     return chain.from_iterable(combinations(L, r) for r in range(len(L)+1))
+
 
 
 

@@ -3,7 +3,7 @@ from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
 
 
-def derangements():
+def derangement():
     """
     Derangement Numbers: Permutations with no element in its original position\n
     OEIS A000166
@@ -20,7 +20,7 @@ def derangements():
         yield d
 
 
-def even_permutations():
+def even_permutation():
     """
     Even Permutation Numbers: Number of even permutations of n elements\n
     OEIS A001710
@@ -120,7 +120,7 @@ def recontres():
     """
     
     P = pascal()
-    dr = derangements()
+    dr = derangement()
     D = []
     
     for n in naturals():
@@ -239,7 +239,7 @@ if __name__ == '__main__':
     from Sequences.SequenceManipulation import simple_test
     
     print("Derangement Numbers")
-    simple_test(derangements(),11,
+    simple_test(derangement(),11,
                 "1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961")
     
     print("\nCatalan Numbers")
@@ -279,7 +279,7 @@ if __name__ == '__main__':
                 "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
     
     print("\nEven Permutations")
-    simple_test(even_permutations(),11,
+    simple_test(even_permutation(),11,
                 "1, 1, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
     
     print("\nRecontres Numbers")

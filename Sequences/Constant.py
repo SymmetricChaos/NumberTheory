@@ -1,116 +1,11 @@
-from Sequences.MathUtils import int_to_digits
+from Sequences.MathUtils import int_to_digits, real_sum, real_diff, real_prod_nat, real_div_nat
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain
 from Sequences.Simple import constant
 
+
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
-
-#Add together real numbers
-def real_sum(R1,R2,B=10):
-    """
-    Sum of two iterables that represent real numbers in base B
-    """
-    
-    # Extend with zeros if finite
-    R1e = chain(R1,constant(0))
-    R2e = chain(R2,constant(0))
-    
-    D = []
-    
-    for a,b in zip(R1e,R2e):
-        t = a+b
-        
-        if t <= B-1:
-            while len(D) > 0:
-                yield D.pop(0)
-        
-        if t > B-1:
-            D[-1] += 1
-        
-        D.append(t%B)
-
-
-def real_diff(R1,R2,B=10):
-    """
-    Difference of two iterables that represent real numbers in base B
-    """
-    
-    # Extend with zeros if finite
-    R1e = chain(R1,constant(0))
-    R2e = chain(R2,constant(0))
-    D = []
-    
-    for a,b in zip(R1e,R2e):
-        t = a-b
-        
-        if t < 0:
-            D[-1] -= 1
-            
-        else:
-            while len(D) > 0:
-                yield D.pop(0)
-                
-        D.append(t%B)
-
-
-# def real_prod(R1,R2,B):
-#     """
-#     Product of two iterables that represent real numbers in base B
-#     """
-#    
-#     # Extend with zeros if finite
-#     R1e = chain(R1,constant(0))
-#     R2e = chain(R2,constant(0))
-#     D1 = []
-#     D2 = []
-#    
-#     for n,(a,b) in enumerate(zip(R1e,R2e)):
-#        
-#         D2.append(b)
-#         for d2 in D2:
-#             yield d2*a
-#        
-#         D1.append(a)
-#        
-#         yield a*b
-
-
-def real_prod_nat(R,n,B=10):
-    """
-    Product of an iterable that represent a real numbers in base B by a positive natural in base B
-    """
-    
-    D = []
-    
-    for a in R:
-        q,r = divmod(a*n,B)
-        
-        if q == 0:
-            while len(D) > 0:
-                yield D.pop(0)
-        
-        else:
-            D[-1] += q
-        
-        D.append(r)
-
-
-def real_div_nat(R,n,B=10):
-    """
-    Quotient of an iterable that represent a real numbers in base B by a positive natural in base B
-    """
-    
-    r = 0
-    
-    for a in R:
-        r = (r*B)+a
-        q,r = divmod(r,n)
-        
-        yield q
-
-
-
 
 
 # This is a spigot algorithm for pi
@@ -198,9 +93,6 @@ def root_digits(n,a,B=10):
         r,y = r1,y1
         
         yield x
-        
-        if r == 0:
-            break
 
 
 # Not sure why this doesn't work in other bases
