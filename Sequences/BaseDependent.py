@@ -179,9 +179,9 @@ def palindrome(B):
                 yield m
 
 
-def fraction_periods(B):
+def fraction_period(B):
     """
-    Repeating period of each unit fraction in base B
+    Repeating period of each unit fraction in base B\n
     OEIS A007732
     """
     
@@ -239,5 +239,5 @@ if __name__ == '__main__':
                 "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
     
     print("\nRepeating Unit Fraction Length (Base 10)")
-    simple_test(fraction_periods(10),17,
+    simple_test(fraction_period(10),17,
                 "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")

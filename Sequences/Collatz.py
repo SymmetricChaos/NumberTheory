@@ -19,7 +19,6 @@ def _reduced_collatz_step(n):
 def collatz_sequence(n):
     """
     Collatz Sequence of n: Iteratively apply the Collatz function to n
-    OEIS 
     """
     
     require_integers(["n"],[n])
@@ -35,7 +34,6 @@ def collatz_sequence(n):
 def reduced_collatz_sequence(n):
     """
     Reduced Collatz Sequence of n: Iteratively apply the Collatz function to n but with an addition division by 2 for odd numbers
-    OEIS 
     """
     
     require_integers(["n"],[n])
@@ -50,7 +48,7 @@ def reduced_collatz_sequence(n):
 
 def collatz_map():
     """
-    Map of the Collatz Function
+    Map of the Collatz Function\n
     OEIS A006370
     """
     
@@ -60,7 +58,7 @@ def collatz_map():
 
 def reduced_collatz_map():
     """
-    Map of the Collatz Function
+    Map of the Collatz Function\n
     OEIS A014682
     """
     
@@ -70,7 +68,7 @@ def reduced_collatz_map():
 
 def collatz_all():
     """
-    All Collatz Sequences: Concatenation of the non-repeating part of each Collatz sequence
+    All Collatz Sequences: Concatenation of the non-repeating part of each Collatz sequence\n
     OEIS A070165
     """
     
@@ -85,7 +83,7 @@ def collatz_all():
 # increase
 def collatz_length():
     """
-    Collatz Sequence Lengths: Steps until the Collatz function equals 1 for each positive natural
+    Collatz Sequence Lengths: Steps until the Collatz function equals 1 for each positive natural\n
     OEIS A006577, A008908
     """
     
@@ -117,7 +115,7 @@ def collatz_length():
 
 def collatz_longest():
     """
-    Greatest Collatz Lenth: Positive integers that set a record for length of their Collatz sequence
+    Greatest Collatz Lenth: Positive integers that set a record for length of their Collatz sequence\n
     OEIS A006877
     """
     
@@ -141,8 +139,8 @@ def collatz_longest():
 
 def collatz_highpoint():
     """
-    High Point of each Collatz Sequence: Greatest value found in each Collatz sequence
-    OEIS 
+    High Point of each Collatz Sequence: Greatest value found in each Collatz sequence\n
+    OEIS A025586
     """
     
     D = {1 : 1}
@@ -165,7 +163,7 @@ def collatz_highpoint():
 
 def collatz_highwater():
     """
-    High-Water Mark of the Collatz Sequences: Record values for the high points of Collatz sequences
+    High-Water Mark of the Collatz Sequences: Record values for the high points of Collatz sequences\n
     OEIS A006885
     """
     

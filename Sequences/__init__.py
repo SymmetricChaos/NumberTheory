@@ -21,18 +21,20 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              self_powers, harmonic_numerators, harmonic_denominators, \
                              gen_harmonic_numerators, gen_harmonic_denominators
 
-from Sequences.Primes import primes, primorials, smooth, rough, highly_composite, \
+from Sequences.Primes import primes, primorial, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
-                             coprime_characteristic
+                             coprime_characteristic, cototients
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
                                  odd_double_factorials
 
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
-                              abundance, deficiency
+                              abundance, deficiency, untouchable, pseudoperfect, \
+                              weird, highly_abundant, superabundant, amicable_pairs, \
+                              practical
 
 from Sequences.Combinatorics import catalan, derangements, pascal, partition, \
                                     eulerian, bell, gould
@@ -45,13 +47,13 @@ from Sequences.Pseudorandom import LCG, LFG, LFSR
 
 from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
                               collatz_map, collatz_all, collatz_highpoint, \
-                              collatz_highwater
+                              collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
 from Sequences.Weird import recaman
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
-                                    digital_roots
+                                    digital_roots, fraction_period, palindrome
 
 from Sequences.Constant import pi_digits
 
@@ -77,10 +79,10 @@ __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "harmonic_numerators", "harmonic_denominators",
          "gen_harmonic_numerators", "gen_harmonic_denominators",
          
-         "primes","primorials","smooth","rough","highly_composite", "divisors",
+         "primes","primorial","smooth","rough","highly_composite", "divisors",
          "squarefree","squarefree_kernel","pythagorean_primes",
          "prime_counting","prime_divisors","unique_prime_divisors",
-         "composites","totients","compositorial","hamming",
+         "composites","totients","compositorial","hamming","cototients",
          "prime_characteristic","coprime_characteristic",
          
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -88,7 +90,8 @@ __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "odd_double_factorials",
          
          "aliquot","abundant","deficient","perfect","aliquot_recurrence",
-         "abundance","deficiency",
+         "abundance","deficiency","untouchable","pseudoperfect","weird",
+         "highly_abundant","superabundant","amicable_pairs","practical",
          
          "catalan","derangements","pascal","partition","eulerian","bell",
          "gould",
@@ -101,11 +104,13 @@ __all__=["sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          
          "collatz_length","collatz_longest","collatz_sequence",
          "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
+         "reduced_collatz_sequence","reduced_collatz_map",
          
          "recaman",
          
          "evil","odious","binary_weight","co_binary_weight","ruler",
          "binary_length","base_length","digital_sums","digital_roots",
+         "palindrome","fraction_period",
          
          "pi_digits"
         ]

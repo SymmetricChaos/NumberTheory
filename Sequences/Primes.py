@@ -47,7 +47,7 @@ def composites():
             del D[q]
 
 
-def primorials():
+def primorial():
     """
     Primoral Numbers: Cumulative product of primes\n
     OEIS A002110
@@ -344,6 +344,25 @@ def totients():
         q += 1
 
 
+def cototients():
+    """
+    Cotients: Count of positive integers not coprime to each positive integer\n
+    OEIS A051953
+    """
+    
+    for n,t in enumerate(totients(),1):
+        yield n-t
+
+
+# def nontotient():
+
+
+# def noncototient():
+
+
+# def sparsely_totient():
+
+
 def coprime_characteristic():
     """
     Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not\n
@@ -437,7 +456,7 @@ if __name__ == '__main__':
                 "4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25")
     
     print("\nPrimorials")
-    simple_test(primorials(),9,
+    simple_test(primorial(),9,
                 "1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690")
     
     print("\nCompositorial")
@@ -448,7 +467,14 @@ if __name__ == '__main__':
     simple_test(prime_powers(),16,
                 "1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27")
     
-    prime_powers
+    print("\nTotient Numbers")
+    simple_test(totients(),17,
+                "1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16")
+    
+    print("\nCototient Numbers")
+    simple_test(cototients(),18,
+                "0, 1, 1, 2, 1, 4, 1, 4, 3, 6, 1, 8, 1, 8, 7, 8, 1, 12")
+    
     print("\nPythagorean Primes")
     simple_test(pythagorean_primes(),13,
                 "5, 13, 17, 29, 37, 41, 53, 61, 73, 89, 97, 101, 109")
