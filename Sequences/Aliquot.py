@@ -57,7 +57,7 @@ def primitive_abundant_1():
     A = set([])
     
     for n in naturals(1):
-        if n >= next_p:
+        if n == next_p:
             A.add(next_p)
             next_p = next(P)
         

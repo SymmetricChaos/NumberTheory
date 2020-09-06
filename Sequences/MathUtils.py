@@ -1,5 +1,5 @@
 from math import isqrt
-from itertools import chain, combinations, repeat
+from itertools import chain, combinations, repeat, count
 
 
 
@@ -25,7 +25,6 @@ def factors(n):
             S.add(f)
     
     return S
-
 
 
 def proper_divisors(n):
@@ -104,6 +103,33 @@ def prime_factorization(n):
     return L
 
 
+def prime_power_factorization(n):
+    """Factor a number into powers of primes"""
+    L = []
+    
+    p = 1
+    
+    while n % 2 == 0:
+        p *= 2
+        n //= 2
+    
+    L.append(p)
+    
+    for d in count(3,2):
+        p = 1
+        while n % d == 0:
+            p *= d
+            n //= d
+        
+        if p != 1:
+            L.append(p)
+        
+        if n == 1:
+            break
+    
+    return L
+
+
 def sum_of_divisors(n,p=1):
     """
     Sum of the divisors of n, including itself, raised to the specified power
@@ -145,6 +171,8 @@ def aliquot_sum(n,p=1):
 def real_sum(R1,R2,B=10):
     """
     Sum of two iterables that represent real numbers in base B
+    If the numbers do not have the decimal in the same place prepend 0s as needed
+    Does not guarantee it will produce the canonical representation
     """
     
     # Extend with zeros if finite
@@ -169,6 +197,8 @@ def real_sum(R1,R2,B=10):
 def real_diff(R1,R2,B=10):
     """
     Difference of two iterables that represent real numbers in base B
+    If the numbers do not have the decimal in the same place prepend 0s as needed
+    Does not guarantee it will produce the canonical representation
     """
     
     # Extend with zeros if finite
@@ -331,7 +361,6 @@ def frac_to_digits(n,d,B=10):
 ## GENERAL STUFF ##
 ###################
 
-
 def repeating_part(n,d,B=10):
     """
     Repeating part of the fraction n/d in base B
@@ -397,6 +426,9 @@ if __name__ == '__main__':
     
     print("\nPrime Factorization of 378")
     print(prime_factorization(378))
+    
+    print("\nPrime Power Factorization of 378")
+    print(prime_power_factorization(378))
     
     print("\nFirst 18 digits of 92/7 ≈ 13.1428 to digits")
     F = frac_to_digits(92,7)

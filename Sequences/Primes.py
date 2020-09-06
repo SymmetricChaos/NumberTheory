@@ -363,6 +363,13 @@ def cototients():
 # def sparsely_totient():
 
 
+# def charmichael():
+#     """
+#     Charmichael Function: Smallest 
+#     OEIS A002322
+#     """
+
+
 def coprime_characteristic():
     """
     Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not\n
