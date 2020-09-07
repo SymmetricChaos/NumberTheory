@@ -1,4 +1,4 @@
-from Sequences.Simple import naturals, integers, arithmetic
+from Sequences.Simple import naturals, integers, arithmetic, sign_sequence
 from math import floor, log2, comb
 from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive, \
@@ -237,6 +237,17 @@ def squared_triangular():
     return sequence_apply(triangular(),lambda x: x*x)
 
 
+def triangles_in_triangle():
+    """
+    Number of triangles described by the internal and external edges of a triangle made of identical triangles\n
+    OEIS A002717
+    """
+    
+    for n,s in enumerate(sign_sequence(1),0):
+        n2 = n*n
+        n3 = n2*n
+        
+        yield (4*n3 + 10*n2 + 4*n + -1 + s)//16
 
 
 
@@ -372,4 +383,8 @@ if __name__ == '__main__':
     print("\nSquared Triangular Numbers")
     simple_test(squared_triangular(),11,
                 "0, 1, 9, 36, 100, 225, 441, 784, 1296, 2025, 3025")
+    
+    print("\nSolutions to the Matchstick Triangle Puzzle")
+    simple_test(triangles_in_triangle(),13,
+                "0, 1, 5, 13, 27, 48, 78, 118, 170, 235, 315, 411, 525")
     

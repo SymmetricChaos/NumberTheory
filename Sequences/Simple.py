@@ -1,5 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
-from itertools import count, repeat
+from itertools import count, repeat, cycle
 from math import gcd
 
 def constant(n):
@@ -224,6 +224,16 @@ def gen_harmonic_denominators(m):
         n0, d0 = n,d
 
 
+def sign_sequence(n):
+    """
+    Sequence of +n and -n repeated forever
+    OEIS A033999
+    """
+    
+    require_integers(["n"],[n])
+    
+    return cycle([n,-n])
+
 
 
 
@@ -419,3 +429,9 @@ if __name__ == '__main__':
     print("\nSelf Powers")
     simple_test(self_powers(), 9,
                 "1, 1, 4, 27, 256, 3125, 46656, 823543, 16777216")
+    
+    print("\nThe (1,-1) Sign Sequence")
+    simple_test(sign_sequence(1), 16,
+                "1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1")
+    
+    
