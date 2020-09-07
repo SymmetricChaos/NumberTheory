@@ -227,7 +227,7 @@ def gen_harmonic_denominators(m):
 
 
 
-### Wrappers for common cases ###
+### Wrappers or more efficient versions of common cases ###
 def naturals(offset=0):
     """
     Natural Numbers: Nonnegative whole numbers, special case of arithmetic
@@ -282,7 +282,8 @@ def powers(n):
 
 def self_powers():
     """
-    Self Powers: Each non-negative integer raised to the power of itself
+    Self Powers: Each non-negative integer raised to the power of itself\n
+    OEIS A000312
     """
     
     for n in naturals():

@@ -77,7 +77,7 @@ def simplicial(N=1):
 
 def perfect_powers():
     """
-    Perfect Powers: Non-negative integers that can be written as a perfect power
+    Perfect Powers: Non-negative integers that can be written as a perfect power\n
     OEIS A001597 (when offset by 1)
     """
     
@@ -180,16 +180,55 @@ def oblong():
 def rectangular(d):
     """
     Rectangular Numbers: Generalization of Pronic Numbers
+    OEIS A005563, A028552, A028347, A028557, A028560, A028563, A028566,
+         A028569, A098603, A119412, A132759, A098847-A098850, A120071,
+         A132760-A132773
     """
     
-    for n in naturals():
-        yield n*(n+d)
+    S = 0
+    
+    for a in arithmetic(d+1,2):
+        yield S
+        
+        S += a
+
+
+def square_triangular():
+    """
+    Square-Triangular Numbers: Positive integers that are both square and triangular
+    OEIS A001110
+    """
+    
+    a,b = 0,1
+    
+    while True:
+        yield b
+        
+        a,b = b,34*b-a+2
+
+
+def square_pyramidal():
+    """
+    Square Pyramidal Numbers: Positive integers that take the shape of a square based pyramid
+    OEIS A000330
+    """
+    
+    SQ = square()
+    next(SQ)
+    next(SQ)
+    
+    S = 1
+    
+    for s in SQ:
+        yield S
+        S += s
+
 
 
 ### More efficient calculation for common polygonal numbers ###
 def triangular():
     """
-    Triangular Numbers
+    Triangular Numbers\n
     OEIS: A000217
     """
     
@@ -202,7 +241,7 @@ def triangular():
 
 def square():
     """
-    Square Numbers
+    Square Numbers\n
     OEIS A000290
     """
     
@@ -215,7 +254,7 @@ def square():
 
 def cubic():
     """
-    Cubic Numbers
+    Cubic Numbers\n
     OEIS A000578
     """
     
@@ -225,7 +264,7 @@ def cubic():
 
 def pentagonal():
     """
-    Pentagonal Numbers
+    Pentagonal Numbers\n
     OEIS A000326
     """
     
@@ -235,7 +274,7 @@ def pentagonal():
 
 def gen_pentagonal():
     """
-    Generalized Pentagonal Numbers
+    Generalized Pentagonal Numbers\n
     OEIS A001318
     """
     
@@ -254,16 +293,16 @@ if __name__ == '__main__':
                 "0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91")
     
     print("\nSquare Numbers")
-    simple_test(square(),14,
-                "0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169")
+    simple_test(square(),13,
+                "0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144")
     
     print("\nPentagonal Numbers")
     simple_test(pentagonal(),13,
                 "0, 1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210")
     
     print("\nGeneralized Pentagonal Numbers")
-    simple_test(gen_pentagonal(),15,
-                "0, 1, 2, 5, 7, 12, 15, 22, 26, 35, 40, 51, 57, 70, 77")
+    simple_test(gen_pentagonal(),14,
+                "0, 1, 2, 5, 7, 12, 15, 22, 26, 35, 40, 51, 57, 70")
     
     print("\nHexagonal Numbers")
     simple_test(polygonal(6),13,
@@ -274,16 +313,16 @@ if __name__ == '__main__':
                 "0, 1, 5, 8, 16, 21, 33, 40, 56, 65, 85, 96, 120, 133")
     
     print("\nCentered Triangular Numbers")
-    simple_test(cen_polygonal(3),13,
-                "1, 4, 10, 19, 31, 46, 64, 85, 109, 136, 166, 199, 235")
+    simple_test(cen_polygonal(3),12,
+                "1, 4, 10, 19, 31, 46, 64, 85, 109, 136, 166, 199")
     
     print("\nTetrahedral Numbers")
     simple_test(simplicial(3),13,
                 "0, 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286, 364")
     
     print("\nPerfect Powers")
-    simple_test(perfect_powers(),15,
-                "0, 1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 64, 81, 100")
+    simple_test(perfect_powers(),14,
+                "0, 1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 64, 81")
     
     print("\nDoubly Pentagonal Numbers")
     simple_test(doubly_polygonal(5),10,
@@ -294,14 +333,23 @@ if __name__ == '__main__':
                 "0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331")
     
     print("\n4th Powers")
-    simple_test(hypercube(4),11,
-                "0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561, 10000")
+    simple_test(hypercube(4),10,
+                "0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561")
     
     print("\nPronic Numbers")
     simple_test(oblong(),13,
                 "0, 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156")
     
     print("\nRectangular Numbers d=2")
-    simple_test(rectangular(2),13,
+    simple_test(rectangular(32),13,
                 "0, 3, 8, 15, 24, 35, 48, 63, 80, 99, 120, 143, 168")
+    
+    print("\nSquare-Triangular Numbers")
+    simple_test(square_triangular(),7,
+                "1, 36, 1225, 41616, 1413721, 48024900, 1631432881")
+    
+    print("\nSquare Pyramidal Numbers")
+    simple_test(square_pyramidal(),12,
+                "1, 5, 14, 30, 55, 91, 140, 204, 285, 385, 506, 650")
+    
     

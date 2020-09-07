@@ -354,7 +354,10 @@ def cototients():
         yield n-t
 
 
-# def nontotient():
+# def nontotients():
+
+
+# def even_nontotients():
 
 
 # def noncototient():

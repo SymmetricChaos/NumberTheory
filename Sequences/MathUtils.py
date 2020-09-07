@@ -2,7 +2,6 @@ from math import isqrt
 from itertools import chain, combinations, repeat, count
 
 
-
 ###################
 ## FACTORIZATION ##
 ###################
@@ -88,25 +87,22 @@ def prime_factorization(n):
         L.append(2)
         n //= 2
     
-    d = 3
-    
-    while n != 1:
+    for d in count(3,2):
+        
         while n % d == 0:
             L.append(d)
             n //= d
         
-        d += 2
-    
-    if n != 1:
-        L.append(n)
+        if n == 1:
+            break
     
     return L
 
 
 def prime_power_factorization(n):
     """Factor a number into powers of primes"""
-    L = []
     
+    L = []
     p = 1
     
     while n % 2 == 0:
@@ -117,6 +113,7 @@ def prime_power_factorization(n):
     
     for d in count(3,2):
         p = 1
+        
         while n % d == 0:
             p *= d
             n //= d
@@ -251,18 +248,6 @@ def real_div_nat(R,n,B=10):
         q,r = divmod(r,n)
         
         yield q
-
-
-# def real_prod(R1,R2,B):
-#     """
-#     Product of two iterables that represent real numbers in base B
-#     """
-
-
-# def real_div(R1,R2,B):
-#     """
-#     Product of two iterables that represent real numbers in base B
-#     """
 
 
 
@@ -407,8 +392,7 @@ def first_where(L,val):
 
 
 def powerset(L):
-    L = list(L)
-    return chain.from_iterable(combinations(L, r) for r in range(len(L)+1))
+    return chain.from_iterable(combinations(list(L), r) for r in range(len(L)+1))
 
 
 
