@@ -1,10 +1,11 @@
 from Sequences.Simple import naturals, integers, arithmetic
 from math import floor, log2, comb
 from Sequences.Primes import primes
-from Sequences.NiceErrorChecking import require_integers, require_positive, require_nonnegative
+from Sequences.NiceErrorChecking import require_integers, require_positive, \
+                                        require_nonnegative, require_geq
+from Sequences.SequenceManipulation import offset, sequence_apply
 
-
-def polygonal(S=1):
+def polygonal(S=2):
     """
     Polygonal Numbers: Numbers that form a polygon with S sides in the usual way
     
@@ -15,13 +16,13 @@ def polygonal(S=1):
     """
     
     require_integers(["S"],[S])
-    require_positive(["S"],[S])
+    require_geq(["S"],[S],2)
     
     for n in naturals():
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
 
-def gen_polygonal(S=1):
+def gen_polygonal(S=2):
     """
     Generalized Polygonal Numbers: Generalization of polygonal number formula to integers
     
@@ -32,13 +33,13 @@ def gen_polygonal(S=1):
     """
     
     require_integers(["S"],[S])
-    require_positive(["S"],[S])
+    require_geq(["S"],[S],2)
     
     for n in integers():
         yield ( n**2*(S-2)-n*(S-4) ) // 2
 
 
-def cen_polygonal(S=1):
+def cen_polygonal(S=2):
     """
     Centered Polygonal Numbers: Numbers that form a polygon with S sides that is centered on an object
     
@@ -49,7 +50,7 @@ def cen_polygonal(S=1):
     """
     
     require_integers(["S"],[S])
-    require_positive(["S"],[S])
+    require_geq(["S"],[S],2)
     
     for n in naturals(1):
         yield (S*(n*n-n)) // 2 +1
@@ -106,7 +107,7 @@ def perfect_powers():
                 break
 
 
-def doubly_polygonal(S=1):
+def doubly_polygonal(S=2):
     """
     Doubly Polygonal Numbers: Polygonal numbers that 
     
@@ -117,7 +118,7 @@ def doubly_polygonal(S=1):
     """
     
     require_integers(["S"],[S])
-    require_positive(["S"],[S])
+    require_geq(["S"],[S],2)
     
     cur = 0
     P = polygonal(S)
@@ -169,23 +170,30 @@ def gen_hypercube(e=0):
 
 def oblong():
     """
-    Pronic Numbers: Sums of consecutive non-negative integers
+    Pronic Numbers: Sums of consecutive non-negative integers\n
     OEIS A002378
     """
     
-    for n in naturals():
-        yield n*(n+1)
+    S = 0
+    
+    for a in arithmetic(2,2):
+        yield S
+        
+        S += a
 
 
 def rectangular(d):
     """
-    Rectangular Numbers: Generalization of Pronic Numbers
+    Rectangular Numbers: Generalization of Pronic Numbers\n
     OEIS A005563, A028552, A028347, A028557, A028560, A028563, A028566,
          A028569, A098603, A119412, A132759, A098847-A098850, A120071,
          A132760-A132773
     """
     
     S = 0
+    
+    require_integers(["d"],[d])
+    require_positive(["d"],[d])
     
     for a in arithmetic(d+1,2):
         yield S
@@ -195,7 +203,7 @@ def rectangular(d):
 
 def square_triangular():
     """
-    Square-Triangular Numbers: Positive integers that are both square and triangular
+    Square-Triangular Numbers: Positive integers that are both square and triangular\n
     OEIS A001110
     """
     
@@ -209,19 +217,28 @@ def square_triangular():
 
 def square_pyramidal():
     """
-    Square Pyramidal Numbers: Positive integers that take the shape of a square based pyramid
+    Square Pyramidal Numbers: Positive integers that take the shape of a square based pyramid\n
     OEIS A000330
     """
     
-    SQ = square()
-    next(SQ)
-    next(SQ)
-    
     S = 1
     
-    for s in SQ:
+    for s in offset(square(),2):
         yield S
         S += s
+
+
+def squared_triangular():
+    """
+    Squared Triangular Numbers: Square of each triangular number\n
+    OEIS A000537
+    """
+    
+    return sequence_apply(triangular(),lambda x: x*x)
+
+
+
+
 
 
 
@@ -352,4 +369,7 @@ if __name__ == '__main__':
     simple_test(square_pyramidal(),12,
                 "1, 5, 14, 30, 55, 91, 140, 204, 285, 385, 506, 650")
     
+    print("\nSquared Triangular Numbers")
+    simple_test(squared_triangular(),11,
+                "0, 1, 9, 36, 100, 225, 441, 784, 1296, 2025, 3025")
     

@@ -8,9 +8,9 @@ from time import time
 
 ## Transform a sequence into another sequence ##
 def sequence_slice(sequence, offset, num_vals, step):
-    """Yields sequence but skipping n terms each time, starts with first element"""
+    """Yields sequence starting with offset until num_vals are returned skipping step each time"""
     
-    islice(sequence, offset, num_vals,step+1)
+    return islice(sequence, offset, num_vals,step+1)
 
 
 def segment(sequence,offset=0,num_vals=None):
