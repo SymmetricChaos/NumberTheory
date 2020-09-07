@@ -341,7 +341,7 @@ if __name__ == '__main__':
                 "0, 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156")
     
     print("\nRectangular Numbers d=2")
-    simple_test(rectangular(32),13,
+    simple_test(rectangular(2),13,
                 "0, 3, 8, 15, 24, 35, 48, 63, 80, 99, 120, 143, 168")
     
     print("\nSquare-Triangular Numbers")
