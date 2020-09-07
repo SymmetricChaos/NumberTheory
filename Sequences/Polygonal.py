@@ -134,7 +134,7 @@ def doubly_polygonal(S=2):
         cur = s
 
 
-def hypercube(e=0):
+def hypercube(e):
     """
     Hypercube Numbers: Each non-negative integer raised to the power of e
     

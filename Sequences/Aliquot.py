@@ -193,7 +193,7 @@ def pseudoperfect():
 def weird():
     """
     Weird Numbers: Positive integers that are abundant but not pseudoperfect\n
-    OEIS 
+    OEIS A006037
     """
     
     def _is_pseudoperfect(n):
@@ -211,7 +211,7 @@ def weird():
 def amicable_pairs():
     """
     Amicable Pairs:\n
-    OEIS
+    OEIS A063990
     """
     
     lower = set([])
@@ -231,7 +231,7 @@ def amicable_pairs():
 def practical():
     """
     Practical Numbers: Positive integers with factors that can be summed to any smaller positive integer\n
-    OEIS
+    OEIS A005153
     """
     
     def srinivasan_ineq(a):
