@@ -172,6 +172,16 @@ def partial_prods(sequence,S=None):
     
     return accumulate(sequence,operator.mul,initial=S)
 
+def differences(sequence):
+    """Differences of the given sequence"""
+    
+    a, b = next(sequence), next(sequence)
+    
+    while True:
+        yield b-a
+        
+        a,b = b,next(sequence)
+
 
 
 

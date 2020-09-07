@@ -11,7 +11,7 @@ binom_trans1 = binomial_transform(constant(1))
 binom_trans2 = binomial_transform(powers(2),invert=True)
 A001629 = convolution(fibonacci(),fibonacci())
 sum_fib_nat = pairwise_sum(naturals(),fibonacci())
-
+fib_diffs = differences(fibonacci())
 
 print("A142150")
 simple_test(A142150,10,"0, 0, 1, 0, 2, 0, 3, 0, 4, 0")
@@ -36,3 +36,7 @@ simple_test(A001629,10,"0, 0, 1, 2, 5, 10, 20, 38, 71, 130")
 
 print("\nPairwise Sum of the Fibonacci Sequence and the Natural Numbers")
 simple_test(sum_fib_nat,10,"0, 2, 3, 5, 7, 10, 14, 20, 29, 43")
+
+print("\nFirst Differences of the Fibonacci Sequence")
+simple_test(fib_diffs,10,"1, 0, 1, 1, 2, 3, 5, 8, 13, 21")
+
