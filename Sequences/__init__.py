@@ -54,7 +54,7 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Weird import recaman, nonadditive
+from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
@@ -130,7 +130,7 @@ __all__=[#MANIPS
          "reduced_collatz_sequence","reduced_collatz_map",
          
          #WEIRD
-         "recaman","nonadditive",
+         "recaman","nonadditive","hofstader","co_hofstader",
          
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",

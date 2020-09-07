@@ -1,5 +1,6 @@
 from Sequences.Simple import naturals, arithmetic
 from math import gcd
+from Sequences.SequenceManipulation import offset
 
 def recaman():
     """
@@ -91,6 +92,40 @@ def nonadditive():
         yield a
 
 
+def hofstader():
+    
+    diff = 2
+    n = 1
+    L = set([1])
+    
+    while True:
+        yield n
+        
+        n += diff
+        diff += 1
+        L.add(n)
+        
+        if diff in L:
+            diff += 1
+
+
+def co_hofstader():
+    
+    diff = 2
+    n = 1
+    L = set([1])
+    
+    while True:
+        yield diff
+        
+        n += diff
+        diff += 1
+        L.add(n)
+        
+        if diff in L:
+            diff += 1
+
+
 
 
 
@@ -116,4 +151,12 @@ if __name__ == '__main__':
     print("\nNonadditive")
     simple_test(nonadditive(),15,
                 "1, 2, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40")
+    
+    print("\nHofstader")
+    simple_test(hofstader(),14,
+                "1, 3, 7, 12, 18, 26, 35, 45, 56, 69, 83, 98, 114, 131")
+    
+    print("\nCo-Hofstader")
+    simple_test(co_hofstader(),15,
+                "2, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20")
     
