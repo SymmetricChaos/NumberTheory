@@ -39,7 +39,8 @@ from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_rec
 
 from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
                                     eulerian, bell, gould, even_permutation, \
-                                    lazy_caterer, cake, multiplicative_partition
+                                    lazy_caterer, cake, multiplicative_partition, \
+                                    central_binomial
 
 from Sequences.ContinuedFractions import cfrac, cfrac_convergents, sqrt_cfrac, \
                                          e_cfrac
@@ -54,7 +55,7 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader
+from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
@@ -110,7 +111,7 @@ __all__=[#MANIPS
          #COMBINATORIC
          "catalan","derangement","pascal","partition","eulerian","bell",
          "gould","recontres","even_permutation","lazy_caterer","cake",
-         "multiplicative_partition",
+         "multiplicative_partition","central_binomial",
          
          #CONTINUED FRACTIONS
          "cfrac","cfrac_convergents","sqrt_cfrac","e_cfrac",
@@ -130,7 +131,7 @@ __all__=[#MANIPS
          "reduced_collatz_sequence","reduced_collatz_map",
          
          #WEIRD
-         "recaman","nonadditive","hofstader","co_hofstader",
+         "recaman","nonadditive","hofstader","co_hofstader","even_odd",
          
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",

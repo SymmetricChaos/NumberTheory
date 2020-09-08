@@ -18,6 +18,7 @@ def derangement():
     for n in naturals(1):
         d = n * (S[0]+S[1])
         S[0], S[1] = S[1], d
+        
         yield d
 
 
@@ -45,9 +46,7 @@ def catalan():
     """
     C = 1
     
-    yield 1
-    
-    for n in naturals(1):
+    for n in naturals():
         yield C
         C = C*(4*n+2)//(n+2)
 
@@ -66,10 +65,12 @@ def pascal():
     
     while True:
         T = [0]
+        
         for i in range(len(L)-1):
             x = L[i]+L[i+1]
             T.append(x)
             yield x
+        
         T.append(0)
         L = T
 
@@ -77,7 +78,7 @@ def pascal():
 # Find a more efficient way to do this
 def central_binomial():
     """
-    Central Binomial Coefficients: 
+    Central Binomial Coefficients: Middle term of the odd rows of Pascal's Triangle
     OEIS A000984
     """
     
@@ -117,10 +118,12 @@ def eulerian():
     
     for a in naturals(1):
         T = []
+        
         for b in range(a):
             x = (a-b)*L[b-1] + (b+1)*L[b]
             T.append(x)
             yield x
+        
         T.append(0)
         L = T
 
