@@ -1,6 +1,7 @@
 from Sequences.MathUtils import nontrivial_factors
 from Sequences.Polygonal import gen_pentagonal
 from Sequences.Simple import naturals
+from math import comb
 
 
 def derangement():
@@ -71,6 +72,17 @@ def pascal():
             yield x
         T.append(0)
         L = T
+
+
+# Find a more efficient way to do this
+def central_binomial():
+    """
+    Central Binomial Coefficients: 
+    OEIS A000984
+    """
+    
+    for n in naturals():
+        yield comb(2*n,n)
 
 
 def gould():
@@ -249,6 +261,10 @@ if __name__ == '__main__':
     print("\nPascal's Triangle by Rows")
     simple_test(pascal(),18,
                 "1, 1, 1, 1, 2, 1, 1, 3, 3, 1, 1, 4, 6, 4, 1, 1, 5, 10")
+    
+    print("\nCentral Binomial Coefficients")
+    simple_test(central_binomial(),11,
+                "1, 2, 6, 20, 70, 252, 924, 3432, 12870, 48620, 184756")
     
     print("\nGould's Sequence")
     simple_test(gould(),18,

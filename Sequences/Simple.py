@@ -34,6 +34,8 @@ def arithmetic(a,n):
     Args:
         a -- starting value
         n -- common difference
+    
+    OEIS
     """
     
     require_integers(["a","n"],[a,n])
@@ -49,6 +51,8 @@ def geometric(a,n):
     Args:
         a -- starting values
         n -- common ratio
+    
+    OEIS
     """
     
     require_integers(["a","n"],[a,n])
@@ -70,6 +74,8 @@ def arithmetrico_geometric(a,n,b,m):
         n -- common difference for arithmetic sequence
         b -- starting value for geometric sequence
         m -- common ratio for geometric sequence
+    
+    OEIS
     """
     
     require_integers(["a","n","b","m"],[a,n,b,m])
@@ -84,6 +90,8 @@ def polynomial(coef):
     
     Args:
         coef -- coefficients of the polynomial is ascending order, all integers
+    
+    OEIS
     """
     
     for c in coef:
@@ -151,7 +159,7 @@ def harmonic_numerators():
 
 def harmonic_denominators():
     """
-    Denominators of the harmonic series
+    Denominators of the harmonic series\n
     OEIS A002805
     """
     
@@ -174,6 +182,8 @@ def gen_harmonic_numerators(m):
     
     Args:
         m -- exponent for the numerators of the terms
+    
+    OEIS
     """
     
     require_integers(["m"],[m])
@@ -202,6 +212,8 @@ def gen_harmonic_denominators(m):
     
     Args:
         m -- exponent for the numerators of the terms
+    
+    OEIS
     """
     
     require_integers(["m"],[m])
@@ -226,7 +238,7 @@ def gen_harmonic_denominators(m):
 
 def sign_sequence(n):
     """
-    Sequence of +n and -n repeated forever
+    Sequence of +n and -n repeated forever\n
     OEIS A033999
     """
     
@@ -433,5 +445,4 @@ if __name__ == '__main__':
     print("\nThe (1,-1) Sign Sequence")
     simple_test(sign_sequence(1), 16,
                 "1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1")
-    
     

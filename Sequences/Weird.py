@@ -92,6 +92,24 @@ def nonadditive():
         yield a
 
 
+# def nongeometric():
+#     """
+#     Greedy sequence avoiding any three term geometric subsequence
+#     OEIS A000452
+#     """
+#    
+#     yield 1
+#    
+#     L = []
+#    
+#     third = set([])
+#    
+#     for n in naturals(2):
+#         if n not in third:
+#             yield n
+#             DO STUFF
+
+
 def hofstader():
     
     diff = 2

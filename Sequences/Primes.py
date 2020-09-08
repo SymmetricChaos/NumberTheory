@@ -141,10 +141,10 @@ def rough(B):
     """
     Rough Numbers: Positive integers with no prime factors less than B
     
-    OEIS A000027, A005408, A007310, A007775, A008364, A008365, A008366, A166061, A166063
-    
     Args:
         B -- smallest prime factor allowed
+    
+    OEIS A000027, A005408, A007310, A007775, A008364, A008365, A008366, A166061, A166063
     """
     
     require_integers(["B"],[B])
