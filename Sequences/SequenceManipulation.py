@@ -252,6 +252,6 @@ def make_triangle(sequence):
     6 7 8 9
     """
     
-    for n in count():
+    for n in count(1):
         L = [next(sequence) for c in range(n)]
         yield L

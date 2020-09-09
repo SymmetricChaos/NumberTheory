@@ -138,12 +138,9 @@ def deficient():
     OEIS A005100
     """
     
-    ctr = 1
-    
-    while True:
-        if aliquot_sum(ctr) < ctr:
-            yield ctr
-        ctr += 1
+    for n in naturals(1):
+        if aliquot_sum(n) < n:
+            yield n
 
 
 def deficiency():
@@ -307,8 +304,8 @@ if __name__ == '__main__':
                 "6, 12, 18, 20, 24, 28, 30, 36, 40, 42, 48, 54, 56, 60")
     
     print("\nWeird Numbers (infinite but very laborious to compute)")
-    simple_test(weird(),2,
-                "70, 836")
+    simple_test(weird(),1,
+                "70")
     
     print("\nAmicable Pairs")
     simple_test(amicable_pairs(),9,

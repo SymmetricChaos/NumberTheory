@@ -1,7 +1,6 @@
-from Sequences.NiceErrorChecking import require_integers, require_nonnegative, require_leq, require_geq
-from itertools import count, repeat, cycle
+from Sequences.NiceErrorChecking import require_integers, require_nonnegative, require_geq
+from itertools import count, repeat
 from math import gcd
-from MathUtils import digits_to_int
 
 def constant(n):
     """
@@ -243,7 +242,9 @@ def sign_sequence(n):
     
     require_integers(["n"],[n])
     
-    return cycle([n,-n])
+    while True:
+        yield n
+        yield -n
 
 
 def repdigit(n,B=10):
@@ -471,6 +472,6 @@ if __name__ == '__main__':
     simple_test(repdigit(1), 8,
                 "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
     
-    print("\nThe Reptwo Sequence in Base 3")
+    print("\nThe Rep-two Sequence in Base 3")
     simple_test(repdigit(2,3), 10,
                 "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")

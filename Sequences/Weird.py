@@ -1,8 +1,6 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
 from math import gcd
-from Sequences.SequenceManipulation import offset
-from Sequences.Polygonal import triangular
-from Sequences.MathUtils import int_to_digits, antidiagonal_pairs
+
 
 def recaman():
     """

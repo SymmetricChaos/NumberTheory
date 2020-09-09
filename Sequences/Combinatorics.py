@@ -107,7 +107,6 @@ def gould():
 # As with Pascal's triangle I found this memoized version to be vastly faster
 # than directly calculating the values, which involved both binomial
 # coefficients and exponentiation
-
 def eulerian():
     """
     Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases\n

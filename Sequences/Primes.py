@@ -237,11 +237,10 @@ def unique_prime_divisors():
     """
     
     D = defaultdict(list)
-    q = 2
     
     yield 0
     
-    while True:
+    for q in naturals(2):
         if q not in D:
             yield 1
             D[q + q] = [q]
@@ -253,8 +252,6 @@ def unique_prime_divisors():
                 D[p+q].append(p)
             
             del D[q]
-        
-        q += 1
 
 
 def squarefree():
@@ -280,11 +277,10 @@ def squarefree_kernel():
     """
     
     D = defaultdict(list)
-    q = 2
     
     yield 1
     
-    while True:
+    for q in naturals(2):
         if q not in D:
             yield q
             
@@ -297,8 +293,6 @@ def squarefree_kernel():
                 D[p+q].append(p)
             
             del D[q]
-        
-        q += 1
 
 
 def prime_counting():
@@ -341,11 +335,10 @@ def totients():
     """
     
     D = defaultdict(list)
-    q = 2
     
     yield 1
     
-    while True:
+    for q in naturals(2):
         if q not in D:
             yield q-1
             D[q + q] = [q]
@@ -362,8 +355,6 @@ def totients():
             yield q*n//d
             
             del D[q]
-        
-        q += 1
 
 
 def cototients():
