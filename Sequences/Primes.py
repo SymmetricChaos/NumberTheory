@@ -4,7 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
 from math import prod, gcd
-from Sequences.SequenceManipulation import partial_prods, prepend
+from Sequences.SequenceManipulation import partial_prods, prepend, hypersequence
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -27,6 +27,16 @@ def primes():
             del D[q]
 
 
+def superprimes():
+    """
+    Prime Indexed Primes: The pth primes for p in primes
+    OEIS A006450
+    """
+    
+    for p in hypersequence(primes()):
+        yield p
+
+
 def composites():
     """
     Composite Numbers: Positive integers with more than two factors\n
@@ -45,6 +55,18 @@ def composites():
             for p in D[q]:
                 D[p+q].append(p)
             del D[q]
+
+
+def noncomposite():
+    """
+    Noncomposite Numbers: Positive integers with less than three factors\n
+    OEIS A008578
+    """
+    
+    yield 1
+    
+    for p in primes():
+        yield p
 
 
 def primorial():
@@ -540,3 +562,12 @@ if __name__ == '__main__':
     print("\nLucky Numbers")
     simple_test(lucky(),15,
                 "1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63")
+    
+    print("\nSuperprimes")
+    simple_test(superprimes(),13,
+                "3, 5, 11, 17, 31, 41, 59, 67, 83, 109, 127, 157, 179")
+    
+    print("\nNoncomposite Numbers")
+    simple_test(noncomposite(),15,
+                "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
+    

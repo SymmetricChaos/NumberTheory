@@ -26,7 +26,8 @@ from Sequences.Primes import primes, primorial, smooth, rough, highly_composite,
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
-                             coprime_characteristic, cototients
+                             coprime_characteristic, cototients, superprimes, lucky \
+                             noncomposite
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -92,10 +93,11 @@ __all__=[#MANIPS
          
          #PRIME
          "primes","primorial","smooth","rough","highly_composite", "divisors",
-         "squarefree","squarefree_kernel","pythagorean_primes",
+         "squarefree","squarefree_kernel","pythagorean_primes","lucky",
          "prime_counting","prime_divisors","unique_prime_divisors",
          "composites","totients","compositorial","hamming","cototients",
-         "prime_characteristic","coprime_characteristic",
+         "prime_characteristic","coprime_characteristic","superprimes",
+         "noncomposite",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
