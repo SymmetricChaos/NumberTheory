@@ -26,7 +26,7 @@ from Sequences.Primes import primes, primorial, smooth, rough, highly_composite,
                              divisors, squarefree, squarefree_kernel, prime_counting, \
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
-                             coprime_characteristic, cototients, superprimes, lucky \
+                             coprime_characteristic, cototients, superprimes, lucky, \
                              noncomposite
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \

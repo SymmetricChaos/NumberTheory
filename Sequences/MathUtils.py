@@ -362,7 +362,7 @@ def antidiagonal_pairs():
     """
     
     for n in count(0,1):
-        for a,b in zip(range(0,n+1),range(n,-1,-1)):
+        for a,b in zip(range(n,-1,-1),range(0,n+1)):
             yield (a,b)
 
 
