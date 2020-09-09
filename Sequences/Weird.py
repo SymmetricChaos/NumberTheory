@@ -112,7 +112,8 @@ def nonadditive():
 
 def hofstader():
     """
-    
+    Solution to a puzzle by Hofstader
+    OEIS A005228
     """
     diff = 2
     n = 1
@@ -131,7 +132,8 @@ def hofstader():
 
 def co_hofstader():
     """
-    
+    Complementary solution to a puzzle by Hofstader
+    OEIS A030124
     """
     diff = 2
     n = 1
@@ -150,7 +152,7 @@ def co_hofstader():
 
 def even_odd():
     """
-    Positive integers with evens replacing odds.
+    Positive integers but with odds and evens exchanged
     """
     
     for n,s in zip(naturals(1),sign_sequence(1)):
@@ -194,5 +196,4 @@ if __name__ == '__main__':
     print("\nDerangement of the Natural Numbers")
     simple_test(even_odd(),16,
                 "2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15")
-    
     

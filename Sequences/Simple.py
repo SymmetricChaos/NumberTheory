@@ -113,6 +113,8 @@ def gen_polynomial(coef):
     
     Args:
         coef -- coefficients of the polynomial is ascending order, all integers
+    
+    OEIS
     """
     
     for c in coef:
@@ -153,8 +155,7 @@ def harmonic_numerators():
         d = d0*i
         g = gcd(n,d)
         
-        n,d = n//g,d//g
-        n0, d0 = n,d
+        n0, d0 = n//g,d//g
 
 
 def harmonic_denominators():
@@ -172,8 +173,7 @@ def harmonic_denominators():
         d = d0*i
         g = gcd(n,d)
         
-        n,d = n//g,d//g
-        n0, d0 = n,d
+        n0, d0 = n//g,d//g
 
 
 def gen_harmonic_numerators(m):
@@ -202,8 +202,7 @@ def gen_harmonic_numerators(m):
         d = d0*(i**m)
         g = gcd(n,d)
         
-        n,d = n//g,d//g
-        n0, d0 = n,d
+        n0, d0 = n//g,d//g
 
 
 def gen_harmonic_denominators(m):
@@ -232,8 +231,7 @@ def gen_harmonic_denominators(m):
         d = d0*(i**m)
         g = gcd(n,d)
         
-        n,d = n//g,d//g
-        n0, d0 = n,d
+        n0, d0 = n//g,d//g
 
 
 def sign_sequence(n):
