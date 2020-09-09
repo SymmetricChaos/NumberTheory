@@ -1,4 +1,5 @@
 from SequenceManipulation import *
+from Primes import primes
 from Simple import naturals, constant, powers
 from Recurrence import companion_pell, fibonacci
 from Aliquot import amicable_pairs
@@ -12,6 +13,9 @@ binom_trans2 = binomial_transform(powers(2),invert=True)
 A001629 = convolution(fibonacci(),fibonacci())
 sum_fib_nat = pairwise_sum(naturals(),fibonacci())
 fib_diffs = differences(fibonacci())
+superprimes = hypersequence(primes())
+
+
 
 print("A142150")
 simple_test(A142150,10,"0, 0, 1, 0, 2, 0, 3, 0, 4, 0")
@@ -39,4 +43,7 @@ simple_test(sum_fib_nat,10,"0, 2, 3, 5, 7, 10, 14, 20, 29, 43")
 
 print("\nFirst Differences of the Fibonacci Sequence")
 simple_test(fib_diffs,10,"1, 0, 1, 1, 2, 3, 5, 8, 13, 21")
+
+print("\nSuperprimes")
+simple_test(superprimes,10,"3, 5, 11, 17, 31, 41, 59, 67, 83, 109")
 

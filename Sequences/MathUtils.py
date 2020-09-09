@@ -342,6 +342,33 @@ def frac_to_digits(n,d,B=10):
 
 
 
+#############################
+## INFINITE ARRAY INDICIES ##
+#############################
+
+def triangle_pairs():
+    """
+    Indicies of a triangular array
+    """
+    
+    for a in count(0,1):
+        for b in range(0,a+1):
+            yield (a,b)
+
+
+def antidiagonal_pairs():
+    """
+    Indicies the antidiagonals of an infinite square array
+    """
+    
+    for n in count(0,1):
+        for a,b in zip(range(0,n+1),range(n,-1,-1)):
+            yield (a,b)
+
+
+
+
+
 ###################
 ## GENERAL STUFF ##
 ###################
@@ -424,3 +451,7 @@ if __name__ == '__main__':
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
     
+    A = antidiagonal_pairs()
+    
+    for i in range(20):
+        print(next(A))

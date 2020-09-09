@@ -172,6 +172,7 @@ def partial_prods(sequence,S=None):
     
     return accumulate(sequence,operator.mul,initial=S)
 
+
 def differences(sequence):
     """Differences of the given sequence"""
     
@@ -181,6 +182,29 @@ def differences(sequence):
         yield b-a
         
         a,b = b,next(sequence)
+
+
+def hypersequence(sequenece):
+    """
+    Returns the a(n)th term of the sequence a(n)
+    For example if a(n) = 1, 3, 5, 7, 9, 11, 13...
+        hypersequence(a(n)) = 1, 5, 9, 13, 17...
+    """
+    
+    L = []
+    pr = 0
+    
+    for n,v in enumerate(sequenece,1):
+        if pr >= v:
+            raise ValueError("Can only create a hypersequence of a sequence that is entirely positive and strictly increasing")
+        
+        L.append(v)
+        
+        if n in L:
+            yield v
+            del L[0]
+        
+        pr = v
 
 
 

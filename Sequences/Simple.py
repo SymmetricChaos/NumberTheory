@@ -247,6 +247,7 @@ def sign_sequence(n):
 
 
 
+
 ### Wrappers or more efficient versions of common cases ###
 def naturals(offset=0):
     """
