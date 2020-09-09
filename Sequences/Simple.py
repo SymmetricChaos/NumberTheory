@@ -1,6 +1,7 @@
-from Sequences.NiceErrorChecking import require_integers, require_nonnegative
+from Sequences.NiceErrorChecking import require_integers, require_nonnegative, require_leq, require_geq
 from itertools import count, repeat, cycle
 from math import gcd
+from MathUtils import digits_to_int
 
 def constant(n):
     """
@@ -245,6 +246,27 @@ def sign_sequence(n):
     return cycle([n,-n])
 
 
+def repdigit(n,B=10):
+    """
+    Repdigit Numbers: Numbers that consist entire of the digtit n in base B\n
+    (Below match when prepended with zero)
+    OEIS A002275, A002276, A002277, A002278, A002279
+    """
+    
+    require_integers(["n","B"],[n,B])
+    require_geq(["B"],[B],2)
+    require_geq(["n"],[n],0)
+    
+    if n >= B:
+        raise ValueError("There is no digit {n} in base {B}")
+    
+    r = n
+    
+    while True:
+        yield r
+        r = (r*B)+n
+
+
 
 
 
@@ -445,3 +467,10 @@ if __name__ == '__main__':
     simple_test(sign_sequence(1), 16,
                 "1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1")
     
+    print("\nThe Repunit Sequence")
+    simple_test(repdigit(1), 8,
+                "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
+    
+    print("\nThe Reptwo Sequence in Base 3")
+    simple_test(repdigit(2,3), 10,
+                "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")

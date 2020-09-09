@@ -294,7 +294,6 @@ def digital_root(n,b=10):
 def int_to_digits(n,B=10):
     """
     Convert the integer n to its digits in base B
-    Finite generator
     """
     
     n = abs(n)
@@ -323,7 +322,7 @@ def digits_to_int(D,B=10):
 def frac_to_digits(n,d,B=10):
     """
     Convert the fraction n/d to its digits in base B
-    Infintie generator
+    Infinite generator
     """
     
     n = abs(n)
@@ -346,23 +345,29 @@ def frac_to_digits(n,d,B=10):
 ## INFINITE ARRAY INDICIES ##
 #############################
 
-def triangle_pairs():
+def triangle_pairs(m=0):
     """
     Indicies of a triangular array
+    
+    Args:
+        m - minimum value of the index
     """
     
-    for a in count(0,1):
-        for b in range(0,a+1):
+    for a in count(m,1):
+        for b in range(m,a+1):
             yield (a,b)
 
 
-def antidiagonal_pairs():
+def antidiagonal_pairs(m=0):
     """
     Indicies the antidiagonals of an infinite square array
+    
+    Args:
+        m - minimum value of the index
     """
     
-    for n in count(0,1):
-        for a,b in zip(range(n,-1,-1),range(0,n+1)):
+    for n in count(m,1):
+        for a,b in zip(range(n,m-1,-1),range(m,n+1)):
             yield (a,b)
 
 
@@ -451,7 +456,3 @@ if __name__ == '__main__':
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
     
-    A = antidiagonal_pairs()
-    
-    for i in range(20):
-        print(next(A))
