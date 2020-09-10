@@ -14,6 +14,7 @@ A001629 = convolution(fibonacci(),fibonacci())
 sum_fib_nat = pairwise_sum(naturals(),fibonacci())
 fib_diffs = differences(fibonacci())
 superprimes = hypersequence(primes())
+RLE = run_length_encoding(iter([2,4,4,4,6,6,6,6,6,7]),reverse=True)
 
 
 
@@ -47,3 +48,6 @@ simple_test(fib_diffs,10,"1, 0, 1, 1, 2, 3, 5, 8, 13, 21")
 print("\nSuperprimes")
 simple_test(superprimes,10,"3, 5, 11, 17, 31, 41, 59, 67, 83, 109")
 
+
+print("\nRLE of 2,4,4,4,6,6,6,6,6,7...")
+simple_test(RLE,10,"1, 2, 3, 4, 5, 6")

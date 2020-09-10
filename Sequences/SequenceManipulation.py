@@ -184,7 +184,7 @@ def differences(sequence):
         a,b = b,next(sequence)
 
 
-def hypersequence(sequenece):
+def hypersequence(sequence):
     """
     Returns the a(n)th term of the sequence a(n)
     For example if a(n) = 1, 3, 5, 7, 9, 11, 13...
@@ -194,7 +194,7 @@ def hypersequence(sequenece):
     L = []
     pr = 0
     
-    for n,v in enumerate(sequenece,1):
+    for n,v in enumerate(sequence,1):
         if pr >= v:
             raise ValueError("Can only create a hypersequence of a sequence that is entirely positive and strictly increasing")
         
@@ -205,6 +205,29 @@ def hypersequence(sequenece):
             del L[0]
         
         pr = v
+
+
+def run_length_encoding(sequence,reverse=False):
+    """
+    
+    """
+    
+    ctr = 1
+    cur = next(sequence)
+    for i in sequence:
+        if i == cur:
+            ctr += 1
+        
+        else:
+            if reverse:
+                yield ctr
+                yield cur
+            else:
+                yield cur
+                yield ctr
+            
+            ctr = 1
+            cur = i
 
 
 
