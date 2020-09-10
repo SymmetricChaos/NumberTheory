@@ -1,6 +1,8 @@
 from NiceErrorChecking import require_integers, require_geq, require_positive
 from math import floor, ceil
 from collections import Counter
+from Sequences.Simple import evens
+from Sequences.SequenceManipulation import offset
 
 def fibonacci():
     """
@@ -285,7 +287,7 @@ def pisot_E(a,b):
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
     if a >= b:
-        raise ValueError("The first two terms of Pisot sequence must be increasing")
+        raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
     while True:
         yield a
@@ -310,7 +312,7 @@ def pisot_L(a,b):
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
     if a >= b:
-        raise ValueError("The first two terms of Pisot sequence must be increasing")
+        raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
     while True:
         yield a
@@ -334,7 +336,7 @@ def pisot_P(a,b):
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
     if a >= b:
-        raise ValueError("The first two terms of Pisot sequence must be increasing")
+        raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
     while True:
         yield a
@@ -360,7 +362,7 @@ def pisot_T(a,b):
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
     if a >= b:
-        raise ValueError("The first two terms of Pisot sequence must be increasing")
+        raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
     while True:
         yield a
@@ -375,7 +377,7 @@ def ulam(u=1,v=2):
         u -- first term
         v -- second term
     
-    OEIS 
+    OEIS A002858
     """
     
     T = [u,v]
@@ -393,6 +395,23 @@ def ulam(u=1,v=2):
             S[new+term] += 1
         
         del S[new]
+
+
+def semifibonacci():
+    """
+    The Semi-Fibonacci Sequence
+    OEIS A030067
+    """
+    
+    L = [1]
+    
+    for e in offset(evens(),1):
+        yield L[-1]
+        L.append(L[e//2-1])
+        
+        yield L[-1]
+        L.append(L[e-1] + L[e-2])
+
 
 
 
@@ -493,3 +512,7 @@ if __name__ == '__main__':
     print("\n(1,3)-Ulam Sequence")
     simple_test(ulam(1,3),15,
                 "1, 3, 4, 5, 6, 8, 10, 12, 17, 21, 23, 28, 32, 34, 39")
+    
+    print("\nThe Semifibonacci Sequence")
+    simple_test(semifibonacci(),17,
+                "1, 1, 2, 1, 3, 2, 5, 1, 6, 3, 9, 2, 11, 5, 16, 1, 17")
