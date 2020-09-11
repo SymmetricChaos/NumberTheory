@@ -245,7 +245,7 @@ def run_length_encoding(sequence,reverse=False):
         yield ctr+1
 
 
-def run_lengths(sequence,reverse=False):
+def run_lengths(sequence):
     """
     Returns the length of the runs in the sequence
     """
@@ -267,8 +267,7 @@ def run_lengths(sequence,reverse=False):
 def n_rep_a(sequence,rep_sequence):
     
     for n,a in zip(sequence,rep_sequence):
-        for t in repeat(n,a):
-            yield t
+        yield from repeat(n,a)
 
 
 

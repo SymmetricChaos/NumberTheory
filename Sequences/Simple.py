@@ -10,8 +10,7 @@ def constant(n):
     
     require_integers(["n"],[n])
     
-    for i in repeat(n):
-        yield i
+    yield from repeat(n)
 
 
 def integers():
@@ -40,8 +39,7 @@ def arithmetic(a,n):
     
     require_integers(["a","n"],[a,n])
     
-    for i in count(a,n):
-        yield i
+    yield from count(a,n)
 
 
 def geometric(a,n):
@@ -285,8 +283,7 @@ def naturals(offset=0):
     require_integers(["offset"],[offset])
     require_nonnegative(["offset"],[offset])
     
-    for i in count(offset,1):
-        yield i
+    yield from count(offset,1)
 
 
 def counting(offset=0):
@@ -302,8 +299,7 @@ def counting(offset=0):
     require_integers(["offset"],[offset])
     require_nonnegative(["offset"],[offset])
     
-    for i in count(offset+1,1):
-        yield i
+    yield from count(offset+1,1)
 
 
 def powers(n):
@@ -320,8 +316,7 @@ def powers(n):
     require_integers(["n"],[n])
     require_nonnegative(["n"],[n])
     
-    for g in geometric(1,n):
-        yield g
+    yield from geometric(1,n)
 
 
 def self_powers():
@@ -340,8 +335,7 @@ def evens():
     OEIS A005843
     """
     
-    for i in arithmetic(0,2):
-        yield i
+    yield from arithmetic(0,2)
 
 
 def gen_evens():
@@ -363,8 +357,7 @@ def odds():
     OEIS A005408
     """
     
-    for i in arithmetic(1,2):
-        yield i
+    yield from arithmetic(1,2)
 
 
 def gen_odds():

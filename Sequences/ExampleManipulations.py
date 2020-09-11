@@ -16,7 +16,7 @@ fib_diffs = differences(fibonacci())
 superprimes = hypersequence(primes())
 even_rep_odd = n_rep_a(offset(evens(),1),odds())
 RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()),reverse=True)
-runs = run_lengths(n_rep_a(offset(evens(),1),odds()),reverse=True)
+runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
 
 
 
