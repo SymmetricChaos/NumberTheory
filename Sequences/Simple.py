@@ -375,7 +375,7 @@ def gen_odds():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Counting Numbers")
     simple_test(counting(),16,

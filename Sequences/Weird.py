@@ -163,7 +163,7 @@ def even_odd():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Recaman's Sequence")
     simple_test(recaman(),15,

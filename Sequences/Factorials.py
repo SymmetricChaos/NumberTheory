@@ -1,4 +1,4 @@
-from SequenceManipulation import offset
+from Sequences.Manipulations import offset
 from Sequences.Simple import naturals
 from itertools import cycle
 
@@ -128,7 +128,7 @@ def even_double_factorials():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Factorials")
     simple_test(factorials(),11,

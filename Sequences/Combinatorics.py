@@ -250,7 +250,7 @@ def multiplicative_partition():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Derangement Numbers")
     simple_test(derangement(),11,

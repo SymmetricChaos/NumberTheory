@@ -46,7 +46,7 @@ def LFSR(vector,taps):
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Linear Congruential Generator")
     simple_test(LCG(9,5,17,97),10,

@@ -2,7 +2,7 @@ from NiceErrorChecking import require_integers, require_geq, require_positive
 from math import floor, ceil
 from collections import Counter
 from Sequences.Simple import evens
-from Sequences.SequenceManipulation import offset
+from Sequences.Manipulations import offset
 
 def fibonacci():
     """
@@ -10,8 +10,7 @@ def fibonacci():
     OEIS A000045
     """
     
-    a = 0
-    b = 1
+    a,b = 0,1
     
     while True:
         yield a
@@ -24,8 +23,7 @@ def lucas():
     OEIS A000032
     """
     
-    a = 2
-    b = 1
+    a,b = 2,1
     
     while True:
         yield a
@@ -92,8 +90,7 @@ def pell():
     OEIS A000129
     """
     
-    a = 0
-    b = 1
+    a,b = 0,1
     
     while True:
         yield a
@@ -106,8 +103,7 @@ def companion_pell():
     OEIS A002203
     """
     
-    a = 2
-    b = 2
+    a,b = 2,2
     
     while True:
         yield a
@@ -162,9 +158,7 @@ def tribonacci():
     OEIS A000073
     """
     
-    a = 0
-    b = 0
-    c = 1
+    a,b,c = 0,0,1
     
     while True:
         yield a
@@ -193,9 +187,7 @@ def padovan():
     OEIS A000931
     """
     
-    a = 1
-    b = 0
-    c = 0
+    a,b,c = 1,0,0
     
     while True:
         yield a
@@ -208,9 +200,7 @@ def padovan_spiral():
     OEIS A134816
     """
     
-    a = 1
-    b = 1
-    c = 1
+    a,b,c = 1,1,1
     
     while True:
         yield a
@@ -223,9 +213,7 @@ def narayana():
     OEIS A000930
     """
     
-    a = 1
-    b = 1
-    c = 1
+    a,b,c = 1,1,1
     
     while True:
         yield a
@@ -286,6 +274,7 @@ def pisot_E(a,b):
     
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
+    
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
@@ -311,6 +300,7 @@ def pisot_L(a,b):
     
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
+    
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
@@ -335,6 +325,7 @@ def pisot_P(a,b):
     
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
+    
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
@@ -361,6 +352,7 @@ def pisot_T(a,b):
     
     require_integers(["a","b"],[a,b])
     require_positive(["a"],[a])
+    
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
     
@@ -418,7 +410,7 @@ def semifibonacci():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Fibonacci Sequence")
     simple_test(fibonacci(),15,

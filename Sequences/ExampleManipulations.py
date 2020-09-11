@@ -1,4 +1,4 @@
-from SequenceManipulation import *
+from Manipulations import *
 from Primes import primes
 from Simple import naturals, constant, powers, evens, odds
 from Recurrence import companion_pell, fibonacci

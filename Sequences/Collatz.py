@@ -192,7 +192,7 @@ def collatz_highwater():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Collatz Map")
     simple_test(collatz_map(),16,

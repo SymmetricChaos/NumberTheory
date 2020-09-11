@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, evens, powers
-from Sequences.SequenceManipulation import offset
+from Sequences.Manipulations import offset
 from MathUtils import digital_sum, digital_root, repeating_part
 from NiceErrorChecking import require_integers, require_geq
 
@@ -196,7 +196,7 @@ def fraction_period(B):
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Evil Numbers")
     simple_test(evil(),15,

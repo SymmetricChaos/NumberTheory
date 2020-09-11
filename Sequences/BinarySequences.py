@@ -41,7 +41,7 @@ def co_thue_morse():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Thue-Morse Sequence")
     simple_test(thue_morse(),16,

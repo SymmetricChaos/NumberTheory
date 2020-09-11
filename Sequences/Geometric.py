@@ -74,7 +74,7 @@ def hypotenuse():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Nonhypotenuse Numbers")
     simple_test(nonhypotenuse(),16,

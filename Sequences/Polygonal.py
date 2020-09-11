@@ -3,7 +3,7 @@ from math import floor, log2, comb
 from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive, \
                                         require_nonnegative, require_geq
-from Sequences.SequenceManipulation import offset, sequence_apply
+from Sequences.Manipulations import offset, sequence_apply
 
 def polygonal(S=2):
     """
@@ -314,7 +314,7 @@ def gen_pentagonal():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Triangular Numbers")
     simple_test(triangular(),14,

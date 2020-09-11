@@ -1,4 +1,4 @@
-from Sequences.SequenceManipulation import make_triangle
+from Sequences.Manipulations import make_triangle
 from Sequences.Combinatorics import pascal, eulerian
 from Sequences.Weird import gcd_numbers, gcd_steps
 from Sequences.Primes import coprime_characteristic

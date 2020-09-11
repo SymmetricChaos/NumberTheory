@@ -70,7 +70,7 @@ def e_cfrac():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Continued Fraction for 649/200")
     simple_test(cfrac(649,200),18,

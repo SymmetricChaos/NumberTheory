@@ -4,7 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
 from math import prod, gcd
-from Sequences.SequenceManipulation import partial_prods, prepend, hypersequence
+from Sequences.Manipulations import partial_prods, prepend, hypersequence
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -33,8 +33,7 @@ def superprimes():
     OEIS A006450
     """
     
-    for p in hypersequence(primes()):
-        yield p
+    yield from hypersequence(primes())
 
 
 def composites():
@@ -65,8 +64,7 @@ def noncomposite():
     
     yield 1
     
-    for p in primes():
-        yield p
+    yield from primes()
 
 
 def primorial():
@@ -75,7 +73,7 @@ def primorial():
     OEIS A002110
     """
     
-    return prepend(1,partial_prods(primes()))
+    yield from  prepend(1,partial_prods(primes()))
 
 
 def compositorial():
@@ -84,7 +82,7 @@ def compositorial():
     OEIS A036691
     """
     
-    return prepend(1,partial_prods(composites()))
+    yield from prepend(1,partial_prods(composites()))
 
 
 def prime_powers():
@@ -155,8 +153,7 @@ def hamming():
     OEIS A051037
     """
     
-    for i in smooth(5):
-        yield i
+    yield from smooth(5)
 
 
 def rough(B):
@@ -468,7 +465,7 @@ def lucky():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Primes")
     simple_test(primes(),15,

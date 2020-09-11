@@ -121,7 +121,7 @@ def phi_digits():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Pi, the Circle Constant")
     simple_test(pi_digits(),18,
