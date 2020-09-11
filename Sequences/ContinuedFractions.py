@@ -3,7 +3,7 @@ from Sequences.Simple import arithmetic
 
 def cfrac(n,d):
     """
-    Terms of the simple continued fraction representation sof n/d
+    Terms of the simple continued fraction representation of n/d
     """
     
     while d != 0:
@@ -15,7 +15,7 @@ def cfrac(n,d):
 
 def cfrac_convergents(S):
     """
-    Convergents of the simple continued fraction representation sof n/d
+    Convergents of the simple continued fraction representation of n/d
     """
     
     n0,n1 = 0,1

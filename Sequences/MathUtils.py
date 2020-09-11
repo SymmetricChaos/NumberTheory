@@ -218,7 +218,7 @@ def real_diff(R1,R2,B=10):
 
 def real_prod_nat(R,n,B=10):
     """
-    Product of an iterable that represent a real numbers in base B by a positive natural in base B
+    Product of an iterable that represents a real number in base B by a positive natural in base B
     """
     
     D = []
@@ -239,6 +239,7 @@ def real_prod_nat(R,n,B=10):
 def real_div_nat(R,n,B=10):
     """
     Quotient of an iterable that represent a real numbers in base B by a positive natural in base B
+    Prepend R with zeroes to shift decimal point
     """
     
     r = 0

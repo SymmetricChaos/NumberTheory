@@ -89,14 +89,18 @@ def convolution(sequence1,sequence2):
 
 
 def triangle_sums(sequence):
-    """Sums of the rows of the standard triangular arrangement of the sequence"""
+    """
+    Sums of the rows of the standard triangular arrangement of the sequence
+    """
     
     for R in make_triangle(sequence):
         yield sum(R)
 
 
 def triangle_products(sequence):
-    """Products of the rows of the standard triangular arrangement of the sequence"""
+    """
+    Products of the rows of the standard triangular arrangement of the sequence
+    """
     
     for R in make_triangle(sequence):
         yield prod(R)
@@ -130,20 +134,26 @@ def pairwise_apply(sequence1,sequence2,func,*args,**kwargs):
 
 
 def chunk_by_n(iterable, n, fillvalue=None):
-    "Collect data into fixed-length chunks or blocks"
+    """
+    Collect data into fixed-length chunks or blocks
+    """
     
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
 
 def prepend(value, iterator):
-    "Prepend a single value in front of an iterator"
+    """
+    Prepend a single value in front of an iterator
+    """
     
     return chain([value], iterator)
 
 
 def sequence_apply(sequence,func):
-    """Apply some function to each term of a sequence and yield the result"""
+    """
+    Apply some function to each term of a sequence and yield the result
+    """
     
     return map(func,sequence)
 
@@ -162,19 +172,25 @@ def interleave(*sequences):
 
 
 def partial_sums(sequence,S=None):
-    """Partial sums of the sequence"""
+    """
+    Partial sums of the sequence
+    """
     
     return accumulate(sequence,operator.add,initial=S)
 
 
 def partial_prods(sequence,S=None):
-    """Partial products of the sequence"""
+    """
+    Partial products of the sequence
+    """
     
     return accumulate(sequence,operator.mul,initial=S)
 
 
 def differences(sequence):
-    """Differences of the given sequence"""
+    """
+    Differences of the given sequence
+    """
     
     a, b = next(sequence), next(sequence)
     
@@ -265,10 +281,12 @@ def run_lengths(sequence):
 
 
 def n_rep_a(sequence,rep_sequence):
+    """
+    Take elements pairwise and repeat the left value as many times as specified by the right argument
+    """
     
     for n,a in zip(sequence,rep_sequence):
         yield from repeat(n,a)
-
 
 
 

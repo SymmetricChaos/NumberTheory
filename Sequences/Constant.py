@@ -1,8 +1,8 @@
-from Sequences.MathUtils import int_to_digits, real_sum, real_diff, real_prod_nat, real_div_nat
+from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain
 from Sequences.Simple import constant, naturals
-
+from Sequences.Manipulations import offset
 
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
@@ -117,6 +117,26 @@ def phi_digits():
         yield d
 
 
+def silver_ratio():
+    """
+    Digits of the silver ratio\n
+    OEIS 
+    """
+    
+    yield 2
+    
+    yield from offset(sqrt_digits(2),1)
+
+
+def metallic_ratio(n):
+    """
+    Digits of the Nth Metallic Ratio\n
+    OEIS 
+    """
+    
+    yield from real_div_nat(real_sum([n],sqrt_digits(n*n+4)),2)
+
+
 def champernowne(B=10):
     """
     Digits of the base B version of Champernowne's constant
@@ -150,6 +170,15 @@ if __name__ == '__main__':
     simple_test(sqrt_digits(2),18,
                 "1, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
+    print("\nThe Silver Ratio, 1 + √2")
+    simple_test(silver_ratio(),18,
+                "2, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
+    
+    print("\nThe Bronze Ratio, (3 + √13)/2")
+    simple_test(metallic_ratio(3),18,
+                "3, 3, 0, 2, 7, 7, 5, 6, 3, 7, 7, 3, 1, 9, 9, 4, 6, 4")
+    
+    
     print("\nBits of the Square Root of 2")
     simple_test(sqrt_digits(2,B=2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
@@ -162,11 +191,11 @@ if __name__ == '__main__':
     simple_test(root_digits(4,2),18,
                 "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
     
-    print("\nChampernowne's Constant in Base 10")
+    print("\nBase 10 Champernowne's Constant")
     simple_test(champernowne(),18,
                 "1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, 1, 1, 1, 2, 1, 3, 1")
     
-    print("\nChampernowne's Constant in Base 2")
+    print("\nBase 2 Champernowne's Constant")
     simple_test(champernowne(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
     

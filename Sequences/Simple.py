@@ -461,7 +461,7 @@ if __name__ == '__main__':
     simple_test(sign_sequence(1), 16,
                 "1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1")
     
-    print("\nThe Repunit Sequence")
+    print("\nThe Repunit Sequence in Base 10")
     simple_test(repdigit(1), 8,
                 "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
     
