@@ -3,7 +3,9 @@ from Sequences.Manipulations import sequence_slice, segment, offset, skips, \
                                     interleave, partial_sums, partial_prods, \
                                     make_triangle, triangle_sums, triangle_products, \
                                     binomial_transform, convolution, pairwise_sum, \
-                                    pairwise_prod, pairwise_apply
+                                    pairwise_prod, pairwise_apply, differences, \
+                                    hypersequence, run_length_encoding, run_lengths, \
+                                    n_rep_a
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  lucas_U, lucas_V, padovan, simple_recurrence, \
@@ -62,7 +64,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     ruler, binary_length, base_length, digital_sums, \
                                     digital_roots, fraction_period, palindrome
 
-from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits
+from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
+                               champernowne
 
 
 __all__=[#MANIPS
@@ -70,7 +73,8 @@ __all__=[#MANIPS
          "sequence_apply","interleave","partial_sums","partial_prods",
          "make_triangle","triangle_sums","triangle_products",
          "binomial_transform","convolution","pairwise_sum","pairwise_prod",
-         "pairwise_apply",
+         "pairwise_apply","differences","hypersequence","run_length_encoding",
+         "run_lengths","n_rep_a",
          
          #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
@@ -141,5 +145,5 @@ __all__=[#MANIPS
          "palindrome","fraction_period",
          
          #CONSTANT
-         "pi_digits","sqrt_digits","root_digits","phi_digits"
+         "pi_digits","sqrt_digits","root_digits","phi_digits","champernowne"
         ]

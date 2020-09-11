@@ -1,7 +1,7 @@
 from Sequences.MathUtils import int_to_digits, real_sum, real_diff, real_prod_nat, real_div_nat
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain
-from Sequences.Simple import constant
+from Sequences.Simple import constant, naturals
 
 
 # Would like to restrict this to streaming algorithms that can keep producing 
@@ -117,6 +117,17 @@ def phi_digits():
         yield d
 
 
+def champernowne(B=10):
+    """
+    Digits of the base B version of Champernowne's constant
+    OEIS A003137, A030302, A030548, A033307, A030373, A031219, A030998, 
+         A031035, A031076
+    """
+    
+    for n in naturals(1):
+        yield from iter(int_to_digits(n,B))
+
+
 
 
 
@@ -151,15 +162,11 @@ if __name__ == '__main__':
     simple_test(root_digits(4,2),18,
                 "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
     
-    print("\n2√2")
-    simple_test(real_sum(sqrt_digits(2),sqrt_digits(2)),18,
-                "2, 8, 2, 8, 4, 2, 7, 1, 2, 4, 7, 4, 6, 1, 9, 0, 0, 9")
+    print("\nChampernowne's Constant in Base 10")
+    simple_test(champernowne(),18,
+                "1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, 1, 1, 1, 2, 1, 3, 1")
     
-    print("\n√(2)/2")
-    simple_test(real_div_nat(sqrt_digits(2),2),18,
-                "0, 7, 0, 7, 1, 0, 6, 7, 8, 1, 1, 8, 6, 5, 4, 7, 5, 2")
-    
-    print("\n√2 - ∛2")
-    simple_test(real_diff(root_digits(2,2),root_digits(3,2)),18,
-                "0, 1, 5, 4, 2, 9, 2, 5, 1, 2, 4, 7, 8, 2, 2, 1, 8, 8")
+    print("\nChampernowne's Constant in Base 2")
+    simple_test(champernowne(2),18,
+                "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
     
