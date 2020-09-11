@@ -1,6 +1,6 @@
 from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
-from itertools import chain
+from itertools import chain, dropwhile
 from Sequences.Simple import constant, naturals
 from Sequences.Manipulations import offset
 
@@ -120,7 +120,7 @@ def phi_digits():
 def silver_ratio():
     """
     Digits of the silver ratio\n
-    OEIS 
+    OEIS A014176
     """
     
     yield 2
@@ -128,13 +128,27 @@ def silver_ratio():
     yield from offset(sqrt_digits(2),1)
 
 
+# This fails for some values, probably something wrong with my implementation of the sqrt function
 def metallic_ratio(n):
     """
     Digits of the Nth Metallic Ratio\n
     OEIS 
     """
     
-    yield from real_div_nat(real_sum([n],sqrt_digits(n*n+4)),2)
+    # Prepend zeroes
+    N = [n]
+    m = 10
+    dig = 0
+    while m <= n:
+        m *= 10
+        dig += 1
+    
+    N = [0]*(dig) + N
+
+    # (n + √(n+4))/2
+    M = real_div_nat(real_sum(N,sqrt_digits(n*n+4)),2)
+    
+    yield from dropwhile(lambda x: x == 0,M)
 
 
 def champernowne(B=10):
@@ -178,6 +192,9 @@ if __name__ == '__main__':
     simple_test(metallic_ratio(3),18,
                 "3, 3, 0, 2, 7, 7, 5, 6, 3, 7, 7, 3, 1, 9, 9, 4, 6, 4")
     
+    print("\nThe 10th Metallic Ratio, (10 + √104)/2")
+    simple_test(metallic_ratio(10),18,
+                "1, 0, 0, 9, 9, 0, 1, 9, 5, 1, 3, 5, 9, 2, 7, 8, 4, 8")
     
     print("\nBits of the Square Root of 2")
     simple_test(sqrt_digits(2,B=2),18,
@@ -198,4 +215,3 @@ if __name__ == '__main__':
     print("\nBase 2 Champernowne's Constant")
     simple_test(champernowne(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
-    

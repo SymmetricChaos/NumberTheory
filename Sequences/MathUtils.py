@@ -177,7 +177,7 @@ def real_sum(R1,R2,B=10):
     R2e = chain(R2,repeat(0))
     
     D = []
-    
+
     for a,b in zip(R1e,R2e):
         t = a+b
         
@@ -186,6 +186,8 @@ def real_sum(R1,R2,B=10):
                 yield D.pop(0)
         
         if t > B-1:
+            if len(D) == 0:
+                D.append(0)
             D[-1] += 1
         
         D.append(t%B)

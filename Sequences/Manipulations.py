@@ -321,6 +321,14 @@ def speed_compare(sequences,n,reps=1):
         print(time()-t0)
 
 
+def head(sequence,n):
+    """
+    First n terms of the sequence as a list
+    """
+    
+    return [i for i in segment(sequence,0,n)]
+
+
 
 
 
