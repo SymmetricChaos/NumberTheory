@@ -1,6 +1,5 @@
 from Sequences.Manipulations import offset
-from Sequences.Simple import naturals
-from itertools import cycle
+from Sequences.Simple import naturals, sign_sequence
 
 
 def factorials():
@@ -24,7 +23,7 @@ def alternating_factorials_1():
     OEIS A005165
     """
     
-    cyc = cycle([1,-1])
+    cyc = sign_sequence(1)
     F = offset(factorials(),1)
     out = 0
     
@@ -41,7 +40,7 @@ def alternating_factorials_2():
     OEIS A058006
     """
     
-    cyc = cycle([1,-1])
+    cyc = sign_sequence(1)
     F = factorials()
     out = 0
     
