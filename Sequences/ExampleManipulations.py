@@ -1,6 +1,6 @@
 from SequenceManipulation import *
 from Primes import primes
-from Simple import naturals, constant, powers
+from Simple import naturals, constant, powers, evens, odds
 from Recurrence import companion_pell, fibonacci
 from Aliquot import amicable_pairs
 
@@ -14,7 +14,9 @@ A001629 = convolution(fibonacci(),fibonacci())
 sum_fib_nat = pairwise_sum(naturals(),fibonacci())
 fib_diffs = differences(fibonacci())
 superprimes = hypersequence(primes())
-RLE = run_length_encoding(iter([2,4,4,4,6,6,6,6,6,7]),reverse=True)
+even_rep_odd = n_rep_a(offset(evens(),1),odds())
+RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()),reverse=True)
+runs = run_lengths(n_rep_a(offset(evens(),1),odds()),reverse=True)
 
 
 
@@ -48,6 +50,11 @@ simple_test(fib_diffs,10,"1, 0, 1, 1, 2, 3, 5, 8, 13, 21")
 print("\nSuperprimes")
 simple_test(superprimes,10,"3, 5, 11, 17, 31, 41, 59, 67, 83, 109")
 
+print("\nEach positive even number E, repeated E-1 times.")
+simple_test(even_rep_odd,10,"2, 4, 4, 4, 6, 6, 6, 6, 6, 8")
 
-print("\nRLE of 2,4,4,4,6,6,6,6,6,7...")
-simple_test(RLE,10,"1, 2, 3, 4, 5, 6")
+print("\nRLE (reversed) of 2,4,4,4,6,6,6,6,6,7...")
+simple_test(RLE,10,"1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+
+print("\nRun Lengths of 2,4,4,4,6,6,6,6,6,7...")
+simple_test(runs,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")

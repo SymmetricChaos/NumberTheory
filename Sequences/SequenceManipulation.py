@@ -1,4 +1,4 @@
-from itertools import islice, cycle, count, zip_longest, chain, accumulate
+from itertools import islice, cycle, count, zip_longest, chain, accumulate, repeat
 from math import comb, prod
 import operator
 from time import time
@@ -209,25 +209,67 @@ def hypersequence(sequence):
 
 def run_length_encoding(sequence,reverse=False):
     """
-    
+    Encodes sequence the length of the runs followed by the number that is repeated
+    Alternatively returns the number and then the length of the run
     """
     
-    ctr = 1
+    ctr = 0
+    cur = next(sequence)
+    
+    if reverse:
+        for i in sequence:
+            ctr += 1
+            
+            if i != cur:
+                yield ctr
+                yield cur
+                
+                ctr = 0
+                cur = i
+        
+        yield ctr+1
+        yield cur
+    
+    else:
+        for i in sequence:
+            ctr += 1
+            
+            if i != cur:
+                yield cur
+                yield ctr
+                
+                ctr = 0
+                cur = i
+        
+        yield cur
+        yield ctr+1
+
+
+def run_lengths(sequence,reverse=False):
+    """
+    Returns the length of the runs in the sequence
+    """
+    
+    ctr = 0
     cur = next(sequence)
     for i in sequence:
-        if i == cur:
-            ctr += 1
+        ctr += 1
         
-        else:
-            if reverse:
-                yield ctr
-                yield cur
-            else:
-                yield cur
-                yield ctr
+        if i != cur:
+            yield ctr
             
-            ctr = 1
+            ctr = 0
             cur = i
+    
+    yield ctr+1
+
+
+def n_rep_a(sequence,rep_sequence):
+    
+    for n,a in zip(sequence,rep_sequence):
+        for t in repeat(n,a):
+            yield t
+
 
 
 
