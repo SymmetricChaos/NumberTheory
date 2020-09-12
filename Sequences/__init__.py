@@ -65,7 +65,7 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_roots, fraction_period, palindrome
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
-                               champernowne, silver_ratio, metallic_ratio
+                               champernowne_digits, silver_ratio_digits, metallic_ratio_digits
 
 
 __all__=[#MANIPS
@@ -145,6 +145,6 @@ __all__=[#MANIPS
          "palindrome","fraction_period",
          
          #CONSTANT
-         "pi_digits","sqrt_digits","root_digits","phi_digits","champernowne",
-         "silver_ratio","metallic_ratio"
+         "pi_digits","sqrt_digits","root_digits","phi_digits",
+         "champernowne_digits","silver_ratio_digits","metallic_ratio_digits"
         ]

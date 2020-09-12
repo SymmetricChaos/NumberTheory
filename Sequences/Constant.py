@@ -2,7 +2,6 @@ from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain, dropwhile
 from Sequences.Simple import constant, naturals
-from Sequences.Manipulations import offset
 
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
@@ -96,40 +95,7 @@ def root_digits(n,a,B=10):
 
 
 # Not sure why this doesn't work in other bases
-def phi_digits():
-    """
-    Phi: Digits of the golden ratio\n
-    OEIS A001622
-    """
-    
-    # Digits of the square root of 5
-    S = sqrt_digits(5,10)
-    
-    # Skip the first two and yield 1 then 6
-    next(S)
-    next(S)
-    
-    yield 1
-    yield 6
-    
-    # Divide remaining part by 2
-    for d in real_div_nat(S,2,10):
-        yield d
-
-
-def silver_ratio():
-    """
-    Digits of the silver ratio\n
-    OEIS A014176
-    """
-    
-    yield 2
-    
-    yield from offset(sqrt_digits(2),1)
-
-
-# This fails for some values, probably something wrong with my implementation of the sqrt function
-def metallic_ratio(n):
+def metallic_ratio_digits(n):
     """
     Digits of the Nth Metallic Ratio\n
     OEIS 
@@ -143,7 +109,7 @@ def metallic_ratio(n):
         m *= 10
         dig += 1
     
-    N = [0]*(dig) + N
+    N = [0]*dig + N
 
     # (n + √(n+4))/2
     M = real_div_nat(real_sum(N,sqrt_digits(n*n+4)),2)
@@ -151,7 +117,25 @@ def metallic_ratio(n):
     yield from dropwhile(lambda x: x == 0,M)
 
 
-def champernowne(B=10):
+def phi_digits():
+    """
+    Phi: Digits of the golden ratio\n
+    OEIS A001622
+    """
+    
+    yield from metallic_ratio_digits(1)
+
+
+def silver_ratio_digits():
+    """
+    Digits of the silver ratio\n
+    OEIS A014176
+    """
+    
+    yield from metallic_ratio_digits(2)
+
+
+def champernowne_digits(B=10):
     """
     Digits of the base B version of Champernowne's constant
     OEIS A003137, A030302, A030548, A033307, A030373, A031219, A030998, 
@@ -185,15 +169,15 @@ if __name__ == '__main__':
                 "1, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
     print("\nThe Silver Ratio, 1 + √2")
-    simple_test(silver_ratio(),18,
+    simple_test(silver_ratio_digits(),18,
                 "2, 4, 1, 4, 2, 1, 3, 5, 6, 2, 3, 7, 3, 0, 9, 5, 0, 4")
     
     print("\nThe Bronze Ratio, (3 + √13)/2")
-    simple_test(metallic_ratio(3),18,
+    simple_test(metallic_ratio_digits(3),18,
                 "3, 3, 0, 2, 7, 7, 5, 6, 3, 7, 7, 3, 1, 9, 9, 4, 6, 4")
     
     print("\nThe 10th Metallic Ratio, (10 + √104)/2")
-    simple_test(metallic_ratio(10),18,
+    simple_test(metallic_ratio_digits(10),18,
                 "1, 0, 0, 9, 9, 0, 1, 9, 5, 1, 3, 5, 9, 2, 7, 8, 4, 8")
     
     print("\nBits of the Square Root of 2")
@@ -209,9 +193,9 @@ if __name__ == '__main__':
                 "1, 1, 8, 9, 2, 0, 7, 1, 1, 5, 0, 0, 2, 7, 2, 1, 0, 6")
     
     print("\nBase 10 Champernowne's Constant")
-    simple_test(champernowne(),18,
+    simple_test(champernowne_digits(),18,
                 "1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, 1, 1, 1, 2, 1, 3, 1")
     
     print("\nBase 2 Champernowne's Constant")
-    simple_test(champernowne(2),18,
+    simple_test(champernowne_digits(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
