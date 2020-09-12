@@ -56,29 +56,25 @@ def five_twos_simple_comp():
     return N,S
 
 
-
-
-
 def five_twos_trans():
     """Five Twos with any grouping: +-*/"""
-
+    
     global S
     S = []
     
     def five_twos_inner(st,depth):
         
         # Allow for concatenation of a 2 with another 2
-        if depth == 4:
-            for pos in range(0,len(st)):
-                if st[pos:pos+1] == "2":
-                    S.append(st[:pos] + "22" + st[pos+1:])
-        
+        for pos in range(0,len(st)):
+            if st[pos:pos+1] == "2":
+                S.append(st[:pos] + "2"*(6-depth) + st[pos+1:])
+    
         if depth == 5:
             S.append(st)
             return 0
         
         # Rewrite 2 as
-        transforms = ["(2+2)","(2-2)","(2*2)","(2/2)"]
+        transforms = ["(2+2)","(2-2)","(2*2)","(2/2)","(2**2)"]
         
         for replacement in transforms:
             for pos in range(0,len(st)):
@@ -100,13 +96,16 @@ print()
 
 
 five_twos_trans()
-U = set([])
+U = []
 for st in S:
     try:
-        if eval(st) == int(eval(st)) and eval(st) > 0:
-            U.add(int(eval(st)))
+        if st.count("**") > 1:
+            continue
+        e = eval(st)
+        if e == int(e) and e >= 0:
+            if e in U:
+                continue
+            print(f"{st.replace('**','^')} = {int(e)}")
+            U.append(int(e))
     except:
         pass
-
-print(sorted(list(set(U))))
-print()
