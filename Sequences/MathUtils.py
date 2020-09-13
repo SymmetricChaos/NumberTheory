@@ -278,23 +278,23 @@ def digital_sum(n,b=10):
     
     s = 0
     
-    while n != 0:
+    while True:
         n,r = divmod(n,b)
         s += r
-    
-    return s
+        if n == 0:
+            return s
 
 
 def digital_prod(n,b=10):
-    """Sum of the digits of n in base b"""
+    """Product of the digits of n in base b"""
     
     s = 1
     
-    while n != 0:
+    while True:
         n,r = divmod(n,b)
         s *= r
-    
-    return s
+        if n == 0:
+            return s
 
 
 def digital_root(n,b=10):
@@ -471,3 +471,4 @@ if __name__ == '__main__':
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
     
+    print(int_to_digits(6,3))

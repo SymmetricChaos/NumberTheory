@@ -151,6 +151,19 @@ def digital_roots(B=10):
         yield digital_root(n,B)
 
 
+def digital_prods(B=10):
+    """
+    Digital Sums: Sum of the digits of each non-negative integer in base B\n
+    OEIS A007953
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    for n in naturals():
+        yield digital_prod(n,B)
+
+
 def additive_persistence(B=10):
     """
     Additive persistence of each natural number in base B
@@ -269,6 +282,10 @@ if __name__ == '__main__':
     simple_test(digital_roots(3),18,
                 "0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1")
     
+    print("\nDigital Products (Base 3)")
+    simple_test(digital_prods(3),18,
+                "0, 1, 2, 0, 1, 2, 0, 2, 4, 0, 0, 0, 0, 1, 2, 0, 2, 4")
+    
     print("\nPalindromes (Base 2)")
     simple_test(palindrome(2),15,
                 "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
@@ -277,11 +294,11 @@ if __name__ == '__main__':
     simple_test(fraction_period(10),17,
                 "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
     
-    print("\nAdditive Persistence (Base 10)")
-    simple_test(additive_persistence(10),18,
-                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1")
+    print("\nAdditive Persistence (Base 3)")
+    simple_test(additive_persistence(3),18,
+                "0, 0, 0, 1, 1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2, 3")
     
-    print("\nMultiplicative Persistence (Base 10)")
-    simple_test(multiplicative_persistence(10),18,
-                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1")
+    print("\nMultiplicative Persistence (Base 3)")
+    simple_test(multiplicative_persistence(3),18,
+                "0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2")
     
