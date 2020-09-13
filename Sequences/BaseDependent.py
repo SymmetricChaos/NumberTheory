@@ -286,14 +286,6 @@ if __name__ == '__main__':
     simple_test(digital_prods(3),18,
                 "0, 1, 2, 0, 1, 2, 0, 2, 4, 0, 0, 0, 0, 1, 2, 0, 2, 4")
     
-    print("\nPalindromes (Base 2)")
-    simple_test(palindrome(2),15,
-                "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
-    
-    print("\nRepeating Unit Fraction Length (Base 10)")
-    simple_test(fraction_period(10),17,
-                "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
-    
     print("\nAdditive Persistence (Base 3)")
     simple_test(additive_persistence(3),18,
                 "0, 0, 0, 1, 1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2, 3")
@@ -301,4 +293,12 @@ if __name__ == '__main__':
     print("\nMultiplicative Persistence (Base 3)")
     simple_test(multiplicative_persistence(3),18,
                 "0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2")
+    
+    print("\nPalindromes (Base 2)")
+    simple_test(palindrome(2),15,
+                "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
+    
+    print("\nRepeating Unit Fraction Length (Base 10)")
+    simple_test(fraction_period(10),17,
+                "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
     

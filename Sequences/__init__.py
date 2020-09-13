@@ -22,7 +22,8 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              polynomial, fermat, evens, gen_evens, odds, gen_odds, \
                              counting, constant, arithmetrico_geometric, gen_polynomial, \
                              self_powers, harmonic_numerators, harmonic_denominators, \
-                             gen_harmonic_numerators, gen_harmonic_denominators
+                             gen_harmonic_numerators, gen_harmonic_denominators, \
+                             repdigit
 
 from Sequences.Primes import primes, primorial, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
@@ -62,7 +63,8 @@ from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
-                                    digital_roots, fraction_period, palindrome
+                                    digital_roots, fraction_period, palindrome, \
+                                    digital_prods, additive_persistence, multiplicative_persistence
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits, metallic_ratio_digits
@@ -92,8 +94,9 @@ __all__=[#MANIPS
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
          "constant","arithmetrico_geometric","gen_polynomial","self_powers",
-         "harmonic_numerators", "harmonic_denominators",
+         "harmonic_numerators", "harmonic_denominators","repdigit",
          "gen_harmonic_numerators", "gen_harmonic_denominators",
+         "sign_sequence",
          
          #PRIME
          "primes","primorial","smooth","rough","highly_composite", "divisors",
@@ -142,7 +145,8 @@ __all__=[#MANIPS
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",
          "binary_length","base_length","digital_sums","digital_roots",
-         "palindrome","fraction_period",
+         "palindrome","fraction_period","digital_prods","additive_persistence",
+         "multiplicative_persistence",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",

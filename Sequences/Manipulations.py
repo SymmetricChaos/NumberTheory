@@ -323,7 +323,7 @@ def speed_compare(sequences,n,reps=1):
 
 def head(sequence,n):
     """
-    First n terms of the sequence as a list
+    First n terms of the sequence as a list, not a generator
     """
     
     return [i for i in segment(sequence,0,n)]
