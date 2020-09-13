@@ -115,6 +115,7 @@ def hofstader():
     Solution to a puzzle by Hofstader
     OEIS A005228
     """
+    
     diff = 2
     n = 1
     L = set([1])
@@ -135,6 +136,7 @@ def co_hofstader():
     Complementary solution to a puzzle by Hofstader
     OEIS A030124
     """
+    
     diff = 2
     n = 1
     L = set([1])

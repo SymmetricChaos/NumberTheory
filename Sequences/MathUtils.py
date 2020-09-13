@@ -285,6 +285,18 @@ def digital_sum(n,b=10):
     return s
 
 
+def digital_prod(n,b=10):
+    """Sum of the digits of n in base b"""
+    
+    s = 1
+    
+    while n != 0:
+        n,r = divmod(n,b)
+        s *= r
+    
+    return s
+
+
 def digital_root(n,b=10):
     """Final value of the iteration of digital sums of n in base b"""
     

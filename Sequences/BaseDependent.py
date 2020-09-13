@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from MathUtils import digital_sum, digital_root, repeating_part
+from MathUtils import digital_sum, digital_root, repeating_part, digital_prod
 from NiceErrorChecking import require_integers, require_geq
 
 def evil():
@@ -108,7 +108,7 @@ def binary_length():
             yield n
 
 
-def base_length(B):
+def base_length(B=10):
     """
     Binary Length: Symbols in the representation of each non-negative integer in base B\n
     OEIS A070939
@@ -125,7 +125,7 @@ def base_length(B):
             yield n
 
 
-def digital_sums(B):
+def digital_sums(B=10):
     """
     Digital Sums: Sum of the digits of each non-negative integer in base B\n
     OEIS A007953
@@ -138,11 +138,12 @@ def digital_sums(B):
         yield digital_sum(n,B)
 
 
-def digital_roots(B):
+def digital_roots(B=10):
     """
     Digital Roots: Final value of the iteration of digital sums of each non-negative integer in base b\n
     OEIS A010888
     """
+    
     require_integers(["B"],[B])
     require_geq(["B"],[B],2)
     
@@ -150,7 +151,41 @@ def digital_roots(B):
         yield digital_root(n,B)
 
 
-def palindrome(B):
+def additive_persistence(B=10):
+    """
+    Additive persistence of each natural number in base B
+    OEIS A031286
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    for n in naturals():
+        ctr = 0
+        while digital_sum(n,B) != n:
+            ctr += 1
+            n = digital_sum(n,B)
+        yield ctr
+
+
+def multiplicative_persistence(B=10):
+    """
+    Multiplicative persistence of each natural number in base B
+    OEIS A031346
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    for n in naturals():
+        ctr = 0
+        while n >= B:
+            ctr += 1
+            n = digital_prod(n,B)
+        yield ctr
+
+
+def palindrome(B=10):
     """
     Palindrome Numbers: Non-negative integers that are palindromes in base B\n
     OEIS A002113, A006995
@@ -179,7 +214,7 @@ def palindrome(B):
                 yield m
 
 
-def fraction_period(B):
+def fraction_period(B=10):
     """
     Repeating period of each unit fraction in base B\n
     OEIS A007732
@@ -241,3 +276,12 @@ if __name__ == '__main__':
     print("\nRepeating Unit Fraction Length (Base 10)")
     simple_test(fraction_period(10),17,
                 "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
+    
+    print("\nAdditive Persistence (Base 10)")
+    simple_test(additive_persistence(10),18,
+                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1")
+    
+    print("\nMultiplicative Persistence (Base 10)")
+    simple_test(multiplicative_persistence(10),18,
+                "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1")
+    
