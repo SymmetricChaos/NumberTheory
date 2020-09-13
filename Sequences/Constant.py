@@ -156,7 +156,9 @@ def champernowne_digits(B=10):
 
 # Extremely inefficient due to the size of the fractions used and locked to base-10 for now
 def bin_log_digits(n):
-    """Decimal digits of the base 2 logarithm of n"""
+    """
+    Decimal digits of the base 2 logarithm of n
+    """
     
     num = n
     den = 1
@@ -177,6 +179,26 @@ def bin_log_digits(n):
         g = gcd(num,den)
         
         num,den = num//g,den//g
+
+
+def quadratic_irrational(a,b,c,d,B=10):
+    """
+    Digits of (a+b√c)/d
+    """
+    
+    require_integers(["a","b","c","d","B"],[a,b,c,d,B])
+    require_geq(["b","c","d"],[b,c,d],1)
+    require_geq(["B"],[B],2)
+    
+    diga = int_to_digits(a,B)
+    
+    sq = sqrt_digits(c,B)
+    pr = real_prod_nat(sq,b,B)
+    sm = real_sum(pr,diga,B)
+    M = real_div_nat(sm,d,B)
+    
+    yield from dropwhile(lambda x: x == 0,M)
+
 
 
 
@@ -236,7 +258,11 @@ if __name__ == '__main__':
     simple_test(champernowne_digits(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
     
-    print("\nlog_2(9)")
-    simple_test(bin_log_digits(9),6,
-                "3, 1, 6, 9, 9, 2")
+    print("\nlog_2(9), infinite but very ineffecient computation")
+    simple_test(bin_log_digits(9),5,
+                "3, 1, 6, 9, 9")
+    
+    print("\n(3 + 2√5)/4")
+    simple_test(quadratic_irrational(3,2,5,4),18,
+                "1, 8, 6, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9, 8, 9, 4, 8, 4")
     
