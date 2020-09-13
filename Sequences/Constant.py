@@ -109,7 +109,7 @@ def metallic_ratio_digits(n,B=10):
     if dign > digs:
         N = [0] * (dign-digs) + int_to_digits(n,B)
     elif dign < digs:
-        N = [0] * (digs-dign) + N
+        N = [0] * (digs-dign) + int_to_digits(n,B)
     else:
         N = int_to_digits(n,B)
     
@@ -121,22 +121,22 @@ def metallic_ratio_digits(n,B=10):
     yield from dropwhile(lambda x: x == 0,M)
 
 
-def phi_digits():
+def phi_digits(B=10):
     """
     Phi: Digits of the golden ratio\n
     OEIS A001622
     """
     
-    yield from metallic_ratio_digits(1)
+    yield from metallic_ratio_digits(1,B)
 
 
-def silver_ratio_digits():
+def silver_ratio_digits(B=10):
     """
     Digits of the silver ratio\n
     OEIS A014176
     """
     
-    yield from metallic_ratio_digits(2)
+    yield from metallic_ratio_digits(2,B)
 
 
 def champernowne_digits(B=10):
@@ -190,6 +190,10 @@ if __name__ == '__main__':
     print("\nBits of the Square Root of 2")
     simple_test(sqrt_digits(2,B=2),18,
                 "1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1")
+    
+    print("\nBits of the Golden Ratio")
+    simple_test(metallic_ratio_digits(1,B=2),18,
+                "1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0")
     
     print("\nCube Root of 3")
     simple_test(root_digits(3,3),18,
