@@ -1,7 +1,8 @@
-from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat
+from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat, digits
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain, dropwhile
 from Sequences.Simple import constant, naturals
+from math import isqrt
 
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
@@ -94,25 +95,28 @@ def root_digits(n,a,B=10):
         yield x
 
 
-# Not sure why this doesn't work in other bases
-def metallic_ratio_digits(n):
+# The digits not lining up for the addition stop is what causes this to go wrong
+def metallic_ratio_digits(n,B=10):
     """
-    Digits of the Nth Metallic Ratio\n
+    Digits of the Nth Metallic Ratio in base B\n
     OEIS 
     """
     
-    # Prepend zeroes
-    N = [n]
-    m = 10
-    dig = 0
-    while m <= n:
-        m *= 10
-        dig += 1
+    # Prepend zeroes to make addition line up
+    dign = digits(n,B)
+    digs = digits(isqrt(n*n+4),B)
     
-    N = [0]*dig + N
-
+    if dign > digs:
+        N = [0] * (dign-digs) + int_to_digits(n,B)
+    elif dign < digs:
+        N = [0] * (digs-dign) + N
+    else:
+        N = int_to_digits(n,B)
+    
     # (n + √(n+4))/2
-    M = real_div_nat(real_sum(N,sqrt_digits(n*n+4)),2)
+    sq = sqrt_digits(n*n+4,B)
+    sm = real_sum(N,sq,B)
+    M = real_div_nat(sm,2,B)
     
     yield from dropwhile(lambda x: x == 0,M)
 
@@ -141,6 +145,9 @@ def champernowne_digits(B=10):
     OEIS A003137, A030302, A030548, A033307, A030373, A031219, A030998, 
          A031035, A031076
     """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
     
     for n in naturals(1):
         yield from iter(int_to_digits(n,B))
@@ -199,3 +206,4 @@ if __name__ == '__main__':
     print("\nBase 2 Champernowne's Constant")
     simple_test(champernowne_digits(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
+    

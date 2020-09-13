@@ -321,8 +321,25 @@ def int_to_digits(n,B=10):
     return [i for i in reversed(D)]
 
 
+def digits(n,B=10):
+    """
+    Number of digits of n in base B
+    """
+    
+    n = abs(n)
+    ctr = 0
+    
+    while n != 0:
+        n //= B
+        ctr += 1
+    
+    return ctr
+
+
 def digits_to_int(D,B=10):
-    """Convert a list of digits in base B to an integer"""
+    """
+    Convert a list of digits in base B to an integer
+    """
     
     n = 0
     p = 1
@@ -472,3 +489,4 @@ if __name__ == '__main__':
     print([i for i in powerset({1,2,3})])
     
     print(int_to_digits(6,3))
+    print(digits(6,3))

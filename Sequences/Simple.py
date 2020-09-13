@@ -254,7 +254,7 @@ def repdigit(n,B=10):
     
     require_integers(["n","B"],[n,B])
     require_geq(["B"],[B],2)
-    require_geq(["n"],[n],0)
+    require_geq(["n"],[n],1)
     
     if n >= B:
         raise ValueError("There is no digit {n} in base {B}")
