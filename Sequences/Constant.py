@@ -1,8 +1,8 @@
 from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat, digits
 from NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import chain, dropwhile
-from Sequences.Simple import constant, naturals
-from math import isqrt
+from Sequences.Simple import constant, naturals, powers
+from math import isqrt, gcd
 
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits
@@ -99,7 +99,8 @@ def root_digits(n,a,B=10):
 def metallic_ratio_digits(n,B=10):
     """
     Digits of the Nth Metallic Ratio in base B\n
-    OEIS 
+    OEIS A001622, A014176, A098316, A098317, A098318, A176398, A176439, 
+         A176458, A176522
     """
     
     # Prepend zeroes to make addition line up
@@ -152,6 +153,30 @@ def champernowne_digits(B=10):
     for n in naturals(1):
         yield from iter(int_to_digits(n,B))
 
+
+# Extremely inefficient due to the size of the fractions used and locked to base-10 for now
+def bin_log_digits(n):
+    """Decimal digits of the base 2 logarithm of n"""
+    
+    num = n
+    den = 1
+    
+    while True:
+        int_part = num//den
+        
+        for e,p in enumerate(powers(2),-1):
+            if p > int_part:
+                break
+        
+        yield e
+        
+        den = den * 2**e
+        
+        num = num**10
+        den = den**10
+        g = gcd(num,den)
+        
+        num,den = num//g,den//g
 
 
 
@@ -210,4 +235,8 @@ if __name__ == '__main__':
     print("\nBase 2 Champernowne's Constant")
     simple_test(champernowne_digits(2),18,
                 "1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1")
+    
+    print("\nlog_2(9)")
+    simple_test(bin_log_digits(9),6,
+                "3, 1, 6, 9, 9, 2")
     
