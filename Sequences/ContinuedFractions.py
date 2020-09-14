@@ -20,6 +20,68 @@ def sqrt_cfrac(n):
         a = (a0+m)//d
 
 
+def sqrt_convergents(n):
+    """
+    Numerator then denominator of each convergent of the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_convergents(sqrt_cfrac(n)):
+        yield n
+        yield d
+
+
+def sqrt_convergents_num(n):
+    """
+    Numerator then denominator of each convergent of the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_convergents(sqrt_cfrac(n)):
+        yield n
+
+
+def sqrt_convergents_den(n):
+    """
+    Numerator then denominator of each convergent of the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_convergents(sqrt_cfrac(n)):
+        yield d
+
+
+def sqrt_semiconvergents(n):
+    """
+    Numerator then denominator of each best rational approximation for the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_semiconvergents(sqrt_cfrac(n)):
+        yield n
+        yield d
+
+
+def sqrt_semiconvergents_num(n):
+    """
+    Numerator then denominator of each best rational approximation for the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_semiconvergents(sqrt_cfrac(n)):
+        yield n
+
+
+def sqrt_semiconvergents_den(n):
+    """
+    Numerator then denominator of each best rational approximation for the square root of n
+    OEIS
+    """
+    
+    for n,d in cfrac_semiconvergents(sqrt_cfrac(n)):
+        yield d
+
+
 def e_cfrac():
     """
     Terms of the simple continued fraction of Euler's Number 
@@ -39,8 +101,6 @@ def e_cfrac():
 
 
 
-
-
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -52,13 +112,17 @@ if __name__ == '__main__':
     simple_test(sqrt_cfrac(2),18,
                 "1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2")
     
-    print("\nContinued Fraction Convergents for √2")
-    simple_test(cfrac_convergents(sqrt_cfrac(2)),6,
-                "(1, 1), (3, 2), (7, 5), (17, 12), (41, 29), (99, 70)")
+    print("\nNumerators of Continued Fraction Convergents for √2")
+    simple_test(sqrt_convergents_num(2),11,
+                "1, 3, 7, 17, 41, 99, 239, 577, 1393, 3363, 8119")
     
-    print("\nContinued Fraction Semi-Convergents for √2")
-    simple_test(cfrac_semiconvergents(sqrt_cfrac(2)),6,
-                "(1, 1), (2, 1), (3, 2), (4, 3), (7, 5), (10, 7)")
+    print("\nDenominators of Continued Fraction Convergents for √2")
+    simple_test(sqrt_convergents_den(2),11,
+                "1, 2, 5, 12, 29, 70, 169, 408, 985, 2378, 5741")
+    
+    print("\nBy Pairs, Continued Fraction Semi-Convergents for √2")
+    simple_test(sqrt_semiconvergents(2),16,
+                "1, 1, 2, 1, 3, 2, 4, 3, 7, 5, 10, 7, 17, 12, 24, 17")
     
     print("\nContinued Fraction for the √144")
     simple_test(sqrt_cfrac(114),16,
