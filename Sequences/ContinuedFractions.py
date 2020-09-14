@@ -1,6 +1,6 @@
 from math import isqrt
 from Sequences.Simple import arithmetic
-from Sequences.MathUtils import rational_to_cfrac, cfrac_convergents
+from Sequences.MathUtils import rational_to_cfrac, cfrac_convergents, cfrac_semiconvergents
 
 # This can be sped up in the extreme case by using cycle detection
 def sqrt_cfrac(n):
@@ -55,6 +55,10 @@ if __name__ == '__main__':
     print("\nContinued Fraction Convergents for √2")
     simple_test(cfrac_convergents(sqrt_cfrac(2)),6,
                 "(1, 1), (3, 2), (7, 5), (17, 12), (41, 29), (99, 70)")
+    
+    print("\nContinued Fraction Semi-Convergents for √2")
+    simple_test(cfrac_semiconvergents(sqrt_cfrac(2)),6,
+                "(1, 1), (2, 1), (3, 2), (4, 3), (7, 5), (10, 7)")
     
     print("\nContinued Fraction for the √144")
     simple_test(sqrt_cfrac(114),16,
