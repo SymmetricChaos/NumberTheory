@@ -233,7 +233,10 @@ def real_prod_nat(R,n,B=10):
                 yield D.pop(0)
         
         else:
-            D[-1] += q
+            if len(D) > 0:
+                D[-1] += q
+            else:
+                D.append(q)
         
         D.append(r)
 

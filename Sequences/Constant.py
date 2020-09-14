@@ -181,6 +181,8 @@ def bin_log_digits(n):
         num,den = num//g,den//g
 
 
+# This won't work correctly for multidigit numbers
+# The number of digits in a must be the same as the number of digits in the integer part of b√c
 def quadratic_irrational(a,b,c,d,B=10):
     """
     Digits of (a+b√c)/d
@@ -189,6 +191,12 @@ def quadratic_irrational(a,b,c,d,B=10):
     require_integers(["a","b","c","d","B"],[a,b,c,d,B])
     require_geq(["b","c","d"],[b,c,d],1)
     require_geq(["B"],[B],2)
+    
+    for i in naturals(2):
+        if c % (i*i) == 0:
+            raise Exception("c must be squarefree")
+        if i*i > c:
+            break
     
     diga = int_to_digits(a,B)
     
@@ -266,3 +274,12 @@ if __name__ == '__main__':
     simple_test(quadratic_irrational(3,2,5,4),18,
                 "1, 8, 6, 8, 0, 3, 3, 9, 8, 8, 7, 4, 9, 8, 9, 4, 8, 4")
     
+    
+    
+    print("\nTEST QUADRATIC IRRATIONAL")
+    simple_test(quadratic_irrational(11,3,1327,4),18,
+                "")
+    
+    from math import sqrt
+    print((11+3*sqrt(1327))/4)
+    print(sqrt(1327)*3)
