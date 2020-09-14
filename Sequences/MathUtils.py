@@ -1,6 +1,6 @@
 from math import isqrt
 from itertools import chain, combinations, repeat, count
-
+from fractions import Fraction
 
 ###################
 ## FACTORIZATION ##
@@ -177,7 +177,7 @@ def real_sum(R1,R2,B=10):
     R2e = chain(R2,repeat(0))
     
     D = []
-
+    
     for a,b in zip(R1e,R2e):
         t = a+b
         
@@ -254,6 +254,110 @@ def real_div_nat(R,n,B=10):
         q,r = divmod(r,n)
         
         yield q
+
+
+
+
+
+####################################
+## CONTINUED FRACTION ARITHMETRIC ##
+####################################
+
+def rational_to_cfrac(n,d):
+    """
+    Terms of the simple continued fraction representation of n/d
+    """
+    
+    out = []
+    
+    while d != 0:
+        i = n//d
+        
+        out.append(i)
+        n,d = d,n-(d*i)
+    
+    return out
+
+
+def cfrac_to_rational(S,lim=20):
+    """
+    Pair representing the rational value of S out to lim terms
+    """
+    
+    n0,n1 = 0,1
+    d0,d1 = 1,0
+    
+    for ctr,c in enumerate(S):
+        n0,n1 = n1,c*n1 + n0
+        d0,d1 = d1,c*d1 + d0
+        if ctr == lim:
+            break
+        
+    return Fraction(n1,d1)
+
+
+def finite_cfrac_to_rational(S):
+    """
+    Pair representing the rational value of S but requiring that S be finite
+    """
+    
+    if type(S) not in (list,tuple):
+        raise Exception("finite_cfrac_to_rational accepts only lists and tuples that represent a continued fraction in order to ensure cacluation terminates")
+    
+    n0,n1 = 0,1
+    d0,d1 = 1,0
+    
+    for c in S:
+        n0,n1 = n1,c*n1 + n0
+        d0,d1 = d1,c*d1 + d0
+        
+    return Fraction(n1,d1)
+
+
+def cfrac_convergents(S):
+    """
+    Convergents of the simple continued fraction S
+    """
+    
+    n0,n1 = 0,1
+    d0,d1 = 1,0
+    
+    for c in S:
+        n0,n1 = n1,c*n1 + n0
+        d0,d1 = d1,c*d1 + d0
+        
+        yield (n1,d1)
+
+
+def cfrac_semiconvergents(S):
+    """
+    Semiconvergents of the simple continued fraction S, contains all best rational approximations
+    """
+    
+    S = iter(S)
+    A = [next(S)]
+    prev_best = finite_cfrac_to_rational(A)
+    
+    yield prev_best.numerator,prev_best.denominator
+    
+    for a in S:
+        A.append(a)
+        next_best = finite_cfrac_to_rational(A)
+        cur_diff = abs(prev_best-next_best)
+        
+        semi = A[:-1] + [(a-1)//2+1]
+        semi_c = finite_cfrac_to_rational(semi)
+        
+        if abs(semi_c-next_best) > cur_diff:
+            semi[-1] += 1
+        
+        while semi[-1] <= a:
+            semi_c = finite_cfrac_to_rational(semi)
+            yield semi_c.numerator,semi_c.denominator
+            semi[-1] += 1
+        
+        prev_best = next_best
+
 
 
 
@@ -493,3 +597,9 @@ if __name__ == '__main__':
     
     print(int_to_digits(6,3))
     print(digits(6,3))
+    
+    print("\nConvergents of Pi up to 355/113")
+    print([i for i in cfrac_convergents([3, 7, 15, 1])])
+    
+    print("\nSemiconvergents of Pi up to 355/113")
+    print([i for i in cfrac_semiconvergents([3, 7, 15, 1])])

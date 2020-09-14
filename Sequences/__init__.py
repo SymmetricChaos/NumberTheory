@@ -46,8 +46,7 @@ from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial
 
-from Sequences.ContinuedFractions import cfrac, cfrac_convergents, sqrt_cfrac, \
-                                         e_cfrac
+from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
