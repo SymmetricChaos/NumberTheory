@@ -235,6 +235,8 @@ def real_prod_nat(R,n,B=10):
         else:
             if len(D) > 0:
                 D[-1] += q
+                if D[-1] >= B:
+                    print("ISSUE")
             else:
                 D.append(q)
         

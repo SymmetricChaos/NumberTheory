@@ -276,10 +276,15 @@ if __name__ == '__main__':
     
     
     
-    print("\nTEST QUADRATIC IRRATIONAL")
-    simple_test(quadratic_irrational(11,3,1327,4),18,
-                "")
+    # print("\nTEST QUADRATIC IRRATIONAL")
+    # simple_test(quadratic_irrational(11,3,1327,4),18,
+    #             "")
     
-    from math import sqrt
-    print((11+3*sqrt(1327))/4)
-    print(sqrt(1327)*3)
+    # from math import sqrt
+    # print((11+3*sqrt(1327))/4)    
+    # print(f"({11}+{3*sqrt(1327)})/{4}")
+    
+    # sq = sqrt_digits(1327,10)
+    # pr = real_prod_nat(sq,3,10)
+    # # sm = real_sum(pr,11,10)
+    # print(simple_test(pr,10,""))
