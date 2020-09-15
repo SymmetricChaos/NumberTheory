@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factors
+from Sequences.MathUtils import factors, prime_factorization, nth_sign
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
@@ -461,6 +461,22 @@ def lucky():
             nth += 1
 
 
+def mobius_function():
+    """
+    Map of the Mobius Function
+    """
+    
+    yield 1
+    
+    for n in naturals(2):
+        P = prime_factorization(n)
+        
+        if len(P) == len(set(P)):
+            yield nth_sign(len(P))
+        else:
+            yield 0
+
+
 
 
 
@@ -558,4 +574,8 @@ if __name__ == '__main__':
     print("\nNoncomposite Numbers")
     simple_test(noncomposite(),15,
                 "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
+    
+    print("\nMobius Function")
+    simple_test(mobius_function(),16,
+                "1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1, 1, 0")
     

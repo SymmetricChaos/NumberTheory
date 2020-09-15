@@ -595,6 +595,17 @@ def powerset(L):
     return chain.from_iterable(combinations(list(L), r) for r in range(len(L)+1))
 
 
+def nth_sign(n):
+    """
+    (-1)^n
+    """
+    
+    if n % 2 == 0:
+        return 1
+    
+    return -1
+
+
 
 
 
@@ -632,4 +643,3 @@ if __name__ == '__main__':
     
     print("\nMobius Transform")
     print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
-    
