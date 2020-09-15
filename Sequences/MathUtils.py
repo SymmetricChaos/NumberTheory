@@ -364,26 +364,29 @@ def mobius(a,b,c,d,S):
     The Mobius transform
     """
     
-    try:
-        while True:
-            if c == 0 or d == 0:
-                s = next(S)
-                a,b,c,d = b,a+b*s,d,c+d*s
-            
-            elif a//c == b//d:
-                q = a//c
-                yield q
-                a,b,c,d = c,d,a-c*q,b-d*q
-            
-            else:
-                s = next(S)
-                a,b,c,d = b,a+b*s,d,c+d*s
-    except:
+    for s in S:
+        a,b,c,d = b,a+b*s,d,c+d*s
         
-        a,b,c,d = b,b,d,d
-        yield a//c
+        while c != 0 and d != 0 and a//c == b//d:
+            q = a//c
+            yield q
+            a,b,c,d = c,d,a-c*q,b-d*q
+    
+    #Final step
+    a,b,c,d = b,b,d,d
+    yield a//c
 
 
+def double_mobius(a,b,c,d,e,f,g,h,X,Y):
+    
+    if 0 in [e,f,g,h]:
+        raise Exception("e, f, g, and h must all be nonzero")
+    
+    ae = Fraction(a,e)
+    bd = Fraction(b,f)
+    cf = Fraction(c,g)
+    dh = Fraction(d,h)
+    
 
 
 
@@ -629,3 +632,4 @@ if __name__ == '__main__':
     
     print("\nMobius Transform")
     print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
+    
