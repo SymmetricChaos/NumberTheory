@@ -359,6 +359,21 @@ def cfrac_semiconvergents(S):
         prev_best = next_best
 
 
+def mobius(a,b,c,d,S):
+    """
+    The Mobius transform
+    """
+    
+    for s in S:
+        if c == 0 or d == 0:
+            a,b,c,d = b,a+b*s,d,c+d*s
+        
+        else:
+            while a//c == b//d:
+                q = a//c
+                yield q
+                a,b,c,d = c,d,a-c*q,b-d*q
+
 
 
 
@@ -595,11 +610,11 @@ if __name__ == '__main__':
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
     
-    print(int_to_digits(6,3))
-    print(digits(6,3))
-    
     print("\nConvergents of Pi up to 355/113")
     print([i for i in cfrac_convergents([3, 7, 15, 1])])
     
     print("\nSemiconvergents of Pi up to 355/113")
     print([i for i in cfrac_semiconvergents([3, 7, 15, 1])])
+    
+    print("\nMobius Transform")
+    print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
