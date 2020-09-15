@@ -359,30 +359,30 @@ def cfrac_semiconvergents(S):
         prev_best = next_best
 
 
-# idk wtf is going on with this
 def mobius(a,b,c,d,S):
     """
     The Mobius transform
     """
     
-    for s in S:
-        if c == 0 or d == 0:
-            a,b,c,d = b,a+b*s,d,c+d*s
-            print(f"get {s}")
-            print(a,b)
-            print(c,d)
-            print()
-        
-        else:
-            while a//c == b//d:
+    try:
+        while True:
+            if c == 0 or d == 0:
+                s = next(S)
+                a,b,c,d = b,a+b*s,d,c+d*s
+            
+            elif a//c == b//d:
                 q = a//c
                 yield q
                 a,b,c,d = c,d,a-c*q,b-d*q
-                print(f"return {q}")
-                print(a,b)
-                print(c,d)
-                print()
-    
+            
+            else:
+                s = next(S)
+                a,b,c,d = b,a+b*s,d,c+d*s
+    except:
+        
+        a,b,c,d = b,b,d,d
+        yield a//c
+
 
 
 
