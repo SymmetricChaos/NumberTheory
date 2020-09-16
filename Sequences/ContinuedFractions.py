@@ -117,9 +117,13 @@ if __name__ == '__main__':
     simple_test(sqrt_convergents_den(2),11,
                 "1, 2, 5, 12, 29, 70, 169, 408, 985, 2378, 5741")
     
-    print("\nContinued Fraction Semi-Convergents for √2")
-    simple_test(sqrt_semiconvergents(2),6,
-                "(1, 1), (3, 2), (7, 5), (17, 12), (41, 29), (99, 70)")
+    print("\nContinued Fraction Convergents of Pi")
+    simple_test(cfrac_convergents([3,7,15,1,292]),6,
+                "(3, 1), (22, 7), (333, 106), (355, 113), (103993, 33102)")
+    
+    print("\nContinued Fraction Semi-Convergents of Pi")
+    simple_test(cfrac_semiconvergents([3,7,15,1,292]),6,
+                "(3, 1), (13, 4), (16, 5), (19, 6), (22, 7), (179, 57)")
     
     print("\nContinued Fraction for the √144")
     simple_test(sqrt_cfrac(114),16,
