@@ -1,4 +1,4 @@
-from math import isqrt
+from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from fractions import Fraction
 
@@ -274,8 +274,8 @@ def rational_to_cfrac(n,d):
     
     while d != 0:
         i = n//d
-        
         out.append(i)
+        
         n,d = d,n-(d*i)
     
     return out
@@ -292,6 +292,7 @@ def cfrac_to_rational(S,lim=20):
     for ctr,c in enumerate(S):
         n0,n1 = n1,c*n1 + n0
         d0,d1 = d1,c*d1 + d0
+        
         if ctr == lim:
             break
         
@@ -379,17 +380,16 @@ def mobius(a,b,c,d,S):
     yield a//c
 
 
-def double_mobius(a,b,c,d,e,f,g,h,X,Y):
+def homographic_convergents(a,b,c,d,S):
+    """
+    Rational convergents of (a+bx)/(c+dx) where x is the real represented by S
+    """
     
-    if 0 in [e,f,g,h]:
-        raise Exception("e, f, g, and h must all be nonzero")
-    
-    ae = Fraction(a,e)
-    bd = Fraction(b,f)
-    cf = Fraction(c,g)
-    dh = Fraction(d,h)
-    
-
+    for s in S:
+        a,b,c,d = b,a+b*s,d,c+d*s
+        
+        g = gcd(b,d)
+        yield (b//g,d//g)
 
 
 
@@ -645,3 +645,4 @@ if __name__ == '__main__':
     
     print("\nMobius Transform")
     print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
+    

@@ -1,6 +1,6 @@
 from math import isqrt
 from Sequences.Simple import arithmetic
-from Sequences.MathUtils import rational_to_cfrac, cfrac_convergents, cfrac_semiconvergents
+from Sequences.MathUtils import rational_to_cfrac, cfrac_convergents, cfrac_semiconvergents, homographic_convergents
 
 # This can be sped up in the extreme case by using cycle detection
 def sqrt_cfrac(n):
@@ -26,9 +26,7 @@ def sqrt_convergents(n):
     OEIS
     """
     
-    for n,d in cfrac_convergents(sqrt_cfrac(n)):
-        yield n
-        yield d
+    yield from cfrac_convergents(sqrt_cfrac(n))
 
 
 def sqrt_convergents_num(n):
@@ -57,9 +55,8 @@ def sqrt_semiconvergents(n):
     OEIS
     """
     
-    for n,d in cfrac_semiconvergents(sqrt_cfrac(n)):
-        yield n
-        yield d
+    yield from cfrac_convergents(sqrt_cfrac(n))
+
 
 
 def sqrt_semiconvergents_num(n):
@@ -120,9 +117,9 @@ if __name__ == '__main__':
     simple_test(sqrt_convergents_den(2),11,
                 "1, 2, 5, 12, 29, 70, 169, 408, 985, 2378, 5741")
     
-    print("\nBy Pairs, Continued Fraction Semi-Convergents for √2")
-    simple_test(sqrt_semiconvergents(2),16,
-                "1, 1, 2, 1, 3, 2, 4, 3, 7, 5, 10, 7, 17, 12, 24, 17")
+    print("\nContinued Fraction Semi-Convergents for √2")
+    simple_test(sqrt_semiconvergents(2),6,
+                "(1, 1), (3, 2), (7, 5), (17, 12), (41, 29), (99, 70)")
     
     print("\nContinued Fraction for the √144")
     simple_test(sqrt_cfrac(114),16,
@@ -131,4 +128,8 @@ if __name__ == '__main__':
     print("\nContinued Fraction for Euler's Number, e")
     simple_test(e_cfrac(),17,
                 "2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1")
+    
+    print("\nRational Convergents of (1+2e)/(1+3e)")
+    simple_test(homographic_convergents(1,2,1,3,e_cfrac()),5,
+                "(5, 7), (7, 10), (19, 27), (26, 37), (45, 64)")
     
