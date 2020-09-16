@@ -392,6 +392,19 @@ def homographic_convergents(a,b,c,d,S):
         yield (b//g,d//g)
 
 
+def digits_to_cfrac(D,chunk_size=10):
+    """
+    Convert a stream of decimal digits to a stream of continued fraction convergents
+    """
+    
+    # Calculate the terms for the first n terms, then check what happens if the
+    # next term is 9. All digits that match (and haven't been output yet) can be given
+    # https://x.st/continued-fraction-streams/
+    # Not sure how to handle number greater than 9
+    
+    # For efficiency, because this method recomputes the terms, digits should be taken in chunks
+    
+    
 
 
 #################
