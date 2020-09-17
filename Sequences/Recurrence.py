@@ -391,7 +391,7 @@ def ulam(u=1,v=2):
 
 def semifibonacci():
     """
-    The Semi-Fibonacci Sequence
+    The Semi-Fibonacci Sequence\n
     OEIS A030067
     """
     
@@ -403,6 +403,19 @@ def semifibonacci():
         
         yield L[-1]
         L.append(L[e-1] + L[e-2])
+
+
+def perrin():
+    """
+    The Perrin Numbers\n
+    OEIS A001608
+    """
+    
+    a,b,c = 3,0,2
+    
+    while True:
+        yield a
+        a, b, c = b, c, a+b
 
 
 
@@ -508,3 +521,7 @@ if __name__ == '__main__':
     print("\nThe Semifibonacci Sequence")
     simple_test(semifibonacci(),17,
                 "1, 1, 2, 1, 3, 2, 5, 1, 6, 3, 9, 2, 11, 5, 16, 1, 17")
+    
+    print("\nPerrin Sequence")
+    simple_test(perrin(),15,
+                "3, 0, 2, 3, 2, 5, 5, 7, 10, 12, 17, 22, 29, 39, 51")
