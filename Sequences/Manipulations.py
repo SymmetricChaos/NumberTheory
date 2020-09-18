@@ -289,6 +289,16 @@ def n_rep_a(sequence,rep_sequence):
         yield from repeat(n,a)
 
 
+def records(sequence):
+    
+    r = next(sequence)
+    yield r
+    
+    for s in sequence:
+        if s > r:
+            yield s
+            r = s
+
 
 
 

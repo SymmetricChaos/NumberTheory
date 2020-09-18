@@ -190,6 +190,7 @@ def highly_composite():
     """
     
     F = 0
+    
     for i in naturals(1):
         L = len(factors(i))
         
@@ -290,6 +291,24 @@ def squarefree_kernel():
                 D[p+q].append(p)
             
             del D[q]
+
+
+def squareful():
+    """
+    Complement of the Squarefree Numbers\n
+    OEIS A013929
+    """
+    
+    yield 0
+    
+    for n in naturals(1):
+        for i in naturals(2):
+            if n % i**2 == 0:
+                yield n
+                break
+            
+            if (i**2) > n:
+                break
 
 
 def prime_counting():
@@ -546,6 +565,10 @@ if __name__ == '__main__':
     print("\nSquarefree Kernels")
     simple_test(squarefree_kernel(),16,
                 "1, 2, 3, 2, 5, 6, 7, 2, 3, 10, 11, 6, 13, 14, 15, 2")
+    
+    print("\nSquareful Numbers")
+    simple_test(squareful(),14,
+                "0, 4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28, 32, 36")
     
     print("\nPrime Counting Function")
     simple_test(prime_counting(),18,
