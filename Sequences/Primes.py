@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factors, prime_factorization, nth_sign
+from Sequences.MathUtils import factors, prime_factorization, nth_sign, unique_prime_factors
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive
@@ -496,6 +496,26 @@ def mobius_function():
             yield 0
 
 
+def powerful():
+    """
+    Powerful Numbers: Positive integers that are divisible by the square of each prime factor
+    OEIS A001694
+    """
+    
+    def is_powerful(n):
+        U = unique_prime_factors(n)
+        for u in U:
+            if n % (u*u) != 0:
+                return False
+        return True
+    
+    yield 1
+    
+    for n in naturals(4):
+        if is_powerful(n):
+            yield n
+
+
 
 
 
@@ -601,4 +621,8 @@ if __name__ == '__main__':
     print("\nMobius Function")
     simple_test(mobius_function(),16,
                 "1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1, 1, 0")
+    
+    print("\nPowerful Numbers")
+    simple_test(powerful(),14,
+                "1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 72, 81, 100")
     

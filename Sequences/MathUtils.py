@@ -99,6 +99,32 @@ def prime_factorization(n):
     return L
 
 
+def unique_prime_factors(n):
+    """Unique Prime Factors"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    L = []
+    
+    if n % 2 == 0:
+        L.append(2)
+        while n % 2 == 0:
+            n //= 2
+    
+    for d in count(3,2):
+        
+        if n % d == 0:
+            L.append(d)
+            while n % d == 0:
+                n //= d
+        
+        if n == 1:
+            break
+    
+    return L
+
+
 def prime_power_factorization(n):
     """Factor a number into powers of primes"""
     
