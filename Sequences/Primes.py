@@ -2,7 +2,7 @@ from Sequences.Simple import naturals, arithmetic
 from Sequences.MathUtils import factors, prime_factorization, nth_sign, unique_prime_factors
 from collections import defaultdict
 from itertools import takewhile
-from Sequences.NiceErrorChecking import require_integers, require_positive
+from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
 from math import prod, gcd
 from Sequences.Manipulations import partial_prods, prepend, hypersequence
 
@@ -496,24 +496,27 @@ def mobius_function():
             yield 0
 
 
-def powerful():
+def powerful(n=2):
     """
-    Powerful Numbers: Positive integers that are divisible by the square of each prime factor
+    n-Powerful Numbers: Positive integers that are divisible by the square of each prime factor
     OEIS A001694
     """
     
-    def is_powerful(n):
-        U = unique_prime_factors(n)
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],2)
+    
+    def is_n_powerful(a,n):
+        U = unique_prime_factors(a)
         for u in U:
-            if n % (u*u) != 0:
+            if a % (u**n) != 0:
                 return False
         return True
     
     yield 1
     
-    for n in naturals(4):
-        if is_powerful(n):
-            yield n
+    for m in naturals(4):
+        if is_n_powerful(m,n):
+            yield m
 
 
 
@@ -625,4 +628,8 @@ if __name__ == '__main__':
     print("\nPowerful Numbers")
     simple_test(powerful(),14,
                 "1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 72, 81, 100")
+    
+    print("\n3-Powerful Numbers")
+    simple_test(powerful(3),12,
+                "1, 8, 16, 27, 32, 64, 81, 125, 128, 216, 243, 256")
     
