@@ -1,5 +1,6 @@
 from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
+from functools import reduce
 from fractions import Fraction
 
 ###################
@@ -559,6 +560,32 @@ def frac_to_digits(n,d,B=10):
         n = r*B
 
 
+def int_to_balanced_ternary(n):
+    """
+    Convert an integer to a list of its digits in balanced ternary
+    """
+    
+    D = []
+    
+    while n != 0:
+        n,r = divmod(n,3)
+        if r == 2:
+            n += 1
+            D.append(-1)
+        else:
+            D.append(r)
+    
+    return [i for i in reversed(D)]
+
+
+def balanced_ternary_to_int(D):
+    """
+    Convert a list of balanced ternary digits to an integer
+    """
+    
+    return reduce(lambda y,x: x + 3 * y,D,0)
+
+
 
 
 
@@ -696,4 +723,10 @@ if __name__ == '__main__':
     
     print("\nMobius Transform")
     print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
+    
+    print("\nBalanced Ternary Representation of 378")
+    print(int_to_balanced_ternary(378))
+    
+    print("\nConvert Balanced Ternary Number +---000 to an integer")
+    print(balanced_ternary_to_int([1, -1, -1, -1, 0, 0, 0]))
     
