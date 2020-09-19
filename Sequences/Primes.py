@@ -199,6 +199,32 @@ def highly_composite():
             yield i
 
 
+def highly_composite_factor():
+    """
+    Factors of each Highly Composite Number\n
+    OEIS 
+    """
+    
+    F = 0
+    
+    for i in naturals(1):
+        L = len(factors(i))
+        
+        if L > F:
+            F = L
+            yield F
+
+
+def highly_composite_prime_factor():
+    """
+    Prime Factors (with multiplicity) of each Highly Composite Number\n
+    OEIS A112778
+    """
+    
+    for h in highly_composite():
+        yield len(prime_factorization(h))
+
+
 def divisors():
     """
     Number of Divisors: Count of divisors for each positive integer\n
@@ -291,6 +317,12 @@ def squarefree_kernel():
                 D[p+q].append(p)
             
             del D[q]
+
+
+def A111059():
+    """Partial Products of the Squarefree Numbers"""
+    
+    yield from partial_prods(squarefree())
 
 
 def squareful():
@@ -589,6 +621,10 @@ if __name__ == '__main__':
     simple_test(squarefree_kernel(),16,
                 "1, 2, 3, 2, 5, 6, 7, 2, 3, 10, 11, 6, 13, 14, 15, 2")
     
+    print("\nA111059: Squarefree Partial Products")
+    simple_test(A111059(),9,
+                "1, 2, 6, 30, 180, 1260, 12600, 138600, 1801800")
+    
     print("\nSquareful Numbers")
     simple_test(squareful(),14,
                 "0, 4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28, 32, 36")
@@ -632,4 +668,13 @@ if __name__ == '__main__':
     print("\n3-Powerful Numbers")
     simple_test(powerful(3),13,
                 "1, 8, 16, 27, 32, 64, 81, 125, 128, 216, 243, 256, 343")
+    
+    print("\nCount of Factors for each Highly Composite Number")
+    simple_test(highly_composite_factor(),15,
+                "1, 2, 3, 4, 6, 8, 9, 10, 12, 16, 18, 20, 24, 30, 32")
+    
+    print("\nCount of Prime Factors (with multiplicity) for each Highly Composite Number")
+    simple_test(highly_composite_prime_factor(),18,
+                "0, 1, 2, 2, 3, 4, 4, 5, 4, 5, 5, 6, 6, 7, 6, 6, 7, 7")
+    
     
