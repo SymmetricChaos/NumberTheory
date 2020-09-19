@@ -4,7 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
 from math import prod, gcd
-from Sequences.Manipulations import partial_prods, prepend, hypersequence
+from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences
 
 ## Generator that returns primes (not my work)
 def primes():
@@ -25,6 +25,30 @@ def primes():
             for p in D[q]:
                 D[p+q].append(p)
             del D[q]
+
+
+def twin_primes():
+    """
+    Twin Primes: Primes that are two more or less than another prime
+    OEIS A001097
+    """
+    P = primes()
+    
+    a,b,c = next(P),next(P),next(P)
+    
+    while True:
+        if b-2 == a or b+2 == c:
+            yield b
+        a,b,c = b,c,next(P)
+
+
+def prime_gaps():
+    """
+    Prime Gaps: Gaps between successive primes
+    OEIS A001223
+    """
+    
+    yield from differences(primes())
 
 
 def superprimes():
@@ -554,6 +578,9 @@ def powerful(n=2):
 
 
 
+
+
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -677,4 +704,11 @@ if __name__ == '__main__':
     simple_test(highly_composite_prime_factor(),18,
                 "0, 1, 2, 2, 3, 4, 4, 5, 4, 5, 5, 6, 6, 7, 6, 6, 7, 7")
     
+    print("\nTwin Primes")
+    simple_test(twin_primes(),14,
+                "3, 5, 7, 11, 13, 17, 19, 29, 31, 41, 43, 59, 61, 71")
+    
+    print("\nPrime Gaps")
+    simple_test(prime_gaps(),18,
+                "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
     
