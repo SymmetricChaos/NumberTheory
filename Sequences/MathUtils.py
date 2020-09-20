@@ -450,53 +450,8 @@ def homographic_convergents(a,b,c,d,S):
 ## CONVERSIONS ##
 #################
 
-def _bits_to_int(bits):
-    """Convert a list of 0s and 1s representing a bigendian binary integer"""
-    
-    n = 0
-    p = 1
-    
-    for b in bits:
-        n += p
-        p *= 2
-    
-    return n
 
-
-def digital_sum(n,b=10):
-    """Sum of the digits of n in base b"""
-    
-    s = 0
-    
-    while True:
-        n,r = divmod(n,b)
-        s += r
-        if n == 0:
-            return s
-
-
-def digital_prod(n,b=10):
-    """Product of the digits of n in base b"""
-    
-    s = 1
-    
-    while True:
-        n,r = divmod(n,b)
-        s *= r
-        if n == 0:
-            return s
-
-
-def digital_root(n,b=10):
-    """Final value of the iteration of digital sums of n in base b"""
-    
-    while n >= b:
-        n = digital_sum(n,b)
-    
-    return n
-
-
-def int_to_digits(n,B=10):
+def int_to_digits(n,B=10,bigendian=False):
     """
     Convert the integer n to its digits in base B
     """
@@ -508,25 +463,13 @@ def int_to_digits(n,B=10):
         n,r = divmod(n,B)
         D.append(r)
     
-    return [i for i in reversed(D)]
+    if bigendian:
+        return D
+    else:
+        return [i for i in reversed(D)]
 
 
-def digits(n,B=10):
-    """
-    Number of digits of n in base B
-    """
-    
-    n = abs(n)
-    ctr = 0
-    
-    while n != 0:
-        n //= B
-        ctr += 1
-    
-    return ctr
-
-
-def digits_to_int(D,B=10):
+def digits_to_int(D,B=10,bigendian=False):
     """
     Convert a list of digits in base B to an integer
     """
@@ -534,17 +477,25 @@ def digits_to_int(D,B=10):
     n = 0
     p = 1
     
-    for d in D:
-        n += d*p
-        p *= B
+    if bigendian:
+        for d in D:
+            n += d*p
+            p *= B
+        
+        return n
     
-    return n
+    else:
+        for d in reversed(D):
+            n += d*p
+            p *= B
+        
+        return n
 
 
 def frac_to_digits(n,d,B=10):
     """
-    Convert the fraction n/d to its digits in base B
-    Infinite generator
+    Convert the rational n/d to its digits in base B
+    Infinite generator, little-endian only
     """
     
     n = abs(n)
@@ -584,6 +535,61 @@ def balt_to_int(D):
     """
     
     return reduce(lambda y,x: x + 3 * y,D,0)
+
+
+
+
+
+########################
+## DIGIT MANIPULATION ##
+########################
+
+def digital_sum(n,B=10):
+    """Sum of the digits of n in base B"""
+    
+    s = 0
+    
+    while True:
+        n,r = divmod(n,B)
+        s += r
+        if n == 0:
+            return s
+
+
+def digital_prod(n,B=10):
+    """Product of the digits of n in base B"""
+    
+    s = 1
+    
+    while True:
+        n,r = divmod(n,B)
+        s *= r
+        if n == 0:
+            return s
+
+
+def digital_root(n,B=10):
+    """Final value of the iteration of digital sums of n in base B"""
+    
+    while n >= B:
+        n = digital_sum(n,B)
+    
+    return n
+
+
+def digits(n,B=10):
+    """
+    Number of digits of n in base B
+    """
+    
+    n = abs(n)
+    ctr = 0
+    
+    while n != 0:
+        n //= B
+        ctr += 1
+    
+    return ctr
 
 
 
@@ -730,3 +736,8 @@ if __name__ == '__main__':
     print("\nConvert Balanced Ternary Number -+++000 to an integer")
     print(balt_to_int([-1, 1, 1, 1, 0, 0, 0]))
     
+    print("\nConvert 387 to decimal digits")
+    print(int_to_digits(387))
+    
+    print("\nConvert the decimal digits [3,8,7] to an integer")
+    print(digits_to_int([3,8,7]))

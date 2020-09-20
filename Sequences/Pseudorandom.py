@@ -1,4 +1,4 @@
-from MathUtils import _bits_to_int
+from MathUtils import digits_to_int
 
 # Obviously these are all VERY inefficient
 
@@ -38,7 +38,7 @@ def LFSR(vector,taps):
     _check_LFSR_args(vector,taps)
     
     while True:
-        yield _bits_to_int(vector)
+        yield digits_to_int(vector,2,bigendian=True)
         vector = vector[1:] + [sum([vector[i] for i in taps])%2]
 
 
