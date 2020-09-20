@@ -560,7 +560,7 @@ def frac_to_digits(n,d,B=10):
         n = r*B
 
 
-def int_to_balanced_ternary(n):
+def int_to_balt(n):
     """
     Convert an integer to a list of its digits in balanced ternary
     """
@@ -578,7 +578,7 @@ def int_to_balanced_ternary(n):
     return [i for i in reversed(D)]
 
 
-def balanced_ternary_to_int(D):
+def balt_to_int(D):
     """
     Convert a list of balanced ternary digits to an integer
     """
@@ -724,9 +724,9 @@ if __name__ == '__main__':
     print("\nMobius Transform")
     print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
     
-    print("\nBalanced Ternary Representation of 378")
-    print(int_to_balanced_ternary(378))
+    print("\nBalanced Ternary Representation of -378")
+    print(int_to_balt(-378))
     
-    print("\nConvert Balanced Ternary Number +---000 to an integer")
-    print(balanced_ternary_to_int([1, -1, -1, -1, 0, 0, 0]))
+    print("\nConvert Balanced Ternary Number -+++000 to an integer")
+    print(balt_to_int([-1, 1, 1, 1, 0, 0, 0]))
     
