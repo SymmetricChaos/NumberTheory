@@ -32,6 +32,7 @@ def twin_primes():
     Twin Primes: Primes that are two more or less than another prime
     OEIS A001097
     """
+    
     P = primes()
     
     a,b,c = next(P),next(P),next(P)
@@ -42,6 +43,55 @@ def twin_primes():
         a,b,c = b,c,next(P)
 
 
+def cousin_primes():
+    """
+    Cousin Primes: Primes that are four more or less than another prime
+    OEIS
+    """
+    
+    P = primes()
+    
+    a,b,c = next(P),next(P),next(P)
+    
+    while True:
+        if b-4 == a or b+4 == c:
+            yield b
+        a,b,c = b,c,next(P)
+
+
+def sexy_primes():
+    """
+    Sexy Primes: Primes that are four more or less than another prime
+    OEIS
+    """
+    
+    P = primes()
+    
+    a,b,c = next(P),next(P),next(P)
+    
+    while True:
+        if b-6 == a or b+6 == c:
+            yield b
+        a,b,c = b,c,next(P)
+
+
+def prime_constellation(n,k):
+    """
+    Primes
+    OEIS
+    """
+    
+    P = primes()
+    L = [next(P) for i in range(n)]
+    
+    if n > k//2:
+        raise ValueError("n must be greater than k/2")
+    
+    while True:
+        if abs(L[0] - L[-1]) == k:
+            yield tuple(L)
+        L = L[1:] + [next(P)]
+
 def prime_gaps():
     """
     Prime Gaps: Gaps between successive primes
@@ -49,6 +99,7 @@ def prime_gaps():
     """
     
     yield from differences(primes())
+
 
 
 def superprimes():
@@ -89,6 +140,17 @@ def noncomposite():
     yield 1
     
     yield from primes()
+
+
+def nonprime():
+    """
+    Nonprime Numbers: Positive integers with less than three factors\n
+    OEIS A008578
+    """
+    
+    yield 1
+    
+    yield from composites()
 
 
 def primorial():
@@ -578,9 +640,6 @@ def powerful(n=2):
 
 
 
-
-
-
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -711,4 +770,8 @@ if __name__ == '__main__':
     print("\nPrime Gaps")
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
+    
+    print("\n7,20-Prime Constellation")
+    simple_test(prime_constellation(7,20),3,
+                "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")
     

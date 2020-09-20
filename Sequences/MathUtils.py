@@ -450,7 +450,6 @@ def homographic_convergents(a,b,c,d,S):
 ## CONVERSIONS ##
 #################
 
-
 def int_to_digits(n,B=10,bigendian=False):
     """
     Convert the integer n to its digits in base B
