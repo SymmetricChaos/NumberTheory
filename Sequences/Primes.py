@@ -6,7 +6,11 @@ from Sequences.NiceErrorChecking import require_integers, require_positive, requ
 from math import prod, gcd
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences
 
-## Generator that returns primes (not my work)
+
+##############################
+## CLASSES OF PRIME NUMBERS ##
+##############################
+
 def primes():
     """
     Prime Numbers: Positive integers with exactly two factors\n
@@ -92,6 +96,7 @@ def prime_constellation(n,k):
             yield tuple(L)
         L = L[1:] + [next(P)]
 
+
 def prime_gaps():
     """
     Prime Gaps: Gaps between successive primes
@@ -99,7 +104,6 @@ def prime_gaps():
     """
     
     yield from differences(primes())
-
 
 
 def superprimes():
@@ -144,7 +148,7 @@ def noncomposite():
 
 def nonprime():
     """
-    Nonprime Numbers: Positive integers with less than three factors\n
+    Nonprime Numbers: Positive integers that are not primes\n
     OEIS A008578
     """
     
@@ -205,6 +209,13 @@ def pythagorean_primes():
         if (p-1)%4 == 0:
             yield p
 
+
+
+
+
+#############################
+## DEFINED BY DIVISIBILITY ##
+#############################
 
 def smooth(B):
     """
