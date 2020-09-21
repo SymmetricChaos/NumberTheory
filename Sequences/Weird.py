@@ -1,5 +1,6 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
 from math import gcd
+from Sequences.MathUtils import egcd
 
 
 def recaman():
@@ -155,10 +156,28 @@ def co_hofstader():
 def even_odd():
     """
     Positive integers but with odds and evens exchanged
+    OEIS A103889
     """
     
     for n,s in zip(naturals(1),sign_sequence(1)):
         yield n+s
+
+
+def modular_inverses():
+    """
+    Triangle of Modular Multiplicative Inverses
+    OEIS A102057
+    """
+    
+    for a in naturals(2):
+        for b in range(1,a):
+            g,x,y = egcd(b,a)
+            
+            if g != 1:
+                yield 0
+            
+            else:
+                yield x%a
 
 
 
@@ -198,4 +217,9 @@ if __name__ == '__main__':
     print("\nDerangement of the Natural Numbers")
     simple_test(even_odd(),16,
                 "2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15")
+    
+    print("\nTriangle of Modular Inverses")
+    simple_test(modular_inverses(),18,
+                "1, 1, 2, 1, 0, 3, 1, 3, 2, 4, 1, 0, 0, 0, 5, 1, 4, 5")
+    
     
