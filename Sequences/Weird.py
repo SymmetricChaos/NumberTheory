@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
 from math import gcd
 from Sequences.MathUtils import egcd
-
+from Sequences.Primes import odd_primes
 
 def recaman():
     """
@@ -180,6 +180,21 @@ def modular_inverses():
                 yield x%a
 
 
+def legendre_symbols():
+    """
+    Irreguar Array of Legendre Symbols
+    OEIS A226520 (skipping first two)
+    """
+    
+    for p in odd_primes():
+        yield 0
+        for a in range(1,p):
+            out = pow(a,(p-1)//2,p)
+            if out == 1:
+                yield 1
+            else:
+                yield -1
+
 
 
 
@@ -222,4 +237,7 @@ if __name__ == '__main__':
     simple_test(modular_inverses(),18,
                 "1, 1, 2, 1, 0, 3, 1, 3, 2, 4, 1, 0, 0, 0, 5, 1, 4, 5")
     
+    print("\nIrregular Array of Legendre Symbols")
+    simple_test(legendre_symbols(),16,
+                "0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1, 0")
     

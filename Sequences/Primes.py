@@ -4,7 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
 from math import prod, gcd
-from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences
+from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 
 
 ##############################
@@ -29,6 +29,14 @@ def primes():
             for p in D[q]:
                 D[p+q].append(p)
             del D[q]
+
+def odd_primes():
+    """
+    Odd Primes: Primes that are odd positive integer
+    OEIS A065091
+    """
+    
+    yield from offset(primes(),1)
 
 
 def twin_primes():
@@ -785,4 +793,3 @@ if __name__ == '__main__':
     print("\n7,20-Prime Constellation")
     simple_test(prime_constellation(7,20),3,
                 "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")
-    

@@ -700,6 +700,51 @@ def egcd(a, b):
 
 
 
+# def jacobi_symbol(a,n):
+#     """The Jacobi Symbol"""
+#     assert n % 2 == 1
+#     fac = prime_factorization(n)
+#     out = 1
+#     for f in fac:
+#         out *= legendre_symbol(a,f)
+#     return out
+
+
+# def kronecker_symbol(a,n):
+#     """The Kronecker Symbol"""
+#     if n == 2:
+#         if a % 2 == 0:
+#             return 0
+#         if a % 8 == 1 or a % 8 == 7:
+#             return 1
+#         return -1
+#     elif n == 0:
+#         if a == 1 or a == -1:
+#             return 1
+#         return 0
+#     elif n == -1:
+#         if a < 0:
+#             return -1
+#         return 1
+#     elif n == 1 or a == 1:
+#         return 1
+#     elif is_prime(n):
+#         return legendre_symbol(a,n)
+#     else:
+#         fac = prime_factorization(n)
+#         if n < 0:
+#             out = kronecker_symbol(a,-1)
+#             for f in fac:
+#                 out *= kronecker_symbol(a,f)
+#             return out
+#         else:
+#             out = kronecker_symbol(a,1)
+#             for f in fac:
+#                 out *= kronecker_symbol(a,f)
+#             return out
+
+
+
 
 
 if __name__ == '__main__':
