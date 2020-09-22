@@ -199,7 +199,7 @@ def legendre_symbols():
 def jacobi_symbols():
     """
     Irreguar Array of Jacobi Symbols
-    OEIS 
+    OEIS (not A226520)
     """
     
     for p in odds():

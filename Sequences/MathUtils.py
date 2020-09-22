@@ -701,7 +701,7 @@ def egcd(a, b):
 
 def legendre_symbol(a,p):
     """
-    The Legendre Symbol
+    The Legendre Symbol: 1 if a is a quadratic residue mod p, -1 if it is a nonresidue, 0 if a is zero
     p must be prime but this is hard to check so is not done in the function itself
     """
     out = pow(a,(p-1)//2,p)
