@@ -1,6 +1,6 @@
-from Sequences.Simple import naturals, arithmetic, sign_sequence
+from Sequences.Simple import naturals, arithmetic, sign_sequence, odds
 from math import gcd
-from Sequences.MathUtils import egcd
+from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol
 from Sequences.Primes import odd_primes
 
 def recaman():
@@ -196,6 +196,22 @@ def legendre_symbols():
                 yield -1
 
 
+def jacobi_symbols():
+    """
+    Irreguar Array of Jacobi Symbols
+    OEIS 
+    """
+    
+    for p in odds():
+        for a in range(p):
+            fac = prime_factorization(p)
+            out = 1
+            for f in fac:
+                out *= legendre_symbol(a,p)
+            yield out
+
+
+
 
 
 if __name__ == '__main__':
@@ -240,4 +256,8 @@ if __name__ == '__main__':
     print("\nIrregular Array of Legendre Symbols")
     simple_test(legendre_symbols(),16,
                 "0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1, 0")
+    
+    print("\nIrregular Array of Jacobi Symbols")
+    simple_test(jacobi_symbols(),16,
+                "1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1")
     

@@ -699,6 +699,19 @@ def egcd(a, b):
         return (gcd, y - (b//a) * x, x)
 
 
+def legendre_symbol(a,p):
+    """
+    The Legendre Symbol
+    p must be prime but this is hard to check so is not done in the function itself
+    """
+    out = pow(a,(p-1)//2,p)
+    if out == 1:
+        return 1
+    if out == 0:
+        return 0
+    else:
+        return -1
+
 
 # def jacobi_symbol(a,n):
 #     """The Jacobi Symbol"""
