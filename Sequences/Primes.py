@@ -86,23 +86,23 @@ def sexy_primes():
             yield b
         a,b,c = b,c,next(P)
 
-
-def prime_constellation(n,k):
-    """
-    Primes
-    OEIS
-    """
+# Unsure about this, need to validate that it matches the definition
+# def prime_constellation(n,k):
+#     """
+#     Primes
+#     OEIS
+#     """
     
-    P = primes()
-    L = [next(P) for i in range(n)]
+#     P = primes()
+#     L = [next(P) for i in range(n)]
     
-    if n > k//2:
-        raise ValueError("n must be greater than k/2")
+#     if n > k//2:
+#         raise ValueError("n must be greater than k/2")
     
-    while True:
-        if abs(L[0] - L[-1]) == k:
-            yield tuple(L)
-        L = L[1:] + [next(P)]
+#     while True:
+#         if abs(L[0] - L[-1]) == k:
+#             yield tuple(L)
+#         L = L[1:] + [next(P)]
 
 
 def prime_gaps():
@@ -790,6 +790,6 @@ if __name__ == '__main__':
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
     
-    print("\n7,20-Prime Constellation")
-    simple_test(prime_constellation(7,20),3,
-                "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")
+    # print("\n7,20-Prime Constellation")
+    # simple_test(prime_constellation(7,20),3,
+    #             "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")

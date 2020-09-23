@@ -10,7 +10,7 @@ from Sequences.Manipulations import sequence_slice, segment, offset, skips, \
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  lucas_U, lucas_V, padovan, simple_recurrence, \
                                  sylvester, leonardo, arbitrary_recurrence, pisot_E, \
-                                 pisot_L, pisot_P, pisot_T, ulam
+                                 pisot_L, pisot_P, pisot_T, ulam, perrin, semifibonacci
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
@@ -30,7 +30,7 @@ from Sequences.Primes import primes, primorial, smooth, rough, highly_composite,
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
                              coprime_characteristic, cototients, superprimes, lucky, \
-                             noncomposite, mobius_function
+                             noncomposite, mobius_function, odd_primes
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -66,7 +66,7 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_prods, additive_persistence, multiplicative_persistence
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
-                               champernowne_digits, silver_ratio_digits, metallic_ratio_digits
+                               champernowne_digits, silver_ratio_digits
 
 
 __all__=[#MANIPS
@@ -81,6 +81,7 @@ __all__=[#MANIPS
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
          "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
+         "perrin", "semifibonacci",
          
          #POLYGONAL
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
@@ -103,7 +104,8 @@ __all__=[#MANIPS
          "prime_counting","prime_divisors","unique_prime_divisors",
          "composites","totients","compositorial","hamming","cototients",
          "prime_characteristic","coprime_characteristic","superprimes",
-         "noncomposite","mobius_function",
+         "noncomposite","mobius_function","odd_primes","twin_primes",
+         "cousin_primes","sexy_primes",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -149,5 +151,5 @@ __all__=[#MANIPS
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",
-         "champernowne_digits","silver_ratio_digits","metallic_ratio_digits"
+         "champernowne_digits","silver_ratio_digits",
         ]

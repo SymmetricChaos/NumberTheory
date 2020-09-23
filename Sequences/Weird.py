@@ -245,7 +245,7 @@ if __name__ == '__main__':
     simple_test(co_hofstader(),15,
                 "2, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20")
     
-    print("\nDerangement of the Natural Numbers")
+    print("\nFirst Derangement of the Natural Numbers")
     simple_test(even_odd(),16,
                 "2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15")
     
