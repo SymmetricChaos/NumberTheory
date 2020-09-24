@@ -2,6 +2,8 @@ from Sequences.Simple import naturals, arithmetic, sign_sequence, odds
 from math import gcd
 from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol
 from Sequences.Primes import odd_primes
+from Sequences.Combinatorics import pascal
+from Sequences.Manipulations import sequence_apply
 
 def recaman():
     """
@@ -211,6 +213,13 @@ def jacobi_symbols():
             yield out
 
 
+def sierpinski():
+    """
+    Sierpinski's Triangle by Rows
+    OEIS A047999
+    """
+    
+    yield from sequence_apply(pascal(),lambda x: x%2)
 
 
 
@@ -260,4 +269,8 @@ if __name__ == '__main__':
     print("\nIrregular Array of Jacobi Symbols")
     simple_test(jacobi_symbols(),16,
                 "1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1")
+    
+    print("\nSierpinski Triangle by Rows")
+    simple_test(sierpinski(),18,
+                "1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0")
     
