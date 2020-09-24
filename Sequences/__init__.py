@@ -30,7 +30,8 @@ from Sequences.Primes import primes, primorial, smooth, rough, highly_composite,
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
                              coprime_characteristic, cototients, superprimes, lucky, \
-                             noncomposite, mobius_function, odd_primes
+                             noncomposite, mobius_function, odd_primes, twin_primes, \
+                             cousin_primes, sexy_primes, prime_gaps, powerful
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -105,7 +106,7 @@ __all__=[#MANIPS
          "composites","totients","compositorial","hamming","cototients",
          "prime_characteristic","coprime_characteristic","superprimes",
          "noncomposite","mobius_function","odd_primes","twin_primes",
-         "cousin_primes","sexy_primes",
+         "cousin_primes","sexy_primes","prime_gaps","powerful",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
