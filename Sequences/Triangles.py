@@ -37,8 +37,8 @@ if __name__ == '__main__':
     print("\nCoprime Triangle")
     quick_triangle(coprime_characteristic(),10,1)
     
-    print("\nIdicies")
+    print("\nIdicies of a Regular Triangular Array")
     quick_triangle(triangle_pairs(),7,1)
     
-    print("\nAntidiagonals of a Square Array")
+    print("\nIndicies of the Antidiagonals of a Square Array")
     quick_triangle(antidiagonal_pairs(),7,1)

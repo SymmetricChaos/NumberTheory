@@ -237,28 +237,45 @@ def run_length_encoding(sequence,reverse=False):
             ctr += 1
             
             if i != cur:
-                yield ctr
                 yield cur
+                yield ctr
                 
                 ctr = 0
                 cur = i
         
-        yield ctr+1
         yield cur
+        yield ctr+1
     
     else:
         for i in sequence:
             ctr += 1
             
             if i != cur:
-                yield cur
                 yield ctr
+                yield cur
                 
                 ctr = 0
                 cur = i
         
-        yield cur
         yield ctr+1
+        yield cur
+
+
+
+def inv_run_length_encoding(sequence,reverse=False):
+    """
+    Convert a Run Length Encoding to the original sequence
+    """
+    
+    if reverse:
+        for a,b in chunk_by_n(sequence,2):
+            for i in range(b):
+                yield a
+    
+    else:
+        for a,b in chunk_by_n(sequence,2):
+            for i in range(a):
+                yield b
 
 
 def run_lengths(sequence):

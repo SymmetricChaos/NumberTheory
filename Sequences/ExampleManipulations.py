@@ -15,7 +15,8 @@ sum_fib_nat = pairwise_sum(naturals(),fibonacci())
 fib_diffs = differences(fibonacci())
 superprimes = hypersequence(primes())
 even_rep_odd = n_rep_a(offset(evens(),1),odds())
-RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()),reverse=True)
+RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()))
+iRLE = inv_run_length_encoding(naturals(1))
 runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
 
 
@@ -53,8 +54,11 @@ simple_test(superprimes,10,"3, 5, 11, 17, 31, 41, 59, 67, 83, 109")
 print("\nEach positive even number E, repeated E-1 times.")
 simple_test(even_rep_odd,10,"2, 4, 4, 4, 6, 6, 6, 6, 6, 8")
 
-print("\nRLE (reversed) of 2,4,4,4,6,6,6,6,6,7...")
+print("\nRLE of 2,4,4,4,6,6,6,6,6,7...")
 simple_test(RLE,10,"1, 2, 3, 4, 5, 6, 7, 8, 9, 10")
+
+print("\nDecoding of 1,2,3,4,5,6,7,8 interpreted as a RLE")
+simple_test(iRLE,10,"2, 4, 4, 4, 6, 6, 6, 6, 6, 8")
 
 print("\nRun Lengths of 2,4,4,4,6,6,6,6,6,7...")
 simple_test(runs,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
