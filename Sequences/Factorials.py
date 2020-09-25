@@ -1,6 +1,6 @@
 from Sequences.Manipulations import offset
 from Sequences.Simple import naturals, sign_sequence
-
+from Sequences.MathUtils import poly_mult
 
 def factorials():
     """
@@ -123,6 +123,35 @@ def even_double_factorials():
         even = even*even_ctr
 
 
+def rising_factorial_expansions():
+    """
+    Coefficients of the Polynomial Expansions of the Rising Factorials
+    OEIS A132393
+    """
+    
+    P = [1]
+    
+    for n in naturals(0):
+        for i in P:
+            yield i
+        
+        P = poly_mult(P,[n,1])
+
+
+def falling_factorial_expansions():
+    """
+    Coefficients of the Polynomial Expansions of the Falling Factorials
+    OEIS A048994
+    """
+    P = [1]
+    
+    for n in naturals(0):
+        for i in P:
+            yield i
+        
+        P = poly_mult(P,[-n,1])
+
+
 
 
 
@@ -156,4 +185,12 @@ if __name__ == '__main__':
     print("\nEven Double Factorials")
     simple_test(even_double_factorials(),9,
                 "1, 2, 8, 48, 384, 3840, 46080, 645120, 10321920")
+    
+    print("\nTriangle of Rising Factorials")
+    simple_test(rising_factorial_expansions(),17,
+                "1, 0, 1, 0, 1, 1, 0, 2, 3, 1, 0, 6, 11, 6, 1, 0, 24")
+    
+    print("\nTriangle of Falling Factorials")
+    simple_test(falling_factorial_expansions(),16,
+                "1, 0, 1, 0, -1, 1, 0, 2, -3, 1, 0, -6, 11, -6, 1, 0")
     

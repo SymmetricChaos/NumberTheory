@@ -756,6 +756,24 @@ def legendre_symbol(a,p):
 #                 out *= kronecker_symbol(a,f)
 #             return out
 
+def poly_mult(P,Q):
+    """
+    Product of two polynomials, both in ascending order
+    """
+    
+    L = [0]*(len(P)+len(Q))
+    
+    for i in range(len(P)):
+        for j in range(len(Q)):
+            L[i+j] += P[i]*Q[j]
+    
+    for x in L[::-1]:
+        if x == 0:
+            L.pop()
+        else:
+            break
+    return L
+
 
 
 
@@ -806,3 +824,6 @@ if __name__ == '__main__':
     
     print("\nConvert the decimal digits [3,8,7] to an integer")
     print(digits_to_int([3,8,7]))
+    
+    print("\nProduct of 1 + 2x + 3x^2 + 4x^3 with 9 + 3x + 2x^2 + x^3")
+    print(poly_mult([1,2,3,4],[9,3,2,1]))

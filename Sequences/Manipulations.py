@@ -261,7 +261,6 @@ def run_length_encoding(sequence,reverse=False):
         yield cur
 
 
-
 def inv_run_length_encoding(sequence,reverse=False):
     """
     Convert a Run Length Encoding to the original sequence
