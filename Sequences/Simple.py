@@ -138,100 +138,6 @@ def fermat():
         yield 2**2**n+1
 
 
-def harmonic_numerators():
-    """
-    Numerators of the harmonic series
-    OEIS A001008
-    """
-    
-    n0, d0 = 1,1
-    
-    for i in naturals(2):
-        yield n0
-        
-        n = n0*i+d0
-        d = d0*i
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
-
-
-def harmonic_denominators():
-    """
-    Denominators of the harmonic series\n
-    OEIS A002805
-    """
-    
-    n0, d0 = 1,1
-    
-    for i in naturals(2):
-        yield d0
-        
-        n = n0*i+d0
-        d = d0*i
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
-
-
-def gen_harmonic_numerators(m):
-    """
-    Numerators of the generalized harmonic series of order m
-    
-    Args:
-        m -- exponent for the numerators of the terms
-    
-    OEIS
-    """
-    
-    require_integers(["m"],[m])
-    require_nonnegative(["m"],[m])
-    
-    if m == 0:
-        for i in naturals(1):
-            yield i
-    
-    n0, d0 = 1,1
-    
-    for i in naturals(2):
-        yield n0
-        
-        n = n0*i+d0
-        d = d0*(i**m)
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
-
-
-def gen_harmonic_denominators(m):
-    """
-    Denominators of the generalized harmonic series of order m
-    
-    Args:
-        m -- exponent for the numerators of the terms
-    
-    OEIS
-    """
-    
-    require_integers(["m"],[m])
-    require_nonnegative(["m"],[m])
-    
-    if m == 0:
-        for i in naturals(1):
-            yield i
-    
-    n0, d0 = 1,1
-    
-    for i in naturals(2):
-        yield d0
-        
-        n = n0*i+d0
-        d = d0*(i**m)
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
-
-
 def sign_sequence(n):
     """
     Sequence of +n and -n repeated forever\n
@@ -432,22 +338,6 @@ if __name__ == '__main__':
     print("\nFermat Numbers")
     simple_test(fermat(),7,
                 "3, 5, 17, 257, 65537, 4294967297, 18446744073709551617")
-    
-    print("\nHarmonic Numerators")
-    simple_test(harmonic_numerators(),11,
-                "1, 3, 11, 25, 137, 49, 363, 761, 7129, 7381, 83711")
-    
-    print("\nHarmonic Denominators")
-    simple_test(harmonic_denominators(),11,
-                "1, 2, 6, 12, 60, 20, 140, 280, 2520, 2520, 27720")
-    
-    print("\nGeneralized Harmonic Numerators of Order 2")
-    simple_test(gen_harmonic_numerators(2),10,
-                "1, 3, 13, 11, 127, 427, 13789, 79939, 550339, 4360579")
-    
-    print("\nGeneralized Harmonic Denominators of Order 2")
-    simple_test(gen_harmonic_denominators(2),9,
-                "1, 4, 36, 72, 1800, 10800, 529200, 4233600, 38102400")
     
     print("\nThe Zero Sequence")
     simple_test(constant(0), 18,

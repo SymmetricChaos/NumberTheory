@@ -21,9 +21,7 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
                              polynomial, fermat, evens, gen_evens, odds, gen_odds, \
                              counting, constant, arithmetrico_geometric, gen_polynomial, \
-                             self_powers, harmonic_numerators, harmonic_denominators, \
-                             gen_harmonic_numerators, gen_harmonic_denominators, \
-                             repdigit
+                             self_powers, repdigit, sign_sequence
 
 from Sequences.Primes import primes, primorial, smooth, rough, highly_composite, \
                              divisors, squarefree, squarefree_kernel, prime_counting, \
@@ -69,6 +67,9 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
 
+from Sequences.Fractional import numerators, denominators, harmonic_pairs, \
+                                 gen_harmonic_pairs
+
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
@@ -95,9 +96,7 @@ __all__=[#MANIPS
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
          "constant","arithmetrico_geometric","gen_polynomial","self_powers",
-         "harmonic_numerators", "harmonic_denominators","repdigit",
-         "gen_harmonic_numerators", "gen_harmonic_denominators",
-         "sign_sequence",
+         "repdigit","sign_sequence",
          
          #PRIME
          "primes","primorial","smooth","rough","highly_composite", "divisors",
@@ -153,4 +152,7 @@ __all__=[#MANIPS
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",
          "champernowne_digits","silver_ratio_digits",
+         
+         #FRACTIONAL
+         "numerators","denominators","harmonic_pairs","gen_harmonic_pairs",
         ]
