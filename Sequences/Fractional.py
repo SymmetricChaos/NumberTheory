@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
 from math import gcd
-
+from fractions import Fraction
 
 def numerators(sequence):
     """
@@ -70,6 +70,20 @@ def gen_harmonic_pairs(m):
         n0, d0 = n//g,d//g
 
 
+def farey():
+    """
+    Farey Sequences for each positive integer
+    """
+    
+    for n in naturals(1):
+        a,b,c,d = 0,1,1,n
+        
+        while a <= b:
+            yield (a,b)
+            
+            k = (n+b)//d
+            a,b,c,d = c,d,k*c-a,k*d-b
+
 
 
 
@@ -91,4 +105,9 @@ if __name__ == '__main__':
     print("\nGeneralized Harmonic Denominators of Order 2")
     simple_test(denominators(gen_harmonic_pairs(2)),9,
                 "1, 4, 36, 72, 1800, 10800, 529200, 4233600, 38102400")
+    
+    print("\nIrregular Triangle of Farey Sequences")
+    simple_test(farey(),6,
+                "(0, 1), (1, 1), (0, 1), (1, 2), (1, 1), (0, 1)")
+    
     
