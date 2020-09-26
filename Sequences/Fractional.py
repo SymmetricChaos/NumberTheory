@@ -1,7 +1,6 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
 from math import gcd
-from fractions import Fraction
 
 def numerators(sequence):
     """
@@ -23,7 +22,16 @@ def denominators(sequence):
         yield b
 
 
-def harmonic_pairs():
+def _pretty_fracs(sequence):
+    """
+    Internal function to show fractions more compactly
+    """
+    
+    for a,b in sequence:
+        yield f"{a}/{b}"
+
+
+def harmonic():
     """
     Harmonic series by pairs
     OEIS A001008, A002805
@@ -41,7 +49,7 @@ def harmonic_pairs():
         n0, d0 = n//g,d//g
 
 
-def gen_harmonic_pairs(m):
+def gen_harmonic(m):
     """
     Generalized harmonic series of order m by pairs
     
@@ -85,29 +93,57 @@ def farey():
             a,b,c,d = c,d,k*c-a,k*d-b
 
 
+def stern_brocot():
+    """
+    Stern-Brocot Tree of Fully Reduced Fractions
+    """
+    
+    def pair_add(A,B):
+        return (A[0]+B[0],A[1]+B[1])
+    
+    row = [(0,1),(1,0)]
+    new = []
+    
+    while True:
+        for i in range(len(row)-1):
+            t = pair_add(row[i],row[i+1])
+            
+            yield t
+            
+            new.append(row[i])
+            new.append(t)
+        
+        new.append((1,0))
+        row, new = new, []
+
+
+
 
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
     print("\nHarmonic Sequence")
-    simple_test(harmonic_pairs(),5,
-                "(1, 1), (3, 2), (11, 6), (25, 12), (137, 60)")
+    simple_test(_pretty_fracs(harmonic()),8,
+                "1/1, 3/2, 11/6, 25/12, 137/60, 49/20, 363/140, 761/280")
     
     print("\nHarmonic Denominators")
-    simple_test(denominators(harmonic_pairs()),11,
+    simple_test(denominators(harmonic()),11,
                 "1, 2, 6, 12, 60, 20, 140, 280, 2520, 2520, 27720")
     
     print("\nGeneralized Harmonic Sequence of Order 2")
-    simple_test(gen_harmonic_pairs(2),5,
-                "(1, 1), (3, 4), (13, 36), (11, 72), (127, 1800)")
+    simple_test(_pretty_fracs(gen_harmonic(2)),6,
+                "1/1, 3/4, 13/36, 11/72, 127/1800, 427/10800")
     
     print("\nGeneralized Harmonic Denominators of Order 2")
-    simple_test(denominators(gen_harmonic_pairs(2)),9,
+    simple_test(denominators(gen_harmonic(2)),9,
                 "1, 4, 36, 72, 1800, 10800, 529200, 4233600, 38102400")
     
     print("\nIrregular Triangle of Farey Sequences")
-    simple_test(farey(),6,
-                "(0, 1), (1, 1), (0, 1), (1, 2), (1, 1), (0, 1)")
+    simple_test(_pretty_fracs(farey()),11,
+                "0/1, 1/1, 0/1, 1/2, 1/1, 0/1, 1/3, 1/2, 2/3, 1/1, 0/1")
     
+    print("\nStern-Brocot Tree")
+    simple_test(_pretty_fracs(stern_brocot()),11,
+                "1/1, 1/2, 2/1, 1/3, 2/3, 3/2, 3/1, 1/4, 2/5, 3/5, 3/4")
     

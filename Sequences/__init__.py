@@ -67,8 +67,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
 
-from Sequences.Fractional import numerators, denominators, harmonic_pairs, \
-                                 gen_harmonic_pairs
+from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
+                                 farey, stern_brocot
 
 
 __all__=[#MANIPS
@@ -154,5 +154,6 @@ __all__=[#MANIPS
          "champernowne_digits","silver_ratio_digits",
          
          #FRACTIONAL
-         "numerators","denominators","harmonic_pairs","gen_harmonic_pairs",
+         "numerators","denominators","harmonic","gen_harmonic","farey",
+         "stern_brocot",
         ]
