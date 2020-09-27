@@ -124,7 +124,7 @@ def stern_brocot():
 #        raise Exception("The Bernoulli numbers should be specified by -1 for the negative version or 1 for the positive version")
 
 
-def fibonacci_rationals():
+def fibonacci_generations():
     """
     Irregular triangle of generations of the Fibonacci ordering of the rationals by rows
     """
@@ -146,6 +146,32 @@ def fibonacci_rationals():
     for n in naturals(1):
         yield from iter(generation(n))
 
+
+def fibonacci_rationals():
+    """
+    Fibonacci ordering of the rationals
+    OEIS A226080, A226081
+    """
+    
+    used = set([])
+    gen = [(1,1)]
+    
+    while True:
+        new = []
+        for g in gen:
+            if g in used:
+                continue
+            else:
+                yield g
+                used.add(g)
+                
+                add = (g[0]+g[1],g[1])
+                inv = (g[1],g[0])
+                
+                new.append(add)
+                new.append(inv)
+        
+        gen = new
 
 
 
@@ -177,7 +203,11 @@ if __name__ == '__main__':
     simple_test(_pretty_fracs(stern_brocot()),11,
                 "1/1, 1/2, 2/1, 1/3, 2/3, 3/2, 3/1, 1/4, 2/5, 3/5, 3/4")
     
-    print("\nFibonacci Order of the Rationals")
-    simple_test(_pretty_fracs(fibonacci_rationals()),11,
+    print("\nGenerations of the Fibonacci Production of Rationals")
+    simple_test(_pretty_fracs(fibonacci_generations()),11,
                 "1/1, 2/1, 1/1, 3/1, 1/2, 2/1, 1/1, 4/1, 1/3, 3/2, 2/1")
+    
+    print("\nFibonacci Ordering of Rationals")
+    simple_test(_pretty_fracs(fibonacci_rationals()),11,
+                "1/1, 2/1, 3/1, 1/2, 4/1, 1/3, 3/2, 5/1, 1/4, 4/3, 5/2")
     
