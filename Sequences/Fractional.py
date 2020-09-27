@@ -1,6 +1,8 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
-from math import gcd
+from math import gcd, comb
+from Sequences.MathUtils import kronecker_delta
+
 
 def numerators(sequence):
     """
@@ -116,6 +118,11 @@ def stern_brocot():
         new.append((1,0))
         row, new = new, []
 
+
+#def bernoulli_numbers(n=-1):
+#    
+#    if n not in (1,-1):
+#        raise Exception("The Bernoulli numbers should be specified by -1 for the negative version or 1 for the positive version")
 
 
 

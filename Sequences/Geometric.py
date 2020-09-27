@@ -70,6 +70,12 @@ def hypotenuse():
                 break
 
 
+#def congruent():
+#    """
+#    Positive integers that can be the area of a right triangle with rational sides
+#    """
+
+
 
 
 

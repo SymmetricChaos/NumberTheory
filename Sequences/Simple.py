@@ -1,6 +1,6 @@
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative, require_geq
 from itertools import count, repeat
-from math import gcd
+
 
 def constant(n):
     """

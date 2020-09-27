@@ -775,6 +775,13 @@ def poly_mult(P,Q):
     return L
 
 
+def kronecker_delta(i,j):
+    if i == j:
+        return 1
+    return 0
+
+
+
 
 
 
