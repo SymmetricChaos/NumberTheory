@@ -1,6 +1,7 @@
 from Sequences.Manipulations import offset
 from Sequences.Simple import naturals, sign_sequence
 from Sequences.MathUtils import poly_mult
+from Sequences.Primes import primes
 
 def factorials():
     """
@@ -158,8 +159,18 @@ def wilson():
     OEIS A061006
     """
     
-    for f,n in zip(factorials(),naturals(1)):
-        yield (f)%n
+    yield 0
+    yield 1
+    yield 2
+    yield 2
+    
+    oldp = 5
+    for p in offset(primes(),2):
+        for i in range(p-oldp-1):
+            yield 0
+        
+        yield p-1
+        oldp = p
 
 
 
