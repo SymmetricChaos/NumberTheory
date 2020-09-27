@@ -152,6 +152,16 @@ def falling_factorial_expansions():
         P = poly_mult(P,[-n,1])
 
 
+def wilson():
+    """
+    Wilson's Sequence: (n-1)! % n, equal to 0 for every composite number other than 4, otherwise n-1
+    OEIS A061006
+    """
+    
+    for f,n in zip(factorials(),naturals(1)):
+        yield (f)%n
+
+
 
 
 
@@ -193,4 +203,8 @@ if __name__ == '__main__':
     print("\nTriangle of Falling Factorials")
     simple_test(falling_factorial_expansions(),16,
                 "1, 0, 1, 0, -1, 1, 0, 2, -3, 1, 0, -6, 11, -6, 1, 0")
+    
+    print("\nWilson's Sequence")
+    simple_test(wilson(),17,
+                "0, 1, 2, 2, 4, 0, 6, 0, 0, 0, 10, 0, 12, 0, 0, 0, 16")
     
