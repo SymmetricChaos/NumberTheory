@@ -1,7 +1,6 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_nonnegative
-from math import gcd, comb
-from Sequences.MathUtils import kronecker_delta
+from math import gcd
 
 
 def numerators(sequence):
@@ -125,6 +124,30 @@ def stern_brocot():
 #        raise Exception("The Bernoulli numbers should be specified by -1 for the negative version or 1 for the positive version")
 
 
+def fibonacci_rationals():
+    """
+    Irregular triangle of generations of the Fibonacci ordering of the rationals by rows
+    """
+    
+    def generation(n):
+        if n == 1:
+            return [(1,1)]
+        else:
+            L = []
+            for i in range(1,n):
+                prev = generation(n-1)
+                for p in prev:
+                    add = (p[0]+p[1],p[1])
+                    inv = (p[1],p[0])
+                    L.append(add)
+                    L.append(inv)
+                return L
+    
+    for n in naturals(1):
+        yield from iter(generation(n))
+
+
+
 
 
 if __name__ == '__main__':
@@ -153,4 +176,8 @@ if __name__ == '__main__':
     print("\nStern-Brocot Tree")
     simple_test(_pretty_fracs(stern_brocot()),11,
                 "1/1, 1/2, 2/1, 1/3, 2/3, 3/2, 3/1, 1/4, 2/5, 3/5, 3/4")
+    
+    print("\nFibonacci Order of the Rationals")
+    simple_test(_pretty_fracs(fibonacci_rationals()),11,
+                "1/1, 2/1, 1/1, 3/1, 1/2, 2/1, 1/1, 4/1, 1/3, 3/2, 2/1")
     
