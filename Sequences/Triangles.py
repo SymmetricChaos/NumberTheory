@@ -1,12 +1,25 @@
-from Sequences.Manipulations import make_triangle, sequence_apply
+from Sequences.Manipulations import make_triangle, sequence_apply, irregular_array
 from Sequences.Combinatorics import pascal, eulerian
 from Sequences.Weird import gcd_numbers, gcd_steps, sierpinski
 from Sequences.Primes import coprime_characteristic
 from Sequences.MathUtils import triangle_pairs, antidiagonal_pairs
+from Sequences.Fractional import _pretty_fracs, fibonacci_generations
+from Sequences.Simple import powers
+
 
 def quick_triangle(sequence,n,space=0,delim=" "):
     
     T = make_triangle(sequence)
+    
+    for i in range(n):
+        l = [f"{str(x):<{space}}" for x in next(T)]
+        s = str(delim).join(l)
+        print(s)
+
+
+def quick_array(sequence,row_lengths,n,space=0,delim=" "):
+    
+    T = irregular_array(sequence,row_lengths)
     
     for i in range(n):
         l = [f"{str(x):<{space}}" for x in next(T)]
@@ -42,3 +55,6 @@ if __name__ == '__main__':
     
     print("\nIndicies of the Antidiagonals of a Square Array")
     quick_triangle(antidiagonal_pairs(),7,1)
+    
+    print("\nEach Generations of Rationals Using the Fibonacci Method")
+    quick_array(_pretty_fracs(fibonacci_generations()),powers(2),4,1)

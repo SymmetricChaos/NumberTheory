@@ -784,7 +784,6 @@ def kronecker_delta(i,j):
 
 
 
-
 if __name__ == '__main__':
     print("Factors of 378")
     print(factors(378))

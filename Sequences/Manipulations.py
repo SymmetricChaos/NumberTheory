@@ -371,3 +371,12 @@ def make_triangle(sequence):
     for n in count(1):
         L = [next(sequence) for c in range(n)]
         yield L
+
+def irregular_array(sequence,row_sequence):
+    """
+    Display the sequence using some pattern of row lengths
+    """
+    
+    for n in row_sequence:
+        L = [next(sequence) for c in range(n)]
+        yield L
