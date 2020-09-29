@@ -3,6 +3,7 @@ from Primes import primes
 from Simple import naturals, constant, powers, evens, odds
 from Recurrence import companion_pell, fibonacci
 from Aliquot import amicable_pairs
+from Weird import even_odd
 
 A142150 = interleave(naturals(0),constant(0))
 A001333 = sequence_apply(companion_pell(),lambda x: x//2)
@@ -18,7 +19,7 @@ even_rep_odd = n_rep_a(offset(evens(),1),odds())
 RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()))
 iRLE = inv_run_length_encoding(naturals(1))
 runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
-prime_perm = permute(primes(),[2,1,0,3,5,4,6,12,11,9,10,7,8])
+prime_perm = permute(primes(),prepend(0,even_odd()))
 
 
 print("A142150")
@@ -64,4 +65,4 @@ print("\nRun Lengths of 2,4,4,4,6,6,6,6,6,7...")
 simple_test(runs,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
 
 print("\nA permutation of the primes")
-simple_test(prime_perm,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
+simple_test(prime_perm,10,"2, 5, 3, 11, 7, 17, 13, 23, 19, 31")
