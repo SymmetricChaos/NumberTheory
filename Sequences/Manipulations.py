@@ -316,9 +316,26 @@ def records(sequence):
             r = s
 
 
+def permute(sequence,permutation):
+    """
+    Reorder the sequence according to the permutation.
+    The permutation must be a permutation of the non-negative integers or behavior is undefined.
+    """
+    
+    L = []
+    
+    for pos in permutation:
+        while pos > (len(L)-1):
+            L.append(next(sequence))
+        yield L[pos]
 
 
-## For testing purposes ##
+
+
+
+#############
+## TESTING ##
+#############
 def simple_test(sequence,N,check):
     """Check the first few terms of a sequence against a known good source like the OEIS"""
     
@@ -358,7 +375,9 @@ def head(sequence,n):
 
 
 
-## Other manipulations ##
+##################
+## Arrangements ##
+##################
 def make_triangle(sequence):
     """
     Standard triangular arrangement of the sequence
@@ -371,6 +390,7 @@ def make_triangle(sequence):
     for n in count(1):
         L = [next(sequence) for c in range(n)]
         yield L
+
 
 def irregular_array(sequence,row_sequence):
     """

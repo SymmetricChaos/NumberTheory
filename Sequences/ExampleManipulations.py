@@ -18,7 +18,7 @@ even_rep_odd = n_rep_a(offset(evens(),1),odds())
 RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()))
 iRLE = inv_run_length_encoding(naturals(1))
 runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
-
+prime_perm = permute(primes(),[2,1,0,3,5,4,6,12,11,9,10,7,8])
 
 
 print("A142150")
@@ -62,3 +62,6 @@ simple_test(iRLE,10,"2, 4, 4, 4, 6, 6, 6, 6, 6, 8")
 
 print("\nRun Lengths of 2,4,4,4,6,6,6,6,6,7...")
 simple_test(runs,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
+
+print("\nA permutation of the primes")
+simple_test(prime_perm,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
