@@ -4,7 +4,7 @@ from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
 from math import prod, gcd
-from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
+from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset, memoize_multiplicative
 
 
 ##############################
@@ -545,8 +545,11 @@ def jordan_totients(k):
     OEIS A007434, A059376, A059377, A059378, A069091-A069095
     """
     
-    for n in naturals(1):
-        yield jordan_totient(n,k)
+    def J(x):
+        return jordan_totient(x,k)
+    
+    yield from memoize_multiplicative(J)
+
 
 
 def coprime_characteristic():

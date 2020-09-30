@@ -886,3 +886,6 @@ if __name__ == '__main__':
     print("\nArithmetic Derivative of 72")
     print(arithmetic_derivative(72))
     
+    print("\nJordan 2-Totient of 4")
+    print(jordan_totient(4,2))
+    
