@@ -30,6 +30,7 @@ def primes():
                 D[p+q].append(p)
             del D[q]
 
+
 def odd_primes():
     """
     Odd Primes: Primes that are odd positive integer
@@ -92,13 +93,13 @@ def sexy_primes():
 #     Primes
 #     OEIS
 #     """
-    
+#    
 #     P = primes()
 #     L = [next(P) for i in range(n)]
-    
+#    
 #     if n > k//2:
 #         raise ValueError("n must be greater than k/2")
-    
+#    
 #     while True:
 #         if abs(L[0] - L[-1]) == k:
 #             yield tuple(L)
@@ -146,7 +147,7 @@ def composites():
 def noncomposite():
     """
     Noncomposite Numbers: Positive integers with less than three factors\n
-    OEIS A008578
+    OEIS 
     """
     
     yield 1
@@ -157,7 +158,7 @@ def noncomposite():
 def nonprime():
     """
     Nonprime Numbers: Positive integers that are not primes\n
-    OEIS A008578
+    OEIS 
     """
     
     yield 1
@@ -204,6 +205,7 @@ def prime_powers():
             
             for p in D[q]:
                 D[p+q].append(p)
+            
             del D[q]
 
 
@@ -545,10 +547,8 @@ def jordan_totients(k):
     OEIS A007434, A059376, A059377, A059378, A069091-A069095
     """
     
-    def J(x):
-        return jordan_totient(x,k)
-    
-    yield from memoize_multiplicative(J)
+    for n in naturals(1):
+        yield jordan_totient(n,k)
 
 
 

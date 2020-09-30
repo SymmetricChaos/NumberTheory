@@ -3,6 +3,7 @@ from math import comb, prod
 import operator
 from time import time
 from Sequences.MathUtils import prime_power_factorization
+from collections import deque
 
 # Many of these are copied from the itertools recipies
 
@@ -336,6 +337,7 @@ def memoize_multiplicative(function):
     Given a multiplicative function over the naturals calculate the values for
     all naturals by evaluating explicitly at prime powers and using the multiplicative
     property for all others
+    WARNING: Currently only useful if the function is extremely expensive to compute
     """
     
     # For any multiplicative function f(1) = 1
@@ -372,10 +374,13 @@ def simple_test(sequence,N,check):
         print(f"Produced:\n{S}")
 
 
-def speed_compare(sequences,n,reps=1):
+def speed_compare(sequences,names=[],*,n=1,reps=1):
     
-    for number,S in enumerate(sequences,1):
-        print(f"Sequence {number}")
+    if names == []:
+        names = [f"Sequence {i}" for i in range(1,len(sequences)+1)]
+    
+    for S,name in zip(sequences,names):
+        print("\n",name)
         
         t0 = time()
         
