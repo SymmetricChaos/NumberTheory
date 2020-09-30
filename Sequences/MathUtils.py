@@ -82,6 +82,12 @@ def prime_factorization(n):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
+    if n == 0:
+        raise ValueError("Prime factorization of 0 is undefined")
+    
+    if n == 1:
+        return []
+    
     L = []
     
     while n % 2 == 0:
@@ -799,6 +805,22 @@ def arithmetic_derivative(n):
             return q + p*arithmetic_derivative(q)
     
     return 1
+
+
+def jordan_totient(n,k=1):
+    """
+    Jordan's Totient Function
+    """
+    
+    F = unique_prime_factors(n)
+    
+    num = 1
+    den = 1
+    for p in F:
+        num *= p**k-1
+        den *= p**k
+    
+    return (n**k*num)//den
 
 
 
