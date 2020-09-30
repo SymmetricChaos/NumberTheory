@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factors, prime_factorization, nth_sign, unique_prime_factors
+from Sequences.MathUtils import factors, prime_factorization, nth_sign, unique_prime_factors, jordan_totient
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
@@ -539,6 +539,16 @@ def cototients():
 #     """
 
 
+def jordan_totients(k):
+    """
+    Jordan's k-Totient Function
+    OEIS A007434, A059376, A059377, A059378, A069091-A069095
+    """
+    
+    for n in naturals(1):
+        yield jordan_totient(n,k)
+
+
 def coprime_characteristic():
     """
     Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not\n
@@ -793,3 +803,8 @@ if __name__ == '__main__':
     # print("\n7,20-Prime Constellation")
     # simple_test(prime_constellation(7,20),3,
     #             "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")
+    
+    print("\nJordan 2-Totients")
+    simple_test(jordan_totients(2),13,
+                "1, 3, 8, 12, 24, 24, 48, 48, 72, 72, 120, 96, 168")
+    

@@ -2,6 +2,7 @@ from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from functools import reduce
 from fractions import Fraction
+from collections import defaultdict
 
 ###################
 ## FACTORIZATION ##
@@ -76,6 +77,21 @@ def nontrivial_factors(n):
     return S
 
 
+# To avoid potential circular reference from Sequences.Primes in following functions
+def _primes_copy():
+    D = defaultdict(list)
+    
+    for q in count(2,1):
+        if q not in D:
+            yield q
+            D[q * q] = [q]
+        
+        else:
+            for p in D[q]:
+                D[p+q].append(p)
+            del D[q]
+
+
 def prime_factorization(n):
     """Prime Factorization: Crude brute-force method"""
     
@@ -90,15 +106,10 @@ def prime_factorization(n):
     
     L = []
     
-    while n % 2 == 0:
-        L.append(2)
-        n //= 2
-    
-    for d in count(3,2):
-        
-        while n % d == 0:
-            L.append(d)
-            n //= d
+    for p in _primes_copy():
+        while n % p == 0:
+            L.append(p)
+            n //= p
         
         if n == 1:
             break
@@ -112,19 +123,16 @@ def unique_prime_factors(n):
     if type(n) != int:
         raise Exception("n must be an integer") 
     
+    if n == 0:
+        raise ValueError("Prime factorization of 0 is undefined")
+    
     L = []
     
-    if n % 2 == 0:
-        L.append(2)
-        while n % 2 == 0:
-            n //= 2
-    
-    for d in count(3,2):
-        
-        if n % d == 0:
-            L.append(d)
-            while n % d == 0:
-                n //= d
+    for p in _primes_copy():
+        if n % p == 0:
+            L.append(p)
+            while n % p == 0:
+                n //= p
         
         if n == 1:
             break
@@ -135,24 +143,23 @@ def unique_prime_factors(n):
 def prime_power_factorization(n):
     """Factor a number into powers of primes"""
     
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    if n == 0:
+        raise ValueError("Prime factorization of 0 is undefined")
+    
     L = []
-    p = 1
     
-    while n % 2 == 0:
-        p *= 2
-        n //= 2
-    
-    L.append(p)
-    
-    for d in count(3,2):
-        p = 1
+    for p in _primes_copy():
+        q = 1
         
-        while n % d == 0:
-            p *= d
-            n //= d
+        while n % p == 0:
+            q *= p
+            n //= p
         
-        if p != 1:
-            L.append(p)
+        if q != 1:
+            L.append(q)
         
         if n == 1:
             break
@@ -809,7 +816,7 @@ def arithmetic_derivative(n):
 
 def jordan_totient(n,k=1):
     """
-    Jordan's Totient Function
+    Jordan's Totient Function: Number of sets of size k with positive integers less than n such that with n add the they are setwise coprime
     """
     
     F = unique_prime_factors(n)
