@@ -380,7 +380,7 @@ def speed_compare(sequences,names=[],*,n=1,reps=1):
         names = [f"Sequence {i}" for i in range(1,len(sequences)+1)]
     
     for S,name in zip(sequences,names):
-        print("\n",name)
+        print(name)
         
         t0 = time()
         
