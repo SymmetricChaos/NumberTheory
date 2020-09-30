@@ -4,6 +4,7 @@ from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_positive, \
                                         require_nonnegative, require_geq
 from Sequences.Manipulations import offset, sequence_apply
+from itertools import takewhile
 
 def polygonal(S=2):
     """
@@ -250,6 +251,29 @@ def triangles_in_triangle():
         yield (4*n3 + 10*n2 + 4*n + -1 + s)//16
 
 
+def two_square():
+    """
+    Sums of exactly two non-zero squares
+    OEIS A000404
+    """
+    
+    sequence = offset(square(),1)
+    
+    sqrs = []
+    sums = []
+    
+    for s in sequence:
+        sqrs.append(s)
+        
+        for i in sqrs:
+            sums.append(i+s)
+        
+        sums = sorted(sums)
+        
+        while sums[0] <= s:
+            yield sums.pop(0)
+
+
 
 
 
@@ -387,4 +411,8 @@ if __name__ == '__main__':
     print("\nSolutions to the Matchstick Triangle Puzzle")
     simple_test(triangles_in_triangle(),13,
                 "0, 1, 5, 13, 27, 48, 78, 118, 170, 235, 315, 411, 525")
+    
+    print("\nSums of Two Squares")
+    simple_test(two_square(),14,
+                "2, 5, 8, 10, 13, 17, 18, 20, 26, 29, 32, 34, 37, 40")
     

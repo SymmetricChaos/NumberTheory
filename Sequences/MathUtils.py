@@ -776,9 +776,29 @@ def poly_mult(P,Q):
 
 
 def kronecker_delta(i,j):
+    """
+    The Kronecker Delta Function
+    (actually might be unnecessary in Python)
+    """
+    
     if i == j:
         return 1
     return 0
+
+
+def arithmetic_derivative(n):
+    
+    if n in (0,1):
+        return 0
+    
+    lim = isqrt(n)+1
+    
+    for i in range(2,lim):
+        if n % i == 0:
+            p,q = i,n//i
+            return q + p*arithmetic_derivative(q)
+    
+    return 1
 
 
 
@@ -833,3 +853,7 @@ if __name__ == '__main__':
     
     print("\nProduct of 1 + 2x + 3x^2 + 4x^3 with 9 + 3x + 2x^2 + x^3")
     print(poly_mult([1,2,3,4],[9,3,2,1]))
+    
+    print("\nArithmetic Derivative of 72")
+    print(arithmetic_derivative(72))
+    
