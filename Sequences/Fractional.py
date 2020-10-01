@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.NiceErrorChecking import require_integers, require_nonnegative
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from math import gcd
 
 
@@ -61,7 +61,7 @@ def gen_harmonic(m):
     """
     
     require_integers(["m"],[m])
-    require_nonnegative(["m"],[m])
+    require_geq(["m"],[m],0)
     
     if m == 0:
         for i in naturals(1):
@@ -192,9 +192,9 @@ if __name__ == '__main__':
     simple_test(_pretty_fracs(gen_harmonic(2)),6,
                 "1/1, 3/4, 13/36, 11/72, 127/1800, 427/10800")
     
-    print("\nGeneralized Harmonic Denominators of Order 2")
-    simple_test(denominators(gen_harmonic(2)),9,
-                "1, 4, 36, 72, 1800, 10800, 529200, 4233600, 38102400")
+    print("\nGeneralized Harmonic Numerators of Order 2")
+    simple_test(numerators(gen_harmonic(2)),9,
+                "1, 3, 13, 11, 127, 427, 13789, 79939, 550339")
     
     print("\nIrregular Triangle of Farey Sequences")
     simple_test(_pretty_fracs(farey()),11,

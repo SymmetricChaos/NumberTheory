@@ -1,10 +1,9 @@
 from Sequences.Simple import naturals, integers, arithmetic, sign_sequence
 from math import floor, log2, comb
 from Sequences.Primes import primes
-from Sequences.NiceErrorChecking import require_integers, require_positive, \
-                                        require_nonnegative, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Manipulations import offset, sequence_apply
-from itertools import takewhile
+
 
 def polygonal(S=2):
     """
@@ -69,7 +68,7 @@ def simplicial(N=1):
     """
     
     require_integers(["N"],[N])
-    require_positive(["N"],[N])
+    require_geq(["N"],[N],1)
     
     yield 0
     
@@ -146,7 +145,7 @@ def hypercube(e):
     """
     
     require_integers(["e"],[e])
-    require_nonnegative(["e"],[e])
+    require_geq(["e"],[e],0)
     
     for n in naturals():
         yield n**e
@@ -163,7 +162,7 @@ def gen_hypercube(e=0):
     """
     
     require_integers(["e"],[e])
-    require_nonnegative(["e"],[e])
+    require_geq(["e"],[e],0)
     
     for i in integers():
         yield i**e
@@ -194,7 +193,7 @@ def rectangular(d):
     S = 0
     
     require_integers(["d"],[d])
-    require_positive(["d"],[d])
+    require_geq(["d"],[d],1)
     
     for a in arithmetic(d+1,2):
         yield S

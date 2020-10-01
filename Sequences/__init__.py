@@ -28,7 +28,7 @@ from Sequences.Primes import primes, primorial, smooth, rough, highly_composite,
                              pythagorean_primes, unique_prime_divisors, prime_divisors, \
                              composites, totients, compositorial, prime_characteristic, \
                              coprime_characteristic, cototients, superprimes, lucky, \
-                             noncomposite, mobius_function, odd_primes, twin_primes, \
+                             noncomposite, odd_primes, twin_primes, \
                              cousin_primes, sexy_primes, prime_gaps, powerful
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
@@ -70,6 +70,8 @@ from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, 
 from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
                                  farey, stern_brocot
 
+from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
+                                        mobius_function
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",

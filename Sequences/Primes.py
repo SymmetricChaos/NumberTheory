@@ -1,10 +1,10 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factors, prime_factorization, nth_sign, unique_prime_factors, jordan_totient
+from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, jordan_totient
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
 from math import prod, gcd
-from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset, memoize_multiplicative
+from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 
 
 ##############################
@@ -218,6 +218,22 @@ def pythagorean_primes():
     for p in primes():
         if (p-1)%4 == 0:
             yield p
+
+
+def prime_characteristic():
+    """
+    Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0\n
+    OEIS A010051
+    """
+    
+    cur = 1
+    
+    for p in primes():
+        for i in range(p-cur):
+            yield 0
+            
+        yield 1
+        cur = p+1
 
 
 
@@ -467,22 +483,6 @@ def prime_counting():
         cur = p
 
 
-def prime_characteristic():
-    """
-    Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0\n
-    OEIS A010051
-    """
-    
-    cur = 1
-    
-    for p in primes():
-        for i in range(p-cur):
-            yield 0
-            
-        yield 1
-        cur = p+1
-
-
 def totients():
     """
     Totients: Count of positive integers coprime to each positive integer\n
@@ -630,25 +630,9 @@ def lucky():
             nth += 1
 
 
-def mobius_function():
-    """
-    Map of the Mobius Function
-    """
-    
-    yield 1
-    
-    for n in naturals(2):
-        P = prime_factorization(n)
-        
-        if len(P) == len(set(P)):
-            yield nth_sign(len(P))
-        else:
-            yield 0
-
-
 def powerful(n=2):
     """
-    n-Powerful Numbers: Positive integers that are divisible by the square of each prime factor
+    n-Powerful Numbers: Positive integers that are divisible by the nth power of each prime factor
     OEIS A001694
     """
     
@@ -774,10 +758,6 @@ if __name__ == '__main__':
     print("\nNoncomposite Numbers")
     simple_test(noncomposite(),15,
                 "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
-    
-    print("\nMobius Function")
-    simple_test(mobius_function(),16,
-                "1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1, 1, 0")
     
     print("\nPowerful Numbers")
     simple_test(powerful(),14,
