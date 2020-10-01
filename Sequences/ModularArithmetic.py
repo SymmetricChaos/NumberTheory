@@ -2,6 +2,24 @@ from Sequences.Primes import odd_primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol, nth_sign
 
+
+def modular_inverses():
+    """
+    Triangle of Modular Multiplicative Inverses
+    OEIS A102057
+    """
+    
+    for a in naturals(2):
+        for b in range(1,a):
+            g,x,y = egcd(b,a)
+            
+            if g != 1:
+                yield 0
+            
+            else:
+                yield x%a
+
+
 def legendre_symbols():
     """
     Irreguar Array of Legendre Symbols
@@ -49,27 +67,11 @@ def mobius_function():
             yield 0
 
 
-def modular_inverses():
-    """
-    Triangle of Modular Multiplicative Inverses
-    OEIS A102057
-    """
-    
-    for a in naturals(2):
-        for b in range(1,a):
-            g,x,y = egcd(b,a)
-            
-            if g != 1:
-                yield 0
-            
-            else:
-                yield x%a
-
-
 # def quadratic_residue(m):
 #     """
-#     Quadratic Residues Modulo M
+#     Quadratic Residues Modulo m
 #     """
+
 
 
 
