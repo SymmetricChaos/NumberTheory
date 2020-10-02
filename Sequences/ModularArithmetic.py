@@ -1,6 +1,6 @@
 from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
-from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol, nth_sign
+from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign
 from Sequences.Polygonal import square
 from Sequences.Manipulations import segment
 from itertools import cycle
@@ -57,7 +57,7 @@ def jacobi_symbols():
             out = 1
             
             for f in fac:
-                out *= legendre_symbol(a,p)
+                out *= _legendre_symbol(a,p)
             
             yield out
 
