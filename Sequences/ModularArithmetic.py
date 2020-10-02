@@ -67,10 +67,40 @@ def mobius_function():
             yield 0
 
 
-# def quadratic_residue(m):
-#     """
-#     Quadratic Residues Modulo m
-#     """
+def quadratic_residue(m):
+    """
+    Quadratic Residues Modulo m
+    Finite generator
+    """
+    
+    L = [0]
+    for x in range(1,m):
+        L.append(x*x%m)
+    
+    yield from sorted(list(set(L)))
+
+
+def quadratic_nonresidue(m):
+    """
+    Quadratic Nonresidues Modulo m
+    Finite generator
+    """
+    
+    S = set([i for i in range(2,m)])
+    for x in range(2,m):
+        S.discard(x*x %m)
+    
+    yield from sorted(list(S))
+
+
+def all_quadratic_residues():
+    """
+    Irregular array by rows listing the quadratic residues for each positive natural
+    OEIS A096008
+    """
+    
+    for n in naturals(1):
+        yield from quadratic_residue(n)
 
 
 
@@ -94,3 +124,16 @@ if __name__ == '__main__':
     print("\nMobius Function")
     simple_test(mobius_function(),16,
                 "1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1, 1, 0")
+    
+    print("\nQuadratic Residues of 22")
+    simple_test(quadratic_residue(22),100,
+                "0, 1, 3, 4, 5, 9, 11, 12, 14, 15, 16, 20")
+    
+    print("\nQuadratic Nonresidues of 22")
+    simple_test(quadratic_nonresidue(22),100,
+                "2, 6, 7, 8, 10, 13, 17, 18, 19, 21")
+    
+    print("\nTable of all Quadratic Residues")
+    simple_test(all_quadratic_residues(),18,
+                "0, 0, 1, 0, 1, 0, 1, 0, 1, 4, 0, 1, 3, 4, 0, 1, 2, 4")
+    
