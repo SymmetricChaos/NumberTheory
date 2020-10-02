@@ -717,6 +717,13 @@ def legendre_symbol(a,p):
     The Legendre Symbol: 1 if a is a quadratic residue mod p, -1 if it is a nonresidue, 0 if a is zero
     p must be prime but this is hard to check so is not done in the function itself
     """
+    if p == 2:
+        if a%2 == 0:
+            return 0
+        if a%8 in (1,7):
+            return 1
+        return -1
+            
     out = pow(a,(p-1)//2,p)
     if out == 1:
         return 1
@@ -726,48 +733,27 @@ def legendre_symbol(a,p):
         return -1
 
 
-# def jacobi_symbol(a,n):
-#     """The Jacobi Symbol"""
-#     assert n % 2 == 1
-#     fac = prime_factorization(n)
-#     out = 1
-#     for f in fac:
-#         out *= legendre_symbol(a,f)
-#     return out
+def kronecker_symbol(a,n):
+    """Extend the Legendre Symbol to all naturals"""
+    if n == 2:
+        if a % 2 == 0:
+            return 0
+        if a % 8 == 1 or a % 8 == 7:
+            return 1
+        return -1
+    elif n == 0:
+        if a == 1 or a == -1:
+            return 1
+        return 0
+    elif n == 1 or a == 1:
+        return 1
+    else:
+        fac = prime_factorization(n)
+        out = kronecker_symbol(a,1)
+        for f in fac:
+            out *= kronecker_symbol(a,f)
+        return out
 
-
-# def kronecker_symbol(a,n):
-#     """The Kronecker Symbol"""
-#     if n == 2:
-#         if a % 2 == 0:
-#             return 0
-#         if a % 8 == 1 or a % 8 == 7:
-#             return 1
-#         return -1
-#     elif n == 0:
-#         if a == 1 or a == -1:
-#             return 1
-#         return 0
-#     elif n == -1:
-#         if a < 0:
-#             return -1
-#         return 1
-#     elif n == 1 or a == 1:
-#         return 1
-#     elif is_prime(n):
-#         return legendre_symbol(a,n)
-#     else:
-#         fac = prime_factorization(n)
-#         if n < 0:
-#             out = kronecker_symbol(a,-1)
-#             for f in fac:
-#                 out *= kronecker_symbol(a,f)
-#             return out
-#         else:
-#             out = kronecker_symbol(a,1)
-#             for f in fac:
-#                 out *= kronecker_symbol(a,f)
-#             return out
 
 def poly_mult(P,Q):
     """

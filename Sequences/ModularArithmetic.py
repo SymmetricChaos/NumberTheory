@@ -1,8 +1,10 @@
-from Sequences.Primes import odd_primes
+from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol, nth_sign
 from Sequences.Polygonal import square
 from Sequences.Manipulations import segment
+from itertools import cycle
+
 
 def modular_inverses():
     """
@@ -23,11 +25,12 @@ def modular_inverses():
 
 def legendre_symbols():
     """
-    Irreguar Array of Legendre Symbols
-    OEIS A226520 (skipping first two)
+    Irreguar Array of Legendre Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
+    One row for each prime, p, of length p
+    OEIS A226520
     """
     
-    for p in odd_primes():
+    for p in primes():
         yield 0
         for a in range(1,p):
             out = pow(a,(p-1)//2,p)
@@ -39,17 +42,34 @@ def legendre_symbols():
 
 def jacobi_symbols():
     """
-    Irreguar Array of Jacobi Symbols
-    OEIS (not A226520)
+    Irreguar Array of Jacobi Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
+    One row for each odd natural, n, of length n
+    
     """
     
+    pfacs = dict()
+    
     for p in odds():
+        pfacs[p] = prime_factorization(p)
+        
         for a in range(p):
-            fac = prime_factorization(p)
+            fac = pfacs[p]
             out = 1
+            
             for f in fac:
                 out *= legendre_symbol(a,p)
+            
             yield out
+
+
+def kronecker_symbols():
+    """
+    Triangle of Kronecker Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
+    One row for each natural, n, of length n
+    OEIS A091337
+    """
+    
+    yield from cycle([1,0,-1,0,-1,0,1,0])
 
 
 def mobius_function():
@@ -116,6 +136,7 @@ def all_quadratic_nonresidues():
 
 
 
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -125,11 +146,15 @@ if __name__ == '__main__':
     
     print("\nIrregular Array of Legendre Symbols")
     simple_test(legendre_symbols(),16,
-                "0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1, 0")
+                "0, 1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1")
     
     print("\nIrregular Array of Jacobi Symbols")
     simple_test(jacobi_symbols(),16,
                 "1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1")
+    
+    print("\nTriangle of Kronecker Symbols")
+    simple_test(kronecker_symbols(),17,
+                "1, 0, -1, 0, -1, 0, 1, 0, 1, 0, -1, 0, -1, 0, 1, 0, 1")
     
     print("\nMobius Function")
     simple_test(mobius_function(),16,
@@ -150,3 +175,4 @@ if __name__ == '__main__':
     print("\nTable of all Quadratic Nonresidues")
     simple_test(all_quadratic_nonresidues(),18,
                 "2, 2, 3, 2, 3, 2, 5, 3, 5, 6, 2, 3, 5, 6, 7, 2, 3, 5")
+    
