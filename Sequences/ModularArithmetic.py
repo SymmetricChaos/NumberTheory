@@ -1,7 +1,8 @@
 from Sequences.Primes import odd_primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, legendre_symbol, nth_sign
-
+from Sequences.Polygonal import square
+from Sequences.Manipulations import segment
 
 def modular_inverses():
     """
@@ -73,9 +74,9 @@ def quadratic_residue(m):
     Finite generator
     """
     
-    L = [0]
-    for x in range(1,m):
-        L.append(x*x%m)
+    L = []
+    for s in segment(square(),0,m):
+        L.append(s % m)
     
     yield from sorted(list(set(L)))
 
@@ -87,21 +88,30 @@ def quadratic_nonresidue(m):
     """
     
     S = set([i for i in range(2,m)])
-    for x in range(2,m):
-        S.discard(x*x %m)
+    for s in segment(square(),0,m):
+        S.discard(s % m)
     
     yield from sorted(list(S))
 
 
 def all_quadratic_residues():
     """
-    Irregular array by rows listing the quadratic residues for each positive natural
+    Irregular array by rows listing all the quadratic residues for each positive natural
     OEIS A096008
     """
     
     for n in naturals(1):
         yield from quadratic_residue(n)
 
+
+def all_quadratic_nonresidues():
+    """
+    Irregular array by rows listing all the quadratic nonresidues for each positive natural
+    OEIS A096008
+    """
+    
+    for n in naturals(1):
+        yield from quadratic_nonresidue(n)
 
 
 
@@ -137,3 +147,6 @@ if __name__ == '__main__':
     simple_test(all_quadratic_residues(),18,
                 "0, 0, 1, 0, 1, 0, 1, 0, 1, 4, 0, 1, 3, 4, 0, 1, 2, 4")
     
+    print("\nTable of all Quadratic Nonresidues")
+    simple_test(all_quadratic_nonresidues(),18,
+                "2, 2, 3, 2, 3, 2, 5, 3, 5, 6, 2, 3, 5, 6, 7, 2, 3, 5")
