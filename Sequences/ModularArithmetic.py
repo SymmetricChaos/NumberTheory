@@ -134,6 +134,21 @@ def all_quadratic_nonresidues():
         yield from quadratic_nonresidue(n)
 
 
+def square_modulo_n(n):
+    """
+    Squares Modulo n
+    OEIS A000004, A000035, A011655, A053879, A054580, A070430-A070470,
+    A008959,
+    """
+    
+    L = []
+    
+    for i in segment(square(),0,n):
+        L.append(i % n)
+    
+    yield from cycle(L)
+
+
 
 
 
@@ -175,4 +190,8 @@ if __name__ == '__main__':
     print("\nTable of all Quadratic Nonresidues")
     simple_test(all_quadratic_nonresidues(),18,
                 "2, 2, 3, 2, 3, 2, 5, 3, 5, 6, 2, 3, 5, 6, 7, 2, 3, 5")
+    
+    print("\nSquares Modulo 7")
+    simple_test(square_modulo_n(7),18,
+                "0, 1, 4, 2, 2, 4, 1, 0, 1, 4, 2, 2, 4, 1, 0, 1, 4, 2")
     
