@@ -1,6 +1,6 @@
 from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
-from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign
+from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
 from Sequences.Polygonal import square
 from Sequences.Manipulations import segment
 from itertools import cycle
@@ -44,20 +44,20 @@ def jacobi_symbols():
     """
     Irreguar Array of Jacobi Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
     One row for each odd natural, n, of length n
-    
+    OEIS
     """
     
     pfacs = dict()
     
     for p in odds():
-        pfacs[p] = prime_factorization(p)
+        pfacs[p] = canonical_factorization(p)
         
         for a in range(p):
             fac = pfacs[p]
             out = 1
             
-            for f in fac:
-                out *= _legendre_symbol(a,p)
+            for f,e in fac.items():
+                out *= _legendre_symbol(a,f)**e
             
             yield out
 

@@ -167,6 +167,33 @@ def prime_power_factorization(n):
     return L
 
 
+def canonical_factorization(n):
+    """Prime factors and their exponents"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    if n == 0:
+        raise ValueError("Prime factorization of 0 is undefined")
+    
+    F = {}
+    
+    for p in _primes_copy():
+        ctr = 0
+        
+        while n % p == 0:
+            ctr += 1
+            n //= p
+        
+        if ctr != 0:
+            F[p] = ctr
+        
+        if n == 1:
+            break
+    
+    return F
+
+
 def sum_of_divisors(n,p=1):
     """
     Sum of the divisors of n, including itself, raised to the specified power
@@ -821,6 +848,9 @@ if __name__ == '__main__':
     
     print("\nPrime Power Factorization of 378")
     print(prime_power_factorization(378))
+    
+    print("\nCanonical Factorization of 378")
+    print(canonical_factorization(378))
     
     print("\nFirst 18 digits of 92/7 ≈ 13.1428 to digits")
     F = frac_to_digits(92,7)
