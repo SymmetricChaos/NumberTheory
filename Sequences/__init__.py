@@ -57,7 +57,8 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd
+from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
+                            hofstader_Q, sierpinski
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
@@ -71,7 +72,9 @@ from Sequences.Fractional import numerators, denominators, harmonic, gen_harmoni
                                  farey, stern_brocot
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
-                                        mobius_function
+                                        kronecker_symbols, mobius_function, quadratic_residue, \
+                                        quadratic_nonresidue, all_quadratic_residues, \
+                                        all_quadratic_nonresidues
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
@@ -144,6 +147,7 @@ __all__=[#MANIPS
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
+         "hofstader_Q","sierpinski",
          
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",
@@ -158,4 +162,10 @@ __all__=[#MANIPS
          #FRACTIONAL
          "numerators","denominators","harmonic","gen_harmonic","farey",
          "stern_brocot",
+         
+         #MODULAR ARITHMETIC
+         "modular_inverses","legendre_symbols","jacobi_symbols",
+         "kronecker_symbols","mobius_function","quadratic_residue", 
+         "quadratic_nonresidue","all_quadratic_residues",
+         "all_quadratic_nonresidues"
         ]
