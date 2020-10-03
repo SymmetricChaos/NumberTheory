@@ -236,10 +236,13 @@ def practical():
         C = Counter(F)
         P = 2**(C[2]+1)-1
         del C[2]
+        
         for p,n in C.items():
             if p > P+1:
                 return False
+            
             P *= (p**(n+1)-1)//(p-1)
+        
         return True
     
     yield 1
@@ -253,7 +256,7 @@ def practical():
 
 
 if __name__ == '__main__':
-    from Sequences.SequenceManipulation import simple_test
+    from Sequences.Manipulations import simple_test
     
     print("Aliquot Sums")
     simple_test(aliquot(),17,

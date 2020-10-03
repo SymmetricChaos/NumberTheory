@@ -2,7 +2,7 @@ from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from functools import reduce
 from fractions import Fraction
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 ###################
 ## FACTORIZATION ##
@@ -176,22 +176,7 @@ def canonical_factorization(n):
     if n == 0:
         raise ValueError("Prime factorization of 0 is undefined")
     
-    F = {}
-    
-    for p in _primes_copy():
-        ctr = 0
-        
-        while n % p == 0:
-            ctr += 1
-            n //= p
-        
-        if ctr != 0:
-            F[p] = ctr
-        
-        if n == 1:
-            break
-    
-    return F
+    return Counter(prime_factorization(n))
 
 
 def sum_of_divisors(n,p=1):

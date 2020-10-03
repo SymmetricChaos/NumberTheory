@@ -8,7 +8,7 @@ from itertools import cycle
 
 def modular_inverses():
     """
-    Triangle of Modular Multiplicative Inverses
+    Triangle of Modular Multiplicative Inverses\n
     OEIS A102057
     """
     
@@ -26,16 +26,19 @@ def modular_inverses():
 def legendre_symbols():
     """
     Irreguar Array of Legendre Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
-    One row for each prime, p, of length p
+    One row for each prime, p, of length p\n
     OEIS A226520
     """
     
     for p in primes():
         yield 0
+        
         for a in range(1,p):
             out = pow(a,(p-1)//2,p)
+            
             if out == 1:
                 yield 1
+            
             else:
                 yield -1
 
@@ -43,20 +46,17 @@ def legendre_symbols():
 def jacobi_symbols():
     """
     Irreguar Array of Jacobi Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
-    One row for each odd natural, n, of length n
+    One row for each odd natural, n, of length n\n
     OEIS
     """
     
-    pfacs = dict()
-    
     for p in odds():
-        pfacs[p] = canonical_factorization(p)
+        pfacs = canonical_factorization(p)
         
         for a in range(p):
-            fac = pfacs[p]
             out = 1
             
-            for f,e in fac.items():
+            for f,e in pfacs.items():
                 out *= _legendre_symbol(a,f)**e
             
             yield out
@@ -65,7 +65,7 @@ def jacobi_symbols():
 def kronecker_symbols():
     """
     Triangle of Kronecker Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
-    One row for each natural, n, of length n
+    One row for each natural, n, of length n\n
     OEIS A091337
     """
     
@@ -74,7 +74,8 @@ def kronecker_symbols():
 
 def mobius_function():
     """
-    Map of the Mobius Function
+    Map of the Mobius Function\n
+    OEIS A008683
     """
     
     yield 1
@@ -84,6 +85,7 @@ def mobius_function():
         
         if len(P) == len(set(P)):
             yield nth_sign(len(P))
+        
         else:
             yield 0
 
@@ -95,6 +97,7 @@ def quadratic_residue(m):
     """
     
     L = []
+    
     for s in segment(square(),0,m):
         L.append(s % m)
     
@@ -108,6 +111,7 @@ def quadratic_nonresidue(m):
     """
     
     S = set([i for i in range(2,m)])
+    
     for s in segment(square(),0,m):
         S.discard(s % m)
     
@@ -116,7 +120,7 @@ def quadratic_nonresidue(m):
 
 def all_quadratic_residues():
     """
-    Irregular array by rows listing all the quadratic residues for each positive natural
+    Irregular array by rows listing all the quadratic residues for each positive natural\n
     OEIS A096008
     """
     
@@ -126,7 +130,7 @@ def all_quadratic_residues():
 
 def all_quadratic_nonresidues():
     """
-    Irregular array by rows listing all the quadratic nonresidues for each positive natural
+    Irregular array by rows listing all the quadratic nonresidues for each positive natural\n
     OEIS A096008
     """
     
@@ -136,9 +140,9 @@ def all_quadratic_nonresidues():
 
 def square_modulo_n(n):
     """
-    Squares Modulo n
+    Squares Modulo n\n
     OEIS A000004, A000035, A011655, A053879, A054580, A070430-A070470,
-    A008959,
+    A008959
     """
     
     L = []
