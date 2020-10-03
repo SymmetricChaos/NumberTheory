@@ -74,7 +74,7 @@ from Sequences.Fractional import numerators, denominators, harmonic, gen_harmoni
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
                                         kronecker_symbols, mobius_function, quadratic_residue, \
                                         quadratic_nonresidue, all_quadratic_residues, \
-                                        all_quadratic_nonresidues
+                                        all_quadratic_nonresidues, squares_modulo_n
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
@@ -167,5 +167,5 @@ __all__=[#MANIPS
          "modular_inverses","legendre_symbols","jacobi_symbols",
          "kronecker_symbols","mobius_function","quadratic_residue", 
          "quadratic_nonresidue","all_quadratic_residues",
-         "all_quadratic_nonresidues"
+         "all_quadratic_nonresidues","squares_modulo_n"
         ]
