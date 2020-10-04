@@ -56,10 +56,26 @@ def twin_primes():
         a,b,c = b,c,next(P)
 
 
+def twin_prime_pairs():
+    """
+    Twin Prime Pairs: Primes that are two more or less than another prime
+    OEIS A077800
+    """
+    
+    P = primes()
+    
+    a,b = next(P),next(P)
+    
+    while True:
+        if a+2 == b:
+            yield (a,b)
+        a,b = b,next(P)
+
+
 def cousin_primes():
     """
     Cousin Primes: Primes that are four more or less than another prime
-    OEIS
+    OEIS A111980
     """
     
     P = primes()
@@ -74,7 +90,7 @@ def cousin_primes():
 
 def sexy_primes():
     """
-    Sexy Primes: Primes that are four more or less than another prime
+    Sexy Primes: Primes that are six more or less than another prime
     OEIS
     """
     
@@ -147,7 +163,7 @@ def composites():
 def noncomposite():
     """
     Noncomposite Numbers: Positive integers with less than three factors\n
-    OEIS 
+    OEIS A008578
     """
     
     yield 1
@@ -158,7 +174,7 @@ def noncomposite():
 def nonprime():
     """
     Nonprime Numbers: Positive integers that are not primes\n
-    OEIS 
+    OEIS A018252
     """
     
     yield 1
@@ -563,7 +579,6 @@ def jordan_totients(k):
         yield jordan_totient(n,k)
 
 
-
 def coprime_characteristic():
     """
     Triangle of coprime pairs: 1 if the pair is coprimes and 0 if not\n
@@ -790,6 +805,14 @@ if __name__ == '__main__':
     print("\nTwin Primes")
     simple_test(twin_primes(),14,
                 "3, 5, 7, 11, 13, 17, 19, 29, 31, 41, 43, 59, 61, 71")
+    
+    print("\nTwin Prime Pairs")
+    simple_test(twin_prime_pairs(),6,
+                "(3, 5), (5, 7), (11, 13), (17, 19), (29, 31), (41, 43)")
+    
+    print("\nCousin Primes")
+    simple_test(cousin_primes(),14,
+                "7, 11, 13, 17, 19, 23, 37, 41, 43, 47, 67, 71, 79, 83")
     
     print("\nPrime Gaps")
     simple_test(prime_gaps(),18,
