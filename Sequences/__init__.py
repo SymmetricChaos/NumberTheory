@@ -23,13 +23,10 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              counting, constant, arithmetrico_geometric, gen_polynomial, \
                              self_powers, repdigit, sign_sequence
 
-from Sequences.Primes import primes, primorial, smooth, rough, highly_composite, \
-                             divisors, squarefree, squarefree_kernel, prime_counting, \
-                             pythagorean_primes, unique_prime_divisors, prime_divisors, \
-                             composites, totients, compositorial, prime_characteristic, \
-                             coprime_characteristic, cototients, superprimes, lucky, \
-                             noncomposite, odd_primes, twin_primes, twin_prime_pairs, \
-                             prime_gaps, powerful, prime_tuples
+from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
+                             composites, compositorial, prime_characteristic, \
+                             superprimes, noncomposite, odd_primes, twin_primes, \
+                             twin_prime_pairs, prime_gaps, prime_tuples
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -58,7 +55,7 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
-                            hofstader_Q, sierpinski
+                            hofstader_Q, sierpinski, lucky
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
@@ -75,6 +72,13 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
                                         kronecker_symbols, mobius_function, quadratic_residue, \
                                         quadratic_nonresidue, all_quadratic_residues, \
                                         all_quadratic_nonresidues, squares_modulo_n
+
+from Sequences.Divisibility import totients, cototients, smooth, rough, highly_composite, \
+                                   divisors, prime_divisors, unique_prime_divisors, \
+                                   squarefree, squarefree_kernel, squareful, coprime_characteristic, \
+                                   coprimes, powerful, highly_composite_factor, \
+                                   highly_composite_prime_factor, jordan_totients, \
+                                   charmichael
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
@@ -104,14 +108,10 @@ __all__=[#MANIPS
          "repdigit","sign_sequence",
          
          #PRIME
-         "primes","primorial","smooth","rough","highly_composite", "divisors",
-         "squarefree","squarefree_kernel","pythagorean_primes","lucky",
-         "prime_counting","prime_divisors","unique_prime_divisors",
-         "composites","totients","compositorial","hamming","cototients",
-         "prime_characteristic","coprime_characteristic","superprimes",
-         "noncomposite","mobius_function","odd_primes","twin_primes",
-         "cousin_primes","sexy_primes","prime_gaps","powerful",
-         "twin_prime_pairs","prime_tuples",
+         "primes","primorial","prime_counting","pythagorean_primes",
+         "composites","compositorial","prime_characteristic",
+         "superprimes","noncomposite","odd_primes","twin_primes",
+         "twin_prime_pairs","prime_gaps","prime_tuples",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -148,7 +148,7 @@ __all__=[#MANIPS
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
-         "hofstader_Q","sierpinski",
+         "hofstader_Q","sierpinski","lucky",
          
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",
@@ -168,5 +168,13 @@ __all__=[#MANIPS
          "modular_inverses","legendre_symbols","jacobi_symbols",
          "kronecker_symbols","mobius_function","quadratic_residue", 
          "quadratic_nonresidue","all_quadratic_residues",
-         "all_quadratic_nonresidues","squares_modulo_n"
+         "all_quadratic_nonresidues","squares_modulo_n",
+         
+         # DIVISBILITY
+         "totients","cototients","smooth","rough","highly_composite",
+         "divisors","prime_divisors","unique_prime_divisors","squarefree",
+         "squarefree_kernel","squareful","coprime_characteristic",
+         "coprimes","powerful","highly_composite_factor",
+         "highly_composite_prime_factor","jordan_totients",
+         "charmichael"
         ]

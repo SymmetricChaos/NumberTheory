@@ -189,6 +189,44 @@ def sierpinski():
     yield from sequence_apply(pascal(),lambda x: x%2)
 
 
+def lucky():
+    """
+    Lucky Numbers: Prime-like integers resulting from a modified sieve of Eratosthenes\n
+    OEIS A000959
+    """
+    
+    yield 1
+    yield 3
+    
+    # Terms of the sequence and where in the cycle each is
+    terms = [3]
+    ctrs = [2]
+    
+    # Update the cycles positions
+    # If any cycle has reached zero we're not at a lucky number and no later 
+    # cycles will be updated since the value has been sieved out before that
+    # number is known
+    def update():
+        for n,t in enumerate(terms):
+            ctrs[n] = (ctrs[n]+1)%t
+            if ctrs[n] == 0:
+                return False
+        return True
+    
+    # Which lucky number we're currently looking for
+    # This sets where the cycle for a newly found lucky number begins
+    nth = 3
+    
+    # Go through the odds greater than 5 looking for lucky numbers
+    for o in arithmetic(5,2):
+        if update():
+            yield o
+            
+            terms.append(o)
+            ctrs.append(nth)
+            nth += 1
+
+
 
 
 
@@ -234,4 +272,8 @@ if __name__ == '__main__':
     print("\nHofstader's Q-Sequence")
     simple_test(hofstader_Q(),17,
                 "1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10, 9, 10")
+    
+    print("\nLucky Numbers")
+    simple_test(lucky(),15,
+                "1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63")
     
