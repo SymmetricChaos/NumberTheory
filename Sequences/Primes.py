@@ -72,54 +72,63 @@ def twin_prime_pairs():
         a,b = b,next(P)
 
 
-def cousin_primes():
+def n_gap_prime_pairs(n):
     """
-    Cousin Primes: Primes that are four more or less than another prime
-    OEIS A111980
+    Pairs of primes (p,q) such that p+n = q
     """
     
-    P = primes()
     
-    a,b,c = next(P),next(P),next(P)
+    if n == 0:
+        raise ValueError("n cannot be zero")
     
-    while True:
-        if b-4 == a or b+4 == c:
-            yield b
-        a,b,c = b,c,next(P)
+    elif n % 2 == 1:
+        raise ValueError("n must be even, for odd n either there is no pair or the only pair is (2,2+n)")
+    
+    else:
+        P = primes()
+        lo = next(P)
+        hi = [next(P)]
+        
+        while True:
+            while hi[-1] < lo+n:
+                hi.append(next(P))
+            
+            if lo+n in hi:
+                yield (lo,lo+n)
+            
+            lo = hi.pop(0)
+            
 
-
-def sexy_primes():
+def prime_tuple(K):
     """
-    Sexy Primes: Primes that are six more or less than another prime
+    Tuples of primes (p,q,r...)
     OEIS
     """
     
-    P = primes()
+    for gap in K:
+        if gap % 2 == 1:
+            raise ValueError("gaps must be even, the only odd gaps are between n and another prime")
     
-    a,b,c = next(P),next(P),next(P)
+    P = primes()
+    L = []
+    
+    def all_gaps(K,L):
+        for k in K:
+            if L[0]+k not in L:
+                return False
+        return True
     
     while True:
-        if b-6 == a or b+6 == c:
-            yield b
-        a,b,c = b,c,next(P)
-
-# Unsure about this, need to validate that it matches the definition
-# def prime_constellation(n,k):
-#     """
-#     Primes
-#     OEIS
-#     """
-#    
-#     P = primes()
-#     L = [next(P) for i in range(n)]
-#    
-#     if n > k//2:
-#         raise ValueError("n must be greater than k/2")
-#    
-#     while True:
-#         if abs(L[0] - L[-1]) == k:
-#             yield tuple(L)
-#         L = L[1:] + [next(P)]
+        while len(L) <= len(K):
+            L.append(next(P))
+        
+        while L[-1] <= L[0]+(max(K)):
+            L.append(next(P))
+        
+        if all_gaps(K,L):
+            yield tuple([L[0]+k for k in K])
+        
+        L = L[1:]
 
 
 def prime_gaps():
@@ -810,17 +819,17 @@ if __name__ == '__main__':
     simple_test(twin_prime_pairs(),6,
                 "(3, 5), (5, 7), (11, 13), (17, 19), (29, 31), (41, 43)")
     
-    print("\nCousin Primes")
-    simple_test(cousin_primes(),14,
-                "7, 11, 13, 17, 19, 23, 37, 41, 43, 47, 67, 71, 79, 83")
+    print("\nSexy Prime Pairs")
+    simple_test(n_gap_prime_pairs(6),5,
+                "(5, 11), (7, 13), (11, 17), (13, 19), (17, 23)")
+    
+    print("\nPrime Tuples of form (0, 4, 6, 10, 12)")
+    simple_test(prime_tuple((0, 4, 6, 10, 12)),2,
+                "(7, 11, 13, 17, 19), (97, 101, 103, 107, 109)")
     
     print("\nPrime Gaps")
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
-    
-    # print("\n7,20-Prime Constellation")
-    # simple_test(prime_constellation(7,20),3,
-    #             "(11, 13, 17, 19, 23, 29, 31), (5639, 5641, 5647, 5651, 5653, 5657, 5659), (88799, 88801, 88807, 88811, 88813, 88817, 88819)")
     
     print("\nJordan 2-Totients")
     simple_test(jordan_totients(2),13,
