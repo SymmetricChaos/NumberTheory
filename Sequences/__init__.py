@@ -7,71 +7,31 @@ from Sequences.Manipulations import sequence_slice, segment, offset, skips, \
                                     hypersequence, run_length_encoding, run_lengths, \
                                     n_rep_a
 
-from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
-                                 lucas_U, lucas_V, padovan, simple_recurrence, \
-                                 sylvester, leonardo, arbitrary_recurrence, pisot_E, \
-                                 pisot_L, pisot_P, pisot_T, ulam, perrin, semifibonacci
-
-from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
-                                polygonal, gen_polygonal, simplicial, perfect_powers, \
-                                cen_polygonal, cubic, doubly_polygonal, hypercube, \
-                                gen_hypercube, oblong, rectangular, square_triangular, \
-                                square_pyramidal, squared_triangular
-
-from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
-                             polynomial, fermat, evens, gen_evens, odds, gen_odds, \
-                             counting, constant, arithmetrico_geometric, gen_polynomial, \
-                             self_powers, repdigit, sign_sequence
-
-from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
-                             composites, compositorial, prime_characteristic, \
-                             superprimes, noncomposite, odd_primes, twin_primes, \
-                             twin_prime_pairs, prime_gaps, prime_tuples
-
-from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
-                                 kempner, double_factorials, even_double_factorials, \
-                                 odd_double_factorials
-
 from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
                               abundance, deficiency, untouchable, pseudoperfect, \
                               weird, highly_abundant, superabundant, amicable_pairs, \
                               practical, primitive_abundant_1, primitive_abundant_2
-
-from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
-                                    eulerian, bell, gould, even_permutation, \
-                                    lazy_caterer, cake, multiplicative_partition, \
-                                    central_binomial
-
-from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
-
-from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
-
-from Sequences.BinarySequences import thue_morse, co_thue_morse
-
-from Sequences.Pseudorandom import LCG, LFG, LFSR
-
-from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
-                              collatz_map, collatz_all, collatz_highpoint, \
-                              collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
-
-from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
-                            hofstader_Q, sierpinski, lucky
 
 from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weight, \
                                     ruler, binary_length, base_length, digital_sums, \
                                     digital_roots, fraction_period, palindrome, \
                                     digital_prods, additive_persistence, multiplicative_persistence
 
+from Sequences.BinarySequences import thue_morse, co_thue_morse
+
+from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
+                              collatz_map, collatz_all, collatz_highpoint, \
+                              collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
+
+from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
+                                    eulerian, bell, gould, even_permutation, \
+                                    lazy_caterer, cake, multiplicative_partition, \
+                                    central_binomial
+
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
 
-from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
-                                 farey, stern_brocot
-
-from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
-                                        kronecker_symbols, mobius_function, quadratic_residue, \
-                                        quadratic_nonresidue, all_quadratic_residues, \
-                                        all_quadratic_nonresidues, squares_modulo_n
+from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
 
 from Sequences.Divisibility import totients, cototients, smooth, rough, highly_composite, \
                                    divisors, prime_divisors, unique_prime_divisors, \
@@ -79,6 +39,50 @@ from Sequences.Divisibility import totients, cototients, smooth, rough, highly_c
                                    coprimes, powerful, highly_composite_factor, \
                                    highly_composite_prime_factor, jordan_totients, \
                                    charmichael
+
+from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
+                                 kempner, double_factorials, even_double_factorials, \
+                                 odd_double_factorials
+
+from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
+                                 farey, stern_brocot
+
+from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
+
+from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
+                                        kronecker_symbols, mobius_function, quadratic_residue, \
+                                        quadratic_nonresidue, all_quadratic_residues, \
+                                        all_quadratic_nonresidues, squares_modulo_n
+
+from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
+                                polygonal, gen_polygonal, simplicial, perfect_powers, \
+                                cen_polygonal, cubic, doubly_polygonal, hypercube, \
+                                gen_hypercube, oblong, rectangular, square_triangular, \
+                                square_pyramidal, squared_triangular
+
+from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
+                             composites, compositorial, prime_characteristic, \
+                             superprimes, noncomposite, odd_primes, twin_primes, \
+                             twin_prime_pairs, prime_gaps, prime_tuples
+
+from Sequences.Pseudorandom import LCG, LFG, LFSR
+
+from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
+                                 lucas_U, lucas_V, padovan, simple_recurrence, \
+                                 sylvester, leonardo, arbitrary_recurrence, pisot_E, \
+                                 pisot_L, pisot_P, pisot_T, ulam, perrin, semifibonacci
+
+from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, \
+                             polynomial, fermat, evens, gen_evens, odds, gen_odds, \
+                             counting, constant, arithmetrico_geometric, gen_polynomial, \
+                             self_powers, repdigit, sign_sequence
+
+from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
+                            hofstader_Q, sierpinski, lucky
+
+
+
+
 
 __all__=[#MANIPS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
@@ -88,11 +92,63 @@ __all__=[#MANIPS
          "pairwise_apply","differences","hypersequence","run_length_encoding",
          "run_lengths","n_rep_a",
          
-         #RECURRENCE
-         "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
-         "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
-         "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
-         "perrin", "semifibonacci",
+         #ALIQUOT
+         "aliquot","abundant","deficient","perfect","aliquot_recurrence",
+         "abundance","deficiency","untouchable","pseudoperfect","weird",
+         "highly_abundant","superabundant","amicable_pairs","practical",
+         "primitive_abundant_1","primitive_abundant_2",
+         
+         #BASE DEPENDENT
+         "evil","odious","binary_weight","co_binary_weight","ruler",
+         "binary_length","base_length","digital_sums","digital_roots",
+         "palindrome","fraction_period","digital_prods","additive_persistence",
+         "multiplicative_persistence",
+         
+         #BINARY
+         "thue_morse","co_thue_morse",
+         
+         #COLLATZ
+         "collatz_length","collatz_longest","collatz_sequence",
+         "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
+         "reduced_collatz_sequence","reduced_collatz_map",
+         
+         #COMBINATORIC
+         "catalan","derangement","pascal","partition","eulerian","bell",
+         "gould","recontres","even_permutation","lazy_caterer","cake",
+         "multiplicative_partition","central_binomial",
+         
+         #CONSTANT
+         "pi_digits","sqrt_digits","root_digits","phi_digits",
+         "champernowne_digits","silver_ratio_digits",
+         
+         #CONTINUED FRACTIONS
+         "cfrac","cfrac_convergents","sqrt_cfrac","e_cfrac",
+         
+         #DIVISBILITY
+         "totients","cototients","smooth","rough","highly_composite",
+         "divisors","prime_divisors","unique_prime_divisors","squarefree",
+         "squarefree_kernel","squareful","coprime_characteristic",
+         "coprimes","powerful","highly_composite_factor",
+         "highly_composite_prime_factor","jordan_totients",
+         "charmichael",
+         
+         #FACTORIAL
+         "factorials","alternating_factorials_1","alternating_factorials_2",
+         "kempner","double_factorials","even_double_factorials",
+         "odd_double_factorials",
+         
+         #FRACTIONAL
+         "numerators","denominators","harmonic","gen_harmonic","farey",
+         "stern_brocot",
+         
+         #GEOMETRIC
+         "primitive_hypotenuse","nonhypotenuse","hypotenuse",
+         
+         #MODULAR ARITHMETIC
+         "modular_inverses","legendre_symbols","jacobi_symbols",
+         "kronecker_symbols","mobius_function","quadratic_residue", 
+         "quadratic_nonresidue","all_quadratic_residues",
+         "all_quadratic_nonresidues","squares_modulo_n",
          
          #POLYGONAL
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
@@ -101,80 +157,28 @@ __all__=[#MANIPS
          "gen_hypercube","oblong","rectangular","square_triangular",
          "square_pyramidal","squared_triangular",
          
-         #SIMPLE
-         "naturals","integers","arithmetic","geometric","powers","fermat",
-         "polynomial","evens","gen_evens","odds","gen_odds","counting",
-         "constant","arithmetrico_geometric","gen_polynomial","self_powers",
-         "repdigit","sign_sequence",
-         
          #PRIME
          "primes","primorial","prime_counting","pythagorean_primes",
          "composites","compositorial","prime_characteristic",
          "superprimes","noncomposite","odd_primes","twin_primes",
          "twin_prime_pairs","prime_gaps","prime_tuples",
          
-         #FACTORIAL
-         "factorials","alternating_factorials_1","alternating_factorials_2",
-         "kempner","double_factorials","even_double_factorials",
-         "odd_double_factorials",
-         
-         #ALIQUOT
-         "aliquot","abundant","deficient","perfect","aliquot_recurrence",
-         "abundance","deficiency","untouchable","pseudoperfect","weird",
-         "highly_abundant","superabundant","amicable_pairs","practical",
-         "primitive_abundant_1","primitive_abundant_2",
-         
-         #COMBINATORIC
-         "catalan","derangement","pascal","partition","eulerian","bell",
-         "gould","recontres","even_permutation","lazy_caterer","cake",
-         "multiplicative_partition","central_binomial",
-         
-         #CONTINUED FRACTIONS
-         "cfrac","cfrac_convergents","sqrt_cfrac","e_cfrac",
-         
-         #GEOMETRIC
-         "primitive_hypotenuse","nonhypotenuse","hypotenuse",
-         
-         #BINARY
-         "thue_morse","co_thue_morse",
-         
          #PRNG
          "LCG","LFG","LFSR",
          
-         #COLLATZ
-         "collatz_length","collatz_longest","collatz_sequence",
-         "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
-         "reduced_collatz_sequence","reduced_collatz_map",
+         #RECURRENCE
+         "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
+         "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
+         "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
+         "perrin", "semifibonacci",
+         
+         #SIMPLE
+         "naturals","integers","arithmetic","geometric","powers","fermat",
+         "polynomial","evens","gen_evens","odds","gen_odds","counting",
+         "constant","arithmetrico_geometric","gen_polynomial","self_powers",
+         "repdigit","sign_sequence",
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
          "hofstader_Q","sierpinski","lucky",
-         
-         #BASE DEPENDENT
-         "evil","odious","binary_weight","co_binary_weight","ruler",
-         "binary_length","base_length","digital_sums","digital_roots",
-         "palindrome","fraction_period","digital_prods","additive_persistence",
-         "multiplicative_persistence",
-         
-         #CONSTANT
-         "pi_digits","sqrt_digits","root_digits","phi_digits",
-         "champernowne_digits","silver_ratio_digits",
-         
-         #FRACTIONAL
-         "numerators","denominators","harmonic","gen_harmonic","farey",
-         "stern_brocot",
-         
-         #MODULAR ARITHMETIC
-         "modular_inverses","legendre_symbols","jacobi_symbols",
-         "kronecker_symbols","mobius_function","quadratic_residue", 
-         "quadratic_nonresidue","all_quadratic_residues",
-         "all_quadratic_nonresidues","squares_modulo_n",
-         
-         # DIVISBILITY
-         "totients","cototients","smooth","rough","highly_composite",
-         "divisors","prime_divisors","unique_prime_divisors","squarefree",
-         "squarefree_kernel","squareful","coprime_characteristic",
-         "coprimes","powerful","highly_composite_factor",
-         "highly_composite_prime_factor","jordan_totients",
-         "charmichael"
         ]
