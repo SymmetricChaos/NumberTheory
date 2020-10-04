@@ -536,7 +536,7 @@ def cototients():
 
 def charmichael():
     """
-    Charmichael Function: Smallest 
+    Charmichael Function: LCM of the orders of the elements of the finite multiplictive group on n
     OEIS A002322
     """
     
