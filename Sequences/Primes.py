@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic
-from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, jordan_totient
+from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, jordan_totient, multi_lcm, prime_power_factorization
 from collections import defaultdict
 from itertools import takewhile
 from Sequences.NiceErrorChecking import require_integers, require_positive, require_geq
@@ -534,11 +534,23 @@ def cototients():
 # def sparsely_totient():
 
 
-# def charmichael():
-#     """
-#     Charmichael Function: Smallest 
-#     OEIS A002322
-#     """
+def charmichael():
+    """
+    Charmichael Function: Smallest 
+    OEIS A002322
+    """
+    
+    yield 1
+    
+    def charm(n):
+        if n > 4 and n%2 == 0:
+            return jordan_totient(n)//2
+        return jordan_totient(n)
+    
+    for n in naturals(2):
+        T = [charm(p) for p in prime_power_factorization(n)]
+        
+        yield multi_lcm(T)
 
 
 def jordan_totients(k):
@@ -790,4 +802,8 @@ if __name__ == '__main__':
     print("\nJordan 2-Totients")
     simple_test(jordan_totients(2),13,
                 "1, 3, 8, 12, 24, 24, 48, 48, 72, 72, 120, 96, 168")
+    
+    print("\nJordan 2-Totients")
+    simple_test(charmichael(),17,
+                "1, 1, 2, 2, 4, 2, 6, 2, 6, 4, 10, 2, 12, 6, 4, 4, 16")
     

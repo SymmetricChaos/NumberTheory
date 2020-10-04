@@ -54,6 +54,23 @@ def fibonacci_word():
         a,b = b,b+a
 
 
+def co_fibonacci_word():
+    """
+    Complement of the Fibonacci Word
+    OEIS
+    """
+    
+    a,b = (1,),(1,0)
+    n = 0
+    
+    while True:
+        for i in range(n,len(b)):
+            yield b[i]
+        
+        n = len(b)
+        a,b = b,b+a
+
+
 
 
 
@@ -63,10 +80,6 @@ if __name__ == '__main__':
     print("Thue-Morse Sequence")
     simple_test(thue_morse(),18,
                 "0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0")
-    
-    print("\nComplement of the Thue-Morse Sequence")
-    simple_test(co_thue_morse(),18,
-                "1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1")
     
     print("\nInfinite Fibonacci Word")
     simple_test(fibonacci_word(),18,

@@ -724,6 +724,54 @@ def egcd(a, b):
         return (gcd, y - (b//a) * x, x)
 
 
+def multi_gcd(*args):
+    """Pairwise GCD"""
+
+    # Handle the case that a list is provided
+    if len(args) == 1 and type(args[0]) is list:
+        return multi_gcd(*args[0])
+    
+    # the gcd of a number with itself is iself
+    if len(args) == 1:
+        return args[0]
+    
+    # calculate gcd for two numbers
+    if len(args) == 2:
+        a = args[0]
+        b = args[1]
+        g = gcd(a,b)
+        return g
+    
+    # if more than two break it up recursively
+    a = multi_gcd(*args[0:2])
+    b = multi_gcd(*args[2:])
+    return multi_gcd(a,b)
+
+
+def multi_lcm(*args):
+    """Pairwise LCM"""
+    
+    # Handle the case that a list is provided
+    if len(args) == 1 and type(args[0]) is list:
+        return multi_lcm(*args[0])
+    
+    # the lcm of a number with itself is iself
+    if len(args) == 1:
+        return args[0]
+    
+    # calculate lcm for two numbers
+    if len(args) == 2:
+        a = args[0]
+        b = args[1]
+        g = gcd(a,b)
+        return abs(a*b)//g
+    
+    # if more than two break it up recursively
+    a = multi_lcm(*args[0:2])
+    b = multi_lcm(*args[2:])
+    return multi_lcm(a,b)
+
+
 def _legendre_symbol(a,p):
     """
     The Legendre Symbol: 1 if a is a quadratic residue mod p, -1 if it is a nonresidue, 0 if a is zero
