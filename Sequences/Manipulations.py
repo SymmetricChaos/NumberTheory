@@ -3,7 +3,7 @@ from math import comb, prod
 import operator
 from time import time
 from Sequences.MathUtils import prime_power_factorization
-from collections import deque
+
 
 # Many of these are copied from the itertools recipies
 
@@ -56,6 +56,7 @@ def binomial_transform(sequence,invert=False):
             for k,s in enumerate(S):
                 if s == 0:
                     continue
+                
                 out += next(sign)*comb(n,k)*s
             
             yield out
@@ -286,6 +287,7 @@ def run_lengths(sequence):
     
     ctr = 0
     cur = next(sequence)
+    
     for i in sequence:
         ctr += 1
         
@@ -329,6 +331,7 @@ def permute(sequence,permutation):
     for pos in permutation:
         while pos > (len(L)-1):
             L.append(next(sequence))
+        
         yield L[pos]
 
 
@@ -368,6 +371,7 @@ def simple_test(sequence,N,check):
     
     if S == check:
         print(S)
+    
     else:
         print("ERROR")
         print(f"Expected:\n{check}")
