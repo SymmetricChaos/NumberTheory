@@ -803,7 +803,7 @@ if __name__ == '__main__':
     simple_test(jordan_totients(2),13,
                 "1, 3, 8, 12, 24, 24, 48, 48, 72, 72, 120, 96, 168")
     
-    print("\nJordan 2-Totients")
+    print("\nCharmichael Function")
     simple_test(charmichael(),17,
                 "1, 1, 2, 2, 4, 2, 6, 2, 6, 4, 10, 2, 12, 6, 4, 4, 16")
     
