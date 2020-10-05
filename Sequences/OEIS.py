@@ -62,7 +62,7 @@ def make_A(num):
     return f'A{num:06}'
 
 
-def pisot_sequences()
+def pisot_sequences():
     
     E = []
     L = []

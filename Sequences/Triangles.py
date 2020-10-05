@@ -1,7 +1,7 @@
 from Sequences.Manipulations import make_triangle, sequence_apply, irregular_array
 from Sequences.Combinatorics import pascal, eulerian
 from Sequences.Weird import gcd_numbers, gcd_steps, sierpinski
-from Sequences.Primes import coprime_characteristic
+from Sequences.Divisibility import coprime_characteristic
 from Sequences.MathUtils import triangle_pairs, antidiagonal_pairs
 from Sequences.Fractional import _pretty_fracs, fibonacci_generations
 from Sequences.Simple import powers

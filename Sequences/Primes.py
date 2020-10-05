@@ -75,7 +75,6 @@ def n_gap_prime_pairs(n):
          A156328, A272816, A140447
     """
     
-    
     if n == 0:
         raise ValueError("n cannot be zero")
     
