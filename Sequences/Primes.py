@@ -71,6 +71,8 @@ def twin_prime_pairs():
 def n_gap_prime_pairs(n):
     """
     Pairs of primes (p,q) such that p+n = q
+    OEIS A077800, A156274, A156320, A140445, A156323, A140446, A272815, 
+         A156328, 
     """
     
     
@@ -327,7 +329,7 @@ if __name__ == '__main__':
                 "(3, 5), (5, 7), (11, 13), (17, 19), (29, 31), (41, 43)")
     
     print("\nSexy Prime Pairs")
-    simple_test(n_gap_prime_pairs(6),5,
+    simple_test(n_gap_prime_pairs(8),5,
                 "(5, 11), (7, 13), (11, 17), (13, 19), (17, 23)")
     
     print("\nPrime Tuples of form (0, 4, 6, 10, 12)")

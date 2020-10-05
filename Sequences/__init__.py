@@ -63,7 +63,7 @@ from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, 
 from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
                              composites, compositorial, prime_characteristic, \
                              superprimes, noncomposite, odd_primes, twin_primes, \
-                             twin_prime_pairs, prime_gaps, prime_tuples
+                             twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs
 
 from Sequences.Pseudorandom import LCG, LFG, LFSR
 
@@ -161,7 +161,7 @@ __all__=[#MANIPS
          "primes","primorial","prime_counting","pythagorean_primes",
          "composites","compositorial","prime_characteristic",
          "superprimes","noncomposite","odd_primes","twin_primes",
-         "twin_prime_pairs","prime_gaps","prime_tuples",
+         "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
          
          #PRNG
          "LCG","LFG","LFSR",
