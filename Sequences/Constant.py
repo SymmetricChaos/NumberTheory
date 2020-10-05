@@ -1,5 +1,5 @@
 from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat, digits
-from NiceErrorChecking import require_integers, require_nonnegative, require_geq
+from NiceErrorChecking import require_integers, require_geq
 from itertools import chain, dropwhile
 from Sequences.Simple import constant, naturals, powers
 from math import isqrt, gcd
@@ -36,7 +36,7 @@ def sqrt_digits(n,B=10):
     """
     
     require_integers(["n","B"],[n,B])
-    require_nonnegative(["n"],[n])
+    require_geq(["n"],[n],0)
     require_geq(["B"],[B],2)
     
     Bsq = B*B
@@ -68,7 +68,7 @@ def root_digits(n,a,B=10):
     """
     
     require_integers(["a","n","B"],[a,n,B])
-    require_nonnegative(["a"],[a])
+    require_geq(["a"],[a],0)
     require_geq(["n","B"],[n,B],2)
     
     Bpow = B**n
@@ -124,18 +124,24 @@ def metallic_ratio_digits(n,B=10):
 
 def phi_digits(B=10):
     """
-    Phi: Digits of the golden ratio\n
+    Phi: Digits of the golden ratio in base B\n
     OEIS A001622
     """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
     
     yield from metallic_ratio_digits(1,B)
 
 
 def silver_ratio_digits(B=10):
     """
-    Digits of the silver ratio\n
+    Digits of the silver ratio in base B\n
     OEIS A014176
     """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
     
     yield from metallic_ratio_digits(2,B)
 

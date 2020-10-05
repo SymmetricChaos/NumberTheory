@@ -181,4 +181,4 @@ __all__=[#MANIPS
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
          "hofstader_Q","sierpinski","lucky",
-        ]
+         ]

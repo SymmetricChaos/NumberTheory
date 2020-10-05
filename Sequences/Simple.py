@@ -1,4 +1,4 @@
-from Sequences.NiceErrorChecking import require_integers, require_nonnegative, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from itertools import count, repeat
 
 
@@ -187,7 +187,7 @@ def naturals(offset=0):
     """
     
     require_integers(["offset"],[offset])
-    require_nonnegative(["offset"],[offset])
+    require_geq(["offset"],[offset],0)
     
     yield from count(offset,1)
 
@@ -203,7 +203,7 @@ def counting(offset=0):
     """
     
     require_integers(["offset"],[offset])
-    require_nonnegative(["offset"],[offset])
+    require_geq(["offset"],[offset],0)
     
     yield from count(offset+1,1)
 
@@ -220,7 +220,7 @@ def powers(n):
     """
     
     require_integers(["n"],[n])
-    require_nonnegative(["n"],[n])
+    require_geq(["n"],[n],0)
     
     yield from geometric(1,n)
 

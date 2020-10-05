@@ -36,32 +36,7 @@ def require_iterable(K,L):
 
 
 ## Value Errors ##
-def require_nonnegative(K,L):
-    
-    out = ""
-    
-    for k,l in zip(K,L):
-        if l < 0:
-            out += f"{k} must be non-negative\n"
-    
-    if out != "":
-        raise ValueError(out)
-
-
-def require_positive(K,L):
-    
-    out = ""
-    
-    for k,l in zip(K,L):
-        if l <= 0:
-            out += f"{k} must be positive\n"
-    
-    if out != "":
-        raise ValueError(out)
-
-
-# To avoid potential confusion only no strictly greater than or strictly less
-# checking functions are provided.
+# Following a letter by Dijkstra only "greater than or equal to" and "strictly less than" are provided
 def require_geq(K,L,n):
     
     out = ""
@@ -74,13 +49,13 @@ def require_geq(K,L,n):
         raise ValueError(out)
 
 
-def require_leq(K,L,n):
+def require_lt(K,L,n):
     
     out = ""
     
     for k,l in zip(K,L):
-        if l > n:
-            out += f"{k} must be less than or equal to {n}\n"
+        if l >= n:
+            out += f"{k} must be strictly less than {n}\n"
     
     if out != "":
         raise ValueError(out)

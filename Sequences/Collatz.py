@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.NiceErrorChecking import require_integers, require_positive
+from Sequences.NiceErrorChecking import require_integers, require_geq
 
 
 def _collatz_step(n):
@@ -22,7 +22,7 @@ def collatz_sequence(n):
     """
     
     require_integers(["n"],[n])
-    require_positive(["n"],[n])
+    require_geq(["n"],[n],1)
     
     yield n
     
@@ -37,7 +37,7 @@ def reduced_collatz_sequence(n):
     """
     
     require_integers(["n"],[n])
-    require_positive(["n"],[n])
+    require_geq(["n"],[n],1)
     
     yield n
     

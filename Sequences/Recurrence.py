@@ -1,4 +1,4 @@
-from NiceErrorChecking import require_integers, require_geq, require_positive
+from NiceErrorChecking import require_integers, require_geq
 from math import floor, ceil
 from collections import Counter
 from Sequences.Simple import evens
@@ -273,7 +273,7 @@ def pisot_E(a,b):
     """
     
     require_integers(["a","b"],[a,b])
-    require_positive(["a"],[a])
+    require_geq(["a"],[a],1)
     
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
@@ -299,7 +299,7 @@ def pisot_L(a,b):
     """
     
     require_integers(["a","b"],[a,b])
-    require_positive(["a"],[a])
+    require_geq(["a"],[a],1)
     
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
@@ -324,7 +324,7 @@ def pisot_P(a,b):
     """
     
     require_integers(["a","b"],[a,b])
-    require_positive(["a"],[a])
+    require_geq(["a"],[a],1)
     
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")
@@ -351,7 +351,7 @@ def pisot_T(a,b):
     """
     
     require_integers(["a","b"],[a,b])
-    require_positive(["a"],[a])
+    require_geq(["a"],[a],1)
     
     if a >= b:
         raise ValueError("The first two terms of a Pisot sequence must be increasing")

@@ -173,9 +173,7 @@ def noncomposite():
     OEIS A008578
     """
     
-    yield 1
-    
-    yield from primes()
+    yield from prepend(1,primes())
 
 
 def nonprime():
@@ -184,9 +182,7 @@ def nonprime():
     OEIS A018252
     """
     
-    yield 1
-    
-    yield from composites()
+    yield from prepend(1,composites())
 
 
 def primorial():

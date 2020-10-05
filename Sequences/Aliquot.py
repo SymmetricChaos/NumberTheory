@@ -1,4 +1,4 @@
-from Sequences.NiceErrorChecking import require_integers, require_positive
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.MathUtils import aliquot_parts, sum_of_divisors, powerset, aliquot_sum, prime_factorization
 from Sequences.Simple import naturals, arithmetic
 from collections import Counter
@@ -28,7 +28,7 @@ def aliquot_recurrence(N):
     """
     
     require_integers(["N"],[N])
-    require_positive(["N"],[N])
+    require_geq(["N"],[N],1)
     
     while True:
         yield N
