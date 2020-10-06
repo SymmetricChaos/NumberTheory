@@ -94,7 +94,7 @@ def n_gap_prime_pairs(n):
                 yield (lo,lo+n)
             
             lo = hi.pop(0)
-            
+
 
 def prime_tuples(K):
     """

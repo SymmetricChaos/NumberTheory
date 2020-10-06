@@ -1,7 +1,9 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Primes import primes
 from Sequences.Simple import naturals
-from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, jordan_totient, multi_lcm, prime_power_factorization
+from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
+                                jordan_totient, multi_lcm, prime_power_factorization, \
+                                canonical_factorization
 from collections import defaultdict
 from math import prod, gcd
 from itertools import takewhile
@@ -367,6 +369,28 @@ def coprime_characteristic():
                 yield 0
 
 
+def p_adic_order(p):
+    """
+    p-adic Orders: Exponent of the greatest power of p that divides each positive integer\n
+    Technically only a p-adic order if p is prime but defined for all naturals\n
+    OEIS A007814, A007949, A235127, A112765
+    """
+    
+    require_integers(["p"],[p])
+    require_geq(["p"],[p],1)
+    
+    for n in naturals(1):
+        ctr = 0
+        
+        while n%p == 0:
+            ctr += 1
+            n //= p
+        
+        yield ctr
+
+
+
+
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
@@ -446,4 +470,8 @@ if __name__ == '__main__':
     print("\nCharmichael Function")
     simple_test(charmichael(),17,
                 "1, 1, 2, 2, 4, 2, 6, 2, 6, 4, 10, 2, 12, 6, 4, 4, 16")
+    
+    print("\n3-adic Orders")
+    simple_test(p_adic_order(3),18,
+                "0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2")
     
