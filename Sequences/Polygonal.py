@@ -303,6 +303,14 @@ def square():
         S += a
 
 
+def squares():
+    """
+    Alias to square() that I find myself accidentally using
+    """
+    
+    yield from square()
+
+
 def cubic():
     """
     Cubic Numbers\n

@@ -2,7 +2,7 @@ from itertools import islice, cycle, count, zip_longest, chain, accumulate, repe
 from math import comb, prod
 import operator
 from time import time
-from Sequences.MathUtils import prime_power_factorization
+from Sequences.MathUtils import prime_power_factorization, prime_factorization
 
 
 # Many of these are copied from the itertools recipies
@@ -338,8 +338,8 @@ def permute(sequence,permutation):
 def memoize_multiplicative(function):
     """
     Given a multiplicative function over the naturals calculate the values for
-    all naturals by evaluating explicitly at prime powers and using the multiplicative
-    property for all others
+    all naturals by evaluating explicitly at prime powers and using the 
+    multiplicative property for all others
     WARNING: Currently only useful if the function is extremely expensive to compute
     """
     
@@ -356,6 +356,27 @@ def memoize_multiplicative(function):
         
         yield prod([D[i] for i in p])
 
+
+def memoize_total_multiplicative(function):
+    """
+    Given a total multiplicative function over the naturals calculate the 
+    values for all naturals by evaluating explicitly at primes and using the 
+    multiplicative property for all others
+    WARNING: Currently only useful if the function is extremely expensive to compute
+    """
+    
+    # For any multiplicative function f(1) = 1
+    yield 1
+    
+    D = {}
+    
+    for n in count(2,1):
+        p = prime_factorization(n)
+        
+        if len(p) == 1:
+            D[n] = function(n)
+        
+        yield prod([D[i] for i in p])
 
 
 
