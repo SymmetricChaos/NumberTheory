@@ -4,6 +4,7 @@ from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
                                 nth_sign
+from Sequences.Manipulations import partial_sums
 from collections import defaultdict
 from math import prod, gcd
 from itertools import takewhile
@@ -391,7 +392,8 @@ def p_adic_order(p):
 
 def liouville():
     """
-    Liouville's Function: 1 if n is a product of an even number of primes, otherwise -1
+    Liouville's Lambda Function: 1 if n is a product of an even number of primes, otherwise -1
+    OEIS A008836
     """
     
     yield 1
@@ -400,6 +402,14 @@ def liouville():
         P = prime_factorization(n)
         yield nth_sign(len(P))
 
+
+def liouville_sums():
+    """
+    Liouville's L Function: Partial sums of Liouville's Lambda Function
+    OEIS A002819
+    """
+    
+    yield from partial_sums(liouville())
 
 
 
@@ -487,7 +497,11 @@ if __name__ == '__main__':
     simple_test(p_adic_order(3),18,
                 "0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2")
     
-    print("\nLiouville Function")
+    print("\nLiouville's Lambda Function")
     simple_test(liouville(),15,
                 "1, -1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, 1, 1")
+    
+    print("\nLiouville's L Function")
+    simple_test(liouville_sums(),15,
+                "1, 0, -1, 0, -1, 0, -1, -2, -1, 0, -1, -2, -3, -2, -1")
     
