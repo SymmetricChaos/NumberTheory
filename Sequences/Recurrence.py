@@ -1,7 +1,7 @@
 from NiceErrorChecking import require_integers, require_geq
-from math import floor, ceil
+from math import floor, ceil, gcd
 from collections import Counter
-from Sequences.Simple import evens
+from Sequences.Simple import evens, naturals
 from Sequences.Manipulations import offset
 
 def fibonacci():
@@ -418,6 +418,21 @@ def perrin():
         a, b, c = b, c, a+b
 
 
+def rowland():
+    """
+    Rowland's Sequence consisting of only 1s and odd primes
+    OEIS A132199
+    """
+    
+    a = 7
+    
+    for n in naturals(2):
+        b = a+gcd(n,a)
+        
+        yield b-a
+        
+        a = b
+
 
 
 
@@ -524,3 +539,10 @@ if __name__ == '__main__':
     print("\nPerrin Sequence")
     simple_test(perrin(),15,
                 "3, 0, 2, 3, 2, 5, 5, 7, 10, 12, 17, 22, 29, 39, 51")
+    
+    print("\nRowland's Sequence")
+    simple_test(rowland(),17,
+                "1, 1, 1, 5, 3, 1, 1, 1, 1, 11, 3, 1, 1, 1, 1, 1, 1")
+    
+    
+    
