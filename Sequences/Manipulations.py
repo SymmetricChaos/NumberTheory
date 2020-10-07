@@ -2,7 +2,7 @@ from itertools import islice, cycle, count, zip_longest, chain, accumulate, repe
 from math import comb, prod
 import operator
 from time import time
-from Sequences.MathUtils import prime_power_factorization, prime_factorization
+from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
 
 
 # Many of these are copied from the itertools recipies
@@ -87,6 +87,28 @@ def convolution(sequence1,sequence2):
         out = 0
         for a,b in zip(S1,reversed(S2)):
             out += a*b
+        
+        yield out
+
+
+def dirichlet_convolution(sequence1,sequence2):
+    """
+    Dirichlet convolution of two sequences
+    Domain for both most be positive integers
+    """
+    
+    S1 = []
+    S2 = []
+    
+    for n in count(1,1):
+        S1.append(next(sequence1))
+        S2.append(next(sequence2))
+        
+        D = factors(n)
+        out = 0
+        
+        for d in D:
+            out += S1[d-1]*S2[n//d-1]
         
         yield out
 
