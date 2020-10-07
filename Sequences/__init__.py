@@ -52,7 +52,8 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jacobi_symbols, \
                                         kronecker_symbols, mobius_function, quadratic_residue, \
                                         quadratic_nonresidue, all_quadratic_residues, \
-                                        all_quadratic_nonresidues, squares_modulo_n
+                                        all_quadratic_nonresidues, squares_modulo_n, \
+                                        mertens_function
 
 from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
@@ -148,7 +149,7 @@ __all__=[#MANIPS
          "modular_inverses","legendre_symbols","jacobi_symbols",
          "kronecker_symbols","mobius_function","quadratic_residue", 
          "quadratic_nonresidue","all_quadratic_residues",
-         "all_quadratic_nonresidues","squares_modulo_n",
+         "all_quadratic_nonresidues","squares_modulo_n","mertens_function",
          
          #POLYGONAL
          "triangular","square","pentagonal","gen_pentagonal","polygonal",

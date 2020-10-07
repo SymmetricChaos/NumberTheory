@@ -2,7 +2,7 @@ from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
 from Sequences.Polygonal import square
-from Sequences.Manipulations import segment
+from Sequences.Manipulations import segment, partial_sums
 from itertools import cycle
 
 
@@ -90,6 +90,15 @@ def mobius_function():
             yield 0
 
 
+def mertens_function():
+    """
+    Merten's Function: Partial sums of the Mobius Function
+    OEIS A002321
+    """
+    
+    yield from partial_sums(mobius_function())
+
+
 def quadratic_residue(m):
     """
     Quadratic Residues Modulo m
@@ -142,7 +151,7 @@ def squares_modulo_n(n):
     """
     Squares Modulo n\n
     OEIS A000004, A000035, A011655, A053879, A054580, A070430-A070470,
-    A008959
+         A008959
     """
     
     L = []
@@ -178,6 +187,10 @@ if __name__ == '__main__':
     print("\nMobius Function")
     simple_test(mobius_function(),16,
                 "1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0, -1, 1, 1, 0")
+    
+    print("\nMerten's Function")
+    simple_test(mertens(),14,
+                "1, 0, -1, -1, -2, -1, -2, -2, -2, -1, -2, -2, -3, -2")
     
     print("\nQuadratic Residues of 22")
     simple_test(quadratic_residue(22),100,

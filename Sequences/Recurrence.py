@@ -436,6 +436,7 @@ def rowland():
 
 
 
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -543,6 +544,4 @@ if __name__ == '__main__':
     print("\nRowland's Sequence")
     simple_test(rowland(),17,
                 "1, 1, 1, 5, 3, 1, 1, 1, 1, 11, 3, 1, 1, 1, 1, 1, 1")
-    
-    
     
