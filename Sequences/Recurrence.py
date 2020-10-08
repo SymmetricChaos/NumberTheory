@@ -434,6 +434,23 @@ def rowland():
         a = b
 
 
+def rowland_primes():
+    """
+    Prime values of Rowlan's Sequence
+    OEIS 
+    """
+    
+    a = 7
+    
+    for n in naturals(2):
+        b = a+gcd(n,a)
+        
+        if b-a != 1:
+            yield b-a
+        
+        a = b
+
+
 
 
 
@@ -544,4 +561,8 @@ if __name__ == '__main__':
     print("\nRowland's Sequence")
     simple_test(rowland(),17,
                 "1, 1, 1, 5, 3, 1, 1, 1, 1, 11, 3, 1, 1, 1, 1, 1, 1")
+    
+    print("\nPrimes in Rowland's Sequence")
+    simple_test(rowland_primes(),16,
+                "5, 3, 11, 3, 23, 3, 47, 3, 5, 3, 101, 3, 7, 11, 3, 13")
     
