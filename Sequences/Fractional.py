@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.NiceErrorChecking import require_integers, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from math import gcd
 
 
@@ -174,21 +174,45 @@ def fibonacci_rationals():
         gen = new
 
 
-def dirichlet(A,s):
+def dirichlet_terms(A,s):
+    """
+    Terms of the given Dirichlet series
+    """
+    
+    require_integers(["s"], [s])
+    require_geq(["s"], [s], 1)
+    require_iterable(["A"],[A])
+    
+    for t,a in enumerate(A,1):
+        
+        n = a
+        d = t**s
+        g = gcd(n,d)
+        
+        n, d = n//g,d//g
+        
+        yield (n,d)
+
+
+def dirichlet_sums(A,s):
     """
     Partial Sums of the given Dirichlet series
     """
     
+    require_integers(["s"], [s])
+    require_geq(["s"], [s], 1)
+    require_iterable(["A"],[A])
+    
     n0,d0 = 0,1
     
     for t,a in enumerate(A,1):
-        yield (n0,d0)
-        
         n = n0*(t**s) + a*d0
         d = d0*(t**s)
         g = gcd(n,d)
         
         n0, d0 = n//g,d//g
+        
+        yield (n0,d0)
 
 
 
@@ -196,7 +220,7 @@ def dirichlet(A,s):
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
-    from Sequences.Simple import constant
+    from Sequences.Simple import sign_sequence
     
     print("\nHarmonic Sequence")
     simple_test(_pretty_fracs(harmonic()),8,
@@ -230,7 +254,11 @@ if __name__ == '__main__':
     simple_test(_pretty_fracs(fibonacci_rationals()),11,
                 "1/1, 2/1, 3/1, 1/2, 4/1, 1/3, 3/2, 5/1, 1/4, 4/3, 5/2")
     
-    print("\nPartial Sums of Dirichlet Series 1/(n^2)")
-    simple_test(_pretty_fracs(dirichlet(constant(1),2)),7,
-                "0/1, 1/1, 5/4, 49/36, 205/144, 5269/3600, 5369/3600")
+    print("\nTerms of Dirichlet Series (-1)^n/(n^2)")
+    simple_test(_pretty_fracs(dirichlet_terms(sign_sequence(1),2)),9,
+                "1/1, -1/4, 1/9, -1/16, 1/25, -1/36, 1/49, -1/64, 1/81")
+    
+    print("\nPartial Sums of Dirichlet Series (-1)^n/(n^2)")
+    simple_test(_pretty_fracs(dirichlet_sums(sign_sequence(1),2)),6,
+                "1/1, 3/4, 31/36, 115/144, 3019/3600, 973/1200")
     

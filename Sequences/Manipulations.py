@@ -113,6 +113,12 @@ def dirichlet_convolution(sequence1,sequence2):
         yield out
 
 
+# def dirichlet_inversion(sequence):
+
+
+# def mobius_inversion(sequence):
+
+
 def triangle_sums(sequence):
     """
     Sums of the rows of the standard triangular arrangement of the sequence
