@@ -174,11 +174,29 @@ def fibonacci_rationals():
         gen = new
 
 
+def dirichlet(A,s):
+    """
+    Partial Sums of the given Dirichlet series
+    """
+    
+    n0,d0 = 0,1
+    
+    for t,a in enumerate(A,1):
+        yield (n0,d0)
+        
+        n = n0*(t**s) + a*d0
+        d = d0*(t**s)
+        g = gcd(n,d)
+        
+        n0, d0 = n//g,d//g
+
+
 
 
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
+    from Sequences.Simple import constant
     
     print("\nHarmonic Sequence")
     simple_test(_pretty_fracs(harmonic()),8,
@@ -211,4 +229,8 @@ if __name__ == '__main__':
     print("\nFibonacci Ordering of Rationals")
     simple_test(_pretty_fracs(fibonacci_rationals()),11,
                 "1/1, 2/1, 3/1, 1/2, 4/1, 1/3, 3/2, 5/1, 1/4, 4/3, 5/2")
+    
+    print("\nPartial Sums of Dirichlet Series 1/(n^2)")
+    simple_test(_pretty_fracs(dirichlet(constant(1),2)),7,
+                "0/1, 1/1, 5/4, 49/36, 205/144, 5269/3600, 5369/3600")
     
