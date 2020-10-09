@@ -35,7 +35,7 @@ from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
 
 from Sequences.Divisibility import totients, cototients, smooth, rough, highly_composite, \
                                    divisors, prime_divisors, unique_prime_divisors, \
-                                   squarefree, squarefree_kernel, squareful, coprime_characteristic, \
+                                   squarefree, squarefree_kernel, coprime_characteristic, \
                                    coprimes, powerful, highly_composite_factor, \
                                    highly_composite_prime_factor, jordan_totients, \
                                    charmichael, principal_character, p_adic_order, \
@@ -129,11 +129,10 @@ __all__=[#MANIPS
          #DIVISBILITY
          "totients","cototients","smooth","rough","highly_composite",
          "divisors","prime_divisors","unique_prime_divisors","squarefree",
-         "squarefree_kernel","squareful","coprime_characteristic",
-         "coprimes","powerful","highly_composite_factor",
-         "highly_composite_prime_factor","jordan_totients",
-         "charmichael","principal_character","p_adic_order","liouville",
-         "liouville_sums",
+         "squarefree_kernel","coprime_characteristic","coprimes",
+         "powerful","highly_composite_factor","highly_composite_prime_factor",
+         "jordan_totients","charmichael","principal_character",
+         "p_adic_order","liouville","liouville_sums",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",

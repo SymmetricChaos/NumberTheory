@@ -209,24 +209,6 @@ def squarefree_kernel():
             del D[q]
 
 
-def squareful():
-    """
-    Complement of the Squarefree Numbers\n
-    OEIS A013929
-    """
-    
-    yield 0
-    
-    for n in naturals(1):
-        for i in naturals(2):
-            if n % i**2 == 0:
-                yield n
-                break
-            
-            if (i**2) > n:
-                break
-
-
 def powerful(n=2):
     """
     n-Powerful Numbers: Positive integers that are divisible by the nth power of each prime factor
@@ -338,16 +320,12 @@ def coprimes(n):
     require_integers(["n"],[n])
     require_geq(["n"],[n],1)
     
-    F = []
-    for p in primes():
-        if n%p == 0:
-            F.append(p)
-        if p >= n:
-            break
+    F = unique_prime_factors(n)
     
-    def divby(n,F):
+    # Check if any of the factors of n divide a
+    def divby(a,F):
         for f in F:
-            if x%f == 0:
+            if a%f == 0:
                 return False
         return True
     
