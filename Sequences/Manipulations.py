@@ -407,6 +407,48 @@ def memoize_total_multiplicative(function):
         yield prod([D[i] for i in p])
 
 
+def memoize_additive(function):
+    """
+    Given an additive function over the naturals calculate the values for
+    all naturals by evaluating explicitly at prime powers and using the 
+    additive property for all others
+    WARNING: Currently only useful if the function is extremely expensive to compute
+    """
+    
+    D = {1: function(1)}
+    
+    for n in count(2,1):
+        p = prime_power_factorization(n)
+        
+        if len(p) == 1:
+            D[n] = function(n)
+        
+        yield sum([D[i] for i in p])+D[1]
+
+
+def memoize_total_additive(function):
+    """
+    Given atotal additive function over the naturals calculate the values for
+    all naturals by evaluating explicitly at primes and using the additive
+    property for all others
+    WARNING: Currently only useful if the function is extremely expensive to compute
+    """
+    
+    # For any total additive function f(1) = 0
+    yield 0
+    
+    D = {}
+    
+    for n in count(2,1):
+        p = prime_factorization(n)
+        
+        if len(p) == 1:
+            D[n] = function(n)
+        
+        yield sum([D[i] for i in p])
+
+
+
 
 
 #############
