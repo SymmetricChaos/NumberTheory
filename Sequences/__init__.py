@@ -38,14 +38,15 @@ from Sequences.Divisibility import totients, cototients, smooth, rough, highly_c
                                    squarefree, squarefree_kernel, squareful, coprime_characteristic, \
                                    coprimes, powerful, highly_composite_factor, \
                                    highly_composite_prime_factor, jordan_totients, \
-                                   charmichael
+                                   charmichael, principal_character, p_adic_order, \
+                                   liouville, liouville_sums
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
                                  odd_double_factorials
 
 from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
-                                 farey, stern_brocot
+                                 farey, stern_brocot, dirichlet_terms, dirichlet_sums
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
@@ -131,7 +132,8 @@ __all__=[#MANIPS
          "squarefree_kernel","squareful","coprime_characteristic",
          "coprimes","powerful","highly_composite_factor",
          "highly_composite_prime_factor","jordan_totients",
-         "charmichael",
+         "charmichael","principal_character","p_adic_order","liouville",
+         "liouville_sums",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -140,7 +142,7 @@ __all__=[#MANIPS
          
          #FRACTIONAL
          "numerators","denominators","harmonic","gen_harmonic","farey",
-         "stern_brocot",
+         "stern_brocot","dirichlet_terms","dirichlet_sums",
          
          #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse",

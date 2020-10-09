@@ -7,7 +7,7 @@ from Sequences.MathUtils import factors, prime_factorization, unique_prime_facto
 from Sequences.Manipulations import partial_sums
 from collections import defaultdict
 from math import prod, gcd
-from itertools import takewhile
+from itertools import takewhile, cycle
 
 
 def smooth(B):
@@ -370,6 +370,25 @@ def coprime_characteristic():
                 yield 0
 
 
+def principal_character(n):
+    """
+    Principal Dirichlet Character: For each positive integer yield 1 of it is coprime to n otherwise 0
+    """
+    
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],1)
+    
+    L = []
+    
+    for a in range(1,11):
+        if gcd(a,n) == 1:
+            L.append(1)
+        else:
+            L.append(0)
+    
+    yield from cycle(L)
+
+
 def p_adic_order(p):
     """
     p-adic Orders: Exponent of the greatest power of p that divides each positive integer\n
@@ -505,4 +524,8 @@ if __name__ == '__main__':
     print("\nLiouville's L Function")
     simple_test(liouville_sums(),15,
                 "1, 0, -1, 0, -1, 0, -1, -2, -1, 0, -1, -2, -3, -2, -1")
+    
+    print("\nPricipal Character of 10")
+    simple_test(principal_character(10),18,
+                "1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0")
     
