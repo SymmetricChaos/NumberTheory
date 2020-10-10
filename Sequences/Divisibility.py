@@ -127,26 +127,41 @@ def divisors():
 
 def prime_divisors():
     """
-    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer\n
+    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
+    Also the big omega function\
     OEIS A001222
     """
     
-    for n in naturals(1):
-        ctr = 0
+    D = defaultdict(list)
+    
+    yield 0
+    
+    for q in naturals(2):
+        if q not in D:
+            yield 1
+            D[q + q] = [q]
         
-        for p in primes():
-            while n % p == 0:
-                ctr += 1
-                n = n // p
+        else:
+            q_copy = q
+            ctr = 0
             
-            if n == 1:
-                yield ctr
-                break
+            for fac in D[q]:
+                while q_copy % fac == 0:
+                    ctr += 1
+                    q_copy //= fac
+            
+            yield ctr
+            
+            for p in D[q]:
+                D[p+q].append(p)
+            
+            del D[q]
 
 
 def unique_prime_divisors():
     """
-    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer\n
+    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer
+    Also the little omega function\n
     OEIS A001221
     """
     
@@ -454,10 +469,6 @@ if __name__ == '__main__':
     print("\nSquarefree Kernels")
     simple_test(squarefree_kernel(),16,
                 "1, 2, 3, 2, 5, 6, 7, 2, 3, 10, 11, 6, 13, 14, 15, 2")
-    
-    print("\nSquareful Numbers")
-    simple_test(squareful(),14,
-                "0, 4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28, 32, 36")
     
     print("\nCharacteristic Triangle of Coprimes")
     simple_test(coprime_characteristic(),18,
