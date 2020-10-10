@@ -105,8 +105,8 @@ def prime_omega_example():
         yield from memoize_total_additive(f)
     
     
-    print("Counting Prime Factors, first 7000 terms")
-    speed_compare([omega(),omega_mem1(),omega_mem2()],["Direct","Sieved","Additive"],n=8000,reps=1)
+    print("Counting Prime Factors, first 10000 terms")
+    speed_compare([omega(),omega_mem1(),omega_mem2()],["Direct","Sieved","Additive"],n=10000,reps=1)
 
 
 
