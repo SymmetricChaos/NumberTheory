@@ -1,9 +1,9 @@
 ## Type Errors ##
-def require_integers(K,L):
+def require_integers(names,variables):
     
     out = ""
     
-    for k,l in zip(K,L):
+    for k,l in zip(names,variables):
         if type(l) != int:
             out += f"{k} must be an integer\n"
     
@@ -11,11 +11,11 @@ def require_integers(K,L):
         raise TypeError(out)
 
 
-def require_callable(K,L):
+def require_callable(names,variables):
     
     out = ""
     
-    for k,l in zip(K,L):
+    for k,l in zip(names,variables):
         if not callable(l):
             out += f"{k} must be a function or other callable object\n"
     
@@ -23,11 +23,11 @@ def require_callable(K,L):
         raise TypeError(out)
 
 
-def require_iterable(K,L):
+def require_iterable(names,variables):
     
     out = ""
     
-    for k,l in zip(K,L):
+    for k,l in zip(names,variables):
         if not iter(l):
             out += f"{k} must be a list, tuple, generator, or other iterable object\n"
     
@@ -37,11 +37,11 @@ def require_iterable(K,L):
 
 ## Value Errors ##
 # Following a letter by Dijkstra only "greater than or equal to" and "strictly less than" are provided
-def require_geq(K,L,n):
+def require_geq(names,variables,n):
     
     out = ""
     
-    for k,l in zip(K,L):
+    for k,l in zip(names,variables):
         if l < n:
             out += f"{k} must be greater than or equal to {n}\n"
     
@@ -49,11 +49,11 @@ def require_geq(K,L,n):
         raise ValueError(out)
 
 
-def require_lt(K,L,n):
+def require_lt(names,variables,n):
     
     out = ""
     
-    for k,l in zip(K,L):
+    for k,l in zip(names,variables):
         if l >= n:
             out += f"{k} must be strictly less than {n}\n"
     

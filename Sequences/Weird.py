@@ -157,6 +157,7 @@ def co_hofstader():
 def hofstader_Q():
     """
     Hofstader's Q-Sequence: Q(n) = Q(n-Q(n-1)) + Q(n-Q(n-2)), , Q(0) = Q(1) = 1
+    OEIS A005185
     """
     
     Q = [1,1]

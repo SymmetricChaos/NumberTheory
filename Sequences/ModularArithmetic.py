@@ -1,7 +1,7 @@
 from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
-from Sequences.Polygonal import square
+from Sequences.Figurate import squares
 from Sequences.Manipulations import segment, partial_sums
 from itertools import cycle
 
@@ -156,7 +156,7 @@ def squares_modulo_n(n):
     
     L = []
     
-    for i in segment(square(),0,n):
+    for i in segment(squares(),0,n):
         L.append(i % n)
     
     yield from cycle(L)

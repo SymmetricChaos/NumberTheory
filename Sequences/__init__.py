@@ -45,6 +45,12 @@ from Sequences.Factorials import factorials, alternating_factorials_1, alternati
                                  kempner, double_factorials, even_double_factorials, \
                                  odd_double_factorials
 
+from Sequences.Figurate import triangular, square, pentagonal, gen_pentagonal, \
+                                polygonal, gen_polygonal, simplicial, perfect_powers, \
+                                cen_polygonal, cubic, doubly_polygonal, hypercube, \
+                                gen_hypercube, oblong, rectangular, square_triangular, \
+                                square_pyramidal, squared_triangular
+
 from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
                                  farey, stern_brocot, dirichlet_terms, dirichlet_sums
 
@@ -55,12 +61,6 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
                                         quadratic_nonresidue, all_quadratic_residues, \
                                         all_quadratic_nonresidues, squares_modulo_n, \
                                         mertens_function
-
-from Sequences.Polygonal import triangular, square, pentagonal, gen_pentagonal, \
-                                polygonal, gen_polygonal, simplicial, perfect_powers, \
-                                cen_polygonal, cubic, doubly_polygonal, hypercube, \
-                                gen_hypercube, oblong, rectangular, square_triangular, \
-                                square_pyramidal, squared_triangular
 
 from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
                              composites, compositorial, prime_characteristic, \
@@ -139,6 +139,13 @@ __all__=[#MANIPS
          "kempner","double_factorials","even_double_factorials",
          "odd_double_factorials",
          
+         #FIGURATE
+         "triangular","square","pentagonal","gen_pentagonal","polygonal",
+         "exponent","gen_polygonal","simplicial","perfect_powers",
+         "cen_polygonal","cubic","doubly_polygonal","hypercube",
+         "gen_hypercube","oblong","rectangular","square_triangular",
+         "square_pyramidal","squared_triangular",
+         
          #FRACTIONAL
          "numerators","denominators","harmonic","gen_harmonic","farey",
          "stern_brocot","dirichlet_terms","dirichlet_sums",
@@ -151,13 +158,6 @@ __all__=[#MANIPS
          "kronecker_symbols","mobius_function","quadratic_residue", 
          "quadratic_nonresidue","all_quadratic_residues",
          "all_quadratic_nonresidues","squares_modulo_n","mertens_function",
-         
-         #POLYGONAL
-         "triangular","square","pentagonal","gen_pentagonal","polygonal",
-         "exponent","gen_polygonal","simplicial","perfect_powers",
-         "cen_polygonal","cubic","doubly_polygonal","hypercube",
-         "gen_hypercube","oblong","rectangular","square_triangular",
-         "square_pyramidal","squared_triangular",
          
          #PRIME
          "primes","primorial","prime_counting","pythagorean_primes",
