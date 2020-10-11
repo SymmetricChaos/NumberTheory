@@ -2,6 +2,7 @@ from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from math import gcd
 from fractions import Fraction
+from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 
 
 def numerators(sequence):
@@ -198,6 +199,52 @@ def dirichlet_sums(A,s):
         yield p
 
 
+def taylor_terms(A,c=0):
+    """
+    Coefficients of each term of the Talyor Series defined by the sequence A and constant c
+    """
+    
+    require_iterable(["A"],[A])
+    
+    P = [Fraction(1)]
+    Q = [Fraction(1),Fraction(-c)]
+    
+    for a in A:
+        yield poly_mult([a],P)
+        
+        P = poly_mult(Q,P)
+
+
+def taylor_sums(A,c=0):
+    """
+    Coefficients of each partial sum of the Talyor Series defined by the sequence A and constant c
+    """
+    
+    require_iterable(["A"],[A])
+    
+    c = Fraction(c)
+    S = [Fraction(0)]
+    
+    for P in taylor_terms(A,c):
+        S = poly_sum(P,S)
+        
+        yield S
+
+
+def taylor_convergents(A,c=0,x=0):
+    """
+    Convergents of the Talyor Series defined by the sequence A and constant c, at x
+    """
+    
+    require_iterable(["A"],[A])
+    
+    c = Fraction(c)
+    x = Fraction(x)
+    
+    for P in taylor_sums(A,c):
+        yield poly_eval(P,x)
+
+
 
 
 
@@ -245,3 +292,14 @@ if __name__ == '__main__':
     simple_test(_pretty_fracs(dirichlet_sums(sign_sequence(1),2)),6,
                 "1/1, 3/4, 31/36, 115/144, 3019/3600, 973/1200")
     
+    print("\nExpansion of each Term of a Taylor Series")
+    simple_test(taylor_terms(naturals(1),1),5,
+                "")
+    
+    print("\nExpansion of the Partials Sums of a Taylor Series")
+    simple_test(taylor_sums(naturals(1),1),5,
+                "")
+    
+    print("\nConvergents of a Taylor Series")
+    simple_test(taylor_convergents(naturals(1),1,0),5,
+                "")

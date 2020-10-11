@@ -891,6 +891,21 @@ def poly_sum(P,Q):
     return L
 
 
+def poly_eval(P,x):
+    """
+    Evaluate the polynomial P at x
+    """
+    
+    out = 0
+    e = 1
+    
+    for coef in P:
+        out += coef*e
+        e *= x
+    
+    return out
+
+
 
 
 
