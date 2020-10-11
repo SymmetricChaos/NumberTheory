@@ -803,25 +803,6 @@ def kronecker_symbol(a,n):
     return out
 
 
-def poly_mult(P,Q):
-    """
-    Product of two polynomials, both in ascending order
-    """
-    
-    L = [0]*(len(P)+len(Q))
-    
-    for i in range(len(P)):
-        for j in range(len(Q)):
-            L[i+j] += P[i]*Q[j]
-    
-    for x in L[::-1]:
-        if x == 0:
-            L.pop()
-        else:
-            break
-    return L
-
-
 def kronecker_delta(i,j):
     """
     The Kronecker Delta Function
@@ -862,6 +843,53 @@ def jordan_totient(n,k=1):
         den *= p**k
     
     return (n**k*num)//den
+
+
+
+#################
+## POLYNOMIALS ##
+#################
+
+def poly_mult(P,Q):
+    """
+    Product of two polynomials in ascending order
+    """
+    
+    L = [0]*(len(P)+len(Q))
+    
+    for i in range(len(P)):
+        for j in range(len(Q)):
+            L[i+j] += P[i]*Q[j]
+    
+    for x in L[::-1]:
+        if x == 0:
+            L.pop()
+        else:
+            break
+    return L
+
+
+def poly_sum(P,Q):
+    """
+    Sum of two polynomials in ascending order
+    """
+    
+    P = P[:]
+    Q = Q[:]
+    d = abs((len(Q)-len(P)))
+    
+    if len(Q) > len(P):
+        P = P + [0]*d
+    else:
+        Q = Q + [0]*d
+    
+    L = []
+    
+    for p,q in zip(P,Q):
+        L.append(p+q)
+    
+    return L
+
 
 
 
@@ -919,6 +947,9 @@ if __name__ == '__main__':
     
     print("\nProduct of 1 + 2x + 3x^2 + 4x^3 with 9 + 3x + 2x^2 + x^3")
     print(poly_mult([1,2,3,4],[9,3,2,1]))
+    
+    print("\nSum of 2 + 3x + 5x^2 with 7 + 11x + 13x^2 + 17x^3")
+    print(poly_sum([2,3,5],[7,11,13,17]))
     
     print("\nArithmetic Derivative of 72")
     print(arithmetic_derivative(72))
