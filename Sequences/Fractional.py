@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from math import gcd
+from fractions import Fraction
 
 
 def numerators(sequence):
@@ -9,8 +10,8 @@ def numerators(sequence):
     Equivalently first value from each pair in a sequence
     """
     
-    for a,b in sequence:
-        yield a
+    for f in sequence:
+        yield f.numerator
 
 
 def denominators(sequence):
@@ -19,8 +20,8 @@ def denominators(sequence):
     Equivalently second value from each pair in a sequence
     """
     
-    for a,b in sequence:
-        yield b
+    for f in sequence:
+        yield f.denominator
 
 
 def _pretty_fracs(sequence):
@@ -28,31 +29,28 @@ def _pretty_fracs(sequence):
     Internal function to show fractions more compactly
     """
     
-    for a,b in sequence:
+    for f in sequence:
+        a,b = f.numerator,f.denominator
         yield f"{a}/{b}"
 
 
 def harmonic():
     """
-    Harmonic series by pairs
+    Partial sums of the Harmonic Series
     OEIS A001008, A002805
     """
     
-    n0, d0 = 1,1
+    f = Fraction(1)
     
     for i in naturals(2):
-        yield (n0,d0)
+        yield f
         
-        n = n0*i+d0
-        d = d0*i
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
+        f += Fraction(1,i)
 
 
 def gen_harmonic(m):
     """
-    Generalized harmonic series of order m by pairs
+    Partial sums of the Generalized Harmonic Series of Order m
     
     Args:
         m -- exponent for the numerators of the terms
@@ -65,18 +63,14 @@ def gen_harmonic(m):
     
     if m == 0:
         for i in naturals(1):
-            yield i
+            yield Fraction(i)
     
-    n0, d0 = 1,1
+    f = Fraction(1)
     
     for i in naturals(2):
-        yield (n0,d0)
+        yield f
         
-        n = n0*i+d0
-        d = d0*(i**m)
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
+        f += Fraction(1,i**m)
 
 
 def farey():
@@ -88,7 +82,7 @@ def farey():
         a,b,c,d = 0,1,1,n
         
         while a <= b:
-            yield (a,b)
+            yield Fraction(a,b)
             
             k = (n+b)//d
             a,b,c,d = c,d,k*c-a,k*d-b
@@ -109,7 +103,7 @@ def stern_brocot():
         for i in range(len(row)-1):
             t = pair_add(row[i],row[i+1])
             
-            yield t
+            yield Fraction(*t)
             
             new.append(row[i])
             new.append(t)
@@ -131,16 +125,16 @@ def fibonacci_generations():
     
     def generation(n):
         if n == 1:
-            return [(1,1)]
+            return [Fraction(1,1)]
         else:
             L = []
             for i in range(1,n):
                 prev = generation(n-1)
                 for p in prev:
-                    add = (p[0]+p[1],p[1])
-                    inv = (p[1],p[0])
-                    L.append(add)
-                    L.append(inv)
+                    add = Fraction(p.numerator+p.denominator,p.denominator)
+                    inv = 1/p
+                    L.append(Fraction(add))
+                    L.append(Fraction(inv))
                 return L
     
     for n in naturals(1):
@@ -154,7 +148,7 @@ def fibonacci_rationals():
     """
     
     used = set([])
-    gen = [(1,1)]
+    gen = [Fraction(1,1)]
     
     while True:
         new = []
@@ -165,8 +159,8 @@ def fibonacci_rationals():
                 yield g
                 used.add(g)
                 
-                add = (g[0]+g[1],g[1])
-                inv = (g[1],g[0])
+                add = Fraction(g.numerator+g.denominator,g.denominator)
+                inv = 1/g
                 
                 new.append(add)
                 new.append(inv)
@@ -183,15 +177,9 @@ def dirichlet_terms(A,s):
     require_geq(["s"], [s], 1)
     require_iterable(["A"],[A])
     
-    for t,a in enumerate(A,1):
-        
-        n = a
-        d = t**s
-        g = gcd(n,d)
-        
-        n, d = n//g,d//g
-        
-        yield (n,d)
+    for n,a in enumerate(A,1):
+        f = Fraction(a)/Fraction(n**s)
+        yield f
 
 
 def dirichlet_sums(A,s):
@@ -203,16 +191,11 @@ def dirichlet_sums(A,s):
     require_geq(["s"], [s], 1)
     require_iterable(["A"],[A])
     
-    n0,d0 = 0,1
+    p = Fraction(0)
     
-    for t,a in enumerate(A,1):
-        n = n0*(t**s) + a*d0
-        d = d0*(t**s)
-        g = gcd(n,d)
-        
-        n0, d0 = n//g,d//g
-        
-        yield (n0,d0)
+    for f in dirichlet_terms(A,s):
+        p += f
+        yield p
 
 
 
@@ -232,11 +215,11 @@ if __name__ == '__main__':
     
     print("\nGeneralized Harmonic Sequence of Order 2")
     simple_test(_pretty_fracs(gen_harmonic(2)),6,
-                "1/1, 3/4, 13/36, 11/72, 127/1800, 427/10800")
+                "1/1, 5/4, 49/36, 205/144, 5269/3600, 5369/3600")
     
     print("\nGeneralized Harmonic Numerators of Order 2")
     simple_test(numerators(gen_harmonic(2)),9,
-                "1, 3, 13, 11, 127, 427, 13789, 79939, 550339")
+                "1, 5, 49, 205, 5269, 5369, 266681, 1077749, 9778141")
     
     print("\nIrregular Triangle of Farey Sequences")
     simple_test(_pretty_fracs(farey()),11,
