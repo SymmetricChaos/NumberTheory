@@ -20,7 +20,7 @@ RLE = run_length_encoding(n_rep_a(offset(evens(),1),odds()))
 iRLE = inv_run_length_encoding(naturals(1))
 runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
 prime_perm = permute(primes(),prepend(0,even_odd()))
-
+fib_primes = prime_subsequence(fibonacci())
 
 print("A142150")
 simple_test(A142150,10,"0, 0, 1, 0, 2, 0, 3, 0, 4, 0")
@@ -66,3 +66,6 @@ simple_test(runs,10,"1, 3, 5, 7, 9, 11, 13, 15, 17, 19")
 
 print("\nA permutation of the primes")
 simple_test(prime_perm,10,"2, 5, 3, 11, 7, 17, 13, 23, 19, 31")
+
+print("\nFibonnaci Primes")
+simple_test(fib_primes,6,"3, 5, 13, 89, 233, 1597")

@@ -2,8 +2,9 @@ from itertools import islice, cycle, count, zip_longest, chain, accumulate, repe
 from math import comb, prod
 import operator
 from time import time
-from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
+from collections import defaultdict
 
+from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
 
 # Many of these are copied from the itertools recipies
 
@@ -446,6 +447,46 @@ def memoize_total_additive(function):
             D[n] = function(n)
         
         yield sum([D[i] for i in p])
+
+
+# To avoid potential circular reference from Sequences.Primes in following functions
+def _primes_copy():
+    D = defaultdict(list)
+    
+    for q in count(2,1):
+        if q not in D:
+            yield q
+            D[q * q] = [q]
+        
+        else:
+            for p in D[q]:
+                D[p+q].append(p)
+            del D[q]
+
+
+def prime_subsequence(sequence):
+    """
+    Given a monotonically increasing sequence return all the prime elements
+    WARNING: Doesn't check for monotonically increasing property
+    """
+    prime = _primes_copy()
+    
+    a = next(prime)
+    b = next(sequence)
+    
+    while True:
+        if a == b:
+            yield a
+            
+            a = next(prime)
+            b = next(sequence)
+        
+        else:
+            if a > b:
+                b = next(prime)
+            
+            if b > a:
+                a = next(sequence)
 
 
 

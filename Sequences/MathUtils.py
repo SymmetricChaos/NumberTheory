@@ -846,6 +846,8 @@ def jordan_totient(n,k=1):
 
 
 
+
+
 #################
 ## POLYNOMIALS ##
 #################

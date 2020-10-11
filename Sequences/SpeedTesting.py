@@ -1,10 +1,9 @@
-from Sequences.Manipulations import speed_compare, memoize_multiplicative, memoize_total_additive
-from itertools import count
+from Sequences.Manipulations import speed_compare, memoize_multiplicative, memoize_total_additive, head
+from itertools import count, cycle, compress, islice
 from Sequences.MathUtils import jordan_totient, prime_factorization
 from Sequences.Primes import primes
 from collections import defaultdict
 from Sequences.Simple import naturals
-
 
 def memoization_example():
     
@@ -110,16 +109,61 @@ def prime_omega_example():
 
 
 
+def prime_generators():
+    
+    def simple_primes():
+        D = defaultdict(list)
+        
+        for q in naturals(2):
+            
+            if q not in D:
+                yield q
+                D[q * q] = [q]
+            
+            else:
+                for p in D[q]:
+                    D[p+q].append(p)
+                del D[q]
+    
+    
+    def erat30():
+        "https://stackoverflow.com/questions/2211990/how-to-implement-an-efficient-infinite-generator-of-prime-numbers-in-python"
+        D = { 9: 3, 25: 5 }
+        yield 2
+        yield 3
+        yield 5
+        MASK= cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
+        MODULOS= frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
+        
+        for q in compress(
+                count(7,2),
+                MASK):
+            p = D.pop(q, None)
+            if p is None:
+                D[q*q] = q
+                yield q
+            else:
+                x = q + 2*p
+                while x in D or (x%30) not in MODULOS:
+                    x += 2*p
+                D[x] = p
+    
+    
+    print("Generate the first 38000 prime numbers")
+    speed_compare([simple_primes(),erat30()],["Simple","erat30"],n=38000,reps=3)
+
+
+
 
 
 if __name__ == '__main__':
     
-    memoization_example()
+    # memoization_example()
     
     print("\n\n")
     
-    prime_omega_example()
-
-
-
-
+    # prime_omega_example()
+    
+    print("\n\n")
+    
+    prime_generators()
