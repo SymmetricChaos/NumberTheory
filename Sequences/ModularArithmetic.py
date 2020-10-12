@@ -3,9 +3,10 @@ from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
 from Sequences.Figurate import squares
 from Sequences.Manipulations import segment, partial_sums
+from Sequences.NiceErrorChecking import require_integers
 
 from itertools import cycle
-
+from math import gcd
 
 def modular_inverses():
     """
@@ -108,7 +109,7 @@ def quadratic_residue(m):
     
     L = []
     
-    for s in segment(square(),0,m):
+    for s in segment(squares(),0,m):
         L.append(s % m)
     
     yield from sorted(list(set(L)))
@@ -122,7 +123,7 @@ def quadratic_nonresidue(m):
     
     S = set([i for i in range(2,m)])
     
-    for s in segment(square(),0,m):
+    for s in segment(squares(),0,m):
         S.discard(s % m)
     
     yield from sorted(list(S))
@@ -161,6 +162,26 @@ def squares_modulo_n(n):
         L.append(i % n)
     
     yield from cycle(L)
+
+
+def weyl(k,m):
+    """
+    Weyl Sequence: Multiples of k modulo m
+    Computational version using integers rather than Weyl's mathematical version with irrational k\n
+    OEIS
+    """
+    
+    if gcd(k,m) != 1:
+        raise Exception("k and m must be coprime")
+    
+    require_integers(["k","m"],[k,m])
+    
+    n = 0
+    
+    while True:
+        yield n
+        
+        n = (n+k)%m
 
 
 
@@ -212,4 +233,8 @@ if __name__ == '__main__':
     print("\nSquares Modulo 7")
     simple_test(squares_modulo_n(7),18,
                 "0, 1, 4, 2, 2, 4, 1, 0, 1, 4, 2, 2, 4, 1, 0, 1, 4, 2")
+    
+    print("\nWeyl Sequence for k = 36243 and m = 65536")
+    simple_test(weyl(36243,2**16),8,
+                "0, 36243, 6950, 43193, 13900, 50143, 20850, 57093")
     

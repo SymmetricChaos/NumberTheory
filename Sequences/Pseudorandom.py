@@ -1,4 +1,5 @@
 from MathUtils import digits_to_int, int_to_digits
+from Sequences.ModularArithmetic import weyl
 
 # Obviously these are all VERY inefficient
 
@@ -50,8 +51,6 @@ def middle_square(n):
     width = len(N)+(len(N)%2)
     
     while True:
-        yield n
-        
         a = n*n
         A = int_to_digits(a)
         
@@ -59,6 +58,30 @@ def middle_square(n):
             A = [0] + A
         
         n = digits_to_int(A[width//2:-width//2])
+        
+        yield n
+
+
+def middle_square_weyl(n,k,m):
+    """Middle Square Method Augmented with a Weyl Sequence"""
+    
+    W = weyl(k,m)
+    
+    N = int_to_digits(n)
+    width = len(N)+(len(N)%2)
+    
+    for w in W:
+        a = n*n+w
+        A = int_to_digits(a)
+        
+        if len(A) % 2 == 1:
+            A = [0] + A
+        
+        n = digits_to_int(A[width//2:-width//2])
+        
+        yield n
+
+
 
 
 
@@ -80,5 +103,9 @@ if __name__ == '__main__':
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
-                "675248, 959861, 333139, 981593, 524817, 432883")
+                "959861, 333139, 981593, 524817, 432883, 387691")
+    
+    print("\nMiddle-Square Weyl")
+    simple_test(middle_square_weyl(675248,5743,7899),6,
+                "959861, 333145, 985594, 395534, 447152, 944916")
     
