@@ -3,6 +3,7 @@ from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
 from Sequences.Figurate import squares
 from Sequences.Manipulations import segment, partial_sums
+
 from itertools import cycle
 
 

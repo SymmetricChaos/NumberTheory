@@ -5,6 +5,7 @@ from Sequences.MathUtils import factors, prime_factorization, unique_prime_facto
                                 jordan_totient, multi_lcm, prime_power_factorization, \
                                 nth_sign
 from Sequences.Manipulations import partial_sums
+
 from collections import defaultdict
 from math import prod, gcd
 from itertools import takewhile, cycle

@@ -1,8 +1,9 @@
 from NiceErrorChecking import require_integers, require_geq
-from math import floor, ceil, gcd
-from collections import Counter
 from Sequences.Simple import evens, naturals
 from Sequences.Manipulations import offset
+
+from math import floor, ceil, gcd
+from collections import Counter
 
 def fibonacci():
     """

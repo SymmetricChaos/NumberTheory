@@ -1,6 +1,7 @@
-from math import isqrt
 from Sequences.Simple import arithmetic
 from Sequences.MathUtils import rational_to_cfrac, cfrac_convergents, cfrac_semiconvergents, homographic_convergents
+
+from math import isqrt
 
 # This can be sped up in the extreme case by using cycle detection
 def sqrt_cfrac(n):

@@ -1,9 +1,9 @@
 from Sequences.Simple import naturals, integers, arithmetic, sign_sequence
-from math import floor, log2, comb
 from Sequences.Primes import primes
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Manipulations import offset, sequence_apply
 
+from math import floor, log2, comb
 
 def polygonal(S=2):
     """

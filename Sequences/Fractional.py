@@ -1,9 +1,8 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
-from math import gcd
-from fractions import Fraction
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 
+from fractions import Fraction
 
 def numerators(sequence):
     """

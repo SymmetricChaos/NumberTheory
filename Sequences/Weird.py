@@ -1,8 +1,8 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from math import gcd
 from Sequences.Combinatorics import pascal
 from Sequences.Manipulations import sequence_apply
 
+from math import gcd
 
 def recaman():
     """

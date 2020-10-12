@@ -1,6 +1,7 @@
 from Sequences.MathUtils import nontrivial_factors
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
+
 from math import comb
 
 

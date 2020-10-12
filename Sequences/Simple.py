@@ -1,4 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
+
 from itertools import count, repeat
 
 
