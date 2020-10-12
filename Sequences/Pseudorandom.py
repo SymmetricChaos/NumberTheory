@@ -1,4 +1,4 @@
-from MathUtils import digits_to_int
+from MathUtils import digits_to_int, int_to_digits
 
 # Obviously these are all VERY inefficient
 
@@ -32,6 +32,7 @@ def LFG(a,b,m,func):
         yield a
         a,b = b,func(a,b)%m
 
+
 def LFSR(vector,taps):
     """Linear Feedback Shift Register: Returns the state at each step"""
     
@@ -41,6 +42,23 @@ def LFSR(vector,taps):
         yield digits_to_int(vector,2,bigendian=True)
         vector = vector[1:] + [sum([vector[i] for i in taps])%2]
 
+
+def middle_square(n):
+    """Middle Square Method"""
+    
+    N = int_to_digits(n)
+    width = len(N)+(len(N)%2)
+    
+    while True:
+        yield n
+        
+        a = n*n
+        A = int_to_digits(a)
+        
+        if len(A) % 2 == 1:
+            A = [0] + A
+        
+        n = digits_to_int(A[width//2:-width//2])
 
 
 
@@ -59,4 +77,8 @@ if __name__ == '__main__':
     print("\nLinear Feedback Shift Register")
     simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),10,
                 "105, 180, 218, 237, 118, 187, 221, 110, 55, 155")
+    
+    print("\nMiddle-Square Method")
+    simple_test(middle_square(675248),6,
+                "675248, 959861, 333139, 981593, 524817, 432883")
     
