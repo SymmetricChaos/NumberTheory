@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals
 from collections import defaultdict
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
-
+from itertools import count, compress, cycle
 
 ##############################
 ## CLASSES OF PRIME NUMBERS ##
@@ -13,18 +13,28 @@ def primes():
     OEIS A000040
     """
     
-    D = defaultdict(list)
+    yield 2
+    yield 3
+    yield 5
     
-    for q in naturals(2):
+    D = { 9: 3, 25: 5 }
+    MASK = cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
+    MODULOS = frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
+    
+    for q in compress(count(7,2),MASK):
+        p = D.pop(q, None)
         
-        if q not in D:
+        if p is None:
+            D[q*q] = q
             yield q
-            D[q * q] = [q]
         
         else:
-            for p in D[q]:
-                D[p+q].append(p)
-            del D[q]
+            x = q + 2*p
+            
+            while x in D or (x%30) not in MODULOS:
+                x += 2*p
+            
+            D[x] = p
 
 
 def odd_primes():

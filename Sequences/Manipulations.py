@@ -1,8 +1,7 @@
-from itertools import islice, cycle, count, zip_longest, chain, accumulate, repeat
+from itertools import islice, cycle, count, zip_longest, chain, accumulate, repeat, compress
 from math import comb, prod
 import operator
 from time import time
-from collections import defaultdict
 
 from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
 
@@ -451,17 +450,28 @@ def memoize_total_additive(function):
 
 # To avoid potential circular reference from Sequences.Primes in following functions
 def _primes_copy():
-    D = defaultdict(list)
+    yield 2
+    yield 3
+    yield 5
     
-    for q in count(2,1):
-        if q not in D:
+    D = { 9: 3, 25: 5 }
+    MASK = cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
+    MODULOS = frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
+    
+    for q in compress(count(7,2),MASK):
+        p = D.pop(q, None)
+        
+        if p is None:
+            D[q*q] = q
             yield q
-            D[q * q] = [q]
         
         else:
-            for p in D[q]:
-                D[p+q].append(p)
-            del D[q]
+            x = q + 2*p
+            
+            while x in D or (x%30) not in MODULOS:
+                x += 2*p
+            
+            D[x] = p
 
 
 def prime_subsequence(sequence):

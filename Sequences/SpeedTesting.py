@@ -132,8 +132,8 @@ def prime_generators():
         yield 2
         yield 3
         yield 5
-        MASK= cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
-        MODULOS= frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
+        MASK = cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
+        MODULOS = frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
         
         for q in compress(
                 count(7,2),
