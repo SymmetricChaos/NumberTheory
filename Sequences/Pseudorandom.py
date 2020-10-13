@@ -26,8 +26,24 @@ def LCG(x,a,c,m):
         x = ((a*x)+c)%m
 
 
-def LFG(a,b,m,func):
-    """Lagged Fibonacci Generator"""
+def aLFG(a,b,m):
+    """Additive Lagged Fibonacci Generator"""
+    
+    while True:
+        yield a
+        a,b = b,(a+b)%m
+
+
+def mLFG(a,b,m):
+    """Multiplicative Lagged Fibonacci Generator"""
+    
+    while True:
+        yield a
+        a,b = b,(a*b)%m
+
+
+def gLFG(a,b,m,func):
+    """Generalized Lagged Fibonacci Generator"""
     
     while True:
         yield a
