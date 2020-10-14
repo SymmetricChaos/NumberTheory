@@ -856,6 +856,47 @@ def jordan_totient(n,k=1):
     return (n**k*num)//den
 
 
+def miller_rabin_test(n):
+    """
+    Miller-Rabin Primality Test
+    Returns 0 for composite, 1 for prime, and 2 for probably prime
+    Deterministic for n less than 3,317,044,064,679,887,385,961,981 ≈ 2^81
+    """
+    
+    def check_base(a,d,n,r):
+        for i in range(0,r+1):
+            if pow(a,2**i*d,n) == 1:
+                return False
+        return True
+    
+    W = [2,3,5,7,11,13,17,19,23,29,31,37,41]
+    
+    # Deal with even numbers first
+    if n == 2:
+        return 1
+    if n % 2 == 0:
+        return 0
+    
+    d = n-1
+    r = 0
+    while d % 2 == 0:
+        d //= 2
+        r += 1
+    
+    for witness in W:
+        if witness >= n:
+            break
+        # If the test for compositeness returns true we know for certain the
+        # number is composite and we return false
+        if check_base(witness,d,n,r):
+            return 0
+    
+    if n >= 3317044064679887385961981:
+        return 2
+    else:
+        return 1
+
+
 
 
 

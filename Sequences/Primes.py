@@ -285,7 +285,7 @@ def prime_counting():
 
 def sophie_germain_primes():
     """
-    Sophie Germain Primes: Primes such that 2p+1 is prime
+    Sophie Germain Primes: Primes such that 2p+1 is prime\n
     OEIS A005384
     """
     
@@ -295,11 +295,12 @@ def sophie_germain_primes():
         S.add(p)
         if (p-1)//2 in S:
             yield (p-1)//2
-
+        
+        S = {s for s in S if s > (p-1)//2}
 
 def safe_primes():
     """
-    Safe Primes: Primes such that (p-1)/2 is prime
+    Safe Primes: Primes such that (p-1)/2 is prime\n
     OEIS A005385
     """
     
@@ -309,6 +310,9 @@ def safe_primes():
         S.add(p)
         if (p-1)//2 in S:
             yield p
+        
+        S = {s for s in S if s > (p-1)//2}
+
 
 
 

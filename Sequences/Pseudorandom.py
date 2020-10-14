@@ -1,6 +1,6 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits
 from Sequences.ModularArithmetic import weyl
-from Sequences.NiceErrorChecking import require_integers
+from Sequences.NiceErrorChecking import require_integers, require_prime
 
 from math import gcd
 
@@ -117,8 +117,9 @@ def middle_square_weyl(n,k,m):
 def blum_blum_shub(x,p,q):
     """
     Blum Blum Shub PRNG
-    M must be a semiprime but this is not checked
     """
+    
+    require_prime( ["p","q"], [p,q])
     
     M = p*q
     
@@ -163,7 +164,7 @@ if __name__ == '__main__':
     simple_test(middle_square_weyl(675248,5743,7899),6,
                 "959861, 333145, 985594, 395534, 447152, 944916")
     
-    # print("\nBlum Blum Shub")
-    # simple_test(blum_blum_shub(17,101,71),10,
-    #             "17, 289, 523, 1480, 175, 1422, 929, 784, 1393, 755")
+    print("\nBlum Blum Shub")
+    simple_test(blum_blum_shub(17,101,71),10,
+                "17, 289, 523, 1480, 175, 1422, 929, 784, 1393, 755")
     
