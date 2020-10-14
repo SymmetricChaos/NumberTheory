@@ -2,6 +2,8 @@ from Sequences.MathUtils import digits_to_int, int_to_digits
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers
 
+from math import gcd
+
 # Obviously these are all VERY inefficient
 
 def _check_LFSR_args(vector,taps):
@@ -112,7 +114,21 @@ def middle_square_weyl(n,k,m):
         yield n
 
 
-
+def blum_blum_shub(x,M):
+    """
+    Blum Blum Shub PRNG
+    M must be a semiprime but this is not checked
+    """
+    
+    if gcd(M,x) != 1:
+        raise Exception("x must be coprime to M")
+    if x in (0,1):
+        raise Exception("x cannot be 0 or 1")
+    
+    while True:
+        yield x
+        
+        x = (x*x)%M
 
 
 
@@ -138,4 +154,8 @@ if __name__ == '__main__':
     print("\nMiddle-Square Weyl")
     simple_test(middle_square_weyl(675248,5743,7899),6,
                 "959861, 333145, 985594, 395534, 447152, 944916")
+    
+    print("\nBlum Blum Shub")
+    simple_test(blum_blum_shub(17,1537),10,
+                "17, 289, 523, 1480, 175, 1422, 929, 784, 1393, 755")
     
