@@ -283,6 +283,33 @@ def prime_counting():
         cur = p
 
 
+def sophie_germain_primes():
+    """
+    Sophie Germain Primes: Primes such that 2p+1 is prime
+    OEIS A005384
+    """
+    
+    S = set([2])
+    
+    for p in odd_primes():
+        S.add(p)
+        if (p-1)//2 in S:
+            yield (p-1)//2
+
+
+def safe_primes():
+    """
+    Safe Primes: Primes such that (p-1)/2 is prime
+    OEIS A005385
+    """
+    
+    S = set([2])
+    
+    for p in odd_primes():
+        S.add(p)
+        if (p-1)//2 in S:
+            yield p
+
 
 
 
@@ -348,4 +375,12 @@ if __name__ == '__main__':
     print("\nPrime Gaps")
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
+    
+    print("\nSophie Germain Primes")
+    simple_test(sophie_germain_primes(),13,
+                "2, 3, 5, 11, 23, 29, 41, 53, 83, 89, 113, 131, 173")
+    
+    print("\nSafe Primes")
+    simple_test(safe_primes(),13,
+                "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
     
