@@ -132,6 +132,8 @@ def blum_blum_shub(x,M):
 
 
 
+
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
