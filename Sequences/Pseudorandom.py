@@ -1,5 +1,6 @@
-from MathUtils import digits_to_int, int_to_digits
+from Sequences.MathUtils import digits_to_int, int_to_digits
 from Sequences.ModularArithmetic import weyl
+from Sequences.NiceErrorChecking import require_integers
 
 # Obviously these are all VERY inefficient
 
@@ -21,6 +22,8 @@ def _check_LFSR_args(vector,taps):
 def LCG(x,a,c,m):
     """Linear Congruential Generator"""
     
+    require_integers(["x","a","c","m"],[x,a,c,m])
+    
     while True:
         yield x
         x = ((a*x)+c)%m
@@ -28,6 +31,8 @@ def LCG(x,a,c,m):
 
 def aLFG(a,b,m):
     """Additive Lagged Fibonacci Generator"""
+    
+    require_integers(["a","b","m"],[a,b,m])
     
     while True:
         yield a
@@ -37,6 +42,8 @@ def aLFG(a,b,m):
 def mLFG(a,b,m):
     """Multiplicative Lagged Fibonacci Generator"""
     
+    require_integers(["a","b","m"],[a,b,m])
+    
     while True:
         yield a
         a,b = b,(a*b)%m
@@ -44,6 +51,8 @@ def mLFG(a,b,m):
 
 def gLFG(a,b,m,func):
     """Generalized Lagged Fibonacci Generator"""
+    
+    require_integers(["a","b","m"],[a,b,m])
     
     while True:
         yield a
@@ -63,6 +72,8 @@ def LFSR(vector,taps):
 def middle_square(n):
     """Middle Square Method"""
     
+    require_integers(["n"],[n])
+    
     N = int_to_digits(n)
     width = len(N)+(len(N)%2)
     
@@ -80,6 +91,9 @@ def middle_square(n):
 
 def middle_square_weyl(n,k,m):
     """Middle Square Method Augmented with a Weyl Sequence"""
+    
+    # Only n has to be checked since the weyl() function will check k and m
+    require_integers(["n"],[n])
     
     W = weyl(k,m)
     
@@ -106,16 +120,16 @@ if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
     print("Linear Congruential Generator")
-    simple_test(LCG(9,5,17,97),10,
-                "9, 62, 36, 3, 32, 80, 29, 65, 51, 78")
+    simple_test(LCG(9,5,17,97),14,
+                "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
     
     print("\nLagged Fibonacci Generator")
-    simple_test(LFG(9,27,97,lambda x,y:x*y),10,
-                "9, 27, 49, 62, 31, 79, 24, 53, 11, 1")
+    simple_test(mLFG(9,27,97),14,
+                "9, 27, 49, 62, 31, 79, 24, 53, 11, 1, 11, 11, 24, 70")
     
     print("\nLinear Feedback Shift Register")
-    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),10,
-                "105, 180, 218, 237, 118, 187, 221, 110, 55, 155")
+    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),11,
+                "105, 180, 218, 237, 118, 187, 221, 110, 55, 155, 205")
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,

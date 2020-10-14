@@ -67,7 +67,7 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
                              superprimes, noncomposite, odd_primes, twin_primes, \
                              twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs
 
-from Sequences.Pseudorandom import LCG, LFG, LFSR, middle_square
+from Sequences.Pseudorandom import LCG, aLFG, mLFG, gLFG, LFSR, middle_square
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  lucas_U, lucas_V, padovan, simple_recurrence, \
@@ -166,7 +166,7 @@ __all__=[#MANIPULATIONS
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
          
          #PSEUDORANDOM
-         "LCG","LFG","LFSR","middle_square",
+         "LCG","aLFG","mLFG","gLFG","LFSR","middle_square",
          
          #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
