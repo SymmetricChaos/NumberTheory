@@ -108,13 +108,13 @@ def n_gap_prime_pairs(n):
 
 def prime_tuples(K):
     """
-    Tuples of primes (p,q,r...)
+    Tuples of primes (p,q,r...) with gaps specified by K
     OEIS
     """
     
     for gap in K:
         if gap % 2 == 1:
-            raise ValueError("gaps must be even, the only odd gaps are between n and another prime")
+            raise ValueError("gaps must be even, the only odd gaps are between 2 and another prime")
     
     P = primes()
     L = []

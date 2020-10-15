@@ -1,9 +1,10 @@
 from Manipulations import *
-from Primes import primes
+from Primes import primes, safe_primes
 from Simple import naturals, constant, powers, evens, odds
 from Recurrence import companion_pell, fibonacci
 from Aliquot import amicable_pairs
 from Weird import even_odd
+
 
 A142150 = interleave(naturals(0),constant(0))
 A001333 = sequence_apply(companion_pell(),lambda x: x//2)
@@ -21,6 +22,8 @@ iRLE = inv_run_length_encoding(naturals(1))
 runs = run_lengths(n_rep_a(offset(evens(),1),odds()))
 prime_perm = permute(primes(),prepend(0,even_odd()))
 fib_primes = prime_subsequence(fibonacci())
+three_mod_four_primes = filter(lambda x: x%4 == 3,safe_primes())
+
 
 print("A142150")
 simple_test(A142150,10,"0, 0, 1, 0, 2, 0, 3, 0, 4, 0")
@@ -69,3 +72,6 @@ simple_test(prime_perm,10,"2, 5, 3, 11, 7, 17, 13, 23, 19, 31")
 
 print("\nFibonnaci Primes")
 simple_test(fib_primes,6,"3, 5, 13, 89, 233, 1597")
+
+print("\nSafe Primes Congruent to 3 mod 4")
+simple_test(three_mod_four_primes,12,"7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")

@@ -117,6 +117,7 @@ def middle_square_weyl(n,k,m):
 def blum_blum_shub(x,p,q):
     """
     Blum Blum Shub PRNG
+    
     """
     
     require_prime( ["p","q"], [p,q])
@@ -162,6 +163,6 @@ if __name__ == '__main__':
                 "959861, 333145, 985594, 395534, 447152, 944916")
     
     print("\nBlum Blum Shub")
-    simple_test(blum_blum_shub(17,103,71),10,
-                "17, 289, 3078, 3749, 6728, 5827, 6983, 6518, 3107, 289")
+    simple_test(blum_blum_shub(3,11,23),12,
+                "3, 9, 81, 236, 36, 31, 202, 71, 234, 108, 26, 170")
     
