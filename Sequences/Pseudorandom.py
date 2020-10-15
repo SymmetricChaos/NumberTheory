@@ -1,6 +1,6 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits
 from Sequences.ModularArithmetic import weyl
-from Sequences.NiceErrorChecking import require_integers, require_prime
+from Sequences.NiceErrorChecking import require_integers, require_prime, require_true
 
 from math import gcd
 
@@ -120,6 +120,7 @@ def blum_blum_shub(x,p,q):
     """
     
     require_prime( ["p","q"], [p,q])
+    require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
     
     M = p*q
     
@@ -127,10 +128,6 @@ def blum_blum_shub(x,p,q):
         raise Exception("x must be coprime to M")
     if x in (0,1):
         raise Exception("x cannot be 0 or 1")
-    if p%4:
-        raise Exception("p must be congruent to 3 mod 4")
-    if q%4:
-        raise Exception("q must be congruent to 3 mod 4")
     
     while True:
         yield x
@@ -165,6 +162,6 @@ if __name__ == '__main__':
                 "959861, 333145, 985594, 395534, 447152, 944916")
     
     print("\nBlum Blum Shub")
-    simple_test(blum_blum_shub(17,101,71),10,
-                "17, 289, 523, 1480, 175, 1422, 929, 784, 1393, 755")
+    simple_test(blum_blum_shub(17,103,71),10,
+                "17, 289, 3078, 3749, 6728, 5827, 6983, 6518, 3107, 289")
     
