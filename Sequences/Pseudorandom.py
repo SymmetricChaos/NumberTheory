@@ -1,4 +1,4 @@
-from Sequences.MathUtils import digits_to_int, int_to_digits
+from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true
 
@@ -28,7 +28,7 @@ def LCG(x,a,c,m):
     Args:
         x -- seed value
         a -- multiplicative constant
-        c -- additive consrant
+        c -- additive constant
         m -- modulus
     """
     
@@ -37,6 +37,30 @@ def LCG(x,a,c,m):
     while True:
         yield x
         x = ((a*x)+c)%m
+
+
+def ICG(x,a,c,m):
+    """
+    Inversive Congruential Generator
+    
+    Args:
+        x -- seed value
+        a -- multiplicative constant
+        c -- additive constant
+        m -- modulus, a prime
+    """
+    
+    require_integers(["x","a","c","m"],[x,a,c,m])
+    require_prime( ["m"], [m])
+    
+    while True:
+        yield x
+        
+        if x == 0:
+            x = c
+        
+        else:
+            x = (mod_inv(x,m)*a+c)%m
 
 
 def aLFG(a,b,m):
@@ -164,7 +188,7 @@ def middle_square_weyl(n,k,m):
 
 def blum_blum_shub(x,p,q):
     """
-    Blum Blum Shub PRNG
+    Blum Blum Shub
     
     Args:
         x -- seed value, coprime to pq
@@ -172,10 +196,10 @@ def blum_blum_shub(x,p,q):
         q -- prime congruent to 3 mod 4
     """
     
+    M = p*q
+    
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
-    
-    M = p*q
     
     if gcd(M,x) != 1:
         raise Exception("x must be coprime to M")
@@ -198,7 +222,15 @@ if __name__ == '__main__':
     simple_test(LCG(9,5,17,97),14,
                 "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
     
-    print("\nLagged Fibonacci Generator")
+    print("\nInversive Congruential Generator")
+    simple_test(ICG(1,7,23,103),14,
+                "1, 30, 61, 40, 0, 23, 86, 65, 96, 22, 28, 49, 82, 57")
+    
+    print("\nAdditive Lagged Fibonacci Generator")
+    simple_test(aLFG(9,27,97),14,
+                "9, 27, 36, 63, 2, 65, 67, 35, 5, 40, 45, 85, 33, 21")
+    
+    print("\nMultiplicative Lagged Fibonacci Generator")
     simple_test(mLFG(9,27,97),14,
                 "9, 27, 49, 62, 31, 79, 24, 53, 11, 1, 11, 11, 24, 70")
     

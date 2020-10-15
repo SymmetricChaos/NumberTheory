@@ -732,8 +732,18 @@ def egcd(a, b):
         return (b, 0, 1)
     
     else:
-        gcd, x, y = egcd(b % a, a)
-        return (gcd, y - (b//a) * x, x)
+        g, x, y = egcd(b % a, a)
+        return (g, y-(b//a) * x, x)
+
+
+def mod_inv(n,m):
+    """Modular Multiplicative Inverse"""
+    g,x,y = egcd(n,m)
+    
+    if g != 1:
+        raise Exception("n and m are not coprime, no modular multiplicative inverse exists")
+    
+    return x%m
 
 
 def multi_gcd(*args):
@@ -871,7 +881,9 @@ def miller_rabin_test(n):
     
     W = [2,3,5,7,11,13,17,19,23,29,31,37,41]
     
-    # Deal with even numbers first
+    # Deal with special cases first
+    if n == 1:
+        return 0
     if n == 2:
         return 1
     if n % 2 == 0:
