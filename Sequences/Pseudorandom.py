@@ -22,7 +22,15 @@ def _check_LFSR_args(vector,taps):
 
 
 def LCG(x,a,c,m):
-    """Linear Congruential Generator"""
+    """
+    Linear Congruential Generator
+    
+    Args:
+        x -- seed value
+        a -- multiplicative constant
+        c -- additive consrant
+        m -- modulus
+    """
     
     require_integers(["x","a","c","m"],[x,a,c,m])
     
@@ -32,7 +40,14 @@ def LCG(x,a,c,m):
 
 
 def aLFG(a,b,m):
-    """Additive Lagged Fibonacci Generator"""
+    """
+    Additive Lagged Fibonacci Generator
+    
+    Args:
+        a -- first term
+        b -- second term
+        m -- modulus
+    """
     
     require_integers(["a","b","m"],[a,b,m])
     
@@ -42,7 +57,14 @@ def aLFG(a,b,m):
 
 
 def mLFG(a,b,m):
-    """Multiplicative Lagged Fibonacci Generator"""
+    """
+    Multiplicative Lagged Fibonacci Generator
+    
+    Args:
+        a -- first term
+        b -- second term
+        m -- modulus
+    """
     
     require_integers(["a","b","m"],[a,b,m])
     
@@ -52,7 +74,15 @@ def mLFG(a,b,m):
 
 
 def gLFG(a,b,m,func):
-    """Generalized Lagged Fibonacci Generator"""
+    """
+    Generalized Lagged Fibonacci Generator
+    
+    Args:
+        a -- first term
+        b -- second term
+        m -- modulus
+        func -- function with two arguments returning an integer
+    """
     
     require_integers(["a","b","m"],[a,b,m])
     
@@ -62,7 +92,13 @@ def gLFG(a,b,m,func):
 
 
 def LFSR(vector,taps):
-    """Linear Feedback Shift Register: Returns the state at each step"""
+    """
+    Linear Feedback Shift Register: Returns the state at each step
+    
+    Args:
+        vector -- list of bits
+        taps --positions used to control next term
+    """
     
     _check_LFSR_args(vector,taps)
     
@@ -72,7 +108,12 @@ def LFSR(vector,taps):
 
 
 def middle_square(n):
-    """Middle Square Method"""
+    """
+    Middle Square Method
+    
+    Args:
+        n -- seed value
+    """
     
     require_integers(["n"],[n])
     
@@ -92,7 +133,14 @@ def middle_square(n):
 
 
 def middle_square_weyl(n,k,m):
-    """Middle Square Method Augmented with a Weyl Sequence"""
+    """
+    Middle Square Method Augmented with a Weyl Sequence
+    
+    Args:
+        n -- seed value
+        k -- initial value for Weyl Sequence
+        m -- modulus of Weyl Sequence
+    """
     
     # Only n has to be checked since the weyl() function will check k and m
     require_integers(["n"],[n])
@@ -118,6 +166,10 @@ def blum_blum_shub(x,p,q):
     """
     Blum Blum Shub PRNG
     
+    Args:
+        x -- seed value, coprime to pq
+        p -- prime congruent to 3 mod 4
+        q -- prime congruent to 3 mod 4
     """
     
     require_prime( ["p","q"], [p,q])
