@@ -736,8 +736,13 @@ def egcd(a, b):
         return (g, y-(b//a) * x, x)
 
 
+def lcm(a,b):
+    return abs(a*b)//gcd(a,b)
+
+
 def mod_inv(n,m):
     """Modular Multiplicative Inverse"""
+    
     g,x,y = egcd(n,m)
     
     if g != 1:
@@ -761,8 +766,7 @@ def multi_gcd(*args):
     if len(args) == 2:
         a = args[0]
         b = args[1]
-        g = gcd(a,b)
-        return g
+        return gcd(a,b)
     
     # if more than two break it up recursively
     a = multi_gcd(*args[0:2])
@@ -785,8 +789,7 @@ def multi_lcm(*args):
     if len(args) == 2:
         a = args[0]
         b = args[1]
-        g = gcd(a,b)
-        return abs(a*b)//g
+        return lcm(a,b)
     
     # if more than two break it up recursively
     a = multi_lcm(*args[0:2])

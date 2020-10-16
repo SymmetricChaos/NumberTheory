@@ -196,12 +196,12 @@ def blum_blum_shub(x,p,q):
         q -- prime congruent to 3 mod 4
     """
     
-    M = p*q
+    m = p*q
     
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
     
-    if gcd(M,x) != 1:
+    if gcd(m,x) != 1:
         raise Exception("x must be coprime to M")
     if x in (0,1):
         raise Exception("x cannot be 0 or 1")
@@ -209,7 +209,7 @@ def blum_blum_shub(x,p,q):
     while True:
         yield x
         
-        x = (x*x)%M
+        x = (x*x)%m
 
 
 
