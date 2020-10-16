@@ -1,6 +1,8 @@
 from Sequences.Simple import naturals
 from collections import defaultdict
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
+from Sequences.NiceErrorChecking import require_integers, require_geq
+
 from itertools import count, compress, cycle
 
 ##############################
@@ -85,10 +87,10 @@ def n_gap_prime_pairs(n):
          A156328, A272816, A140447
     """
     
-    if n == 0:
-        raise ValueError("n cannot be zero")
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],1)
     
-    elif n % 2 == 1:
+    if n % 2 == 1:
         raise ValueError("n must be even, for odd n either there is no pair or the only pair is (2,2+n)")
     
     else:
@@ -113,7 +115,7 @@ def prime_tuples(K):
     """
     
     for gap in K:
-        if gap % 2 == 1:
+        if gap % 2 != 0:
             raise ValueError("gaps must be even, the only odd gaps are between 2 and another prime")
     
     P = primes()
@@ -158,6 +160,56 @@ def superprimes():
     yield from hypersequence(primes())
 
 
+def sophie_germain_primes():
+    """
+    Sophie Germain Primes: Primes such that 2p+1 is prime\n
+    OEIS A005384
+    """
+    
+    S = set([2])
+    
+    for p in odd_primes():
+        S.add(p)
+        if (p-1)//2 in S:
+            yield (p-1)//2
+        
+        S = {s for s in S if s > (p-1)//2}
+
+
+def safe_primes():
+    """
+    Safe Primes: Primes such that (p-1)/2 is prime\n
+    OEIS A005385
+    """
+    
+    S = set([2])
+    
+    for p in odd_primes():
+        S.add(p)
+        if (p-1)//2 in S:
+            yield p
+        
+        S = {s for s in S if s > (p-1)//2}
+
+
+def pythagorean_primes():
+    """
+    Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle\n
+    OEIS A002144
+    """
+    
+    for p in primes():
+        if (p-1)%4 == 0:
+            yield p
+
+
+
+
+
+#####################
+## CLOSELY RELATED ##
+#####################
+
 def composites():
     """
     Composite Numbers: Positive integers with more than two factors\n
@@ -175,6 +227,7 @@ def composites():
             yield q
             for p in D[q]:
                 D[p+q].append(p)
+            
             del D[q]
 
 
@@ -239,17 +292,6 @@ def prime_powers():
             del D[q]
 
 
-def pythagorean_primes():
-    """
-    Pythagorean Primes: Primes that can be the hypotenuse of an integer right triangle\n
-    OEIS A002144
-    """
-    
-    for p in primes():
-        if (p-1)%4 == 0:
-            yield p
-
-
 def prime_characteristic():
     """
     Characteristic Function of the Primes: For each positive integer 1 if the number is prime otherwise 0\n
@@ -263,6 +305,7 @@ def prime_characteristic():
             yield 0
             
         yield 1
+        
         cur = p+1
 
 
@@ -281,37 +324,6 @@ def prime_counting():
         
         ctr += 1
         cur = p
-
-
-def sophie_germain_primes():
-    """
-    Sophie Germain Primes: Primes such that 2p+1 is prime\n
-    OEIS A005384
-    """
-    
-    S = set([2])
-    
-    for p in odd_primes():
-        S.add(p)
-        if (p-1)//2 in S:
-            yield (p-1)//2
-        
-        S = {s for s in S if s > (p-1)//2}
-
-def safe_primes():
-    """
-    Safe Primes: Primes such that (p-1)/2 is prime\n
-    OEIS A005385
-    """
-    
-    S = set([2])
-    
-    for p in odd_primes():
-        S.add(p)
-        if (p-1)//2 in S:
-            yield p
-        
-        S = {s for s in S if s > (p-1)//2}
 
 
 

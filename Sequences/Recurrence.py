@@ -437,7 +437,7 @@ def rowland():
 
 def rowland_primes():
     """
-    Prime values of Rowlan's Sequence
+    Prime values of Rowland's Sequence
     OEIS 
     """
     
