@@ -2,7 +2,8 @@ from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true
 
-from math import gcd
+from math import gcd, prod
+from itertools import cycle
 
 # Obviously these are all VERY inefficient
 
@@ -61,6 +62,22 @@ def ICG(x,a,c,m):
         
         else:
             x = (mod_inv(x,m)*a+c)%m
+
+
+def CIG(P):
+    """
+    Compound Inversive Generator
+    
+    Args:
+        P -- list of primes greater than 3
+    """
+    
+    m = prod(P)
+    T = [m//p for p in P]
+    cycles = [cycle([i for i in range(p)]) for p in P]
+    
+    for vals in zip(*cycles):
+        yield sum(t*v for t,v in zip(T,vals)) % m
 
 
 def aLFG(a,b,m):
@@ -225,6 +242,10 @@ if __name__ == '__main__':
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
                 "1, 30, 61, 40, 0, 23, 86, 65, 96, 22, 28, 49, 82, 57")
+    
+    print("\nCompound Inversive Generator")
+    simple_test(CIG([5,7]),15,
+                "0, 12, 24, 1, 13, 25, 2, 14, 26, 3, 15, 27, 4, 16, 28")
     
     print("\nAdditive Lagged Fibonacci Generator")
     simple_test(aLFG(9,27,97),14,
