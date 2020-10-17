@@ -336,6 +336,16 @@ def fermat_pseudoprimes(a):
             yield c
 
 
+def weak_pseudoprimes(a):
+    """
+    Weak Pseudoprimes to Base a
+    """
+    
+    for c in composites():
+        if pow(a,c,c) == a:
+            yield c
+
+
 
 
 
@@ -410,7 +420,11 @@ if __name__ == '__main__':
     simple_test(safe_primes(),13,
                 "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
     
-    print("\nFermat Pseudoprimes to Base 2")
-    simple_test(fermat_pseudoprimes(2),9,
-                "341, 561, 645, 1105, 1387, 1729, 1905, 2047, 2465")
+    print("\nFermat Pseudoprimes to Base 3")
+    simple_test(fermat_pseudoprimes(3),10,
+                "91, 121, 286, 671, 703, 949, 1105, 1541, 1729, 1891")
+    
+    print("\nWeak Pseudoprimes to Base 3")
+    simple_test(weak_pseudoprimes(3),11,
+                "6, 66, 91, 121, 286, 561, 671, 703, 726, 949, 1105")
     
