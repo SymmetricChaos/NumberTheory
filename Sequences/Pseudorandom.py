@@ -1,6 +1,6 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
-from Sequences.NiceErrorChecking import require_integers, require_prime, require_true
+from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
 
 from math import gcd, prod
 from itertools import cycle
@@ -217,11 +217,10 @@ def blum_blum_shub(x,p,q):
     
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
+    require_geq(["x"], [x], 2)
     
     if gcd(m,x) != 1:
         raise Exception("x must be coprime to M")
-    if x in (0,1):
-        raise Exception("x cannot be 0 or 1")
     
     while True:
         yield x

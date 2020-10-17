@@ -326,6 +326,16 @@ def prime_counting():
         cur = p
 
 
+def fermat_pseudoprimes(a):
+    """
+    Fermat Pseudoprimes to Base a
+    """
+    
+    for c in composites():
+        if pow(a,c-1,c) == 1:
+            yield c
+
+
 
 
 
@@ -399,4 +409,8 @@ if __name__ == '__main__':
     print("\nSafe Primes")
     simple_test(safe_primes(),13,
                 "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
+    
+    print("\nFermat Pseudoprimes to Base 2")
+    simple_test(fermat_pseudoprimes(2),9,
+                "341, 561, 645, 1105, 1387, 1729, 1905, 2047, 2465")
     
