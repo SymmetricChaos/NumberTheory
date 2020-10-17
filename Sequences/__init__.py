@@ -69,7 +69,7 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
                              fermat_pseudoprimes, weak_pseudoprimes, sophie_germain_primes, \
                              safe_primes
 
-from Sequences.Pseudorandom import LCG, ICG, aLFG, mLFG, gLFG, LFSR, middle_square, \
+from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
@@ -172,7 +172,7 @@ __all__=[#MANIPULATIONS
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",
-         "middle_square_weyl","ICG",
+         "middle_square_weyl","ICG","CIG",
          
          #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
