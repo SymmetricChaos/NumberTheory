@@ -65,7 +65,9 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
 from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
                              composites, compositorial, prime_characteristic, \
                              superprimes, noncomposite, odd_primes, twin_primes, \
-                             twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs
+                             twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
+                             fermat_pseudoprimes, weak_pseudoprimes, sophie_germain_primes, \
+                             safe_primes
 
 from Sequences.Pseudorandom import LCG, ICG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub
@@ -165,6 +167,8 @@ __all__=[#MANIPULATIONS
          "composites","compositorial","prime_characteristic",
          "superprimes","noncomposite","odd_primes","twin_primes",
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
+         "fermat_pseudoprimes","weak_pseudoprimes","sophie_germain_primes",
+         "safe_primes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",

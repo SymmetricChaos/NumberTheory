@@ -328,7 +328,8 @@ def prime_counting():
 
 def fermat_pseudoprimes(a):
     """
-    Fermat Pseudoprimes to Base a
+    Fermat Pseudoprimes to Base a\n
+    OEIS
     """
     
     yield 1
@@ -340,7 +341,8 @@ def fermat_pseudoprimes(a):
 
 def weak_pseudoprimes(a):
     """
-    Weak Pseudoprimes to Base a
+    Weak Pseudoprimes to Base a\n
+    OEIS
     """
     
     yield 1
@@ -392,6 +394,14 @@ if __name__ == '__main__':
     simple_test(superprimes(),13,
                 "3, 5, 11, 17, 31, 41, 59, 67, 83, 109, 127, 157, 179")
     
+    print("\nSophie Germain Primes")
+    simple_test(sophie_germain_primes(),13,
+                "2, 3, 5, 11, 23, 29, 41, 53, 83, 89, 113, 131, 173")
+    
+    print("\nSafe Primes")
+    simple_test(safe_primes(),13,
+                "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
+    
     print("\nNoncomposite Numbers")
     simple_test(noncomposite(),15,
                 "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
@@ -415,14 +425,6 @@ if __name__ == '__main__':
     print("\nPrime Gaps")
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
-    
-    print("\nSophie Germain Primes")
-    simple_test(sophie_germain_primes(),13,
-                "2, 3, 5, 11, 23, 29, 41, 53, 83, 89, 113, 131, 173")
-    
-    print("\nSafe Primes")
-    simple_test(safe_primes(),13,
-                "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
     
     print("\nFermat Pseudoprimes to Base 3")
     simple_test(fermat_pseudoprimes(3),11,
