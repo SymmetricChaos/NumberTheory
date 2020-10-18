@@ -40,6 +40,22 @@ def LCG(x,a,c,m):
         x = ((a*x)+c)%m
 
 
+def RANDU(x):
+    """
+    RANDU: Famously flawed Linear Congruential Generator
+    
+    Args:
+        x -- seed value, odd
+    
+    OEIS A096555 (yes, really)
+    """
+    
+    if x % 2 != 1:
+        raise Exception("RANDU only accepts odd seed numbers, sorry!")
+    
+    yield from LCG(x,65539,0,2**31)
+
+
 def ICG(x,a,c,m):
     """
     Inversive Congruential Generator
@@ -237,6 +253,10 @@ if __name__ == '__main__':
     print("Linear Congruential Generator")
     simple_test(LCG(9,5,17,97),14,
                 "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
+    
+    print("\nRANDU from 1 (note only odd values)")
+    simple_test(RANDU(1),7,
+                "1, 65539, 393225, 1769499, 7077969, 26542323, 95552217")
     
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
