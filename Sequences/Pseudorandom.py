@@ -1,6 +1,7 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
+from Sequences.Manipulations import sequence_apply
 
 from math import gcd, prod
 from itertools import cycle
@@ -22,6 +23,16 @@ def _check_LFSR_args(vector,taps):
             raise Exception("Taps must be valid positions in the vector")
 
 
+def lower_bits(x,b):
+    """Return only the b lowest bits of x"""
+    return x % (2**b)
+
+
+def upper_bits(x,b):
+    """Return only the b highest bits of x"""
+    return (x >> b) % (2**b)
+
+
 def LCG(x,a,c,m):
     """
     Linear Congruential Generator
@@ -38,6 +49,28 @@ def LCG(x,a,c,m):
     while True:
         yield x
         x = ((a*x)+c)%m
+
+
+def cLCG(X,A,C,M):
+    """
+    Combined Linear Congruential Generator
+    
+    Args:
+        X -- list of seed values
+        A -- list of multiplicative constants
+        C -- list of additive constants
+        M -- list of moduli
+    """
+    
+    G = []
+    
+    for x,a,c,m in zip(X,A,C,M):
+        G.append(LCG(x,a,c,m))
+    
+    m0 = M[0]-1
+    
+    while True:
+        yield sum([(-1**j)*next(g) for j,g in enumerate(G)]) % m0
 
 
 def lehmer(x,a,m):
@@ -292,9 +325,17 @@ if __name__ == '__main__':
     simple_test(LCG(9,5,17,97),14,
                 "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
     
-    print("\nRANDU (note only odd values)")
-    simple_test(RANDU(2127401289),4,
-                "2127401289, 229749723, 1559239569, 845238963")
+    print("\nRANDU, lower 16 bits (note only odd values)")
+    simple_test(sequence_apply(RANDU(2127401289),lambda x: lower_bits(x,16)),8,
+                "37193, 46043, 7057, 21171, 63513, 59467, 47329, 10915")
+    
+    print("\nRANDU, upper 16 bits")
+    simple_test(sequence_apply(RANDU(2127401289),lambda x: upper_bits(x,16)),8,
+                "32461, 3505, 23792, 12897, 27094, 13725, 2340, 21583")
+    
+    # print("\nCompound LCG")
+    # simple_test(cLCG([142,5],[40014,40692],[0,0],[2147483563,2147483399]),13,
+    #             "")
     
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
