@@ -254,9 +254,9 @@ if __name__ == '__main__':
     simple_test(LCG(9,5,17,97),14,
                 "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
     
-    print("\nRANDU from 1 (note only odd values)")
-    simple_test(RANDU(1),7,
-                "1, 65539, 393225, 1769499, 7077969, 26542323, 95552217")
+    print("\nRANDU (note only odd values)")
+    simple_test(RANDU(2127401289),4,
+                "2127401289, 229749723, 1559239569, 845238963")
     
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
