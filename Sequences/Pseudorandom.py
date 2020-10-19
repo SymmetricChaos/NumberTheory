@@ -60,6 +60,22 @@ def lehmer(x,a,m):
         x = (a*x)%m
 
 
+def MINSTD0(x):
+    """
+    Original MINSTD with constant 16807
+    """
+    
+    yield from lehmer(x,16807,2**31-1)
+
+
+def MINSTD(x):
+    """
+    Revised MINSTD with constant 48271
+    """
+    
+    yield from lehmer(x,48271,2**31-1)
+
+
 def RANDU(x):
     """
     RANDU: Famously flawed Linear Congruential Generator
