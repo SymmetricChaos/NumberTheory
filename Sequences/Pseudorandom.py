@@ -40,6 +40,26 @@ def LCG(x,a,c,m):
         x = ((a*x)+c)%m
 
 
+def lehmer(x,a,m):
+    """
+    Lehmer PRNG: Special case of LCG
+    
+    Args:
+        x -- seed value, coprime to m
+        a -- multiplicative constant
+        m -- modulus
+    """
+    
+    require_integers(["x","a","m"],[x,a,m])
+    
+    if gcd(x,m) != 1:
+        raise Exception("The seed of a Lehmer PRNG must be coprime to the modulus")
+    
+    while True:
+        yield x
+        x = (a*x)%m
+
+
 def RANDU(x):
     """
     RANDU: Famously flawed Linear Congruential Generator
@@ -49,6 +69,8 @@ def RANDU(x):
     
     OEIS A096555 (yes, really)
     """
+    
+    require_integers(["x"],[x])
     
     if x % 2 != 1:
         raise Exception("RANDU only accepts odd seed numbers, sorry!")
