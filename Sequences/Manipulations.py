@@ -189,6 +189,16 @@ def sequence_apply(sequence,func):
     return map(func,sequence)
 
 
+def lower_bits(sequence,n):
+    """Return only the n lowest bits of each term in the sequence"""
+    return map(lambda x: x%(2**n), sequence)
+
+
+def upper_bits(sequence,n):
+    """Return only the n highest bits of each term in the sequence"""
+    return map(lambda x: (x >> n) % (2**n), sequence)
+
+
 def interleave(*sequences):
     """Interleave some sequences in a round-robin style, interleaving ends if any iterator ends"""
     

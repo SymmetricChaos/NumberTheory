@@ -1,7 +1,7 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
-from Sequences.Manipulations import sequence_apply
+from Sequences.Manipulations import lower_bits, upper_bits
 
 from math import gcd, prod
 from itertools import cycle
@@ -21,16 +21,6 @@ def _check_LFSR_args(vector,taps):
     for t in taps:
         if t >= len(vector):
             raise Exception("Taps must be valid positions in the vector")
-
-
-def lower_bits(x,b):
-    """Return only the b lowest bits of x"""
-    return x % (2**b)
-
-
-def upper_bits(x,b):
-    """Return only the b highest bits of x"""
-    return (x >> b) % (2**b)
 
 
 def LCG(x,a,c,m):
@@ -111,7 +101,7 @@ def MINSTD(x):
 
 def RANDU(x):
     """
-    RANDU: Famously flawed Linear Congruential Generator
+    RANDU: Famously flawed Lehmer PRNG
     
     Args:
         x -- seed value, odd
@@ -124,7 +114,7 @@ def RANDU(x):
     if x % 2 != 1:
         raise Exception("RANDU only accepts odd seed numbers, sorry!")
     
-    yield from LCG(x,65539,0,2**31)
+    yield from lehmer(x,65539,2**31)
 
 
 def ICG(x,a,c,m):
@@ -326,12 +316,16 @@ if __name__ == '__main__':
                 "9, 62, 36, 3, 32, 80, 29, 65, 51, 78, 19, 15, 92, 89")
     
     print("\nRANDU, lower 16 bits (note only odd values)")
-    simple_test(sequence_apply(RANDU(2127401289),lambda x: lower_bits(x,16)),8,
+    simple_test(lower_bits(RANDU(2127401289),16),8,
                 "37193, 46043, 7057, 21171, 63513, 59467, 47329, 10915")
     
     print("\nRANDU, upper 16 bits")
-    simple_test(sequence_apply(RANDU(2127401289),lambda x: upper_bits(x,16)),8,
+    simple_test(upper_bits(RANDU(2127401289),16),8,
                 "32461, 3505, 23792, 12897, 27094, 13725, 2340, 21583")
+    
+    print("\nMINSTD, lower 16 bits")
+    simple_test(lower_bits(MINSTD(2127401289),16),8,
+                "37193, 32402, 23247, 27161, 9001, 55737, 34452, 60993")
     
     # print("\nCompound LCG")
     # simple_test(cLCG([142,5],[40014,40692],[0,0],[2147483563,2147483399]),13,
