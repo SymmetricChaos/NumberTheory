@@ -41,26 +41,23 @@ def LCG(x,a,c,m):
         x = ((a*x)+c)%m
 
 
-def cLCG(X,A,C,M):
+def cLCG(G):
     """
     Combined Linear Congruential Generator
     
     Args:
-        X -- list of seed values
-        A -- list of multiplicative constants
-        C -- list of additive constants
-        M -- list of moduli
+        G -- list of tuples with args for LCGs
     """
     
-    G = []
+    gens = []
     
-    for x,a,c,m in zip(X,A,C,M):
-        G.append(LCG(x,a,c,m))
+    for g in G:
+        gens.append(LCG(*g))
     
-    m0 = M[0]-1
+    m0 = G[0][3]-1
     
     while True:
-        yield sum([(-1**j)*next(g) for j,g in enumerate(G)]) % m0
+        yield sum([(-1**j)*next(g) for j,g in enumerate(gens)]) % m0
 
 
 def lehmer(x,a,m):
@@ -327,9 +324,13 @@ if __name__ == '__main__':
     simple_test(lower_bits(MINSTD(2127401289),16),8,
                 "37193, 32402, 23247, 27161, 9001, 55737, 34452, 60993")
     
-    # print("\nCompound LCG")
-    # simple_test(cLCG([142,5],[40014,40692],[0,0],[2147483563,2147483399]),13,
-    #             "")
+    print("\nCompound LCG, lower 16 bits")
+    simple_test(lower_bits(
+                cLCG(
+                     [[142,40014,0,2147483563],
+                     [5,40692,0,2147483399]]),
+                16),8,
+                "65303, 12706, 20484, 22304, 1195, 48904, 19797, 28148")
     
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
