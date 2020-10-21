@@ -1,7 +1,7 @@
 from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
-from Sequences.Manipulations import lower_bits, upper_bits
+from Sequences.Manipulations import lower_bits, upper_bits, chunk_by_n
 
 from math import gcd, prod
 from itertools import cycle
@@ -212,9 +212,9 @@ def gLFG(a,b,m,func):
         a,b = b,func(a,b)%m
 
 
-def LFSR(vector,taps):
+def LFSR_bits(vector,taps):
     """
-    Linear Feedback Shift Register: Returns the state at each step
+    Linear Feedback Shift Register: Returns bit by bit
     
     Args:
         vector -- list of bits
@@ -224,8 +224,45 @@ def LFSR(vector,taps):
     _check_LFSR_args(vector,taps)
     
     while True:
-        yield digits_to_int(vector,2,bigendian=True)
+        yield vector[0]
         vector = vector[1:] + [sum([vector[i] for i in taps])%2]
+
+
+def LFSR(vector,taps,bits):
+    """
+    Linear Feedback Shift Register: Generates specified number of bits at a time
+    
+    Args:
+        vector -- list of bits
+        taps --positions used to control next term
+    """
+    
+    _check_LFSR_args(vector,taps)
+    
+    for bits in chunk_by_n(LFSR_bits(vector,taps),bits):
+        yield digits_to_int(bits,2)
+
+
+def shrinking_generator_bits(G1,G2):
+    """
+    Shrinking Generator: 
+    """
+    
+    A = LFSR_bits(*G1)
+    S = LFSR_bits(*G2)
+    
+    for a,s in zip(A,S):
+        if s == 1:
+            yield a
+
+
+def shrinking_generator(G1,G2,bits):
+    """
+    Shrinking Generator: 
+    """
+    
+    for bits in chunk_by_n(shrinking_generator_bits(G1,G2),bits):
+        yield digits_to_int(bits,2)
 
 
 def middle_square(n):
@@ -358,9 +395,17 @@ if __name__ == '__main__':
     simple_test(mLFG(9,27,97),14,
                 "9, 27, 49, 62, 31, 79, 24, 53, 11, 1, 11, 11, 24, 70")
     
-    print("\nLinear Feedback Shift Register")
-    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7]),11,
-                "105, 180, 218, 237, 118, 187, 221, 110, 55, 155, 205")
+    print("\nLinear Feedback Shift Register, 8-bit output")
+    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7],8),11,
+                "150, 236, 213, 248, 33, 138, 122, 57, 45, 217, 171")
+    
+    print("\nShrinking Generator, 8-bit output")
+    simple_test(shrinking_generator(
+                                    ([1,0,0,1,0,1,1,0],[0,3,6,7]),
+                                    ([1,0,0,1,0,1,1,0],[1,2,5,7]),
+                                    8),11,
+                "150, 236, 213, 248, 33, 138, 122, 57, 45, 217, 171")
+    
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
