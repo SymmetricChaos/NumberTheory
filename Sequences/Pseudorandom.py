@@ -345,6 +345,40 @@ def blum_blum_shub(x,p,q):
         x = (x*x)%m
 
 
+def xorshift64(x):
+    """
+    Marsaglia's 64-bit xorshift
+    
+    Args:
+        x -- seed value
+    """
+    
+    require_geq(["x"], [x], 1)
+    
+    while True:
+        x ^= (x << 13)%(2**64)
+        x ^= (x >> 7)%(2**64)
+        x ^= (x << 17)%(2**64)
+        
+        yield x
+
+
+def xorshift32(x):
+    """
+    Marsaglia's 32-bit xorshift
+    
+    Args:
+        x -- seed value
+    """
+    
+    require_geq(["x"], [x], 1)
+    
+    while True:
+        x ^= (x << 13)%(2**32)
+        x ^= (x >> 17)%(2**32)
+        x ^= (x << 5)%(2**32)
+        
+        yield x
 
 
 
@@ -404,8 +438,7 @@ if __name__ == '__main__':
                                     ([1,0,0,1,0,1,1,0],[0,3,6,7]),
                                     ([1,0,0,1,0,1,1,0],[1,2,5,7]),
                                     8),11,
-                "150, 236, 213, 248, 33, 138, 122, 57, 45, 217, 171")
-    
+                "254, 177, 53, 157, 165, 248, 12, 24, 46, 210, 33")
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
@@ -418,4 +451,8 @@ if __name__ == '__main__':
     print("\nBlum Blum Shub")
     simple_test(blum_blum_shub(3,11,23),12,
                 "3, 9, 81, 236, 36, 31, 202, 71, 234, 108, 26, 170")
+    
+    print("\nXorshift64, lower 16 bits")
+    simple_test(lower_bits(xorshift32(1),16),8,
+                "8225, 1537, 43205, 39247, 6097, 23504, 13082, 7346")
     
