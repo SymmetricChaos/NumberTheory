@@ -114,6 +114,12 @@ def RANDU(x):
     yield from lehmer(x,65539,2**31)
 
 
+def wichmann_hill(x1,x2,x3):
+    yield from cLCG([(x1,171,0,30269),
+                     (x2,172,0,30307),
+                     (x3,170,0,30323)])
+
+
 def ICG(x,a,c,m):
     """
     Inversive Congruential Generator
@@ -327,10 +333,14 @@ if __name__ == '__main__':
     print("\nCompound LCG, lower 16 bits")
     simple_test(lower_bits(
                 cLCG(
-                     [[142,40014,0,2147483563],
-                     [5,40692,0,2147483399]]),
+                     [(142,40014,0,2147483563),
+                      (5,  40692,0,2147483399)]),
                 16),8,
                 "65303, 12706, 20484, 22304, 1195, 48904, 19797, 28148")
+    
+    print("\nWichmann-Hill lower 16 bits")
+    simple_test(lower_bits(wichmann_hill(1,2,3),16),8,
+                "30262, 29243, 6648, 28637, 7691, 15410, 440, 5722")
     
     print("\nInversive Congruential Generator")
     simple_test(ICG(1,7,23,103),14,
