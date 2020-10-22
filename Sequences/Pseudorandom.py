@@ -245,7 +245,7 @@ def LFSR(vector,taps,bits):
 
 def shrinking_generator_bits(G1,G2):
     """
-    Shrinking Generator: 
+    Shrinking Generator: Bit by bit
     """
     
     A = LFSR_bits(*G1)
@@ -258,11 +258,36 @@ def shrinking_generator_bits(G1,G2):
 
 def shrinking_generator(G1,G2,bits):
     """
-    Shrinking Generator: 
+    Shrinking Generator: Several bits at a time
     """
     
-    for bits in chunk_by_n(shrinking_generator_bits(G1,G2),bits):
-        yield digits_to_int(bits,2)
+    for b in chunk_by_n(shrinking_generator_bits(G1,G2),bits):
+        yield digits_to_int(b,2)
+
+
+def alternating_step_generator_bits(G1,G2,G3):
+    """
+    Alternating Step Generator: Bit by bit
+    """
+    
+    A = LFSR_bits(*G1)
+    B = LFSR_bits(*G2)
+    C = LFSR_bits(*G3)
+    
+    for a,b,c in zip(A,B,C):
+        if a:
+            yield b
+        else:
+            yield c
+
+
+def alternating_step_generator(G1,G2,G3,bits):
+    """
+    Alternating Step Generator: Several bits at a time
+    """
+    
+    for b in chunk_by_n(alternating_step_generator_bits(G1,G2),bits):
+        yield digits_to_int(b,2)
 
 
 def middle_square(n):
@@ -379,6 +404,8 @@ def xorshift32(x):
         x ^= (x << 5)%(2**32)
         
         yield x
+
+
 
 
 
