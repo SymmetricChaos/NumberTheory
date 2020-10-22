@@ -218,14 +218,17 @@ def LFSR_bits(vector,taps):
     
     Args:
         vector -- list of bits
-        taps --positions used to control next term
+        taps --positions used to control next state
     """
     
-    _check_LFSR_args(vector,taps)
+    l = len(vector)
+    inner_taps = [l-t for t in taps]
+    
+    _check_LFSR_args(vector,inner_taps)
     
     while True:
         yield vector[0]
-        vector = vector[1:] + [sum([vector[i] for i in taps])%2]
+        vector = vector[1:] + [sum([vector[i] for i in inner_taps])%2]
 
 
 def LFSR(vector,taps,bits):
@@ -234,10 +237,8 @@ def LFSR(vector,taps,bits):
     
     Args:
         vector -- list of bits
-        taps --positions used to control next term
+        taps --positions used to control next state
     """
-    
-    _check_LFSR_args(vector,taps)
     
     for bits in chunk_by_n(LFSR_bits(vector,taps),bits):
         yield digits_to_int(bits,2)
@@ -457,15 +458,24 @@ if __name__ == '__main__':
                 "9, 27, 49, 62, 31, 79, 24, 53, 11, 1, 11, 11, 24, 70")
     
     print("\nLinear Feedback Shift Register, 8-bit output")
-    simple_test(LFSR([1,0,0,1,0,1,1,0],[0,3,6,7],8),11,
-                "150, 236, 213, 248, 33, 138, 122, 57, 45, 217, 171")
+    simple_test(LFSR([1,0,0,1,0,1,1,0],[8,4,3,2],8),11,
+                "150, 140, 231, 141, 132, 93, 123, 124, 52, 214, 212")
     
     print("\nShrinking Generator, 8-bit output")
     simple_test(shrinking_generator(
-                                    ([1,0,0,1,0,1,1,0],[0,3,6,7]),
-                                    ([1,0,0,1,0,1,1,0],[1,2,5,7]),
-                                    8),11,
-                "254, 177, 53, 157, 165, 248, 12, 24, 46, 210, 33")
+                    ([1,0,0,1,0,1,1,0],[8,5,3,1]),
+                    ([1,0,0,1,0,1,1,0],[8,7,6,1]),
+                    8),11,
+                "252, 153, 2, 236, 32, 18, 173, 184, 248, 129, 97")
+    
+    # print("\nAlternating Step Generator, 8-bit output")
+    # simple_test(alternating_step_generator(
+    #                 ([1,0,0,0,0,0,0,0,1,0,0],[0,3]),
+    #                 ([1,0,0,0,0,0,0,1,1,0,1],[1,2,5,7]),
+    #                 ([1,0,0,0,0,1,1,0,1,1,1],[1,2,5,7]),
+    #                 8),11,
+    #             "254, 177, 53, 157, 165, 248, 12, 24, 46, 210, 33")
+    
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
