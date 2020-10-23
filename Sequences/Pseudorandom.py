@@ -237,7 +237,7 @@ def LFSR(vector,taps,bits):
     
     Args:
         vector -- list of bits
-        taps --positions used to control next state
+        taps -- positions used to control next state
     """
     
     for bits in chunk_by_n(LFSR_bits(vector,taps),bits):
@@ -247,6 +247,10 @@ def LFSR(vector,taps,bits):
 def shrinking_generator_bits(G1,G2):
     """
     Shrinking Generator: Bit by bit
+    
+    Args:
+        G1 -- arguments for an LFSR_bits function
+        G2 -- arguments for an LFSR_bits function
     """
     
     A = LFSR_bits(*G1)
@@ -260,6 +264,11 @@ def shrinking_generator_bits(G1,G2):
 def shrinking_generator(G1,G2,bits):
     """
     Shrinking Generator: Several bits at a time
+    
+    Args:
+        G1 -- arguments for an LFSR_bits function
+        G2 -- arguments for an LFSR_bits function
+        bits -- number of bits to return at a time
     """
     
     for b in chunk_by_n(shrinking_generator_bits(G1,G2),bits):
@@ -269,6 +278,11 @@ def shrinking_generator(G1,G2,bits):
 def alternating_step_generator_bits(G1,G2,G3):
     """
     Alternating Step Generator: Bit by bit
+    
+    Args:
+        G1 -- arguments for an LFSR_bits function, controls output of G2 and G3
+        G2 -- arguments for an LFSR_bits function
+        G3 -- arguments for an LFSR_bits function
     """
     
     A = LFSR_bits(*G1)
@@ -285,10 +299,60 @@ def alternating_step_generator_bits(G1,G2,G3):
 def alternating_step_generator(G1,G2,G3,bits):
     """
     Alternating Step Generator: Several bits at a time
+    
+    Args:
+        G1 -- arguments for an LFSR_bits function, controls output of G2 and G3
+        G2 -- arguments for an LFSR_bits function
+        G3 -- arguments for an LFSR_bits function
+        bits -- number of bits to return at a time
     """
     
-    for b in chunk_by_n(alternating_step_generator_bits(G1,G2),bits):
+    for b in chunk_by_n(alternating_step_generator_bits(G1,G2,G3),bits):
         yield digits_to_int(b,2)
+
+
+def mersenne_twister(seed=5489):
+    """
+    Mersenne Twister: MT199937
+    
+    Args:
+        seed -- integer used to generate the seed
+    """
+    
+    require_integers(["seed"], [seed])
+    require_true(["seed"],[seed],lambda x: x >> 32 == 0,"must be a 32-bit value")
+    
+    w,n,m,r = 32,624,397,31
+    a = int("9908B0DF",16)
+    u,d = 11, int("FFFFFFFF",16)
+    s,b = 7, int("9D2C5680",16)
+    t,c = 17, int("EFC60000",16)
+    l = 18
+    f = 1812433253
+    
+    lower_mask = (1 << r)-1
+    upper_mask = 0
+    
+    #Create the seed state from the seed
+    X = [seed]
+    
+    for i in range(n-1):
+        t = X[-1] >> (w-2)
+        t ^= X[-1]
+        t = t*f+1
+        X.append(t%(2**32))
+    
+    def twist(X):
+        for i in range(n):
+            x = (X[i] & upper_mask) + (X[(i+1)%n] & lower_mask)
+            xA = x >> 1
+            if x % 2 == 0:
+                xA = xA ^ a
+            X[i] = X[(i+m)%n] ^ xA
+    print(X)
+    # while True:
+        #Got a memory error when trying to output numbers
+
 
 
 def middle_square(n):
@@ -468,14 +532,13 @@ if __name__ == '__main__':
                     8),11,
                 "252, 153, 2, 236, 32, 18, 173, 184, 248, 129, 97")
     
-    # print("\nAlternating Step Generator, 8-bit output")
-    # simple_test(alternating_step_generator(
-    #                 ([1,0,0,0,0,0,0,0,1,0,0],[0,3]),
-    #                 ([1,0,0,0,0,0,0,1,1,0,1],[1,2,5,7]),
-    #                 ([1,0,0,0,0,1,1,0,1,1,1],[1,2,5,7]),
-    #                 8),11,
-    #             "254, 177, 53, 157, 165, 248, 12, 24, 46, 210, 33")
-    
+    print("\nAlternating Step Generator, 8-bit output")
+    simple_test(alternating_step_generator(
+                    ([1,0,0,0,0,0,0,0,1,0,0],[10,3]),
+                    ([1,0,0,0,0,0,0,1,1,0,1],[10,4,3,1]),
+                    ([1,0,0,0,0,1,1,0,1,1,1],[10,8,3,2]),
+                    8),11,
+                "134, 243, 156, 53, 199, 14, 153, 230, 205, 212, 105")
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
@@ -493,3 +556,6 @@ if __name__ == '__main__':
     simple_test(lower_bits(xorshift32(1),16),8,
                 "8225, 1537, 43205, 39247, 6097, 23504, 13082, 7346")
     
+    print("\nMersenne Twister")
+    simple_test(mersenne_twister(5489),8,
+                "")
