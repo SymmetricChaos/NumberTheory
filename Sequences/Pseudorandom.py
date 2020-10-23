@@ -103,7 +103,7 @@ def RANDU(x):
     Args:
         x -- seed value, odd
     
-    OEIS A096555 (yes, really)
+    OEIS A096555
     """
     
     require_integers(["x"],[x])
@@ -301,9 +301,9 @@ def alternating_step_generator(G1,G2,G3,bits):
     Alternating Step Generator: Several bits at a time
     
     Args:
-        G1 -- arguments for an LFSR_bits function, controls output of G2 and G3
-        G2 -- arguments for an LFSR_bits function
-        G3 -- arguments for an LFSR_bits function
+        G1 -- vector and taps for the LFSR that controls output of G2 and G3
+        G2 -- vector and taps for an LFSR
+        G3 -- vector and taps for an LFSR
         bits -- number of bits to return at a time
     """
     
@@ -416,7 +416,7 @@ def blum_blum_shub(x,p,q):
     Blum Blum Shub
     
     Args:
-        x -- seed value, coprime to pq
+        x -- seed value, coprime to pq, and >= 2
         p -- prime congruent to 3 mod 4
         q -- prime congruent to 3 mod 4
     """
@@ -428,7 +428,7 @@ def blum_blum_shub(x,p,q):
     require_geq(["x"], [x], 2)
     
     if gcd(m,x) != 1:
-        raise Exception("x must be coprime to M")
+        raise Exception("x must be coprime to pq")
     
     while True:
         yield x
