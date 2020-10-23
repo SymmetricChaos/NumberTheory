@@ -289,11 +289,11 @@ def alternating_step_generator_bits(G1,G2,G3):
     B = LFSR_bits(*G2)
     C = LFSR_bits(*G3)
     
-    for a,b,c in zip(A,B,C):
+    for a in A:
         if a:
-            yield b
+            yield next(B)
         else:
-            yield c
+            yield next(C)
 
 
 def alternating_step_generator(G1,G2,G3,bits):
@@ -311,47 +311,48 @@ def alternating_step_generator(G1,G2,G3,bits):
         yield digits_to_int(b,2)
 
 
-def mersenne_twister(seed=5489):
-    """
-    Mersenne Twister: MT199937
+# def mersenne_twister(seed=5489):
+#     """
+#     Mersenne Twister: MT199937
     
-    Args:
-        seed -- integer used to generate the seed
-    """
+#     Args:
+#         seed -- integer used to generate the seed
+#     """
     
-    require_integers(["seed"], [seed])
-    require_true(["seed"],[seed],lambda x: x >> 32 == 0,"must be a 32-bit value")
+#     require_integers(["seed"], [seed])
+#     require_true(["seed"],[seed],lambda x: x >> 32 == 0,"must be a 32-bit value")
     
-    w,n,m,r = 32,624,397,31
-    a = int("9908B0DF",16)
-    u,d = 11, int("FFFFFFFF",16)
-    s,b = 7, int("9D2C5680",16)
-    t,c = 17, int("EFC60000",16)
-    l = 18
-    f = 1812433253
+#     w,n,m,r = 32,624,397,31
+#     a = int("9908B0DF",16)
+#     u,d = 11, int("FFFFFFFF",16)
+#     s,b = 7, int("9D2C5680",16)
+#     t,c = 17, int("EFC60000",16)
+#     l = 18
+#     f = 1812433253
     
-    lower_mask = (1 << r)-1
-    upper_mask = 0
+#     lower_mask = (1 << r)-1
+#     upper_mask = 0
     
-    #Create the seed state from the seed
-    X = [seed]
+#     #Create the seed state from the seed
+#     X = [seed]
     
-    for i in range(n-1):
-        t = X[-1] >> (w-2)
-        t ^= X[-1]
-        t = t*f+1
-        X.append(t%(2**32))
+#     for i in range(n-1):
+#         t = X[-1] >> (w-2)
+#         t ^= X[-1]
+#         t = t*f+1
+#         X.append(t%(2**32))
     
-    def twist(X):
-        for i in range(n):
-            x = (X[i] & upper_mask) + (X[(i+1)%n] & lower_mask)
-            xA = x >> 1
-            if x % 2 == 0:
-                xA = xA ^ a
-            X[i] = X[(i+m)%n] ^ xA
-    print(X)
-    # while True:
-        #Got a memory error when trying to output numbers
+#     # Twist function
+#     def twist(X):
+#         for i in range(n):
+#             x = (X[i] & upper_mask) + (X[(i+1)%n] & lower_mask)
+#             xA = x >> 1
+#             if x % 2 == 0:
+#                 xA = xA ^ a
+#             X[i] = X[(i+m)%n] ^ xA
+#     print(X)
+#     # while True:
+#         #Got a memory error when trying to output numbers
 
 
 
@@ -537,8 +538,8 @@ if __name__ == '__main__':
                     ([1,0,0,0,0,0,0,0,1,0,0],[10,3]),
                     ([1,0,0,0,0,0,0,1,1,0,1],[10,4,3,1]),
                     ([1,0,0,0,0,1,1,0,1,1,1],[10,8,3,2]),
-                    8),11,
-                "134, 243, 156, 53, 199, 14, 153, 230, 205, 212, 105")
+                    8),12,
+                "195, 44, 7, 221, 170, 51, 37, 174, 219, 226, 10, 215")
     
     print("\nMiddle-Square Method")
     simple_test(middle_square(675248),6,
@@ -556,6 +557,6 @@ if __name__ == '__main__':
     simple_test(lower_bits(xorshift32(1),16),8,
                 "8225, 1537, 43205, 39247, 6097, 23504, 13082, 7346")
     
-    print("\nMersenne Twister")
-    simple_test(mersenne_twister(5489),8,
-                "")
+    # print("\nMersenne Twister")
+    # simple_test(mersenne_twister(5489),8,
+    #             "")
