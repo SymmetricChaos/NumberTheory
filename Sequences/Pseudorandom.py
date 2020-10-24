@@ -541,17 +541,17 @@ if __name__ == '__main__':
                     8),12,
                 "195, 44, 7, 221, 170, 51, 37, 174, 219, 226, 10, 215")
     
-    print("\nMiddle-Square Method")
-    simple_test(middle_square(675248),6,
-                "959861, 333139, 981593, 524817, 432883, 387691")
+    print("\nMiddle-Square Method, lower 16 bits")
+    simple_test(lower_bits(middle_square(675248),16),8,
+                "42357, 5459, 64089, 529, 39667, 60011, 42167, 15360")
     
-    print("\nMiddle-Square Weyl")
-    simple_test(middle_square_weyl(675248,5743,7899),6,
-                "959861, 333145, 985594, 395534, 447152, 944916")
+    print("\nMiddle-Square Weyl, lower 16 bits")
+    simple_test(lower_bits(middle_square_weyl(675248,5743,7899),16),8,
+                "42357, 5465, 2554, 2318, 53936, 27412, 14281, 59650")
     
     print("\nBlum Blum Shub")
-    simple_test(blum_blum_shub(3,11,23),12,
-                "3, 9, 81, 236, 36, 31, 202, 71, 234, 108, 26, 170")
+    simple_test(blum_blum_shub(3,7,71),12,
+                "3, 9, 81, 100, 60, 121, 228, 296, 144, 359, 158, 114")
     
     print("\nXorshift64, lower 16 bits")
     simple_test(lower_bits(xorshift32(1),16),8,
