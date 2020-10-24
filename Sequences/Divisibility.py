@@ -478,6 +478,7 @@ def semiprimes():
         if len(prime_factorization(n)) == 2:
             yield n
 
+
 def almost_primes(n):
     """
     The Almost Prime Numbers: Positive integers that are the product of exactly n primes\n
@@ -491,6 +492,7 @@ def almost_primes(n):
     for i in naturals(4):
         if len(prime_factorization(i)) == n:
             yield i
+
 
 def blum():
     """
@@ -623,5 +625,5 @@ if __name__ == '__main__':
     
     print("\nBlum-Blum-Shub Integers")
     simple_test(blum_blum_shub_integers(),8,
-                "1081, 2209, 3841, 7849, 8257, 16537, 16873, 27889")
+                "1081, 3841, 7849, 8257, 16537, 16873, 33097, 33793")
     

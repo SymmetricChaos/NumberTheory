@@ -516,7 +516,8 @@ def pair_products(sequence,distinct=True):
     WARNING: Doesn't check for monotonically increasing property
     """
     
-    S = [next(sequence)]
+    
+    S = []
     T = []
     
     for s in sequence:
@@ -525,8 +526,13 @@ def pair_products(sequence,distinct=True):
         while len(T) > 0 and T[0] < s*S[0]:
             yield T.pop(0)
         
-        for t in S:
-            T.append(t*s)
+        if distinct:
+            for t in S[:-1]:
+                T.append(t*s)
+        
+        else:
+            for t in S:
+                T.append(t*s)
         
         T = sorted(T)
 
