@@ -204,35 +204,35 @@ def pythagorean_primes():
             yield p
 
 
-def mk_primes(m,k):
+def linear_primes(a,b):
     """
-    Primes of the form m*n+k for naturals n
+    Primes of the form a*n+b for naturals n
     
     Args:
-        m -- multiplicative constant
-        k -- additive constant
+        a -- multiplicative constant
+        b -- additive constant
     
     OEIS A002145
     """
     
     for p in primes():
-        if (p-k)%m == 0:
+        if (p-a)%b == 0:
             yield p
 
 
-def congruent_primes(k,m):
+def congruent_primes(n,k):
     """
-    Primes that are congruent to k modulo m
+    Primes that are congruent to n modulo k
     
     Args:
-        k -- remainder
-        m -- modulus
+        n -- remainder
+        k -- modulus
     
     OEIS A002145
     """
     
     for p in primes():
-        if p%m == k:
+        if p%k == n:
             yield p
 
 
@@ -482,7 +482,7 @@ if __name__ == '__main__':
                 "1, 6, 66, 91, 121, 286, 561, 671, 703, 726, 949, 1105")
     
     print("\nPrimes of form 3k+4")
-    simple_test(mk_primes(4,3),14,
+    simple_test(linear_primes(3,4),14,
                 "3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103")
     
     print("\nBlum's Special Primes")

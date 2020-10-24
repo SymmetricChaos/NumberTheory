@@ -510,12 +510,11 @@ def prime_subsequence(sequence):
                 a = next(sequence)
 
 
-def pair_products(sequence,distinct=True):
+def pair_products(sequence,distinct=False):
     """
     Given a monotonically increasing sequence return the product of each pair
     WARNING: Doesn't check for monotonically increasing property
     """
-    
     
     S = []
     T = []
@@ -534,7 +533,7 @@ def pair_products(sequence,distinct=True):
             for t in S:
                 T.append(t*s)
         
-        T = sorted(T)
+        T.sort()
 
 
 
@@ -611,3 +610,23 @@ def irregular_array(sequence,row_sequence):
     for n in row_sequence:
         L = [next(sequence) for c in range(n)]
         yield L
+
+
+def all_pairs(sequence,distinct=False):
+    """
+    All pairs of values from the given sequence ordered such that the term with the earlier index comes first
+    """
+    
+    S = []
+    
+    for s in sequence:
+        S.append(s)
+        
+        if distinct:
+            for t in S[:-1]:
+                yield (t,s)
+        
+        else:
+            for t in S:
+                yield (t,s)
+

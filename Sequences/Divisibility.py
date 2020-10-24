@@ -513,7 +513,7 @@ def blum():
 
 def blum_blum_shub_integers():
     
-    for i in pair_products(blum_primes()):
+    for i in pair_products(blum_primes(),distinct=True):
         yield i
 
 
@@ -624,6 +624,6 @@ if __name__ == '__main__':
                 "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
     
     print("\nBlum-Blum-Shub Integers")
-    simple_test(blum_blum_shub_integers(),8,
+    simple_test(blum_blum_shub_integers(),50,
                 "1081, 3841, 7849, 8257, 16537, 16873, 33097, 33793")
     
