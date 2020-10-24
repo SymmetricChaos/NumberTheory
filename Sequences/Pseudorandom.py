@@ -550,7 +550,7 @@ if __name__ == '__main__':
                 "42357, 5465, 2554, 2318, 53936, 27412, 14281, 59650")
     
     print("\nBlum Blum Shub")
-    simple_test(blum_blum_shub(3,7,71),12,
+    simple_test(blum_blum_shub(634584,47,13799),7,
                 "3, 9, 81, 100, 60, 121, 228, 296, 144, 359, 158, 114")
     
     print("\nXorshift64, lower 16 bits")

@@ -629,4 +629,3 @@ def all_pairs(sequence,distinct=False):
         else:
             for t in S:
                 yield (t,s)
-

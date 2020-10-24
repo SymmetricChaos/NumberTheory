@@ -3,7 +3,7 @@ from Sequences.Primes import primes, blum_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
-                                nth_sign
+                                nth_sign, kronecker_symbol
 from Sequences.Manipulations import partial_sums, pair_products
 
 from collections import defaultdict
@@ -474,7 +474,7 @@ def semiprimes():
     OEIS A001358
     """
     
-    for n in naturals(4):
+    for n in naturals(1):
         if len(prime_factorization(n)) == 2:
             yield n
 
@@ -489,7 +489,7 @@ def almost_primes(n):
     require_integers(["n"],[n])
     require_geq(["n"],[n],1)
     
-    for i in naturals(4):
+    for i in naturals(1):
         if len(prime_factorization(i)) == n:
             yield i
 
@@ -500,7 +500,7 @@ def blum():
     OEIS
     """
     
-    for n in naturals(21):
+    for n in naturals(1):
         P = prime_factorization(n)
         
         if len(P) == 2:
@@ -513,8 +513,27 @@ def blum():
 
 def blum_blum_shub_integers():
     
-    for i in pair_products(blum_primes(),distinct=True):
-        yield i
+    # TODO: Ensure that no more than one of the factors as associated number p_1 = 2p+1 that has 2 as a quadratic residue
+    
+    P = blum_primes()
+    
+    S = []
+    K = {}
+    T = []
+    
+    for s in P:
+        S.append(s)
+        K[s] = kronecker_symbol(2,(s-1)//2)
+        
+        while len(T) > 0 and T[0] < s*S[0]:
+            yield T.pop(0)
+        
+        for t in S[:-1]:
+            if K[t] + K[s] != 2:
+                T.append(t*s)
+        
+        T.sort()
+    
 
 
 
@@ -625,5 +644,5 @@ if __name__ == '__main__':
     
     print("\nBlum-Blum-Shub Integers")
     simple_test(blum_blum_shub_integers(),50,
-                "1081, 3841, 7849, 8257, 16537, 16873, 33097, 33793")
+                "1081, 3841, 7849, 8257, 16537, 16873, 33097, 46897")
     
