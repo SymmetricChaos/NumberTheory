@@ -1,9 +1,10 @@
 from Sequences.Simple import naturals
-from collections import defaultdict
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 from Sequences.NiceErrorChecking import require_integers, require_geq
+from Sequences.MathUtils import miller_rabin_test
 
 from itertools import count, compress, cycle
+from collections import defaultdict
 
 ##############################
 ## CLASSES OF PRIME NUMBERS ##
@@ -233,6 +234,20 @@ def congruent_primes(k,m):
     for p in primes():
         if p%m == k:
             yield p
+
+
+def blum_primes():
+    """
+    Primes such that P = 2p+1 and p = 2q+1 where p and q are odd primes
+    """
+    
+    for p in congruent_primes(3,4):
+        a = (p-1)//2
+        b = (a-1)//2
+        
+        if a%2 == 1 and b % 2 == 1:
+            if miller_rabin_test(a) and miller_rabin_test(b):
+                yield p
 
 
 
@@ -469,4 +484,8 @@ if __name__ == '__main__':
     print("\nPrimes of form 3k+4")
     simple_test(mk_primes(4,3),14,
                 "3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103")
+    
+    print("\nBlum's Special Primes")
+    simple_test(blum_primes(),10,
+                "23, 47, 167, 359, 719, 1439, 2039, 2879, 4079, 4127")
     

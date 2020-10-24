@@ -489,6 +489,7 @@ def prime_subsequence(sequence):
     Given a monotonically increasing sequence return all the prime elements
     WARNING: Doesn't check for monotonically increasing property
     """
+    
     prime = _primes_copy()
     
     a = next(prime)
@@ -507,6 +508,27 @@ def prime_subsequence(sequence):
             
             if b > a:
                 a = next(sequence)
+
+
+def pair_products(sequence,distinct=True):
+    """
+    Given a monotonically increasing sequence return the product of each pair
+    WARNING: Doesn't check for monotonically increasing property
+    """
+    
+    S = [next(sequence)]
+    T = []
+    
+    for s in sequence:
+        S.append(s)
+        
+        while len(T) > 0 and T[0] < s*S[0]:
+            yield T.pop(0)
+        
+        for t in S:
+            T.append(t*s)
+        
+        T = sorted(T)
 
 
 

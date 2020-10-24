@@ -191,10 +191,15 @@ def canonical_factorization(n):
 
 
 def special_factorization(n,W):
-    """Factor a number into numbers of a specified form not including 1"""
+    """Factor n into numbers from the list or tuple W"""
     
     if type(n) != int:
         raise Exception("n must be an integer") 
+    
+    if type(W) not in (list,tuple,set):
+        raise Exception("W must be a list, tuple, or set")
+    
+    W = sorted(list(set(W)))
     
     L = []
     

@@ -1,10 +1,10 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_prime
-from Sequences.Primes import primes, congruent_primes
+from Sequences.Primes import primes, blum_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
-                                nth_sign, special_factorization
-from Sequences.Manipulations import partial_sums
+                                nth_sign
+from Sequences.Manipulations import partial_sums, pair_products
 
 from collections import defaultdict
 from math import prod, gcd
@@ -494,7 +494,8 @@ def almost_primes(n):
 
 def blum():
     """
-    The Blum Integers: 
+    The Blum Integers: Integers that are the product of distinct primes both congruent to 3 mod 4
+    OEIS
     """
     
     for n in naturals(21):
@@ -506,6 +507,13 @@ def blum():
             
             if P[0]%4 == 3 and P[1]%4 == 3:
                 yield n
+
+
+def blum_blum_shub_integers():
+    
+    for i in pair_products(blum_primes()):
+        yield i
+
 
 
 
@@ -612,4 +620,8 @@ if __name__ == '__main__':
     print("\nBlum Integers")
     simple_test(blum(),12,
                 "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
+    
+    print("\nBlum-Blum-Shub Integers")
+    simple_test(blum_blum_shub_integers(),8,
+                "1081, 2209, 3841, 7849, 8257, 16537, 16873, 27889")
     
