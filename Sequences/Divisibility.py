@@ -1,9 +1,9 @@
-from Sequences.NiceErrorChecking import require_integers, require_geq
-from Sequences.Primes import primes
+from Sequences.NiceErrorChecking import require_integers, require_geq, require_prime
+from Sequences.Primes import primes, congruent_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
-                                nth_sign
+                                nth_sign, special_factorization
 from Sequences.Manipulations import partial_sums
 
 from collections import defaultdict
@@ -129,7 +129,7 @@ def divisors():
 def prime_divisors():
     """
     Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
-    Also the big omega function\
+    Also the big omega function\n
     OEIS A001222
     """
     
@@ -228,6 +228,11 @@ def squarefree_kernel():
 def powerful(n=2):
     """
     n-Powerful Numbers: Positive integers that are divisible by the nth power of each prime factor
+    
+    Args:
+        n -- power
+    
+    
     OEIS A001694
     """
     
@@ -301,7 +306,7 @@ def cototients():
 
 def charmichael():
     """
-    Charmichael Function: LCM of the orders of the elements of the finite multiplictive group on n
+    Charmichael Function: LCM of the orders of the elements of the finite multiplictive group on n\n
     OEIS A002322
     """
     
@@ -321,6 +326,10 @@ def charmichael():
 def jordan_totients(k):
     """
     Jordan's k-Totient Function
+    
+    Args:
+        k -- power that denominator is raised to
+    
     OEIS A007434, A059376, A059377, A059378, A069091-A069095
     """
     
@@ -331,6 +340,9 @@ def jordan_totients(k):
 def coprimes(n):
     """
     All positive integers coprime to n
+    
+    Args:
+        n -- an integer greater than 0
     """
     
     require_integers(["n"],[n])
@@ -367,6 +379,9 @@ def coprime_characteristic():
 def principal_character(n):
     """
     Principal Dirichlet Character: For each positive integer yield 1 of it is coprime to n otherwise 0
+    
+    Args:
+        n -- an integer greater than 0
     """
     
     require_integers(["n"],[n])
@@ -386,12 +401,16 @@ def principal_character(n):
 def p_adic_order(p):
     """
     p-adic Orders: Exponent of the greatest power of p that divides each positive integer\n
-    Technically only a p-adic order if p is prime but defined for all naturals\n
+    
+    Args:
+        p -- a prime
+    
     OEIS A007814, A007949, A235127, A112765
     """
     
     require_integers(["p"],[p])
     require_geq(["p"],[p],1)
+    require_prime(["p"],[p])
     
     for n in naturals(1):
         ctr = 0
@@ -403,9 +422,33 @@ def p_adic_order(p):
         yield ctr
 
 
+def n_adic_order(n):
+    """
+    n-adic Orders: Exponent of the greatest power of n that divides each positive integer
+    Identical to p_adic_order but allowing nonprime inputs
+    
+    Args:
+        n -- an integer greater than zero
+    
+    OEIS A007814, A007949, A235127, A112765
+    """
+    
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],1)
+    
+    for i in naturals(1):
+        ctr = 0
+        
+        while i%n == 0:
+            ctr += 1
+            i //= n
+        
+        yield ctr
+
+
 def liouville():
     """
-    Liouville's Lambda Function: 1 if n is a product of an even number of primes, otherwise -1
+    Liouville's Lambda Function: 1 if n is a product of an even number of primes, otherwise -1\n
     OEIS A008836
     """
     
@@ -418,12 +461,51 @@ def liouville():
 
 def liouville_sums():
     """
-    Liouville's L Function: Partial sums of Liouville's Lambda Function
+    Liouville's L Function: Partial sums of Liouville's Lambda Function\n
     OEIS A002819
     """
     
     yield from partial_sums(liouville())
 
+
+def semiprimes():
+    """
+    The Semiprimes: Positive integers that are the product of exactly two primes\n
+    OEIS A001358
+    """
+    
+    for n in naturals(4):
+        if len(prime_factorization(n)) == 2:
+            yield n
+
+def almost_primes(n):
+    """
+    The Almost Prime Numbers: Positive integers that are the product of exactly n primes\n
+    OEIS A000040, A001358, A014612, A014613, A014614, A046306, A046308, A046310, 
+         A046312, A046314, A069276-A069281
+    """
+    
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],1)
+    
+    for i in naturals(4):
+        if len(prime_factorization(i)) == n:
+            yield i
+
+def blum():
+    """
+    The Blum Integers: 
+    """
+    
+    for n in naturals(21):
+        P = prime_factorization(n)
+        
+        if len(P) == 2:
+            if P[0] == P[1]:
+                continue
+            
+            if P[0]%4 == 3 and P[1]%4 == 3:
+                yield n
 
 
 
@@ -518,4 +600,16 @@ if __name__ == '__main__':
     print("\nPricipal Character of 10")
     simple_test(principal_character(10),18,
                 "1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0")
+    
+    print("\nSemiprimes")
+    simple_test(semiprimes(),14,
+                "4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38")
+    
+    print("\nTriprimes")
+    simple_test(almost_primes(3),14,
+                "8, 12, 18, 20, 27, 28, 30, 42, 44, 45, 50, 52, 63, 66")
+    
+    print("\nBlum Integers")
+    simple_test(blum(),12,
+                "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
     

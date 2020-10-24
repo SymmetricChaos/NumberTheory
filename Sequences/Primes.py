@@ -203,6 +203,38 @@ def pythagorean_primes():
             yield p
 
 
+def mk_primes(m,k):
+    """
+    Primes of the form m*n+k for naturals n
+    
+    Args:
+        m -- multiplicative constant
+        k -- additive constant
+    
+    OEIS A002145
+    """
+    
+    for p in primes():
+        if (p-k)%m == 0:
+            yield p
+
+
+def congruent_primes(k,m):
+    """
+    Primes that are congruent to k modulo m
+    
+    Args:
+        k -- remainder
+        m -- modulus
+    
+    OEIS A002145
+    """
+    
+    for p in primes():
+        if p%m == k:
+            yield p
+
+
 
 
 
@@ -433,4 +465,8 @@ if __name__ == '__main__':
     print("\nWeak Pseudoprimes to Base 3")
     simple_test(weak_pseudoprimes(3),12,
                 "1, 6, 66, 91, 121, 286, 561, 671, 703, 726, 949, 1105")
+    
+    print("\nPrimes of form 3k+4")
+    simple_test(mk_primes(4,3),14,
+                "3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103")
     

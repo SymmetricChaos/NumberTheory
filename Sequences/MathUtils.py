@@ -190,6 +190,33 @@ def canonical_factorization(n):
     return Counter(prime_factorization(n))
 
 
+def special_factorization(n,W):
+    """Factor a number into numbers of a specified form not including 1"""
+    
+    if type(n) != int:
+        raise Exception("n must be an integer") 
+    
+    L = []
+    
+    for w in W:
+        if w != 1:
+            while n % w == 0:
+                L.append(w)
+                n //= w
+            
+            if n == 1:
+                break
+            
+            if w > n:
+                break
+    
+    if n != 1:
+        return L
+    
+    else:
+        return []
+
+
 def sum_of_divisors(n,p=1):
     """
     Sum of the divisors of n, including itself, raised to the specified power
@@ -874,6 +901,7 @@ def miller_rabin_test(n):
     Miller-Rabin Primality Test
     Returns 0 for composite, 1 for prime, and 2 for probably prime
     Deterministic for n less than 3,317,044,064,679,887,385,961,981 ≈ 2^81
+    For greater numbers about 99.9999985% accurate
     """
     
     def check_base(a,d,n,r):
