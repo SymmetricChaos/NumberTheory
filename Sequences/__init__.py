@@ -39,7 +39,8 @@ from Sequences.Divisibility import totients, cototients, smooth, rough, highly_c
                                    coprimes, powerful, highly_composite_factor, \
                                    highly_composite_prime_factor, jordan_totients, \
                                    charmichael, principal_character, p_adic_order, \
-                                   liouville, liouville_sums
+                                   liouville, liouville_sums, blum, blum_blum_shub_integers, \
+                                   semiprimes, almost_primes
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -67,11 +68,14 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
                              superprimes, noncomposite, odd_primes, twin_primes, \
                              twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
                              fermat_pseudoprimes, weak_pseudoprimes, sophie_germain_primes, \
-                             safe_primes
+                             safe_primes, linear_primes, congruent_primes, blum_primes
+                             
 
 from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub, lehmer, \
-                                   MINSTD0, MINSTD, RANDU
+                                   MINSTD0, MINSTD, RANDU, shrinking_generator, \
+                                   alternating_step_generator, wichmann_hill, xorshift32, \
+                                   xorshift64
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, tribonacci, \
                                  lucas_U, lucas_V, padovan, simple_recurrence, \
@@ -135,8 +139,9 @@ __all__=[#MANIPULATIONS
          "divisors","prime_divisors","unique_prime_divisors","squarefree",
          "squarefree_kernel","coprime_characteristic","coprimes",
          "powerful","highly_composite_factor","highly_composite_prime_factor",
-         "jordan_totients","charmichael","principal_character",
-         "p_adic_order","liouville","liouville_sums",
+         "jordan_totients","charmichael","principal_character","semiprimes",
+         "p_adic_order","liouville","liouville_sums","blum","almost_primes",
+         "blum_blum_shub_integers",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -169,11 +174,13 @@ __all__=[#MANIPULATIONS
          "superprimes","noncomposite","odd_primes","twin_primes",
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
          "fermat_pseudoprimes","weak_pseudoprimes","sophie_germain_primes",
-         "safe_primes",
+         "safe_primes","linear_primes","congruent_primes","blum_primes"
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",
          "middle_square_weyl","ICG","CIG","lehmer","MINSTD0","MINSTD","RANDU",
+         "shrinking_generator","alternating_step_generator","wichmann_hill",
+         "xorshift32","xorshift64",
          
          #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",

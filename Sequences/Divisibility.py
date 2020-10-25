@@ -533,7 +533,6 @@ def blum_blum_shub_integers():
                 T.append(t*s)
         
         T.sort()
-    
 
 
 

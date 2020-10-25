@@ -1,4 +1,4 @@
-from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
+from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv, kronecker_symbol
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
 from Sequences.Manipulations import lower_bits, upper_bits, chunk_by_n
@@ -426,6 +426,10 @@ def blum_blum_shub(x,p,q):
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
     require_geq(["x"], [x], 2)
+    K = kronecker_symbol(2,(p-1)//2) + kronecker_symbol(2,(q-1)//2)
+    
+    if K == 2:
+        raise Exception("both (p-1)/2 and (q-1)/2 have 2 as a quadratic residue")
     
     if gcd(m,x) != 1:
         raise Exception("x must be coprime to pq")
@@ -497,9 +501,9 @@ if __name__ == '__main__':
     print("\nCompound LCG, lower 16 bits")
     simple_test(lower_bits(
                 cLCG(
-                     [(142,40014,0,2147483563),
-                      (5,  40692,0,2147483399)]),
-                16),8,
+                    [(142,40014,0,2147483563),
+                     (5,  40692,0,2147483399)]),
+                    16),8,
                 "65303, 12706, 20484, 22304, 1195, 48904, 19797, 28148")
     
     print("\nWichmann-Hill lower 16 bits")
