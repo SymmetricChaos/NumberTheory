@@ -174,7 +174,7 @@ __all__=[#MANIPULATIONS
          "superprimes","noncomposite","odd_primes","twin_primes",
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
          "fermat_pseudoprimes","weak_pseudoprimes","sophie_germain_primes",
-         "safe_primes","linear_primes","congruent_primes","blum_primes"
+         "safe_primes","linear_primes","congruent_primes","blum_primes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",
