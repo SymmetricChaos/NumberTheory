@@ -423,6 +423,7 @@ def blum_blum_shub(x,p,q):
     
     m = p*q
     
+    require_integers(["x","p","q"], [x,p,q])
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
     require_geq(["x"], [x], 2)
@@ -448,6 +449,7 @@ def xorshift64(x):
         x -- seed value
     """
     
+    require_integers(["x"], [x])
     require_geq(["x"], [x], 1)
     
     while True:
@@ -458,6 +460,26 @@ def xorshift64(x):
         yield x
 
 
+
+def xorshift64_star(x):
+    """
+    Marsaglia's 64-bit xorshift*
+    
+    Args:
+        x -- seed value
+    """
+    
+    require_integers(["x"], [x])
+    require_geq(["x"], [x], 1)
+    
+    while True:
+        x ^= (x << 12)%(2**64)
+        x ^= (x >> 25)%(2**64)
+        x ^= (x << 27)%(2**64)
+        
+        yield x * 0x2545F4914F6CDD1D
+
+
 def xorshift32(x):
     """
     Marsaglia's 32-bit xorshift
@@ -466,6 +488,7 @@ def xorshift32(x):
         x -- seed value
     """
     
+    require_integers(["x"], [x])
     require_geq(["x"], [x], 1)
     
     while True:
@@ -553,13 +576,17 @@ if __name__ == '__main__':
     simple_test(lower_bits(middle_square_weyl(675248,5743,7899),16),8,
                 "42357, 5465, 2554, 2318, 53936, 27412, 14281, 59650")
     
-    print("\nBlum Blum Shub")
+    print("\nBlum-Blum-Shub")
     simple_test(blum_blum_shub(634584,47,13799),7,
                 "634584, 567061, 411897, 268021, 229055, 200984, 93204")
     
-    print("\nXorshift64, lower 16 bits")
-    simple_test(lower_bits(xorshift32(1),16),8,
-                "8225, 1537, 43205, 39247, 6097, 23504, 13082, 7346")
+    print("\nxorshift64, lower 16 bits")
+    simple_test(lower_bits(xorshift64(1),16),8,
+                "8257, 5185, 9769, 32805, 37477, 6145, 40561, 22797")
+    
+    print("\nxorshift64*, lower 16 bits")
+    simple_test(lower_bits(xorshift64_star(1),16),8,
+                "44317, 20881, 30107, 62050, 42830, 9426, 65039, 62893")
     
     # print("\nMersenne Twister")
     # simple_test(mersenne_twister(5489),8,
