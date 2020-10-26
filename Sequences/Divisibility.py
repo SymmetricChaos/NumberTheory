@@ -4,7 +4,7 @@ from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
                                 nth_sign, kronecker_symbol
-from Sequences.Manipulations import partial_sums, pair_products
+from Sequences.Manipulations import partial_sums
 
 from collections import defaultdict
 from math import prod, gcd
@@ -497,7 +497,7 @@ def almost_primes(n):
 def blum():
     """
     The Blum Integers: Integers that are the product of distinct primes both congruent to 3 mod 4
-    OEIS
+    OEIS A016105
     """
     
     for n in naturals(1):
@@ -512,8 +512,9 @@ def blum():
 
 
 def blum_blum_shub_integers():
-    
-    # TODO: Ensure that no more than one of the factors as associated number p_1 = 2p+1 that has 2 as a quadratic residue
+    """
+    Integers that maximize the period of the Blum-Blum-Shub PRNG
+    """
     
     P = blum_primes()
     
@@ -533,6 +534,36 @@ def blum_blum_shub_integers():
                 T.append(t*s)
         
         T.sort()
+
+# Version of above using sympy functions for OEIS inclusion
+# For some reason this is significantly slower
+# from sympy.ntheory import prime, legendre_symbol, isprime
+# def BBSI():
+#    
+#     def BBS_primes():
+#         ctr = 0
+#         while True:
+#             ctr += 1
+#             p = prime(ctr)
+#             if p%4 == 3:
+#                 a = (p-1)//2
+#                 b = (a-1)//2
+#                 if a%2 == 1 and b % 2 == 1:
+#                     if isprime(a) and isprime(b):
+#                         yield p
+#    
+#     S = []
+#     K = {}
+#     T = []
+#     for s in BBS_primes():
+#         S.append(s)
+#         K[s] = legendre_symbol(2,(s-1)//2)
+#         while len(T) > 0 and T[0] < s*S[0]:
+#             yield T.pop(0)
+#         for t in S[:-1]:
+#             if K[t] + K[s] != 2:
+#                 T.append(t*s)
+#         T.sort()
 
 
 
@@ -642,6 +673,6 @@ if __name__ == '__main__':
                 "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
     
     print("\nBlum-Blum-Shub Integers")
-    simple_test(blum_blum_shub_integers(),50,
+    simple_test(blum_blum_shub_integers(),8,
                 "1081, 3841, 7849, 8257, 16537, 16873, 33097, 46897")
     
