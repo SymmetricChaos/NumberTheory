@@ -537,21 +537,20 @@ def blum_blum_shub_integers():
 
 # Version of above using sympy functions for OEIS inclusion
 # For some reason this is significantly slower
-# from sympy.ntheory import prime, legendre_symbol, isprime
+# from sympy.ntheory import legendre_symbol, isprime, sieve
 # def BBSI():
-#    
 #     def BBS_primes():
-#         ctr = 0
+#         ctr = 1
+#         S = sieve
 #         while True:
 #             ctr += 1
-#             p = prime(ctr)
+#             S.extend_to_no(ctr)
+#             p = S._list[-1]
 #             if p%4 == 3:
 #                 a = (p-1)//2
 #                 b = (a-1)//2
-#                 if a%2 == 1 and b % 2 == 1:
-#                     if isprime(a) and isprime(b):
-#                         yield p
-#    
+#                 if isprime(a) and isprime(b):
+#                     yield p
 #     S = []
 #     K = {}
 #     T = []
