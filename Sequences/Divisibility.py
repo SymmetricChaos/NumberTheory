@@ -540,17 +540,17 @@ def blum_blum_shub_integers():
 # from sympy.ntheory import legendre_symbol, isprime, sieve
 # def BBSI():
 #     def BBS_primes():
-#         ctr = 1
+#         p = 1
 #         S = sieve
 #         while True:
-#             ctr += 1
-#             S.extend_to_no(ctr)
-#             p = S._list[-1]
-#             if p%4 == 3:
-#                 a = (p-1)//2
-#                 b = (a-1)//2
-#                 if isprime(a) and isprime(b):
-#                     yield p
+#             p += 1
+#             if p in S:
+#                 if p%4 == 3:
+#                     a = (p-1)//2
+#                     b = (a-1)//2
+#                     if a%2 == 1 and b % 2 == 1:
+#                         if isprime(a) and isprime(b):
+#                             yield p
 #     S = []
 #     K = {}
 #     T = []
@@ -672,6 +672,6 @@ if __name__ == '__main__':
                 "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
     
     print("\nBlum-Blum-Shub Integers")
-    simple_test(blum_blum_shub_integers(),8,
+    simple_test(BBSI(),8,
                 "1081, 3841, 7849, 8257, 16537, 16873, 33097, 46897")
     

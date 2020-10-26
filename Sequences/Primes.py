@@ -3,8 +3,8 @@ from Sequences.Manipulations import partial_prods, prepend, hypersequence, diffe
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.MathUtils import miller_rabin_test
 
-from itertools import count, compress, cycle
 from collections import defaultdict
+from sympy import sieve
 
 ##############################
 ## CLASSES OF PRIME NUMBERS ##
@@ -16,28 +16,10 @@ def primes():
     OEIS A000040
     """
     
-    yield 2
-    yield 3
-    yield 5
-    
-    D = { 9: 3, 25: 5 }
-    MASK = cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
-    MODULOS = frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
-    
-    for q in compress(count(7,2),MASK):
-        p = D.pop(q, None)
-        
-        if p is None:
-            D[q*q] = q
-            yield q
-        
-        else:
-            x = q + 2*p
-            
-            while x in D or (x%30) not in MODULOS:
-                x += 2*p
-            
-            D[x] = p
+    upper = 2
+    while True:
+        upper *= 2
+        yield from sieve.primerange(upper//2, upper)
 
 
 def odd_primes():

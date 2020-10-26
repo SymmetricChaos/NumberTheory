@@ -4,6 +4,7 @@ from Sequences.MathUtils import jordan_totient, prime_factorization
 from Sequences.Primes import primes
 from collections import defaultdict
 from Sequences.Simple import naturals
+from sympy import sieve
 
 def memoization_example():
     
@@ -148,9 +149,15 @@ def prime_generators():
                     x += 2*p
                 D[x] = p
     
+    sieve._reset()
+    def primes_sympy():
+        upper = 2
+        while True:
+            upper *= 2
+            yield from sieve.primerange(upper//2, upper)
     
     print("Generate the first 38000 prime numbers")
-    speed_compare([simple_primes(),erat30()],["Simple","erat30"],n=38000,reps=3)
+    speed_compare([simple_primes(),erat30(),primes_sympy(),primes_sympy()],["Simple","erat30","sympy","sympy_again"],n=40000,reps=3)
 
 
 
