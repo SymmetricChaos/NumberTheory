@@ -1,9 +1,9 @@
+from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
+
 from itertools import islice, cycle, count, zip_longest, chain, accumulate, repeat, compress
 from math import comb, prod
 import operator
 from time import time
-
-from Sequences.MathUtils import prime_power_factorization, prime_factorization, factors
 
 # Many of these are copied from the itertools recipies
 

@@ -536,9 +536,8 @@ def blum_blum_shub_integers():
         T.sort()
 
 # Version of above using sympy functions for OEIS inclusion
-# For some reason this is significantly slower
 # from sympy.ntheory import legendre_symbol, isprime, sieve
-# def BBSI():
+# def BBSI(N):
 #     def BBS_primes():
 #         p = 1
 #         S = sieve
@@ -554,11 +553,15 @@ def blum_blum_shub_integers():
 #     S = []
 #     K = {}
 #     T = []
+#     ctr = 0
 #     for s in BBS_primes():
 #         S.append(s)
 #         K[s] = legendre_symbol(2,(s-1)//2)
 #         while len(T) > 0 and T[0] < s*S[0]:
-#             yield T.pop(0)
+#             print(T.pop(0))
+#             ctr += 1
+#             if ctr >= N:
+#                 return None
 #         for t in S[:-1]:
 #             if K[t] + K[s] != 2:
 #                 T.append(t*s)
@@ -672,6 +675,6 @@ if __name__ == '__main__':
                 "21, 33, 57, 69, 77, 93, 129, 133, 141, 161, 177, 201")
     
     print("\nBlum-Blum-Shub Integers")
-    simple_test(BBSI(),8,
+    simple_test(blum_blum_shub_integers(),8,
                 "1081, 3841, 7849, 8257, 16537, 16873, 33097, 46897")
     
