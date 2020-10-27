@@ -2,7 +2,7 @@ from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count, compress, cycle
 from functools import reduce
 from fractions import Fraction
-from collections import Counter
+from sympy import factorint, divisors, divisor_sigma
 
 ###################
 ## FACTORIZATION ##
@@ -11,21 +11,7 @@ from collections import Counter
 def factors(n):
     """All Unique Factors"""
     
-    if type(n) != int:
-        raise Exception("n must be an integer") 
-    
-    lim = isqrt(n)+1
-    
-    S = set([1,n])
-    
-    for i in range(2,lim):
-        f,r = divmod(n,i)
-        
-        if r == 0:
-            S.add(i)
-            S.add(f)
-    
-    return S
+    return divisors(n)
 
 
 def proper_divisors(n):
@@ -137,18 +123,13 @@ def unique_prime_factors(n):
     if n == 0:
         raise ValueError("Prime factorization of 0 is undefined")
     
+    F = canonical_factorization(n)
     L = []
     
-    for p in _primes_copy():
-        if n % p == 0:
-            L.append(p)
-            while n % p == 0:
-                n //= p
-        
-        if n == 1:
-            break
+    for p in F:
+        L.append(p)
     
-    return L
+    return sorted(L)
 
 
 def prime_power_factorization(n):
@@ -160,22 +141,13 @@ def prime_power_factorization(n):
     if n == 0:
         raise ValueError("Prime factorization of 0 is undefined")
     
+    F = canonical_factorization(n)
     L = []
     
-    for p in _primes_copy():
-        q = 1
-        
-        while n % p == 0:
-            q *= p
-            n //= p
-        
-        if q != 1:
-            L.append(q)
-        
-        if n == 1:
-            break
+    for p,e in F.items():
+        L.append(p**e)
     
-    return L
+    return sorted(L)
 
 
 def canonical_factorization(n):
@@ -187,7 +159,7 @@ def canonical_factorization(n):
     if n == 0:
         raise ValueError("Prime factorization of 0 is undefined")
     
-    return Counter(prime_factorization(n))
+    return factorint(n)
 
 
 def special_factorization(n,W):
@@ -228,14 +200,7 @@ def sum_of_divisors(n,p=1):
     Also known as the sigma function
     """
     
-    if p == 0:
-        return len(factors(n))
-    
-    elif p == 1:
-        return sum(factors(n))
-    
-    else:
-        return sum([f**p for f in factors(n)])
+    return divisor_sigma(n,p)
 
 
 def aliquot_sum(n,p=1):
@@ -1024,6 +989,9 @@ if __name__ == '__main__':
     
     print("\nPrime Factorization of 378")
     print(prime_factorization(378))
+    
+    print("\nUnique Prime Factors of 378")
+    print(unique_prime_factors(378))
     
     print("\nPrime Power Factorization of 378")
     print(prime_power_factorization(378))

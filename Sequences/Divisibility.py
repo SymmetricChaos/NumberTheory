@@ -9,7 +9,7 @@ from Sequences.Manipulations import partial_sums
 from collections import defaultdict
 from math import prod, gcd
 from itertools import takewhile, cycle
-
+from sympy.ntheory.factor_ import core
 
 def smooth(B):
     """
@@ -223,6 +223,19 @@ def squarefree_kernel():
                 D[p+q].append(p)
             
             del D[q]
+
+# sympy's core function doesn't actually return the kernel
+# def powerfree_kernel(p=2):
+#     """
+#     Powerfree Kernels: Largest powerfree factor of each positive integer\n
+#     OEIS
+#     """
+    
+#     require_integers(["p"],[p])
+#     require_geq(["p"],[p],2)
+    
+#     for n in naturals(1):
+#         yield core(n,p)
 
 
 def powerful(n=2):
