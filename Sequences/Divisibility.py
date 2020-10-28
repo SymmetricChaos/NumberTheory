@@ -161,7 +161,7 @@ def prime_divisors():
 
 def unique_prime_divisors():
     """
-    Number of Unique Prime Divisors: Count of unique prime factors for each positive integer
+    Number of Unique Prime Divisors: Count of unique prime factors for positive n
     Also the little omega function\n
     OEIS A001221
     """
@@ -202,7 +202,7 @@ def squarefree():
 
 def squarefree_kernel():
     """
-    Squarefree Kernels: Largest squarefree factor of each positive integer\n
+    Squarefree Kernels: Largest squarefree factor of positive n\n
     OEIS A007947
     """
     
@@ -224,18 +224,32 @@ def squarefree_kernel():
             
             del D[q]
 
-# sympy's core function doesn't actually return the kernel
-# def powerfree_kernel(p=2):
-#     """
-#     Powerfree Kernels: Largest powerfree factor of each positive integer\n
-#     OEIS
-#     """
+
+def squarefree_core():
+    """
+    Squarefree Core: Smallest integer m such that n/m is square for positive n\n
+    OEIS A007913
+    """
     
-#     require_integers(["p"],[p])
-#     require_geq(["p"],[p],2)
+    for n in naturals(1):
+        yield core(n,2)
+
+
+def powerfree_core(p=2):
+    """
+    Powerfree Core: Smallest integer m such that n/m is a perfect pth power for positive n\n
     
-#     for n in naturals(1):
-#         yield core(n,p)
+    Args:
+        p -- power
+    
+    OEIS
+    """
+    
+    require_integers(["p"],[p])
+    require_geq(["p"],[p],2)
+    
+    for n in naturals(1):
+        yield core(n,p)
 
 
 def powerful(n=2):
