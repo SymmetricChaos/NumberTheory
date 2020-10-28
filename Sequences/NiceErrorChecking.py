@@ -1,5 +1,5 @@
-from MathUtils import miller_rabin_test
 import warnings
+from sympy import isprime
 
 ## Type Errors ##
 def require_integers(names,variables):
@@ -55,12 +55,9 @@ def require_prime(names,variables):
     out = ""
     
     for k,l in zip(names,variables):
-        F = miller_rabin_test(l)
-        if F == 0:
+        F = isprime(l)
+        if not F:
             out += f"{k} is not prime\n"
-        if F == 2:
-            prp = f"{k} is greater than 2^81 and is only probably prime"
-            warnings.warn(prp)
     
     if out != "":
         raise TypeError(out)

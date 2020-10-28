@@ -422,7 +422,6 @@ def p_adic_order(p):
     """
     
     require_integers(["p"],[p])
-    require_geq(["p"],[p],1)
     require_prime(["p"],[p])
     
     for n in naturals(1):
