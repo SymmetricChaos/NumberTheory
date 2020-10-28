@@ -20,21 +20,7 @@ def proper_divisors(n):
     if type(n) != int:
         raise Exception("n must be an integer")
     
-    if n == 1:
-        return set([])
-    
-    lim = isqrt(n)+1
-    
-    S = set([1])
-    
-    for i in range(2,lim):
-        f,r = divmod(n,i)
-        
-        if r == 0:
-            S.add(i)
-            S.add(f)
-    
-    return S
+    return divisors(n,proper=True)
 
 
 # I just think the name is neat
@@ -63,32 +49,6 @@ def nontrivial_factors(n):
     return S
 
 
-# To avoid potential circular reference from Sequences.Primes in following functions
-def _primes_copy():
-    yield 2
-    yield 3
-    yield 5
-    
-    D = { 9: 3, 25: 5 }
-    MASK = cycle((1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0))
-    MODULOS = frozenset( (1, 7, 11, 13, 17, 19, 23, 29) )
-    
-    for q in compress(count(7,2),MASK):
-        p = D.pop(q, None)
-        
-        if p is None:
-            D[q*q] = q
-            yield q
-        
-        else:
-            x = q + 2*p
-            
-            while x in D or (x%30) not in MODULOS:
-                x += 2*p
-            
-            D[x] = p
-
-
 def prime_factorization(n):
     """Prime Factorization: Crude brute-force method"""
     
@@ -98,20 +58,13 @@ def prime_factorization(n):
     if n == 0:
         raise ValueError("Prime factorization of 0 is undefined")
     
-    if n == 1:
-        return []
-    
+    F = canonical_factorization(n)
     L = []
     
-    for p in _primes_copy():
-        while n % p == 0:
-            L.append(p)
-            n //= p
-        
-        if n == 1:
-            break
+    for p,e in F.items():
+        L += [p]*e
     
-    return L
+    return sorted(L)
 
 
 def unique_prime_factors(n):
@@ -162,36 +115,36 @@ def canonical_factorization(n):
     return factorint(n)
 
 
-def special_factorization(n,W):
-    """Factor n into numbers from the list or tuple W"""
-    
-    if type(n) != int:
-        raise Exception("n must be an integer") 
-    
-    if type(W) not in (list,tuple,set):
-        raise Exception("W must be a list, tuple, or set")
-    
-    W = sorted(list(set(W)))
-    
-    L = []
-    
-    for w in W:
-        if w != 1:
-            while n % w == 0:
-                L.append(w)
-                n //= w
-            
-            if n == 1:
-                break
-            
-            if w > n:
-                break
-    
-    if n != 1:
-        return L
-    
-    else:
-        return []
+# def special_factorization(n,W):
+#     """Factor n into numbers from the list or tuple W"""
+#    
+#     if type(n) != int:
+#         raise Exception("n must be an integer") 
+#    
+#     if type(W) not in (list,tuple,set):
+#         raise Exception("W must be a list, tuple, or set")
+#    
+#     W = sorted(list(set(W)))
+#    
+#     L = []
+#    
+#     for w in W:
+#         if w != 1:
+#             while n % w == 0:
+#                 L.append(w)
+#                 n //= w
+#            
+#             if n == 1:
+#                 break
+#            
+#             if w > n:
+#                 break
+#    
+#     if n != 1:
+#         return L
+#    
+#     else:
+#         return []
 
 
 def sum_of_divisors(n,p=1):
@@ -205,7 +158,7 @@ def sum_of_divisors(n,p=1):
 
 def aliquot_sum(n,p=1):
     """
-    Sum of the proper divisors of n raised to the specified power
+    Sum of the proper divisors of n raised to the specified power p
     """
     
     if p == 0:
@@ -216,6 +169,22 @@ def aliquot_sum(n,p=1):
     
     else:
         return sum([f**p for f in aliquot_parts(n)])
+
+
+def nondivisors(n):
+    """
+    Natural numbers less than n that are not factors of n
+    """
+    
+    return [i for i in range(n) if i not in factors(n)]
+
+
+# def antidivisors(n):
+#     """
+#     Natural numbers less than n that are not factors of n and for which the two nearest multiples to n are the same distance from n
+#     """
+#    
+#     return antidivisors(n)
 
 
 
