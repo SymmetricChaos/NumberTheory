@@ -126,6 +126,16 @@ def divisors():
         yield len(factors(i))
 
 
+def all_divisors():
+    """
+    Irregular Array with Divisors of Every Positive Integer\n
+    OEIS A027750
+    """
+    
+    for i in naturals(1):
+        yield from factors(i)
+
+
 def prime_divisors():
     """
     Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
@@ -703,4 +713,8 @@ if __name__ == '__main__':
     print("\nBlum-Blum-Shub Integers")
     simple_test(blum_blum_shub_integers(),8,
                 "1081, 3841, 7849, 8257, 16537, 16873, 33097, 46897")
+    
+    print("\nArray of All Divisors")
+    simple_test(all_divisors(),18,
+                "1, 1, 2, 1, 3, 1, 2, 4, 1, 5, 1, 2, 3, 6, 1, 7, 1, 2")
     

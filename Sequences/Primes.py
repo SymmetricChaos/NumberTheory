@@ -1,10 +1,10 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, odds
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.MathUtils import miller_rabin_test
 
 from collections import defaultdict
-from sympy import sieve
+from sympy import sieve, isprime
 
 ##############################
 ## CLASSES OF PRIME NUMBERS ##
@@ -125,15 +125,6 @@ def prime_tuples(K):
         L = L[1:]
 
 
-def prime_gaps():
-    """
-    Prime Gaps: Gaps between successive primes
-    OEIS A001223
-    """
-    
-    yield from differences(primes())
-
-
 def superprimes():
     """
     Prime Indexed Primes: The pth primes for p in primes
@@ -228,7 +219,7 @@ def blum_primes():
         b = (a-1)//2
         
         if a%2 == 1 and b % 2 == 1:
-            if miller_rabin_test(a) and miller_rabin_test(b):
+            if isprime(a) and isprime(b):
                 yield p
 
 
@@ -239,25 +230,30 @@ def blum_primes():
 ## CLOSELY RELATED ##
 #####################
 
+def prime_gaps():
+    """
+    Prime Gaps: Gaps between successive primes
+    OEIS A001223
+    """
+    
+    yield from differences(primes())
+
+
 def composites():
     """
     Composite Numbers: Positive integers with more than two factors\n
     OEIS A002808
     """
     
-    D = defaultdict(list)
+    P = primes()
+    next(P)
+    lo = next(P)
+    hi = next(P)
     
-    for q in naturals(2):
-        
-        if q not in D:
-            D[q * q] = [q]
-        
-        else:
-            yield q
-            for p in D[q]:
-                D[p+q].append(p)
-            
-            del D[q]
+    while True:
+        yield from range(lo+1,hi)
+        lo = hi
+        hi = next(P)
 
 
 def noncomposite():
@@ -381,6 +377,31 @@ def weak_pseudoprimes(a):
             yield c
 
 
+def strong_pseudoprimes(a):
+    """
+    Strong Pseudoprimes to Base a\n
+    OEIS
+    """
+    
+    for c in composites():
+        if c % 2 == 1:
+            d = c-1
+            r = 0
+            
+            while d % 2 == 0:
+                d //= 2
+                r += 1
+            
+            if (a**d)%c == 1:
+                yield c
+                continue
+            
+            for e in range(0,r):
+                if (a**(d*2**e))%c == c-1:
+                    yield c
+                    continue
+
+
 
 
 
@@ -462,6 +483,10 @@ if __name__ == '__main__':
     print("\nWeak Pseudoprimes to Base 3")
     simple_test(weak_pseudoprimes(3),12,
                 "1, 6, 66, 91, 121, 286, 561, 671, 703, 726, 949, 1105")
+    
+    print("\nStrong Pseudoprimes to Base 3")
+    simple_test(strong_pseudoprimes(3),9,
+                "121, 703, 1891, 3281, 8401, 8911, 10585, 12403, 16531")
     
     print("\nPrimes of form 3k+4")
     simple_test(linear_primes(3,4),14,

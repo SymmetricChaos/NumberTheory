@@ -1,4 +1,3 @@
-import warnings
 from sympy import isprime
 
 ## Type Errors ##

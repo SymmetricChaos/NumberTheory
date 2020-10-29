@@ -40,7 +40,7 @@ from Sequences.Divisibility import totients, cototients, smooth, rough, highly_c
                                    highly_composite_prime_factor, jordan_totients, \
                                    charmichael, principal_character, p_adic_order, \
                                    liouville, liouville_sums, blum, blum_blum_shub_integers, \
-                                   semiprimes, almost_primes
+                                   semiprimes, almost_primes, all_divisors
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -141,7 +141,7 @@ __all__=[#MANIPULATIONS
          "powerful","highly_composite_factor","highly_composite_prime_factor",
          "jordan_totients","charmichael","principal_character","semiprimes",
          "p_adic_order","liouville","liouville_sums","blum","almost_primes",
-         "blum_blum_shub_integers",
+         "blum_blum_shub_integers","all_divisors",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
