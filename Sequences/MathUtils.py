@@ -843,12 +843,6 @@ def miller_rabin_test(n):
     For greater numbers about 99.9999985% accurate
     """
     
-    def check_base(a,d,n,r):
-        for i in range(0,r+1):
-            if pow(a,2**i*d,n) == 1:
-                return False
-        return True
-    
     W = [2,3,5,7,11,13,17,19,23,29,31,37,41]
     
     # Deal with special cases first
@@ -866,12 +860,16 @@ def miller_rabin_test(n):
         r += 1
     
     for witness in W:
-        if witness >= n:
-            break
-        # If the test for compositeness returns true we know for certain the
-        # number is composite and we return false
-        if check_base(witness,d,n,r):
-            return 0
+        x = pow(witness,d,n)
+        
+        if x == 1 or x == n-1:
+            continue
+        
+        for i in range(0,r+1):
+            x = pow(x,2,n)
+            
+            if x == n-1:
+                return 0
     
     if n >= 3317044064679887385961981:
         return 2
@@ -940,7 +938,6 @@ def poly_eval(P,x):
         e *= x
     
     return out
-
 
 
 
