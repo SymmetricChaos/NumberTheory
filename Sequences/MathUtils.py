@@ -940,6 +940,21 @@ def poly_eval(P,x):
     return out
 
 
+def factor_out_twos(n):
+    """
+    Returns the tuple (d,s) such that n = d*(2**s) for the smallest value of d
+    """
+    
+    d = n
+    s = 0
+    
+    while d % 2 == 0:
+        s += 1
+        d //= 2
+    
+    return d,s
+
+
 
 
 

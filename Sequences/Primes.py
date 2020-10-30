@@ -426,7 +426,6 @@ if __name__ == '__main__':
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
     
-    
     print("\nPrimes of form 3k+4")
     simple_test(linear_primes(3,4),14,
                 "3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103")

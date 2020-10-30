@@ -55,6 +55,9 @@ def strong_pseudoprimes(a):
 
 
 def lucas_pseudoprimes(P,Q):
+    """
+    Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
+    """
     
     D = P*P - 4*Q
     for c in composites():
@@ -73,7 +76,8 @@ def lucas_pseudoprimes(P,Q):
 
 def fibonacci_pseudoprimes():
     """
-    Fibonacci Pseudoprimes: Special case of Lucas Pseudoprimes 
+    Fibonacci Pseudoprimes: Special case of Lucas Pseudoprimes, also excluding multiples of 5
+    OEIS A081264
     """
     
     for c in composites():
@@ -87,6 +91,27 @@ def fibonacci_pseudoprimes():
             
             if a % c == 0:
                 yield c
+
+
+def pell_pseudoprimes():
+    """
+    Pell Pseudoprimes: Special case of Lucas Pseudoprimes
+    OEIS A081264
+    """
+    
+    for c in composites():
+        if c % 2 == 1:
+            delta = c-jacobi_symbol(8,c)
+            
+            a,b = 0,1
+            
+            for i in range(delta):
+                a, b = b, 2*b+a
+            
+            if a % c == 0:
+                yield c
+
+
 
 
 
@@ -105,11 +130,15 @@ if __name__ == '__main__':
     simple_test(strong_pseudoprimes(3),9,
                 "121, 703, 1891, 3281, 8401, 8911, 10585, 12403, 16531")
     
-    # print("\n(1,-1)-Lucas Pseudoprimes")
-    # simple_test(lucas_pseudoprimes(1,-1),9,
+    # print("\n(3,-1)-Lucas Pseudoprimes")
+    # simple_test(lucas_pseudoprimes(3,-1),9,
     #             "121, 703, 1891, 3281, 8401, 8911, 10585, 12403, 16531")
     
     print("\nFibonacci Pseudoprimess")
     simple_test(fibonacci_pseudoprimes(),9,
                 "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
+    
+    # print("\nPell Pseudoprimess")
+    # simple_test(pell_pseudoprimes(),9,
+    #             "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
     
