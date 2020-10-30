@@ -1,7 +1,6 @@
-from Sequences.Simple import naturals, odds
+from Sequences.Simple import naturals
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 from Sequences.NiceErrorChecking import require_integers, require_geq
-from Sequences.MathUtils import miller_rabin_test
 
 from collections import defaultdict
 from sympy import sieve, isprime
@@ -351,55 +350,6 @@ def prime_counting():
         cur = p
 
 
-def fermat_pseudoprimes(a):
-    """
-    Fermat Pseudoprimes to Base a\n
-    OEIS
-    """
-    
-    yield 1
-    
-    for c in composites():
-        if pow(a,c-1,c) == 1:
-            yield c
-
-
-def weak_pseudoprimes(a):
-    """
-    Weak Pseudoprimes to Base a\n
-    OEIS
-    """
-    
-    yield 1
-    
-    for c in composites():
-        if pow(a,c,c) == a:
-            yield c
-
-
-def strong_pseudoprimes(a):
-    """
-    Strong Pseudoprimes to Base a\n
-    OEIS
-    """
-    
-    for c in composites():
-        if c % 2 == 1:
-            d = c-1
-            r = 0
-            
-            while d % 2 == 0:
-                d //= 2
-                r += 1
-            
-            if (a**d)%c == 1:
-                yield c
-                continue
-            
-            for e in range(0,r):
-                if (a**(d*2**e))%c == c-1:
-                    yield c
-                    continue
 
 
 
@@ -476,17 +426,6 @@ if __name__ == '__main__':
     simple_test(prime_gaps(),18,
                 "1, 2, 2, 4, 2, 4, 2, 4, 6, 2, 6, 4, 2, 4, 6, 6, 2, 6")
     
-    print("\nFermat Pseudoprimes to Base 3")
-    simple_test(fermat_pseudoprimes(3),11,
-                "1, 91, 121, 286, 671, 703, 949, 1105, 1541, 1729, 1891")
-    
-    print("\nWeak Pseudoprimes to Base 3")
-    simple_test(weak_pseudoprimes(3),12,
-                "1, 6, 66, 91, 121, 286, 561, 671, 703, 726, 949, 1105")
-    
-    print("\nStrong Pseudoprimes to Base 3")
-    simple_test(strong_pseudoprimes(3),9,
-                "121, 703, 1891, 3281, 8401, 8911, 10585, 12403, 16531")
     
     print("\nPrimes of form 3k+4")
     simple_test(linear_primes(3,4),14,

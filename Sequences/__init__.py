@@ -67,9 +67,11 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
                              composites, compositorial, prime_characteristic, \
                              superprimes, noncomposite, odd_primes, twin_primes, \
                              twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
-                             fermat_pseudoprimes, weak_pseudoprimes, sophie_germain_primes, \
-                             safe_primes, linear_primes, congruent_primes, blum_primes
-                             
+                             sophie_germain_primes, safe_primes, linear_primes, congruent_primes, \
+                             blum_primes
+
+from Sequences.Pseudoprimes import fermat_pseudoprimes, weak_pseudoprimes, strong_pseudoprimes, \
+                                   lucas_pseudoprimes
 
 from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub, lehmer, \
@@ -173,8 +175,8 @@ __all__=[#MANIPULATIONS
          "composites","compositorial","prime_characteristic",
          "superprimes","noncomposite","odd_primes","twin_primes",
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
-         "fermat_pseudoprimes","weak_pseudoprimes","sophie_germain_primes",
-         "safe_primes","linear_primes","congruent_primes","blum_primes",
+         "sophie_germain_primes","safe_primes","linear_primes",
+         "congruent_primes","blum_primes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",
