@@ -3,13 +3,14 @@ from Sequences.Primes import primes, blum_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
-                                nth_sign, kronecker_symbol
+                                nth_sign
 from Sequences.Manipulations import partial_sums
 
 from collections import defaultdict
 from math import prod, gcd
 from itertools import takewhile, cycle
 from sympy.ntheory.factor_ import core
+from sympy import legendre_symbol
 
 def smooth(B):
     """
@@ -560,7 +561,7 @@ def blum_blum_shub_integers():
     
     for s in P:
         S.append(s)
-        K[s] = kronecker_symbol(2,(s-1)//2)
+        K[s] = legendre_symbol(2,(s-1)//2)
         
         while len(T) > 0 and T[0] < s*S[0]:
             yield T.pop(0)
@@ -571,8 +572,9 @@ def blum_blum_shub_integers():
         
         T.sort()
 
-# Version of above using sympy functions for OEIS inclusion
-# from sympy.ntheory import legendre_symbol, isprime, sieve
+# Version of above for OEIS designed to print the first N numbers and also
+# include a generator for the relevant primes
+# from sympy.ntheory import , isprime, sieve
 # def BBSI(N):
 #     def BBS_primes():
 #         p = 1
@@ -603,16 +605,19 @@ def blum_blum_shub_integers():
 #                 T.append(t*s)
 #         T.sort()
 
+
 def odd_parts():
     """
-    The odd part of each positive integer
-    OEIS 
+    The odd part of each positive integer\n
+    OEIS A000265
     """
     
     for n in naturals(1):
         while n % 2 == 0:
             n //= 2
         yield n
+
+
 
 
 

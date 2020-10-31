@@ -105,7 +105,16 @@ def fibonacci_pseudoprimes():
 def pell_pseudoprimes():
     """
     Pell Pseudoprimes: Special case of Lucas Pseudoprimes
-    OEIS A081264
+    OEIS 
+    """
+    
+    yield from lucas_pseudoprimes(2,-1)
+
+
+def pell_pseudoprimes_2():
+    """
+    Pell Pseudoprimes: Passes a version of the Pell primality test
+    OEIS A099011
     """
     
     lucas_pos = 0 
@@ -113,15 +122,13 @@ def pell_pseudoprimes():
     
     for c in composites():
         if c % 2 == 1:
-            delta = c-jacobi_symbol(8,c)
             
-            if delta > lucas_pos:
-                for i in range(delta-lucas_pos):
-                    a, b = b, b+a
-                
-                lucas_pos += delta-lucas_pos
+            for i in range(c-lucas_pos):
+                a, b = b, 2*b+a
             
-            if a % c == 0:
+            lucas_pos += c-lucas_pos
+            
+            if (a-jacobi_symbol(2,c))%c == 0:
                 yield c
 
 
@@ -166,6 +173,7 @@ def pell_pseudoprimes():
 
 
 
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -185,15 +193,19 @@ if __name__ == '__main__':
     simple_test(lucas_pseudoprimes(3,-1),9,
                 "119, 169, 649, 1189, 1763, 2197, 3599, 4187, 5559")
     
-    print("\nFibonacci Pseudoprimess")
+    print("\nFibonacci Pseudoprimes")
     simple_test(fibonacci_pseudoprimes(),9,
                 "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
     
-    # print("\nPell Pseudoprimess")
-    # simple_test(pell_pseudoprimes(),9,
-    #             "35, 169, 385, 779, 899, 961, 1121, 1189, 2419")
+    print("\nPell Pseudoprimes")
+    simple_test(pell_pseudoprimes(),10,
+                "35, 169, 385, 779, 899, 961, 1121, 1189, 2419, 2555")
     
-    # print("\nStrong Lucas Pseudoprimess")
+    print("\nPell Pseudoprimes (OEIS version)")
+    simple_test(pell_pseudoprimes_2(),10,
+                "169, 385, 741, 961, 1121, 2001, 3827, 4879, 5719, 6215")
+    
+    # print("\nStrong Lucas Pseudoprimes")
     # simple_test(strong_lucas_pseudoprimes(1,-1),2,
     #             "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
     
