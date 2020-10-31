@@ -1,4 +1,4 @@
-from Sequences.Primes import composites
+from Sequences.Primes import composites, primes
 from Sequences.MathUtils import factor_out_twos, coprime_to
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
@@ -8,20 +8,37 @@ from math import gcd
 
 def fermat_pseudoprimes(a):
     """
-    Fermat Pseudoprimes to Base a\n
-    OEIS
+    Fermat Pseudoprimes to Base a
+    
+    Args:
+        a -- integer greater than 1
+    
+    OEIS A001567, A005935-A005939
     """
     
     require_integers(["a"],[a])
     require_geq(["a"],[a],2)
-    
-    yield 1
     
     for c in composites():
         if pow(a,c-1,c) == 1:
             yield c
 
 
+def cipolla_pseudoprimes(a):
+    """
+    Cipolla Pseudoprimes to Base a: A subset of Fermat pseudoprimes to the same base genereated by Cipolla's method'
+    OEIS A210454, A210461
+    """
+    
+    A = a*(a*a-1)
+    d = (a+1)*(a-1)
+    
+    for p in primes():
+        if A % p != 0:
+            yield ((a**p-1)*(a**p+1))//d
+
+
+# Absurdly inefficient. Must be a better way.
 def carmichael_numbers():
     """
     Charmichael Numbers: Composite numbers that are Fermat Pseudoprimes to all bases\n
@@ -42,7 +59,11 @@ def carmichael_numbers():
 
 def weak_pseudoprimes(a):
     """
-    Weak Pseudoprimes to Base a\n
+    Weak Pseudoprimes to Base a
+    
+    Args:
+        a -- integer greater than 1
+    
     OEIS
     """
     
@@ -58,7 +79,11 @@ def weak_pseudoprimes(a):
 
 def strong_pseudoprimes(a):
     """
-    Strong Pseudoprimes to Base a\n
+    Strong Pseudoprimes to Base a
+    
+    Args:
+        a -- integer greater than 1
+    
     OEIS
     """
     
@@ -85,6 +110,12 @@ def strong_pseudoprimes(a):
 def lucas_pseudoprimes(P,Q):
     """
     Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
+    
+    Args:
+        P -- integer greater than zero
+        Q -- integer
+    
+    OEIS
     """
     
     require_integers(["P","Q"],[P,Q])
@@ -210,12 +241,16 @@ if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
     print("\nFermat Pseudoprimes to Base 3")
-    simple_test(fermat_pseudoprimes(3),11,
-                "1, 91, 121, 286, 671, 703, 949, 1105, 1541, 1729, 1891")
+    simple_test(fermat_pseudoprimes(3),10,
+                "91, 121, 286, 671, 703, 949, 1105, 1541, 1729, 1891")
     
-    print("\nCharmichael Numbers")
-    simple_test(carmichael_numbers(),2,
-                "561, 1105, 1729, 2465, 2821, 6601, 8911, 10585, 15841")
+    print("\nCipolla Pseudoprimes to Base 3")
+    simple_test(cipolla_pseudoprimes(3),4,
+                "7381, 597871, 3922632451, 317733228541")
+    
+    # print("\nCharmichael Numbers")
+    # simple_test(carmichael_numbers(),9,
+    #             "561, 1105, 1729, 2465, 2821, 6601, 8911, 10585, 15841")
     
     print("\nWeak Pseudoprimes to Base 3")
     simple_test(weak_pseudoprimes(3),12,
