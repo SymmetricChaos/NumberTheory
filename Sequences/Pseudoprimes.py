@@ -1,5 +1,7 @@
 from Sequences.Primes import composites
-from Sequences.MathUtils import factor_out_twos
+from Sequences.MathUtils import factor_out_twos, coprime_to
+from Sequences.NiceErrorChecking import require_integers, require_geq
+
 
 from sympy import jacobi_symbol
 from math import gcd
@@ -10,10 +12,31 @@ def fermat_pseudoprimes(a):
     OEIS
     """
     
+    require_integers(["a"],[a])
+    require_geq(["a"],[a],2)
+    
     yield 1
     
     for c in composites():
         if pow(a,c-1,c) == 1:
+            yield c
+
+
+def carmichael_numbers():
+    """
+    Charmichael Numbers: Composite numbers that are Fermat Pseudoprimes to all bases\n
+    OEIS A002997
+    """
+    
+    def all_fermat_test(n):
+        B = coprime_to(n)
+        for b in B:
+            if pow(b,n-1,n) != 1:
+                return False
+        return True
+    
+    for c in composites():
+        if all_fermat_test(c):
             yield c
 
 
@@ -22,6 +45,9 @@ def weak_pseudoprimes(a):
     Weak Pseudoprimes to Base a\n
     OEIS
     """
+    
+    require_integers(["a"],[a])
+    require_geq(["a"],[a],2)
     
     yield 1
     
@@ -35,6 +61,9 @@ def strong_pseudoprimes(a):
     Strong Pseudoprimes to Base a\n
     OEIS
     """
+    
+    require_integers(["a"],[a])
+    require_geq(["a"],[a],2)
     
     for c in composites():
         if c % 2 == 1:
@@ -57,6 +86,9 @@ def lucas_pseudoprimes(P,Q):
     """
     Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
     """
+    
+    require_integers(["P","Q"],[P,Q])
+    require_geq(["P"],[P],1)
     
     D = P*P - 4*Q
     
@@ -180,6 +212,10 @@ if __name__ == '__main__':
     print("\nFermat Pseudoprimes to Base 3")
     simple_test(fermat_pseudoprimes(3),11,
                 "1, 91, 121, 286, 671, 703, 949, 1105, 1541, 1729, 1891")
+    
+    print("\nCharmichael Numbers")
+    simple_test(carmichael_numbers(),2,
+                "561, 1105, 1729, 2465, 2821, 6601, 8911, 10585, 15841")
     
     print("\nWeak Pseudoprimes to Base 3")
     simple_test(weak_pseudoprimes(3),12,

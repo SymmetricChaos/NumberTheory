@@ -187,6 +187,15 @@ def nondivisors(n):
 #     return antidivisors(n)
 
 
+# TODO: Must be a more efficient method
+def coprime_to(n):
+    L = []
+    for i in range(2,n):
+        if gcd(i,n) == 1:
+            L.append(i)
+    return L
+
+
 
 
 
