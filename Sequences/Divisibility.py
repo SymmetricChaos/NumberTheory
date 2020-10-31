@@ -603,7 +603,16 @@ def blum_blum_shub_integers():
 #                 T.append(t*s)
 #         T.sort()
 
-
+def odd_parts():
+    """
+    The odd part of each positive integer
+    OEIS 
+    """
+    
+    for n in naturals(1):
+        while n % 2 == 0:
+            n //= 2
+        yield n
 
 
 
@@ -717,4 +726,8 @@ if __name__ == '__main__':
     print("\nArray of All Divisors")
     simple_test(all_divisors(),18,
                 "1, 1, 2, 1, 3, 1, 2, 4, 1, 5, 1, 2, 3, 6, 1, 7, 1, 2")
+    
+    print("\nOdd Parts")
+    simple_test(odd_parts(),17,
+                "1, 1, 3, 1, 5, 3, 7, 1, 9, 5, 11, 3, 13, 7, 15, 1, 17")
     

@@ -59,7 +59,9 @@ def lucas_pseudoprimes(P,Q):
     """
     
     D = P*P - 4*Q
-    lucas_pos = 0 #rather than recompute we will step the sequence as needed
+    
+    #rather than recompute we will step the sequence as needed
+    lucas_pos = 0
     a,b = 0,1
     
     for c in composites():
@@ -106,14 +108,18 @@ def pell_pseudoprimes():
     OEIS A081264
     """
     
+    lucas_pos = 0 
+    a,b = 0,1
+    
     for c in composites():
         if c % 2 == 1:
             delta = c-jacobi_symbol(8,c)
             
-            a,b = 0,1
-            
-            for i in range(delta):
-                a, b = b, 2*b+a
+            if delta > lucas_pos:
+                for i in range(delta-lucas_pos):
+                    a, b = b, b+a
+                
+                lucas_pos += delta-lucas_pos
             
             if a % c == 0:
                 yield c
@@ -185,7 +191,7 @@ if __name__ == '__main__':
     
     # print("\nPell Pseudoprimess")
     # simple_test(pell_pseudoprimes(),9,
-    #             "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
+    #             "35, 169, 385, 779, 899, 961, 1121, 1189, 2419")
     
     # print("\nStrong Lucas Pseudoprimess")
     # simple_test(strong_lucas_pseudoprimes(1,-1),2,
