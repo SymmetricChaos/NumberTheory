@@ -230,7 +230,6 @@ def strong_lucas_pseudoprimes(P,Q):
     D = P*P - 4*Q
     
     for n in composites():
-        
         if n % 2 == 0:
             continue
         
@@ -293,6 +292,6 @@ if __name__ == '__main__':
                 "169, 385, 741, 961, 1121, 2001, 3827, 4879, 5719, 6215")
     
     print("\nStrong Lucas Pseudoprimes (infinite but rare and expensive to compute)")
-    simple_test(strong_lucas_pseudoprimes(1,-1),3,
-                "4181, 5777, 10877")
+    simple_test(strong_lucas_pseudoprimes(1,-1),2,
+                "4181, 5777")
     

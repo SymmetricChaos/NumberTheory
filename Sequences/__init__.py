@@ -71,7 +71,8 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
                              blum_primes
 
 from Sequences.Pseudoprimes import fermat_pseudoprimes, weak_pseudoprimes, strong_pseudoprimes, \
-                                   lucas_pseudoprimes
+                                   lucas_pseudoprimes, cipolla_pseudoprimes, fibonacci_pseudoprimes, \
+                                   pell_pseudoprimes, pell_pseudoprimes_2, strong_lucas_pseudoprimes
 
 from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub, lehmer, \
@@ -177,6 +178,12 @@ __all__=[#MANIPULATIONS
          "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
          "sophie_germain_primes","safe_primes","linear_primes",
          "congruent_primes","blum_primes",
+         
+         #PSEUDOPRIMES
+         "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",
+         "lucas_pseudoprimes","cipolla_pseudoprimes","fibonacci_pseudoprimes",
+          "pell_pseudoprimes","pell_pseudoprimes_2",
+          "strong_lucas_pseudoprimes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",
