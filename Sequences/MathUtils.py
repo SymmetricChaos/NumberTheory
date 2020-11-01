@@ -187,7 +187,7 @@ def nondivisors(n):
 #     return antidivisors(n)
 
 
-# TODO: Must be a more efficient method
+# TODO: Seems like a more efficient method should exist
 def coprime_to(n):
     L = []
     for i in range(2,n):
@@ -962,6 +962,27 @@ def factor_out_twos(n):
         d //= 2
     
     return d,s
+
+
+
+
+
+#######################
+## LIST MANIPULATION ##
+#######################
+
+def list_diffs(L):
+    
+    
+    out = []
+    
+    for i in range(len(L)-1):
+        a,b = L[i], L[i+1]
+        out.append(b-a)
+    
+    return out
+
+
 
 
 

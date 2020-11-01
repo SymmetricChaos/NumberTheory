@@ -3,7 +3,7 @@ from Sequences.Primes import primes, blum_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
-                                nth_sign
+                                nth_sign, list_diffs
 from Sequences.Manipulations import partial_sums
 
 from collections import defaultdict
@@ -386,18 +386,22 @@ def coprimes(n):
     require_integers(["n"],[n])
     require_geq(["n"],[n],1)
     
-    F = unique_prime_factors(n)
+    # Get the coprimes less than n
+    co = []
+    for i in range(1,n):
+        if gcd(n,i) == 1:
+            co.append(i)
+            yield i
     
-    # Check if any of the factors of n divide a
-    def divby(a,F):
-        for f in F:
-            if a%f == 0:
-                return False
-        return True
+    # Get the list of differences between terms
+    diffs = list_diffs(co)
+    diffs.insert(0,2)
     
-    for x in naturals(1):
-        if divby(x,F):
-            yield x
+    # Efficiently return terms using just addition
+    x = co[-1]
+    for a in cycle(diffs):
+        x += a
+        yield x
 
 
 def coprime_characteristic():
