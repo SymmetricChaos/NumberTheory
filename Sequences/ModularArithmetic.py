@@ -1,12 +1,13 @@
 from Sequences.Primes import primes
 from Sequences.Simple import odds, naturals
-from Sequences.MathUtils import egcd, prime_factorization, _legendre_symbol, nth_sign, canonical_factorization
+from Sequences.MathUtils import egcd, prime_factorization, nth_sign, canonical_factorization
 from Sequences.Figurate import squares
 from Sequences.Manipulations import segment, partial_sums
 from Sequences.NiceErrorChecking import require_integers
 
 from itertools import cycle
 from math import gcd
+from sympy import legendre_symbol
 
 def modular_inverses():
     """
@@ -59,7 +60,7 @@ def jacobi_symbols():
             out = 1
             
             for f,e in pfacs.items():
-                out *= _legendre_symbol(a,f)**e
+                out *= legendre_symbol(a,f)**e
             
             yield out
 

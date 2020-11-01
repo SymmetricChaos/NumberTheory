@@ -1,10 +1,11 @@
-from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv, kronecker_symbol
+from Sequences.MathUtils import digits_to_int, int_to_digits, mod_inv
 from Sequences.ModularArithmetic import weyl
 from Sequences.NiceErrorChecking import require_integers, require_prime, require_true, require_geq
 from Sequences.Manipulations import lower_bits, upper_bits, chunk_by_n
 
 from math import gcd, prod
 from itertools import cycle
+from sympy import legendre_symbol
 
 # Obviously these are all VERY inefficient
 
@@ -416,7 +417,7 @@ def blum_blum_shub(x,p,q):
     Blum Blum Shub
     
     Args:
-        x -- seed value, coprime to pq, and >= 2
+        x -- seed value, coprime to pq, and greater than 1
         p -- prime congruent to 3 mod 4
         q -- prime congruent to 3 mod 4
     """
@@ -427,7 +428,7 @@ def blum_blum_shub(x,p,q):
     require_prime( ["p","q"], [p,q])
     require_true(["p","q"], [p,q], lambda x: x % 4 == 3, "must be congruent to 3 mod 4")
     require_geq(["x"], [x], 2)
-    K = kronecker_symbol(2,(p-1)//2) + kronecker_symbol(2,(q-1)//2)
+    K = legendre_symbol(2,(p-1)//2) + legendre_symbol(2,(q-1)//2)
     
     if K == 2:
         raise Exception("both (p-1)/2 and (q-1)/2 have 2 as a quadratic residue")

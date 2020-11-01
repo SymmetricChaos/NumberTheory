@@ -1,8 +1,8 @@
 from math import isqrt, gcd
-from itertools import chain, combinations, repeat, count, compress, cycle
+from itertools import chain, combinations, repeat, count
 from functools import reduce
 from fractions import Fraction
-from sympy import factorint, divisors, divisor_sigma
+from sympy import factorint, divisors, divisor_sigma, legendre_symbol
 
 ###################
 ## FACTORIZATION ##
@@ -645,6 +645,7 @@ def antidiagonal_pairs(m=0):
 def repeating_part(n,d,B=10):
     """
     Repeating part of the fraction n/d in base B
+    Returns a list
     """
     
     # Get rid of the integer part
@@ -772,47 +773,6 @@ def multi_lcm(*args):
     return multi_lcm(a,b)
 
 
-def _legendre_symbol(a,p):
-    """
-    The Legendre Symbol: 1 if a is a quadratic residue mod p, -1 if it is a nonresidue, 0 if a is zero
-    p must be prime but this is hard to check so is not done in the function itself
-    """
-    if p == 2:
-        if a%2 == 0:
-            return 0
-        if a%8 in (1,7):
-            return 1
-        return -1
-            
-    out = pow(a,(p-1)//2,p)
-    if out == 1:
-        return 1
-    if out == 0:
-        return 0
-    else:
-        return -1
-
-
-def kronecker_symbol(a,n):
-    """Extend the Legendre Symbol to all naturals"""
-    fac = prime_factorization(n)
-    out = 1
-    for f in fac:
-        out *= _legendre_symbol(a,f)
-    return out
-
-
-def kronecker_delta(i,j):
-    """
-    The Kronecker Delta Function
-    (actually might be unnecessary in Python)
-    """
-    
-    if i == j:
-        return 1
-    return 0
-
-
 def arithmetic_derivative(n):
     
     if n in (0,1):
@@ -844,47 +804,13 @@ def jordan_totient(n,k=1):
     return (n**k*num)//den
 
 
-def miller_rabin_test(n):
-    """
-    Miller-Rabin Primality Test
-    Returns 0 for composite, 1 for prime, and 2 for probably prime
-    Deterministic for n less than 3,317,044,064,679,887,385,961,981 ≈ 2^81
-    For greater numbers about 99.9999985% accurate
-    """
-    
-    W = [2,3,5,7,11,13,17,19,23,29,31,37,41]
-    
-    # Deal with special cases first
-    if n == 1:
-        return 0
-    if n == 2:
-        return 1
-    if n % 2 == 0:
-        return 0
-    
-    d = n-1
-    r = 0
-    while d % 2 == 0:
-        d //= 2
-        r += 1
-    
-    for witness in W:
-        x = pow(witness,d,n)
-        
-        if x == 1 or x == n-1:
-            continue
-        
-        for i in range(0,r+1):
-            x = pow(x,2,n)
-            
-            if x == n-1:
-                return 0
-    
-    if n >= 3317044064679887385961981:
-        return 2
-    else:
-        return 1
-
+def kronecker_symbol(a,n):
+    """Extend the Legendre Symbol to all naturals"""
+    fac = prime_factorization(n)
+    out = 1
+    for f in fac:
+        out *= legendre_symbol(a,f)
+    return out
 
 
 
@@ -981,8 +907,6 @@ def list_diffs(L):
         out.append(b-a)
     
     return out
-
-
 
 
 
