@@ -38,7 +38,7 @@ def cipolla_pseudoprimes(a):
             yield ((a**p-1)*(a**p+1))//d
 
 
-# Absurdly inefficient. Must be a better way.
+#Absurdly inefficient. Must be a better way.
 def carmichael_numbers():
     """
     Charmichael Numbers: Composite numbers that are Fermat Pseudoprimes to all bases\n
@@ -195,43 +195,59 @@ def pell_pseudoprimes_2():
                 yield c
 
 
-# def strong_lucas_pseudoprimes(P,Q):
-#     """
-#     Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
-#     """
+# Only seems to work for base 1 need anotehr reference
+def strong_lucas_pseudoprimes(P,Q):
+    """
+    Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
+    """
     
-#     def lucas_U_test(n,d,P,Q):
-#         a,b = 0,1
-#         for i in range(d):
-#             a, b = b, (P*b-Q*a)%c
-#         if a == 0:
-#             return True
-#         return False
+    def lucas_U_test(n,d,P,Q):
+        a,b = 0,1
+        for i in range(d):
+            a, b = b, (P*b-Q*a)%n
+        if a == 0:
+            return True
+        return False
     
-#     def lucas_V_test(d,s,P,Q):
-#         a, b = 2, P
-#         for i in range(s):
-#             for k in range(d):
-#                 a, b = b, P*b-Q*a
-#             if a%c == 0:
-#                 return True
-#         return False
+    def lucas_V_test(n,d,s,P,Q):
+        a, b = 2, P
+        ctr = d
+        nctr = 0
+        for k in range(ctr):
+            a, b = b, (P*b-Q*a)%n
+            nctr += 1
+        if a == 0:
+            return True
+        while ctr < d*(2**(s-1)):
+            for k in range(ctr):
+                a, b = b, (P*b-Q*a)%n
+                nctr += 1
+            ctr *= 2
+            if a == 0:
+                return True
+        return False
     
-#     D = P*P - 4*Q
-#     for c in composites():
-#         if c % 2 == 1:
-#             if gcd(c,D) == 1:
-#                 delta = c-jacobi_symbol(D,c)
-#                 s,d = factor_out_twos(delta)
-                
-#                 # Check with a Lucas U-Sequence
-#                 if lucas_U_test(c,d,P,Q):
-#                     yield c
-#                     continue
-                
-#                 # Check with a Lucas V-Sequence
-#                 if lucas_V_test(d,s,P,Q):
-#                     yield c
+    D = P*P - 4*Q
+    
+    for n in composites():
+        
+        if n % 2 == 0:
+            continue
+        
+        if gcd(n,D) != 1:
+            continue
+        
+        delta = n-jacobi_symbol(D,n)
+        d,s = factor_out_twos(delta)
+        
+        # Check with a Lucas V-Sequence
+        if lucas_U_test(n,d,P,Q):
+            yield n
+            continue
+        
+        # Check with a Lucas V-Sequence
+        if lucas_V_test(n,d,s,P,Q):
+            yield n
 
 
 
@@ -276,7 +292,7 @@ if __name__ == '__main__':
     simple_test(pell_pseudoprimes_2(),10,
                 "169, 385, 741, 961, 1121, 2001, 3827, 4879, 5719, 6215")
     
-    # print("\nStrong Lucas Pseudoprimes")
-    # simple_test(strong_lucas_pseudoprimes(1,-1),2,
-    #             "323, 377, 1891, 3827, 4181, 5777, 6601, 6721, 8149")
+    print("\nStrong Lucas Pseudoprimes (infinite but rare and expensive to compute)")
+    simple_test(strong_lucas_pseudoprimes(1,-1),3,
+                "4181, 5777, 10877")
     
