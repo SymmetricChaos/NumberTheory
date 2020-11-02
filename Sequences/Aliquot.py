@@ -59,17 +59,20 @@ def untouchable():
         lo = hi
 
 
-def aliquot_recurrence(N):
+def aliquot_recurrence(n):
     """
-    Aliquot Sequence of N: Recurrence relation of which each term of the aliquot sum of the previous
+    Aliquot Sequence of n: Recurrence relation of which each term of the aliquot sum of the previous
+    
+    Args:
+        n -- integer greater than zero
     """
     
-    require_integers(["N"],[N])
-    require_geq(["N"],[N],1)
+    require_integers(["n"],[n])
+    require_geq(["n"],[n],1)
     
     while True:
-        yield N
-        N = aliquot_sum(N)
+        yield n
+        n = aliquot_sum(n)
 
 
 def abundant():

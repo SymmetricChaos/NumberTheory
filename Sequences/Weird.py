@@ -228,6 +228,16 @@ def lucky():
             nth += 1
 
 
+def selfridge():
+    """
+    Selfridge's Sequence: Used for parameter selection in Lucas pseudoprime tests\n
+    OEIS 
+    """
+    
+    for s,n in zip(sign_sequence(1),arithmetic(5,2)):
+        yield s*n
+
+
 
 
 
@@ -277,4 +287,8 @@ if __name__ == '__main__':
     print("\nLucky Numbers")
     simple_test(lucky(),15,
                 "1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63")
+    
+    print("\nSelfridge's Sequence")
+    simple_test(selfridge(),13,
+                "5, -7, 9, -11, 13, -15, 17, -19, 21, -23, 25, -27, 29")
     

@@ -1,9 +1,10 @@
 from Sequences.Primes import composites, primes
 from Sequences.MathUtils import factor_out_twos, coprime_to
 from Sequences.NiceErrorChecking import require_integers, require_geq
-
+from Sequences.Weird import selfridge
 
 from sympy import jacobi_symbol
+from sympy.ntheory.primetest import is_square
 from math import gcd
 
 def fermat_pseudoprimes(a):
@@ -111,6 +112,30 @@ def strong_pseudoprimes(a):
                     continue
 
 
+def euler_pseudoprimes():
+    """
+    Euler Pseudoprimes
+    OEIS A006970
+    """
+    
+    for c in composites():
+        if c % 2 == 1:
+            if 2**((c-1)//2)%c in (1,c-1):
+                yield c
+
+
+def euler_jacobi_pseudoprimes():
+    """
+    Euler-Jacobi Pseudoprimes
+    OEIS A047713
+    """
+    
+    for c in composites():
+        if c % 2 == 1:
+            if 2**((c-1)//2)%c == jacobi_symbol(2,c)%c:
+                yield c
+
+
 def lucas_pseudoprimes(P,Q):
     """
     Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
@@ -144,6 +169,39 @@ def lucas_pseudoprimes(P,Q):
                 
                 if a % c == 0:
                     yield c
+
+
+# def lucas_selfridge_pseudoprimes():
+#     """
+#     Lucas-Selfridge Pseudoprimes: Composite number passing the Lucas primality test with P and Q chosen by Selfdrige's method\n
+#     OEIS
+#     """
+    
+    
+#     for c in composites():
+#         if c % 2 == 1:
+#             P = 1
+            
+#             if is_square(c):
+#                 continue
+            
+#             for d in selfridge():
+#                 if gcd(d,c) == 1:
+#                     D = d
+#                     break
+            
+#             Q = (1-D)//4
+            
+#             delta = c-jacobi_symbol(D,c)
+            
+#             if delta > lucas_pos:
+#                 for i in range(delta-lucas_pos):
+#                     a, b = b, P*b-Q*a
+                
+#                 lucas_pos += delta-lucas_pos
+            
+#             if a % c == 0:
+#                 yield c
 
 
 def fibonacci_pseudoprimes():
@@ -202,7 +260,7 @@ def pell_pseudoprimes_2():
 # Only seems to work for base 1 need anotehr reference
 def strong_lucas_pseudoprimes(P,Q):
     """
-    Lucas Pseudoprimes: Composite number passing the Lucas primality test for P and Q
+    Lucas Pseudoprimes: Composite numbers passing either of two the Lucas primality tests for P and Q
     """
     
     def lucas_U_test(n,d,P,Q):
@@ -295,7 +353,18 @@ if __name__ == '__main__':
     simple_test(pell_pseudoprimes_2(),10,
                 "169, 385, 741, 961, 1121, 2001, 3827, 4879, 5719, 6215")
     
-    print("\nStrong Lucas Pseudoprimes (infinite but rare and expensive to compute)")
-    simple_test(strong_lucas_pseudoprimes(1,-1),2,
-                "4181, 5777")
+    # print("\nStrong Lucas Pseudoprimes (infinite but rare and expensive to compute)")
+    # simple_test(strong_lucas_pseudoprimes(1,-1),2,
+    #             "4181, 5777")
     
+    # print("\nLucas-Selfridge Pseudoprimes")
+    # simple_test(lucas_selfridge_pseudoprimes(),2,
+    #             "4181, 5777")
+    
+    print("\nEuler Pseudoprimes")
+    simple_test(euler_pseudoprimes(),9,
+                "341, 561, 1105, 1729, 1905, 2047, 2465, 3277, 4033")
+    
+    print("\nEuler-Jacobi Pseudoprimes")
+    simple_test(euler_jacobi_pseudoprimes(),9,
+                "561, 1105, 1729, 1905, 2047, 2465, 3277, 4033, 4681")
