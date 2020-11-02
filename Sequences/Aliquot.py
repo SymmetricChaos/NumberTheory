@@ -14,13 +14,49 @@ def aliquot():
         yield aliquot_sum(n)
 
 
+def touchable():
+    """
+    Touchable Numbers: Non-negative integers that can be an aliquot sum
+    OEIS A078923
+    """
+    
+    seen = set({})
+    lo, hi = 3,3
+    
+    yield 0
+    yield 1
+    
+    for n in naturals(3):
+        hi = (n-1)**2
+        
+        for k in range(lo,hi+1):
+            seen.add(aliquot_sum(k))
+        
+        if n in seen:
+            yield n
+        
+        lo = hi
+
+
 def untouchable():
     """
     Untouchable Numbers: Non-negative integers that cannot be an aliquot sum
     OEIS A005114
     """
     
-    pass
+    seen = set({})
+    lo, hi = 3,3
+    
+    for n in naturals(2):
+        hi = (n-1)**2
+        
+        for k in range(lo,hi+1):
+            seen.add(aliquot_sum(k))
+        
+        if n not in seen:
+            yield n
+        
+        lo = hi
 
 
 def aliquot_recurrence(N):
@@ -318,4 +354,12 @@ if __name__ == '__main__':
     print("\nPractical Numbers")
     simple_test(practical(),15,
                 "1, 2, 4, 6, 8, 12, 16, 18, 20, 24, 28, 30, 32, 36, 40")
+    
+    print("\nTouchable Numbers")
+    simple_test(touchable(),15,
+                "0, 1, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16")
+    
+    print("\nUntouchable Numbers")
+    simple_test(untouchable(),12,
+                "2, 5, 52, 88, 96, 120, 124, 146, 162, 188, 206, 210")
     
