@@ -182,8 +182,8 @@ __all__=[#MANIPULATIONS
          #PSEUDOPRIMES
          "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",
          "lucas_pseudoprimes","cipolla_pseudoprimes","fibonacci_pseudoprimes",
-          "pell_pseudoprimes","pell_pseudoprimes_2",
-          "strong_lucas_pseudoprimes",
+         "pell_pseudoprimes","pell_pseudoprimes_2",
+         "strong_lucas_pseudoprimes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",

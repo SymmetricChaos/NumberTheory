@@ -26,7 +26,11 @@ def fermat_pseudoprimes(a):
 
 def cipolla_pseudoprimes(a):
     """
-    Cipolla Pseudoprimes to Base a: A subset of Fermat pseudoprimes to the same base genereated by Cipolla's method'
+    Cipolla Pseudoprimes to Base a: A subset of Fermat pseudoprimes to the base a genereated by Cipolla's method'
+    
+    Args:
+        a -- integer greater than 1
+    
     OEIS A210454, A210461
     """
     
