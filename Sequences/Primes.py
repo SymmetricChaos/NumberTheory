@@ -238,41 +238,6 @@ def prime_gaps():
     yield from differences(primes())
 
 
-def composites():
-    """
-    Composite Numbers: Positive integers with more than two factors\n
-    OEIS A002808
-    """
-    
-    P = primes()
-    next(P)
-    lo = next(P)
-    hi = next(P)
-    
-    while True:
-        yield from range(lo+1,hi)
-        lo = hi
-        hi = next(P)
-
-
-def noncomposite():
-    """
-    Noncomposite Numbers: Positive integers with less than three factors\n
-    OEIS A008578
-    """
-    
-    yield from prepend(1,primes())
-
-
-def nonprime():
-    """
-    Nonprime Numbers: Positive integers that are not primes\n
-    OEIS A018252
-    """
-    
-    yield from prepend(1,composites())
-
-
 def primorial():
     """
     Primoral Numbers: Cumulative product of primes\n
@@ -280,15 +245,6 @@ def primorial():
     """
     
     yield from  prepend(1,partial_prods(primes()))
-
-
-def compositorial():
-    """
-    Compositorial Numbers: Cumulative product of composite numbers\n
-    OEIS A036691
-    """
-    
-    yield from prepend(1,partial_prods(composites()))
 
 
 def prime_powers():
@@ -360,17 +316,9 @@ if __name__ == '__main__':
     simple_test(primes(),15,
                 "2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47")
     
-    print("\nComposites")
-    simple_test(composites(),15,
-                "4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25")
-    
     print("\nPrimorials")
     simple_test(primorial(),9,
                 "1, 2, 6, 30, 210, 2310, 30030, 510510, 9699690")
-    
-    print("\nCompositorial")
-    simple_test(compositorial(),9,
-                "1, 4, 24, 192, 1728, 17280, 207360, 2903040, 43545600")
     
     print("\nPrime Powers")
     simple_test(prime_powers(),16,
@@ -399,10 +347,6 @@ if __name__ == '__main__':
     print("\nSafe Primes")
     simple_test(safe_primes(),13,
                 "5, 7, 11, 23, 47, 59, 83, 107, 167, 179, 227, 263, 347")
-    
-    print("\nNoncomposite Numbers")
-    simple_test(noncomposite(),15,
-                "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
     
     print("\nTwin Primes")
     simple_test(twin_primes(),14,

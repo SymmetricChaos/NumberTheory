@@ -4,7 +4,7 @@ from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 jordan_totient, multi_lcm, prime_power_factorization, \
                                 nth_sign, list_diffs
-from Sequences.Manipulations import partial_sums
+from Sequences.Manipulations import partial_sums, prepend, partial_prods
 
 from collections import defaultdict
 from math import prod, gcd
@@ -622,6 +622,61 @@ def odd_parts():
         yield n
 
 
+def composites():
+    """
+    Composite Numbers: Positive integers with more than two factors\n
+    OEIS A002808
+    """
+    
+    P = primes()
+    next(P)
+    lo = next(P)
+    hi = next(P)
+    
+    while True:
+        yield from range(lo+1,hi)
+        lo = hi
+        hi = next(P)
+
+
+def odd_composites():
+    """
+    Odd Composite Numbers: Composite numbers excluding those divisible by 2\n
+    OEIS
+    """
+    
+    for c in composites():
+        if c % 2 == 1:
+            yield c
+
+
+def noncomposite():
+    """
+    Noncomposite Numbers: Positive integers with less than three factors\n
+    OEIS A008578
+    """
+    
+    yield from prepend(1,primes())
+
+
+def nonprime():
+    """
+    Nonprime Numbers: Positive integers that are not primes\n
+    OEIS A018252
+    """
+    
+    yield from prepend(1,composites())
+
+
+def compositorial():
+    """
+    Compositorial Numbers: Cumulative product of composite numbers\n
+    OEIS A036691
+    """
+    
+    yield from prepend(1,partial_prods(composites()))
+
+
 
 
 
@@ -739,4 +794,20 @@ if __name__ == '__main__':
     print("\nOdd Parts")
     simple_test(odd_parts(),17,
                 "1, 1, 3, 1, 5, 3, 7, 1, 9, 5, 11, 3, 13, 7, 15, 1, 17")
+    
+    print("\nNoncomposite Numbers")
+    simple_test(noncomposite(),15,
+                "1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43")
+    
+    print("\nCompositorial")
+    simple_test(compositorial(),9,
+                "1, 4, 24, 192, 1728, 17280, 207360, 2903040, 43545600")
+    
+    print("\nComposites")
+    simple_test(composites(),15,
+                "4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25")
+    
+    print("\nOdd Composites")
+    simple_test(odd_composites(),14,
+                "9, 15, 21, 25, 27, 33, 35, 39, 45, 49, 51, 55, 57, 63")
     

@@ -40,7 +40,8 @@ from Sequences.Divisibility import totients, cototients, smooth, rough, highly_c
                                    highly_composite_prime_factor, jordan_totients, \
                                    charmichael, principal_character, p_adic_order, \
                                    liouville, liouville_sums, blum, blum_blum_shub_integers, \
-                                   semiprimes, almost_primes, all_divisors
+                                   semiprimes, almost_primes, all_divisors, composites, \
+                                   compositorial, nonprime, noncomposite
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -64,8 +65,8 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
                                         mertens_function
 
 from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
-                             composites, compositorial, prime_characteristic, \
-                             superprimes, noncomposite, odd_primes, twin_primes, \
+                             prime_characteristic, \
+                             superprimes, odd_primes, twin_primes, \
                              twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
                              sophie_germain_primes, safe_primes, linear_primes, congruent_primes, \
                              blum_primes
@@ -145,7 +146,8 @@ __all__=[#MANIPULATIONS
          "powerful","highly_composite_factor","highly_composite_prime_factor",
          "jordan_totients","charmichael","principal_character","semiprimes",
          "p_adic_order","liouville","liouville_sums","blum","almost_primes",
-         "blum_blum_shub_integers","all_divisors",
+         "blum_blum_shub_integers","all_divisors","composites","compositorial",
+         "odd_composites","nonprime","noncomposite",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -174,11 +176,10 @@ __all__=[#MANIPULATIONS
          
          #PRIME
          "primes","primorial","prime_counting","pythagorean_primes",
-         "composites","compositorial","prime_characteristic",
-         "superprimes","noncomposite","odd_primes","twin_primes",
-         "twin_prime_pairs","prime_gaps","prime_tuples","n_gap_prime_pairs",
-         "sophie_germain_primes","safe_primes","linear_primes",
-         "congruent_primes","blum_primes",
+         "prime_characteristic","superprimes","odd_primes",
+         "twin_primes","twin_prime_pairs","prime_gaps","prime_tuples",
+         "n_gap_prime_pairs","sophie_germain_primes","safe_primes",
+         "linear_primes","congruent_primes","blum_primes",
          
          #PSEUDOPRIMES
          "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",
