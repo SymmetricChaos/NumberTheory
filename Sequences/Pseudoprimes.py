@@ -176,30 +176,30 @@ def lucas_pseudoprimes(P,Q):
 #     Lucas-Selfridge Pseudoprimes: Composite number passing the Lucas primality test with P and Q chosen by Selfdrige's method\n
 #     OEIS
 #     """
-    
-    
+#    
+#    
 #     for c in composites():
 #         if c % 2 == 1:
 #             P = 1
-            
+#            
 #             if is_square(c):
 #                 continue
-            
+#            
 #             for d in selfridge():
 #                 if gcd(d,c) == 1:
 #                     D = d
 #                     break
-            
+#            
 #             Q = (1-D)//4
-            
+#            
 #             delta = c-jacobi_symbol(D,c)
-            
+#            
 #             if delta > lucas_pos:
 #                 for i in range(delta-lucas_pos):
 #                     a, b = b, P*b-Q*a
-                
+#                
 #                 lucas_pos += delta-lucas_pos
-            
+#            
 #             if a % c == 0:
 #                 yield c
 

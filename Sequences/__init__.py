@@ -72,7 +72,8 @@ from Sequences.Primes import primes, primorial, prime_counting, pythagorean_prim
 
 from Sequences.Pseudoprimes import fermat_pseudoprimes, weak_pseudoprimes, strong_pseudoprimes, \
                                    lucas_pseudoprimes, cipolla_pseudoprimes, fibonacci_pseudoprimes, \
-                                   pell_pseudoprimes, pell_pseudoprimes_2, strong_lucas_pseudoprimes
+                                   pell_pseudoprimes, pell_pseudoprimes_2, strong_lucas_pseudoprimes, \
+                                   euler_pseudoprimes, euler_jacobi_pseudoprimes
 
 from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, middle_square, \
                                    middle_square_weyl, blum_blum_shub, lehmer, \
@@ -100,16 +101,16 @@ from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_
 __all__=[#MANIPULATIONS
          "sequence_slice","segment","offset","skips","chunk_by_n","prepend",
          "sequence_apply","interleave","partial_sums","partial_prods",
-         "make_triangle","triangle_sums","triangle_products",
+         "make_triangle","triangle_sums","triangle_products","n_rep_a",
          "binomial_transform","convolution","pairwise_sum","pairwise_prod",
          "pairwise_apply","differences","hypersequence","run_length_encoding",
-         "run_lengths","n_rep_a",
+         "run_lengths",
          
          #ALIQUOT
          "aliquot","abundant","deficient","perfect","aliquot_recurrence",
          "abundance","deficiency","untouchable","pseudoperfect","weird",
          "highly_abundant","superabundant","amicable_pairs","practical",
-         "primitive_abundant_1","primitive_abundant_2",
+         "primitive_abundant_1","primitive_abundant_2","amicable",
          
          #BASE DEPENDENT
          "evil","odious","binary_weight","co_binary_weight","ruler",
@@ -182,8 +183,8 @@ __all__=[#MANIPULATIONS
          #PSEUDOPRIMES
          "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",
          "lucas_pseudoprimes","cipolla_pseudoprimes","fibonacci_pseudoprimes",
-         "pell_pseudoprimes","pell_pseudoprimes_2",
-         "strong_lucas_pseudoprimes",
+         "pell_pseudoprimes","pell_pseudoprimes_2","euler_pseudoprimes",
+         "strong_lucas_pseudoprimes","euler_jacobi_pseudoprimes",
          
          #PSEUDORANDOM
          "LCG","aLFG","mLFG","gLFG","LFSR","middle_square","blum_blum_shub",

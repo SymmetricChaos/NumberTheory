@@ -245,7 +245,7 @@ def weird():
             yield a
 
 
-def amicable_pairs():
+def amicable():
     """
     Amicable Pairs:\n
     OEIS A063990
@@ -263,6 +263,25 @@ def amicable_pairs():
             lower.add(n)
             yield n
             yield b
+
+
+def amicable_pairs():
+    """
+    Amicable Pairs:\n
+    OEIS A063990
+    """
+    
+    lower = set([])
+    
+    for n in naturals(220):
+        b = aliquot_sum(n)
+        
+        if b <= n or b in lower:
+            continue
+        
+        if aliquot_sum(b) == n:
+            lower.add(n)
+            yield n,b
 
 
 def practical():
@@ -351,8 +370,8 @@ if __name__ == '__main__':
                 "70")
     
     print("\nAmicable Pairs")
-    simple_test(amicable_pairs(),9,
-                "220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232")
+    simple_test(amicable_pairs(),4,
+                "(220, 284), (1184, 1210), (2620, 2924), (5020, 5564)")
     
     print("\nPractical Numbers")
     simple_test(practical(),15,
