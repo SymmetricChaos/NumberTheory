@@ -170,7 +170,7 @@ def gen_hypercube(e=0):
 
 def oblong():
     """
-    Pronic Numbers: Sums of consecutive non-negative integers\n
+    Oblong Numbers (sometimes Pronic Numbers): Sums of consecutive non-negative integers\n
     OEIS A002378
     """
     
@@ -184,7 +184,7 @@ def oblong():
 
 def rectangular(d):
     """
-    Rectangular Numbers: Generalization of Pronic Numbers\n
+    Rectangular Numbers: Generalization of Oblong Numbers\n
     OEIS A005563, A028552, A028347, A028557, A028560, A028563, A028566,
          A028569, A098603, A119412, A132759, A098847-A098850, A120071,
          A132760-A132773
@@ -395,7 +395,7 @@ if __name__ == '__main__':
     simple_test(hypercube(4),10,
                 "0, 1, 16, 81, 256, 625, 1296, 2401, 4096, 6561")
     
-    print("\nPronic Numbers")
+    print("\nOblong Numbers")
     simple_test(oblong(),13,
                 "0, 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156")
     

@@ -33,12 +33,12 @@ from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, 
 
 from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
 
-from Sequences.Divisibility import totients, cototients, smooth, rough, highly_composite, \
+from Sequences.Divisibility import smooth, rough, highly_composite, \
                                    divisors, prime_divisors, unique_prime_divisors, \
                                    squarefree, squarefree_kernel, coprime_characteristic, \
                                    coprimes, powerful, highly_composite_factor, \
-                                   highly_composite_prime_factor, jordan_totients, \
-                                   charmichael, principal_character, p_adic_order, \
+                                   highly_composite_prime_factor, \
+                                   principal_character, p_adic_order, \
                                    liouville, liouville_sums, blum, blum_blum_shub_integers, \
                                    semiprimes, almost_primes, all_divisors, composites, \
                                    compositorial, nonprime, noncomposite
@@ -91,6 +91,8 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              polynomial, fermat, evens, gen_evens, odds, gen_odds, \
                              counting, constant, arithmetrico_geometric, gen_polynomial, \
                              self_powers, repdigit, sign_sequence
+
+from Sequences.Totient import totients, cototients, charmichael, jordan_totients
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
                             hofstader_Q, sierpinski, lucky
@@ -204,6 +206,9 @@ __all__=[#MANIPULATIONS
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
          "constant","arithmetrico_geometric","gen_polynomial","self_powers",
          "repdigit","sign_sequence",
+         
+         #TOTIENT
+         "totients","cototients","charmichael","jordan_totients",
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",

@@ -2,7 +2,6 @@ from Sequences.NiceErrorChecking import require_integers, require_geq, require_p
 from Sequences.Primes import primes, blum_primes
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
-                                jordan_totient, multi_lcm, prime_power_factorization, \
                                 nth_sign, list_diffs
 from Sequences.Manipulations import partial_sums, prepend, partial_prods
 
@@ -289,90 +288,6 @@ def powerful(n=2):
     for m in naturals(4):
         if is_n_powerful(m,n):
             yield m
-
-
-def totients():
-    """
-    Totients: Count of positive integers coprime to each positive integer\n
-    OEIS A000010
-    """
-    
-    D = defaultdict(list)
-    
-    yield 1
-    
-    for q in naturals(2):
-        if q not in D:
-            yield q-1
-            D[q + q] = [q]
-        
-        else:
-            n,d = 1,1
-            
-            for p in D[q]:
-                D[p+q].append(p)
-                
-                n *= (p-1)
-                d *= p
-            
-            yield q*n//d
-            
-            del D[q]
-
-
-def cototients():
-    """
-    Cotients: Count of positive integers not coprime to each positive integer\n
-    OEIS A051953
-    """
-    
-    for n,t in enumerate(totients(),1):
-        yield n-t
-
-
-# def nontotients():
-
-
-# def even_nontotients():
-
-
-# def noncototient():
-
-
-# def sparsely_totient():
-
-
-def charmichael():
-    """
-    Charmichael Function: LCM of the orders of the elements of the finite multiplictive group on n\n
-    OEIS A002322
-    """
-    
-    yield 1
-    
-    def charm(n):
-        if n > 4 and n%2 == 0:
-            return jordan_totient(n)//2
-        return jordan_totient(n)
-    
-    for n in naturals(2):
-        T = [charm(p) for p in prime_power_factorization(n)]
-        
-        yield multi_lcm(T)
-
-
-def jordan_totients(k):
-    """
-    Jordan's k-Totient Function
-    
-    Args:
-        k -- power that denominator is raised to
-    
-    OEIS A007434, A059376, A059377, A059378, A069091-A069095
-    """
-    
-    for n in naturals(1):
-        yield jordan_totient(n,k)
 
 
 def coprimes(n):
@@ -683,14 +598,6 @@ def compositorial():
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
-    print("\nTotient Numbers")
-    simple_test(totients(),17,
-                "1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16")
-    
-    print("\nCototient Numbers")
-    simple_test(cototients(),18,
-                "0, 1, 1, 2, 1, 4, 1, 4, 3, 6, 1, 8, 1, 8, 7, 8, 1, 12")
-    
     print("\n5-Smooth (Hamming)")
     simple_test(smooth(5),16,
                 "1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25")
@@ -746,14 +653,6 @@ if __name__ == '__main__':
     print("\nCount of Prime Factors (with multiplicity) for each Highly Composite Number")
     simple_test(highly_composite_prime_factor(),18,
                 "0, 1, 2, 2, 3, 4, 4, 5, 4, 5, 5, 6, 6, 7, 6, 6, 7, 7")
-    
-    print("\nJordan 2-Totients")
-    simple_test(jordan_totients(2),13,
-                "1, 3, 8, 12, 24, 24, 48, 48, 72, 72, 120, 96, 168")
-    
-    print("\nCharmichael Function")
-    simple_test(charmichael(),17,
-                "1, 1, 2, 2, 4, 2, 6, 2, 6, 4, 10, 2, 12, 6, 4, 4, 16")
     
     print("\n3-adic Orders")
     simple_test(p_adic_order(3),18,
