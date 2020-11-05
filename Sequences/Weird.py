@@ -241,7 +241,7 @@ def selfridge():
 
 def natural_subsets(tuples=True):
     """
-    All subset's of the natural numbers in the standard recursive order. Returns tuples.\n
+    All subset's of the natural numbers in the standard recursive order. Returns tuples.
     
     Args:
         tuples -- bool, if true returns the subsets as tuples, if false streams an integers
@@ -258,9 +258,9 @@ def natural_subsets(tuples=True):
 
 def natural_subsets_2(tuples=True):
     """
-    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set\n
+    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set
     
-        Args:
+    Args:
         tuples -- bool, if true returns the subsets as tuples, if false streams an integers with 0 for the empty set
     
     OEIS A048793
@@ -336,3 +336,4 @@ if __name__ == '__main__':
     print("\nAll Subsets of Positive Integers (OEIS) version")
     simple_test(natural_subsets_2(tuples=False),18,
                 "0, 1, 2, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 4, 1, 4, 2, 4")
+    

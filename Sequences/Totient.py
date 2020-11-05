@@ -1,7 +1,10 @@
 from Sequences.Simple import naturals
-from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm
+from Sequences.Divisibility import squarefree
+from Sequences.Primes import primorial
+from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm, unique_prime_factors
 
 from collections import defaultdict
+from math import prod
 
 def totients():
     """
@@ -47,25 +50,33 @@ def totient_range():
     Range of Euler's Totient Function in order
     """
     
-    #need inverse totient function for this
+    # Primorials are all sparsely totient, every following number has a greater totient
     
-    # P(n) = 2,3
-    # (1/2)*(2/3) = 1/3
-    # Giving the sequences
-    # 6, 12, 18, 24
-    # 2   4   6   8
+    P = primorial()
+    ctr = next(P)
     
-    # P = 2,5
-    #  (1/2)*(4/5) = 2/5
-    # Giving the sequences
-    # 10, 20, 40, 50
-    #  4   8, 16, 20
+    old = set([])
+    S = set([])
     
-    # P = 3,5
-    # (2/3)*(4/5) = 8/15
-    # Giving the sequences
-    # 15, 45, 75, 135
-    #  8, 24, 40,  72
+    for n,t in enumerate(totients(),1):
+        S.add(t)
+        
+        if n == ctr:
+            ctr = next(P)
+            
+            #When reaching a primorial filter out eveything greater than its totient
+            confirmed = [s for s in S-old if s <= t]
+            
+            # Then eliminate previously used values from S
+            S = S - old
+            
+            # Store thenew confirmed values as old, we don't need anything else
+            # because low number won't appear again
+            old = set(confirmed)
+            
+            yield from sorted(confirmed)
+            
+
 
 
 
@@ -135,4 +146,8 @@ if __name__ == '__main__':
     print("\nCototient Numbers")
     simple_test(cototients(),18,
                 "0, 1, 1, 2, 1, 4, 1, 4, 3, 6, 1, 8, 1, 8, 7, 8, 1, 12")
+    
+    print("\nRange of the Totient Function")
+    simple_test(totient_range(),15,
+                "1, 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 28, 30, 32")
     

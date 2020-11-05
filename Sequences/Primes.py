@@ -313,6 +313,8 @@ def prime_product(P,inclusive=False):
     
     Args:
         inclusive -- bool, if True only numbers divisible by all elements of P are included
+    
+    OEIS
     """
     
     P = set(P)
