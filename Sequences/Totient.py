@@ -51,15 +51,21 @@ def totient_range():
     
     # P(n) = 2,3
     # (1/2)*(2/3) = 1/3
-    # so the totient of n must be a multiple of 3
+    # Giving the sequences
+    # 6, 12, 18, 24
+    # 2   4   6   8
     
     # P = 2,5
     #  (1/2)*(4/5) = 2/5
-    # so the totient of n must be a multiple of 5
+    # Giving the sequences
+    # 10, 20, 40, 50
+    #  4   8, 16, 20
     
     # P = 3,5
     # (2/3)*(4/5) = 8/15
-    # so the totient of n must be a multiple of 15
+    # Giving the sequences
+    # 15, 45, 75, 135
+    #  8, 24, 40,  72
 
 
 

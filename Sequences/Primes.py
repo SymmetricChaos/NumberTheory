@@ -1,9 +1,10 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, arithmetic
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
 from collections import defaultdict
 from sympy import sieve, isprime
+from math import prod
 
 ##############################
 ## CLASSES OF PRIME NUMBERS ##
@@ -306,6 +307,40 @@ def prime_counting():
         cur = p
 
 
+def prime_product(P,inclusive=False):
+    """
+    Naturals such that all prime factors are in the set P
+    
+    Args:
+        inclusive -- bool, if True only numbers divisible by all elements of P are included
+    """
+    
+    P = set(P)
+    I = prod(P)
+    
+    if inclusive:
+        for n in arithmetic(I,I):
+            m = n
+            
+            for p in P:
+                while m % p == 0:
+                    m //= p
+            
+            if m == 1:
+                yield n
+    
+    
+    else:
+        for n in naturals(2):
+            m = n
+            
+            for p in P:
+                while m % p == 0:
+                    m //= p
+            
+            if m == 1:
+                yield n
+
 
 
 
@@ -375,4 +410,12 @@ if __name__ == '__main__':
     print("\nBlum's Special Primes")
     simple_test(blum_primes(),10,
                 "23, 47, 167, 359, 719, 1439, 2039, 2879, 4079, 4127")
+    
+    print("\n(3,5)-Prime Product Numbers")
+    simple_test(prime_product([3,5]),13,
+                "3, 5, 9, 15, 25, 27, 45, 75, 81, 125, 135, 225, 243")
+    
+    print("\n(3,5)-Prime Product Numbers (requiring both)")
+    simple_test(prime_product([3,5],inclusive=True),11,
+                "15, 45, 75, 135, 225, 375, 405, 675, 1125, 1215, 1875")
     

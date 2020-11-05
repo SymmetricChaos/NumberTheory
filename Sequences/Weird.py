@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
 from Sequences.Combinatorics import pascal
 from Sequences.Manipulations import sequence_apply
+from Sequences.MathUtils import all_subsets
 
 from math import gcd
 
@@ -238,6 +239,15 @@ def selfridge():
         yield s*n
 
 
+def natural_subsets():
+    """
+    All subset's of the natural numbers in the standard recursive order\n
+    OEIS A048793
+    """
+    
+    yield from all_subsets(naturals(1))
+
+
 
 
 
@@ -291,4 +301,8 @@ if __name__ == '__main__':
     print("\nSelfridge's Sequence")
     simple_test(selfridge(),13,
                 "5, -7, 9, -11, 13, -15, 17, -19, 21, -23, 25, -27, 29")
+    
+    print("\nAll Subsets of Natural Numbers")
+    simple_test(natural_subsets(),7,
+                "(1,), (2,), (1, 2), (3,), (1, 3), (2, 3), (1, 2, 3)")
     

@@ -692,6 +692,28 @@ def powerset(L):
     return chain.from_iterable(combinations(list(L), r) for r in range(len(L)+1))
 
 
+def all_subsets(sequence):
+    """
+    Generalize the above powerset code to work with generators
+    """
+    
+    L = [(next(sequence),)]
+    
+    yield L[0]
+    
+    for s in sequence:
+        yield (s,)
+        T = [(s,)]
+        
+        for l in L:
+            sub = l+(s,)
+            yield sub
+            T.append(sub)
+        
+        
+        L += T
+
+
 def nth_sign(n):
     """
     (-1)^n
@@ -976,4 +998,7 @@ if __name__ == '__main__':
     
     print("\nJordan 2-Totient of 4")
     print(jordan_totient(4,2))
+    
+    print("\nAll Subsets of [1,2,3,4,5]")
+    print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
