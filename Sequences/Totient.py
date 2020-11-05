@@ -1,10 +1,9 @@
 from Sequences.Simple import naturals
-from Sequences.Divisibility import squarefree
 from Sequences.Primes import primorial
-from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm, unique_prime_factors
+from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm
 
 from collections import defaultdict
-from math import prod
+
 
 def totients():
     """
@@ -75,15 +74,33 @@ def totient_range():
             old = set(confirmed)
             
             yield from sorted(confirmed)
-            
 
 
+def nontotients():
+    """
+    Numbers that are not in the range of the totient function\n
+    OEIS A007617
+    """
+    
+    T = totient_range()
+    a,b = next(T),next(T)
+    
+    while True:
+        for i in range(a+1,b):
+            yield 
+        
+        a,b = b,next(T)
 
 
-# def nontotients():
-
-
-# def even_nontotients():
+def even_nontotients():
+    """
+    Even Numbers that are not in the range of the totient function\n
+    OEIS A005277
+    """
+    
+    for i in nontotients():
+        if i % 2 == 0:
+            yield i
 
 
 # def noncototient():
@@ -150,4 +167,12 @@ if __name__ == '__main__':
     print("\nRange of the Totient Function")
     simple_test(totient_range(),15,
                 "1, 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 28, 30, 32")
+    
+    print("\nNontotient Numbers")
+    simple_test(nontotients(),15,
+                "3, 5, 7, 9, 11, 13, 14, 15, 17, 19, 21, 23, 25, 26, 27")
+    
+    print("\nEven Nontotient Numbers")
+    simple_test(even_nontotients(),13,
+                "14, 26, 34, 38, 50, 62, 68, 74, 76, 86, 90, 94, 98")
     
