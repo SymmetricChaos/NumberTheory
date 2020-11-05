@@ -241,11 +241,23 @@ def selfridge():
 
 def natural_subsets():
     """
-    All subset's of the natural numbers in the standard recursive order\n
+    All subset's of the natural numbers in the standard recursive order. Returns tuples.\n
+    OEIS
+    """
+    
+    yield ()
+    yield from all_subsets(naturals(0))
+
+
+def natural_subsets_2():
+    """
+    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set\n
     OEIS A048793
     """
     
-    yield from all_subsets(naturals(1))
+    yield 0
+    for i in all_subsets(naturals(1)):
+        yield from i
 
 
 
@@ -304,5 +316,8 @@ if __name__ == '__main__':
     
     print("\nAll Subsets of Natural Numbers")
     simple_test(natural_subsets(),7,
-                "(1,), (2,), (1, 2), (3,), (1, 3), (2, 3), (1, 2, 3)")
+                "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
     
+    print("\nAll Subsets of Positive Integers (OEIS) version")
+    simple_test(natural_subsets_2(),18,
+                "0, 1, 2, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 4, 1, 4, 2, 4")
