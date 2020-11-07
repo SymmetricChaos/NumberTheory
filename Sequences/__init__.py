@@ -94,7 +94,7 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
 
 from Sequences.Totient import totients, cototients, charmichael, jordan_totients, \
                               totient_range, nontotients, even_nontotients, sparsely_totient, \
-                              highly_totient
+                              highly_totient, totient_count
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
                             hofstader_Q, sierpinski, lucky
@@ -212,7 +212,7 @@ __all__=[#MANIPULATIONS
          #TOTIENT
          "totients","cototients","charmichael","jordan_totients",
          "totient_range","nontotients","even_nontotients","sparsely_totient",
-         "highly_totient",
+         "highly_totient","totient_count",
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",

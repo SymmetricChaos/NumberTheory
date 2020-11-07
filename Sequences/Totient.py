@@ -140,7 +140,8 @@ def sparsely_totient():
 
 def highly_totient():
     """
-    POsitive integer with that are the totient of more numbers than any smaller number
+    Positive integer with that are the totient of more numbers than any smaller number\n
+    OEIS A097942
     """
     
     D = defaultdict(lambda:0)
@@ -155,11 +156,38 @@ def highly_totient():
         if n == ctr:
             ctr = next(S)
             
-            for num,val in D.items():
-                if num <= t:
-                    if val > hi:
-                        yield num
-                        hi = val
+            L = [(k,v) for k,v in D.items()]
+            for tot,ct in L:
+                if tot <= t:
+                    if ct > hi:
+                        yield tot
+                        hi = ct
+                    del D[tot]
+
+
+def totient_count():
+    """
+    Number of positive integers with totient n for positive n
+    """
+    
+    D = defaultdict(lambda:0)
+    lo = 1
+    
+    S = offset(sparsely_totient(),1)
+    ctr = next(S)
+    
+    for n,t in enumerate(totients(),1):
+        D[t] += 1
+        
+        if n == ctr:
+            ctr = next(S)
+            
+            for i in range(lo,t):
+                yield D[i]
+                del D[i]
+            
+            lo = t
+
 
 
 def charmichael():
@@ -237,3 +265,6 @@ if __name__ == '__main__':
     simple_test(highly_totient(),13,
                 "1, 2, 4, 8, 12, 24, 48, 72, 144, 240, 432, 480, 576")
     
+    print("\nTotient Counting Function")
+    simple_test(totient_count(),18,
+                "2, 3, 0, 4, 0, 4, 0, 5, 0, 2, 0, 6, 0, 0, 0, 6, 0, 4")

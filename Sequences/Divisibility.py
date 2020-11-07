@@ -568,7 +568,7 @@ def odd_composites():
 def even_composites():
     """
     Odd Composite Numbers: Composite numbers divisible by 2\n
-    OEIS
+    OEIS A014076
     """
     
     for i in arithmetic(4,2):
