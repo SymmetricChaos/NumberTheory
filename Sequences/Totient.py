@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.Primes import primorial
 from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm
+from Sequences.Manipulations import offset
 
 from collections import defaultdict
 
@@ -47,6 +48,7 @@ def cototients():
 def totient_range():
     """
     Range of Euler's Totient Function in order
+    OEIS A002202
     """
     
     # Primorials are all sparsely totient, every following number has a greater totient
@@ -87,7 +89,7 @@ def nontotients():
     
     while True:
         for i in range(a+1,b):
-            yield 
+            yield i
         
         a,b = b,next(T)
 
@@ -106,7 +108,37 @@ def even_nontotients():
 # def noncototient():
 
 
-# def sparsely_totient():
+def sparsely_totient():
+    """
+    Positive integers which have a totient less than all greater integers\n
+    OEIS A036913
+    """
+    
+    P = offset(primorial(),1)
+    ctr = next(P)
+    
+    N = []
+    T = []
+    
+    def find_sparse(N,T):
+        for i,t in enumerate(T[:-1]):
+            if t < min(T[i+1:]):
+                yield N[i]
+    
+    
+    for n,t in enumerate(totients(),1):
+        N.append(n)
+        T.append(t)
+        
+        if n == ctr:
+            # print(N)
+            # print(T)
+            ctr = next(P)
+            
+            yield from find_sparse(N,T)
+            yield n
+            N = []
+            T = []
 
 
 def charmichael():
@@ -175,4 +207,8 @@ if __name__ == '__main__':
     print("\nEven Nontotient Numbers")
     simple_test(even_nontotients(),13,
                 "14, 26, 34, 38, 50, 62, 68, 74, 76, 86, 90, 94, 98")
+    
+    print("\nSparsely Totient Numbers")
+    simple_test(sparsely_totient(),13,
+                "2, 6, 12, 18, 30, 42, 60, 66, 90, 120, 126, 150, 210")
     
