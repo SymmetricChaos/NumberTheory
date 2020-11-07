@@ -582,7 +582,24 @@ def head(sequence,n):
     return [i for i in segment(sequence,0,n)]
 
 
-
+def compare_sequences(sequences,n):
+    """
+    Compare the first n terms of the given list of sequences
+    """
+    
+    S = [head(s,n) for s in sequences]
+    
+    lines = []
+    for l in range(len(sequences)):
+        lines.append([])
+    
+    for tup in zip(*S):
+        m = max([len(str(i)) for i in tup])+1
+        for n,t in enumerate(tup):
+            lines[n].append(f"{str(t):>{m}}")
+    
+    for l in lines:
+        print(",".join(l))
 
 
 ##################
