@@ -167,7 +167,8 @@ def highly_totient():
 
 def totient_count():
     """
-    Number of positive integers with totient n for positive n
+    Number of positive integers with totient n for positive n\n
+    OEIS A014197
     """
     
     D = defaultdict(lambda:0)
@@ -187,7 +188,6 @@ def totient_count():
                 del D[i]
             
             lo = t
-
 
 
 def charmichael():

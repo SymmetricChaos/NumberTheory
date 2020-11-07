@@ -3,6 +3,8 @@ from Sequences.Simple import naturals, sign_sequence
 from Sequences.MathUtils import poly_mult
 from Sequences.Primes import primes
 
+from itertools import cycle
+
 def factorials():
     """
     Factorial Numbers: Product of the the first n positive integers\n
@@ -16,6 +18,32 @@ def factorials():
     for n in naturals(1):
         out = out * n
         yield out
+
+
+def superfactorials():
+    """
+    Superfactorials: Partial products of the factorials\n
+    OEIS A000178
+    """
+    
+    out = 1
+    
+    for f in factorials():
+        out *= f
+        yield out
+
+
+def left_factorials():
+    """
+    Left Factorials: Partial sums of the factorials
+    OEIS A003422
+    """
+    out = 0
+    
+    for f in factorials():
+        
+        yield out
+        out += f
 
 
 def alternating_factorials_1():
@@ -126,7 +154,7 @@ def even_double_factorials():
 
 def rising_factorial_expansions():
     """
-    Coefficients of the Polynomial Expansions of the Rising Factorials
+    Coefficients of the Polynomial Expansions of the Rising Factorials\n
     OEIS A132393
     """
     
@@ -141,7 +169,7 @@ def rising_factorial_expansions():
 
 def falling_factorial_expansions():
     """
-    Coefficients of the Polynomial Expansions of the Falling Factorials
+    Coefficients of the Polynomial Expansions of the Falling Factorials\n
     OEIS A048994
     """
     P = [1]
@@ -155,7 +183,7 @@ def falling_factorial_expansions():
 
 def wilson():
     """
-    Wilson's Sequence: (n-1)! % n, equal to 0 for every composite number other than 4, otherwise n-1
+    Wilson's Sequence: (n-1)! % n, equal to 0 for every composite number other than 4, otherwise n-1\n
     OEIS A061006
     """
     
@@ -171,6 +199,48 @@ def wilson():
         
         yield p-1
         oldp = p
+
+
+def factoradic():
+    """
+    Factoradic Number System: The integers written in the factorial base, returns tuples\n
+    OEIS A007623
+    """
+    
+    # The maxiumim digit value in the factoradic system goes up by one each place
+    max_val = 1
+    
+    # Counting up the digits of the factoradic numbers cycle at slower and slower paces
+    # The lowest place goes 0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+    # The next place goes   0,0,1,1,2,2,0,0,1,1,2,2,0,0,1,1,2,2,0,0,1,1,2,2
+    # The next place goes   0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3
+    # We will generate the factoradics using this pattern and the cycle() function
+    cycle_len = 1
+    cycles = [cycle([1,0])]
+    
+    yield (0,)
+    ctr = 0
+    
+    while True:
+        ctr += 1
+        N = []
+        
+        for n in reversed(cycles):
+            N.append(next(n))
+        
+        if ctr == cycle_len*max_val:
+            ctr = 0
+            max_val += 1
+            cycle_len *= max_val
+            
+            L = []
+            for i in range(1,max_val+1):
+                L += [i]*cycle_len
+            L += [0]*cycle_len
+            
+            cycles.append(cycle(L))
+        
+        yield tuple(N)
 
 
 
@@ -218,4 +288,16 @@ if __name__ == '__main__':
     print("\nWilson's Sequence")
     simple_test(wilson(),17,
                 "0, 1, 2, 2, 4, 0, 6, 0, 0, 0, 10, 0, 12, 0, 0, 0, 16")
+    
+    print("\nSuperfactorials")
+    simple_test(superfactorials(),8,
+                "1, 1, 2, 12, 288, 34560, 24883200, 125411328000")
+    
+    print("\nLeft Factorials")
+    simple_test(left_factorials(),11,
+                "0, 1, 2, 4, 10, 34, 154, 874, 5914, 46234, 409114")
+    
+    print("\nFactoradic Integers")
+    simple_test(factoradic(),7,
+                "(0,), (1,), (1, 0), (1, 1), (2, 0), (2, 1), (1, 0, 0)")
     

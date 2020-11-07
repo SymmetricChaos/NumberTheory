@@ -45,7 +45,8 @@ from Sequences.Divisibility import smooth, rough, highly_composite, \
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
-                                 odd_double_factorials
+                                 odd_double_factorials, superfactorials, left_factorials, \
+                                 factoradic
 
 from Sequences.Figurate import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
@@ -156,7 +157,8 @@ __all__=[#MANIPULATIONS
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
-         "odd_double_factorials",
+         "odd_double_factorials","superfactorials", "left_factorials",
+         "factoradic",
          
          #FIGURATE
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
