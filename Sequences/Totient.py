@@ -125,20 +125,41 @@ def sparsely_totient():
             if t < min(T[i+1:]):
                 yield N[i]
     
-    
     for n,t in enumerate(totients(),1):
         N.append(n)
         T.append(t)
         
         if n == ctr:
-            # print(N)
-            # print(T)
             ctr = next(P)
             
             yield from find_sparse(N,T)
             yield n
             N = []
             T = []
+
+
+def highly_totient():
+    """
+    POsitive integer with that are the totient of more numbers than any smaller number
+    """
+    
+    D = defaultdict(lambda:0)
+    hi = 0
+    
+    S = sparsely_totient()
+    ctr = next(S)
+    
+    for n,t in enumerate(totients(),1):
+        D[t] += 1
+        
+        if n == ctr:
+            ctr = next(S)
+            
+            for num,val in D.items():
+                if num <= t:
+                    if val > hi:
+                        yield num
+                        hi = val
 
 
 def charmichael():
@@ -211,4 +232,8 @@ if __name__ == '__main__':
     print("\nSparsely Totient Numbers")
     simple_test(sparsely_totient(),13,
                 "2, 6, 12, 18, 30, 42, 60, 66, 90, 120, 126, 150, 210")
+    
+    print("\nHighly Totient Numbers")
+    simple_test(highly_totient(),13,
+                "1, 2, 4, 8, 12, 24, 48, 72, 144, 240, 432, 480, 576")
     

@@ -41,7 +41,7 @@ from Sequences.Divisibility import smooth, rough, highly_composite, \
                                    principal_character, p_adic_order, \
                                    liouville, liouville_sums, blum, blum_blum_shub_integers, \
                                    semiprimes, almost_primes, all_divisors, composites, \
-                                   compositorial, nonprime, noncomposite
+                                   compositorial, nonprime, noncomposite, even_composites
 
 from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                  kempner, double_factorials, even_double_factorials, \
@@ -93,7 +93,8 @@ from Sequences.Simple import naturals, integers, arithmetic, geometric, powers, 
                              self_powers, repdigit, sign_sequence
 
 from Sequences.Totient import totients, cototients, charmichael, jordan_totients, \
-                              totient_range, nontotients, even_nontotients, sparsely_totient
+                              totient_range, nontotients, even_nontotients, sparsely_totient, \
+                              highly_totient
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, even_odd, \
                             hofstader_Q, sierpinski, lucky
@@ -150,7 +151,7 @@ __all__=[#MANIPULATIONS
          "jordan_totients","charmichael","principal_character","semiprimes",
          "p_adic_order","liouville","liouville_sums","blum","almost_primes",
          "blum_blum_shub_integers","all_divisors","composites","compositorial",
-         "odd_composites","nonprime","noncomposite",
+         "odd_composites","nonprime","noncomposite","even_composites",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -211,6 +212,7 @@ __all__=[#MANIPULATIONS
          #TOTIENT
          "totients","cototients","charmichael","jordan_totients",
          "totient_range","nontotients","even_nontotients","sparsely_totient",
+         "highly_totient",
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",

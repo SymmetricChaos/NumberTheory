@@ -1,6 +1,6 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_prime
 from Sequences.Primes import primes, blum_primes
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, arithmetic
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 nth_sign, list_diffs
 from Sequences.Manipulations import partial_sums, prepend, partial_prods
@@ -565,6 +565,16 @@ def odd_composites():
             yield c
 
 
+def even_composites():
+    """
+    Odd Composite Numbers: Composite numbers divisible by 2\n
+    OEIS
+    """
+    
+    for i in arithmetic(4,2):
+        yield i
+
+
 def noncomposite():
     """
     Noncomposite Numbers: Positive integers with less than three factors\n
@@ -709,4 +719,8 @@ if __name__ == '__main__':
     print("\nOdd Composites")
     simple_test(odd_composites(),14,
                 "9, 15, 21, 25, 27, 33, 35, 39, 45, 49, 51, 55, 57, 63")
+    
+    print("\nEven Composites")
+    simple_test(even_composites(),14,
+                "4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30")
     
