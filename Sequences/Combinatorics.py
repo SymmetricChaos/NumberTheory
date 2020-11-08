@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors
+from Sequences.MathUtils import nontrivial_factors, all_subsets
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -391,6 +391,23 @@ def finite_permutations():
         yield from lex_permute(n,n)
 
 
+def natural_subsets(index=0):
+    """
+    All subset's of the natural numbers in the standard recursive order. Returns tuples.
+    
+    Args:
+        index -- 0 or 1, least element
+    
+    OEIS
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    yield ()
+    yield from all_subsets(naturals(index))
+
+
 
 
 
@@ -489,4 +506,8 @@ if __name__ == '__main__':
     print("\n\nAll Finite Permutations")
     simple_test(finite_permutations(),6,
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
+    
+    print("\nAll Subsets of Natural Numbers")
+    simple_test(natural_subsets(),7,
+                "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
     

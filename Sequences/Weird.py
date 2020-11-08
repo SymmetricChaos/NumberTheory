@@ -239,40 +239,16 @@ def selfridge():
         yield s*n
 
 
-def natural_subsets(tuples=True):
+def natural_subsets_2():
     """
-    All subset's of the natural numbers in the standard recursive order. Returns tuples.
-    
-    Args:
-        tuples -- bool, if true returns the subsets as tuples, if false streams an integers
-    OEIS
-    """
-    
-    if tuples:
-        yield ()
-        yield from all_subsets(naturals(0))
-    else:
-        for i in all_subsets(naturals(0)):
-            yield from i
-
-
-def natural_subsets_2(tuples=True):
-    """
-    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set
-    
-    Args:
-        tuples -- bool, if true returns the subsets as tuples, if false streams an integers with 0 for the empty set
-    
+    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set\n
     OEIS A048793
     """
     
-    if tuples:
-        yield ()
-        yield from all_subsets(naturals(1))
-    else:
-        yield 0
-        for i in all_subsets(naturals(1)):
-            yield from i
+    
+    yield 0
+    for i in all_subsets(naturals(1)):
+        yield from i
 
 
 
@@ -329,11 +305,7 @@ if __name__ == '__main__':
     simple_test(selfridge(),13,
                 "5, -7, 9, -11, 13, -15, 17, -19, 21, -23, 25, -27, 29")
     
-    print("\nAll Subsets of Natural Numbers")
-    simple_test(natural_subsets(),7,
-                "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
-    
     print("\nAll Subsets of Positive Integers (OEIS representation)")
-    simple_test(natural_subsets_2(tuples=False),18,
+    simple_test(natural_subsets_2(),18,
                 "0, 1, 2, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 4, 1, 4, 2, 4")
     
