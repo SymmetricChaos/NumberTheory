@@ -303,7 +303,6 @@ def lex_choose(n,k,replace=False,reverse=False):
                     # So if anything in the suffix is less than s it can't be valid
                     if len(suffix) > 0 and min(suffix) < s:
                         continue
-                    # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     T = (s,) + suffix
                     # If we allow replacement don't check for repetition
                     if replace:
@@ -368,7 +367,6 @@ def colex_choose(n,k,replace=False,reverse=False):
                     # So no element of the prefix can be greater than s
                     if len(prefix) > 0 and max(prefix) > s:
                         continue
-                    # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     T = prefix + (s,)
                     # If we allow replacement don't check for repetition
                     if replace:
@@ -437,40 +435,6 @@ if __name__ == '__main__':
                 "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
     
-    print("\n\nThe following are permutations (without repetition) of length 3 from the set {0,1,2,3,4}")
-    print("Lexicographic Order")
-    simple_test(lex_permute(5,3),5,
-                "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
-    
-    print("\nReversed")
-    simple_test(lex_permute(5,3,reverse=True),5,
-                "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
-    
-    print("\nReflected")
-    simple_test(lex_permute(5,3,reflect=True),5,
-                "(2, 1, 0), (3, 1, 0), (4, 1, 0), (1, 2, 0), (3, 2, 0)")
-    
-    print("\nReversed and Reflected")
-    simple_test(lex_permute(5,3,reflect=True,reverse=True),5,
-                "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
-    
-    print("\nColexicographic Order")
-    simple_test(colex_permute(5,3),5,
-                "(2, 1, 0), (3, 1, 0), (4, 1, 0), (1, 2, 0), (3, 2, 0)")
-    
-    print("\nReversed")
-    simple_test(colex_permute(5,3,reverse=True),5,
-                "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
-    
-    print("\nReflected")
-    simple_test(colex_permute(5,3,reflect=True),5,
-                "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
-    
-    print("\nReversed and Reflected")
-    simple_test(colex_permute(5,3,reflect=True,reverse=True),5,
-                "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
-    
-    
     print("\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographc Order")
     simple_test(lex_choose(5,3),5,
@@ -481,10 +445,28 @@ if __name__ == '__main__':
                 "(2, 3, 4), (1, 3, 4), (1, 2, 4), (1, 2, 3), (0, 3, 4)")
     
     print("\nColexicographc Order")
-    simple_test(colex_choose(6,3),5,
+    simple_test(colex_choose(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 2, 3), (1, 2, 3), (0, 1, 4)")
     
     print("\nReversed")
     simple_test(colex_choose(5,3,reverse=True),5,
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (1, 2, 4), (0, 2, 4)")
+    
+    
+    print("\n\nThe following are permutations (without repetition) of length 3 from the set {0,1,2,3,4}")
+    print("Lexicographic Order")
+    simple_test(lex_permute(5,3),5,
+                "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
+    
+    print("\nReversed (equivalent to Colexicographic Order)")
+    simple_test(lex_permute(5,3,reverse=True),5,
+                "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
+    
+    print("\nReflected")
+    simple_test(lex_permute(5,3,reflect=True),5,
+                "(2, 1, 0), (3, 1, 0), (4, 1, 0), (1, 2, 0), (3, 2, 0)")
+    
+    print("\nReversed and Reflected")
+    simple_test(lex_permute(5,3,reflect=True,reverse=True),5,
+                "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
     
