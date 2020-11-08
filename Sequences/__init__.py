@@ -27,7 +27,7 @@ from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial, lex_permute, lex_choose, \
-                                    colex_permute, colex_choose
+                                    colex_permute, colex_choose, finite_permutations
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -137,7 +137,7 @@ __all__=[#MANIPULATIONS
          "catalan","derangement","pascal","partition","eulerian","bell",
          "gould","recontres","even_permutation","lazy_caterer","cake",
          "multiplicative_partition","central_binomial","lex_permute",
-         "lex_choose","colex_permute","colex_choose",
+         "lex_choose","colex_permute","colex_choose","finite_permutations",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",

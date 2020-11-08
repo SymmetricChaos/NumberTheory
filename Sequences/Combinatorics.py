@@ -250,6 +250,7 @@ def multiplicative_partition():
 def lex_permute(n,k,replace=False,reverse=False,reflect=False):
     """
     The ways to choose permutations of length k from a set of n elements, returns tuples in lexicographic order
+    Finite generator
     """
     
     if k > n:
@@ -285,6 +286,7 @@ def lex_permute(n,k,replace=False,reverse=False,reflect=False):
 def lex_choose(n,k,replace=False,reverse=False):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in lexicographic order  (aka suffix order)
+    Finite generator
     """
     
     def choose_recur(n,k,depth,replace,reverse):
@@ -317,6 +319,7 @@ def lex_choose(n,k,replace=False,reverse=False):
 def colex_permute(n,k,replace=False,reverse=False,reflect=False):
     """
     The ways to choose permutations of length k from a set of n element, returns tuples in colexicographic order, equivalent to lex_order() with reversed = True
+    Finite generator
     """
     
     def choose_recur(n,k,depth,replace,reverse,reflect):
@@ -349,6 +352,7 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False):
 def colex_choose(n,k,replace=False,reverse=False):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in colexicographic order (aka prefix order)
+    Finite generator
     """
     
     def choose_recur(n,k,depth,replace,reverse):
@@ -376,6 +380,17 @@ def colex_choose(n,k,replace=False,reverse=False):
                             yield T
     
     yield from choose_recur(n,k,0,replace,reverse)
+
+
+def finite_permutations():
+    """
+    Every permutation on n elements for positive n, returns tuples in lexicographic order
+    """
+    
+    for n in naturals(1):
+        yield from lex_permute(n,n)
+
+
 
 
 
@@ -469,4 +484,9 @@ if __name__ == '__main__':
     print("\nReversed and Reflected")
     simple_test(lex_permute(5,3,reflect=True,reverse=True),5,
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
+    
+    
+    print("\n\nAll Finite Permutations")
+    simple_test(finite_permutations(),6,
+                "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
     

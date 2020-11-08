@@ -183,7 +183,7 @@ def falling_factorial_expansions():
 
 def wilson():
     """
-    Wilson's Sequence: (n-1)! % n, equal to 0 for every composite number other than 4, otherwise n-1\n
+    Wilson's Sequence: (n-1)! % n, for primes p-1, otherwise 0 except at four where it equals 2\n
     OEIS A061006
     """
     
@@ -201,9 +201,13 @@ def wilson():
         oldp = p
 
 
-def factoradic():
+def factoradic(full=False):
     """
-    Factoradic Number System: The integers written in the factorial base, returns tuples\n
+    Factoradic Number System: The integers written in the factorial base, returns tuples
+    
+    Args:
+        full -- bool, if True appends 0 to the end of the tuple to give the full factoradic number
+    
     OEIS A007623
     """
     
@@ -240,7 +244,19 @@ def factoradic():
             
             cycles.append(cycle(L))
         
+        if full:
+            N.append(0)
+        
         yield tuple(N)
+
+
+def factorial_chain_length():
+    """
+    Smallest number of factorials needed to sum to n
+    """
+    
+    for i in factoradic():
+        yield sum(i)
 
 
 
@@ -300,4 +316,9 @@ if __name__ == '__main__':
     print("\nFactoradic Integers")
     simple_test(factoradic(),7,
                 "(0,), (1,), (1, 0), (1, 1), (2, 0), (2, 1), (1, 0, 0)")
+    
+    print("\nMinimum Number of Factorials Needed to Sum to n")
+    simple_test(factorial_chain_length(),18,
+                "0, 1, 1, 2, 2, 3, 1, 2, 2, 3, 3, 4, 2, 3, 3, 4, 4, 5")
+    
     

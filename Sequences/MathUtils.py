@@ -694,7 +694,7 @@ def powerset(L):
 
 def all_subsets(sequence):
     """
-    Generalize the above powerset code to work with generators, by iteratively combining prefixes with new elements
+    Generalize the above powerset code to give all finite subsets of a sequences by iteratively merging prefixes
     Effectively colexicographic order
     """
     
