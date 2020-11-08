@@ -247,60 +247,81 @@ def multiplicative_partition():
         yield num_factorizations(n)
 
 
-def lex_permute(n,k,replace=False,reverse=False,reflect=False):
+def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
     The ways to choose permutations of length k from a set of n elements, returns tuples in lexicographic order
     Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of elements chosen
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        reflect -- bool, reflect each permutation
+        index -- 0 or 1, value to start counting permutations from
     """
     
     if k > n:
         raise Exception(f"k must be less than or equal to n, cannot choose {k} elements from a set of {n}")
     
-    def permute_recur(n,k,depth,replace,reverse,reflect):
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def permute_recur(n,k,depth):
         if depth >= k:
             yield ()
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
-            S = range(n)
+            S = range(index,n+index)
             if reverse:
                 S = reversed(S)
             # Choose the head
             for s in S:
                 # Get the tail by recursion
-                for sub in permute_recur(n,k,depth+1,replace,reverse,reflect):
+                for suffix in permute_recur(n,k,depth+1):
                     # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     if reflect:
-                        T = sub + (s,)
+                        T = suffix + (s,)
                     else:
-                        T = (s,) + sub
+                        T = (s,) + suffix
                     # If we allow replacement don't check for repetition
                     if replace:
                         yield T
                     else:
-                        if s not in sub:
+                        if s not in suffix:
                             yield T
     
-    yield from permute_recur(n,k,0,replace,reverse,reflect)
+    yield from permute_recur(n,k,0)
 
 
-def lex_choose(n,k,replace=False,reverse=False):
+def lex_choose(n,k,replace=False,reverse=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in lexicographic order  (aka suffix order)
     Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of elements chosen
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        index -- 0 or 1, value to start counting permutations from
     """
     
-    def choose_recur(n,k,depth,replace,reverse):
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
-            S = range(n)
+            S = range(index,n+index)
             if reverse:
                 S = reversed(S)
             # Choose the head
             for s in S:
                 # Get the tail by recursion
-                for suffix in choose_recur(n,k,depth+1,replace,reverse):
+                for suffix in choose_recur(n,k,depth+1):
                     # We're looking for the lexicographically first representation for each permutation
                     # So if anything in the suffix is less than s it can't be valid
                     if len(suffix) > 0 and min(suffix) < s:
@@ -313,27 +334,38 @@ def lex_choose(n,k,replace=False,reverse=False):
                         if s not in suffix:
                             yield T
     
-    yield from choose_recur(n,k,0,replace,reverse)
+    yield from choose_recur(n,k,0)
 
 
-def colex_permute(n,k,replace=False,reverse=False,reflect=False):
+def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
     The ways to choose permutations of length k from a set of n element, returns tuples in colexicographic order, equivalent to lex_order() with reversed = True
     Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of elements chosen
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        reflect -- bool, reflect each permutation
+        index -- 0 or 1, value to start counting permutations from
     """
     
-    def choose_recur(n,k,depth,replace,reverse,reflect):
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
-            S = range(n)
+            S = range(index,n+index)
             if reverse:
                 S = reversed(S)
             # Choose the head
             for s in S:
                 # Get the tail by recursion
-                for prefix in choose_recur(n,k,depth+1,replace,reverse,reflect):
+                for prefix in choose_recur(n,k,depth+1):
                     # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     if reflect:
                         T = (s,) + prefix
@@ -346,27 +378,37 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False):
                         if s not in prefix:
                             yield T
     
-    yield from choose_recur(n,k,0,replace,reverse,reflect)
+    yield from choose_recur(n,k,0)
 
 
-def colex_choose(n,k,replace=False,reverse=False):
+def colex_choose(n,k,replace=False,reverse=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in colexicographic order (aka prefix order)
     Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of elements chosen
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        index -- 0 or 1, value to start counting permutations from
     """
     
-    def choose_recur(n,k,depth,replace,reverse):
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
-            S = range(n)
+            S = range(index,n+index)
             if reverse:
                 S = reversed(S)
             # Choose the head
             for s in S:
                 # Get the tail by recursion
-                for prefix in choose_recur(n,k,depth+1,replace,reverse):
+                for prefix in choose_recur(n,k,depth+1):
                     # We're looking for the colexicographically first representation for each permutation
                     # So no element of the prefix can be greater than s
                     if len(prefix) > 0 and max(prefix) > s:
@@ -379,16 +421,21 @@ def colex_choose(n,k,replace=False,reverse=False):
                         if s not in prefix:
                             yield T
     
-    yield from choose_recur(n,k,0,replace,reverse)
+    yield from choose_recur(n,k,0)
 
 
-def finite_permutations():
+def finite_permutations(index=0):
     """
     Every permutation on n elements for positive n, returns tuples in lexicographic order
+    
+    Args:
+        index -- 0 or 1, least element
+    
+    OEIS A030298
     """
     
     for n in naturals(1):
-        yield from lex_permute(n,n)
+        yield from lex_permute(n,n,index=index)
 
 
 def natural_subsets(index=0):
