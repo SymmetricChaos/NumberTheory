@@ -275,9 +275,8 @@ def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
-            # Choose the head
             for s in S:
-                # Get the tail by recursion
+                # Get the syffux by recursion
                 for suffix in permute_recur(n,k,depth+1):
                     # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     if reflect:
@@ -318,9 +317,8 @@ def lex_choose(n,k,replace=False,reverse=False,index=0):
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
-            # Choose the head
             for s in S:
-                # Get the tail by recursion
+                # Get the suffix by recursion
                 for suffix in choose_recur(n,k,depth+1):
                     # We're looking for the lexicographically first representation for each permutation
                     # So if anything in the suffix is less than s it can't be valid
@@ -358,20 +356,16 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
         if depth >= k:
             yield ()
         else:
-            # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
-            # Choose the head
             for s in S:
-                # Get the tail by recursion
+                # Get the prefix by recursion
                 for prefix in choose_recur(n,k,depth+1):
-                    # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
                     if reflect:
                         T = (s,) + prefix
                     else:
                         T = prefix + (s,)
-                    # If we allow replacement don't check for repetition
                     if replace:
                         yield T
                     else:
@@ -401,20 +395,17 @@ def colex_choose(n,k,replace=False,reverse=False,index=0):
         if depth >= k:
             yield ()
         else:
-            # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
-            # Choose the head
             for s in S:
-                # Get the tail by recursion
+                # Get the prefix by recursion
                 for prefix in choose_recur(n,k,depth+1):
                     # We're looking for the colexicographically first representation for each permutation
-                    # So no element of the prefix can be greater than s
+                    # So if anything in the prefix is greater than s it can't be valid
                     if len(prefix) > 0 and max(prefix) > s:
                         continue
                     T = prefix + (s,)
-                    # If we allow replacement don't check for repetition
                     if replace:
                         yield T
                     else:
@@ -440,7 +431,7 @@ def finite_permutations(index=0):
 
 def natural_subsets(index=0):
     """
-    All subset's of the natural numbers in the standard recursive order. Returns tuples.
+    All subset's of the natural numbers in colexicographic order (aka prefix order)
     
     Args:
         index -- 0 or 1, least element
@@ -537,7 +528,7 @@ if __name__ == '__main__':
     simple_test(lex_permute(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
     
-    print("\nReversed (equivalent to Colexicographic Order)")
+    print("\nReversed (equivalent to using the colex_permute() function)")
     simple_test(lex_permute(5,3,reverse=True),5,
                 "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
     
