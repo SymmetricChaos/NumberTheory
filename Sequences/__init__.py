@@ -26,7 +26,8 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
 from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
-                                    central_binomial
+                                    central_binomial, lex_permute, lex_choose, \
+                                    colex_permute, colex_choose
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -135,7 +136,8 @@ __all__=[#MANIPULATIONS
          #COMBINATORIC
          "catalan","derangement","pascal","partition","eulerian","bell",
          "gould","recontres","even_permutation","lazy_caterer","cake",
-         "multiplicative_partition","central_binomial",
+         "multiplicative_partition","central_binomial","lex_permute",
+         "lex_choose","colex_permute","colex_choose",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",

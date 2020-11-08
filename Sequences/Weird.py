@@ -333,7 +333,7 @@ if __name__ == '__main__':
     simple_test(natural_subsets(),7,
                 "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
     
-    print("\nAll Subsets of Positive Integers (OEIS) version")
+    print("\nAll Subsets of Positive Integers (OEIS representation)")
     simple_test(natural_subsets_2(tuples=False),18,
                 "0, 1, 2, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 4, 1, 4, 2, 4")
     

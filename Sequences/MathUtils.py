@@ -694,7 +694,8 @@ def powerset(L):
 
 def all_subsets(sequence):
     """
-    Generalize the above powerset code to work with generators
+    Generalize the above powerset code to work with generators, by iteratively combining prefixes with new elements
+    Effectively colexicographic order
     """
     
     L = [(next(sequence),)]
@@ -920,7 +921,6 @@ def factor_out_twos(n):
 #######################
 
 def list_diffs(L):
-    
     
     out = []
     
