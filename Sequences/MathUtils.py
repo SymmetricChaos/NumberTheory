@@ -572,8 +572,41 @@ def int_to_comb(n,k):
     for c in count(1):
         if comb(c,k) > n:
             return (c-1,) + int_to_comb(n-comb(c-1,k),k-1)
+
+
+def comb_to_vector(C,n=None,index=0):
+    """
+    Convert a combination (in any order) to an index vector in ascending order
     
+    Args:
+        C -- iterable containing the combination
+        n -- number of elements to include in the vector
+        index -- 0 or 1, number to start counting from
+    """
     
+    if index not in (0,1):
+        raise ValueError("The index must be 0 or 1")
+    
+    if index == 0:
+        if n == None:
+            n = max(C)+1
+        V = [0]*n
+        for c in C:
+            if c < index:
+                raise ValueError("No element can be less than the index value 0")
+            V[c-1] = 1
+    
+    if index == 1:
+        if index == 1:
+            n = max(C)
+        V = [0]*n
+        for c in C:
+            if c < index:
+                raise ValueError("No element can be less than the index value 1")
+            V[c] = 1
+    
+    return V
+
 
 
 
@@ -1033,3 +1066,5 @@ if __name__ == '__main__':
     print(comb_to_int([8,6,3,1,0]))
     
     print(int_to_comb(72,5))
+    
+    print(comb_to_vector([8,6,3,1,0]))

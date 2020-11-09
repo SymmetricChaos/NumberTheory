@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets
+from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -435,7 +435,7 @@ def finite_permutations(index=0):
 
 def natural_subsets(index=0):
     """
-    All subset's of the natural numbers in colexicographic order (aka prefix order)
+    All subsets of the natural numbers in colexicographic order (aka prefix order)
     
     Args:
         index -- 0 or 1, least element
@@ -450,11 +450,14 @@ def natural_subsets(index=0):
     yield from all_subsets(naturals(index))
 
 
-# def combinadic(k):
-#     """
+def combinadic(k):
+    """
+    k-Combinadic Numbers: Natural numbers represented as descending combinations of k elements
+    OEIS
+    """
     
-#     """
-
+    for n in naturals():
+        yield int_to_comb(n,k)
 
 
 
@@ -559,4 +562,8 @@ if __name__ == '__main__':
     print("\nAll Subsets of Natural Numbers")
     simple_test(natural_subsets(),7,
                 "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
+    
+    print("\n3-Combinadic Numbers")
+    simple_test(combinadic(3),5,
+                "(2, 1, 0), (3, 1, 0), (3, 2, 0), (3, 2, 1), (4, 1, 0)")
     
