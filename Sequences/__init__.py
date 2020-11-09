@@ -68,7 +68,7 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
                                         mertens_function
 
 from Sequences.Primes import primes, primorial, prime_counting, pythagorean_primes, \
-                             prime_characteristic, \
+                             prime_characteristic, prime_signatures, \
                              superprimes, odd_primes, twin_primes, \
                              twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
                              sophie_germain_primes, safe_primes, linear_primes, congruent_primes, \
@@ -189,7 +189,7 @@ __all__=[#MANIPULATIONS
          "prime_characteristic","superprimes","odd_primes",
          "twin_primes","twin_prime_pairs","prime_gaps","prime_tuples",
          "n_gap_prime_pairs","sophie_germain_primes","safe_primes",
-         "linear_primes","congruent_primes","blum_primes",
+         "linear_primes","congruent_primes","blum_primes","prime_signatures",
          
          #PSEUDOPRIMES
          "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",

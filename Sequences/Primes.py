@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, arithmetic
 from Sequences.Manipulations import partial_prods, prepend, hypersequence, differences, offset
-from Sequences.NiceErrorChecking import require_integers, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 
 from collections import defaultdict
 from sympy import sieve, isprime
@@ -312,13 +312,20 @@ def prime_product(P,inclusive=False):
     Naturals such that all prime factors are in the set P
     
     Args:
+        P -- an interable consisting of primes
         inclusive -- bool, if True only numbers divisible by all elements of P are included
     
     OEIS
     """
     
+    require_iterable(["P"],[P])
+    
     P = set(P)
     I = prod(P)
+    
+    for p in P:
+        if not isprime(p):
+            raise Exception(f"All elements of P must be prime, {p} is not prime")
     
     if inclusive:
         for n in arithmetic(I,I):
@@ -342,6 +349,38 @@ def prime_product(P,inclusive=False):
             
             if m == 1:
                 yield n
+
+
+def prime_signatures():
+    """
+    Prime Signatures: The prime signature of each positive integer, returns tuples
+    """
+    
+    D = defaultdict(list)
+    
+    yield ()
+    
+    for q in naturals(2):
+        if q not in D:
+            yield (1,)
+            D[q + q] = [q]
+        
+        else:
+            T = []
+            r = q
+            
+            for p in D[q]:
+                T.append(0)
+                D[p+q].append(p)
+                
+                while r % p == 0:
+                    r //= p
+                    T[-1] += 1
+                
+            yield tuple(T)
+            
+            del D[q]
+
 
 
 
@@ -420,4 +459,8 @@ if __name__ == '__main__':
     print("\n(3,5)-Prime Product Numbers (requiring both)")
     simple_test(prime_product([3,5],inclusive=True),11,
                 "15, 45, 75, 135, 225, 375, 405, 675, 1125, 1215, 1875")
+    
+    print("\nPrime Signatures")
+    simple_test(prime_signatures(),9,
+                "(), (1,), (1,), (2,), (1,), (1, 1), (1,), (3,), (2,)")
     

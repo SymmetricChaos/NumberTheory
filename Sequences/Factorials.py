@@ -321,4 +321,3 @@ if __name__ == '__main__':
     simple_test(factorial_chain_length(),18,
                 "0, 1, 1, 2, 2, 3, 1, 2, 2, 3, 3, 4, 2, 3, 3, 4, 4, 5")
     
-    

@@ -1,3 +1,6 @@
+from collections import defaultdict
+from itertools import count
+
 
 def _legendre_symbol(a,p):
     """
@@ -63,3 +66,22 @@ def miller_rabin_test(n):
         return 2
     else:
         return 1
+
+
+
+
+
+def primes():
+    
+    D = defaultdict(list)
+    
+    for q in count(2,1):
+        if q not in D:
+            yield q-1
+            D[q + q] = [q]
+        
+        else:
+            for p in D[q]:
+                D[p+q].append(p)
+            
+            del D[q]
