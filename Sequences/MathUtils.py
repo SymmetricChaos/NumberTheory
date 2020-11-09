@@ -1,4 +1,4 @@
-from math import isqrt, gcd
+from math import isqrt, gcd, comb
 from itertools import chain, combinations, repeat, count
 from functools import reduce
 from fractions import Fraction
@@ -547,6 +547,17 @@ def balt_to_int(D):
     return reduce(lambda y,x: x + 3 * y,D,0)
 
 
+def comb_to_int(C):
+    
+    for i in range(len(C)-1):
+        if C[i] <= C[i+1]:
+            raise Exception("Elements of C must be given in strictly decreasing order")
+    
+    L = [comb(c,i) for c,i in zip(C,range(len(C),0,-1))]
+    
+    return sum(L)
+
+
 
 
 
@@ -710,7 +721,6 @@ def all_subsets(sequence):
             sub = l+(s,)
             yield sub
             T.append(sub)
-        
         
         L += T
 
@@ -1002,3 +1012,4 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
+    print(comb_to_int([4,2,0]))

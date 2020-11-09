@@ -446,6 +446,13 @@ def natural_subsets(index=0):
     yield from all_subsets(naturals(index))
 
 
+def combinadic(k):
+    """
+    
+    """
+
+
+
 
 
 
