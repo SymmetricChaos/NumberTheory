@@ -293,7 +293,7 @@ def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     yield from permute_recur(n,k,0)
 
 
-def lex_choose(n,k,replace=False,reverse=False,index=0):
+def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in lexicographic order  (aka suffix order)
     Finite generator
@@ -324,6 +324,8 @@ def lex_choose(n,k,replace=False,reverse=False,index=0):
                     # So if anything in the suffix is less than s it can't be valid
                     if len(suffix) > 0 and min(suffix) < s:
                         continue
+                    if descending:
+                        T = suffix + (s,)
                     T = (s,) + suffix
                     # If we allow replacement don't check for repetition
                     if replace:
@@ -375,7 +377,7 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     yield from choose_recur(n,k,0)
 
 
-def colex_choose(n,k,replace=False,reverse=False,index=0):
+def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in colexicographic order (aka prefix order)
     Finite generator
@@ -405,6 +407,8 @@ def colex_choose(n,k,replace=False,reverse=False,index=0):
                     # So if anything in the prefix is greater than s it can't be valid
                     if len(prefix) > 0 and max(prefix) > s:
                         continue
+                    if descending:
+                        T = (s,) + prefix
                     T = prefix + (s,)
                     if replace:
                         yield T
@@ -446,10 +450,10 @@ def natural_subsets(index=0):
     yield from all_subsets(naturals(index))
 
 
-def combinadic(k):
-    """
+# def combinadic(k):
+#     """
     
-    """
+#     """
 
 
 

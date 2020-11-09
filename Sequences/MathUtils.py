@@ -548,6 +548,9 @@ def balt_to_int(D):
 
 
 def comb_to_int(C):
+    """
+    Given a combination in descending order return to associated integer
+    """
     
     for i in range(len(C)-1):
         if C[i] <= C[i+1]:
@@ -556,6 +559,21 @@ def comb_to_int(C):
     L = [comb(c,i) for c,i in zip(C,range(len(C),0,-1))]
     
     return sum(L)
+
+
+def int_to_comb(n,k):
+    """
+    Given an integer return the associated combination
+    """
+    
+    if k == 0:
+        return ()
+    
+    for c in count(1):
+        if comb(c,k) > n:
+            return (c-1,) + int_to_comb(n-comb(c-1,k),k-1)
+    
+    
 
 
 
@@ -1012,4 +1030,6 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
-    print(comb_to_int([4,2,0]))
+    print(comb_to_int([8,6,3,1,0]))
+    
+    print(int_to_comb(72,5))
