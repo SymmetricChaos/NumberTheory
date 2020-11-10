@@ -17,7 +17,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_roots, fraction_period, palindrome, \
                                     digital_prods, additive_persistence, multiplicative_persistence
 
-from Sequences.BinarySequences import thue_morse, co_thue_morse
+from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word
+
 
 from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
                               collatz_map, collatz_all, collatz_highpoint, \

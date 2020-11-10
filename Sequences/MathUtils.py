@@ -611,7 +611,6 @@ def comb_to_vector(C,n=None,index=0):
 
 
 
-
 ########################
 ## DIGIT MANIPULATION ##
 ########################
