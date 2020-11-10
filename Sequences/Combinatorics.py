@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
+from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb, all_partitions
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -460,6 +460,18 @@ def combinadic(k):
         yield int_to_comb(n,k)
 
 
+def partition_tuples():
+    """
+    Partitions of each integer in canonical (graded reverse lexicographic) order
+    OEIS A080577
+    """
+    
+    yield ()
+    
+    for n in naturals(1):
+        yield from all_partitions(n)
+
+
 
 
 
@@ -563,7 +575,11 @@ if __name__ == '__main__':
     simple_test(natural_subsets(),7,
                 "(), (0,), (1,), (0, 1), (2,), (0, 2), (1, 2)")
     
-    print("\n3-Combinadic Numbers")
-    simple_test(combinadic(3),5,
-                "(2, 1, 0), (3, 1, 0), (3, 2, 0), (3, 2, 1), (4, 1, 0)")
+    print("\n2-Combinadic Numbers")
+    simple_test(combinadic(2),7,
+                "(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0)")
+    
+    print("\nPartitions")
+    simple_test(partition_tuples(),8,
+                "(), (1,), (2,), (1, 1), (3,), (2, 1), (1, 1, 1), (4,)")
     

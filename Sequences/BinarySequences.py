@@ -52,8 +52,6 @@ def fibonacci_word(invert=False):
         a,b = b,b+a
 
 
-
-
 def gray_codes():
     """
     Ordering of binary codes such that there is exactly one change between successive codes
