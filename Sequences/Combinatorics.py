@@ -444,9 +444,9 @@ def combinadic(k):
         yield int_to_comb(n,k)
 
 
-def partition():
+def partition_count():
     """
-    Partition Number: Number of unique multisets of positive integers with sum n\n
+    Partition Numbers: Number of unique multisets of positive integers with sum n\n
     OEIS A000041
     """
     
@@ -472,7 +472,7 @@ def partition():
             k += sign*D[n-i]
 
 
-def partition_tuples(n):
+def partitions(n):
     """
     Partitions of n in canonical (reverse lexicographic) order
     """
@@ -487,12 +487,12 @@ def partition_tuples(n):
         yield (n,)
         
         for x in range(1,n):
-            for p in partition_tuples(x):
+            for p in partitions(x):
                 if p[0] <= n-x:
                     yield (n-x,) + p
 
 
-def all_partition_tuples():
+def all_partitions():
     """
     Partitions of each integer in canonical (reverse lexicographic) order
     OEIS A080577
@@ -501,7 +501,7 @@ def all_partition_tuples():
     yield ()
     
     for n in naturals(1):
-        yield from partition_tuples(n)
+        yield from partitions(n)
 
 
 
@@ -511,7 +511,7 @@ def partition_ordering():
     OEIS A129129
     """
     
-    for Q in all_partition_tuples():
+    for Q in all_partitions():
         yield prod([prime(i) for i in Q])
 
 
@@ -544,10 +544,6 @@ if __name__ == '__main__':
     print("\nEulerian Triangle by Rows")
     simple_test(eulerian(),16,
                 "1, 1, 1, 1, 4, 1, 1, 11, 11, 1, 1, 26, 66, 26, 1, 1")
-    
-    print("\nPartition Numbers")
-    simple_test(partition(),15,
-                "1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135")
     
     print("\nBell Numbers")
     simple_test(bell(),11,
@@ -622,12 +618,16 @@ if __name__ == '__main__':
     simple_test(combinadic(2),7,
                 "(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0)")
     
+    print("\nPartition Numbers")
+    simple_test(partition_count(),15,
+                "1, 1, 2, 3, 5, 7, 11, 15, 22, 30, 42, 56, 77, 101, 135")
+    
     print("\nPartitions of 4")
-    simple_test(partition_tuples(4),8,
+    simple_test(partitions(4),8,
                 "(4,), (3, 1), (2, 2), (2, 1, 1), (1, 1, 1, 1)")
     
     print("\nSequence of All Partitions")
-    simple_test(all_partition_tuples(),8,
+    simple_test(all_partitions(),8,
                 "(), (1,), (2,), (1, 1), (3,), (2, 1), (1, 1, 1), (4,)")
     
     print("\nPartition Order")

@@ -24,13 +24,13 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
+from Sequences.Combinatorics import catalan, derangement, pascal, partition_count, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial, lex_permute, lex_choose, \
                                     colex_permute, colex_choose, finite_permutations, \
-                                    natural_subsets, combinadic, partition_tuples, \
-                                    all_partition_tuples, partition_ordering
+                                    natural_subsets, combinadic, partitions, \
+                                    partition_ordering
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -136,13 +136,13 @@ __all__=[#MANIPULATIONS
          "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
          "reduced_collatz_sequence","reduced_collatz_map",
          
-         #COMBINATORIC
-         "catalan","derangement","pascal","partition","eulerian","bell",
+         #COMBINATORICS
+         "catalan","derangement","pascal","eulerian","bell",
          "gould","recontres","even_permutation","lazy_caterer","cake",
          "multiplicative_partition","central_binomial","lex_permute",
          "lex_choose","colex_permute","colex_choose","finite_permutations",
-         "natural_subsets","combinadic","partition_tuples",
-         "all_partition_tuples","partition_ordering",
+         "natural_subsets","combinadic","partitions",
+         "all_partitions","partition_ordering","partition_count",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",
