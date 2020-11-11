@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, integers, arithmetic, sign_sequence
-from Sequences.Primes import primes
+from Sequences.Divisibility import primes
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Manipulations import offset, sequence_apply
 

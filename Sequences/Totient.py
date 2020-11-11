@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.Primes import primorial
+from Sequences.Divisibility import primorial
 from Sequences.MathUtils import jordan_totient, prime_power_factorization, multi_lcm
 from Sequences.Manipulations import offset
 

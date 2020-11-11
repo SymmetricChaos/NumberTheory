@@ -1,5 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_prime
-from Sequences.Primes import primes, blum_primes
+from Sequences.Divisibility.Primes import primes, blum_primes
 from Sequences.Simple import naturals, arithmetic
 from Sequences.MathUtils import factors, prime_factorization, unique_prime_factors, \
                                 nth_sign, list_diffs

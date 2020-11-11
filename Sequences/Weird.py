@@ -1,5 +1,4 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from Sequences.Combinatorics import pascal
 from Sequences.Manipulations import sequence_apply
 from Sequences.MathUtils import all_subsets
 
@@ -182,15 +181,6 @@ def even_odd():
         yield n+s
 
 
-def sierpinski():
-    """
-    Sierpinski's Triangle by Rows
-    OEIS A047999
-    """
-    
-    yield from sequence_apply(pascal(),lambda x: x%2)
-
-
 def lucky():
     """
     Lucky Numbers: Prime-like integers resulting from a modified sieve of Eratosthenes\n
@@ -288,10 +278,6 @@ if __name__ == '__main__':
     print("\nFirst Derangement of the Natural Numbers")
     simple_test(even_odd(),16,
                 "2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15")
-    
-    print("\nSierpinski Triangle by Rows")
-    simple_test(sierpinski(),18,
-                "1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0")
     
     print("\nHofstader's Q-Sequence")
     simple_test(hofstader_Q(),17,

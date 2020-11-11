@@ -1,7 +1,7 @@
 from Sequences.Manipulations import offset
 from Sequences.Simple import naturals, sign_sequence
 from Sequences.MathUtils import poly_mult
-from Sequences.Primes import primes
+from Sequences.Divisibility import primes
 
 from itertools import cycle
 

@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from MathUtils import digital_sum, digital_root, repeating_part, digital_prod
-from NiceErrorChecking import require_integers, require_geq
+from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod
+from Sequences.NiceErrorChecking import require_integers, require_geq
 
 def evil():
     """

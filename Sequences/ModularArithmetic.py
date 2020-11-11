@@ -1,4 +1,4 @@
-from Sequences.Primes import primes
+from Sequences.Divisibility import primes
 from Sequences.Simple import odds, naturals
 from Sequences.MathUtils import egcd, prime_factorization, nth_sign, canonical_factorization
 from Sequences.Figurate import squares

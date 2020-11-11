@@ -1,4 +1,4 @@
-from Sequences.Primes import pythagorean_primes
+from Sequences.Divisibility import pythagorean_primes
 from Sequences.Simple import naturals
 
 from math import gcd

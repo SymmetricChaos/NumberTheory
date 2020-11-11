@@ -1,7 +1,8 @@
 from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals, powers, evens
-from Sequences.Primes import primes
+from Sequences.Divisibility import primes
+from Sequences.Manipulations import make_triangle, sequence_apply
 
 from math import comb, prod
 from sympy import prime
@@ -75,6 +76,15 @@ def pascal():
         
         T.append(0)
         L = T
+
+
+def pascal_triangle():
+    """
+    Pascal's Triangle by Rows\n
+    OEIS A007318
+    """
+    
+    yield from make_triangle(pascal())
 
 
 # Find a more efficient way to do this
@@ -583,6 +593,15 @@ def even_goldbach_partitions():
                 yield (e-s,s)
 
 
+def sierpinski_triangle():
+    """
+    Sierpinski's Triangle by Rows
+    OEIS A047999
+    """
+    
+    yield from make_triangle(sequence_apply(pascal(),lambda x: x%2))
+
+
 
 
 
@@ -713,4 +732,12 @@ if __name__ == '__main__':
     print("\nGoldbach Partitions of the Even Numbers")
     simple_test(even_goldbach_partitions(),7,
                 "(2, 2), (3, 3), (3, 5), (5, 5), (3, 7), (5, 7), (7, 7)")
+    
+    print("\nPascal's Triangle by Rows")
+    simple_test(pascal_triangle(),5,
+                "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1), (1, 4, 6, 4, 1)")
+    
+    print("\nSierpinski Triangle by Rows")
+    simple_test(sierpinski_triangle(),5,
+                "(1,), (1, 1), (1, 0, 1), (1, 1, 1, 1), (1, 0, 0, 0, 1)")
     

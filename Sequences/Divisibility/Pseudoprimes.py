@@ -1,5 +1,4 @@
-from Sequences.Primes import primes
-from Sequences.Divisibility import composites
+from Sequences.Divisibility import composites, primes
 from Sequences.MathUtils import factor_out_twos, coprime_to
 from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Weird import selfridge
