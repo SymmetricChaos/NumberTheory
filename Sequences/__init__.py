@@ -30,7 +30,8 @@ from Sequences.Combinatorics import catalan, derangement, pascal, partition_coun
                                     central_binomial, lex_permute, lex_choose, \
                                     colex_permute, colex_choose, finite_permutations, \
                                     natural_subsets, combinadic, partitions, \
-                                    partition_ordering, equal_partitions, power_partitions
+                                    partition_ordering, equal_partitions, power_partitions, \
+                                    even_goldbach_partitions
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -143,7 +144,7 @@ __all__=[#MANIPULATIONS
          "lex_choose","colex_permute","colex_choose","finite_permutations",
          "natural_subsets","combinadic","partitions","equal_partitions",
          "all_partitions","partition_ordering","partition_count",
-         "power_partitions",
+         "power_partitions","even_goldbach_partitions",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",

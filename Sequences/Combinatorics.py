@@ -1,6 +1,7 @@
 from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Figurate import gen_pentagonal
-from Sequences.Simple import naturals, powers
+from Sequences.Simple import naturals, powers, evens
+from Sequences.Primes import primes
 
 from math import comb, prod
 from sympy import prime
@@ -564,6 +565,23 @@ def power_partitions(n,k):
                     yield (p,) + S
 
 
+def even_goldbach_partitions():
+    """
+    Even numbers written as the sum of two primes\n
+    OEIS
+    """
+    
+    P = primes()
+    L = [next(P)]
+    
+    for e in evens():
+        if e > L[0]:
+            L.append(next(P))
+        
+        for s in L:
+            if e-s in L and e-s <= s:
+                yield (e-s,s)
+
 
 
 
@@ -692,4 +710,7 @@ if __name__ == '__main__':
     simple_test(power_partitions(6,2),16,
                 "(4, 2), (4, 1, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
     
+    print("\nGoldbach Partitions of the Even Numbers")
+    simple_test(even_goldbach_partitions(),7,
+                "(2, 2), (3, 3), (3, 5), (5, 5), (3, 7), (5, 7), (7, 7)")
     
