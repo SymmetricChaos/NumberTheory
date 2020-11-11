@@ -7,7 +7,7 @@ from Sequences.Manipulations import sequence_slice, segment, offset, skips, \
                                     hypersequence, run_length_encoding, run_lengths, \
                                     n_rep_a
 
-from Sequences.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
+from Sequences.Divisibility.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
                               abundance, deficiency, untouchable, pseudoperfect, \
                               weird, highly_abundant, superabundant, amicable_pairs, \
                               practical, primitive_abundant_1, primitive_abundant_2
@@ -144,7 +144,8 @@ __all__=[#MANIPULATIONS
          "lex_choose","colex_permute","colex_choose","finite_permutations",
          "natural_subsets","combinadic","partitions","equal_partitions",
          "all_partitions","partition_ordering","partition_count",
-         "power_partitions","even_goldbach_partitions",
+         "power_partitions","even_goldbach_partitions","pascal_triangle",
+         "sierpinski_triangle",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",
@@ -227,5 +228,5 @@ __all__=[#MANIPULATIONS
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
-         "hofstader_Q","sierpinski","lucky",
+         "hofstader_Q","lucky",
          ]
