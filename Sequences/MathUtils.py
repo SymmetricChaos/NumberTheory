@@ -896,20 +896,39 @@ def kronecker_symbol(a,n):
     return out
 
 
-def all_partitions(n):
+def factor_out_twos(n):
+    """
+    Returns the tuple (d,s) such that n = d*(2**s) for the smallest value of d
+    """
+    
+    d = n
+    s = 0
+    
+    while d % 2 == 0:
+        s += 1
+        d //= 2
+    
+    return d,s
+
+
+def partitions_of(n):
     """
     All descending partitions of n in reverse lexicographic order
     """
-    if n == 1:
-        yield (1,)
     
-    else:
-        yield (n,)
+    def all_partitions(n):
+        if n == 1:
+            yield (1,)
         
-        for x in range(1,n):
-            for p in all_partitions(x):
-                if p[0] <= n-x:
-                    yield (n-x,) + p
+        else:
+            yield (n,)
+            
+            for x in range(1,n):
+                for p in all_partitions(x):
+                    if p[0] <= n-x:
+                        yield (n-x,) + p
+    
+    return [i for i in all_partitions(n)]
 
 
 
@@ -973,21 +992,6 @@ def poly_eval(P,x):
         e *= x
     
     return out
-
-
-def factor_out_twos(n):
-    """
-    Returns the tuple (d,s) such that n = d*(2**s) for the smallest value of d
-    """
-    
-    d = n
-    s = 0
-    
-    while d % 2 == 0:
-        s += 1
-        d //= 2
-    
-    return d,s
 
 
 
@@ -1079,15 +1083,14 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
-    print("\nThe 5-Combination Associated with 72")
+    print("\n5-Combination Associated with 72")
     print(int_to_comb(72,5))
     
-    print("\nThe Integer Associated with the 5-Combination (8,6,3,1,0)")
+    print("\nInteger Associated with the 5-Combination (8,6,3,1,0)")
     print(comb_to_int([8,6,3,1,0]))
     
     print("\nIndicator Vector for Above Combination")
     print(comb_to_vector([8,6,3,1,0]))
     
     print("\nPartitions of 6")
-    for i in all_partitions(6):
-        print(i)
+    print(partitions_of(6))

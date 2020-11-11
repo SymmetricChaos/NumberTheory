@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb, all_partitions
+from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
 
@@ -465,6 +465,21 @@ def partition_tuples():
     Partitions of each integer in canonical (graded reverse lexicographic) order
     OEIS A080577
     """
+    
+    def all_partitions(n):
+        """
+        All descending partitions of n in reverse lexicographic order
+        """
+        if n == 1:
+            yield (1,)
+        
+        else:
+            yield (n,)
+            
+            for x in range(1,n):
+                for p in all_partitions(x):
+                    if p[0] <= n-x:
+                        yield (n-x,) + p
     
     yield ()
     
