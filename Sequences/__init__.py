@@ -29,7 +29,8 @@ from Sequences.Combinatorics import catalan, derangement, pascal, partition, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial, lex_permute, lex_choose, \
                                     colex_permute, colex_choose, finite_permutations, \
-                                    natural_subsets, combinadic
+                                    natural_subsets, combinadic, partition_tuples, \
+                                    all_partition_tuples, partition_ordering
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -128,7 +129,7 @@ __all__=[#MANIPULATIONS
          "multiplicative_persistence",
          
          #BINARY
-         "thue_morse","co_thue_morse",
+         "thue_morse","gray_codes","fibonacci_word",
          
          #COLLATZ
          "collatz_length","collatz_longest","collatz_sequence",
@@ -140,7 +141,8 @@ __all__=[#MANIPULATIONS
          "gould","recontres","even_permutation","lazy_caterer","cake",
          "multiplicative_partition","central_binomial","lex_permute",
          "lex_choose","colex_permute","colex_choose","finite_permutations",
-         "natural_subsets","combinadic",
+         "natural_subsets","combinadic","partition_tuples",
+         "all_partition_tuples","partition_ordering",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",

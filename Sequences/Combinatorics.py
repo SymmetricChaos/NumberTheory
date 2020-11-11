@@ -2,8 +2,8 @@ from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals
 
-from math import comb
-
+from math import comb, prod
+from sympy import prime
 
 def derangement():
     """
@@ -149,34 +149,6 @@ def recontres():
             yield D[n-k]*next(P)
 
 
-def partition():
-    """
-    Partition Number: Number of ways to add naturals greater than 0 to get n\n
-    OEIS A000041
-    """
-    
-    D = [1]
-    
-    for n in naturals(1):
-        yield D[-1]
-        
-        P = gen_pentagonal()
-        next(P)
-        
-        sign = -1
-        k=0
-        
-        for ctr,i in enumerate(P):
-            if n-i < 0:
-                D.append(k)
-                break
-            
-            if ctr % 2 == 0:
-                sign *= -1
-            
-            k += sign*D[n-i]
-
-
 def bell():
     """
     Bell Numbers: Number of equivalence classes on a set with n elements\n
@@ -270,11 +242,13 @@ def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     def permute_recur(n,k,depth):
         if depth >= k:
             yield ()
+        
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
+            
             for s in S:
                 # Get the syffux by recursion
                 for suffix in permute_recur(n,k,depth+1):
@@ -283,6 +257,7 @@ def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
                         T = suffix + (s,)
                     else:
                         T = (s,) + suffix
+                    
                     # If we allow replacement don't check for repetition
                     if replace:
                         yield T
@@ -312,11 +287,13 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
+        
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
+            
             for s in S:
                 # Get the suffix by recursion
                 for suffix in choose_recur(n,k,depth+1):
@@ -326,6 +303,7 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
                         continue
                     if descending:
                         T = suffix + (s,)
+                    
                     T = (s,) + suffix
                     # If we allow replacement don't check for repetition
                     if replace:
@@ -357,10 +335,12 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
     def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
+        
         else:
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
+            
             for s in S:
                 # Get the prefix by recursion
                 for prefix in choose_recur(n,k,depth+1):
@@ -368,6 +348,7 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
                         T = (s,) + prefix
                     else:
                         T = prefix + (s,)
+                    
                     if replace:
                         yield T
                     else:
@@ -396,10 +377,12 @@ def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     def choose_recur(n,k,depth):
         if depth >= k:
             yield ()
+        
         else:
             S = range(index,n+index)
             if reverse:
                 S = reversed(S)
+            
             for s in S:
                 # Get the prefix by recursion
                 for prefix in choose_recur(n,k,depth+1):
@@ -409,6 +392,7 @@ def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
                         continue
                     if descending:
                         T = (s,) + prefix
+                        
                     T = prefix + (s,)
                     if replace:
                         yield T
@@ -460,31 +444,75 @@ def combinadic(k):
         yield int_to_comb(n,k)
 
 
-def partition_tuples():
+def partition():
     """
-    Partitions of each integer in canonical (graded reverse lexicographic) order
-    OEIS A080577
+    Partition Number: Number of unique multisets of positive integers with sum n\n
+    OEIS A000041
     """
     
-    def all_partitions(n):
-        """
-        All descending partitions of n in reverse lexicographic order
-        """
-        if n == 1:
-            yield (1,)
+    D = [1]
+    
+    for n in naturals(1):
+        yield D[-1]
         
-        else:
-            yield (n,)
+        P = gen_pentagonal()
+        next(P)
+        
+        sign = -1
+        k=0
+        
+        for ctr,i in enumerate(P):
+            if n-i < 0:
+                D.append(k)
+                break
             
-            for x in range(1,n):
-                for p in all_partitions(x):
-                    if p[0] <= n-x:
-                        yield (n-x,) + p
+            if ctr % 2 == 0:
+                sign *= -1
+            
+            k += sign*D[n-i]
+
+
+def partition_tuples(n):
+    """
+    Partitions of n in canonical (reverse lexicographic) order
+    """
+    
+    if n == 0:
+        yield ()
+    
+    if n == 1:
+        yield (1,)
+    
+    else:
+        yield (n,)
+        
+        for x in range(1,n):
+            for p in partition_tuples(x):
+                if p[0] <= n-x:
+                    yield (n-x,) + p
+
+
+def all_partition_tuples():
+    """
+    Partitions of each integer in canonical (reverse lexicographic) order
+    OEIS A080577
+    """
     
     yield ()
     
     for n in naturals(1):
-        yield from all_partitions(n)
+        yield from partition_tuples(n)
+
+
+
+def partition_ordering():
+    """
+    Permutation of the positive integers defined by partition tuples
+    OEIS A129129
+    """
+    
+    for Q in all_partition_tuples():
+        yield prod([prime(i) for i in Q])
 
 
 
@@ -594,7 +622,15 @@ if __name__ == '__main__':
     simple_test(combinadic(2),7,
                 "(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0)")
     
-    print("\nPartitions")
-    simple_test(partition_tuples(),8,
+    print("\nPartitions of 4")
+    simple_test(partition_tuples(4),8,
+                "(4,), (3, 1), (2, 2), (2, 1, 1), (1, 1, 1, 1)")
+    
+    print("\nSequence of All Partitions")
+    simple_test(all_partition_tuples(),8,
                 "(), (1,), (2,), (1, 1), (3,), (2, 1), (1, 1, 1), (4,)")
+    
+    print("\nPartition Order")
+    simple_test(partition_ordering(),16,
+                "1, 2, 3, 4, 5, 6, 8, 7, 10, 9, 12, 16, 11, 14, 15, 20")
     

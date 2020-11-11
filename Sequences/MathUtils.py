@@ -913,7 +913,7 @@ def factor_out_twos(n):
 
 def partitions_of(n):
     """
-    All descending partitions of n in reverse lexicographic order
+    All partitions of n in reverse lexicographic order
     """
     
     def all_partitions(n):
@@ -1092,5 +1092,5 @@ if __name__ == '__main__':
     print("\nIndicator Vector for Above Combination")
     print(comb_to_vector([8,6,3,1,0]))
     
-    print("\nPartitions of 6")
+    print("\nPartitions of 6 (canonical)")
     print(partitions_of(6))
