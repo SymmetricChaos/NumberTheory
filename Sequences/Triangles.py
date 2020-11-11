@@ -11,24 +11,21 @@ def quick_triangle(sequence,n,space=0,delim=" "):
     
     T = make_triangle(sequence)
     
-    _pretty_triangle(T,n=n,space=space,delim=delim)
+    pretty_array(T,n=n,space=space,delim=delim)
 
 
-def _pretty_triangle(T,n,space=0,delim=" "):
+def pretty_array(A,n,space=0,delim=" "):
     for i in range(n):
-        l = [f"{str(x):<{space}}" for x in next(T)]
+        l = [f"{str(x):<{space}}" for x in next(A)]
         s = str(delim).join(l)
         print(s)
 
 
 def quick_array(sequence,row_lengths,n,space=0,delim=" "):
     
-    T = irregular_array(sequence,row_lengths)
+    A = irregular_array(sequence,row_lengths)
     
-    for i in range(n):
-        l = [f"{str(x):<{space}}" for x in next(T)]
-        s = str(delim).join(l)
-        print(s)
+    pretty_array(A,n=n,space=space,delim=delim)
 
 
 
@@ -37,10 +34,10 @@ def quick_array(sequence,row_lengths,n,space=0,delim=" "):
 if __name__ == '__main__':
     
     print("\nPascal's Triangle")
-    _pretty_triangle(pascal_triangle(),10,3)
+    pretty_array(pascal_triangle(),10,3)
     
     print("\nSierpinski's Triangle")
-    _pretty_triangle(sierpinski_triangle(),10)
+    pretty_array(sierpinski_triangle(),10)
     
     print("\nEuler's Triangle")
     quick_triangle(eulerian(),6,3)
