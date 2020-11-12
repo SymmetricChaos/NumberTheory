@@ -99,11 +99,3 @@ def pisot_sequences():
     print("L=",", ".join(L))
     print("P=",", ".join(P))
     print("T=",", ".join(T))
-
-
-
-
-
-if __name__ == '__main__':
-    from Sequences.SequenceManipulation import segment
-    from Sequences.Simple import powers

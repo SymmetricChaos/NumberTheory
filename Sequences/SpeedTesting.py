@@ -1,10 +1,11 @@
-from Sequences.Manipulations import speed_compare, memoize_multiplicative, memoize_total_additive, head
-from itertools import count, cycle, compress, islice
+from Sequences.Manipulations import speed_compare, memoize_multiplicative, memoize_total_additive
 from Sequences.MathUtils import jordan_totient, prime_factorization
 from Sequences.Primes import primes
-from collections import defaultdict
 from Sequences.Simple import naturals
+
+from collections import defaultdict
 from sympy import sieve
+from itertools import count, cycle, compress
 
 def memoization_example():
     

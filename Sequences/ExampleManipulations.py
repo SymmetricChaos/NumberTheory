@@ -1,8 +1,8 @@
 from Manipulations import *
-from Primes import primes, safe_primes
+from Sequences.Divisibility import primes, safe_primes
 from Simple import naturals, constant, powers, evens, odds
 from Recurrence import companion_pell, fibonacci
-from Aliquot import amicable_pairs
+from Divisibility import amicable_pairs
 from Weird import even_odd
 
 

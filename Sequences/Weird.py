@@ -1,5 +1,4 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from Sequences.Manipulations import sequence_apply
 from Sequences.MathUtils import all_subsets
 
 from math import gcd
