@@ -34,6 +34,19 @@ def _pretty_fracs(sequence):
         yield f"{a}/{b}"
 
 
+def _pretty_fracs_tuple(sequence):
+    """
+    Internal function to show fractions more compactly
+    """
+    
+    for f in sequence:
+        L = []
+        for e in f:
+            a,b = e.numerator,e.denominator
+            L.append(f"{a}/{b}")
+        yield tuple(L)
+
+
 def harmonic():
     """
     Partial sums of the Harmonic Series
@@ -292,13 +305,13 @@ if __name__ == '__main__':
                 "1/1, 3/4, 31/36, 115/144, 3019/3600, 973/1200")
     
     print("\nExpansion of each Term of a Taylor Series")
-    simple_test(taylor_terms(naturals(1),1),5,
+    simple_test(_pretty_fracs_tuple(taylor_terms(naturals(1),1)),5,
                 "")
     
     print("\nExpansion of the Partials Sums of a Taylor Series")
-    simple_test(taylor_sums(naturals(1),1),5,
+    simple_test(_pretty_fracs_tuple(taylor_sums(naturals(1),1)),5,
                 "")
     
     print("\nConvergents of a Taylor Series")
-    simple_test(taylor_convergents(naturals(1),1,0),5,
-                "")
+    simple_test(taylor_convergents(naturals(1),1,0),10,
+                "1, 3, 6, 10, 15, 21, 28, 36, 45, 55")
