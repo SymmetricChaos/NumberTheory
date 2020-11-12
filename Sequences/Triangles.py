@@ -7,18 +7,18 @@ from Sequences.Fractional import _pretty_fracs, fibonacci_generations
 from Sequences.Simple import powers
 
 
-def quick_triangle(sequence,n,space=0,delim=" "):
-    
-    T = make_triangle(sequence)
-    
-    pretty_array(T,n=n,space=space,delim=delim)
-
-
 def pretty_array(A,n,space=0,delim=" "):
     for i in range(n):
         l = [f"{str(x):<{space}}" for x in next(A)]
         s = str(delim).join(l)
         print(s)
+
+
+def quick_triangle(sequence,n,space=0,delim=" "):
+    
+    T = make_triangle(sequence)
+    
+    pretty_array(T,n=n,space=space,delim=delim)
 
 
 def quick_array(sequence,row_lengths,n,space=0,delim=" "):
