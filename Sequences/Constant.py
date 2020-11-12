@@ -1,8 +1,9 @@
 from Sequences.MathUtils import int_to_digits, real_sum, real_prod_nat, real_div_nat, digits
-from NiceErrorChecking import require_integers, require_geq
-from itertools import chain, dropwhile
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Simple import constant, naturals, powers
+
 from math import isqrt, gcd
+from itertools import chain, dropwhile
 
 # Would like to restrict this to streaming algorithms that can keep producing 
 # digits

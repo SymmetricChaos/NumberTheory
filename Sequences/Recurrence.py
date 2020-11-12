@@ -1,4 +1,4 @@
-from NiceErrorChecking import require_integers, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq
 from Sequences.Simple import evens, naturals
 from Sequences.Manipulations import offset
 

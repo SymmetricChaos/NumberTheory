@@ -23,15 +23,13 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Combinatorics import catalan, derangement, pascal, partition_count, \
+from Sequences.Combinatorics.Combinatorics import catalan, derangement, pascal, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial, lex_permute, lex_choose, \
                                     colex_permute, colex_choose, finite_permutations, \
-                                    natural_subsets, combinadic, partitions, \
-                                    partition_ordering, equal_partitions, power_partitions, \
-                                    even_goldbach_partitions, pascal_triangle, \
-                                    sierpinski_triangle
+                                    natural_subsets, combinadic, \
+                                    sierpinski_triangle, pascal_triangle
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
@@ -39,19 +37,19 @@ from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, 
 from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
 
 from Sequences.Divisibility.Other import smooth, rough, highly_composite, \
-                                   divisors, prime_divisors, unique_prime_divisors, \
-                                   squarefree, squarefree_kernel, coprime_characteristic, \
-                                   coprimes, powerful, highly_composite_factor, \
-                                   highly_composite_prime_factor, \
-                                   principal_character, p_adic_order, \
-                                   liouville, liouville_sums, blum, blum_blum_shub_integers, \
-                                   semiprimes, almost_primes, all_divisors, composites, \
-                                   compositorial, nonprime, noncomposite, even_composites
+                                         divisors, prime_divisors, unique_prime_divisors, \
+                                         squarefree, squarefree_kernel, coprime_characteristic, \
+                                         coprimes, powerful, highly_composite_factor, \
+                                         highly_composite_prime_factor, \
+                                         principal_character, p_adic_order, \
+                                         liouville, liouville_sums, blum, blum_blum_shub_integers, \
+                                         semiprimes, almost_primes, all_divisors, composites, \
+                                         compositorial, nonprime, noncomposite, even_composites
 
-from Sequences.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
-                                 kempner, double_factorials, even_double_factorials, \
-                                 odd_double_factorials, superfactorials, left_factorials, \
-                                 factoradic
+from Sequences.Combinatorics.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
+                                  kempner, double_factorials, even_double_factorials, \
+                                  odd_double_factorials, superfactorials, left_factorials, \
+                                  factoradic
 
 from Sequences.Figurate import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
@@ -70,12 +68,16 @@ from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, jaco
                                         all_quadratic_nonresidues, squares_modulo_n, \
                                         mertens_function
 
+from Sequences.Combinatorics.Partitions import partitions, partition_count, partition_ordering, \
+                                               equal_partitions, power_partitions, \
+                                               even_goldbach_partitions
+
 from Sequences.Divisibility.Primes import primes, primorial, prime_counting, pythagorean_primes, \
-                             prime_characteristic, prime_signatures, \
-                             superprimes, odd_primes, twin_primes, \
-                             twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
-                             sophie_germain_primes, safe_primes, linear_primes, congruent_primes, \
-                             blum_primes
+                                          prime_characteristic, prime_signatures, \
+                                          superprimes, odd_primes, twin_primes, \
+                                          twin_prime_pairs, prime_gaps, prime_tuples, n_gap_prime_pairs, \
+                                          sophie_germain_primes, safe_primes, linear_primes, congruent_primes, \
+                                          blum_primes
 
 from Sequences.Divisibility.Pseudoprimes import fermat_pseudoprimes, weak_pseudoprimes, strong_pseudoprimes, \
                                    lucas_pseudoprimes, cipolla_pseudoprimes, fibonacci_pseudoprimes, \
