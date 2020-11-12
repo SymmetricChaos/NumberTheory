@@ -30,7 +30,7 @@ def thue_morse(invert=False):
 
 def fibonacci_word(invert=False):
     """
-    Fibonacci Word
+    The Infinite Fibonacci Word
     
     Args:
         invert -- bool, give the complement of the Fibonacci word
@@ -49,6 +49,26 @@ def fibonacci_word(invert=False):
             yield b[i]
         
         n = len(b)
+        a,b = b,b+a
+
+
+def fibonacci_words(invert=False):
+    """
+    Each Finite Fibonacci Word
+    
+    Args:
+        invert -- bool, give the complement of the Fibonacci word
+    
+    OEIS
+    """
+    
+    if invert:
+        a,b = (1,),(1,0)
+    else:
+        a,b = (0,),(0,1)
+    
+    while True:
+        yield a
         a,b = b,b+a
 
 
@@ -92,6 +112,10 @@ if __name__ == '__main__':
     print("\nInfinite Fibonacci Word")
     simple_test(fibonacci_word(),18,
                 "0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1")
+    
+    print("\nInfinite Fibonacci Word")
+    simple_test(fibonacci_words(),4,
+                "(0,), (0, 1), (0, 1, 0), (0, 1, 0, 0, 1)")
     
     print("\nGray Codes")
     simple_test(gray_codes(),6,
