@@ -23,7 +23,7 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
                               collatz_map, collatz_all, collatz_highpoint, \
                               collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
 
-from Sequences.Combinatorics.Combinatorics import catalan, derangement, pascal, \
+from Sequences.Combinatorics.Other import catalan, derangement, pascal, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
                                     central_binomial, lex_permute, lex_choose, \
