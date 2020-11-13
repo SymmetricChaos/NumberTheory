@@ -259,6 +259,19 @@ def factorial_chain_length():
         yield sum(i)
 
 
+def triple_factorial():
+    """
+    Triple Factorial: Version of 
+    OEIS A007661
+    """
+    
+    a,b,c = 1,1,2
+    
+    for n in naturals(3):
+        yield n*a
+        a,b,c = b,c,n*a
+
+
 
 
 
@@ -320,4 +333,8 @@ if __name__ == '__main__':
     print("\nMinimum Number of Factorials Needed to Sum to n")
     simple_test(factorial_chain_length(),18,
                 "0, 1, 1, 2, 2, 3, 1, 2, 2, 3, 3, 4, 2, 3, 3, 4, 4, 5")
+    
+    print("\nTriple Factorial")
+    simple_test(triple_factorial(),12,
+                "3, 4, 10, 18, 28, 80, 162, 280, 880, 1944, 3640, 12320")
     

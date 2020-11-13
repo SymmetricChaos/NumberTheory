@@ -269,7 +269,6 @@ def powerful(n=2):
     Args:
         n -- power
     
-    
     OEIS A001694
     """
     

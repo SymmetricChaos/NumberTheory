@@ -5,8 +5,7 @@ def thue_morse(invert=False):
     Thue-Morse Sequence
     
     Args:
-        invert -- bool, give the complement of the Thue Morse sequence
-    
+        invert -- bool, give the complement
     
     OEIS A010060
     """
@@ -33,9 +32,9 @@ def fibonacci_word(invert=False):
     The Infinite Fibonacci Word
     
     Args:
-        invert -- bool, give the complement of the Fibonacci word
+        invert -- bool, give the complement
     
-    OEIS
+    OEIS A003849
     """
     
     if invert:
@@ -57,7 +56,7 @@ def fibonacci_words(invert=False):
     Each Finite Fibonacci Word
     
     Args:
-        invert -- bool, give the complement of the Fibonacci word
+        invert -- bool, give the complement
     
     OEIS
     """
@@ -102,6 +101,11 @@ def gray_codes():
 def cantor_set(invert=False):
     """
     Generations of the Cantor Ternary Set
+    
+    Args:
+        invert -- bool, give the complement
+    
+    OEIS
     """
     
     if invert:

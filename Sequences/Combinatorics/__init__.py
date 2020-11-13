@@ -9,7 +9,7 @@ from Sequences.Combinatorics.Other import catalan, derangement, pascal, \
 from Sequences.Combinatorics.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                   kempner, double_factorials, even_double_factorials, \
                                   odd_double_factorials, superfactorials, left_factorials, \
-                                  factoradic
+                                  factoradic, triple_factorial
 
 from Sequences.Combinatorics.Partitions import partitions, partition_count, partition_ordering, \
                                                equal_partitions, power_partitions, \
@@ -32,7 +32,7 @@ __all__=[
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
          "odd_double_factorials","superfactorials", "left_factorials",
-         "factoradic",
+         "factoradic","triple_factorial",
          
          #PARTITIONS
          "partitions","equal_partitions","all_partitions","partition_ordering",
