@@ -99,6 +99,28 @@ def gray_codes():
         yield tuple(N)
 
 
+def cantor_set(invert=False):
+    """
+    Generations of the Cantor Ternary Set
+    """
+    
+    if invert:
+        D = {1:(1,0,1), 0:(0,0,0)}
+        S = (1,)
+    else:
+        D = {0:(0,1,0), 1:(1,1,1)}
+        S = (0,)
+    
+    while True:
+        yield S
+        
+        new = ()
+        for s in S:
+            new += D[s]
+        
+        S = new
+
+
 
 
 
@@ -113,11 +135,15 @@ if __name__ == '__main__':
     simple_test(fibonacci_word(),18,
                 "0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1")
     
-    print("\nInfinite Fibonacci Word")
+    print("\nFinite Fibonacci Words")
     simple_test(fibonacci_words(),4,
                 "(0,), (0, 1), (0, 1, 0), (0, 1, 0, 0, 1)")
     
     print("\nGray Codes")
     simple_test(gray_codes(),6,
                 "(0,), (1,), (1, 1), (1, 0), (1, 1, 0), (1, 1, 1)")
+    
+    print("\nGenerations of the Cantor Set")
+    simple_test(cantor_set(),3,
+                "(0,), (0, 1, 0), (0, 1, 0, 1, 1, 1, 0, 1, 0)")
     

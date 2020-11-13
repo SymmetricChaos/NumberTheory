@@ -12,7 +12,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, co_binary_weigh
                                     digital_roots, fraction_period, palindrome, \
                                     digital_prods, additive_persistence, multiplicative_persistence
 
-from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, fibonacci_words
+from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, fibonacci_words, \
+                                      cantor_set
 
 from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence, \
                               collatz_map, collatz_all, collatz_highpoint, \
@@ -83,6 +84,7 @@ __all__=[#MANIPULATIONS
          
          #BINARY
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",
+         "cantor_set",
          
          #COLLATZ
          "collatz_length","collatz_longest","collatz_sequence",
