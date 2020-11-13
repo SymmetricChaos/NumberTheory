@@ -100,6 +100,41 @@ def gray_codes():
 
 def cantor_set(invert=False):
     """
+    The Cantor Ternary Set
+    
+    Args:
+        invert -- bool, give the complement
+    
+    OEIS
+    """
+    
+    if invert:
+        yield 1
+        S = (1,)
+    else:
+        yield 0
+        S = (0,)
+    
+    if invert:
+        while True:
+            for i in range(len(S)):
+                yield 0
+            
+            yield from S
+            
+            S = S + (0,)*len(S) + S
+    else:
+        while True:
+            for i in range(len(S)):
+                yield 1
+            
+            yield from S
+            
+            S = S + (1,)*len(S) + S
+
+
+def cantor_sets(invert=False):
+    """
     Generations of the Cantor Ternary Set
     
     Args:
@@ -147,7 +182,11 @@ if __name__ == '__main__':
     simple_test(gray_codes(),6,
                 "(0,), (1,), (1, 1), (1, 0), (1, 1, 0), (1, 1, 1)")
     
-    print("\nGenerations of the Cantor Set")
-    simple_test(cantor_set(),3,
+    print("\nInfinite Cantor Set")
+    simple_test(cantor_set(),18,
+                "0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1")
+    
+    print("\nGenerations of the Cantor Sets")
+    simple_test(cantor_sets(),3,
                 "(0,), (0, 1, 0), (0, 1, 0, 1, 1, 1, 0, 1, 0)")
     
