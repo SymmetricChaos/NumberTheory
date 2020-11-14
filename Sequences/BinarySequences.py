@@ -168,6 +168,9 @@ def paperfolding_word(invert=False):
     """
     Infinite Regular Paperfolding Word
     
+    Args:
+        invert -- bool, give the complement
+    
     OEIS A014577
     """
     
@@ -189,6 +192,11 @@ def paperfolding_word(invert=False):
 def paperfolding_words(invert=False):
     """
     Generations of the Regular Paperfolding Word by Interpolation
+    
+    Args:
+        invert -- bool, give the complement
+    
+    OEIS
     """
     
     if invert:
@@ -254,7 +262,7 @@ if __name__ == '__main__':
     simple_test(paperfolding_word(),18,
                 "1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1")
     
-    print("\nInfinite Paperfolding Word")
+    print("\nGenerations of the Paperfolding Word")
     simple_test(paperfolding_words(),3,
                 "(1,), (1, 1, 0), (1, 1, 0, 1, 1, 0, 0)")
     

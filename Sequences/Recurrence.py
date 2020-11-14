@@ -166,6 +166,66 @@ def tribonacci():
         a, b, c = b, c, a+b+c
 
 
+def tribonnaci_word(index=0):
+    """
+    Infinite Tribonnaci Word
+    
+    Args:
+        index -- 0 or 1, value to start counting from
+    
+    OEIS A080843, A092782
+    """
+    
+    if index not in (0,1):
+        raise ValueError("Index must be zero or one")
+    
+    if index == 0:
+        a = (0,)
+        b = (0,1)
+        c = (0,1,0,2)
+    else:
+        a = (1,)
+        b = (1,2)
+        c = (1,2,1,3)
+    
+    while True:
+        yield from c
+        yield from b
+        yield from a
+        
+        a,b,c = b,c,c+b+a
+
+
+def tribonnaci_words(index=0):
+    """
+    Finite the Tribonnaci Words
+    
+    Args:
+        index -- 0 or 1, value to start counting from
+    
+    OEIS
+    """
+    
+    if index not in (0,1):
+        raise ValueError("Index must be zero or one")
+    
+    if index == 0:
+        D = {0:(0,1), 1:(0,2), 2:(0,)}
+        S = (0,)
+    else:
+        D = {1:(1,2), 2:(1,3), 3:(1,)}
+        S = (1,)
+    
+    while True:
+        yield S
+        
+        new = ()
+        for s in S:
+            new += D[s]
+        
+        S = new
+
+
 def multi_fibonacci(n):
     """
     Higher Order Fibonacci Sequences\n
@@ -566,4 +626,12 @@ if __name__ == '__main__':
     print("\nPrimes in Rowland's Sequence")
     simple_test(rowland_primes(),16,
                 "5, 3, 11, 3, 23, 3, 47, 3, 5, 3, 101, 3, 7, 11, 3, 13")
+    
+    print("\nTribonnaci Words")
+    simple_test(tribonnaci_word(),18,
+                "0, 1, 0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 1, 0, 1, 0, 2, 0")
+    
+    print("\nTribonnaci Words")
+    simple_test(tribonnaci_words(),4,
+                "(0,), (0, 1), (0, 1, 0, 2), (0, 1, 0, 2, 0, 1, 0)")
     

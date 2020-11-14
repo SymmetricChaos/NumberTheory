@@ -234,7 +234,6 @@ def natural_subsets_2():
     OEIS A048793
     """
     
-    
     yield 0
     for i in all_subsets(naturals(1)):
         yield from i
