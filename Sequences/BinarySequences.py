@@ -1,3 +1,6 @@
+from Sequences.Simple import naturals
+from Sequences.MathUtils import factor_out_twos
+
 from itertools import cycle
 
 def thue_morse(invert=False):
@@ -123,6 +126,7 @@ def cantor_set(invert=False):
             yield from S
             
             S = S + (0,)*len(S) + S
+    
     else:
         while True:
             for i in range(len(S)):
@@ -160,6 +164,62 @@ def cantor_sets(invert=False):
         S = new
 
 
+def paperfolding_word(invert=False):
+    """
+    Infinite Regular Paperfolding Word
+    
+    OEIS A014577
+    """
+    
+    for n in naturals(1):
+        d,s = factor_out_twos(n)
+        
+        if invert:
+            if d % 4 == 1:
+                yield 0
+            else:
+                yield 1
+        else:
+            if d % 4 == 1:
+                yield 1
+            else:
+                yield 0
+
+
+def paperfolding_words(invert=False):
+    """
+    Generations of the Regular Paperfolding Word by Interpolation
+    """
+    
+    if invert:
+        S = (0,)
+        
+        while True:
+            yield S
+            
+            new = [0]
+            C = cycle([1,0])
+            
+            for s,c in zip(S,C):
+                new += [s,c]
+            
+            S = tuple(new)
+        
+    else:
+        S = (1,)
+        
+        while True:
+            yield S
+            
+            new = [1]
+            C = cycle([0,1])
+            
+            for s,c in zip(S,C):
+                new += [s,c]
+            
+            S = tuple(new)
+
+
 
 
 
@@ -189,4 +249,12 @@ if __name__ == '__main__':
     print("\nGenerations of the Cantor Sets")
     simple_test(cantor_sets(),3,
                 "(0,), (0, 1, 0), (0, 1, 0, 1, 1, 1, 0, 1, 0)")
+    
+    print("\nInfinite Paperfolding Word")
+    simple_test(paperfolding_word(),18,
+                "1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1")
+    
+    print("\nInfinite Paperfolding Word")
+    simple_test(paperfolding_words(),3,
+                "(1,), (1, 1, 0), (1, 1, 0, 1, 1, 0, 0)")
     
