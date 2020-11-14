@@ -166,14 +166,14 @@ def tribonacci():
         a, b, c = b, c, a+b+c
 
 
-def tribonnaci_word(index=0):
+def tribonnaci_words(index=0):
     """
-    Infinite Tribonnaci Word
+    Finite the Tribonnaci Words
     
     Args:
         index -- 0 or 1, value to start counting from
     
-    OEIS A080843, A092782
+    OEIS
     """
     
     if index not in (0,1):
@@ -189,41 +189,27 @@ def tribonnaci_word(index=0):
         c = (1,2,1,3)
     
     while True:
-        yield from c
-        yield from b
-        yield from a
-        
+        yield a
         a,b,c = b,c,c+b+a
 
 
-def tribonnaci_words(index=0):
+def tribonnaci_word(index=0):
     """
-    Finite the Tribonnaci Words
+    Infinite Tribonnaci Word
     
     Args:
         index -- 0 or 1, value to start counting from
     
-    OEIS
+    OEIS A080843, A092782
     """
     
     if index not in (0,1):
         raise ValueError("Index must be zero or one")
     
-    if index == 0:
-        D = {0:(0,1), 1:(0,2), 2:(0,)}
-        S = (0,)
-    else:
-        D = {1:(1,2), 2:(1,3), 3:(1,)}
-        S = (1,)
-    
-    while True:
-        yield S
-        
-        new = ()
-        for s in S:
-            new += D[s]
-        
-        S = new
+    n = 0
+    for T in tribonnaci_words(index):
+        yield from T[n:]
+        n = len(T)
 
 
 def multi_fibonacci(n):
@@ -627,7 +613,7 @@ if __name__ == '__main__':
     simple_test(rowland_primes(),16,
                 "5, 3, 11, 3, 23, 3, 47, 3, 5, 3, 101, 3, 7, 11, 3, 13")
     
-    print("\nTribonnaci Words")
+    print("\nInfinite Tribonnaci Word")
     simple_test(tribonnaci_word(),18,
                 "0, 1, 0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 1, 0, 1, 0, 2, 0")
     
