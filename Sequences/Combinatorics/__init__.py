@@ -13,7 +13,7 @@ from Sequences.Combinatorics.Factorials import factorials, alternating_factorial
 
 from Sequences.Combinatorics.Partitions import partitions, partition_count, partition_ordering, \
                                                equal_partitions, power_partitions, \
-                                               even_goldbach_partitions
+                                               even_goldbach_partitions, tribonnaci_partitions
 
 
 
@@ -37,4 +37,5 @@ __all__=[
          #PARTITIONS
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
+         "tribonnaci_partitions"
          ]

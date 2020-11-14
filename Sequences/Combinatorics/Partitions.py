@@ -1,6 +1,8 @@
 from Sequences.Figurate import gen_pentagonal
 from Sequences.Simple import naturals, powers, evens
 from Sequences.Divisibility import primes
+from Sequences.Recurrence import tribonacci
+from Sequences.Manipulations import offset
 
 from math import prod
 from sympy import prime
@@ -142,6 +144,34 @@ def even_goldbach_partitions():
                 yield (e-s,s)
 
 
+def tribonnaci_partitions():
+    """
+    Unique representation of each natural as a sum of distrinct tribonacci numbers\n
+    OEIS
+    """
+    
+    trib = offset(tribonacci(),4)
+    T = [1]
+    
+    yield (0,)
+    
+    for n in naturals(1):
+        if T[-1] < n:
+            T.append(next(trib))
+        
+        out = []
+        
+        for t in reversed(T):
+            if n >= t:
+                out.append(t)
+                n -= t
+            
+            if n == 0:
+                break
+        
+        yield tuple(out)
+
+
 
 
 
@@ -175,4 +205,8 @@ if __name__ == '__main__':
     print("\nGoldbach Partitions of the Even Numbers")
     simple_test(even_goldbach_partitions(),7,
                 "(2, 2), (3, 3), (3, 5), (5, 5), (3, 7), (5, 7), (7, 7)")
+    
+    print("\nUnique Representation of Each Natural as a Sum of Tribonacci Numbers")
+    simple_test(tribonnaci_partitions(),8,
+                "(0,), (1,), (2,), (2, 1), (4,), (4, 1), (4, 2), (7,)")
     
