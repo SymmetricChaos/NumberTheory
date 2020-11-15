@@ -1,5 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factor_out_twos
+from Sequences.Recurrence import tribonacci
+from Sequences.Manipulations import offset
 
 from itertools import cycle
 
@@ -228,6 +230,33 @@ def paperfolding_words(invert=False):
             S = tuple(new)
 
 
+def tribonnaci_vectors():
+    """
+    Unique representation of each natural in the tribonacci base\n
+    OEIS A278038
+    """
+    
+    trib = offset(tribonacci(),4)
+    T = [1]
+    
+    yield (0,)
+    
+    for n in naturals(1):
+        if T[-1] < n:
+            T.append(next(trib))
+        
+        out = []
+        
+        for t in reversed(T):
+            if n >= t:
+                out.append(1)
+                n -= t
+            else:
+                if 1 in out:
+                    out.append(0)
+        
+        yield tuple(out)
+
 
 
 
@@ -265,4 +294,8 @@ if __name__ == '__main__':
     print("\nGenerations of the Paperfolding Word")
     simple_test(paperfolding_words(),3,
                 "(1,), (1, 1, 0), (1, 1, 0, 1, 1, 0, 0)")
+    
+    print("\nTribonacci Vector Representation of Each Natural")
+    simple_test(tribonnaci_vectors(),6,
+                "(0,), (1,), (1, 0), (1, 1), (1, 0, 0), (1, 0, 1)")
     
