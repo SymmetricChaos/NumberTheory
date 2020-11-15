@@ -476,7 +476,7 @@ def int_to_digits(n,B=10,bigendian=False):
     if bigendian:
         return D
     else:
-        return [i for i in reversed(D)]
+        return tuple([i for i in reversed(D)])
 
 
 def digits_to_int(D,B=10,bigendian=False):
@@ -536,7 +536,7 @@ def int_to_balt(n):
         else:
             D.append(r)
     
-    return [i for i in reversed(D)]
+    return tuple([i for i in reversed(D)])
 
 
 def balt_to_int(D):

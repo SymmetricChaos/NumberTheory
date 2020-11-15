@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod
+from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
 def evil():
@@ -178,6 +178,7 @@ def additive_persistence(B=10):
         while digital_sum(n,B) != n:
             ctr += 1
             n = digital_sum(n,B)
+        
         yield ctr
 
 
@@ -195,6 +196,7 @@ def multiplicative_persistence(B=10):
         while n >= B:
             ctr += 1
             n = digital_prod(n,B)
+        
         yield ctr
 
 
@@ -238,6 +240,19 @@ def fraction_period(B=10):
     
     for n in naturals(1):
         yield len(repeating_part(1,n,B))
+
+
+def radix_digits(B=10):
+    """
+    The digits of each natural number in base B\n
+    OEIS
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    for n in naturals(0):
+        yield int_to_digits(n,B)
 
 
 
@@ -301,4 +316,8 @@ if __name__ == '__main__':
     print("\nRepeating Unit Fraction Length (Base 10)")
     simple_test(fraction_period(10),17,
                 "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
+    
+    print("\nDigits of Each Natural (Base 3)")
+    simple_test(radix_digits(3),8,
+                "(), (1,), (2,), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1)")
     
