@@ -229,6 +229,35 @@ def palindrome(B=10):
                 yield m
 
 
+# This could also be done by generating permutations and sticking them together
+# which might be faster for large numbers but also would be harder to get into
+# numeric order
+def palindrome_digits(B=10):
+    """
+    Palindrome Numbers: Non-negative integers that are palindromes in base B\n
+    OEIS A002113, A006995
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    yield (0,)
+    
+    for n in naturals(1):
+        d = []
+        l = []
+        
+        while n != 0:
+            n,r = divmod(n,B)
+            d.append(r)
+            l.append(str(r))
+        
+        s = "".join(l)
+        
+        if s == s[::-1]:
+            yield tuple(d)
+
+
 def fraction_period(B=10):
     """
     Repeating period of each unit fraction in base B\n
@@ -261,11 +290,11 @@ def radix_digits(B=10):
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
-    print("Evil Numbers")
+    print("Evil Numbers (Even Number of 1s in Binary Expansion)")
     simple_test(evil(),15,
                 "0, 3, 5, 6, 9, 10, 12, 15, 17, 18, 20, 23, 24, 27, 29")
     
-    print("\nOdious Numbers")
+    print("\nOdious Numbers (Odd Number of 1s in Binary Expansion)")
     simple_test(odious(),15,
                 "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28")
     
@@ -312,6 +341,10 @@ if __name__ == '__main__':
     print("\nPalindromes (Base 2)")
     simple_test(palindrome(2),15,
                 "0, 1, 3, 5, 7, 9, 15, 17, 21, 27, 31, 33, 45, 51, 63")
+    
+    print("\nPalindrome Digits (Base 2)")
+    simple_test(palindrome_digits(2),6,
+                "(0,), (1,), (1, 1), (1, 0, 1), (1, 1, 1), (1, 0, 0, 1)")
     
     print("\nRepeating Unit Fraction Length (Base 10)")
     simple_test(fraction_period(10),17,
