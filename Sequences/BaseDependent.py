@@ -79,6 +79,28 @@ def co_binary_weight():
         yield s
 
 
+def radix_k_weight(k,B=10):
+    """
+    Number of time the digit k appears in the base B expansion of each natural\n
+    OEIS A000120, A023416, A081603
+    """
+    
+    require_integers(["B","k"],[B,k])
+    require_geq(["B"],[B],2)
+    require_geq(["k"],[k],0)
+    
+    for n in naturals():
+        s = 0
+        
+        while n != 0:
+            n,r = divmod(n,B)
+            
+            if r == k:
+                s += 1
+        
+        yield s
+
+
 def ruler():
     """
     Ruler Sequence: Largest power of 2 dividing each positive integer, also height of gradation at each position of an infinite ruler\n
@@ -229,9 +251,9 @@ def palindrome(B=10):
                 yield m
 
 
-# This could also be done by generating permutations and sticking them together
-# which might be faster for large numbers but also would be harder to get into
-# numeric order
+# This could also be done by generating combinations with repetition and 
+# sticking them together which might be faster for large numbers but also would
+# be harder to get into numeric order
 def palindrome_digits(B=10):
     """
     Palindrome Numbers: Non-negative integers that are palindromes in base B\n
@@ -280,9 +302,10 @@ def radix_digits(B=10):
     require_integers(["B"],[B])
     require_geq(["B"],[B],2)
     
-    for n in naturals(0):
+    yield (0,)
+    
+    for n in naturals(1):
         yield int_to_digits(n,B)
-
 
 
 
@@ -298,11 +321,11 @@ if __name__ == '__main__':
     simple_test(odious(),15,
                 "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28")
     
-    print("\nBinary Weights")
+    print("\nBinary Weights (Number of 1s in Binary Expansion)")
     simple_test(binary_weight(),18,
                 "0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2")
     
-    print("\nComplementary Binary Weights")
+    print("\nComplementary Binary Weights (Number of 0s in Binary Expansion)")
     simple_test(co_binary_weight(),18,
                 "1, 0, 1, 0, 2, 1, 1, 0, 3, 2, 2, 1, 2, 1, 1, 0, 4, 3")
     
@@ -352,5 +375,9 @@ if __name__ == '__main__':
     
     print("\nDigits of Each Natural (Base 3)")
     simple_test(radix_digits(3),8,
-                "(), (1,), (2,), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1)")
+                "(0,), (1,), (2,), (1, 0), (1, 1), (1, 2), (2, 0)")
+    
+    print("\nNumber of 2s in the Base-3 Expansion of Each Natural")
+    simple_test(radix_k_weight(2,3),18,
+                "0, 0, 1, 0, 0, 1, 1, 1, 2, 0, 0, 1, 0, 0, 1, 1, 1, 2")
     
