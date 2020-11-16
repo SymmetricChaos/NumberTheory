@@ -22,14 +22,12 @@ def thue_morse(invert=False):
         S = [0]
         yield 0
     
+    D = {0:1, 1:0}
+    
     while True:
-        new = []
-        
-        for s in S:
-            yield (s+1)%2
-            new.append((s+1)%2)
-            
-        S += new
+        for s in S[:]:
+            yield D[s]
+            S.append(D[s])
 
 
 def thue_morse_words(invert=False):
