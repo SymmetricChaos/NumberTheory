@@ -310,6 +310,7 @@ def radix_digits(B=10):
 
 
 
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -374,7 +375,7 @@ if __name__ == '__main__':
                 "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
     
     print("\nDigits of Each Natural (Base 3)")
-    simple_test(radix_digits(3),8,
+    simple_test(radix_digits(3),7,
                 "(0,), (1,), (2,), (1, 0), (1, 1), (1, 2), (2, 0)")
     
     print("\nNumber of 2s in the Base-3 Expansion of Each Natural")

@@ -32,6 +32,21 @@ def thue_morse(invert=False):
         S += new
 
 
+def thue_morse_words(invert=False):
+    if invert:
+        S = [1]
+    else:
+        S = [0]
+    
+    D = {0:1, 1:0}
+    
+    while True:
+        yield tuple(S)
+        
+        for s in S[:]:
+            S.append(D[s])
+
+
 def fibonacci_word(invert=False):
     """
     The Infinite Fibonacci Word
@@ -267,6 +282,10 @@ if __name__ == '__main__':
     print("Thue-Morse Sequence")
     simple_test(thue_morse(),18,
                 "0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0")
+    
+    print("\nThue-Morse Words")
+    simple_test(thue_morse_words(),4,
+                "(0,), (0, 1), (0, 1, 1, 0), (0, 1, 1, 0, 1, 0, 0, 1)")
     
     print("\nInfinite Fibonacci Word")
     simple_test(fibonacci_word(),18,
