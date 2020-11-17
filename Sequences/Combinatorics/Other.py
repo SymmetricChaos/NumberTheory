@@ -5,41 +5,6 @@ from Sequences.Manipulations import make_triangle
 from math import comb
 
 
-def derangement():
-    """
-    Derangement Numbers: Permutations with no element in its original position\n
-    OEIS A000166
-    """
-    
-    yield 1
-    yield 0
-    
-    S = [1,0]
-    
-    for n in naturals(1):
-        d = n * (S[0]+S[1])
-        S[0], S[1] = S[1], d
-        
-        yield d
-
-
-def even_permutation():
-    """
-    Even Permutation Numbers: Number of even permutations of n elements\n
-    OEIS A001710
-    """
-    
-    yield 1
-    yield 1
-    yield 1
-    
-    out = 3
-    
-    for n in naturals(4):
-        yield out
-        out = out * n
-
-
 def catalan():
     """
     Catalan Numbers: Number of non-crossing partitions of a set with n elements\n

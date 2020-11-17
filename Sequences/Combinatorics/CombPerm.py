@@ -1,8 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
 from Sequences.Simple import naturals
-from Sequences.Manipulations import make_triangle, sequence_apply
-
-from math import comb
 
 
 def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
@@ -64,7 +60,7 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
         k -- int, number of elements chosen
         replace -- bool, results with or without replacement
         reverse -- bool, return results in reverse order
-        index -- 0 or 1, value to start counting permutations from
+        index -- 0 or 1, value to start counting from
     """
     
     if index not in (0,1):
@@ -115,33 +111,8 @@ def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
         index -- 0 or 1, value to start counting permutations from
     """
     
-    if index not in (0,1):
-        raise Exception("index must be 0 or 1")
-    
-    def choose_recur(n,k,depth):
-        if depth >= k:
-            yield ()
-        
-        else:
-            S = range(index,n+index)
-            if reverse:
-                S = reversed(S)
-            
-            for s in S:
-                # Get the prefix by recursion
-                for prefix in choose_recur(n,k,depth+1):
-                    if reflect:
-                        T = (s,) + prefix
-                    else:
-                        T = prefix + (s,)
-                    
-                    if replace:
-                        yield T
-                    else:
-                        if s not in prefix:
-                            yield T
-    
-    yield from choose_recur(n,k,0)
+    reverse = not reverse
+    yield from lex_permute(n,k,replace,reverse,reflect,index)
 
 
 def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
@@ -154,7 +125,7 @@ def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
         k -- int, number of elements chosen
         replace -- bool, results with or without replacement
         reverse -- bool, return results in reverse order
-        index -- 0 or 1, value to start counting permutations from
+        index -- 0 or 1, value to start counting from
     """
     
     if index not in (0,1):
@@ -203,11 +174,89 @@ def finite_permutations(index=0):
         yield from lex_permute(n,n,index=index)
 
 
+def derangement():
+    """
+    Derangement Numbers: Permutations with no element in its original position\n
+    OEIS A000166
+    """
+    
+    yield 1
+    yield 0
+    
+    S = [1,0]
+    
+    for n in naturals(1):
+        d = n * (S[0]+S[1])
+        S[0], S[1] = S[1], d
+        
+        yield d
+
+
+def lex_derange(n,reverse=False,index=0):
+    """
+    The derangements of n elements, permutations with no term at its own index, returns tuples in lexicographic order
+    Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        reverse -- bool, return results in reverse order
+        index -- 0 or 1, value to start counting from
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def derange_recur(n,depth):
+        if depth >= n:
+            yield ()
+        
+        else:
+            # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
+            S = range(n)
+            if reverse:
+                S = reversed(S)
+            
+            for s in S:
+                # Get the suffix by recursion
+                if s != depth:
+                    s += index
+                    
+                    for suffix in derange_recur(n,depth+1):
+                        # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
+                        T = (s,) + suffix
+                        
+                        if s not in suffix:
+                            yield T
+    
+    yield from derange_recur(n,0)
+
+
+def even_permutation():
+    """
+    Even Permutation Numbers: Number of even permutations of n elements\n
+    OEIS A001710
+    """
+    
+    yield 1
+    yield 1
+    yield 1
+    
+    out = 3
+    
+    for n in naturals(4):
+        yield out
+        out = out * n
+
+
+
 
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
+    print("\nAll Finite Permutations")
+    simple_test(finite_permutations(),6,
+                "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
     
     print("\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographc Order")
@@ -232,7 +281,7 @@ if __name__ == '__main__':
     simple_test(lex_permute(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
     
-    print("\nReversed (equivalent to using the colex_permute() function)")
+    print("\nReversed (equivalent to using the colex_permute function)")
     simple_test(lex_permute(5,3,reverse=True),5,
                 "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
     
@@ -244,7 +293,11 @@ if __name__ == '__main__':
     simple_test(lex_permute(5,3,reflect=True,reverse=True),5,
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
     
-    print("\n\nAll Finite Permutations")
-    simple_test(finite_permutations(),6,
-                "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
+    print("\n\nThe following are derangements of length 4, indexed from 1 for ease of reading")
+    print("Lexicographc Order")
+    simple_test(lex_derange(4,index=1),4,
+                "(2, 1, 4, 3), (2, 3, 4, 1), (2, 4, 1, 3), (3, 1, 4, 2)")
     
+    print("\nReversed")
+    simple_test(lex_derange(4,reverse=True,index=1),4,
+                "(4, 3, 2, 1), (4, 3, 1, 2), (4, 1, 2, 3), (3, 4, 2, 1)")
