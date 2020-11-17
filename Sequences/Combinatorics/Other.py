@@ -111,27 +111,6 @@ def eulerian_triangle():
     yield from make_triangle(eulerian())
 
 
-def recontres():
-    """
-    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
-    OEIS A008290
-    """
-    
-    P = pascal()
-    dr = derangement()
-    D = []
-    
-    for n in naturals():
-        D.append(next(dr))
-        yield D[-1]
-        
-        # Skip the next value of P
-        next(P)
-        
-        for k in range(1,n+1):
-            yield D[n-k]*next(P)
-
-
 def bell():
     """
     Bell Numbers: Number of equivalence classes on a set with n elements\n
@@ -235,10 +214,6 @@ def combinadic(k):
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
-    print("Derangement Numbers")
-    simple_test(derangement(),11,
-                "1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961")
-    
     print("\nCatalan Numbers")
     simple_test(catalan(),11,
                 "1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796")
@@ -274,14 +249,6 @@ if __name__ == '__main__':
     print("\nMultiplicative Partitions")
     simple_test(multiplicative_partition(),18,
                 "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
-    
-    print("\nEven Permutations")
-    simple_test(even_permutation(),11,
-                "1, 1, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
-    
-    print("\nRecontres Numbers")
-    simple_test(recontres(),17,
-                "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
     print("\nAll Subsets of Natural Numbers")
     simple_test(natural_subsets(),7,

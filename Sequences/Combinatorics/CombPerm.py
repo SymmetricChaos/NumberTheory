@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-
+from Sequences.Combinatorics.Other import pascal
 
 def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
@@ -234,16 +234,98 @@ def even_permutation():
         out = out * n
 
 
+# def even_permutations(n,index=0):
+#     """
+#     The even permutations (created by an even number of transpositions) on n elements
+#     Finite generator
+#    
+#     OEIS
+#     """
+#    
+#     if index not in (0,1):
+#         raise Exception("index must be 0 or 1")
+#        
+#     S = [i+index for i in range(n)]
+    
+    
+
+
+def odd_permutation():
+    """
+    Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
+    OEIS A000246
+    """
+    
+    yield 0
+    yield 0
+    yield 1
+    
+    out = 3
+    
+    for n in naturals(4):
+        yield out
+        out = out * n
+
+
+# def odd_permutations():
+#     """
+#     The odd permutations (created by an odd number of transpositions) on n elements
+#     Finite generator
+#     OEIS 
+#     """
+#     if index not in (0,1):
+#         raise Exception("index must be 0 or 1")
+#        
+#     S = [i+index for i in range(n)]
+
+
+def recontres():
+    """
+    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
+    OEIS A008290
+    """
+    
+    P = pascal()
+    dr = derangement()
+    D = []
+    
+    for n in naturals():
+        D.append(next(dr))
+        yield D[-1]
+        
+        # Skip the next value of P
+        next(P)
+        
+        for k in range(1,n+1):
+            yield D[n-k]*next(P)
+
 
 
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
+    print("\nDerangement Numbers")
+    simple_test(derangement(),11,
+                "1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961")
+    
+    print("\nEven Permutation Numbers")
+    simple_test(even_permutation(),11,
+                "1, 1, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
+    
+    print("\nOdd Permutation Numbers")
+    simple_test(odd_permutation(),11,
+                "0, 0, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
+    
+    
+    print("\nRecontres Numbers")
+    simple_test(recontres(),17,
+                "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
+    
+    
     print("\nAll Finite Permutations")
     simple_test(finite_permutations(),6,
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
-    
     
     print("\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographc Order")
