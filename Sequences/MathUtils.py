@@ -474,7 +474,7 @@ def int_to_digits(n,B=10,bigendian=False):
         D.append(r)
     
     if bigendian:
-        return D
+        return tuple(D)
     else:
         return tuple([i for i in reversed(D)])
 
@@ -500,6 +500,27 @@ def digits_to_int(D,B=10,bigendian=False):
             p *= B
         
         return n
+
+
+def int_to_bits(n,width=None,bigendian=False):
+    
+    n = abs(n)
+    D = []
+    
+    while n != 0:
+        n,r = divmod(n,2)
+        D.append(r)
+    
+    if D == []:
+        D = [0]
+    
+    if width != None:
+        D += [0]*(width-len(D))
+    
+    if bigendian:
+        return tuple(D)
+    else:
+        return tuple([i for i in reversed(D)])
 
 
 def frac_to_digits(n,d,B=10):
