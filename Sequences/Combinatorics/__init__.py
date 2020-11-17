@@ -1,10 +1,12 @@
 from Sequences.Combinatorics.Other import catalan, derangement, pascal, \
                                     eulerian, bell, gould, even_permutation, \
                                     lazy_caterer, cake, multiplicative_partition, \
-                                    central_binomial, lex_permute, lex_choose, \
-                                    colex_permute, colex_choose, finite_permutations, \
+                                    central_binomial, \
                                     natural_subsets, combinadic, \
                                     pascal_triangle, eulerian_triangle
+
+from Sequences.Combinatorics.CombPerm import lex_permute, lex_choose, colex_permute, \
+                                             colex_choose, finite_permutations
 
 from Sequences.Combinatorics.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                   kempner, double_factorials, even_double_factorials, \
@@ -24,10 +26,13 @@ __all__=[
          #COMBINATORICS
          "catalan","derangement","pascal","eulerian","bell",
          "gould","recontres","even_permutation","lazy_caterer","cake",
-         "multiplicative_partition","central_binomial","lex_permute",
-         "lex_choose","colex_permute","colex_choose","finite_permutations",
+         "multiplicative_partition","central_binomial",
          "natural_subsets","combinadic","pascal_triangle",
          "eulerian_triangle",
+         
+         #COMBINATIONS AND PERMUTATIONS
+         "lex_permute","lex_choose","colex_permute","colex_choose",
+         "finite_permutations",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",

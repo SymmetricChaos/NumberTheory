@@ -69,6 +69,7 @@ def fibonacci_word(invert=False):
         a,b = (1,),(1,0)
     else:
         a,b = (0,),(0,1)
+    
     n = 0
     
     while True:
@@ -108,20 +109,18 @@ def gray_codes():
     
     cycles = [cycle([1,1,0,0])]
     cycle_len = 2
-    ctr = 0
     
-    while True:
-        ctr += 1
-        
-        if ctr == cycle_len:
+    for n in naturals(1):
+        if n == cycle_len:
             cycle_len *= 2
             
             L = [1]*cycle_len + [0]*cycle_len
             cycles.append(cycle(L))
         
         N = []
-        for n in reversed(cycles):
-            N.append(next(n))
+        
+        for c in reversed(cycles):
+            N.append(next(c))
         
         yield tuple(N)
 
@@ -207,6 +206,7 @@ def paperfolding_word(invert=False):
                 yield 0
             else:
                 yield 1
+        
         else:
             if d % 4 == 1:
                 yield 1
@@ -293,9 +293,9 @@ def sierpinski_triangle(invert=False):
     for row in make_triangle(sequence_apply(pascal(),lambda x: x%2)):
         if invert:
             yield tuple([D[i] for i in row])
+        
         else:
             yield row
-
 
 
 
