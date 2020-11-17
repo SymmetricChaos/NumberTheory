@@ -1,7 +1,8 @@
 from Sequences.Simple import naturals
 from Sequences.MathUtils import factor_out_twos
 from Sequences.Recurrence import tribonacci
-from Sequences.Manipulations import offset
+from Sequences.Manipulations import offset, make_triangle, sequence_apply
+from Sequences.Combinatorics import pascal
 
 from itertools import cycle
 
@@ -281,6 +282,22 @@ def tribonnaci_vectors():
         yield tuple(out)
 
 
+def sierpinski_triangle(invert=False):
+    """
+    Sierpinski's Triangle by Rows\n
+    OEIS A047999
+    """
+    
+    D = {0:1, 1:0}
+    
+    for row in make_triangle(sequence_apply(pascal(),lambda x: x%2)):
+        if invert:
+            yield tuple([D[i] for i in row])
+        else:
+            yield row
+
+
+
 
 
 
@@ -326,4 +343,8 @@ if __name__ == '__main__':
     print("\nTribonacci Vector Representation of Each Natural")
     simple_test(tribonnaci_vectors(),6,
                 "(0,), (1,), (1, 0), (1, 1), (1, 0, 0), (1, 0, 1)")
+    
+    print("\nSierpinski Triangle by Rows")
+    simple_test(sierpinski_triangle(),5,
+                "(1,), (1, 1), (1, 0, 1), (1, 1, 1, 1), (1, 0, 0, 0, 1)")
     

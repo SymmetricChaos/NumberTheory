@@ -4,7 +4,7 @@ from Sequences.Combinatorics.Other import catalan, derangement, pascal, \
                                     central_binomial, lex_permute, lex_choose, \
                                     colex_permute, colex_choose, finite_permutations, \
                                     natural_subsets, combinadic, \
-                                    sierpinski_triangle, pascal_triangle
+                                    pascal_triangle, eulerian_triangle
 
 from Sequences.Combinatorics.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
                                   kempner, double_factorials, even_double_factorials, \
@@ -13,7 +13,8 @@ from Sequences.Combinatorics.Factorials import factorials, alternating_factorial
 
 from Sequences.Combinatorics.Partitions import partitions, partition_count, partition_ordering, \
                                                equal_partitions, power_partitions, \
-                                               even_goldbach_partitions, tribonnaci_partitions
+                                               even_goldbach_partitions, tribonnaci_partitions, \
+                                               composition_count, compositions, all_compositions
 
 
 
@@ -26,7 +27,7 @@ __all__=[
          "multiplicative_partition","central_binomial","lex_permute",
          "lex_choose","colex_permute","colex_choose","finite_permutations",
          "natural_subsets","combinadic","pascal_triangle",
-         "sierpinski_triangle",
+         "eulerian_triangle",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
@@ -37,5 +38,6 @@ __all__=[
          #PARTITIONS
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
-         "tribonnaci_partitions"
+         "tribonnaci_partitions","composition_count","compositions",
+         "all_compositions"
          ]

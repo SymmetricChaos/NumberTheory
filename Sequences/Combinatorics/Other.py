@@ -137,6 +137,15 @@ def eulerian():
         L = T
 
 
+def eulerian_triangle():
+    """
+    Eulerian's Triangle by Rows\n
+    OEIS A007318
+    """
+    
+    yield from make_triangle(eulerian())
+
+
 def recontres():
     """
     Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
@@ -453,15 +462,6 @@ def combinadic(k):
         yield int_to_comb(n,k)
 
 
-def sierpinski_triangle():
-    """
-    Sierpinski's Triangle by Rows
-    OEIS A047999
-    """
-    
-    yield from make_triangle(sequence_apply(pascal(),lambda x: x%2))
-
-
 
 
 
@@ -568,8 +568,4 @@ if __name__ == '__main__':
     print("\nPascal's Triangle by Rows")
     simple_test(pascal_triangle(),5,
                 "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1), (1, 4, 6, 4, 1)")
-    
-    print("\nSierpinski Triangle by Rows")
-    simple_test(sierpinski_triangle(),5,
-                "(1,), (1, 1), (1, 0, 1), (1, 1, 1, 1), (1, 0, 0, 0, 1)")
     

@@ -45,7 +45,7 @@ def partitions(n):
     if n == 0:
         yield ()
     
-    if n == 1:
+    elif n == 1:
         yield (1,)
     
     else:
@@ -172,6 +172,64 @@ def tribonnaci_partitions():
         yield tuple(out)
 
 
+def composition_count():
+    """
+    Number of compositions (ordered partition) for each natural (2**(n-1) for n > 0)
+    OEIS A011782
+    """
+    
+    yield 1
+    
+    for p in powers(2):
+        yield p
+
+
+def compositions(n):
+    """
+    All of the compositions (ordered partitions) of n
+    Finite generator
+    """
+    
+    if n == 0:
+        yield ()
+    
+    elif n == 1:
+        yield (1,)
+    
+    else:
+        yield (n,)
+        
+        for x in range(1,n):
+            for p in partitions(x):
+                yield (n-x,) + p
+    
+    # An interative version of this (using a list as a stack) show the relationship
+    # with binary expansions
+    # if n == 0:
+    #     yield ()
+    #
+    # else:
+    #     for i in range(0,2**(n-1)):
+    #         P = [n]
+    #        
+    #         for pos,val in enumerate(int_to_bits(i,width=n-1),1):
+    #             if val:
+    #                 P[-1] -= n-pos
+    #                 P.append(n-pos)
+    #        
+    #         yield tuple(P)
+
+
+def all_compositions():
+    """
+    All of the compositions (ordered partitions) of each natural
+    OEIS
+    """
+    
+    for n in naturals():
+        yield from compositions(n)
+
+
 
 
 
@@ -209,4 +267,16 @@ if __name__ == '__main__':
     print("\nUnique Representation of Each Natural as a Sum of Tribonacci Numbers")
     simple_test(tribonnaci_partitions(),8,
                 "(0,), (1,), (2,), (2, 1), (4,), (4, 1), (4, 2), (7,)")
+    
+    print("\nNumber of Compositions for Each Natural")
+    simple_test(composition_count(),13,
+                "1, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048")
+    
+    print("\nCompositions of 5")
+    simple_test(compositions(5),6,
+                "(5,), (4, 1), (3, 2), (3, 1, 1), (2, 3), (2, 2, 1)")
+    
+    print("\nSequence of all Compositions")
+    simple_test(all_compositions(),7,
+                "(), (1,), (2,), (1, 1), (3,), (2, 1), (1, 2)")
     
