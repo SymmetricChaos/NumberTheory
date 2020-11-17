@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals
 
 
-def lex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
+def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
     The ways to choose permutations of length k from a set of n elements, returns tuples in lexicographic order
     Finite generator
@@ -97,24 +97,6 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     yield from choose_recur(n,k,0)
 
 
-def colex_permute(n,k,replace=False,reverse=False,reflect=False,index=0):
-    """
-    The ways to choose permutations of length k from a set of n element, returns tuples in colexicographic order, equivalent to lex_order() with reversed = True
-    Finite generator
-    
-    Args:
-        n -- int, size of the set to choose from
-        k -- int, number of elements chosen
-        replace -- bool, results with or without replacement
-        reverse -- bool, return results in reverse order
-        reflect -- bool, reflect each permutation
-        index -- 0 or 1, value to start counting permutations from
-    """
-    
-    reverse = not reverse
-    yield from lex_permute(n,k,replace,reverse,reflect,index)
-
-
 def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in colexicographic order (aka prefix order)
@@ -171,7 +153,7 @@ def finite_permutations(index=0):
     """
     
     for n in naturals(1):
-        yield from lex_permute(n,n,index=index)
+        yield from permutations(n,n,index=index)
 
 
 def derangement():
@@ -192,7 +174,7 @@ def derangement():
         yield d
 
 
-def lex_derange(n,reverse=False,index=0):
+def derangements(n,reverse=False,reflect=False,index=0):
     """
     The derangements of n elements, permutations with no term at its own index, returns tuples in lexicographic order
     Finite generator
@@ -200,6 +182,7 @@ def lex_derange(n,reverse=False,index=0):
     Args:
         n -- int, size of the set to choose from
         reverse -- bool, return results in reverse order
+        reflect -- bool, reflect each derangement
         index -- 0 or 1, value to start counting from
     """
     
@@ -217,13 +200,16 @@ def lex_derange(n,reverse=False,index=0):
                 S = reversed(S)
             
             for s in S:
-                # Get the suffix by recursion
                 if s != depth:
                     s += index
                     
+                    # Get the suffix by recursion
                     for suffix in derange_recur(n,depth+1):
                         # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
-                        T = (s,) + suffix
+                        if reflect:
+                            T = suffix + (s,)
+                        else:
+                            T = (s,) + suffix
                         
                         if s not in suffix:
                             yield T
@@ -258,6 +244,7 @@ if __name__ == '__main__':
     simple_test(finite_permutations(),6,
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
     
+    
     print("\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographc Order")
     simple_test(lex_choose(5,3),5,
@@ -278,26 +265,35 @@ if __name__ == '__main__':
     
     print("\n\nThe following are permutations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographic Order")
-    simple_test(lex_permute(5,3),5,
+    simple_test(permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
     
-    print("\nReversed (equivalent to using the colex_permute function)")
-    simple_test(lex_permute(5,3,reverse=True),5,
+    print("\nReversed")
+    simple_test(permutations(5,3,reverse=True),5,
                 "(4, 3, 2), (4, 3, 1), (4, 3, 0), (4, 2, 3), (4, 2, 1)")
     
     print("\nReflected")
-    simple_test(lex_permute(5,3,reflect=True),5,
+    simple_test(permutations(5,3,reflect=True),5,
                 "(2, 1, 0), (3, 1, 0), (4, 1, 0), (1, 2, 0), (3, 2, 0)")
     
     print("\nReversed and Reflected")
-    simple_test(lex_permute(5,3,reflect=True,reverse=True),5,
+    simple_test(permutations(5,3,reflect=True,reverse=True),5,
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
+    
     
     print("\n\nThe following are derangements of length 4, indexed from 1 for ease of reading")
     print("Lexicographc Order")
-    simple_test(lex_derange(4,index=1),4,
+    simple_test(derangements(4,index=1),4,
                 "(2, 1, 4, 3), (2, 3, 4, 1), (2, 4, 1, 3), (3, 1, 4, 2)")
     
     print("\nReversed")
-    simple_test(lex_derange(4,reverse=True,index=1),4,
+    simple_test(derangements(4,reverse=True,index=1),4,
                 "(4, 3, 2, 1), (4, 3, 1, 2), (4, 1, 2, 3), (3, 4, 2, 1)")
+    
+    print("\nReflected (some are not derangements when read left to right)")
+    simple_test(derangements(4,reflect=True,index=1),4,
+                "(3, 4, 1, 2), (1, 4, 3, 2), (3, 1, 4, 2), (2, 4, 1, 3)")
+    
+    print("\nReversed and Reflected")
+    simple_test(derangements(4,reverse=True,reflect=True,index=1),4,
+                "(1, 2, 3, 4), (2, 1, 3, 4), (3, 2, 1, 4), (1, 2, 4, 3)")
