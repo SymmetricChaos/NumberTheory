@@ -31,6 +31,15 @@ def thue_morse(invert=False):
 
 
 def thue_morse_words(invert=False):
+    """
+    Generations of the Thue-Morse Sequence
+    
+    Args:
+        invert -- bool, give the complement
+    
+    OEIS
+    """
+    
     if invert:
         S = [1]
     else:
@@ -264,6 +273,7 @@ def tribonnaci_vectors():
             if n >= t:
                 out.append(1)
                 n -= t
+            
             else:
                 if 1 in out:
                     out.append(0)
