@@ -6,8 +6,8 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
                                     pascal_triangle, eulerian_triangle
 
 from Sequences.Combinatorics.CombPerm import permutations, lex_choose, colex_choose, \
-                                             finite_permutations, derangement, derangements,\
-                                             even_permutation, \
+                                             all_permutations, derangement, derangements,\
+                                             even_permutation, all_derangements, \
                                              odd_permutation
 
 from Sequences.Combinatorics.Factorials import factorials, alternating_factorials_1, alternating_factorials_2, \
@@ -34,8 +34,8 @@ __all__=[
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","lex_choose","colex_choose","derangements",
-         "finite_permutations","derangement","even_permutation",
-         "odd_permutation",
+         "all_permutations","derangement","even_permutation",
+         "odd_permutation","all_derangements",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",

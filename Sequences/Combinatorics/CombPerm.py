@@ -142,7 +142,7 @@ def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
     yield from choose_recur(n,k,0)
 
 
-def finite_permutations(index=0):
+def all_permutations(index=0):
     """
     Every permutation on n elements for positive n, returns tuples in lexicographic order
     
@@ -217,6 +217,22 @@ def derangements(n,reverse=False,reflect=False,index=0):
     yield from derange_recur(n,0)
 
 
+def all_derangements(index=0):
+    """
+    Every permutation on n elements for positive n, returns tuples in lexicographic order
+    
+    Args:
+        index -- 0 or 1, least element
+    
+    OEIS A030298
+    """
+    
+    yield ()
+    
+    for n in naturals(2):
+        yield from derangements(n,index=index)
+
+
 def even_permutation():
     """
     Even Permutation Numbers: Number of even permutations of n elements\n
@@ -238,22 +254,20 @@ def even_permutation():
 #     """
 #     The even permutations (created by an even number of transpositions) on n elements
 #     Finite generator
-#    
+    
 #     OEIS
 #     """
-#    
+    
 #     if index not in (0,1):
 #         raise Exception("index must be 0 or 1")
-#        
+        
 #     S = [i+index for i in range(n)]
-    
-    
 
 
 def odd_permutation():
     """
     Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
-    OEIS A000246
+    OEIS
     """
     
     yield 0
@@ -267,15 +281,17 @@ def odd_permutation():
         out = out * n
 
 
-# def odd_permutations():
+# def odd_permutations(n,index=0):
 #     """
 #     The odd permutations (created by an odd number of transpositions) on n elements
 #     Finite generator
-#     OEIS 
+    
+#     OEIS
 #     """
+    
 #     if index not in (0,1):
 #         raise Exception("index must be 0 or 1")
-#        
+        
 #     S = [i+index for i in range(n)]
 
 
@@ -300,6 +316,13 @@ def recontres():
             yield D[n-k]*next(P)
 
 
+# def adjacent_permutations(n):
+#     """
+#     Permutations on n that ordered so that each differs from the previous by an adjacent transposition
+#     """
+
+
+
 
 
 if __name__ == '__main__':
@@ -317,17 +340,21 @@ if __name__ == '__main__':
     simple_test(odd_permutation(),11,
                 "0, 0, 1, 3, 12, 60, 360, 2520, 20160, 181440, 1814400")
     
-    
     print("\nRecontres Numbers")
     simple_test(recontres(),17,
                 "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
-    
     print("\nAll Finite Permutations")
-    simple_test(finite_permutations(),6,
+    simple_test(all_permutations(),6,
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
     
-    print("\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
+    print("\nAll Finite Derangements")
+    simple_test(all_derangements(),5,
+                "(), (1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
+    
+    
+    
+    print("\n\n\nThe following are combinations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographc Order")
     simple_test(lex_choose(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4)")
@@ -345,7 +372,8 @@ if __name__ == '__main__':
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (1, 2, 4), (0, 2, 4)")
     
     
-    print("\n\nThe following are permutations (without repetition) of length 3 from the set {0,1,2,3,4}")
+    
+    print("\n\n\nThe following are permutations (without repetition) of length 3 from the set {0,1,2,3,4}")
     print("Lexicographic Order")
     simple_test(permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
@@ -363,7 +391,8 @@ if __name__ == '__main__':
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (3, 2, 4), (1, 2, 4)")
     
     
-    print("\n\nThe following are derangements of length 4, indexed from 1 for ease of reading")
+    
+    print("\n\n\nThe following are derangements of length 4, indexed from 1 for ease of reading")
     print("Lexicographc Order")
     simple_test(derangements(4,index=1),4,
                 "(2, 1, 4, 3), (2, 3, 4, 1), (2, 4, 1, 3), (3, 1, 4, 2)")

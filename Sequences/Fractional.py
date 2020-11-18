@@ -48,6 +48,15 @@ def _pretty_fracs_tuple(sequence):
 
 
 
+
+
+# def positive_rationals():
+#     """
+#     Sequence of all positive rationals in Cantor's order
+#     """
+#     yield Fraction(0)
+
+
 def harmonic():
     """
     Partial sums of the Harmonic Series
