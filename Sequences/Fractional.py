@@ -3,6 +3,7 @@ from Sequences.NiceErrorChecking import require_integers, require_geq, require_i
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 
 from fractions import Fraction
+from math import gcd
 
 def numerators(sequence):
     """
@@ -50,11 +51,18 @@ def _pretty_fracs_tuple(sequence):
 
 
 
-# def positive_rationals():
-#     """
-#     Sequence of all positive rationals in Cantor's order
-#     """
-#     yield Fraction(0)
+def positive_rationals():
+    """
+    Sequence of all positive rationals
+    """
+    
+    yield Fraction(1)
+    
+    for n in naturals(1):
+        for d in range(1,n):
+            if gcd(n,d) == 1:
+                yield Fraction(n,d)
+
 
 
 def harmonic():
@@ -325,4 +333,8 @@ if __name__ == '__main__':
     print("\nConvergents of a Taylor Series")
     simple_test(taylor_convergents(naturals(1),1,0),10,
                 "1, 3, 6, 10, 15, 21, 28, 36, 45, 55")
+    
+    print("\nPositive Rationals")
+    simple_test(_pretty_fracs(positive_rationals()),11,
+                "1/1, 2/1, 3/1, 3/2, 4/1, 4/3, 5/1, 5/2, 5/3, 5/4, 6/1")
     

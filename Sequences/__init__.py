@@ -113,6 +113,7 @@ __all__=[#MANIPULATIONS
          #FRACTIONAL
          "numerators","denominators","harmonic","gen_harmonic","farey",
          "stern_brocot","dirichlet_terms","dirichlet_sums",
+         "positive_rationals",
          
          #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse",
