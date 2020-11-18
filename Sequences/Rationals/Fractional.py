@@ -64,7 +64,6 @@ def positive_rationals():
                 yield Fraction(n,d)
 
 
-
 def harmonic():
     """
     Partial sums of the Harmonic Series

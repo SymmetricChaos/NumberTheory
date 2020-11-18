@@ -105,7 +105,6 @@ def _cfrac_semiconvergents(S):
         prev_best = next_best
 
 
-
 def rational_to_cfrac(n,d):
     """
     Terms of the simple continued fraction representation of n/d
