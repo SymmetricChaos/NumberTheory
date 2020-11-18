@@ -24,16 +24,11 @@ from Sequences.Collatz import collatz_length, collatz_longest, collatz_sequence,
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, phi_digits, \
                                champernowne_digits, silver_ratio_digits
 
-from Sequences.ContinuedFractions import sqrt_cfrac, e_cfrac
-
 from Sequences.Figurate import triangular, square, pentagonal, gen_pentagonal, \
                                 polygonal, gen_polygonal, simplicial, perfect_powers, \
                                 cen_polygonal, cubic, doubly_polygonal, hypercube, \
                                 gen_hypercube, oblong, rectangular, square_triangular, \
                                 square_pyramidal, squared_triangular
-
-from Sequences.Fractional import numerators, denominators, harmonic, gen_harmonic, \
-                                 farey, stern_brocot, dirichlet_terms, dirichlet_sums
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, hypotenuse
 
@@ -100,20 +95,12 @@ __all__=[#MANIPULATIONS
          "pi_digits","sqrt_digits","root_digits","phi_digits",
          "champernowne_digits","silver_ratio_digits",
          
-         #CONTINUED FRACTIONS
-         "cfrac","cfrac_convergents","sqrt_cfrac","e_cfrac",
-         
          #FIGURATE
          "triangular","square","pentagonal","gen_pentagonal","polygonal",
          "exponent","gen_polygonal","simplicial","perfect_powers",
          "cen_polygonal","cubic","doubly_polygonal","hypercube",
          "gen_hypercube","oblong","rectangular","square_triangular",
          "square_pyramidal","squared_triangular",
-         
-         #FRACTIONAL
-         "numerators","denominators","harmonic","gen_harmonic","farey",
-         "stern_brocot","dirichlet_terms","dirichlet_sums",
-         "positive_rationals",
          
          #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse",
