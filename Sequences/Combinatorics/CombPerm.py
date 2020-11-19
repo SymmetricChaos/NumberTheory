@@ -213,18 +213,29 @@ def circular_permutations(n,k,replace=False,reverse=False,reflect=False,index=0)
         else:
             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
             S = range(1+index,1+n+index)
+            if reverse:
+                S = reversed(S)
             
             for s in S:
                 # Get the suffix by recursion
                 for suffix in partial_permute_recur(n,k,depth+1):
-                    T = (s,) + suffix
+                    if reflect:
+                        T = suffix + (s,)
+                    else:
+                        T = (s,) + suffix
                     
                     # If we allow replacement don't check for repetition
-                    if s not in suffix:
+                    if replace:
                         yield T
+                    else:
+                        if s not in suffix:
+                            yield T
     
     for P in partial_permute_recur(n-1,k-1,0):
-        yield (index,) + P
+        if reflect:
+            yield P + (index,)
+        else:
+            yield (index,) + P
 
 
 def all_permutations(index=0):
@@ -251,9 +262,8 @@ def derangement():
     
     for n in naturals(1):
         yield a
-        d = n * (a+b)
-        a, b = b, d
         
+        a, b = b, n * (a+b)
 
 
 def all_derangements(index=0):
@@ -362,24 +372,28 @@ def recontres():
 
 
 # This needs to use distinct circular permutations
-# def cyclic_permutations(n,index=0):
-#     """
-#     Permutations on n that contain exactly one nontrivial cycle
-#     """
-#     base = tuple([i+index for i in range(n)])
+def cyclic_permutations(n,index=0):
+    """
+    Permutations on n that contain exactly one nontrivial cycle
+    """
+    base = tuple([i+index for i in range(n)])
     
-#     for i in range(2,n):
-#         for P in lex_choose(n,i,index=index):
-#             print(P)
-#             print(permutation_cycle(P, base, index=index))
-#             print()
-#             yield permutation_cycle(P, base, index=index)
+    for i in range(2,n+1):
+        for P in circular_permutations(n,i,index=index):
+            yield permutation_cycle(P, base, index=index)
 
 
-# def cyclic_derangements(n):
-#     """
-#     Derangements on n that contain exactly one nontrivial cycle
-#     """
+def cyclic_derangements(n,index=0):
+    """
+    Derangements on n that consist of exactly one cycle
+    """
+    
+    base = tuple([i+index for i in range(n)])
+    
+    for P in circular_permutations(n,n,index=index):
+        yield permutation_cycle(P, base, index=index)
+
+
 
 
 
@@ -411,9 +425,13 @@ if __name__ == '__main__':
     simple_test(all_derangements(),5,
                 "(), (1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
     
-    # print("\nCyclic Permutations on 4")
-    # simple_test(cyclic_permutations(4,index=1),20,
-    #             "")
+    print("\nCyclic Derangements on 4")
+    simple_test(cyclic_derangements(4,index=1),3,
+                "(4, 1, 2, 3), (3, 1, 4, 2), (4, 3, 1, 2)")
+    
+    print("\nCyclic Permutations on 4")
+    simple_test(cyclic_permutations(4,index=1),3,
+                "(2, 1, 3, 4), (3, 2, 1, 4), (4, 2, 3, 1)")
     
     
     
@@ -473,9 +491,21 @@ if __name__ == '__main__':
                 "(1, 2, 3, 4), (2, 1, 3, 4), (3, 2, 1, 4), (1, 2, 4, 3)")
     
     
+    
     print("\n\n\nThe following distinct circular permutation on 5 of length 3")
     print("Lexicographc Order")
     simple_test(circular_permutations(5,3),5,
-                "(1, 2, 3, 4), (1, 2, 4, 3), (1, 3, 2, 4), (1, 3, 4, 2), (1, 4, 2, 3)")
-
+                "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
+    
+    print("\nReversed")
+    simple_test(circular_permutations(5,3,reverse=True),5,
+                "(0, 4, 3), (0, 4, 2), (0, 4, 1), (0, 3, 4), (0, 3, 2)")
+    
+    print("\nReflected")
+    simple_test(circular_permutations(5,3,reflect=True),5,
+                "(2, 1, 0), (3, 1, 0), (4, 1, 0), (1, 2, 0), (3, 2, 0)")
+    
+    print("\nReversed and Reflected")
+    simple_test(circular_permutations(5,3,reverse=True,reflect=True),5,
+                "(3, 4, 0), (2, 4, 0), (1, 4, 0), (4, 3, 0), (2, 3, 0)")
     
