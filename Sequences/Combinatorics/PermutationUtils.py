@@ -1,10 +1,10 @@
 
 
-def permutation_cycle(C,T,index=0):
+def permutation_cycle(cycle,T,index=0):
     
-    C = C + (C[0],)
+    cycle = cycle + (cycle[0],)
     new = list(T[:])
-    for pos in range(len(C)-1):
-        new[C[pos+1]-index] = C[pos]
+    for pos in range(len(cycle)-1):
+        new[cycle[pos+1]-index] = cycle[pos]
     
     return tuple(new)

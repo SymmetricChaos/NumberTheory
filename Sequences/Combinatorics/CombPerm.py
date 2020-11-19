@@ -371,10 +371,10 @@ def recontres():
 #     """
 
 
-# This needs to use distinct circular permutations
+# These two need a way to give them a particular order
 def cyclic_permutations(n,index=0):
     """
-    Permutations on n that contain exactly one nontrivial cycle
+    Permutations on n that contain exactly one nontrivial cycle, not meaningful ordered
     """
     base = tuple([i+index for i in range(n)])
     
@@ -385,7 +385,7 @@ def cyclic_permutations(n,index=0):
 
 def cyclic_derangements(n,index=0):
     """
-    Derangements on n that consist of exactly one cycle
+    Derangements on n that consist of exactly one cycle, not meaningful ordered
     """
     
     base = tuple([i+index for i in range(n)])
