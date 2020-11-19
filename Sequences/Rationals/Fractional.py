@@ -3,7 +3,7 @@ from Sequences.NiceErrorChecking import require_integers, require_geq, require_i
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 
 from fractions import Fraction
-from math import gcd
+from math import gcd, isqrt
 
 def numerators(sequence):
     """
@@ -62,6 +62,76 @@ def positive_rationals():
         for d in range(1,n):
             if gcd(n,d) == 1:
                 yield Fraction(n,d)
+
+
+def babylonian_sqrt(n,init=None):
+    """
+    Esimates of the sqrt of n using the Babylonian method, defaults to using integer sqrt as a starting value
+    
+    Args:
+        n -- positive integer to extract the square root of
+        init -- initial guess for the square root
+    """
+    
+    if init == None:
+        cur = Fraction(isqrt(n))
+    else:
+        cur = Fraction(init)
+        
+    require_integers(["n"],[n])
+    require_geq(["n","init"],[n,cur],0)
+    
+    while True:
+        yield cur
+        cur = (cur+(n/cur))/2
+
+
+def bakhshali_sqrt(n,init=None):
+    """
+    Esimates of the sqrt of n using the Bakhshali method, defaults to using integer sqrt as a starting value
+    
+    Args:
+        n -- positive integer to extract the square root of
+        init -- initial guess for the square root
+    """
+    
+    if init == None:
+        cur = Fraction(isqrt(n))
+    else:
+        cur = Fraction(init)
+        
+    require_integers(["n"],[n])
+    require_geq(["n","init"],[n,cur],0)
+    
+    while True:
+        yield cur
+        
+        a = (n-(cur*cur))/(2*cur)
+        cur = (cur+a)-((a*a)/(2*(cur+a)))
+
+
+def newton_root(n,r,init=None):
+    """
+    Esimates of the r-th root of n using the Newton's method, defaults to using integer sqrt as a starting value
+    
+    Args:
+        n -- positive integer to extract the root of
+        r -- power of the root to extract
+        init -- initial guess for the root
+    """
+    
+    if init == None:
+        cur = Fraction(isqrt(n))
+    else:
+        cur = Fraction(init)
+    
+    require_integers(["n","r"],[n,r])
+    require_geq(["n","init"],[n,cur],0)
+    require_geq(["r"],[r],2)
+    
+    while True:
+        yield cur
+        cur = cur-(cur**r-n)/(r*cur**(r-1))
 
 
 def harmonic():
@@ -336,4 +406,16 @@ if __name__ == '__main__':
     print("\nPositive Rationals")
     simple_test(_pretty_fracs(positive_rationals()),11,
                 "1/1, 2/1, 3/1, 3/2, 4/1, 4/3, 5/1, 5/2, 5/3, 5/4, 6/1")
+    
+    print("\nBabylonian Convergents of √2")
+    simple_test(babylonian_sqrt(2),5,
+                "1, 3/2, 17/12, 577/408, 665857/470832")
+    
+    print("\nBakhshali Convergents of √2")
+    simple_test(bakhshali_sqrt(2),3,
+                "1, 17/12, 665857/470832")
+    
+    print("\nNewton Convergents of Cube Root of 2")
+    simple_test(newton_root(2,3),4,
+                "1, 4/3, 91/72, 1126819/894348")
     
