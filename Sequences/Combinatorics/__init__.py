@@ -3,10 +3,10 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
        eulerian_triangle
 
-from Sequences.Combinatorics.CombPerm import permutations, lex_choose, \
-       colex_choose, all_permutations, derangement, derangements,\
-       even_permutation, all_derangements, odd_permutation, \
-       cyclic_permutations, cyclic_derangements, circular_permutations
+from Sequences.Combinatorics.CombPerm import permutations, combinations, \
+       all_permutations, derangement, derangements, even_permutation, \
+       all_derangements, odd_permutation, cyclic_permutations, \
+       cyclic_derangements, circular_permutations
 
 from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
@@ -31,10 +31,9 @@ __all__=[
          "eulerian_triangle",
          
          #COMBINATIONS AND PERMUTATIONS
-         "permutations","lex_choose","colex_choose","derangements",
-         "all_permutations","derangement","even_permutation",
-         "odd_permutation","all_derangements","cyclic_permutations",
-         "cyclic_derangements","circular_permutations",
+         "permutations","combinations","derangements","all_permutations",
+         "derangement","even_permutation","odd_permutation","all_derangements",
+         "cyclic_permutations","cyclic_derangements","circular_permutations",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",

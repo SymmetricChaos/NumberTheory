@@ -51,7 +51,7 @@ def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     yield from permute_recur(n,k,0)
 
 
-def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
+def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
     """
     The ways to choose combinations of length k from a set of n element, returns tuples in lexicographic order  (aka suffix order)
     Finite generator
@@ -61,13 +61,15 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
         k -- int, number of elements chosen
         replace -- bool, results with or without replacement
         reverse -- bool, return results in reverse order
+        reflect -- bool, return descending combination rather than ascending
+        colex -- bool, return results in colexicographic order
         index -- 0 or 1, value to start counting from
     """
     
     if index not in (0,1):
         raise Exception("index must be 0 or 1")
     
-    def choose_recur(n,k,depth):
+    def lex_choose_recur(n,k,depth):
         if depth >= k:
             yield ()
         
@@ -79,12 +81,12 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
             
             for s in S:
                 # Get the suffix by recursion
-                for suffix in choose_recur(n,k,depth+1):
+                for suffix in lex_choose_recur(n,k,depth+1):
                     # We're looking for the lexicographically first representation for each permutation
                     # So if anything in the suffix is less than s it can't be valid
                     if len(suffix) > 0 and min(suffix) < s:
                         continue
-                    if descending:
+                    if reflect:
                         T = suffix + (s,)
                     
                     T = (s,) + suffix
@@ -95,26 +97,7 @@ def lex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
                         if s not in suffix:
                             yield T
     
-    yield from choose_recur(n,k,0)
-
-
-def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
-    """
-    The ways to choose combinations of length k from a set of n element, returns tuples in colexicographic order (aka prefix order)
-    Finite generator
-    
-    Args:
-        n -- int, size of the set to choose from
-        k -- int, number of elements chosen
-        replace -- bool, results with or without replacement
-        reverse -- bool, return results in reverse order
-        index -- 0 or 1, value to start counting from
-    """
-    
-    if index not in (0,1):
-        raise Exception("index must be 0 or 1")
-    
-    def choose_recur(n,k,depth):
+    def colex_choose_recur(n,k,depth):
         if depth >= k:
             yield ()
         
@@ -125,22 +108,26 @@ def colex_choose(n,k,replace=False,reverse=False,descending=False,index=0):
             
             for s in S:
                 # Get the prefix by recursion
-                for prefix in choose_recur(n,k,depth+1):
+                for prefix in colex_choose_recur(n,k,depth+1):
                     # We're looking for the colexicographically first representation for each permutation
                     # So if anything in the prefix is greater than s it can't be valid
                     if len(prefix) > 0 and max(prefix) > s:
                         continue
-                    if descending:
+                    if reflect:
                         T = (s,) + prefix
-                        
-                    T = prefix + (s,)
+                    else:
+                        T = prefix + (s,)
+                    
                     if replace:
                         yield T
                     else:
                         if s not in prefix:
                             yield T
     
-    yield from choose_recur(n,k,0)
+    if colex:
+        yield from colex_choose_recur(n,k,0)
+    else:
+        yield from lex_choose_recur(n,k,0)
 
 
 def derangements(n,reverse=False,reflect=False,index=0):
@@ -397,7 +384,6 @@ def cyclic_derangements(n,index=0):
 
 
 
-
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -437,19 +423,19 @@ if __name__ == '__main__':
     
     print("\n\n\nThe following are combinations on 5 of length 3")
     print("Lexicographc Order")
-    simple_test(lex_choose(5,3),5,
+    simple_test(combinations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4)")
     
     print("\nReversed")
-    simple_test(lex_choose(5,3,reverse=True),5,
+    simple_test(combinations(5,3,reverse=True),5,
                 "(2, 3, 4), (1, 3, 4), (1, 2, 4), (1, 2, 3), (0, 3, 4)")
     
     print("\nColexicographc Order")
-    simple_test(colex_choose(5,3),5,
+    simple_test(combinations(5,3,colex=True),5,
                 "(0, 1, 2), (0, 1, 3), (0, 2, 3), (1, 2, 3), (0, 1, 4)")
     
     print("\nReversed")
-    simple_test(colex_choose(5,3,reverse=True),5,
+    simple_test(combinations(5,3,reverse=True,colex=True),5,
                 "(2, 3, 4), (1, 3, 4), (0, 3, 4), (1, 2, 4), (0, 2, 4)")
     
     
