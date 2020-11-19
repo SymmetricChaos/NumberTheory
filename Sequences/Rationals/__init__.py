@@ -1,5 +1,6 @@
-from Sequences.Rationals.Fractional import numerators, denominators, harmonic, gen_harmonic, \
-                                 farey, stern_brocot, dirichlet_terms, dirichlet_sums
+from Sequences.Rationals.Fractional import numerators, denominators, \
+       harmonic, gen_harmonic, farey, stern_brocot, dirichlet_terms, \
+       dirichlet_sums
 
 from Sequences.Rationals.ContinuedFractions import sqrt_cfrac, e_cfrac
 
