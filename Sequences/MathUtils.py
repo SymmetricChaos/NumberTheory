@@ -1,7 +1,6 @@
 from math import isqrt, gcd, comb
 from itertools import chain, combinations, repeat, count
 from functools import reduce
-from fractions import Fraction
 from sympy import factorint, divisors, divisor_sigma, legendre_symbol
 
 ###################
@@ -410,67 +409,6 @@ def balt_to_int(D):
     return reduce(lambda y,x: x + 3 * y,D,0)
 
 
-def comb_to_int(C):
-    """
-    Given a combination in descending order return to associated integer
-    """
-    
-    for i in range(len(C)-1):
-        if C[i] <= C[i+1]:
-            raise Exception("Elements of C must be given in strictly decreasing order")
-    
-    L = [comb(c,i) for c,i in zip(C,range(len(C),0,-1))]
-    
-    return sum(L)
-
-
-def int_to_comb(n,k):
-    """
-    Given an integer return the associated combination
-    """
-    
-    if k == 0:
-        return ()
-    
-    for c in count(1):
-        if comb(c,k) > n:
-            return (c-1,) + int_to_comb(n-comb(c-1,k),k-1)
-
-
-def comb_to_vector(C,n=None,index=0):
-    """
-    Convert a combination (in any order) to an index vector in ascending order
-    
-    Args:
-        C -- iterable containing the combination
-        n -- number of elements to include in the vector
-        index -- 0 or 1, number to start counting from
-    """
-    
-    if index not in (0,1):
-        raise ValueError("The index must be 0 or 1")
-    
-    if index == 0:
-        if n == None:
-            n = max(C)+1
-        V = [0]*n
-        for c in C:
-            if c < index:
-                raise ValueError("No element can be less than the index value 0")
-            V[c-1] = 1
-    
-    if index == 1:
-        if index == 1:
-            n = max(C)
-        V = [0]*n
-        for c in C:
-            if c < index:
-                raise ValueError("No element can be less than the index value 1")
-            V[c] = 1
-    
-    return V
-
-
 
 
 
@@ -774,25 +712,6 @@ def factor_out_twos(n):
     return d,s
 
 
-def partitions_of(n):
-    """
-    All partitions of n in reverse lexicographic order
-    """
-    
-    def all_partitions(n):
-        if n == 1:
-            yield (1,)
-        
-        else:
-            yield (n,)
-            
-            for x in range(1,n):
-                for p in all_partitions(x):
-                    if p[0] <= n-x:
-                        yield (n-x,) + p
-    
-    return [i for i in all_partitions(n)]
-
 
 
 
@@ -910,15 +829,6 @@ if __name__ == '__main__':
     print("\nPowerset of {1,2,3,4}")
     print([i for i in powerset({1,2,3})])
     
-    print("\nConvergents of Pi up to 355/113")
-    print([i for i in cfrac_convergents([3, 7, 15, 1])])
-    
-    print("\nSemiconvergents of Pi up to 355/113")
-    print([i for i in cfrac_semiconvergents([3, 7, 15, 1])])
-    
-    print("\nMobius Transform")
-    print([ i for i in mobius(1,2,2,0,iter([1,5,2])) ])
-    
     print("\nBalanced Ternary Representation of -378")
     print(int_to_balt(-378))
     
@@ -954,6 +864,3 @@ if __name__ == '__main__':
     
     print("\nIndicator Vector for Above Combination")
     print(comb_to_vector([8,6,3,1,0]))
-    
-    print("\nPartitions of 6 (canonical)")
-    print(partitions_of(6))

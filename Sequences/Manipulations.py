@@ -9,7 +9,7 @@ from time import time
 
 
 ## Transform a sequence into another sequence ##
-def sequence_slice(sequence, offset, num_vals, step):
+def sequence_slice(sequence, offset=9, num_vals=None, step=0):
     """Yields sequence starting with offset until num_vals are returned skipping step each time"""
     
     return islice(sequence, offset, num_vals,step+1)

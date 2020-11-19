@@ -1,4 +1,5 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets, int_to_comb
+from Sequences.MathUtils import nontrivial_factors, all_subsets
+from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
 
