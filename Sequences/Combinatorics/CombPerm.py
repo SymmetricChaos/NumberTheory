@@ -2,10 +2,11 @@ from Sequences.Simple import naturals
 from Sequences.Combinatorics.Other import pascal
 from Sequences.Combinatorics.PermutationUtils import permutation_cycle
 from Sequences.Manipulations import sequence_slice
+from Sequences.MathUtils import sign_of
 
 def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
-    The ways to choose permutations of length k from a set of n elements, returns tuples in lexicographic order
+    The permutations of length k from a set of n elements, returns tuples in lexicographic order
     Finite generator
     
     Args:
@@ -54,7 +55,7 @@ def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
 
 def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
     """
-    The ways to choose combinations of length k from a set of n element, returns tuples in lexicographic order  (aka suffix order)
+    The combinations of length k from a set of n elements, returns tuples in lexicographic order
     Finite generator
     
     Args:
@@ -63,7 +64,7 @@ def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index
         replace -- bool, results with or without replacement
         reverse -- bool, return results in reverse order
         reflect -- bool, return descending combination rather than ascending
-        colex -- bool, return results in colexicographic order
+        colex -- bool, return results in colexicographic order, aka prefix order
         index -- 0 or 1, value to start counting from
     """
     
@@ -176,7 +177,7 @@ def derangements(n,reverse=False,reflect=False,index=0):
 
 def circular_permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
-    The ways to choose disctinct circular permutations of length k from a set of n elements, returns tuples in lexicographic order
+    The disctinct circular permutations of length k from a set of n elements, returns tuples in lexicographic order
     Finite generator
     
     Args:
@@ -224,6 +225,38 @@ def circular_permutations(n,k,replace=False,reverse=False,reflect=False,index=0)
             yield P + (index,)
         else:
             yield (index,) + P
+
+
+def alternating_permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
+    """
+    The alternating permutations of length k from a set of n elements, returns tuples in lexicographic order
+    Finite generator
+    
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of elements chosen
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        reflect -- bool, reflect each permutation
+        index -- 0 or 1, value to start counting permutations from
+    """
+    
+    if k > n:
+        raise Exception(f"k must be less than or equal to n, cannot choose {k} elements from a set of {n}")
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def is_alternating(P):
+        direct = sign_of(P[0]-P[1])
+        for i in range(1,len(P)-1):
+            if sign_of(P[i]-P[i+1]) == direct:
+                return False
+        return True
+            
+    for P in permutations(n,k,replace=replace,reverse=reverse,reflect=reflect,index=index):
+        if is_alternating(P):
+            yield P
 
 
 def all_permutations(index=0):
@@ -450,7 +483,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nThe following are combinations on 5 of length 3")
+    print("\n\n\nCombinations on 5 of length 3")
     print("Lexicographc Order")
     simple_test(combinations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4)")
@@ -469,7 +502,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nThe following are permutations on 5 of length 3")
+    print("\n\n\nPermutations on 5 of length 3")
     print("Lexicographic Order")
     simple_test(permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
@@ -488,7 +521,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nThe following are derangements of length 4, indexed from 1 for ease of reading")
+    print("\n\n\nDerangements of length 4, indexed from 1 for ease of reading")
     print("Lexicographc Order")
     simple_test(derangements(4,index=1),4,
                 "(2, 1, 4, 3), (2, 3, 4, 1), (2, 4, 1, 3), (3, 1, 4, 2)")
@@ -507,7 +540,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nThe following distinct circular permutation on 5 of length 3")
+    print("\n\n\nDistinct circular permutation on 5 of length 3")
     print("Lexicographc Order")
     simple_test(circular_permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
@@ -523,4 +556,23 @@ if __name__ == '__main__':
     print("\nReversed and Reflected")
     simple_test(circular_permutations(5,3,reverse=True,reflect=True),5,
                 "(3, 4, 0), (2, 4, 0), (1, 4, 0), (4, 3, 0), (2, 3, 0)")
+    
+    
+    
+    print("\n\n\nAlternating permutation on 4 of length 3")
+    print("Lexicographc Order")
+    simple_test(alternating_permutations(4,3),5,
+                "(0, 2, 1), (0, 3, 1), (0, 3, 2), (1, 0, 2), (1, 0, 3)")
+    
+    print("\nReversed")
+    simple_test(alternating_permutations(4,3,reverse=True),5,
+                "(3, 1, 2), (3, 0, 2), (3, 0, 1), (2, 3, 1), (2, 3, 0)")
+    
+    print("\nReflected")
+    simple_test(alternating_permutations(4,3,reflect=True),5,
+                "(1, 2, 0), (1, 3, 0), (2, 3, 0), (2, 0, 1), (3, 0, 1)")
+    
+    print("\nReversed and Reflected")
+    simple_test(alternating_permutations(4,3,reverse=True,reflect=True),5,
+                "(2, 1, 3), (2, 0, 3), (1, 0, 3), (1, 3, 2), (0, 3, 2)")
     

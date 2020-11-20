@@ -6,7 +6,9 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
        all_derangements, odd_permutation, cyclic_permutations, \
-       cyclic_derangements, circular_permutations
+       cyclic_derangements, circular_permutations, adjacent_permutations, \
+       recontres, odd_permutations, even_permutations, \
+       alternating_permutations
 
 from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
@@ -25,7 +27,7 @@ from Sequences.Combinatorics.Partitions import partitions, partition_count, \
 __all__=[
          #COMBINATORICS
          "catalan","derangement","pascal","eulerian","bell",
-         "gould","recontres","even_permutation","lazy_caterer","cake",
+         "gould","even_permutation","lazy_caterer","cake",
          "multiplicative_partition","central_binomial",
          "natural_subsets","combinadic","pascal_triangle",
          "eulerian_triangle",
@@ -34,6 +36,8 @@ __all__=[
          "permutations","combinations","derangements","all_permutations",
          "derangement","even_permutation","odd_permutation","all_derangements",
          "cyclic_permutations","cyclic_derangements","circular_permutations",
+         "adjacent_permutations","recontres","odd_permutations",
+         "even_permutations","alternating_permutations",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
