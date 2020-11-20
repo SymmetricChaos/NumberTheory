@@ -273,20 +273,6 @@ def all_permutations(index=0):
         yield from permutations(n,n,index=index)
 
 
-def derangement():
-    """
-    Derangement Numbers: Number of permutations of length n with no element in its original position\n
-    OEIS A000166
-    """
-    
-    a,b = 1,0
-    
-    for n in naturals(1):
-        yield a
-        
-        a, b = b, n * (a+b)
-
-
 def all_derangements(index=0):
     """
     Every permutation on n elements for positive n, returns tuples in lexicographic order
@@ -299,61 +285,6 @@ def all_derangements(index=0):
     
     for n in naturals(2):
         yield from derangements(n,index=index)
-
-
-def even_permutation():
-    """
-    Even Permutation Numbers: Number of even permutations of n elements\n
-    OEIS A001710
-    """
-    
-    yield 1
-    yield 1
-    yield 1
-    
-    out = 3
-    
-    for n in naturals(4):
-        yield out
-        out = out * n
-
-
-def odd_permutation():
-    """
-    Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
-    OEIS
-    """
-    
-    yield 0
-    yield 0
-    yield 1
-    
-    out = 3
-    
-    for n in naturals(4):
-        yield out
-        out = out * n
-
-
-def recontres():
-    """
-    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
-    OEIS A008290
-    """
-    
-    P = pascal()
-    dr = derangement()
-    D = []
-    
-    for n in naturals():
-        D.append(next(dr))
-        yield D[-1]
-        
-        # Skip the next value of P
-        next(P)
-        
-        for k in range(1,n+1):
-            yield D[n-k]*next(P)
 
 
 def adjacent_permutations(n,index=0):
@@ -429,6 +360,81 @@ def cyclic_derangements(n,index=0):
     
     for P in circular_permutations(n,n,index=index):
         yield permutation_cycle(P, base, index=index)
+
+
+
+
+
+### COUNTING SEQUENCES ###
+
+
+def derangement():
+    """
+    Derangement Numbers: Number of permutations of length n with no element in its original position\n
+    OEIS A000166
+    """
+    
+    a,b = 1,0
+    
+    for n in naturals(1):
+        yield a
+        
+        a, b = b, n * (a+b)
+
+
+def even_permutation():
+    """
+    Even Permutation Numbers: Number of even permutations of n elements\n
+    OEIS A001710
+    """
+    
+    yield 1
+    yield 1
+    yield 1
+    
+    out = 3
+    
+    for n in naturals(4):
+        yield out
+        out = out * n
+
+
+def odd_permutation():
+    """
+    Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
+    OEIS
+    """
+    
+    yield 0
+    yield 0
+    yield 1
+    
+    out = 3
+    
+    for n in naturals(4):
+        yield out
+        out = out * n
+
+
+def recontres():
+    """
+    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
+    OEIS A008290
+    """
+    
+    P = pascal()
+    dr = derangement()
+    D = []
+    
+    for n in naturals():
+        D.append(next(dr))
+        yield D[-1]
+        
+        # Skip the next value of P
+        next(P)
+        
+        for k in range(1,n+1):
+            yield D[n-k]*next(P)
 
 
 
