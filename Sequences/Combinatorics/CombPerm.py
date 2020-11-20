@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.Combinatorics.Other import pascal
 from Sequences.Combinatorics.PermutationUtils import permutation_cycle
+from Sequences.Manipulations import sequence_slice
 
 def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
@@ -263,8 +264,6 @@ def all_derangements(index=0):
     OEIS A030298
     """
     
-    yield ()
-    
     for n in naturals(2):
         yield from derangements(n,index=index)
 
@@ -286,20 +285,6 @@ def even_permutation():
         out = out * n
 
 
-# def even_permutations(n,index=0):
-#     """
-#     The even permutations (created by an even number of transpositions) on n elements
-#     Finite generator
-    
-#     OEIS
-#     """
-    
-#     if index not in (0,1):
-#         raise Exception("index must be 0 or 1")
-        
-#     S = [i+index for i in range(n)]
-
-
 def odd_permutation():
     """
     Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
@@ -315,20 +300,6 @@ def odd_permutation():
     for n in naturals(4):
         yield out
         out = out * n
-
-
-# def odd_permutations(n,index=0):
-#     """
-#     The odd permutations (created by an odd number of transpositions) on n elements
-#     Finite generator
-    
-#     OEIS
-#     """
-    
-#     if index not in (0,1):
-#         raise Exception("index must be 0 or 1")
-        
-#     S = [i+index for i in range(n)]
 
 
 def recontres():
@@ -352,16 +323,62 @@ def recontres():
             yield D[n-k]*next(P)
 
 
-# def adjacent_permutations(n):
-#     """
-#     Permutations on n that ordered so that each differs from the previous by an adjacent transposition
-#     """
+def adjacent_permutations(n,index=0):
+    """
+    Permutations on n that ordered so that each differs from the previous by an adjacent transposition
+    Recursive version of Steinhaus–Johnson–Trotter algorithm
+    """
+    
+    if n == 1:
+        yield (0,)
+    else:
+        direct = -1
+        for P in adjacent_permutations(n-1,index=index):
+            if direct == 1:
+                # Ascending step
+                for i in range(n):
+                    yield P[:i] + (n-1,) + P[i:]
+            
+            else:
+                # Descneding step
+                for i in range(n-1,-1,-1):
+                    yield P[:i] + (n-1,) + P[i:]
+            
+            direct *= -1
 
 
-# These two need a way to give them a particular order
+def odd_permutations(n,index=0):
+    """
+    The odd permutations (created by an odd number of transpositions) on n elements
+    Finite generator
+    
+    OEIS
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    yield from sequence_slice(adjacent_permutations(n,index=index),offset=1,step=1)
+
+
+def even_permutations(n,index=0):
+    """
+    The even permutations (created by an even number of transpositions) on n elements
+    Finite generator
+    
+    OEIS
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+        
+    yield from sequence_slice(adjacent_permutations(n,index=index),offset=0,step=1)
+
+
+# Probably a better way to order these
 def cyclic_permutations(n,index=0):
     """
-    Permutations on n that contain exactly one nontrivial cycle, not meaningful ordered
+    Permutations on n that contain exactly one nontrivial cycle, ordered by underlying cycle
     """
     base = tuple([i+index for i in range(n)])
     
@@ -372,7 +389,7 @@ def cyclic_permutations(n,index=0):
 
 def cyclic_derangements(n,index=0):
     """
-    Derangements on n that consist of exactly one cycle, not meaningful ordered
+    Derangements on n that consist of exactly one cycle, ordered by underlying cycle
     """
     
     base = tuple([i+index for i in range(n)])
@@ -408,16 +425,28 @@ if __name__ == '__main__':
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
     
     print("\nAll Finite Derangements")
-    simple_test(all_derangements(),5,
-                "(), (1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
+    simple_test(all_derangements(),4,
+                "(1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
     
-    print("\nCyclic Derangements on 4")
+    print("\nCyclic Derangements on 4, indexed from 1 for ease of reading")
     simple_test(cyclic_derangements(4,index=1),3,
                 "(4, 1, 2, 3), (3, 1, 4, 2), (4, 3, 1, 2)")
     
-    print("\nCyclic Permutations on 4")
+    print("\nCyclic Permutations on 4, indexed from 1 for ease of reading")
     simple_test(cyclic_permutations(4,index=1),3,
                 "(2, 1, 3, 4), (3, 2, 1, 4), (4, 2, 3, 1)")
+    
+    print("\nPermutations on 3 in Steinhaus–Johnson–Trotter Order")
+    simple_test(adjacent_permutations(3,index=1),5,
+                "(0, 1, 2), (0, 2, 1), (2, 0, 1), (2, 1, 0), (1, 2, 0)")
+    
+    print("\nOdd Permutations on 4 (in SJT Order)")
+    simple_test(odd_permutations(4,index=1),4,
+                "(0, 1, 3, 2), (3, 0, 1, 2), (0, 3, 2, 1), (0, 2, 1, 3)")
+    
+    print("\nEven Permutations on 4 (in SJT Order)")
+    simple_test(even_permutations(4,index=1),4,
+                "(0, 1, 2, 3), (0, 3, 1, 2), (3, 0, 2, 1), (0, 2, 3, 1)")
     
     
     
