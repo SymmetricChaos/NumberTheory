@@ -89,12 +89,7 @@ def comb_to_vector(C,n=None,index=0):
     return V
 
 
-# def patterns(P,k,index=0):
-#     """
-#     All the patterns of length k contained in P
-#     """
-#     https://en.wikipedia.org/wiki/Permutation_pattern
-#     https://en.wikipedia.org/wiki/Superpattern
+
 
 
 if __name__ == '__main__':
@@ -111,3 +106,4 @@ if __name__ == '__main__':
     
     print("\nIndexed from 1")
     print(f"{P} --> {n}")
+    

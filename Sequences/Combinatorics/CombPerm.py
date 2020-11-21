@@ -92,8 +92,9 @@ def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index
                         continue
                     if reflect:
                         T = suffix + (s,)
+                    else:
+                        T = (s,) + suffix
                     
-                    T = (s,) + suffix
                     # If we allow replacement don't check for repetition
                     if replace:
                         yield T
@@ -132,6 +133,25 @@ def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index
         yield from colex_choose_recur(n,k,0)
     else:
         yield from lex_choose_recur(n,k,0)
+
+
+def subsequences(P,k,replace=False,reverse=False,reflect=False,colex=False):
+    """
+    All the subsequences of length k contained in P
+    """
+    
+    for p in combinations(len(P),k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
+        yield tuple([P[i] for i in p])
+
+
+#https://en.wikipedia.org/wiki/Permutation_pattern
+#https://en.wikipedia.org/wiki/Superpattern
+# def patterns(P,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
+#     """
+#     All the permutations patterns of length k contained in P
+#     """
+    
+#     for S in subsequences(P,k,,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
 
 
 def derangements(n,reverse=False,reflect=False,index=0):
@@ -344,7 +364,8 @@ def even_permutations(n,index=0):
 # Probably a better way to order these
 def cyclic_permutations(n,index=0):
     """
-    Permutations on n that contain exactly one nontrivial cycle, ordered by underlying cycle
+    Permutations on n that contain exactly one nontrivial cycle, ordered by underlying cycle\n
+    OEIS
     """
     base = tuple([i+index for i in range(n)])
     
@@ -355,7 +376,8 @@ def cyclic_permutations(n,index=0):
 
 def cyclic_derangements(n,index=0):
     """
-    Derangements on n that consist of exactly one cycle, ordered by underlying cycle
+    Derangements on n that consist of exactly one cycle, ordered by underlying cycle\n
+    OEIS
     """
     
     base = tuple([i+index for i in range(n)])
@@ -460,6 +482,9 @@ def alternating_permutation():
 
 
 
+
+
+
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -514,6 +539,10 @@ if __name__ == '__main__':
     print("\nEven Permutations on 4 (in SJT Order)")
     simple_test(even_permutations(4,index=1),4,
                 "(0, 1, 2, 3), (0, 3, 1, 2), (3, 0, 2, 1), (0, 2, 3, 1)")
+    
+    print("\nSubsequences of length 3 from (1,5,7,2,6,3,4)")
+    simple_test(subsequences((1,5,7,2,6),3),5,
+                "(1, 5, 7), (1, 5, 2), (1, 5, 6), (1, 7, 2), (1, 7, 6)")
     
     
     
