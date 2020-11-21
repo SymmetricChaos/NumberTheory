@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals
 from Sequences.Combinatorics.Other import pascal
-from Sequences.Combinatorics.PermutationUtils import permutation_cycle
+from Sequences.Combinatorics.PermutationUtils import permutation_cycle, perm_to_pattern
 from Sequences.Manipulations import sequence_slice
 from Sequences.MathUtils import sign_of
 
@@ -135,25 +135,6 @@ def combinations(n,k,replace=False,reverse=False,reflect=False,colex=False,index
         yield from lex_choose_recur(n,k,0)
 
 
-def subsequences(P,k,replace=False,reverse=False,reflect=False,colex=False):
-    """
-    All the subsequences of length k contained in P
-    """
-    
-    for p in combinations(len(P),k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
-        yield tuple([P[i] for i in p])
-
-
-#https://en.wikipedia.org/wiki/Permutation_pattern
-#https://en.wikipedia.org/wiki/Superpattern
-# def patterns(P,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
-#     """
-#     All the permutations patterns of length k contained in P
-#     """
-    
-#     for S in subsequences(P,k,,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
-
-
 def derangements(n,reverse=False,reflect=False,index=0):
     """
     The derangements of n elements, permutations with no term at its own index, returns tuples in lexicographic order
@@ -279,6 +260,24 @@ def alternating_permutations(n,k,replace=False,reverse=False,reflect=False,index
     for P in permutations(n,k,replace=replace,reverse=reverse,reflect=reflect,index=index):
         if is_alternating(P):
             yield P
+
+
+def subsequences(P,k,replace=False,reverse=False,reflect=False,colex=False):
+    """
+    All the subsequences of length k contained in P
+    """
+    
+    for p in combinations(len(P),k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
+        yield tuple([P[i] for i in p])
+
+
+def permutation_patterns(P,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
+    """
+    All the permutations patterns of length k contained in P
+    """
+    
+    for S in subsequences(P,k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
+        yield perm_to_pattern(S)
 
 
 def all_permutations(index=0):
@@ -505,9 +504,9 @@ if __name__ == '__main__':
     simple_test(recontres(),17,
                 "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
-    print("\Alternating Permutation Numbers")
-    simple_test(alternating_permutation(),12,
-                "1, 1, 1, 2, 5, 16, 61, 272, 1385, 7936, 50521, 353792")
+    print("\nAlternating Permutation Numbers")
+    simple_test(alternating_permutation(),11,
+                "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
     
     
     
@@ -543,6 +542,11 @@ if __name__ == '__main__':
     print("\nSubsequences of length 3 from (1,5,7,2,6,3,4)")
     simple_test(subsequences((1,5,7,2,6),3),5,
                 "(1, 5, 7), (1, 5, 2), (1, 5, 6), (1, 7, 2), (1, 7, 6)")
+    
+    print("\nPatterns of length 3 from (1,5,7,2,6,3,4)")
+    simple_test(permutation_patterns((1,5,7,2,6),3),5,
+                "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
+    
     
     
     

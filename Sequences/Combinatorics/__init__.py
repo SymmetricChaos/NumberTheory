@@ -8,7 +8,8 @@ from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_derangements, odd_permutation, cyclic_permutations, \
        cyclic_derangements, circular_permutations, adjacent_permutations, \
        recontres, odd_permutations, even_permutations, \
-       alternating_permutations, alternating_permutation, subsequences
+       alternating_permutations, alternating_permutation, subsequences, \
+       permutation_patterns
 
 from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
@@ -38,7 +39,7 @@ __all__=[
          "cyclic_permutations","cyclic_derangements","circular_permutations",
          "adjacent_permutations","recontres","odd_permutations",
          "even_permutations","alternating_permutations","subsequences",
-         "alternating_permutation",
+         "alternating_permutation","permutation_patterns",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",

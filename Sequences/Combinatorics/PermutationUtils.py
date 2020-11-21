@@ -89,6 +89,16 @@ def comb_to_vector(C,n=None,index=0):
     return V
 
 
+def perm_to_pattern(P,index=0):
+    """
+    Convert the permutation P into a permutation 
+    """
+    
+    S = sorted(set(P))
+    D = {v:rank for rank,v in enumerate(S,index)}
+    
+    return tuple([D[p] for p in P])
+
 
 
 
@@ -106,4 +116,11 @@ if __name__ == '__main__':
     
     print("\nIndexed from 1")
     print(f"{P} --> {n}")
+    
+    
+    perm = (0,6,7,5,3,2,9)
+    patt = perm_to_pattern(perm,index=1)
+    
+    print(perm)
+    print(patt)
     
