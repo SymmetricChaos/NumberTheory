@@ -481,8 +481,8 @@ if __name__ == '__main__':
     simple_test(recontres(),17,
                 "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
-    print("\nZigzag Numbers")
-    simple_test(zigzag(),12,
+    print("\Alternating Permutation Numbers")
+    simple_test(alternating_permutation(),12,
                 "1, 1, 1, 2, 5, 16, 61, 272, 1385, 7936, 50521, 353792")
     
     

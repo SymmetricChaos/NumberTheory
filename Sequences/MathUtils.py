@@ -1,4 +1,4 @@
-from math import isqrt, gcd, comb
+from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from functools import reduce
 from sympy import factorint, divisors, divisor_sigma, legendre_symbol
@@ -863,11 +863,3 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
-    print("\n5-Combination Associated with 72")
-    print(int_to_comb(72,5))
-    
-    print("\nInteger Associated with the 5-Combination (8,6,3,1,0)")
-    print(comb_to_int([8,6,3,1,0]))
-    
-    print("\nIndicator Vector for Above Combination")
-    print(comb_to_vector([8,6,3,1,0]))
