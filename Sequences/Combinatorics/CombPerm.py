@@ -369,7 +369,6 @@ def cyclic_derangements(n,index=0):
 
 ### COUNTING SEQUENCES ###
 
-
 def derangement():
     """
     Derangement Numbers: Number of permutations of length n with no element in its original position\n

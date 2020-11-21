@@ -1,4 +1,4 @@
-from itertools import cycle, count
+from itertools import count
 from math import comb
 
 def permutation_cauchy(line,T,index=0):
@@ -28,7 +28,7 @@ def permutation_cycle(cyc,T,index=0):
     return tuple(new)
 
 
-def comb_to_int(C):
+def comb_to_int(C,index=0):
     """
     Given a combination in descending order return to associated integer
     """
@@ -37,14 +37,14 @@ def comb_to_int(C):
         if C[i] <= C[i+1]:
             raise Exception("Elements of C must be given in strictly decreasing order")
     
-    L = [comb(c,i) for c,i in zip(C,range(len(C),0,-1))]
+    L = [comb(c-index,i) for c,i in zip(C,range(len(C),0,-1))]
     
     return sum(L)
 
 
-def int_to_comb(n,k):
+def int_to_comb(n,k,index=0):
     """
-    Given an integer return the associated combination
+    Given an integer return the associated combination in descending order
     """
     
     if k == 0:
@@ -52,7 +52,7 @@ def int_to_comb(n,k):
     
     for c in count(1):
         if comb(c,k) > n:
-            return (c-1,) + int_to_comb(n-comb(c-1,k),k-1)
+            return (c-1+index,) + int_to_comb(n-comb(c-1,k),k-1,index=index)
 
 
 def comb_to_vector(C,n=None,index=0):
@@ -87,3 +87,27 @@ def comb_to_vector(C,n=None,index=0):
             V[c] = 1
     
     return V
+
+
+# def patterns(P,k,index=0):
+#     """
+#     All the patterns of length k contained in P
+#     """
+#     https://en.wikipedia.org/wiki/Permutation_pattern
+#     https://en.wikipedia.org/wiki/Superpattern
+
+
+if __name__ == '__main__':
+    
+    print("Enumerating Permutations")
+    P = comb_to_int([4,1,0],index=0)
+    n = int_to_comb(4,3,index=0)
+    
+    print("Indexed from 0")
+    print(f"{P} --> {n}")
+    
+    P = comb_to_int([5,2,1],index=1)
+    n = int_to_comb(4,3,index=1)
+    
+    print("\nIndexed from 1")
+    print(f"{P} --> {n}")
