@@ -4,6 +4,8 @@ from Sequences.Combinatorics.PermutationUtils import permutation_cycle
 from Sequences.Manipulations import sequence_slice
 from Sequences.MathUtils import sign_of
 
+from math import comb
+
 def permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
     The permutations of length k from a set of n elements, returns tuples in lexicographic order
@@ -437,12 +439,32 @@ def recontres():
             yield D[n-k]*next(P)
 
 
+def alternating_permutation():
+    """
+    Number of alternating permutations on n
+    OEIS A001250
+    """
+    
+    yield 1
+    yield 1
+    
+    A = [1,1]
+    
+    for n in naturals(1):
+        a = 0
+        for k in range(n+1):
+            a += comb(n,k)*A[k]*A[n-k]
+        
+        yield a
+        A.append(a//2)
+
 
 
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
+    print("Combinatoric Counting Sequences")
     print("\nDerangement Numbers")
     simple_test(derangement(),11,
                 "1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961")
@@ -459,6 +481,13 @@ if __name__ == '__main__':
     simple_test(recontres(),17,
                 "1, 0, 1, 1, 0, 1, 2, 3, 0, 1, 9, 8, 6, 0, 1, 44, 45")
     
+    print("\nZigzag Numbers")
+    simple_test(zigzag(),12,
+                "1, 1, 1, 2, 5, 16, 61, 272, 1385, 7936, 50521, 353792")
+    
+    
+    
+    print("\n\n\nVarious Permutation Generators")
     print("\nAll Finite Permutations")
     simple_test(all_permutations(),6,
                 "(0,), (0, 1), (1, 0), (0, 1, 2), (0, 2, 1), (1, 0, 2)")
