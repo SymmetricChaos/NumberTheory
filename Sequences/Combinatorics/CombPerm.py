@@ -257,27 +257,45 @@ def alternating_permutations(n,k,replace=False,reverse=False,reflect=False,index
                 return False
         return True
             
-    for P in permutations(n,k,replace=replace,reverse=reverse,reflect=reflect,index=index):
+    for P in permutations(n,k,reverse=reverse,reflect=reflect,index=index):
         if is_alternating(P):
             yield P
 
 
-def subsequences(P,k,replace=False,reverse=False,reflect=False,colex=False):
+def subsequences(P,k,reverse=False,reflect=False,colex=False):
     """
     All the subsequences of length k contained in P
+    
+    Args:
+        P -- a permutation
+        k -- length of subsequences to generate
+        reverse -- bool, return results in reverse order
+        reflect -- bool, return descending combination rather than ascending
+        colex -- bool, return results in colexicographic order, aka prefix order
     """
     
-    for p in combinations(len(P),k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
+    for p in combinations(len(P),k,reverse=reverse,reflect=reflect,colex=colex):
         yield tuple([P[i] for i in p])
 
 
-def permutation_patterns(P,k,replace=False,reverse=False,reflect=False,colex=False,index=0):
+def permutation_patterns(P,k,reverse=False,reflect=False,colex=False,index=0):
     """
     All the permutations patterns of length k contained in P
+    
+    Args:
+        P -- a permutation
+        k -- length of subsequences to generate
+        reverse -- bool, return results in reverse order
+        reflect -- bool, return descending combination rather than ascending
+        colex -- bool, return results in colexicographic order, aka prefix order
+        index -- 0 or 1, value to start counting from
     """
     
-    for S in subsequences(P,k,replace=replace,reverse=reverse,reflect=reflect,colex=colex):
-        yield perm_to_pattern(S)
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    for S in subsequences(P,k,reverse=reverse,reflect=reflect,colex=colex):
+        yield perm_to_pattern(S,index=index)
 
 
 def all_permutations(index=0):
@@ -289,6 +307,9 @@ def all_permutations(index=0):
     
     OEIS A030298
     """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
     
     for n in naturals(1):
         yield from permutations(n,n,index=index)
@@ -304,6 +325,9 @@ def all_derangements(index=0):
     OEIS A030298
     """
     
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     for n in naturals(2):
         yield from derangements(n,index=index)
 
@@ -314,8 +338,12 @@ def adjacent_permutations(n,index=0):
     Recursive version of Steinhaus–Johnson–Trotter algorithm
     """
     
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     if n == 1:
         yield (0,)
+    
     else:
         direct = -1
         for P in adjacent_permutations(n-1,index=index):
@@ -325,13 +353,14 @@ def adjacent_permutations(n,index=0):
                     yield P[:i] + (n-1,) + P[i:]
             
             else:
-                # Descneding step
+                # Descending step
                 for i in range(n-1,-1,-1):
                     yield P[:i] + (n-1,) + P[i:]
             
             direct *= -1
 
 
+# Probably a better way to order these
 def odd_permutations(n,index=0):
     """
     The odd permutations (created by an odd number of transpositions) on n elements
@@ -366,6 +395,10 @@ def cyclic_permutations(n,index=0):
     Permutations on n that contain exactly one nontrivial cycle, ordered by underlying cycle\n
     OEIS
     """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     base = tuple([i+index for i in range(n)])
     
     for i in range(2,n+1):
@@ -378,6 +411,9 @@ def cyclic_derangements(n,index=0):
     Derangements on n that consist of exactly one cycle, ordered by underlying cycle\n
     OEIS
     """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
     
     base = tuple([i+index for i in range(n)])
     
@@ -482,8 +518,6 @@ def alternating_permutation():
 
 
 
-
-
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
@@ -549,7 +583,6 @@ if __name__ == '__main__':
     
     
     
-    
     print("\n\n\nCombinations on 5 of length 3")
     print("Lexicographc Order")
     simple_test(combinations(5,3),5,
@@ -597,7 +630,7 @@ if __name__ == '__main__':
     simple_test(derangements(4,reverse=True,index=1),4,
                 "(4, 3, 2, 1), (4, 3, 1, 2), (4, 1, 2, 3), (3, 4, 2, 1)")
     
-    print("\nReflected (some are not derangements when read left to right)")
+    print("\nReflected")
     simple_test(derangements(4,reflect=True,index=1),4,
                 "(3, 4, 1, 2), (1, 4, 3, 2), (3, 1, 4, 2), (2, 4, 1, 3)")
     
