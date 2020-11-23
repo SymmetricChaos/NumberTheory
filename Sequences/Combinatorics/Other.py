@@ -209,6 +209,35 @@ def combinadic(k):
         yield int_to_comb(n,k)
 
 
+def dyck_words(n):
+    """
+    The Dyck words of order n with 'up' as +1 and 'down' as -1
+    """
+    
+    def dyck_recur(S):
+        # Check how many of each parenthesis we have
+        a = S.count(1)
+        b = S.count(-1)
+        if len(S) > 2*n or b > a:
+            return None
+        elif a == b == n:
+            yield S
+        else:
+            yield from dyck_recur(S+(1,))
+            yield from dyck_recur(S+(-1,))
+    
+    yield from dyck_recur(())
+
+
+def dyck_language():
+    """
+    All the Dyck words with 'up' as +1 and 'down' as -1
+    """
+    
+    for n in naturals(1):
+        yield from dyck_words(n)
+
+
 
 
 

@@ -100,11 +100,11 @@ def perm_to_pattern(P,index=0):
     return tuple([D[p] for p in P])
 
 
-def perm_skew_sum(P,Q):
+def skew_sum(P,Q):
     return tuple([p+len(Q) for p in P]) + Q
 
 
-def perm_direct_sum(P,Q):
+def direct_sum(P,Q):
     return P + tuple([q+len(P) for q in Q])
 
 
@@ -140,5 +140,5 @@ if __name__ == '__main__':
     print(f"{P=}")
     print(f"{Q=}")
     
-    print("Skew Sum:  ",perm_skew_sum(P,Q))
-    print("Direct Sum:",perm_direct_sum(P,Q))
+    print("Skew Sum:  ",skew_sum(P,Q))
+    print("Direct Sum:",direct_sum(P,Q))

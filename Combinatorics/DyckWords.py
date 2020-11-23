@@ -12,7 +12,7 @@ def dyck_inner(S,n,l,r):
     if b > a:
         return []
     ## Otherwise we continue until there are 2n parentheses
-    if a + b == 2*n and a == b:
+    if a == b == n:
         return [S]
     return dyck_inner(S+l,n,l,r) + dyck_inner(S+r,n,l,r)
 
@@ -23,3 +23,5 @@ def dyck_words(n,word="()"):
     r = word[1]
     return dyck_inner(l,n,l,r)
     
+
+print(dyck_words(3))

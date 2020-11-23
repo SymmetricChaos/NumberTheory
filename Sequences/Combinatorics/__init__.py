@@ -1,7 +1,7 @@
 from Sequences.Combinatorics.Other import catalan, pascal, \
        eulerian, bell, gould, lazy_caterer, cake, multiplicative_partition, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
-       eulerian_triangle
+       eulerian_triangle, dyck_words, dyck_language
 
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -31,7 +31,7 @@ __all__=[
          "gould","even_permutation","lazy_caterer","cake",
          "multiplicative_partition","central_binomial",
          "natural_subsets","combinadic","pascal_triangle",
-         "eulerian_triangle",
+         "eulerian_triangle","dyck_words","dyck_language",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
