@@ -100,6 +100,15 @@ def perm_to_pattern(P,index=0):
     return tuple([D[p] for p in P])
 
 
+def perm_skew_sum(P,Q):
+    return tuple([p+len(Q) for p in P]) + Q
+
+
+def perm_direct_sum(P,Q):
+    return P + tuple([q+len(P) for q in Q])
+
+
+
 
 
 if __name__ == '__main__':
@@ -120,7 +129,16 @@ if __name__ == '__main__':
     
     perm = (0,6,7,5,3,2,9)
     patt = perm_to_pattern(perm,index=1)
-    
+    print("\n\nA permutation")
     print(perm)
+    print("Its pattern")
     print(patt)
     
+    print("\n\nSums of Permutations")
+    P = (2,4,1,3)
+    Q = (3,5,1,4,2)
+    print(f"{P=}")
+    print(f"{Q=}")
+    
+    print("Skew Sum:  ",perm_skew_sum(P,Q))
+    print("Direct Sum:",perm_direct_sum(P,Q))
