@@ -43,7 +43,8 @@ from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, \
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        tribonacci, lucas_U, lucas_V, padovan, simple_recurrence, sylvester, \
        leonardo, arbitrary_recurrence, pisot_E, pisot_L, pisot_P, pisot_T, \
-       ulam, perrin, semifibonacci, tribonnaci_word, tribonnaci_words
+       ulam, perrin, semifibonacci, tribonnaci_word, tribonnaci_words, \
+       narayana_cows
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
       powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
@@ -117,6 +118,7 @@ __all__=[#MANIPULATIONS
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
          "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
          "perrin", "semifibonacci","tribonnaci_word","tribonnaci_words",
+         "narayana_cows",
          
          #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",

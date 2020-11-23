@@ -105,7 +105,7 @@ def eulerian():
 
 def eulerian_triangle():
     """
-    Eulerian's Triangle by Rows\n
+    Eulerian Triangle by Rows\n
     OEIS A007318
     """
     
@@ -215,7 +215,6 @@ def dyck_words(n):
     """
     
     def dyck_recur(S):
-        # Check how many of each parenthesis we have
         a = S.count(1)
         b = S.count(-1)
         if len(S) > 2*n or b > a:
@@ -244,7 +243,6 @@ def dyck_words_str(n):
     """
     
     def dyck_recur(S):
-        # Check how many of each parenthesis we have
         a = S.count("(")
         b = S.count(")")
         if len(S) > 2*n or b > a:
@@ -267,6 +265,26 @@ def dyck_language_str():
         yield from dyck_words_str(n)
 
 
+def naranya():
+    """
+    Triangle of Naranya Numbers: Number of Dyck words of order n with k peaks\n
+    OEIS A001263
+    """
+    
+    for n in naturals(1):
+        for k in range(1,n+1):
+            yield (comb(n,k)*comb(n,k-1))//n
+
+
+def naranya_triangle():
+    """
+    Naranya's Triangle by Rows\n
+    OEIS A001263
+    """
+    
+    yield from make_triangle(naranya())
+
+
 
 
 
@@ -277,9 +295,13 @@ if __name__ == '__main__':
     simple_test(catalan(),11,
                 "1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796")
     
-    print("\nPascal's Triangle by Rows")
+    print("\nPascal's Triangle")
     simple_test(pascal(),18,
                 "1, 1, 1, 1, 2, 1, 1, 3, 3, 1, 1, 4, 6, 4, 1, 1, 5, 10")
+    
+    print("\nPascal's Triangle by Rows")
+    simple_test(pascal_triangle(),4,
+                "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1)")
     
     print("\nCentral Binomial Coefficients")
     simple_test(central_binomial(),11,
@@ -289,9 +311,13 @@ if __name__ == '__main__':
     simple_test(gould(),18,
                 "1, 2, 2, 4, 2, 4, 4, 8, 2, 4, 4, 8, 4, 8, 8, 16, 2, 4")
     
-    print("\nEulerian Triangle by Rows")
+    print("\nEulerian Triangle")
     simple_test(eulerian(),16,
                 "1, 1, 1, 1, 4, 1, 1, 11, 11, 1, 1, 26, 66, 26, 1, 1")
+    
+    print("\nEulerian Triangle by Rows")
+    simple_test(eulerian_triangle(),4,
+                "(1,), (1, 1), (1, 4, 1), (1, 11, 11, 1)")
     
     print("\nBell Numbers")
     simple_test(bell(),11,
@@ -336,4 +362,12 @@ if __name__ == '__main__':
     print("\nDyck Language (numeric)")
     simple_test(dyck_language(),3,
                 "(1, -1), (1, 1, -1, -1), (1, -1, 1, -1)")
+    
+    print("\nNaranya's Triangle")
+    simple_test(naranya(),16,
+                "1, 1, 1, 1, 3, 1, 1, 6, 6, 1, 1, 10, 20, 10, 1, 1")
+    
+    print("\nNaranya's Triangle By Rows")
+    simple_test(naranya_triangle(),4,
+                "(1,), (1, 1), (1, 3, 1), (1, 6, 6, 1)")
     

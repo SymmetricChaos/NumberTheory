@@ -254,9 +254,9 @@ def padovan_spiral():
         a, b, c = b, c, a+b
 
 
-def narayana():
+def narayana_cows():
     """
-    Narayana's Sequence\n
+    Narayana's Cows Sequence\n
     OEIS A000930
     """
     
@@ -564,8 +564,8 @@ if __name__ == '__main__':
     simple_test(sylvester(),7,
                 "2, 3, 7, 43, 1807, 3263443, 10650056950807")
     
-    print("\nNarayana's Sequence")
-    simple_test(narayana(),15,
+    print("\nNarayana's Cows Sequence")
+    simple_test(narayana_cows(),15,
                 "1, 1, 1, 2, 3, 4, 6, 9, 13, 19, 28, 41, 60, 88, 129")
     
     from math import sqrt, floor

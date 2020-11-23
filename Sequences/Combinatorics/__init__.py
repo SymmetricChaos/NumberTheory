@@ -2,7 +2,7 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        eulerian, bell, gould, lazy_caterer, cake, multiplicative_partition, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
        eulerian_triangle, dyck_words, dyck_language, dyck_words_str, \
-       dyck_language_str
+       dyck_language_str, naranya, naranya_triangle
 
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -28,12 +28,11 @@ from Sequences.Combinatorics.Partitions import partitions, partition_count, \
 
 __all__=[
          #COMBINATORICS
-         "catalan","derangement","pascal","eulerian","bell",
-         "gould","even_permutation","lazy_caterer","cake",
-         "multiplicative_partition","central_binomial",
-         "natural_subsets","combinadic","pascal_triangle",
-         "eulerian_triangle","dyck_words","dyck_language","dyck_words_str",
-         "dyck_language_str",
+         "catalan","derangement","pascal","eulerian","bell","pascal_triangle",
+         "gould","even_permutation","lazy_caterer","cake","eulerian_triangle",
+         "multiplicative_partition","central_binomial","natural_subsets",
+         "combinadic","dyck_words","dyck_language","dyck_words_str",
+         "dyck_language_str","naranya","naranya_triangle",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
