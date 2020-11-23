@@ -238,6 +238,35 @@ def dyck_language():
         yield from dyck_words(n)
 
 
+def dyck_words_str(n):
+    """
+    All words consisting of n pairs of correctly matched parentheses
+    """
+    
+    def dyck_recur(S):
+        # Check how many of each parenthesis we have
+        a = S.count("(")
+        b = S.count(")")
+        if len(S) > 2*n or b > a:
+            return None
+        elif a == b == n:
+            yield S
+        else:
+            yield from dyck_recur(S+"(")
+            yield from dyck_recur(S+")")
+    
+    yield from dyck_recur("")
+
+
+def dyck_language_str():
+    """
+    All words consisting of correctly matched pairs of parentheses
+    """
+    
+    for n in naturals(1):
+        yield from dyck_words_str(n)
+
+
 
 
 
@@ -291,4 +320,20 @@ if __name__ == '__main__':
     print("\nPascal's Triangle by Rows")
     simple_test(pascal_triangle(),5,
                 "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1), (1, 4, 6, 4, 1)")
+    
+    print("\nDyck Words of Order 4")
+    simple_test(dyck_words_str(4),5,
+                "(((()))), ((()())), ((())()), ((()))(), (()(()))")
+    
+    print("\nDyck Language")
+    simple_test(dyck_language_str(),7,
+                "(), (()), ()(), ((())), (()()), (())(), ()(())")
+    
+    print("\nDyck Words of Order 3 (numeric)")
+    simple_test(dyck_words(3),2,
+                "(1, 1, 1, -1, -1, -1), (1, 1, -1, 1, -1, -1)")
+    
+    print("\nDyck Language (numeric)")
+    simple_test(dyck_language(),3,
+                "(1, -1), (1, 1, -1, -1), (1, -1, 1, -1)")
     
