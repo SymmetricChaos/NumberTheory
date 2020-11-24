@@ -1,6 +1,6 @@
 from Sequences.MathUtils import nontrivial_factors, all_subsets
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, powers
 from Sequences.Manipulations import make_triangle
 
 from math import comb
@@ -285,6 +285,44 @@ def naranya_triangle():
     yield from make_triangle(naranya())
 
 
+def schroder():
+    """
+    Schröder Numbers: The big Schröder numbers\n
+    OEIS A006318
+    """
+    
+    yield 1
+    
+    S = [1,2]
+    
+    for n in naturals(1):
+        yield S[n]
+        
+        t = 3*S[-1]
+        for k in range(1,n):
+            t += S[k]*S[n-k]
+        
+        S.append(t)
+
+
+def schroder_hipparchus():
+    """
+    Schröder-Hipparchus Numbers: The little Schröder numbers\n
+    OEIS A001003
+    """
+    
+    yield 1
+    
+    a,b = 1,1
+    
+    for n in naturals(2):
+        t = ((6*n-9)*b-(n-3)*a)//n
+        a,b = b,t
+        
+        yield b//2
+
+
+
 
 
 
@@ -370,4 +408,13 @@ if __name__ == '__main__':
     print("\nNaranya's Triangle By Rows")
     simple_test(naranya_triangle(),4,
                 "(1,), (1, 1), (1, 3, 1), (1, 6, 6, 1)")
+    
+    print("\nSchröder Numbers")
+    simple_test(schroder(),10,
+                "1, 2, 6, 22, 90, 394, 1806, 8558, 41586, 206098")
+    
+    print("\nSchröder-Hipparchus Numbers")
+    simple_test(schroder_hipparchus(),10,
+                "1, 1, 3, 11, 45, 197, 903, 4279, 20793, 103049")
+    
     
