@@ -1,6 +1,6 @@
 from Sequences.MathUtils import nontrivial_factors, all_subsets
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
-from Sequences.Simple import naturals, powers
+from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
 
 from math import comb
@@ -278,7 +278,7 @@ def naranya():
 
 def naranya_triangle():
     """
-    Naranya's Triangle by Rows\n
+    Naranya's Triangle by Rows, sums are the Catalan numbers\n
     OEIS A001263
     """
     
@@ -321,6 +321,30 @@ def schroder_hipparchus():
         
         yield b//2
 
+
+# def motzkin():
+#     """
+    
+#     OEIS 1006
+#     """
+
+
+def motzkin_paths(n):
+    """
+    Every 'mountain' made of line segments going NE (+1) and SW (-1), and E (0)\n
+    """
+    
+    def horizon_recur(S):
+        if len(S) > n or sum(S) < 0:
+            return None
+        elif sum(S) == 0 and len(S) == n:
+            yield S
+        else:
+            yield from horizon_recur(S+(1,))
+            yield from horizon_recur(S+(0,))
+            yield from horizon_recur(S+(-1,))
+    
+    yield from horizon_recur(())
 
 
 
@@ -417,4 +441,11 @@ if __name__ == '__main__':
     simple_test(schroder_hipparchus(),10,
                 "1, 1, 3, 11, 45, 197, 903, 4279, 20793, 103049")
     
+    # print("\nMotizkin Numbers")
+    # simple_test(motzkin(),10,
+    #             "")
+    
+    print("\nMotzkin Paths of Length 3 (numeric)")
+    simple_test(motzkin_paths(3),10,
+                "(1, 0, -1), (1, -1, 0), (0, 1, -1), (0, 0, 0)")
     
