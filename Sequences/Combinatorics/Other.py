@@ -11,6 +11,7 @@ def catalan():
     Catalan Numbers: Number of non-crossing partitions of a set with n elements\n
     OEIS A000108
     """
+    
     C = 1
     
     for n in naturals():
@@ -322,11 +323,21 @@ def schroder_hipparchus():
         yield b//2
 
 
-# def motzkin():
-#     """
+def motzkin():
+    """
+    Motzkin Numbers: The number of ways to draw non-intersecting chords through n points on a circle
+    OEIS 1006
+    """
     
-#     OEIS 1006
-#     """
+    yield 1
+    
+    for n in naturals(1):
+        
+        t = 0
+        for k,c in zip(range(n//2+1),catalan()):
+            t += comb(n,2*k)*c
+        
+        yield t
 
 
 def motzkin_paths(n):
@@ -441,9 +452,9 @@ if __name__ == '__main__':
     simple_test(schroder_hipparchus(),10,
                 "1, 1, 3, 11, 45, 197, 903, 4279, 20793, 103049")
     
-    # print("\nMotizkin Numbers")
-    # simple_test(motzkin(),10,
-    #             "")
+    print("\nMotizkin Numbers")
+    simple_test(motzkin(),12,
+                "1, 1, 2, 4, 9, 21, 51, 127, 323, 835, 2188, 5798")
     
     print("\nMotzkin Paths of Length 3 (numeric)")
     simple_test(motzkin_paths(3),10,

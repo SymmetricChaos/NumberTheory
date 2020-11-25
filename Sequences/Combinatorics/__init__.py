@@ -3,7 +3,7 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
        eulerian_triangle, dyck_words, dyck_language, dyck_words_str, \
        dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
-       schroder
+       schroder, motzkin, motzkin_paths
 
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -34,7 +34,7 @@ __all__=[
          "multiplicative_partition","central_binomial","natural_subsets",
          "combinadic","dyck_words","dyck_language","dyck_words_str",
          "dyck_language_str","naranya","naranya_triangle","schroder",
-         "schroder_hipparchus",
+         "schroder_hipparchus","motzkin_paths","motzkin",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
