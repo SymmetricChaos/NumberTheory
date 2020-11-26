@@ -342,7 +342,7 @@ def motzkin():
 
 def motzkin_paths(n):
     """
-    Every 'mountain' made of line segments going NE (+1) and SW (-1), and E (0)\n
+    Every 'mountain' made of n line segments going NE (+1) and SW (-1), and E (0)\n
     """
     
     def horizon_recur(S):
@@ -356,6 +356,18 @@ def motzkin_paths(n):
             yield from horizon_recur(S+(-1,))
     
     yield from horizon_recur(())
+
+
+def delannoy():
+    """
+    Central Delannoy Numbers
+    """
+    
+    for n in naturals(0):
+        t = 0
+        for k in range(n+1):
+            t += comb(n,k)*comb(n+k,k)
+        yield t
 
 
 
@@ -459,4 +471,8 @@ if __name__ == '__main__':
     print("\nMotzkin Paths of Length 3 (numeric)")
     simple_test(motzkin_paths(3),10,
                 "(1, 0, -1), (1, -1, 0), (0, 1, -1), (0, 0, 0)")
+    
+    print("\nDelannoy")
+    simple_test(delannoy(),9,
+                "1, 3, 13, 63, 321, 1683, 8989, 48639, 265729")
     
