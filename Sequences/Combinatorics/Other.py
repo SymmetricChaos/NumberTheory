@@ -360,7 +360,40 @@ def motzkin_paths(n):
 
 def delannoy():
     """
-    Central Delannoy Numbers
+    Triangle of Delannoy Numbers\n
+    A008288
+    """
+    
+    yield 1
+    
+    R1 = [0,0]
+    R2 = [0,1,0]
+    
+    while True:
+        T = [0]
+        
+        for i in range(len(R2)-1):
+            x = R2[i]+R2[i+1]+R1[i]
+            T.append(x)
+            yield x
+        
+        T.append(0)
+        R1, R2 = R2, T
+
+
+def delannoy_triangle():
+    """
+    Delannoy Triangle By Rows\n
+    A008288
+    """
+    
+    yield from make_triangle(delannoy())
+
+
+def central_delannoy():
+    """
+    Central Delannoy Numbers\n
+    OEIS A001850
     """
     
     for n in naturals(0):
@@ -473,6 +506,14 @@ if __name__ == '__main__':
                 "(1, 0, -1), (1, -1, 0), (0, 1, -1), (0, 0, 0)")
     
     print("\nDelannoy")
-    simple_test(delannoy(),9,
+    simple_test(delannoy(),18,
+                "1, 1, 1, 1, 3, 1, 1, 5, 5, 1, 1, 7, 13, 7, 1, 1, 9, 25")
+    
+    print("\nDelannoy Triangle")
+    simple_test(delannoy_triangle(),4,
+                "(1,), (1, 1), (1, 3, 1), (1, 5, 5, 1)")
+    
+    print("\nCentral Delannoy")
+    simple_test(central_delannoy(),9,
                 "1, 3, 13, 63, 321, 1683, 8989, 48639, 265729")
     
