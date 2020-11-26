@@ -403,6 +403,53 @@ def central_delannoy():
         yield t
 
 
+def wedderburn_etherington():
+    """
+    Wedderburn-Etherington Numbers\n
+    OEIS A001190
+    """
+    
+    S = [0,1,1]
+    
+    yield from S
+    
+    for n in naturals(2):
+        # Odd step
+        t = 0
+        for i in range(1,n):
+            t += S[i]*S[2*n-i-1]
+        
+        yield t
+        S.append(t)
+        
+        # Even step
+        t = (S[n]*(S[n]+1))//2
+        for i in range(1,n):
+            t += S[i]*S[2*n-i]
+        
+        yield t
+        S.append(t)
+
+
+def lobb():
+    """
+    Lobb Numbers\n
+    OEIS A039599
+    """
+    
+    for n in naturals():
+        for m in range(n+1):
+            yield (2*m+1)*comb(2*n,m+n)//(m+n+1)
+
+def lobb_triangle():
+    """
+    Lobb Triangle by Rows\n
+    OEIS A039599
+    """
+    
+    yield from make_triangle(lobb())
+
+
 
 
 
@@ -516,4 +563,16 @@ if __name__ == '__main__':
     print("\nCentral Delannoy")
     simple_test(central_delannoy(),9,
                 "1, 3, 13, 63, 321, 1683, 8989, 48639, 265729")
+    
+    print("\nWedderburn-Etherington Numbers")
+    simple_test(wedderburn_etherington(),13,
+                "0, 1, 1, 1, 2, 3, 6, 11, 23, 46, 98, 207, 451")
+    
+    print("\nLobb Numbers")
+    simple_test(lobb(),17,
+                "1, 1, 1, 2, 3, 1, 5, 9, 5, 1, 14, 28, 20, 7, 1, 42, 90")
+    
+    print("\nLobb Triangle")
+    simple_test(lobb_triangle(),4,
+                "(1,), (1, 1), (2, 3, 1), (5, 9, 5, 1)")
     

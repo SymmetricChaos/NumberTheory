@@ -4,7 +4,7 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        eulerian_triangle, dyck_words, dyck_language, dyck_words_str, \
        dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
        schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
-       central_delannoy
+       central_delannoy,wedderburn_etherington, lobb, lobb_triangle
 
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -36,7 +36,8 @@ __all__=[
          "combinadic","dyck_words","dyck_language","dyck_words_str",
          "dyck_language_str","naranya","naranya_triangle","schroder",
          "schroder_hipparchus","motzkin_paths","motzkin","delannoy",
-         "delannoy_triangle","central_delannoy",
+         "delannoy_triangle","central_delannoy","wedderburn_etherington",
+         "lobb","lobb_triangle",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
