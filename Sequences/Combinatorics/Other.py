@@ -2,6 +2,7 @@ from Sequences.MathUtils import nontrivial_factors, all_subsets
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
+from Sequences.NiceErrorChecking import require_geq, require_integers
 
 from math import comb
 
@@ -433,13 +434,14 @@ def wedderburn_etherington():
 
 def lobb():
     """
-    Lobb Numbers\n
+    Lobb Numbers: Valid prefixes for matched parentheses with m+n left brackets and m-n right brackets\n
     OEIS A039599
     """
     
-    for n in naturals():
-        for m in range(n+1):
-            yield (2*m+1)*comb(2*n,m+n)//(m+n+1)
+    for m in naturals():
+        for n in range(m+1):
+            yield (2*n+1)*comb(2*m,m+n)//(m+n+1)
+
 
 def lobb_triangle():
     """
@@ -448,6 +450,56 @@ def lobb_triangle():
     """
     
     yield from make_triangle(lobb())
+
+
+def lobb_words(m,n):
+    """
+    All words consisting of m+n left brackets and n-m right brackets that can be the prefix of a Dyck word
+    """
+    
+    require_integers(["m","n"],[m,n])
+    require_geq(["m","n"],[m,n],0)
+    
+    if n < m:
+        raise ValueError("n cannot be less than m")
+    
+    def lobb_recur(S):
+        a = S.count(1)
+        b = S.count(-1)
+        if len(S) > 2*n or b > a:
+            return None
+        elif a == (m+n) and b == (n-m):
+            yield S
+        else:
+            yield from lobb_recur(S+(1,))
+            yield from lobb_recur(S+(-1,))
+    
+    yield from lobb_recur(())
+
+
+def lobb_words_str(m,n):
+    """
+    All words consisting of m+n left brackets and n-m right brackets that can be the prefix of a Dyck word
+    """
+    
+    require_integers(["m","n"],[m,n])
+    require_geq(["m","n"],[m,n],0)
+    
+    if n < m:
+        raise ValueError("n cannot be less than m")
+    
+    def lobb_recur(S):
+        a = S.count("(")
+        b = S.count(")")
+        if len(S) > 2*n or b > a:
+            return None
+        elif a == (m+n) and b == (n-m):
+            yield S
+        else:
+            yield from lobb_recur(S+"(")
+            yield from lobb_recur(S+")")
+    
+    yield from lobb_recur("")
 
 
 
@@ -575,4 +627,12 @@ if __name__ == '__main__':
     print("\nLobb Triangle")
     simple_test(lobb_triangle(),4,
                 "(1,), (1, 1), (2, 3, 1), (5, 9, 5, 1)")
+    
+    print("\nLobb Words with m = 1 and n = 3")
+    simple_test(lobb_words_str(1,3),7,
+                "(((()), ((()(), ((())(, (()((), (()()(, (())((, ()((()")
+    
+    print("\nLobb Words with m = 1 and n = 2")
+    simple_test(lobb_words(1,2),3,
+                "(1, 1, 1, -1), (1, 1, -1, 1), (1, -1, 1, 1)")
     
