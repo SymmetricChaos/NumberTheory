@@ -9,7 +9,7 @@ from math import comb
 
 def catalan():
     """
-    Catalan Numbers: Number of non-crossing partitions of a set with n elements\n
+    Catalan Numbers: Fundamental sequence in combinatorics\n
     OEIS A000108
     """
     
@@ -18,6 +18,17 @@ def catalan():
     for n in naturals():
         yield C
         C = C*(4*n+2)//(n+2)
+
+
+def co_catalan():
+    """
+    Co-Catalan Numbers: Number of illegal options in many counting problems address by Catalan numbers\n
+    OEIS A001791
+    """
+    
+    yield 0
+    for n in naturals(1):
+        yield comb(2*n,n-1)
 
 
 # Building the triangle using only addition and index look ups is about 100 
@@ -502,6 +513,8 @@ def lobb_words_str(m,n):
     yield from lobb_recur("")
 
 
+# def fuss_catalan():
+
 
 
 
@@ -511,6 +524,10 @@ if __name__ == '__main__':
     print("\nCatalan Numbers")
     simple_test(catalan(),11,
                 "1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796")
+    
+    print("\nCo-Catalan Numbers")
+    simple_test(co_catalan(),11,
+                "0, 1, 4, 15, 56, 210, 792, 3003, 11440, 43758, 167960")
     
     print("\nPascal's Triangle")
     simple_test(pascal(),18,
@@ -632,7 +649,7 @@ if __name__ == '__main__':
     simple_test(lobb_words_str(1,3),7,
                 "(((()), ((()(), ((())(, (()((), (()()(, (())((, ()((()")
     
-    print("\nLobb Words with m = 1 and n = 2")
+    print("\nLobb Words with m = 1 and n = 2 (numeric)")
     simple_test(lobb_words(1,2),3,
                 "(1, 1, 1, -1), (1, 1, -1, 1), (1, -1, 1, 1)")
     

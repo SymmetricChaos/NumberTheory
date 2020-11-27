@@ -515,6 +515,25 @@ def alternating_permutation():
         A.append(a//2)
 
 
+# def stirling_1st():
+#     """
+#     Stirling Numbers of the First Kind\n
+#     OEIS
+#     """
+    
+#     yield 1
+    
+#     R = [0,1,0]
+    
+#     for n in naturals(1):
+#         new = [0]
+#         for k in range(1,n+1):
+#             t = -n*R[k-1]+R[k]
+#             yield t
+#             new.append(t)
+#         R = new + [0]
+
+
 
 
 
@@ -541,6 +560,11 @@ if __name__ == '__main__':
     print("\nAlternating Permutation Numbers")
     simple_test(alternating_permutation(),11,
                 "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
+    
+    print("\nStirling Numbers of the First Kind")
+    simple_test(stirling_1st(),11,
+                "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
+    
     
     
     

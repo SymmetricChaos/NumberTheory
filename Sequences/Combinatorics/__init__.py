@@ -5,7 +5,7 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
        schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
        central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
-       lobb_words, lobb_words_str
+       lobb_words, lobb_words_str, co_catalan
 
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -18,7 +18,9 @@ from Sequences.Combinatorics.CombPerm import permutations, combinations, \
 from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
        double_factorials, even_double_factorials, odd_double_factorials, \
-       superfactorials, left_factorials, factoradic, triple_factorial
+       superfactorials, left_factorials, factoradic, triple_factorial, \
+       falling_factorial, falling_factorial_triangle, rising_factorial, \
+       rising_factorial_triangle
 
 from Sequences.Combinatorics.Partitions import partitions, partition_count, \
        partition_ordering, equal_partitions, power_partitions, \
@@ -38,7 +40,7 @@ __all__=[
          "dyck_language_str","naranya","naranya_triangle","schroder",
          "schroder_hipparchus","motzkin_paths","motzkin","delannoy",
          "delannoy_triangle","central_delannoy","wedderburn_etherington",
-         "lobb","lobb_triangle","lobb_words","lobb_words_str",
+         "lobb","lobb_triangle","lobb_words","lobb_words_str","co_catalan",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
@@ -52,7 +54,9 @@ __all__=[
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
          "odd_double_factorials","superfactorials", "left_factorials",
-         "factoradic","triple_factorial",
+         "factoradic","triple_factorial","falling_factorial",
+         "falling_factorial_triangle","rising_factorial",
+         "rising_factorial_triangle",
          
          #PARTITIONS
          "partitions","equal_partitions","all_partitions","partition_ordering",

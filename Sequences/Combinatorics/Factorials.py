@@ -1,4 +1,4 @@
-from Sequences.Manipulations import offset
+from Sequences.Manipulations import offset, make_triangle
 from Sequences.Simple import naturals, sign_sequence
 from Sequences.MathUtils import poly_mult
 from Sequences.Divisibility import primes
@@ -152,7 +152,7 @@ def even_double_factorials():
         even = even*even_ctr
 
 
-def rising_factorial_expansions():
+def rising_factorial():
     """
     Coefficients of the Polynomial Expansions of the Rising Factorials\n
     OEIS A132393
@@ -167,7 +167,16 @@ def rising_factorial_expansions():
         P = poly_mult(P,[n,1])
 
 
-def falling_factorial_expansions():
+def rising_factorial_triangle():
+    """
+    Triangle of Coefficients of the Polynomial Expansions of the Rising Factorials\n
+    OEIS A132393
+    """
+    
+    yield from make_triangle(rising_factorial())
+
+
+def falling_factorial():
     """
     Coefficients of the Polynomial Expansions of the Falling Factorials\n
     OEIS A048994
@@ -179,6 +188,15 @@ def falling_factorial_expansions():
             yield i
         
         P = poly_mult(P,[-n,1])
+
+
+def falling_factorial_triangle():
+    """
+    Triangle of Coefficients of the Polynomial Expansions of the Falling Factorials\n
+    OEIS A132393
+    """
+    
+    yield from make_triangle(falling_factorial())
 
 
 def wilson():
@@ -306,13 +324,21 @@ if __name__ == '__main__':
     simple_test(even_double_factorials(),9,
                 "1, 2, 8, 48, 384, 3840, 46080, 645120, 10321920")
     
-    print("\nTriangle of Rising Factorials")
-    simple_test(rising_factorial_expansions(),17,
+    print("\nRising Factorials")
+    simple_test(rising_factorial(),17,
                 "1, 0, 1, 0, 1, 1, 0, 2, 3, 1, 0, 6, 11, 6, 1, 0, 24")
     
-    print("\nTriangle of Falling Factorials")
-    simple_test(falling_factorial_expansions(),16,
+    print("\nTriangle of Rising Factorials")
+    simple_test(rising_factorial_triangle(),4,
+                "(1,), (0, 1), (0, 1, 1), (0, 2, 3, 1)")
+    
+    print("\nFalling Factorials")
+    simple_test(falling_factorial(),16,
                 "1, 0, 1, 0, -1, 1, 0, 2, -3, 1, 0, -6, 11, -6, 1, 0")
+    
+    print("\nTriangle of Rising Factorials")
+    simple_test(falling_factorial_triangle(),4,
+                "(1,), (0, 1), (0, -1, 1), (0, 2, -3, 1)")
     
     print("\nWilson's Sequence")
     simple_test(wilson(),17,
