@@ -513,7 +513,19 @@ def lobb_words_str(m,n):
     yield from lobb_recur("")
 
 
-# def fuss_catalan():
+def fuss_catalan(p,r):
+    """
+    Fuss-Catalan Numbers
+    OEIS A000108, A000245, A002057, A001764, A006013, A006629, A002293, 
+         A069271, A006632
+    """
+    
+    require_integers(["p","r"],[p,r])
+    require_geq(["p","r"],[p,r],0)
+    
+    for n in naturals():
+        yield r*comb(n*p+r,n)//(n*p+r)
+
 
 
 
@@ -652,4 +664,8 @@ if __name__ == '__main__':
     print("\nLobb Words with m = 1 and n = 2 (numeric)")
     simple_test(lobb_words(1,2),3,
                 "(1, 1, 1, -1), (1, 1, -1, 1), (1, -1, 1, 1)")
+    
+    print("\nFuss-Catalan Numbers with p = 2, r = 3")
+    simple_test(fuss_catalan(2,3),11,
+                "1, 3, 9, 28, 90, 297, 1001, 3432, 11934, 41990, 149226")
     

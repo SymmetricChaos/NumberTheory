@@ -421,6 +421,97 @@ def cyclic_derangements(n,index=0):
         yield permutation_cycle(P, base, index=index)
 
 
+# def stirling_1():
+#     """
+#     Stirling Numbers of the First Kind\n
+#     OEIS
+#     """
+    
+#     yield 1
+    
+#     R = [0,1,0]
+    
+#     for n in naturals(1):
+#         new = [0]
+#         for k in range(1,n+1):
+#             t = -n*R[k-1]+R[k]
+#             yield t
+#             new.append(t)
+#         R = new + [0]
+
+
+# def stirling_2():
+#     """
+#     Stirling Numbers of the First Kind\n
+#     OEIS
+#     """
+    
+#     yield 1
+    
+#     R = [0,1,0]
+    
+#     for n in naturals(1):
+#         new = [0]
+#         for k in range(1,n+1):
+#             t = -n*R[k-1]+R[k]
+#             yield t
+#             new.append(t)
+#         R = new + [0]
+
+
+# def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
+#     """
+#     Permutation on n with k fixed points
+#     OEIS A001250
+    
+#     Args:
+#         n -- int, size of the set to choose from
+#         k -- int, number of fixed points
+#         replace -- bool, results with or without replacement
+#         reverse -- bool, return results in reverse order
+#         reflect -- bool, reflect each permutation
+#         index -- 0 or 1, value to start counting permutations from
+#     """
+    
+#     if k > n:
+#         raise Exception(f"k must be less than or equal to n, cannot have {k} fixed points in a set of {n}")
+    
+#     if index not in (0,1):
+#         raise Exception("index must be 0 or 1")
+    
+#     def fixed_recur(n,depth=0,ctr=0):
+#         if depth >= n:
+#             yield ()
+        
+#         elif ctr == k:
+#             yield ()
+        
+#         else:
+#             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
+#             S = range(n)
+#             if reverse:
+#                 S = reversed(S)
+            
+#             for s in S:
+#                 if s == depth:
+#                     ctr += 1
+                
+#                 s += index
+                
+#                 # Get the suffix by recursion
+#                 for suffix in fixed_recur(n,depth+1,ctr):
+#                     # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
+#                     if reflect:
+#                         T = suffix + (s,)
+#                     else:
+#                         T = (s,) + suffix
+                    
+#                     if s not in suffix:
+#                         yield T
+    
+#     yield from fixed_recur(n)
+
+
 
 
 
@@ -515,25 +606,6 @@ def alternating_permutation():
         A.append(a//2)
 
 
-# def stirling_1st():
-#     """
-#     Stirling Numbers of the First Kind\n
-#     OEIS
-#     """
-    
-#     yield 1
-    
-#     R = [0,1,0]
-    
-#     for n in naturals(1):
-#         new = [0]
-#         for k in range(1,n+1):
-#             t = -n*R[k-1]+R[k]
-#             yield t
-#             new.append(t)
-#         R = new + [0]
-
-
 
 
 
@@ -561,12 +633,9 @@ if __name__ == '__main__':
     simple_test(alternating_permutation(),11,
                 "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
     
-    print("\nStirling Numbers of the First Kind")
-    simple_test(stirling_1st(),11,
-                "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
-    
-    
-    
+    # print("\nStirling Numbers of the First Kind")
+    # simple_test(stirling_1(),11,
+    #             "1, 1, 2, 4, 10, 32, 122, 544, 2770, 15872, 101042")
     
     print("\n\n\nVarious Permutation Generators")
     print("\nAll Finite Permutations")
@@ -604,6 +673,10 @@ if __name__ == '__main__':
     print("\nPatterns of length 3 from (1,5,7,2,6,3,4)")
     simple_test(permutation_patterns((1,5,7,2,6),3),5,
                 "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
+    
+    # print("\nPermutation of Length 4 with 3 Fixed Points")
+    # simple_test(permutation_fixed_points(4,2),10,
+    #             "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
     
     
     
