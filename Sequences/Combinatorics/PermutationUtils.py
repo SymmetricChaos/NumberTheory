@@ -6,6 +6,9 @@ def permutation_cauchy(line,T,index=0):
     Produce a permutation of T using Cauchy notation
     """
     
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     new = []
     
     for pos in line:
@@ -18,6 +21,9 @@ def permutation_cycle(cyc,T,index=0):
     """
     Produce a permutation of T using cycle notation
     """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
     
     cyc = cyc + (cyc[0],)
     new = list(T[:])
@@ -33,6 +39,9 @@ def comb_to_int(C,index=0):
     Given a combination in descending order return to associated integer
     """
     
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     for i in range(len(C)-1):
         if C[i] <= C[i+1]:
             raise Exception("Elements of C must be given in strictly decreasing order")
@@ -46,6 +55,9 @@ def int_to_comb(n,k,index=0):
     """
     Given an integer return the associated combination in descending order
     """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
     
     if k == 0:
         return ()
@@ -94,6 +106,9 @@ def perm_to_pattern(P,index=0):
     Convert the permutation P into a permutation 
     """
     
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     S = sorted(set(P))
     D = {v:rank for rank,v in enumerate(S,index)}
     
@@ -107,6 +122,18 @@ def skew_sum(P,Q):
 def direct_sum(P,Q):
     return P + tuple([q+len(P) for q in Q])
 
+
+def fixed_points(P,index=0):
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    ctr = 0
+    for val,pos in enumerate(P,index):
+        if val == pos:
+            ctr += 1
+    
+    return ctr
 
 
 

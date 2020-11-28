@@ -459,57 +459,41 @@ def cyclic_derangements(n,index=0):
 #         R = new + [0]
 
 
-# def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
-#     """
-#     Permutation on n with k fixed points
-#     OEIS A001250
+def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
+    """
+    Permutation on n with exactly k fixed points\n
+    OEIS A001250
     
-#     Args:
-#         n -- int, size of the set to choose from
-#         k -- int, number of fixed points
-#         replace -- bool, results with or without replacement
-#         reverse -- bool, return results in reverse order
-#         reflect -- bool, reflect each permutation
-#         index -- 0 or 1, value to start counting permutations from
-#     """
+    Args:
+        n -- int, size of the set to choose from
+        k -- int, number of fixed points
+        replace -- bool, results with or without replacement
+        reverse -- bool, return results in reverse order
+        reflect -- bool, reflect each permutation
+        index -- 0 or 1, value to start counting permutations from
+    """
     
-#     if k > n:
-#         raise Exception(f"k must be less than or equal to n, cannot have {k} fixed points in a set of {n}")
+    if k > n:
+        raise Exception(f"k must be less than or equal to n, cannot have {k} fixed points in a set of {n}")
     
-#     if index not in (0,1):
-#         raise Exception("index must be 0 or 1")
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
     
-#     def fixed_recur(n,depth=0,ctr=0):
-#         if depth >= n:
-#             yield ()
-        
-#         elif ctr == k:
-#             yield ()
-        
-#         else:
-#             # To reverse the external order (ie return the 'first' tuple last) reverse the selection order
-#             S = range(n)
-#             if reverse:
-#                 S = reversed(S)
-            
-#             for s in S:
-#                 if s == depth:
-#                     ctr += 1
-                
-#                 s += index
-                
-#                 # Get the suffix by recursion
-#                 for suffix in fixed_recur(n,depth+1,ctr):
-#                     # To reflect the internal order(ie write each tuple 'backward') reverse the joining order
-#                     if reflect:
-#                         T = suffix + (s,)
-#                     else:
-#                         T = (s,) + suffix
-                    
-#                     if s not in suffix:
-#                         yield T
+    def has_x_fixed(P,x):
+        ctr = 0
+        for val,pos in enumerate(P,index):
+            if val == pos:
+                ctr += 1
+            if ctr > x:
+                return False
+        if ctr == x:
+            return True
+        else:
+            return False
     
-#     yield from fixed_recur(n)
+    for P in permutations(n,n,replace=False,reverse=False,reflect=False,index=0):
+        if has_x_fixed(P,k):
+            yield P
 
 
 
@@ -674,9 +658,9 @@ if __name__ == '__main__':
     simple_test(permutation_patterns((1,5,7,2,6),3),5,
                 "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
     
-    # print("\nPermutation of Length 4 with 3 Fixed Points")
-    # simple_test(permutation_fixed_points(4,2),10,
-    #             "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
+    print("\nPermutation of Length 4 with 2 Fixed Points")
+    simple_test(permutation_fixed_points(4,2),3,
+                "(0, 1, 3, 2), (0, 2, 1, 3), (0, 3, 2, 1)")
     
     
     
