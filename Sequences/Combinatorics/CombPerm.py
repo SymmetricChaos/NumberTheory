@@ -458,10 +458,10 @@ def cyclic_derangements(n,index=0):
 #             new.append(t)
 #         R = new + [0]
 
-
+# Definitely a more efficent way to do this
 def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
-    Permutation on n with exactly k fixed points\n
+    Permutation on n with exactly k fixed points in lexicographic order\n
     OEIS A001250
     
     Args:
