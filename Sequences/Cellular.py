@@ -54,162 +54,54 @@ R110_str = {"###": " ",
             "  #": "#",
             "   ": " "}
 
-def rule_30(V=(1,)):
-    """
-    Irregular Triangle of Rule 30 by Rows\n
-    OEIS A070952
-    """
+
+def make_wolfram_code(rule_code,rule_code_str):
     
-    while True:
-        yield V
-        
-        V = (0,0) + V + (0,0)
-        
-        new = []
-        for i in range(len(V)-2):
-            new.append(R30[V[i:i+3]])
-        
-        V = tuple(new)
-
-
-def rule_30_str(V="#"):
-    """
-    Irregular Triangle of Rule 30 by Rows\n
-    OEIS A070952
-    """
+    def RULE(V=(1,)):
     
-    while True:
-        yield V
-        
-        V = "  " + V + "  "
-        
-        new = ""
-        for i in range(len(V)-2):
-            new += R30_str[V[i:i+3]]
-        
-        V = new
-
-
-def rule_30_black(V=(1,)):
-    """
-    Black Cells in Each Row of the Rule 30 Triangle
-    """
+        while True:
+            yield V
+            
+            V = (0,0) + V + (0,0)
+            
+            new = []
+            for i in range(len(V)-2):
+                new.append(rule_code[V[i:i+3]])
+            
+            V = tuple(new)
     
-    for R in rule_30(V):
-        yield sum(R)
-
-
-def rule_30_white(V=(1,)):
-    """
-    White Cells in Each Rows of the Rule 30 Triangle
-    """
     
-    for o,R in zip(odds(),rule_30(V)):
-        yield o-sum(R)
-
-
-def rule_90(V=(1,)):
-    """
-    Irregular Triangle of Rule 90 by Rows\n
-    """
+    def RULE_str(V="#"):
+        
+        while True:
+            yield V
+            
+            V = "  " + V + "  "
+            
+            new = ""
+            for i in range(len(V)-2):
+                new += rule_code_str[V[i:i+3]]
+            
+            V = new
     
-    while True:
-        yield V
-        
-        V = (0,0) + V + (0,0)
-        
-        new = []
-        for i in range(len(V)-2):
-            new.append(R90[V[i:i+3]])
-        
-        V = tuple(new)
-
-
-def rule_90_str(V="#"):
-    """
-    Irregular Triangle of Rule 90 by Rows\n
-    """
     
-    while True:
-        yield V
+    def RULE_black(V=(1,)):
         
-        V = "  " + V + "  "
-        
-        new = ""
-        for i in range(len(V)-2):
-            new += R90_str[V[i:i+3]]
-        
-        V = new
-
-
-def rule_90_black(V=(1,)):
-    """
-    Black Cells in Each Row of the Rule 90 Triangle
-    """
+        for R in RULE(V):
+            yield sum(R)
     
-    for R in rule_90(V):
-        yield sum(R)
-
-
-def rule_90_white(V=(1,)):
-    """
-    White Cells in Each Rows of the Rule 90 Triangle
-    """
     
-    for o,R in zip(odds(),rule_90(V)):
-        yield o-sum(R)
-
-
-def rule_110(V=(1,)):
-    """
-    Irregular Triangle of Rule 110 by Rows\n
-    """
+    def RULE_white(V=(1,)):
+        
+        for o,R in zip(odds(),RULE(V)):
+            yield o-sum(R)
     
-    while True:
-        yield V
-        
-        V = (0,0) + V + (0,0)
-        
-        new = []
-        for i in range(len(V)-2):
-            new.append(R110[V[i:i+3]])
-        
-        V = tuple(new)
+    return RULE, RULE_str, RULE_black, RULE_white
 
 
-def rule_110_str(V="#"):
-    """
-    Irregular Triangle of Rule 110 by Rows\n
-    """
-    
-    while True:
-        yield V
-        
-        V = "  " + V + "  "
-        
-        new = ""
-        for i in range(len(V)-2):
-            new += R110_str[V[i:i+3]]
-        
-        V = new
-
-
-def rule_110_black(V=(1,)):
-    """
-    Black Cells in Each Row of the Rule 110 Triangle
-    """
-    
-    for R in rule_110(V):
-        yield sum(R)
-
-
-def rule_110_white(V=(1,)):
-    """
-    White Cells in Each Rows of the Rule 110 Triangle
-    """
-    
-    for o,R in zip(odds(),rule_110(V)):
-        yield o-sum(R)
+rule_30, rule_30_str, rule_30_black, rule_30_white = make_wolfram_code(R30,R30_str)
+rule_90, rule_90_str, rule_90_black, rule_90_white = make_wolfram_code(R90,R90_str)
+rule_110, rule_110_str, rule_110_black, rule_110_white = make_wolfram_code(R110,R110_str)
 
 
 
