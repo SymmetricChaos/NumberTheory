@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets
+from Sequences.MathUtils import nontrivial_factors, all_subsets, poly_eval
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
@@ -142,6 +142,18 @@ def bell():
             R2.append(i+R2[-1])
         
         R0, R1 = R1, R2
+
+
+def fubini():
+    """
+    Fubini Numbers (aka Ordered Bell Numbers): Number of weak orderings on a set with n elements\n
+    OEIS A000670
+    """
+    
+    yield 1
+    
+    for P in eulerian_triangle():
+        yield poly_eval(P,2)
 
 
 def lazy_caterer():
@@ -527,6 +539,42 @@ def fuss_catalan(p,r):
         yield r*comb(n*p+r,n)//(n*p+r)
 
 
+# def permutohedron():
+#     """
+    
+#     """
+
+
+
+def set_partitions(n,index=0):
+    """
+    The partitions of a set with n elements
+    """
+    
+    def part(depth):
+        if depth == index:
+            yield ((index,),)
+        else:
+            for t in part(depth-1):
+                for n,sub in enumerate(t):
+                    if type(sub) == tuple:
+                        yield t[:n] + (sub + (depth,),) + t[n+1:]
+                yield t + ((depth,),)
+    
+    if index == 1:
+        yield from part(n)
+    else:
+        yield from part(n-1)
+
+
+# def ordered_partitions(n):
+#     """
+#     The ordered partitions of a set with n elements
+#     """
+    
+#     S = [i for i in range(n)]
+    
+#     def 
 
 
 
@@ -568,6 +616,10 @@ if __name__ == '__main__':
     print("\nBell Numbers")
     simple_test(bell(),11,
                 "1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975")
+    
+    print("\nFubini Numbers")
+    simple_test(fubini(),10,
+                "1, 1, 3, 13, 75, 541, 4683, 47293, 545835, 7087261")
     
     print("\nLazy Caterer's Numbers")
     simple_test(lazy_caterer(),14,
@@ -668,4 +720,8 @@ if __name__ == '__main__':
     print("\nFuss-Catalan Numbers with p = 2, r = 3")
     simple_test(fuss_catalan(2,3),11,
                 "1, 3, 9, 28, 90, 297, 1001, 3432, 11934, 41990, 149226")
+    
+    print("\nSet Partitions")
+    simple_test(set_partitions(3),11,
+                "((0, 1, 2),), ((0, 1), (2,)), ((0, 2), (1,)), ((0,), (1, 2)), ((0,), (1,), (2,))")
     
