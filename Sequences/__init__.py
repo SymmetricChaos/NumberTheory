@@ -15,6 +15,10 @@ from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, \
        fibonacci_words, cantor_set, paperfolding_word, paperfolding_words, \
        thue_morse_words, sierpinski_triangle
 
+from Sequences.Cellular import rule_30, rule_30_str, rule_30_black, \
+       rule_30_white, rule_90, rule_90_str, rule_90_black, rule_90_white, \
+       rule_110, rule_110_str, rule_110_black, rule_110_white
+
 from Sequences.Collatz import collatz_length, collatz_longest, \
        collatz_sequence, collatz_map, collatz_all, collatz_highpoint, \
        collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
@@ -81,6 +85,11 @@ __all__=[#MANIPULATIONS
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",
          "cantor_set","cantor_sets","paperfolding_word","paperfolding_words",
          "thue_morse_words","sierpinski_triangle",
+         
+         #CELLULAR
+         "rule_30","rule_30_str","rule_30_black","rule_30_white","rule_90",
+         "rule_90_str","rule_90_black","rule_90_white","rule_110",
+         "rule_110_str","rule_110_black","rule_110_white",
          
          #COLLATZ
          "collatz_length","collatz_longest","collatz_sequence",
