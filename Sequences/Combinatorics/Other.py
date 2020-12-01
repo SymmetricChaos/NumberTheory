@@ -545,7 +545,6 @@ def fuss_catalan(p,r):
 #     """
 
 
-
 def set_partitions(n,index=0):
     """
     The partitions of a set with n elements
