@@ -6,7 +6,6 @@ from Sequences.NiceErrorChecking import require_geq, require_integers
 
 from math import comb
 
-
 def catalan():
     """
     Catalan Numbers: Fundamental sequence in combinatorics\n
@@ -598,6 +597,30 @@ def ordered_set_partitions(n,index=0):
         yield from part(n-1)
 
 
+def lattice_words(n,k):
+    """
+    Lattice words of length n using k symbols
+    Every prefix of a word must contain at least as many instances of i as of i+1
+    """
+    
+    require_integers(["n","k"],[n,k])
+    require_geq(["n","k"],[n,k],1)
+    
+    def lattice_recur(S,depth=0):
+        
+        if depth == n:
+            yield S
+        
+        else:
+            yield from lattice_recur(S+(1,),depth+1)
+            
+            for x in range(2,k+1):
+                if S.count(x) < S.count(x-1):
+                    yield from lattice_recur(S+(x,),depth+1)
+    
+    yield from lattice_recur(())
+
+
 
 
 
@@ -751,4 +774,8 @@ if __name__ == '__main__':
     print("\nOrdered Set Partitions")
     simple_test(ordered_set_partitions(3),4,
                 "((0, 1, 2),), ((0, 1), (2,)), ((2,), (0, 1)), ((0, 2), (1,))")
+    
+    print("\nLattice Words of Length 3 using 3 Symbols")
+    simple_test(lattice_words(3,3),20,
+                "(1, 1, 1), (1, 1, 2), (1, 2, 1), (1, 2, 3)")
     

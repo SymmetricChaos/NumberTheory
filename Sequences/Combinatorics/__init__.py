@@ -6,7 +6,7 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
        central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
        lobb_words, lobb_words_str, co_catalan, fuss_catalan, set_partitions, \
-       ordered_set_partitions
+       ordered_set_partitions, lattice_words
        
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -43,6 +43,7 @@ __all__=[
          "delannoy_triangle","central_delannoy","wedderburn_etherington",
          "lobb","lobb_triangle","lobb_words","lobb_words_str","co_catalan",
          "fuss_catalan","set_partitions","ordered_set_partitions",
+         "lattice_words",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
