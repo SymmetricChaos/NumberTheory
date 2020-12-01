@@ -41,7 +41,6 @@ def left_factorials():
     out = 0
     
     for f in factorials():
-        
         yield out
         out += f
 
@@ -56,11 +55,9 @@ def alternating_factorials_1():
     F = offset(factorials(),1)
     out = 0
     
-    yield 0
-    
     for f,s in zip(F,cyc):
-        out += f*s
         yield abs(out)
+        out += f*s
 
 
 def alternating_factorials_2():

@@ -5,8 +5,9 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
        schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
        central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
-       lobb_words, lobb_words_str, co_catalan, fuss_catalan
-
+       lobb_words, lobb_words_str, co_catalan, fuss_catalan, set_partitions, \
+       ordered_set_partitions
+       
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
        all_derangements, odd_permutation, cyclic_permutations, \
@@ -41,7 +42,7 @@ __all__=[
          "schroder_hipparchus","motzkin_paths","motzkin","delannoy",
          "delannoy_triangle","central_delannoy","wedderburn_etherington",
          "lobb","lobb_triangle","lobb_words","lobb_words_str","co_catalan",
-         "fuss_catalan",
+         "fuss_catalan","set_partitions","ordered_set_partitions",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",

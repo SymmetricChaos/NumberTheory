@@ -551,14 +551,19 @@ def set_partitions(n,index=0):
     The partitions of a set with n elements
     """
     
+    require_integers(["n","index"],[n,index])
+    require_geq(["n"],[n],1)
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
     def part(depth):
         if depth == index:
             yield ((index,),)
         else:
             for t in part(depth-1):
                 for n,sub in enumerate(t):
-                    if type(sub) == tuple:
-                        yield t[:n] + (sub + (depth,),) + t[n+1:]
+                    yield t[:n] + (sub + (depth,),) + t[n+1:]
                 yield t + ((depth,),)
     
     if index == 1:
@@ -567,14 +572,33 @@ def set_partitions(n,index=0):
         yield from part(n-1)
 
 
-# def ordered_partitions(n):
-#     """
-#     The ordered partitions of a set with n elements
-#     """
+def ordered_set_partitions(n,index=0):
+    """
+    The ordered partitions of a set with n elements
+    """
     
-#     S = [i for i in range(n)]
+    require_integers(["n","index"],[n,index])
+    require_geq(["n"],[n],1)
     
-#     def 
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def part(depth):
+        if depth == index:
+            yield ((index,),)
+        else:
+            for t in part(depth-1):
+                for n,sub in enumerate(t):
+                    yield t[:n] + (sub + (depth,),) + t[n+1:]
+                yield t + ((depth,),)
+                yield ((depth,),) + t
+    
+    if index == 1:
+        yield from part(n)
+    else:
+        yield from part(n-1)
+
+
 
 
 
@@ -722,6 +746,10 @@ if __name__ == '__main__':
                 "1, 3, 9, 28, 90, 297, 1001, 3432, 11934, 41990, 149226")
     
     print("\nSet Partitions")
-    simple_test(set_partitions(3),11,
-                "((0, 1, 2),), ((0, 1), (2,)), ((0, 2), (1,)), ((0,), (1, 2)), ((0,), (1,), (2,))")
+    simple_test(set_partitions(3),4,
+                "((0, 1, 2),), ((0, 1), (2,)), ((0, 2), (1,)), ((0,), (1, 2))")
+    
+    print("\nOrdered Set Partitions")
+    simple_test(ordered_set_partitions(3),4,
+                "((0, 1, 2),), ((0, 1), (2,)), ((2,), (0, 1)), ((0, 2), (1,))")
     
