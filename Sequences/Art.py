@@ -12,12 +12,12 @@ def centered_triangular(n):
     th = np.linspace(0,2*np.pi,4)
     
     for i in range(1,n+1):
-        x = np.sin(th[:3])*i
-        y = np.cos(th[:3])*i
+        x = np.sin(th[:3])*(4*i/n)
+        y = np.cos(th[:3])*(4*i/n)
         
         for p in range(3):
             x_space = np.linspace(x[p%3],x[(p+1)%3],i+1)
             y_space = np.linspace(y[p%3],y[(p+1)%3],i+1)
             draw.circles_xy(x_space,y_space,[.1]*(i+1))
 
-centered_triangular(4)
+centered_triangular(7)
