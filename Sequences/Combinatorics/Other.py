@@ -621,6 +621,20 @@ def lattice_words(n,k):
     yield from lattice_recur(())
 
 
+# Because of the prefix property this can be memoized to start from the previous generation of
+# words.
+def lattice_language(k):
+    """
+    Lattice words using k symbols
+    Every prefix of a word must contain at least as many instances of i as of i+1
+    """
+    
+    require_integers(["k"],[k])
+    require_geq(["k"],[k],1)
+    
+    for n in naturals(1):
+        yield from lattice_words(n,k)
+
 
 
 
@@ -776,6 +790,10 @@ if __name__ == '__main__':
                 "((0, 1, 2),), ((0, 1), (2,)), ((2,), (0, 1)), ((0, 2), (1,))")
     
     print("\nLattice Words of Length 3 using 3 Symbols")
-    simple_test(lattice_words(3,3),20,
+    simple_test(lattice_words(3,3),4,
                 "(1, 1, 1), (1, 1, 2), (1, 2, 1), (1, 2, 3)")
+    
+    print("\nLattice Language Using 2 Symbols")
+    simple_test(lattice_language(2),6,
+                "(1,), (1, 1), (1, 2), (1, 1, 1), (1, 1, 2), (1, 2, 1)")
     
