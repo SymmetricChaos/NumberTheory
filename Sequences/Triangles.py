@@ -15,16 +15,12 @@ def pretty_array(A,n,space=0,delim=" "):
 
 
 def quick_triangle(sequence,n,space=0,delim=" "):
-    
     T = make_triangle(sequence)
-    
     pretty_array(T,n=n,space=space,delim=delim)
 
 
 def quick_array(sequence,row_lengths,n,space=0,delim=" "):
-    
     A = irregular_array(sequence,row_lengths)
-    
     pretty_array(A,n=n,space=space,delim=delim)
 
 
