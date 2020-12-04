@@ -51,18 +51,15 @@ def motzkin_mountains(n=2):
             y = y+(8/n)*move
 
 
-def pascal_triangle_art(n,circle_size=.13,circle_color="lavender",cavas_size=15):
+def pascal_triangle_art(n,circle_size=.15,circle_color="lavender",cavas_size=15):
     
     draw.make_blank_canvas([cavas_size,cavas_size],facecolor="lightgray")
     draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
     draw.title("Pascal's Triangle",size=30)
     
-    draw.text_xy(0,2.5,"1",ha='center',va='center')
-    draw.circle_xy(0,2.5,circle_size,fc=circle_color)
-    
-    for k,row in enumerate(segment(pascal_triangle(),1),1):
-        y = 2.5-3.5*k/n
-        x_space = np.linspace(-3.5*k/n,3.5*k/n,k+1)
+    for k,row in enumerate(pascal_triangle(),0):
+        y = 2.5-4*k/n
+        x_space = np.linspace(-3.7*k/n,3.7*k/n,k+1)
         
         for x,val in zip(x_space,row):
             draw.circle_xy(x,y,circle_size,fc=circle_color)
@@ -72,10 +69,6 @@ def pascal_triangle_art(n,circle_size=.13,circle_color="lavender",cavas_size=15)
 
 
 
-# def dyck_paths(n):
-    
-
-
-# dyck_mountains(5)
-# motzkin_mountains(5)
-pascal_triangle_art(12)
+dyck_mountains(5)
+motzkin_mountains(5)
+pascal_triangle_art(14)
