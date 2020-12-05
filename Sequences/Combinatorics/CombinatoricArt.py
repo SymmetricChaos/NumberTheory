@@ -51,7 +51,7 @@ def motzkin_mountains(n=2):
             y = y+(8/n)*move
 
 
-def pascal_triangle_art(n,circle_size=.15,circle_color="lavender",cavas_size=15):
+def pascal_triangle_art(n,circle_size=.15,text_size=8,circle_color="lavender",cavas_size=15):
     
     draw.make_blank_canvas([cavas_size,cavas_size],facecolor="lightgray")
     draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
@@ -63,12 +63,32 @@ def pascal_triangle_art(n,circle_size=.15,circle_color="lavender",cavas_size=15)
         
         for x,val in zip(x_space,row):
             draw.circle_xy(x,y,circle_size,fc=circle_color)
-            draw.text_xy(x,y,val,ha='center',va='center')
+            draw.text_xy(x,y,val,ha='center',va='center',size=text_size)
         if k >= n:
             break
 
 
+def pascal_sierpinski_art(n,circle_size=.12,text_size=8,circle_color="cornflowerblue",cavas_size=15):
+    
+    draw.make_blank_canvas([cavas_size,cavas_size],facecolor="lightgray")
+    draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
+    draw.title("Sierpinski Triangle\nBuilt From Pascal's Triangle",size=30)
+    
+    for k,row in enumerate(pascal_triangle(),0):
+        y = 2.5-4*k/n
+        x_space = np.linspace(-3.7*k/n,3.7*k/n,k+1)
+        
+        for x,val in zip(x_space,row):
+            if val % 2 == 1:
+                draw.circle_xy(x,y,circle_size,fc=circle_color)
+            else:
+                draw.circle_xy(x,y,circle_size,fc="white",ec="black")
+            draw.text_xy(x,y,val,ha='center',va='center',size=text_size)
+        if k >= n:
+            break
 
-dyck_mountains(5)
-motzkin_mountains(5)
-pascal_triangle_art(14)
+
+# dyck_mountains(5)
+# motzkin_mountains(5)
+# pascal_triangle_art(14)
+pascal_sierpinski_art(15)
