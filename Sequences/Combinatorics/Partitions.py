@@ -119,6 +119,7 @@ def power_partitions(n,k):
         for p in powers(k):
             if p >= n:
                 break
+        
         while p >= k:
             p = p//k
             for S in power_partitions(n-p,k):

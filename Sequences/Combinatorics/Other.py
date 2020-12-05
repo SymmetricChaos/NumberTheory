@@ -3,6 +3,7 @@ from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
 from Sequences.NiceErrorChecking import require_geq, require_integers
+from Sequences.Combinatorics.Factorials import falling_factorial_triangle
 
 from math import comb
 
@@ -349,7 +350,7 @@ def schroder_hipparchus():
 def motzkin():
     """
     Motzkin Numbers: The number of ways to draw non-intersecting chords through n points on a circle
-    OEIS 1006
+    OEIS A001006
     """
     
     yield 1
@@ -384,7 +385,7 @@ def motzkin_paths(n):
 def delannoy():
     """
     Triangle of Delannoy Numbers\n
-    A008288
+    OEIS A008288
     """
     
     yield 1
@@ -407,7 +408,7 @@ def delannoy():
 def delannoy_triangle():
     """
     Delannoy Triangle By Rows\n
-    A008288
+    OEIS A008288
     """
     
     yield from make_triangle(delannoy())
@@ -636,6 +637,20 @@ def lattice_language(k):
         yield from lattice_words(n,k)
 
 
+# def partial_order():
+#     """
+#     Number of partial orders of a set with n elements
+#     OEIS A001035
+#     """
+    
+#     L = [1]
+#     for row in falling_factorial_triangle():
+#         S = sum([abs(val*L[k]) for k,val in enumerate(row)])
+#         L.append(S)
+#         yield S
+
+
+
 
 
 if __name__ == '__main__':
@@ -796,4 +811,8 @@ if __name__ == '__main__':
     print("\nLattice Language Using 2 Symbols")
     simple_test(lattice_language(2),6,
                 "(1,), (1, 1), (1, 2), (1, 1, 1), (1, 1, 2), (1, 2, 1)")
+    
+    # print("\nPartial Orders")
+    # simple_test(partial_order(),6,
+    #             "1, 1, 3, 19, 219, 4231, 130023, 6129859, 431723379")
     

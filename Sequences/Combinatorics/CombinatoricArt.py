@@ -1,7 +1,8 @@
 from Sequences import Drawing as draw
-import numpy as np
 from Sequences.Combinatorics import motzkin_paths, dyck_words, catalan, pascal_triangle
 from Sequences.Manipulations import segment
+
+import numpy as np
 from math import comb
 
 
@@ -88,7 +89,46 @@ def pascal_sierpinski_art(n,circle_size=.12,text_size=8,circle_color="cornflower
             break
 
 
+# Each chord partitions the set of points into three sets: those on the chord, those to the "left", and those to the "right"
+# We should be able to generate solutions by using this knowledge to then partition each partition
+# Turns out to be some error in this implementation for n > 5
+def motzkin_chords(n,cavas_size=15):
+    
+    draw.make_blank_canvas([cavas_size,cavas_size],facecolor="lightgray")
+    
+    th = np.linspace(0,2*np.pi,n+1)
+    x = np.sin(th[:n])
+    y = np.cos(th[:n])
+    P = draw.xy_to_points(x,y)
+    
+    S = tuple([i for i in range(n)])
+    
+    def chord_recur(S):
+        print(S)
+        yield []
+        for a in S:
+            for b in S:
+                if a < b:
+                    for x in chord_recur(tuple([s for s in S if s > b])):
+                        yield [(a,b)] + x
+                    for x in chord_recur(tuple([s for s in S if s > a and s < b])):
+                        if x != []:
+                            yield [(a,b)] + x
+
+    
+    for ctr,i in enumerate(chord_recur(S),1):
+        draw.make_blank_plot(8,8,ctr,[-1.2,1.2],[-1.2,1.2])
+        draw.circle_xy(0, 0, 1, fc='white', ec='black')
+        draw.circles_xy(x,y,[.1]*n)
+        for pair in i:
+            draw.connection_p(P[pair[0]],P[pair[1]],color='red')
+
+
+
+
+
 # dyck_mountains(5)
 # motzkin_mountains(5)
 # pascal_triangle_art(14)
-pascal_sierpinski_art(15)
+# pascal_sierpinski_art(15)
+motzkin_chords(6)

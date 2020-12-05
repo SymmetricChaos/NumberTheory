@@ -333,7 +333,7 @@ if __name__ == '__main__':
     simple_test(falling_factorial(),16,
                 "1, 0, 1, 0, -1, 1, 0, 2, -3, 1, 0, -6, 11, -6, 1, 0")
     
-    print("\nTriangle of Rising Factorials")
+    print("\nTriangle of Falling Factorials")
     simple_test(falling_factorial_triangle(),4,
                 "(1,), (0, 1), (0, -1, 1), (0, 2, -3, 1)")
     
