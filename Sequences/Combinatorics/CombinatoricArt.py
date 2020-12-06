@@ -90,11 +90,10 @@ def pascal_sierpinski_art(n,circle_size=.12,text_size=8,circle_color="cornflower
 
 
 # Each chord partitions the set of points into three sets: those on the chord, those to the "left", and those to the "right"
-# We should be able to generate solutions by using this knowledge to then partition each partition
-# Turns out to be some error in this implementation for n > 5
-def motzkin_chords(n,cavas_size=15):
+# We generate solutions by using this knowledge to then partition each partition
+def motzkin_chords(n,cavas_size=[15,15],rows=10,cols=10):
     
-    draw.make_blank_canvas([cavas_size,cavas_size],facecolor="lightgray")
+    draw.make_blank_canvas(cavas_size,facecolor="lightgray")
     
     th = np.linspace(0,2*np.pi,n+1)
     x = np.sin(th[:n])
@@ -104,24 +103,23 @@ def motzkin_chords(n,cavas_size=15):
     S = tuple([i for i in range(n)])
     
     def chord_recur(S):
-        print(S)
         yield []
         for a in S:
             for b in S:
                 if a < b:
+                    yield [(a,b)]
+                    
                     for x in chord_recur(tuple([s for s in S if s > b])):
-                        yield [(a,b)] + x
-                    for x in chord_recur(tuple([s for s in S if s > a and s < b])):
-                        if x != []:
-                            yield [(a,b)] + x
-
+                        for y in chord_recur(tuple([s for s in S if s > a and s < b])):
+                            if x != [] or y != []:
+                                yield [(a,b)] + x + y
     
     for ctr,i in enumerate(chord_recur(S),1):
-        draw.make_blank_plot(8,8,ctr,[-1.2,1.2],[-1.2,1.2])
-        draw.circle_xy(0, 0, 1, fc='white', ec='black')
-        draw.circles_xy(x,y,[.1]*n)
+        draw.make_blank_plot(rows,cols,ctr,[-1.2,1.2],[-1.2,1.2])
+        draw.circle_xy(0, 0, 1, fc='white', ec='black',zorder=-1)
         for pair in i:
-            draw.connection_p(P[pair[0]],P[pair[1]],color='red')
+            draw.connection_p(P[pair[0]],P[pair[1]],color='red',zorder=0)
+        draw.circles_xy(x,y,[.1]*n)
 
 
 
@@ -131,4 +129,4 @@ def motzkin_chords(n,cavas_size=15):
 # motzkin_mountains(5)
 # pascal_triangle_art(14)
 # pascal_sierpinski_art(15)
-motzkin_chords(6)
+motzkin_chords(6,rows=8,cols=8)
