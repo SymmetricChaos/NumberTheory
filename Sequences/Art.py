@@ -11,9 +11,9 @@ def centered_figurate(k,n):
     
     th = np.linspace(0,2*np.pi,k+1)
     
-    for i in range(1,n+1):
-        x = np.sin(th[:k])*(3.5*i/n)
-        y = np.cos(th[:k])*(3.5*i/n)
+    for i in range(1,n):
+        x = np.sin(th[:k])*(3.5*i/(n-1))
+        y = np.cos(th[:k])*(3.5*i/(n-1))
         
         for p in range(k):
             x_space = np.linspace(x[p%k],x[(p+1)%k],i+1)
@@ -30,9 +30,9 @@ def figurate(k,n):
     
     th = np.linspace(0,2*np.pi,k+1)
     
-    for i in range(1,n+1):
-        x = np.sin(th[:k])*(3.5*i/n)
-        y = np.cos(th[:k])*(3.5*i/n)+3.5-3.5*i/n
+    for i in range(1,n):
+        x = np.sin(th[:k])*(3.5*i/(n-1))
+        y = np.cos(th[:k])*(3.5*i/(n-1))+3.5-3.5*i/(n-1)
         
         for p in range(k):
             x_space = np.linspace(x[p%k],x[(p+1)%k],i+1)
@@ -41,5 +41,5 @@ def figurate(k,n):
 
 
 
-centered_figurate(5,4)
-figurate(5,4)
+centered_figurate(5,5)
+figurate(5,5)

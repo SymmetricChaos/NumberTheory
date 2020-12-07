@@ -382,6 +382,28 @@ def motzkin_paths(n):
     yield from horizon_recur(())
 
 
+def motzkin_chords(n,index=0):
+    """
+    All of the ways to draw non-intersecting chords through n points on a circle
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    def chord_recur(S):
+        yield []
+        for a in S:
+            for b in [s for s in S if s > a]:
+                yield [(a,b)]
+                
+                for x in chord_recur(tuple([s for s in S if s > a and s < b])):
+                    for y in chord_recur(tuple([s for s in S if s > b])):
+                        if x != [] or y != []:
+                            yield [(a,b)] + x + y
+    
+    yield from chord_recur([i for i in range(index,n+index)])
+
+
 def delannoy():
     """
     Triangle of Delannoy Numbers\n
@@ -759,6 +781,10 @@ if __name__ == '__main__':
     print("\nMotzkin Paths of Length 3 (numeric)")
     simple_test(motzkin_paths(3),10,
                 "(1, 0, -1), (1, -1, 0), (0, 1, -1), (0, 0, 0)")
+    
+    print("\nMotzkin Chord Pairs")
+    simple_test(motzkin_chords(5),4,
+                "[], [(0, 1)], [(0, 1), (2, 3)], [(0, 1), (2, 4)]")
     
     print("\nDelannoy")
     simple_test(delannoy(),18,

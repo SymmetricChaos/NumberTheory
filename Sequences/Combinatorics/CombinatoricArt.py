@@ -1,9 +1,11 @@
 from Sequences import Drawing as draw
-from Sequences.Combinatorics import motzkin_paths, dyck_words, catalan, pascal_triangle
-from Sequences.Manipulations import segment
+from Sequences.Combinatorics import motzkin_paths, dyck_words, catalan, pascal_triangle, motzkin_chords
 
 import numpy as np
 from math import comb
+
+
+
 
 
 def dyck_mountains(n=2):
@@ -91,7 +93,7 @@ def pascal_sierpinski_art(n,circle_size=.12,text_size=8,circle_color="cornflower
 
 # Each chord partitions the set of points into three sets: those on the chord, those to the "left", and those to the "right"
 # We generate solutions by using this knowledge to then partition each partition
-def motzkin_chords(n,cavas_size=[15,15],rows=10,cols=10):
+def motzkin_chords_art(n,cavas_size=[15,15],rows=10,cols=10):
     
     draw.make_blank_canvas(cavas_size,facecolor="lightgray")
     
@@ -100,21 +102,7 @@ def motzkin_chords(n,cavas_size=[15,15],rows=10,cols=10):
     y = np.cos(th[:n])
     P = draw.xy_to_points(x,y)
     
-    S = tuple([i for i in range(n)])
-    
-    def chord_recur(S):
-        yield []
-        for a in S:
-            for b in S:
-                if a < b:
-                    yield [(a,b)]
-                    
-                    for x in chord_recur(tuple([s for s in S if s > b])):
-                        for y in chord_recur(tuple([s for s in S if s > a and s < b])):
-                            if x != [] or y != []:
-                                yield [(a,b)] + x + y
-    
-    for ctr,i in enumerate(chord_recur(S),1):
+    for ctr,i in enumerate(motzkin_chords(n),1):
         draw.make_blank_plot(rows,cols,ctr,[-1.2,1.2],[-1.2,1.2])
         draw.circle_xy(0, 0, 1, fc='white', ec='black',zorder=-1)
         for pair in i:
@@ -129,4 +117,4 @@ def motzkin_chords(n,cavas_size=[15,15],rows=10,cols=10):
 # motzkin_mountains(5)
 # pascal_triangle_art(14)
 # pascal_sierpinski_art(15)
-motzkin_chords(6,rows=8,cols=8)
+motzkin_chords_art(6,rows=8,cols=8)
