@@ -77,6 +77,20 @@ def hypotenuse():
 #    """
 
 
+def mosner():
+    """
+    Mosner Numbers: Maximum number of regions created by cutting a circle with n lines\n
+    OEIS A000127
+    """
+    
+    cur = 1
+    
+    for n in naturals(1):
+        cur += sum([2-n+n*i-i*i for i in range(1,n)])
+        yield cur
+
+
+
 
 
 
@@ -94,4 +108,8 @@ if __name__ == '__main__':
     print("\nHypotenuse Numbers")
     simple_test(hypotenuse(),14,
                 "5, 10, 13, 15, 17, 20, 25, 26, 29, 30, 34, 35, 37, 39")
+    
+    print("\nMosner")
+    simple_test(mosner(),13,
+                "1, 2, 4, 8, 16, 31, 57, 99, 163, 256, 386, 562, 794")
     
