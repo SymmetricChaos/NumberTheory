@@ -298,6 +298,31 @@ def sierpinski_triangle(invert=False):
             yield row
 
 
+def lindenmayer_words(invert=False):
+    """
+    Lindenmayer's Original L-System
+    """
+    
+    if invert:
+        S = (1,)
+        D = {1: (1,0),
+             0: (1,)}
+    else:
+        S = (0,)
+        D = {0: (0,1),
+             1: (0,)}
+    
+    while True:
+        yield S
+        
+        t = ()
+        
+        for s in S:
+            t += D[s]
+        
+        S = t
+
+
 
 
 
@@ -347,4 +372,9 @@ if __name__ == '__main__':
     print("\nSierpinski Triangle by Rows")
     simple_test(sierpinski_triangle(),5,
                 "(1,), (1, 1), (1, 0, 1), (1, 1, 1, 1), (1, 0, 0, 0, 1)")
+    
+    print("\nLindenmayer's Original L-System")
+    simple_test(lindenmayer_words(invert=True),4,
+                "(0,), (0, 1), (0, 1, 0), (0, 1, 0, 0, 1)")
+    
     

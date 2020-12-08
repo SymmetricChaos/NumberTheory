@@ -1,5 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.Combinatorics.Factorials import factorials
+from fractions import Fraction
+
 
 
 
@@ -33,6 +35,13 @@ def total_order():
     yield from factorials()
 
 
+# def partial_order():
+#     """
+#     Number of Partial Orders on n elements
+#     OEIS A000112
+#     """
+
+
 def equivalence_relation():
     """
     Number of Equivalence Relations on a set with n elements (same as Bell Numbers)
@@ -50,6 +59,7 @@ def equivalence_relation():
             R2.append(i+R2[-1])
         
         R0, R1 = R1, R2
+
 
 
 
@@ -72,4 +82,8 @@ if __name__ == '__main__':
     print("\nEquivalence Relations")
     simple_test(equivalence_relation(),10,
                 "1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147")
+    
+    # print("\nPartial Orders")
+    # simple_test(partial_order(),10,
+    #             "1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147")
     
