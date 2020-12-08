@@ -1,4 +1,5 @@
 from sympy import isprime
+from fractions import Fraction
 
 ## Type Errors ##
 def require_integers(names,variables):
@@ -8,6 +9,18 @@ def require_integers(names,variables):
     for k,l in zip(names,variables):
         if type(l) != int:
             out += f"{k} must be an integer\n"
+    
+    if out != "":
+        raise TypeError(out)
+
+
+def require_rationals(names,variables):
+    
+    out = ""
+    
+    for k,l in zip(names,variables):
+        if type(l) != Fraction:
+            out += f"{k} must be a Fraction\n"
     
     if out != "":
         raise TypeError(out)

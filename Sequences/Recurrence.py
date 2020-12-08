@@ -1,7 +1,8 @@
-from Sequences.NiceErrorChecking import require_integers, require_geq
+from Sequences.NiceErrorChecking import require_integers, require_geq, require_rationals
 from Sequences.Simple import evens, naturals
 from Sequences.Manipulations import offset
 
+from fractions import Fraction
 from math import floor, ceil, gcd
 from collections import Counter
 
@@ -498,6 +499,19 @@ def rowland_primes():
         a = b
 
 
+def logistic_map(x,r):
+    """
+    Logistic Map for some rational n/d and integer r
+    """
+    
+    require_rationals(["x","r"],[x,r])
+    
+    while True:
+        yield x
+        
+        x = r*x*(1-x)
+
+
 
 
 
@@ -568,7 +582,7 @@ if __name__ == '__main__':
     simple_test(narayana_cows(),15,
                 "1, 1, 1, 2, 3, 4, 6, 9, 13, 19, 28, 41, 60, 88, 129")
     
-    from math import sqrt, floor
+    from math import sqrt
     print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
     simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
                 "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
@@ -620,4 +634,8 @@ if __name__ == '__main__':
     print("\nTribonnaci Words")
     simple_test(tribonnaci_words(),4,
                 "(0,), (0, 1), (0, 1, 0, 2), (0, 1, 0, 2, 0, 1, 0)")
+    
+    print("\nLogistic Word")
+    simple_test(logistic_map(Fraction(1,3),Fraction(1,2)),5,
+                "1/3, 1/9, 4/81, 154/6561, 493339/43046721")
     
