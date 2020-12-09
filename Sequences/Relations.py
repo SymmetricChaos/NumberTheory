@@ -1,6 +1,5 @@
 from Sequences.Simple import naturals
 from Sequences.Combinatorics.Factorials import factorials
-from fractions import Fraction
 
 
 

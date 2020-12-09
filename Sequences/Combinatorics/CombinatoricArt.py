@@ -1,5 +1,5 @@
 from Sequences import Drawing as draw
-from Sequences.Combinatorics import motzkin_paths, dyck_words, catalan, pascal_triangle, motzkin_chords
+from Sequences.Combinatorics import motzkin_paths, dyck_words, catalan, pascal_triangle, motzkin_chords, partitions
 
 import numpy as np
 from math import comb
@@ -110,6 +110,27 @@ def motzkin_chords_art(n,cavas_size=[15,15],rows=10,cols=10):
         draw.circles_xy(x,y,[.1]*n)
 
 
+def partition_art(n,cavas_size=[15,15]):
+    
+    draw.make_blank_canvas(cavas_size,facecolor="lightgray")
+    draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
+    draw.title(f"Partitions of {n}",size=30)
+    
+    parts = [i for i in partitions(n)]
+    
+    xunit = 7/n
+    yunit = 7/len(parts)
+    
+    y = -3.5
+    
+    for p in parts:
+        x = -3.5
+        
+        for section in p:
+            draw.rect_xy(x, y, x+section*xunit, y+yunit,facecolor="salmon",edgecolor="black",lw=3)
+            x += section*xunit
+        
+        y += yunit
 
 
 
@@ -117,4 +138,5 @@ def motzkin_chords_art(n,cavas_size=[15,15],rows=10,cols=10):
 # motzkin_mountains(5)
 # pascal_triangle_art(14)
 # pascal_sierpinski_art(15)
-motzkin_chords_art(6,rows=8,cols=8)
+# motzkin_chords_art(6,rows=8,cols=8)
+partition_art(9)
