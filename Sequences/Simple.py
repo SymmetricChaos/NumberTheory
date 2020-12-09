@@ -1,4 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
+from Manipulations import make_triangle
 
 from itertools import count, repeat
 
@@ -171,6 +172,24 @@ def repdigit(n,B=10):
     while True:
         yield r
         r = (r*B)+n
+
+
+def floyd_triangle():
+    """
+    Floyd's Triangle
+    """
+    
+    yield from make_triangle(count(1,1))
+
+
+def magic_square():
+    """
+    The Magic Square Constant for each Natural
+    OEIS A006003
+    """
+    
+    for i in floyd_triangle():
+        yield sum(i)
 
 
 
@@ -359,3 +378,12 @@ if __name__ == '__main__':
     print("\nThe Rep-two Sequence in Base 3")
     simple_test(repdigit(2,3), 10,
                 "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")
+    
+    print("\nFloyd's Triangle")
+    simple_test(floyd_triangle(), 4,
+                "(1,), (2, 3), (4, 5, 6), (7, 8, 9, 10)")
+    
+    print("\nMagic Square Constants")
+    simple_test(magic_square(), 12,
+                "1, 5, 15, 34, 65, 111, 175, 260, 369, 505, 671, 870")
+    

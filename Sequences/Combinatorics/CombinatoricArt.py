@@ -134,6 +134,8 @@ def partition_art(n,cavas_size=[15,15]):
 
 
 
+
+
 # dyck_mountains(5)
 # motzkin_mountains(5)
 # pascal_triangle_art(14)
