@@ -1,4 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
+from Sequences.MathUtils import int_to_roman
 from Manipulations import make_triangle
 
 from itertools import count, repeat
@@ -190,6 +191,15 @@ def magic_square():
     
     for i in floyd_triangle():
         yield sum(i)
+
+
+def roman_numerals():
+    """
+    The positive integers as standard Roman Numerals
+    """
+    
+    for n in count(1,1):
+        yield int_to_roman(n)
 
 
 
@@ -386,4 +396,8 @@ if __name__ == '__main__':
     print("\nMagic Square Constants")
     simple_test(magic_square(), 12,
                 "1, 5, 15, 34, 65, 111, 175, 260, 369, 505, 671, 870")
+    
+    print("\nRoman Numerals")
+    simple_test(roman_numerals(), 12,
+                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII")
     

@@ -409,6 +409,22 @@ def balt_to_int(D):
     return reduce(lambda y,x: x + 3 * y,D,0)
 
 
+def int_to_roman(n):
+    """
+    Convert an integer to its standard Roman Numeral representation
+    """
+    
+    V = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    S = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+    
+    out = ""
+    for val,sym in zip(V,S):
+        while n >= val:
+            out += sym
+            n -= val
+    
+    return out
+
 
 
 
@@ -863,3 +879,6 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
+    
+    # for i in range(1,100):
+    #     print(i,int_to_roman(i))
