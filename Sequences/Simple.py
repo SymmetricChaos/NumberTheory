@@ -193,13 +193,27 @@ def magic_square():
         yield sum(i)
 
 
-def roman_numerals():
+def roman_numerals_str():
     """
     The positive integers as standard Roman Numerals
     """
     
     for n in count(1,1):
         yield int_to_roman(n)
+
+
+def roman_numerals():
+    """
+    The positive integers as standard Roman Numerals in numeric form
+    OEIS A093796
+    """
+    
+    D = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V":5, "I": 1}
+    for R in roman_numerals_str():
+        yield tuple([D[letter] for letter in R])
+
+
+
 
 
 
@@ -398,6 +412,10 @@ if __name__ == '__main__':
                 "1, 5, 15, 34, 65, 111, 175, 260, 369, 505, 671, 870")
     
     print("\nRoman Numerals")
-    simple_test(roman_numerals(), 12,
+    simple_test(roman_numerals_str(), 12,
                 "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII")
+    
+    print("\nRoman Numerals (numeric)")
+    simple_test(roman_numerals(), 6,
+                "(1,), (1, 1), (1, 1, 1), (1, 5), (5,), (5, 1)")
     
