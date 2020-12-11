@@ -1,7 +1,8 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits
+from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits, int_to_roman
 from Sequences.NiceErrorChecking import require_integers, require_geq
+
 
 def evil():
     """
@@ -308,6 +309,63 @@ def radix_digits(B=10):
         yield int_to_digits(n,B)
 
 
+def roman_numerals_str():
+    """
+    The positive integers as standard Roman Numerals
+    """
+    
+    for n in naturals(1):
+        yield int_to_roman(n)
+
+
+def roman_numerals():
+    """
+    The positive integers as standard Roman Numerals in numeric form
+    OEIS A093796
+    """
+    
+    D = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V":5, "I": 1}
+    for R in roman_numerals_str():
+        yield tuple([D[letter] for letter in R])
+
+
+def repdigit(n,B=10):
+    """
+    Repdigit Numbers: Numbers that consist entire of the digtit n in base B\n
+    (Below match when prepended with zero)
+    OEIS A002275-A002279
+    """
+    
+    require_integers(["n","B"],[n,B])
+    require_geq(["B"],[B],2)
+    require_geq(["n"],[n],1)
+    
+    if n >= B:
+        raise ValueError("There is no digit {n} in base {B}")
+    
+    r = n
+    
+    while True:
+        yield r
+        r = (r*B)+n
+
+
+def all_repdigit(B=10):
+    """
+    All the numbers that use a the same digit in each poisition in base B\n
+    OEIS
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    nums = [repdigit(n,B) for n in range(1,B)]
+    
+    while True:
+        for i in nums:
+            yield next(i)
+
+
 
 
 
@@ -322,11 +380,11 @@ if __name__ == '__main__':
     simple_test(odious(),15,
                 "1, 2, 4, 7, 8, 11, 13, 14, 16, 19, 21, 22, 25, 26, 28")
     
-    print("\nBinary Weights (Number of 1s in Binary Expansion)")
+    print("\nBinary Weights")
     simple_test(binary_weight(),18,
                 "0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2")
     
-    print("\nComplementary Binary Weights (Number of 0s in Binary Expansion)")
+    print("\nComplementary Binary Weights")
     simple_test(co_binary_weight(),18,
                 "1, 0, 1, 0, 2, 1, 1, 0, 3, 2, 2, 1, 2, 1, 1, 0, 4, 3")
     
@@ -382,3 +440,22 @@ if __name__ == '__main__':
     simple_test(radix_k_weight(2,3),18,
                 "0, 0, 1, 0, 0, 1, 1, 1, 2, 0, 0, 1, 0, 0, 1, 1, 1, 2")
     
+    print("\nRoman Numerals")
+    simple_test(roman_numerals_str(), 12,
+                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII")
+    
+    print("\nRoman Numerals (numeric)")
+    simple_test(roman_numerals(), 6,
+                "(1,), (1, 1), (1, 1, 1), (1, 5), (5,), (5, 1)")
+    
+    print("\nThe Repunit Sequence in Base 10")
+    simple_test(repdigit(1), 8,
+                "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
+    
+    print("\nThe Rep-two Sequence in Base 3")
+    simple_test(repdigit(2,3), 10,
+                "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")
+    
+    print("\nAll Base 3 Repdigits")
+    simple_test(all_repdigit(3), 13,
+                "1, 2, 4, 8, 13, 26, 40, 80, 121, 242, 364, 728, 1093")

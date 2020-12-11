@@ -9,7 +9,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, \
        co_binary_weight, ruler, binary_length, base_length, digital_sums, \
        digital_roots, fraction_period, palindrome, digital_prods, \
        additive_persistence, multiplicative_persistence, radix_digits, \
-       palindrome_digits, radix_k_weight
+       palindrome_digits, radix_k_weight, roman_numerals_str, roman_numerals, \
+       repdigit, all_repdigit
 
 from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, \
        fibonacci_words, cantor_set, paperfolding_word, paperfolding_words, \
@@ -54,8 +55,7 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
       powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
       constant, arithmetrico_geometric, gen_polynomial, self_powers, \
-      repdigit, sign_sequence, floyd_triangle, magic_square, roman_numerals, \
-      roman_numerals_str
+      sign_sequence, floyd_triangle, magic_square
 
 from Sequences.Totient import totients, cototients, charmichael, \
        jordan_totients, totient_range, nontotients, even_nontotients, \
@@ -81,7 +81,8 @@ __all__=[#MANIPULATIONS
          "binary_length","base_length","digital_sums","digital_roots",
          "palindrome","fraction_period","digital_prods","additive_persistence",
          "multiplicative_persistence","radix_digits","palindrome_digits",
-         "radix_k_weight",
+         "radix_k_weight","roman_numerals_str","roman_numerals","repdigit",
+         "all_repdigit",
          
          #BINARY
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",
@@ -135,8 +136,7 @@ __all__=[#MANIPULATIONS
          "naturals","integers","arithmetic","geometric","powers","fermat",
          "polynomial","evens","gen_evens","odds","gen_odds","counting",
          "constant","arithmetrico_geometric","gen_polynomial","self_powers",
-         "repdigit","sign_sequence","floyd_triangle","magic_square",
-         "roman_numerals_str","roman_numerals",
+         "sign_sequence","floyd_triangle","magic_square",
          
          #TOTIENT
          "totients","cototients","charmichael","jordan_totients",

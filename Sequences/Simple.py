@@ -1,5 +1,4 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
-from Sequences.MathUtils import int_to_roman
 from Manipulations import make_triangle
 
 from itertools import count, repeat
@@ -154,27 +153,6 @@ def sign_sequence(n):
         yield -n
 
 
-def repdigit(n,B=10):
-    """
-    Repdigit Numbers: Numbers that consist entire of the digtit n in base B\n
-    (Below match when prepended with zero)
-    OEIS A002275, A002276, A002277, A002278, A002279
-    """
-    
-    require_integers(["n","B"],[n,B])
-    require_geq(["B"],[B],2)
-    require_geq(["n"],[n],1)
-    
-    if n >= B:
-        raise ValueError("There is no digit {n} in base {B}")
-    
-    r = n
-    
-    while True:
-        yield r
-        r = (r*B)+n
-
-
 def floyd_triangle():
     """
     Floyd's Triangle
@@ -191,29 +169,6 @@ def magic_square():
     
     for i in floyd_triangle():
         yield sum(i)
-
-
-def roman_numerals_str():
-    """
-    The positive integers as standard Roman Numerals
-    """
-    
-    for n in count(1,1):
-        yield int_to_roman(n)
-
-
-def roman_numerals():
-    """
-    The positive integers as standard Roman Numerals in numeric form
-    OEIS A093796
-    """
-    
-    D = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V":5, "I": 1}
-    for R in roman_numerals_str():
-        yield tuple([D[letter] for letter in R])
-
-
-
 
 
 
@@ -395,14 +350,6 @@ if __name__ == '__main__':
     simple_test(sign_sequence(1), 16,
                 "1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1")
     
-    print("\nThe Repunit Sequence in Base 10")
-    simple_test(repdigit(1), 8,
-                "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
-    
-    print("\nThe Rep-two Sequence in Base 3")
-    simple_test(repdigit(2,3), 10,
-                "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")
-    
     print("\nFloyd's Triangle")
     simple_test(floyd_triangle(), 4,
                 "(1,), (2, 3), (4, 5, 6), (7, 8, 9, 10)")
@@ -410,12 +357,4 @@ if __name__ == '__main__':
     print("\nMagic Square Constants")
     simple_test(magic_square(), 12,
                 "1, 5, 15, 34, 65, 111, 175, 260, 369, 505, 671, 870")
-    
-    print("\nRoman Numerals")
-    simple_test(roman_numerals_str(), 12,
-                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII")
-    
-    print("\nRoman Numerals (numeric)")
-    simple_test(roman_numerals(), 6,
-                "(1,), (1, 1), (1, 1, 1), (1, 5), (5,), (5, 1)")
     
