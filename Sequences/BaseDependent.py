@@ -361,6 +361,8 @@ def all_repdigit(B=10):
     
     nums = [repdigit(n,B) for n in range(1,B)]
     
+    yield 0
+    
     while True:
         for i in nums:
             yield next(i)
@@ -458,4 +460,4 @@ if __name__ == '__main__':
     
     print("\nAll Base 3 Repdigits")
     simple_test(all_repdigit(3), 13,
-                "1, 2, 4, 8, 13, 26, 40, 80, 121, 242, 364, 728, 1093")
+                "0, 1, 2, 4, 8, 13, 26, 40, 80, 121, 242, 364, 728")
