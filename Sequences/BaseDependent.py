@@ -353,7 +353,7 @@ def repdigit(n,B=10):
 def all_repdigit(B=10):
     """
     All the numbers that use a the same digit in each poisition in base B\n
-    OEIS
+    OEIS A010785, A048328-A048340
     """
     
     require_integers(["B"],[B])
@@ -431,8 +431,8 @@ if __name__ == '__main__':
                 "(0,), (1,), (1, 1), (1, 0, 1), (1, 1, 1), (1, 0, 0, 1)")
     
     print("\nRepeating Unit Fraction Length (Base 10)")
-    simple_test(fraction_period(10),17,
-                "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16")
+    simple_test(fraction_period(10),18,
+                "1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 2, 1, 6, 6, 1, 1, 16, 1")
     
     print("\nDigits of Each Natural (Base 3)")
     simple_test(radix_digits(3),7,
@@ -443,8 +443,8 @@ if __name__ == '__main__':
                 "0, 0, 1, 0, 0, 1, 1, 1, 2, 0, 0, 1, 0, 0, 1, 1, 1, 2")
     
     print("\nRoman Numerals")
-    simple_test(roman_numerals_str(), 12,
-                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII")
+    simple_test(roman_numerals_str(), 13,
+                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII")
     
     print("\nRoman Numerals (numeric)")
     simple_test(roman_numerals(), 6,
@@ -454,7 +454,7 @@ if __name__ == '__main__':
     simple_test(repdigit(1), 8,
                 "1, 11, 111, 1111, 11111, 111111, 1111111, 11111111")
     
-    print("\nThe Rep-two Sequence in Base 3")
+    print("\nThe Rep-2 Sequence in Base 3")
     simple_test(repdigit(2,3), 10,
                 "2, 8, 26, 80, 242, 728, 2186, 6560, 19682, 59048")
     
