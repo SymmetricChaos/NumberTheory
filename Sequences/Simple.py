@@ -1,5 +1,5 @@
 from Sequences.NiceErrorChecking import require_integers, require_geq
-from Manipulations import make_triangle
+from Sequences.Manipulations import make_triangle
 
 from itertools import count, repeat
 
@@ -140,7 +140,7 @@ def fermat():
         yield 2**2**n+1
 
 
-def sign_sequence(n):
+def sign_sequence(n=1):
     """
     Sequence of +n and -n repeated forever\n
     OEIS A033999

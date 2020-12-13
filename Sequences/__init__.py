@@ -34,7 +34,8 @@ from Sequences.Figurate import triangular, square, pentagonal, \
        squared_triangular
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
-       hypotenuse, mosner
+       hypotenuse, mosner, primitive_pythagorean_triples, \
+       pythagorean_triples
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
        jacobi_symbols, kronecker_symbols, mobius_function, quadratic_residue, \
@@ -112,6 +113,7 @@ __all__=[#MANIPULATIONS
          
          #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse","mosner",
+         "primitive_pythagorean_triples","pythagorean_triples",
          
          #MODULAR ARITHMETIC
          "modular_inverses","legendre_symbols","jacobi_symbols",

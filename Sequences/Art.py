@@ -40,6 +40,10 @@ def figurate(k,n):
             draw.circles_xy(x_space,y_space,[.1]*(i+1))
 
 
+def pthyagorean_triples(n):
+    draw.make_blank_canvas([15,15],facecolor="lightgray")
+    draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
+
 
 centered_figurate(5,5)
 figurate(5,5)
