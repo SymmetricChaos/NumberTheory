@@ -276,7 +276,7 @@ def two_square():
 # Need to generlizae this
 def concentric_hexagonal():
     """
-    The Concentric Hexagonal Numbers
+    Concentric Hexagonal Numbers\n
     OEIS A032528
     """
     
@@ -287,11 +287,12 @@ def concentric_hexagonal():
 # Definitely some clever algebraic way to avoid the recursion here
 def simplex(n):
     """
-    The n-Simplex Numbers
+    n-Simplex Numbers\n
+    OEIS
     """
     
     if n == 1:
-        yield from naturals(1)
+        yield from naturals(0)
     
     else:
         psum = 0
@@ -366,6 +367,18 @@ def gen_pentagonal():
     
     for i in integers():
         yield (3*i*i-i)//2
+
+
+def star():
+    """
+    Star Numbers: Equivalent to the centered 12-gonal numbers\n
+    OEIS A003154
+    """
+    
+    yield 0
+    
+    for n in naturals(1):
+        yield 6*n*(n-1)+1
 
 
 
@@ -456,5 +469,9 @@ if __name__ == '__main__':
     
     print("\n4-Simplex (Pentatope) Numbers")
     simple_test(simplex(4),12,
-                "1, 5, 15, 35, 70, 126, 210, 330, 495, 715, 1001, 1365")
+                "0, 1, 5, 15, 35, 70, 126, 210, 330, 495, 715, 1001")
+    
+    print("\nStar Numbers")
+    simple_test(star(),12,
+                "0, 1, 13, 37, 73, 121, 181, 253, 337, 433, 541, 661")
     

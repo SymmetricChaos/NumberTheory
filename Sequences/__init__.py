@@ -31,7 +31,7 @@ from Sequences.Figurate import triangular, square, pentagonal, \
        gen_pentagonal, polygonal, gen_polygonal, simplicial, perfect_powers, \
        cen_polygonal, cubic, doubly_polygonal, hypercube, gen_hypercube, \
        oblong, rectangular, square_triangular, square_pyramidal, \
-       squared_triangular, simplex
+       squared_triangular, simplex, star
 
 from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        hypotenuse, mosner, primitive_pythagorean_triples, \
@@ -109,7 +109,7 @@ __all__=[#MANIPULATIONS
          "exponent","gen_polygonal","simplicial","perfect_powers",
          "cen_polygonal","cubic","doubly_polygonal","hypercube",
          "gen_hypercube","oblong","rectangular","square_triangular",
-         "square_pyramidal","squared_triangular","simplex",
+         "square_pyramidal","squared_triangular","simplex","star",
          
          #GEOMETRIC
          "primitive_hypotenuse","nonhypotenuse","hypotenuse","mosner",
