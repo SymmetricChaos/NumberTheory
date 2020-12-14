@@ -273,6 +273,33 @@ def two_square():
             yield sums.pop(0)
 
 
+# Need to generlizae this
+def concentric_hexagonal():
+    """
+    The Concentric Hexagonal Numbers
+    OEIS A032528
+    """
+    
+    for n in naturals():
+        yield (6*n*n)//4
+
+
+# Definitely some clever algebraic way to avoid the recursion here
+def simplex(n):
+    """
+    The n-Simplex Numbers
+    """
+    
+    if n == 1:
+        yield from naturals(1)
+    
+    else:
+        psum = 0
+        for s in simplex(n-1):
+            psum += s
+            yield psum
+
+
 
 
 
@@ -422,4 +449,12 @@ if __name__ == '__main__':
     print("\nSums of Two Squares")
     simple_test(two_square(),14,
                 "2, 5, 8, 10, 13, 17, 18, 20, 25, 26, 29, 32, 34, 37")
+    
+    print("\nConcentric Hexagonal Numbers")
+    simple_test(concentric_hexagonal(),13,
+                "0, 1, 6, 13, 24, 37, 54, 73, 96, 121, 150, 181, 216")
+    
+    print("\n4-Simplex (Pentatope) Numbers")
+    simple_test(simplex(4),12,
+                "1, 5, 15, 35, 70, 126, 210, 330, 495, 715, 1001, 1365")
     
