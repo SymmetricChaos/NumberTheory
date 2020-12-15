@@ -659,19 +659,6 @@ def lattice_language(k):
         yield from lattice_words(n,k)
 
 
-# def partial_order():
-#     """
-#     Number of partial orders of a set with n elements
-#     OEIS A001035
-#     """
-    
-#     L = [1]
-#     for row in falling_factorial_triangle():
-#         S = sum([abs(val*L[k]) for k,val in enumerate(row)])
-#         L.append(S)
-#         yield S
-
-
 
 
 

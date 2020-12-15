@@ -6,7 +6,8 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
        central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
        lobb_words, lobb_words_str, co_catalan, fuss_catalan, set_partitions, \
-       ordered_set_partitions, lattice_words, lattice_language, motzkin_chords
+       ordered_set_partitions, lattice_words, lattice_language, \
+       motzkin_chords
        
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -26,7 +27,7 @@ from Sequences.Combinatorics.Factorials import factorials, \
 from Sequences.Combinatorics.Partitions import partitions, partition_count, \
        partition_ordering, equal_partitions, power_partitions, \
        even_goldbach_partitions, tribonnaci_partitions, composition_count, \
-       compositions, all_compositions
+       compositions, all_compositions, polite_partitions, politeness
 
 
 
@@ -65,5 +66,5 @@ __all__=[
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
          "tribonnaci_partitions","composition_count","compositions",
-         "all_compositions"
+         "all_compositions","polite_partitions","politeness"
          ]

@@ -3,6 +3,7 @@ from Sequences.Simple import naturals, powers, evens
 from Sequences.Divisibility import primes
 from Sequences.Recurrence import tribonacci
 from Sequences.Manipulations import offset
+from Sequences.MathUtils import factors
 
 from math import prod
 from sympy import prime
@@ -127,6 +128,34 @@ def power_partitions(n,k):
                     yield (p,) + S
 
 
+def polite_partitions(n):
+    """
+    Partitions of n into sums of at least two consecutive naturals
+    Finite generator
+    """
+    
+    for x in range(1,n):
+        s = (x,)
+        
+        while sum(s) < n:
+            x += 1
+            s += (x,)
+            
+            if sum(s) == n:
+                yield s
+                break
+
+
+def politeness():
+    """
+    Number of polite partitions of each integer. The number of odd factors excluding 1.\n
+    OEIS A069283
+    """
+    
+    for n in naturals(1):
+        yield len([p for p in factors(n) if p > 1 and p % 2 == 1])
+
+
 def even_goldbach_partitions():
     """
     Even numbers written as the sum of two primes\n
@@ -223,11 +252,11 @@ def compositions(n):
 
 def all_compositions():
     """
-    All of the compositions (ordered partitions) of each natural
-    OEIS
+    All of the compositions (ordered partitions) of each positive natural
+    OEIS 
     """
     
-    for n in naturals():
+    for n in naturals(0):
         yield from compositions(n)
 
 
@@ -261,6 +290,10 @@ if __name__ == '__main__':
     simple_test(power_partitions(6,2),16,
                 "(4, 2), (4, 1, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
     
+    print("\nPolite Partitions of 100")
+    simple_test(polite_partitions(100),2,
+                "(9, 10, 11, 12, 13, 14, 15, 16), (18, 19, 20, 21, 22)")
+    
     print("\nGoldbach Partitions of the Even Numbers")
     simple_test(even_goldbach_partitions(),7,
                 "(2, 2), (3, 3), (3, 5), (5, 5), (3, 7), (5, 7), (7, 7)")
@@ -274,10 +307,14 @@ if __name__ == '__main__':
                 "1, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048")
     
     print("\nCompositions of 5")
-    simple_test(compositions(5),6,
-                "(5,), (4, 1), (3, 2), (3, 1, 1), (2, 3), (2, 2, 1)")
+    simple_test(compositions(5),12,
+                "(5,), (4, 1), (3, 2), (3, 1, 1), (2, 3), (2, 2, 1), (2, 1, 1, 1), (1, 4), (1, 3, 1), (1, 2, 2), (1, 2, 1, 1), (1, 1, 1, 1, 1)")
     
     print("\nSequence of all Compositions")
     simple_test(all_compositions(),7,
                 "(), (1,), (2,), (1, 1), (3,), (2, 1), (1, 2)")
+    
+    print("\nPoliteness of Each Natural")
+    simple_test(politeness(),18,
+                "0, 0, 1, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 3, 0, 1, 2")
     

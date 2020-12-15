@@ -67,6 +67,7 @@ def show_primitive_pthyagorean_triples(n):
         draw.connection_p(pt2,pt3,alpha=.2)
         draw.connection_p(pt3,pt1,alpha=.2)
 
+
 def sum_of_triangular(n):
     """
     Show why the sums of consecutive triangular numbers are square
