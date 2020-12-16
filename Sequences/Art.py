@@ -3,7 +3,7 @@ from Sequences import primitive_pythagorean_triples
 import numpy as np
 
 
-def centered_figurate(k,n):
+def centered_figurate(k,n,show_lines=False):
     """
     Show the first n centered k-gonal numbers
     """
@@ -23,9 +23,12 @@ def centered_figurate(k,n):
             x_space = np.linspace(x[p%k],x[(p+1)%k],i+1)
             y_space = np.linspace(y[p%k],y[(p+1)%k],i+1)
             draw.circles_xy(x_space,y_space,[.1]*(i+1))
+            
+            if show_lines:
+                draw.closed_curve_xy(x_space,y_space,color="black",zorder=-1,lw=5)
 
 
-def figurate(k,n):
+def figurate(k,n,show_lines=False):
     """
     Show the first n ordinary k-gonal numbers
     """
@@ -45,6 +48,9 @@ def figurate(k,n):
             x_space = np.linspace(x[p%k],x[(p+1)%k],i+1)
             y_space = np.linspace(y[p%k],y[(p+1)%k],i+1)
             draw.circles_xy(x_space,y_space,[.1]*(i+1))
+            
+            if show_lines:
+                draw.closed_curve_xy(x_space,y_space,color="black",zorder=-1,lw=5)
 
 
 def show_primitive_pthyagorean_triples(n):
@@ -116,7 +122,7 @@ def sum_of_triangular(n):
     Show that the sums of consecutive triangular numbers are square
     """
     
-    draw.make_blank_canvas([15,15],facecolor="lightgray")
+    draw.make_blank_canvas([12,12],facecolor="lightgray")
     draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
     draw.title("$T_n + T_{n+1} = n^2$",size=35)
     
@@ -133,8 +139,8 @@ def sum_of_triangular(n):
                 draw.circle_xy(x,y,radius,fc="red")
 
 
-# centered_figurate(5,5)
-# figurate(5,5)
+centered_figurate(5,5,show_lines=True)
+figurate(5,5,show_lines=True)
 # show_primitive_pthyagorean_triples(100)
-pthyagorean_butterfly(200,160)
+# pthyagorean_butterfly(400,300)
 # sum_of_triangular(7)
