@@ -3,7 +3,6 @@ from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
 from Sequences.NiceErrorChecking import require_geq, require_integers
-from Sequences.Combinatorics.Factorials import falling_factorial_triangle
 
 from math import comb
 
@@ -401,7 +400,8 @@ def motzkin_chords(n,index=0):
                         if x != [] or y != []:
                             yield [(a,b)] + x + y
     
-    yield from chord_recur([i for i in range(index,n+index)])
+    for pairs in chord_recur([i for i in range(index,n+index)]):
+        yield tuple(pairs)
 
 
 def delannoy():
@@ -771,7 +771,7 @@ if __name__ == '__main__':
     
     print("\nMotzkin Chord Pairs")
     simple_test(motzkin_chords(5),4,
-                "[], [(0, 1)], [(0, 1), (2, 3)], [(0, 1), (2, 4)]")
+                "(), ((0, 1),), ((0, 1), (2, 3)), ((0, 1), (2, 4))")
     
     print("\nDelannoy")
     simple_test(delannoy(),18,

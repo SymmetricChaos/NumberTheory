@@ -70,10 +70,27 @@ def show_primitive_pthyagorean_triples(n):
 
 def sum_of_triangular(n):
     """
-    Show why the sums of consecutive triangular numbers are square
+    Show that the sums of consecutive triangular numbers are square
     """
+    
+    draw.make_blank_canvas([15,15],facecolor="lightgray")
+    draw.make_blank_plot(1,1,1,[-4,4],[-4,4])
+    draw.title("$T_n + T_{n+1} = n^2$",size=35)
+    
+    xs = np.linspace(-3,3,n)
+    ys = np.linspace(-3,3,n)
+    
+    radius = 3/(n+2)
+    
+    for m,x in enumerate(xs):
+        for n,y in enumerate(ys):
+            if m >= n:
+                draw.circle_xy(x,y,radius,fc="black")
+            else:
+                draw.circle_xy(x,y,radius,fc="red")
 
 
 # centered_figurate(5,5)
 # figurate(5,5)
 show_primitive_pthyagorean_triples(100)
+sum_of_triangular(7)
