@@ -68,6 +68,49 @@ def show_primitive_pthyagorean_triples(n):
         draw.connection_p(pt3,pt1,alpha=.2)
 
 
+def pthyagorean_butterfly(hi,lo):
+    """
+    Butterfly pattern made using integer right triangles
+    """
+    
+    draw.make_blank_canvas([15,15],facecolor="lightgray")
+    draw.make_blank_plot(1,1,1,[-hi,hi],[-hi,hi])
+    
+    for T in primitive_pythagorean_triples():
+        if T[2] > hi:
+            break
+        
+        pt1 = (0,0)
+        pt2 = (T[2],0)
+        pt3 = (T[2],T[1])
+        
+        draw.connection_p(pt1,pt2,alpha=.2)
+        draw.connection_p(pt2,pt3,alpha=.2)
+        draw.connection_p(pt3,pt1,alpha=.2)
+        
+        pt2 = (-T[2],0)
+        pt3 = (-T[2],T[1])
+        
+        draw.connection_p(pt1,pt2,alpha=.2)
+        draw.connection_p(pt2,pt3,alpha=.2)
+        draw.connection_p(pt3,pt1,alpha=.2)
+        
+        if T[2] <= lo:
+            pt2 = (T[2],0)
+            pt3 = (T[2],-T[1])
+            
+            draw.connection_p(pt1,pt2,alpha=.2)
+            draw.connection_p(pt2,pt3,alpha=.2)
+            draw.connection_p(pt3,pt1,alpha=.2)
+            
+            pt2 = (-T[2],0)
+            pt3 = (-T[2],-T[1])
+            
+            draw.connection_p(pt1,pt2,alpha=.2)
+            draw.connection_p(pt2,pt3,alpha=.2)
+            draw.connection_p(pt3,pt1,alpha=.2)
+
+
 def sum_of_triangular(n):
     """
     Show that the sums of consecutive triangular numbers are square
@@ -92,5 +135,6 @@ def sum_of_triangular(n):
 
 # centered_figurate(5,5)
 # figurate(5,5)
-show_primitive_pthyagorean_triples(100)
-sum_of_triangular(7)
+# show_primitive_pthyagorean_triples(100)
+pthyagorean_butterfly(200,160)
+# sum_of_triangular(7)
