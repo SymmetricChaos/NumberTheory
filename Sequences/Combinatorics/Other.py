@@ -659,6 +659,31 @@ def lattice_language(k):
         yield from lattice_words(n,k)
 
 
+def sum_free_subsets(k):
+    """The sum-free subsets of the set {1...k}"""
+    
+    def is_sub_sum(S,n):
+        for s in S:
+            if n-s in S:
+                return True
+        return False
+    
+    def sum_free_recur(S,n):
+        
+        if n > k:
+            yield S
+        else:
+            
+            if not is_sub_sum(S,n):
+                yield from sum_free_recur(S+(n,),n+1)
+            
+            yield from sum_free_recur(S,n+1)
+    
+    yield from sum_free_recur((),1)
+
+
+
+
 
 
 
@@ -828,4 +853,10 @@ if __name__ == '__main__':
     # print("\nPartial Orders")
     # simple_test(partial_order(),6,
     #             "1, 1, 3, 19, 219, 4231, 130023, 6129859, 431723379")
+    
+    print("\nSum-Free Subsets of {1,2,3}")
+    simple_test(sum_free_subsets(7),50,
+                "(1,), (1, 1), (1, 2), (1, 1, 1), (1, 1, 2), (1, 2, 1)")
+    
+    print(len([i for i in sum_free_subsets(7)]))
     
