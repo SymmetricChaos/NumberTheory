@@ -28,8 +28,7 @@ from Sequences.Combinatorics.Factorials import factorials, \
 from Sequences.Combinatorics.Partitions import partitions, partition_count, \
        partition_ordering, equal_partitions, power_partitions, \
        even_goldbach_partitions, tribonnaci_partitions, composition_count, \
-       compositions, all_compositions, polite_partitions, politeness, \
-       multiplicative_partition, multiplicative_partitions
+       compositions, all_compositions, polite_partitions, politeness
 
 
 
@@ -69,6 +68,5 @@ __all__=[
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
          "tribonnaci_partitions","composition_count","compositions",
-         "all_compositions","polite_partitions","politeness",
-         "multiplicative_partition","multiplicative_partitions"
+         "all_compositions","polite_partitions","politeness"
          ]

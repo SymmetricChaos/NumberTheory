@@ -601,6 +601,48 @@ def compositorial():
     yield from prepend(1,partial_prods(composites()))
 
 
+# Potentially memoizeable
+def multiplicative_partition():
+    """
+    Multiplicative Partition Numbers: Number of sets of integers, not including one, that have a product of n\n
+    OEIS A001055
+    """
+    
+    def mul_part_recur(n,m=2):
+        F = [f for f in factors(n) if f >= m]
+        
+        if n == 1:
+            yield ()
+        
+        else:
+            for f in F:
+                for a in mul_part_recur(n//f,f):
+                    yield (f,) + a
+    
+    for n in naturals(1):
+        yield len([i for i in mul_part_recur(n)])
+
+
+def multiplicative_partitions(n):
+    """
+    Multiplicative Partitions: Sets of integers, not including one, that have a product of n, in lexicographic order\n
+    Finite generator
+    """
+    
+    def mul_part_recur(n,m=2):
+        F = [f for f in factors(n) if f >= m]
+        
+        if n == 1:
+            yield ()
+        
+        else:
+            for f in F:
+                for a in mul_part_recur(n//f,f):
+                    yield (f,) + a
+    
+    yield from mul_part_recur(n)
+
+
 
 
 
@@ -722,4 +764,12 @@ if __name__ == '__main__':
     print("\nEven Composites")
     simple_test(even_composites(),14,
                 "4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30")
+    
+    print("\nMultiplicative Partitions")
+    simple_test(multiplicative_partition(),18,
+                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
+    
+    print("\nMultiplicative Partitions of 60")
+    simple_test(multiplicative_partitions(60),11,
+                "(2, 2, 3, 5), (2, 2, 15), (2, 3, 10), (2, 5, 6), (2, 30), (3, 4, 5), (3, 20), (4, 15), (5, 12), (6, 10), (60,)")
     

@@ -6,7 +6,8 @@ from Sequences.Divisibility.Other import smooth, rough, highly_composite, \
                                    principal_character, p_adic_order, \
                                    liouville, liouville_sums, blum, blum_blum_shub_integers, \
                                    semiprimes, almost_primes, all_divisors, composites, \
-                                   compositorial, nonprime, noncomposite, even_composites
+                                   compositorial, nonprime, noncomposite, even_composites, \
+                                   multiplicative_partition, multiplicative_partitions
 
 from Sequences.Divisibility.Aliquot import aliquot, abundant, deficient, perfect, aliquot_recurrence, \
                               abundance, deficiency, untouchable, pseudoperfect, \
@@ -45,6 +46,7 @@ __all__=[
          "p_adic_order","liouville","liouville_sums","blum","almost_primes",
          "blum_blum_shub_integers","all_divisors","composites","compositorial",
          "odd_composites","nonprime","noncomposite","even_composites",
+         "multiplicative_partition","multiplicative_partitions",
          
          #PRIME
          "primes","primorial","prime_counting","pythagorean_primes",
