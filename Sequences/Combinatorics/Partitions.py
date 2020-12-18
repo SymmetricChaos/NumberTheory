@@ -3,7 +3,7 @@ from Sequences.Simple import naturals, powers, evens
 from Sequences.Divisibility import primes
 from Sequences.Recurrence import tribonacci
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import factors, nontrivial_factors
+from Sequences.MathUtils import factors
 
 from math import prod
 from sympy import prime
@@ -284,7 +284,7 @@ def multiplicative_partition():
 
 def multiplicative_partitions(n):
     """
-    Multiplicative Partitions: Sets of integers, not including one, that have a product of n\n
+    Multiplicative Partitions: Sets of integers, not including one, that have a product of n, in lexicographic order\n
     Finite generator
     """
     
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     simple_test(multiplicative_partition(),18,
                 "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
     
-    print("\nMultiplicative Partitions of 12")
-    simple_test(multiplicative_partitions(12),14,
-                "(2, 2, 3), (2, 6), (3, 4), (12,)")
+    print("\nMultiplicative Partitions of 60")
+    simple_test(multiplicative_partitions(60),11,
+                "(2, 2, 3, 5), (2, 2, 15), (2, 3, 10), (2, 5, 6), (2, 30), (3, 4, 5), (3, 20), (4, 15), (5, 12), (6, 10), (60,)")
     
