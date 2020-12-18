@@ -1,4 +1,4 @@
-from Sequences.MathUtils import nontrivial_factors, all_subsets, poly_eval
+from Sequences.MathUtils import all_subsets, poly_eval
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
 from Sequences.Manipulations import make_triangle
@@ -21,7 +21,7 @@ def catalan():
 
 def co_catalan():
     """
-    Co-Catalan Numbers: Number of illegal options in many counting problems address by Catalan numbers\n
+    Co-Catalan Numbers: Number of illegal options in many counting problems addressed by Catalan numbers\n
     OEIS A001791
     """
     
@@ -66,7 +66,7 @@ def pascal_triangle():
 # Find a more efficient way to do this
 def central_binomial():
     """
-    Central Binomial Coefficients: Middle term of the odd rows of Pascal's Triangle
+    Central Binomial Coefficients: Middle term of the odd rows of Pascal's Triangle\n
     OEIS A000984
     """
     
@@ -174,36 +174,6 @@ def cake():
     
     for n in naturals():
         yield (n*n*n+5*n+6)//6
-
-
-# Potentially memoizeable
-def multiplicative_partition():
-    """
-    Multiplicative Partition Numbers: Sets of integers, not including one, that have a product of n\n
-    OEIS A001055
-    """
-    
-    def all_factorizations_inner(n,m=1):
-        F = [f for f in nontrivial_factors(n) if f >= m]
-        
-        if len(F) == 0:
-            yield [n]
-        
-        else:
-            for f in F:
-                for a in all_factorizations_inner(n//f,f):
-                    yield [f] + a
-    
-    def num_factorizations(n):
-        S = set([(n,)])
-        
-        for i in all_factorizations_inner(n):
-            S.add(tuple(sorted(i)))
-        
-        return len(S)
-    
-    for n in naturals(1):
-        yield num_factorizations(n)
 
 
 def natural_subsets(index=0):
@@ -660,7 +630,10 @@ def lattice_language(k):
 
 
 def sum_free_subsets(k):
-    """The sum-free subsets of the set {1...k} in lexicographic order"""
+    """
+    The sum-free subsets of the set {1...k} in lexicographic order\n
+    Finite generator
+    """
     
     def is_sub_sum(S,n):
         for s in S:
@@ -673,12 +646,10 @@ def sum_free_subsets(k):
             return None
         else:
             yield S
-            
             if not is_sub_sum(S,n):
                 for s in sum_free_recur(S+(n,),n+1):
                     if s != S:
                         yield s
-            
             for s in sum_free_recur(S,n+1):
                 if s != S:
                     yield s
@@ -686,6 +657,29 @@ def sum_free_subsets(k):
     yield from sum_free_recur((),1)
 
 
+# Memory efficient method?
+def all_sum_free_subsets():
+    """
+    The sum-free subsets of the naturals in colexicographic order
+    """
+    
+    S = set()
+    
+    for n in naturals():
+        for i in sum_free_subsets(n):
+            if i not in S:
+                yield i
+                S.add(i)
+
+
+def sum_free_subset():
+    """
+    The number of sum-free subsets of the set {1...n} for all naturals n
+    OEIS A007865
+    """
+    
+    for n in naturals():
+        yield len([i for i in sum_free_subsets(n)])
 
 
 
@@ -741,10 +735,6 @@ if __name__ == '__main__':
     print("\nCake Numbers")
     simple_test(cake(),13,
                 "1, 2, 4, 8, 15, 26, 42, 64, 93, 130, 176, 232, 299")
-    
-    print("\nMultiplicative Partitions")
-    simple_test(multiplicative_partition(),18,
-                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
     
     print("\nAll Subsets of Natural Numbers")
     simple_test(natural_subsets(),7,
@@ -857,3 +847,12 @@ if __name__ == '__main__':
     print("\nSum-Free Subsets of {1,2,3,4,5}")
     simple_test(sum_free_subsets(5),8,
                 "(), (1,), (1, 3), (1, 3, 5), (1, 4), (1, 5), (2,), (2, 3)")
+    
+    print("\nSum-Free Subsets of the Naturals")
+    simple_test(all_sum_free_subsets(),9,
+                "(), (1,), (2,), (1, 3), (2, 3), (3,), (1, 4), (3, 4), (4,)")
+    
+    print("\nSum-Free Subset Numbers")
+    simple_test(sum_free_subset(),14,
+                "1, 2, 3, 6, 9, 16, 24, 42, 61, 108, 151, 253, 369, 607")
+    

@@ -3,7 +3,7 @@ from Sequences.Simple import naturals, powers, evens
 from Sequences.Divisibility import primes
 from Sequences.Recurrence import tribonacci
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import factors
+from Sequences.MathUtils import factors, nontrivial_factors
 
 from math import prod
 from sympy import prime
@@ -260,6 +260,48 @@ def all_compositions():
         yield from compositions(n)
 
 
+# Potentially memoizeable
+def multiplicative_partition():
+    """
+    Multiplicative Partition Numbers: Number of sets of integers, not including one, that have a product of n\n
+    OEIS A001055
+    """
+    
+    def mul_part_recur(n,m=2):
+        F = [f for f in factors(n) if f >= m]
+        
+        if n == 1:
+            yield ()
+        
+        else:
+            for f in F:
+                for a in mul_part_recur(n//f,f):
+                    yield (f,) + a
+    
+    for n in naturals(1):
+        yield len([i for i in mul_part_recur(n)])
+
+
+def multiplicative_partitions(n):
+    """
+    Multiplicative Partitions: Sets of integers, not including one, that have a product of n\n
+    Finite generator
+    """
+    
+    def mul_part_recur(n,m=2):
+        F = [f for f in factors(n) if f >= m]
+        
+        if n == 1:
+            yield ()
+        
+        else:
+            for f in F:
+                for a in mul_part_recur(n//f,f):
+                    yield (f,) + a
+    
+    yield from mul_part_recur(n)
+
+
 
 
 
@@ -317,4 +359,12 @@ if __name__ == '__main__':
     print("\nPoliteness of Each Natural")
     simple_test(politeness(),18,
                 "0, 0, 1, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 3, 0, 1, 2")
+    
+    print("\nMultiplicative Partitions")
+    simple_test(multiplicative_partition(),18,
+                "1, 1, 1, 2, 1, 2, 1, 3, 2, 2, 1, 4, 1, 2, 2, 5, 1, 4")
+    
+    print("\nMultiplicative Partitions of 12")
+    simple_test(multiplicative_partitions(12),14,
+                "(2, 2, 3), (2, 6), (3, 4), (12,)")
     

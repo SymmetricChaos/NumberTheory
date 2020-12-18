@@ -1,5 +1,5 @@
 from Sequences.Combinatorics.Other import catalan, pascal, \
-       eulerian, bell, gould, lazy_caterer, cake, multiplicative_partition, \
+       eulerian, bell, gould, lazy_caterer, cake, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
        eulerian_triangle, dyck_words, dyck_language, dyck_words_str, \
        dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
@@ -7,7 +7,8 @@ from Sequences.Combinatorics.Other import catalan, pascal, \
        central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
        lobb_words, lobb_words_str, co_catalan, fuss_catalan, set_partitions, \
        ordered_set_partitions, lattice_words, lattice_language, \
-       motzkin_chords, sum_free_subsets
+       motzkin_chords, sum_free_subsets, all_sum_free_subsets, \
+       sum_free_subset
        
 from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        all_permutations, derangement, derangements, even_permutation, \
@@ -27,7 +28,8 @@ from Sequences.Combinatorics.Factorials import factorials, \
 from Sequences.Combinatorics.Partitions import partitions, partition_count, \
        partition_ordering, equal_partitions, power_partitions, \
        even_goldbach_partitions, tribonnaci_partitions, composition_count, \
-       compositions, all_compositions, polite_partitions, politeness
+       compositions, all_compositions, polite_partitions, politeness, \
+       multiplicative_partition, multiplicative_partitions
 
 
 
@@ -45,7 +47,7 @@ __all__=[
          "lobb","lobb_triangle","lobb_words","lobb_words_str","co_catalan",
          "fuss_catalan","set_partitions","ordered_set_partitions",
          "lattice_words","lattice_language","motzkin_chords",
-         "sum_free_subsets",
+         "sum_free_subsets","all_sum_free_subsets","sum_free_subset",
          
          #COMBINATIONS AND PERMUTATIONS
          "permutations","combinations","derangements","all_permutations",
@@ -67,5 +69,6 @@ __all__=[
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
          "tribonnaci_partitions","composition_count","compositions",
-         "all_compositions","polite_partitions","politeness"
+         "all_compositions","polite_partitions","politeness",
+         "multiplicative_partition","multiplicative_partitions"
          ]
