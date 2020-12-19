@@ -172,6 +172,17 @@ def mosner():
         yield cur
 
 
+def primitive_optic_triples():
+    """
+    Triples of positive integer a,b,c such that 1/a + 1/b = 1/c
+    """
+    
+    for m in naturals(1):
+        for n in range(1,m):
+            if gcd(m,n) == 1:
+                yield (m*(m+n), n*(m+n), m*n)
+
+
 
 
 
@@ -208,5 +219,9 @@ if __name__ == '__main__':
     
     print("\nMosner")
     simple_test(mosner(),13,
+                "1, 2, 4, 8, 16, 31, 57, 99, 163, 256, 386, 562, 794")
+    
+    print("\nPrimitive Optic Triples")
+    simple_test(primitive_optic_triples(),13,
                 "1, 2, 4, 8, 16, 31, 57, 99, 163, 256, 386, 562, 794")
     
