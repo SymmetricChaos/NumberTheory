@@ -222,6 +222,6 @@ if __name__ == '__main__':
                 "1, 2, 4, 8, 16, 31, 57, 99, 163, 256, 386, 562, 794")
     
     print("\nPrimitive Optic Triples")
-    simple_test(primitive_optic_triples(),13,
-                "1, 2, 4, 8, 16, 31, 57, 99, 163, 256, 386, 562, 794")
+    simple_test(primitive_optic_triples(),4,
+                "(6, 3, 2), (12, 4, 3), (15, 10, 6), (20, 5, 4)")
     
