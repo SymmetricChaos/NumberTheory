@@ -174,7 +174,7 @@ def mosner():
 
 def primitive_optic_triples():
     """
-    Triples of positive integer a,b,c such that 1/a + 1/b = 1/c
+    Triples of positive integers a,b,c such that 1/a + 1/b = 1/c
     """
     
     for m in naturals(1):

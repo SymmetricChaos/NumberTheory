@@ -344,6 +344,25 @@ def taylor_convergents(A,c=0,x=0):
         yield poly_eval(P,x)
 
 
+def gobel(k=2):
+    """
+    Göbel's Sequence: Each term is the sum of the kth powers of the previous term divided by the index
+    """
+    
+    require_integers(["k"],[k])
+    require_geq(["k"],[k],2)
+    
+    L = [1,1]
+    yield from L
+    
+    for n in naturals(1):
+        x = Fraction(sum(L),n)
+        
+        yield x
+        
+        L.append(x**k)
+
+
 
 
 
@@ -418,4 +437,8 @@ if __name__ == '__main__':
     print("\nNewton Convergents of Cube Root of 2")
     simple_test(newton_root(2,3),4,
                 "1, 4/3, 91/72, 1126819/894348")
+    
+    print("\nGöbel's Sequence (noninteger at term 43)")
+    simple_test(gobel(),10,
+                "1, 1, 2, 3, 5, 10, 28, 154, 3520, 1551880")
     
