@@ -635,6 +635,7 @@ def sum_free_subsets(k):
     Finite generator
     """
     
+    # Check if n is a sum of any two (possibly equal) elements of S
     def is_sub_sum(S,n):
         for s in S:
             if n-s in S:
@@ -645,11 +646,16 @@ def sum_free_subsets(k):
         if n > k+1:
             return None
         else:
+            # Give S at each step to make sure we get intermediate sets not
+            # just the longest ones
             yield S
+            # If n cannot be written as a sum of elements of S recur on S with
+            # n included
             if not is_sub_sum(S,n):
                 for s in sum_free_recur(S+(n,),n+1):
                     if s != S:
                         yield s
+            # Always recur on S without n included
             for s in sum_free_recur(S,n+1):
                 if s != S:
                     yield s
