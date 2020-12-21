@@ -287,6 +287,25 @@ def triple_factorial():
         a,b,c = b,c,n*a
 
 
+def fibonorial():
+    """
+    Partial products of the (non-zero) Fibonacci numbers\n
+    OEIS A003266
+    """
+    
+    a,b = 1,1
+    P = 1
+    
+    yield 1
+    
+    while True:
+        yield P
+        
+        a,b = b,a+b
+        
+        P *= a
+
+
 
 
 
@@ -360,4 +379,9 @@ if __name__ == '__main__':
     print("\nTriple Factorial")
     simple_test(triple_factorial(),12,
                 "3, 4, 10, 18, 28, 80, 162, 280, 880, 1944, 3640, 12320")
+    
+    print("\nFibonorial")
+    simple_test(fibonorial(),11,
+                "1, 1, 1, 2, 6, 30, 240, 3120, 65520, 2227680, 122522400")
+    
     

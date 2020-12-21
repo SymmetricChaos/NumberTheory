@@ -649,7 +649,7 @@ if __name__ == '__main__':
     simple_test(tribonnaci_words(),4,
                 "(0,), (0, 1), (0, 1, 0, 2), (0, 1, 0, 2, 0, 1, 0)")
     
-    print("\nLogistic Word")
+    print("\nLogistic Map with x=1/3 and r=1/2")
     simple_test(logistic_map(Fraction(1,3),Fraction(1,2)),5,
                 "1/3, 1/9, 4/81, 154/6561, 493339/43046721")
     
