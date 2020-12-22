@@ -362,6 +362,33 @@ def gobel(k=2):
         
         L.append(x**k)
 
+def leibniz_harmonic_triangle(flatten=False):
+    """
+    Leibniz's Harmonic Triangle: Each term is the sum of the two below\n
+    
+    Args:
+        flatten -- boolean, if True returns one number at a time top to bottom left to right, otherwise returns on row at a time
+    
+    A003506
+    """
+    
+    if flatten:
+        for row in leibniz_harmonic_triangle(flatten=False):
+            yield from row
+    else:
+        row = [1]
+        
+        for n in naturals(2):
+            yield tuple(row)
+            
+            new_row = [Fraction(1,n)]
+            
+            for term in row:
+                new_row.append(term-new_row[-1])
+            
+            row = new_row
+
+
 
 
 
@@ -441,4 +468,9 @@ if __name__ == '__main__':
     print("\nGöbel's Sequence (noninteger at term 43)")
     simple_test(gobel(),10,
                 "1, 1, 2, 3, 5, 10, 28, 154, 3520, 1551880")
+    
+    print("\nLeibniz's Harmonic Triangle")
+    simple_test(_pretty_fracs_tuple(leibniz_harmonic_triangle()),4,
+                "1, 1, 2, 3, 5, 10, 28, 154, 3520, 1551880")
+    
     

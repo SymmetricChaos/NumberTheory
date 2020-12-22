@@ -267,7 +267,8 @@ def factoradic(full=False):
 
 def factorial_chain_length():
     """
-    Smallest number of factorials needed to sum to n
+    Smallest number of factorials needed to sum to n\n
+    OEIS A034968
     """
     
     for i in factoradic():
@@ -276,7 +277,7 @@ def factorial_chain_length():
 
 def triple_factorial():
     """
-    Triple Factorial: Version of 
+    Triple Factorial\n
     OEIS A007661
     """
     

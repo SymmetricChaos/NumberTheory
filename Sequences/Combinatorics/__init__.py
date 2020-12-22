@@ -1,10 +1,10 @@
-from Sequences.Combinatorics.Other import catalan, pascal, \
-       eulerian, bell, gould, lazy_caterer, cake, \
+from Sequences.Combinatorics.Other import catalan, \
+       bell, gould, lazy_caterer, cake, \
        central_binomial, natural_subsets, combinadic, pascal_triangle, \
        eulerian_triangle, dyck_words, dyck_language, dyck_words_str, \
-       dyck_language_str, naranya, naranya_triangle, schroder_hipparchus, \
-       schroder, motzkin, motzkin_paths, delannoy, delannoy_triangle, \
-       central_delannoy,wedderburn_etherington, lobb, lobb_triangle, \
+       dyck_language_str, naranya_triangle, schroder_hipparchus, \
+       schroder, motzkin, motzkin_paths, delannoy_triangle, \
+       central_delannoy,wedderburn_etherington, lobb_triangle, \
        lobb_words, lobb_words_str, co_catalan, fuss_catalan, set_partitions, \
        ordered_set_partitions, lattice_words, lattice_language, \
        motzkin_chords, sum_free_subsets, all_sum_free_subsets, \
@@ -36,14 +36,14 @@ from Sequences.Combinatorics.Partitions import partitions, partition_count, \
 
 __all__=[
          #COMBINATORICS
-         "catalan","derangement","pascal","eulerian","bell","pascal_triangle",
+         "catalan","derangement","bell","pascal_triangle",
          "gould","even_permutation","lazy_caterer","cake","eulerian_triangle",
          "multiplicative_partition","central_binomial","natural_subsets",
          "combinadic","dyck_words","dyck_language","dyck_words_str",
-         "dyck_language_str","naranya","naranya_triangle","schroder",
-         "schroder_hipparchus","motzkin_paths","motzkin","delannoy",
+         "dyck_language_str","naranya_triangle","schroder",
+         "schroder_hipparchus","motzkin_paths","motzkin",
          "delannoy_triangle","central_delannoy","wedderburn_etherington",
-         "lobb","lobb_triangle","lobb_words","lobb_words_str","co_catalan",
+         "lobb_triangle","lobb_words","lobb_words_str","co_catalan",
          "fuss_catalan","set_partitions","ordered_set_partitions",
          "lattice_words","lattice_language","motzkin_chords",
          "sum_free_subsets","all_sum_free_subsets","sum_free_subset",

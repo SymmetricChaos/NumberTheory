@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals
-from Sequences.Combinatorics.Other import pascal
+from Sequences.Combinatorics.Other import pascal_triangle
 from Sequences.Combinatorics.PermutationUtils import permutation_cycle, perm_to_pattern
 from Sequences.Manipulations import sequence_slice
 from Sequences.MathUtils import sign_of
@@ -555,7 +555,7 @@ def recontres():
     OEIS A008290
     """
     
-    P = pascal()
+    P = pascal_triangle(flatten=True)
     dr = derangement()
     D = []
     

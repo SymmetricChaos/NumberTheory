@@ -2,7 +2,7 @@ from Sequences.Simple import naturals
 from Sequences.MathUtils import factor_out_twos
 from Sequences.Recurrence import tribonacci
 from Sequences.Manipulations import offset, make_triangle, sequence_apply
-from Sequences.Combinatorics import pascal
+from Sequences.Combinatorics import pascal_triangle
 
 from itertools import cycle
 
@@ -290,7 +290,7 @@ def sierpinski_triangle(invert=False):
     
     D = {0:1, 1:0}
     
-    for row in make_triangle(sequence_apply(pascal(),lambda x: x%2)):
+    for row in make_triangle(sequence_apply(pascal_triangle(flatten=True),lambda x: x%2)):
         if invert:
             yield tuple([D[i] for i in row])
         
@@ -374,7 +374,7 @@ if __name__ == '__main__':
                 "(1,), (1, 1), (1, 0, 1), (1, 1, 1, 1), (1, 0, 0, 0, 1)")
     
     print("\nLindenmayer's Original L-System")
-    simple_test(lindenmayer_words(invert=True),4,
+    simple_test(lindenmayer_words(),4,
                 "(0,), (0, 1), (0, 1, 0), (0, 1, 0, 0, 1)")
     
     

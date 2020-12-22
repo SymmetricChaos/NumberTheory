@@ -1,7 +1,6 @@
 from Sequences.MathUtils import all_subsets, poly_eval
 from Sequences.Combinatorics.PermutationUtils import int_to_comb
 from Sequences.Simple import naturals
-from Sequences.Manipulations import make_triangle
 from Sequences.NiceErrorChecking import require_geq, require_integers
 
 from math import comb
@@ -34,33 +33,29 @@ def co_catalan():
 # times faster than calculating the binomial coefficients directly on my
 # machine
 # There is probably a way to do this is place
-def pascal():
+def pascal_triangle(flatten=False):
     """
     Pascal's Triangle: Number triangle with binomial coefficients\n
     OEIS A007318
     """
     
-    L = [1,0]
+    if flatten:
+        for row in pascal_triangle():
+            yield from row
     
-    while True:
-        T = [0]
+    else:
+        L = [1,0]
         
-        for i in range(len(L)-1):
-            x = L[i]+L[i+1]
-            T.append(x)
-            yield x
-        
-        T.append(0)
-        L = T
-
-
-def pascal_triangle():
-    """
-    Pascal's Triangle by Rows\n
-    OEIS A007318
-    """
-    
-    yield from make_triangle(pascal())
+        while True:
+            T = [0]
+            
+            for i in range(len(L)-1):
+                x = L[i]+L[i+1]
+                T.append(x)
+            
+            T.append(0)
+            yield tuple(T[1:-1])
+            L = T
 
 
 # Find a more efficient way to do this
@@ -80,48 +75,36 @@ def gould():
     OEIS A001316
     """
     
-    P = pascal()
-    
-    for n in naturals(1):
-        val = 0
-        
-        for i in range(n):
-            if next(P) % 2 == 1:
-                val += 1
-        
-        yield val
+    for row in pascal_triangle():
+        yield sum([i%2 for i in row])
 
 
 # As with Pascal's triangle I found this memoized version to be vastly faster
 # than directly calculating the values, which involved both binomial
 # coefficients and exponentiation
-def eulerian():
+def eulerian_triangle(flatten=False):
     """
     Eulerian Triangle: Triangle with number of permutations of a set with n elements where there are m increases\n
     OEIS A008292
     """
     
-    L = [1,0]
+    if flatten:
+        for row in eulerian_triangle():
+            yield from row
     
-    for a in naturals(1):
-        T = []
+    else:
+        L = [1,0]
         
-        for b in range(a):
-            x = (a-b)*L[b-1] + (b+1)*L[b]
-            T.append(x)
-            yield x
-        
-        T.append(0)
-        L = T
-
-
-def eulerian_triangle():
-    """
-    Eulerian Triangle by Rows\n
-    OEIS A007318
-    """
-    
-    yield from make_triangle(eulerian())
+        for a in naturals(1):
+            T = []
+            
+            for b in range(a):
+                x = (a-b)*L[b-1] + (b+1)*L[b]
+                T.append(x)
+            
+            T.append(0)
+            yield tuple(T[:-1])
+            L = T
 
 
 def bell():
@@ -259,24 +242,22 @@ def dyck_language_str():
         yield from dyck_words_str(n)
 
 
-def naranya():
+def naranya_triangle(flatten=False):
     """
     Triangle of Naranya Numbers: Number of Dyck words of order n with k peaks\n
     OEIS A001263
     """
     
-    for n in naturals(1):
-        for k in range(1,n+1):
-            yield (comb(n,k)*comb(n,k-1))//n
-
-
-def naranya_triangle():
-    """
-    Naranya's Triangle by Rows, sums are the Catalan numbers\n
-    OEIS A001263
-    """
+    if flatten:
+        for row in naranya_triangle():
+            yield from row
     
-    yield from make_triangle(naranya())
+    else:
+        for n in naturals(1):
+            T = []
+            for k in range(1,n+1):
+                T.append ( (comb(n,k)*comb(n,k-1))//n )
+            yield tuple(T)
 
 
 def schroder():
@@ -374,36 +355,30 @@ def motzkin_chords(n,index=0):
         yield tuple(pairs)
 
 
-def delannoy():
+def delannoy_triangle(flatten=False):
     """
     Triangle of Delannoy Numbers\n
     OEIS A008288
     """
     
-    yield 1
-    
-    R1 = [0,0]
-    R2 = [0,1,0]
-    
-    while True:
-        T = [0]
+    if flatten:
+        for row in delannoy_triangle():
+            yield from row
+    else:
+        R1 = [0,0]
+        R2 = [0,1,0]
         
-        for i in range(len(R2)-1):
-            x = R2[i]+R2[i+1]+R1[i]
-            T.append(x)
-            yield x
-        
-        T.append(0)
-        R1, R2 = R2, T
-
-
-def delannoy_triangle():
-    """
-    Delannoy Triangle By Rows\n
-    OEIS A008288
-    """
-    
-    yield from make_triangle(delannoy())
+        while True:
+            T = [0]
+            
+            for i in range(len(R2)-1):
+                x = R2[i]+R2[i+1]+R1[i]
+                T.append(x)
+            
+            yield tuple(R2[1:-1])
+            
+            T.append(0)
+            R1, R2 = R2, T
 
 
 def central_delannoy():
@@ -447,24 +422,23 @@ def wedderburn_etherington():
         S.append(t)
 
 
-def lobb():
-    """
-    Lobb Numbers: Valid prefixes for matched parentheses with m+n left brackets and m-n right brackets\n
-    OEIS A039599
-    """
-    
-    for m in naturals():
-        for n in range(m+1):
-            yield (2*n+1)*comb(2*m,m+n)//(m+n+1)
-
-
-def lobb_triangle():
+def lobb_triangle(flatten=False):
     """
     Lobb Triangle by Rows\n
     OEIS A039599
     """
     
-    yield from make_triangle(lobb())
+    if flatten:
+        for row in lobb_triangle():
+            yield from row
+    else:
+        for m in naturals():
+            T = []
+            
+            for n in range(m+1):
+                T.append( (2*n+1)*comb(2*m,m+n)//(m+n+1) )
+            
+            yield tuple(T)
 
 
 def lobb_words(m,n):
@@ -702,13 +676,9 @@ if __name__ == '__main__':
     simple_test(co_catalan(),11,
                 "0, 1, 4, 15, 56, 210, 792, 3003, 11440, 43758, 167960")
     
-    print("\nPascal's Triangle")
-    simple_test(pascal(),18,
-                "1, 1, 1, 1, 2, 1, 1, 3, 3, 1, 1, 4, 6, 4, 1, 1, 5, 10")
-    
     print("\nPascal's Triangle by Rows")
-    simple_test(pascal_triangle(),4,
-                "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1)")
+    simple_test(pascal_triangle(),5,
+                "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1), (1, 4, 6, 4, 1)")
     
     print("\nCentral Binomial Coefficients")
     simple_test(central_binomial(),11,
@@ -717,10 +687,6 @@ if __name__ == '__main__':
     print("\nGould's Sequence")
     simple_test(gould(),18,
                 "1, 2, 2, 4, 2, 4, 4, 8, 2, 4, 4, 8, 4, 8, 8, 16, 2, 4")
-    
-    print("\nEulerian Triangle")
-    simple_test(eulerian(),16,
-                "1, 1, 1, 1, 4, 1, 1, 11, 11, 1, 1, 26, 66, 26, 1, 1")
     
     print("\nEulerian Triangle by Rows")
     simple_test(eulerian_triangle(),4,
@@ -750,10 +716,6 @@ if __name__ == '__main__':
     simple_test(combinadic(2),7,
                 "(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2), (4, 0)")
     
-    print("\nPascal's Triangle by Rows")
-    simple_test(pascal_triangle(),5,
-                "(1,), (1, 1), (1, 2, 1), (1, 3, 3, 1), (1, 4, 6, 4, 1)")
-    
     print("\nDyck Words of Order 4")
     simple_test(dyck_words_str(4),5,
                 "(((()))), ((()())), ((())()), ((()))(), (()(()))")
@@ -769,10 +731,6 @@ if __name__ == '__main__':
     print("\nDyck Language (numeric)")
     simple_test(dyck_language(),3,
                 "(1, -1), (1, 1, -1, -1), (1, -1, 1, -1)")
-    
-    print("\nNaranya's Triangle")
-    simple_test(naranya(),16,
-                "1, 1, 1, 1, 3, 1, 1, 6, 6, 1, 1, 10, 20, 10, 1, 1")
     
     print("\nNaranya's Triangle By Rows")
     simple_test(naranya_triangle(),4,
@@ -798,10 +756,6 @@ if __name__ == '__main__':
     simple_test(motzkin_chords(5),4,
                 "(), ((0, 1),), ((0, 1), (2, 3)), ((0, 1), (2, 4))")
     
-    print("\nDelannoy")
-    simple_test(delannoy(),18,
-                "1, 1, 1, 1, 3, 1, 1, 5, 5, 1, 1, 7, 13, 7, 1, 1, 9, 25")
-    
     print("\nDelannoy Triangle")
     simple_test(delannoy_triangle(),4,
                 "(1,), (1, 1), (1, 3, 1), (1, 5, 5, 1)")
@@ -813,10 +767,6 @@ if __name__ == '__main__':
     print("\nWedderburn-Etherington Numbers")
     simple_test(wedderburn_etherington(),13,
                 "0, 1, 1, 1, 2, 3, 6, 11, 23, 46, 98, 207, 451")
-    
-    print("\nLobb Numbers")
-    simple_test(lobb(),17,
-                "1, 1, 1, 2, 3, 1, 5, 9, 5, 1, 14, 28, 20, 7, 1, 42, 90")
     
     print("\nLobb Triangle")
     simple_test(lobb_triangle(),4,
