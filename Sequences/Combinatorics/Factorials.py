@@ -1,4 +1,4 @@
-from Sequences.Manipulations import offset, make_triangle
+from Sequences.Manipulations import offset
 from Sequences.Simple import naturals, sign_sequence
 from Sequences.MathUtils import poly_mult
 from Sequences.Divisibility import primes
@@ -149,51 +149,42 @@ def even_double_factorials():
         even = even*even_ctr
 
 
-def rising_factorial():
+def rising_factorial_triangle(flatten=False):
     """
     Coefficients of the Polynomial Expansions of the Rising Factorials\n
     OEIS A132393
     """
     
-    P = [1]
-    
-    for n in naturals(0):
-        for i in P:
-            yield i
+    if flatten:
+        for row in rising_factorial_triangle():
+            yield from row
+            
+    else:
+        P = [1]
         
-        P = poly_mult(P,[n,1])
+        for n in naturals(0):
+            yield tuple(P)
+            
+            P = poly_mult(P,[n,1])
 
 
-def rising_factorial_triangle():
-    """
-    Triangle of Coefficients of the Polynomial Expansions of the Rising Factorials\n
-    OEIS A132393
-    """
-    
-    yield from make_triangle(rising_factorial())
-
-
-def falling_factorial():
+def falling_factorial_triangle(flatten=False):
     """
     Coefficients of the Polynomial Expansions of the Falling Factorials\n
     OEIS A048994
     """
-    P = [1]
     
-    for n in naturals(0):
-        for i in P:
-            yield i
+    if flatten:
+        for row in falling_factorial_triangle():
+            yield from row
+            
+    else:
+        P = [1]
         
-        P = poly_mult(P,[-n,1])
-
-
-def falling_factorial_triangle():
-    """
-    Triangle of Coefficients of the Polynomial Expansions of the Falling Factorials\n
-    OEIS A132393
-    """
-    
-    yield from make_triangle(falling_factorial())
+        for n in naturals(0):
+            yield tuple(P)
+            
+            P = poly_mult(P,[-n,1])
 
 
 def wilson():
@@ -341,20 +332,12 @@ if __name__ == '__main__':
     simple_test(even_double_factorials(),9,
                 "1, 2, 8, 48, 384, 3840, 46080, 645120, 10321920")
     
-    print("\nRising Factorials")
-    simple_test(rising_factorial(),17,
-                "1, 0, 1, 0, 1, 1, 0, 2, 3, 1, 0, 6, 11, 6, 1, 0, 24")
-    
     print("\nTriangle of Rising Factorials")
-    simple_test(rising_factorial_triangle(),4,
+    simple_test(rising_factorial_triangle(),5,
                 "(1,), (0, 1), (0, 1, 1), (0, 2, 3, 1)")
     
-    print("\nFalling Factorials")
-    simple_test(falling_factorial(),16,
-                "1, 0, 1, 0, -1, 1, 0, 2, -3, 1, 0, -6, 11, -6, 1, 0")
-    
     print("\nTriangle of Falling Factorials")
-    simple_test(falling_factorial_triangle(),4,
+    simple_test(falling_factorial_triangle(),5,
                 "(1,), (0, 1), (0, -1, 1), (0, 2, -3, 1)")
     
     print("\nWilson's Sequence")

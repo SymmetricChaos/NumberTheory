@@ -22,7 +22,7 @@ from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
        double_factorials, even_double_factorials, odd_double_factorials, \
        superfactorials, left_factorials, factoradic, triple_factorial, \
-       falling_factorial, falling_factorial_triangle, rising_factorial, \
+       falling_factorial_triangle, \
        rising_factorial_triangle, fibonorial
 
 from Sequences.Combinatorics.Partitions import partitions, partition_count, \
@@ -60,8 +60,8 @@ __all__=[
          "factorials","alternating_factorials_1","alternating_factorials_2",
          "kempner","double_factorials","even_double_factorials",
          "odd_double_factorials","superfactorials", "left_factorials",
-         "factoradic","triple_factorial","falling_factorial",
-         "falling_factorial_triangle","rising_factorial",
+         "factoradic","triple_factorial",
+         "falling_factorial_triangle",
          "rising_factorial_triangle","fibonorial",
          
          #PARTITIONS

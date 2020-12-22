@@ -38,9 +38,8 @@ def partition_count():
 
 def partitions(n):
     """
-    Partitions of n in canonical (reverse lexicographic) order
+    Partitions of n in canonical (reverse lexicographic) order\n
     Finite generator
-    OEIS
     """
     
     if n == 0:
@@ -98,7 +97,7 @@ def equal_partitions(n):
 
 def power_partitions(n,k):
     """
-    Partitions of n into powers of k in reverse lexicographic order
+    Partitions of n into powers of k in reverse lexicographic order\n
     Finite generator
     """
     
@@ -130,7 +129,7 @@ def power_partitions(n,k):
 
 def polite_partitions(n):
     """
-    Partitions of n into sums of at least two consecutive naturals
+    Partitions of n into sums of at least two consecutive naturals\n
     Finite generator
     """
     
@@ -148,7 +147,7 @@ def polite_partitions(n):
 
 def politeness():
     """
-    Number of polite partitions of each integer. The number of odd factors excluding 1.\n
+    Number of polite partitions of each integer\n
     OEIS A069283
     """
     
@@ -204,7 +203,7 @@ def tribonnaci_partitions():
 
 def composition_count():
     """
-    Number of compositions (ordered partition) for each natural (2**(n-1) for n > 0)
+    Number of compositions (ordered partition) for each natural (2**(n-1) for n > 0)\n
     OEIS A011782
     """
     
@@ -216,7 +215,7 @@ def composition_count():
 
 def compositions(n):
     """
-    All of the compositions (ordered partitions) of n
+    All of the compositions (ordered partitions) of n\n
     Finite generator
     """
     
@@ -252,15 +251,12 @@ def compositions(n):
 
 def all_compositions():
     """
-    All of the compositions (ordered partitions) of each positive natural
+    All of the compositions (ordered partitions) of each positive natural\n
     OEIS 
     """
     
     for n in naturals(0):
         yield from compositions(n)
-
-
-
 
 
 
