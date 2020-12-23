@@ -5,7 +5,7 @@ from math import gcd
 
 def recaman():
     """
-    Recaman's Sequence: Taking steps of size n for eaching positive integer always going backward unless the result would be less than zero or has alread appeared
+    Recaman's Sequence: Taking steps of size n for eaching positive integer always going backward unless the result would be less than zero or has alread appeared\n
     OEIS A005132
     """
     
@@ -27,7 +27,7 @@ def recaman():
 
 def cantor_pairs():
     """
-    Integers that represent the Cantor pairing function a of fully reduced proper fraction
+    Integers that represent the Cantor pairing function a of fully reduced proper fraction\n
     OEIS A337308
     """
     
@@ -45,15 +45,18 @@ def cantor_pairs():
                 L.append( (a+b)*(a+b+1)//2+b )
 
 
-def gcd_numbers():
+def gcd_numbers(flatten=False):
     """
-    Triangle by rows of the GCD for each pair of positive integers
+    Triangle by rows of the GCD for each pair of positive integers\n
     OEIS A003989
     """
     
-    for n in naturals(1):
-        for x in range(1,n):
-            yield gcd(n,x)
+    if flatten:
+        for row in gcd_numbers():
+            yield from row
+    else:
+        for n in naturals(2):
+            yield tuple([gcd(n,x) for x in range(1,n)])
 
 
 def _eculid_step(a,b):
@@ -62,27 +65,35 @@ def _eculid_step(a,b):
     return (a,b-a)
 
 
-def gcd_steps():
+def gcd_steps(flatten=False):
     """
-    Triangle by rows for each pair of positive integers with how long it takes Euclid's GCD algorithm to terminate
+    Triangle by rows for each pair of positive integers with how long it takes Euclid's GCD algorithm to terminate\n
     OEIS A072030
     """
     
-    for n in naturals(1):
-        for x in range(1,n):
-            m = n
-            ctr = 0
+    if flatten:
+        for row in gcd_steps():
+            yield from row
+    else:
+        for n in naturals(2):
+            T = []
             
-            while m != x:
-                m,x = _eculid_step(m,x)
-                ctr += 1
+            for x in range(1,n):
+                m = n
+                ctr = 0
+                
+                while m != x:
+                    m,x = _eculid_step(m,x)
+                    ctr += 1
+                
+                T.append(ctr)
             
-            yield ctr
+            yield tuple(T)
 
 
 def nonadditive():
     """
-    No term is the sum of any previous distinct pair
+    No term is the sum of any previous distinct pair\n
     OEIS A033627
     """
     
@@ -113,7 +124,7 @@ def nonadditive():
 
 def hofstader():
     """
-    Solution to a puzzle by Hofstader
+    Solution to a puzzle by Hofstader\n
     OEIS A005228
     """
     
@@ -134,7 +145,7 @@ def hofstader():
 
 def co_hofstader():
     """
-    Complementary solution to a puzzle by Hofstader
+    Complementary solution to a puzzle by Hofstader\n
     OEIS A030124
     """
     
@@ -155,7 +166,7 @@ def co_hofstader():
 
 def hofstader_Q():
     """
-    Hofstader's Q-Sequence: Q(n) = Q(n-Q(n-1)) + Q(n-Q(n-2)), , Q(0) = Q(1) = 1
+    Hofstader's Q-Sequence: Q(n) = Q(n-Q(n-1)) + Q(n-Q(n-2)), , Q(0) = Q(1) = 1\n
     OEIS A005185
     """
     
@@ -172,7 +183,7 @@ def hofstader_Q():
 
 def even_odd():
     """
-    Positive integers but with odds and evens exchanged
+    Positive integers but with odds and evens exchanged\n
     OEIS A103889
     """
     
@@ -254,12 +265,12 @@ if __name__ == '__main__':
                 "8, 13, 18, 19, 26, 32, 33, 34, 41, 43, 50, 52, 53, 62")
     
     print("\nGCD Numbers")
-    simple_test(gcd_numbers(),18,
-                "1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1")
+    simple_test(gcd_numbers(),5,
+                "(1,), (1, 1), (1, 2, 1), (1, 1, 1, 1), (1, 2, 3, 2, 1)")
     
     print("\nEuclid's GCD Steps")
-    simple_test(gcd_steps(),18,
-                "1, 2, 2, 3, 1, 3, 4, 3, 3, 4, 5, 2, 1, 2, 5, 6, 4, 4")
+    simple_test(gcd_steps(),5,
+                "(1,), (2, 2), (3, 1, 3), (4, 3, 3, 4), (5, 2, 1, 2, 5)")
     
     print("\nNonadditive")
     simple_test(nonadditive(),15,

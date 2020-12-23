@@ -18,7 +18,8 @@ def _reduced_collatz_step(n):
 
 def collatz_sequence(n):
     """
-    Collatz Sequence of n: Iteratively apply the Collatz function to n
+    Collatz Sequence of n: Iteratively apply the Collatz function to n\n
+    OEIS
     """
     
     require_integers(["n"],[n])
@@ -33,7 +34,8 @@ def collatz_sequence(n):
 
 def reduced_collatz_sequence(n):
     """
-    Reduced Collatz Sequence of n: Iteratively apply the Collatz function to n but with an addition division by 2 for odd numbers
+    Reduced Collatz Sequence of n: Iteratively apply the Collatz function to n but with an addition division by 2 for odd numbers\n
+    OEIS
     """
     
     require_integers(["n"],[n])
@@ -58,7 +60,7 @@ def collatz_map():
 
 def reduced_collatz_map():
     """
-    Map of the Collatz Function\n
+    Map of the Reduced Collatz Function\n
     OEIS A014682
     """
     
@@ -77,8 +79,8 @@ def collatz_all():
             yield c
 
 
-# Unknown if any terms are undefined but searches by other suggest this code
-# isn't fast enough to ever encounter such a case.
+# Unknown if any terms are undefined but this code isn't fast enough to ever 
+# encounter such a case.
 # This algorithm stores a lot of intermediate results for a few percent speed
 # increase
 def collatz_length():

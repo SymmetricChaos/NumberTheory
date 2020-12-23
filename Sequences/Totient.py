@@ -47,7 +47,7 @@ def cototients():
 
 def totient_range():
     """
-    Range of Euler's Totient Function in order
+    Range of Euler's Totient Function in order\n
     OEIS A002202
     """
     

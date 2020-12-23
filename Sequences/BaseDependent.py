@@ -189,7 +189,7 @@ def digital_prods(B=10):
 
 def additive_persistence(B=10):
     """
-    Additive persistence of each natural number in base B
+    Additive persistence of each natural number in base B\n
     OEIS A031286
     """
     
@@ -207,7 +207,7 @@ def additive_persistence(B=10):
 
 def multiplicative_persistence(B=10):
     """
-    Multiplicative persistence of each natural number in base B
+    Multiplicative persistence of each natural number in base B\n
     OEIS A031346
     """
     
@@ -311,7 +311,7 @@ def radix_digits(B=10):
 
 def roman_numerals_str():
     """
-    The positive integers as standard Roman Numerals
+    The positive integers as standard Roman Numerals\n
     """
     
     for n in naturals(1):
@@ -320,7 +320,7 @@ def roman_numerals_str():
 
 def roman_numerals():
     """
-    The positive integers as standard Roman Numerals in numeric form
+    The positive integers as standard Roman Numerals in numeric form\n
     OEIS A093796
     """
     
@@ -332,7 +332,6 @@ def roman_numerals():
 def repdigit(n,B=10):
     """
     Repdigit Numbers: Numbers that consist entire of the digtit n in base B\n
-    (Below match when prepended with zero)
     OEIS A002275-A002279
     """
     
@@ -352,7 +351,7 @@ def repdigit(n,B=10):
 
 def all_repdigit(B=10):
     """
-    All the numbers that use a the same digit in each poisition in base B\n
+    All the numbers in base B that use the same digit in every position\n
     OEIS A010785, A048328-A048340
     """
     

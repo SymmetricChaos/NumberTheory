@@ -7,7 +7,7 @@ from Sequences.Combinatorics.Factorials import factorials
 
 def relation():
     """
-    Number of Binary Relations on n elements
+    Number of Binary Relations on n elements\n
     OEIS A002416
     """
     
@@ -17,7 +17,7 @@ def relation():
 
 def reflexive_relation():
     """
-    Number of Reflexive Relations on n elements
+    Number of Reflexive Relations on n elements\n
     OEIS A053763
     """
     
@@ -27,7 +27,7 @@ def reflexive_relation():
 
 def total_order():
     """
-    Number of Total Orders on n elements (same as factorials)
+    Number of Total Orders on n elements (same as factorials)\n
     OEIS A000142
     """
     
@@ -43,7 +43,7 @@ def total_order():
 
 def equivalence_relation():
     """
-    Number of Equivalence Relations on a set with n elements (same as Bell Numbers)
+    Number of Equivalence Relations on a set with n elements (same as Bell Numbers)\n
     OEIS A000110
     """
     

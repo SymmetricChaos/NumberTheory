@@ -4,7 +4,7 @@ from Sequences.Simple import naturals
 
 def taylor_terms(A,c=0):
     """
-    Coefficients of each term of the Talyor Series defined by the sequence A and constant c
+    Coefficients of each term of the Talyor Series defined by the sequence A and constant c\n
     """
     
     require_iterable(["A"],[A])
@@ -20,7 +20,7 @@ def taylor_terms(A,c=0):
 
 def taylor_sums(A,c=0):
     """
-    Coefficients of each partial sum of the Talyor Series defined by the sequence A and constant c
+    Coefficients of each partial sum of the Talyor Series defined by the sequence A and constant c\n
     """
     
     require_iterable(["A"],[A])

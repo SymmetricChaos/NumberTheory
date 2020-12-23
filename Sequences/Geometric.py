@@ -64,7 +64,8 @@ def hypotenuse():
 
 def primitive_pythagorean_triples():
     """
-    All primitive pythagorean triples with hypotenuse in non-decreasing order and otherwise lexicographic order
+    All primitive pythagorean triples with hypotenuse in non-decreasing order and otherwise lexicographic order\n
+    OEIS
     """
     
     triples = []
@@ -94,7 +95,7 @@ def primitive_pythagorean_triples():
 
 def primitive_pythagorean_perimeters():
     """
-    Perimeters of primitive pythagorean triples in asending order
+    Perimeters of primitive pythagorean triples in asending order\n
     OEIS A024364
     """
     
@@ -104,7 +105,8 @@ def primitive_pythagorean_perimeters():
 
 def pythagorean_triples():
     """
-    All pythagorean triples with hypotenuse in non-decreasing order and otherwise lexicographic order
+    All pythagorean triples with hypotenuse in non-decreasing order and otherwise lexicographic order\n
+    OEIS
     """
     
     old_triples = {}
@@ -174,7 +176,8 @@ def mosner():
 
 def primitive_optic_triples():
     """
-    Triples of positive integers a,b,c such that 1/a + 1/b = 1/c
+    Triples of positive integers a,b,c such that 1/a + 1/b = 1/c\n
+    OEIS
     """
     
     for m in naturals(1):

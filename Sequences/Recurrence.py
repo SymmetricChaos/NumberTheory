@@ -114,7 +114,7 @@ def companion_pell():
 
 def jacobsthal():
     """
-    Jacobsthal Numbers:
+    Jacobsthal Numbers\n
     OEIS A001045
     """
     
@@ -468,7 +468,7 @@ def perrin():
 
 def rowland():
     """
-    Rowland's Sequence consisting of only 1s and odd primes
+    Rowland's Sequence consisting of only 1s and odd primes\n
     OEIS A132199
     """
     
@@ -484,7 +484,7 @@ def rowland():
 
 def rowland_primes():
     """
-    Prime values of Rowland's Sequence
+    Prime values of Rowland's Sequence\n
     OEIS 
     """
     
@@ -501,7 +501,7 @@ def rowland_primes():
 
 def logistic_map(x,r):
     """
-    Logistic Map for some rational n/d and integer r
+    Logistic Map for some rational n/d and integer r\n
     """
     
     require_rationals(["x","r"],[x,r])
@@ -514,7 +514,7 @@ def logistic_map(x,r):
 
 def juggler(n):
     """
-    Juggler Sequence starting with n
+    Juggler Sequence starting with n\n
     """
     
     while True:

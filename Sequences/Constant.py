@@ -149,7 +149,7 @@ def silver_ratio_digits(B=10):
 
 def champernowne_digits(B=10):
     """
-    Digits of the base B version of Champernowne's constant
+    Digits of the base B version of Champernowne's constant\n
     OEIS A003137, A030302, A030548, A033307, A030373, A031219, A030998, 
          A031035, A031076
     """

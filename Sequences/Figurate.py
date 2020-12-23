@@ -252,7 +252,7 @@ def triangles_in_triangle():
 
 def two_square():
     """
-    Sums of exactly two non-zero squares
+    Sums of exactly two non-zero squares\n
     OEIS A000404
     """
     
@@ -308,7 +308,7 @@ def simplex(n):
 def triangular():
     """
     Triangular Numbers\n
-    OEIS: A000217
+    OEIS A000217
     """
     
     S = 0

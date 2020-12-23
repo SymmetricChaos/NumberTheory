@@ -153,12 +153,15 @@ def sign_sequence(n=1):
         yield -n
 
 
-def floyd_triangle():
+def floyd_triangle(flatten=False):
     """
     Floyd's Triangle
     """
     
-    yield from make_triangle(count(1,1))
+    if flatten:
+        yield from count(1,1)
+    else:
+        yield from make_triangle(count(1,1))
 
 
 def magic_square():
