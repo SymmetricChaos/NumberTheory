@@ -364,7 +364,7 @@ def adjacent_permutations(n,index=0):
             direct *= -1
 
 
-def adjacent_permutations_heap(n,index=0):
+def swap_permutations(n,index=0):
     """
     Permutations on n that ordered so that each differs from the previous by a single transposition\n
     Iternative version of Heap's algorithm
@@ -402,30 +402,48 @@ def adjacent_permutations_heap(n,index=0):
 
 
 # Probably a better way to order these
-def odd_permutations(n,index=0):
+def odd_permutations(n,index=0,mode="H"):
     """
-    The odd permutations (created by an odd number of transpositions) on n elements\n
-    Finite generator\n
-    OEIS
+    The odd permutations on n elements\n
+    Finite generator
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
+        mode -- "H" or "SJT" to choose algorithm used
     """
     
     if index not in (0,1):
         raise Exception("index must be 0 or 1")
     
-    yield from sequence_slice(adjacent_permutations(n,index=index),offset=1,step=1)
+    if mode == "H":
+        yield from sequence_slice(swap_permutations(n,index=index),offset=1,step=1)
+    elif mode == "SJT":
+        yield from sequence_slice(adjacent_permutations(n,index=index),offset=1,step=1)
+    else:
+        raise Exception("mode must be 'H' (for Heap's Algorithm) or 'SJT' (for the Steinhaus–Johnson–Trotter algorithm)")
 
 
-def even_permutations(n,index=0):
+def even_permutations(n,index=0,mode="H"):
     """
-    The even permutations (created by an even number of transpositions) on n elements\n
-    Finite generator\n
-    OEIS
+    The even permutations on n elements\n
+    Finite generator
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
+        mode -- "H" or "SJT" to choose algorithm used
     """
     
     if index not in (0,1):
         raise Exception("index must be 0 or 1")
         
-    yield from sequence_slice(adjacent_permutations(n,index=index),offset=0,step=1)
+    if mode == "H":
+        yield from sequence_slice(swap_permutations(n,index=index),offset=0,step=1)
+    elif mode == "SJT":
+        yield from sequence_slice(adjacent_permutations(n,index=index),offset=0,step=1)
+    else:
+        raise Exception("mode must be 'H' (for Heap's Algorithm) or 'SJT' (for the Steinhaus–Johnson–Trotter algorithm)")
 
 
 # Probably a better way to order these
@@ -683,16 +701,16 @@ if __name__ == '__main__':
                 "(0, 1, 2), (0, 2, 1), (2, 0, 1), (2, 1, 0), (1, 2, 0)")
     
     print("\nPermutations on 3 in Heap's Order")
-    simple_test(adjacent_permutations_heap(3,index=0),5,
+    simple_test(swap_permutations(3,index=0),5,
                 "(0, 1, 2), (1, 0, 2), (2, 0, 1), (0, 2, 1), (1, 2, 0)")
     
-    print("\nOdd Permutations on 4 (in SJT Order)")
-    simple_test(odd_permutations(4,index=0),4,
-                "(0, 1, 3, 2), (3, 0, 1, 2), (0, 3, 2, 1), (0, 2, 1, 3)")
-    
-    print("\nEven Permutations on 4 (in SJT Order)")
+    print("\nEven Permutations on 4 (in Heap's Order)")
     simple_test(even_permutations(4,index=0),4,
-                "(0, 1, 2, 3), (0, 3, 1, 2), (3, 0, 2, 1), (0, 2, 3, 1)")
+                "(0, 1, 2, 3), (2, 0, 1, 3), (1, 2, 0, 3), (3, 1, 0, 2)")
+    
+    print("\nOdd Permutations on 4 (in Heap's Order)")
+    simple_test(odd_permutations(4,index=0),4,
+                "(1, 0, 2, 3), (0, 2, 1, 3), (2, 1, 0, 3), (1, 3, 0, 2)")
     
     print("\nSubsequences of length 3 from (1,5,7,2,6,3,4)")
     simple_test(subsequences((1,5,7,2,6),3),5,

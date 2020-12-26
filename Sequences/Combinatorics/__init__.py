@@ -16,7 +16,7 @@ from Sequences.Combinatorics.CombPerm import permutations, combinations, \
        cyclic_derangements, circular_permutations, adjacent_permutations, \
        recontres, odd_permutations, even_permutations, \
        alternating_permutations, alternating_permutation, subsequences, \
-       permutation_patterns, adjacent_permutations_heap
+       permutation_patterns, swap_permutations
 
 from Sequences.Combinatorics.Factorials import factorials, \
        alternating_factorials_1, alternating_factorials_2, kempner, \
@@ -55,7 +55,7 @@ __all__=[
          "adjacent_permutations","recontres","odd_permutations",
          "even_permutations","alternating_permutations","subsequences",
          "alternating_permutation","permutation_patterns",
-         "adjacent_permutations_heap",
+         "swap_permutations",
          
          #FACTORIAL
          "factorials","alternating_factorials_1","alternating_factorials_2",
