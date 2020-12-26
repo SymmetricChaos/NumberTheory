@@ -232,7 +232,7 @@ def circular_permutations(n,k,replace=False,reverse=False,reflect=False,index=0)
 
 def alternating_permutations(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
-    The alternating permutations of length k from a set of n elements, returns tuples in lexicographic order
+    The alternating permutations of length k from a set of n elements, returns tuples in lexicographic order\n
     Finite generator
     
     Args:
@@ -264,11 +264,12 @@ def alternating_permutations(n,k,replace=False,reverse=False,reflect=False,index
 
 def subsequences(P,k,reverse=False,reflect=False,colex=False):
     """
-    All the subsequences of length k contained in P
+    All the subsequences of length k contained in P\n
+    Finite generator
     
     Args:
-        P -- a permutation
-        k -- length of subsequences to generate
+        P -- tuple, a permutation
+        k -- int, length of subsequences to generate
         reverse -- bool, return results in reverse order
         reflect -- bool, return descending combination rather than ascending
         colex -- bool, return results in colexicographic order, aka prefix order
@@ -280,11 +281,12 @@ def subsequences(P,k,reverse=False,reflect=False,colex=False):
 
 def permutation_patterns(P,k,reverse=False,reflect=False,colex=False,index=0):
     """
-    All the permutations patterns of length k contained in P
+    All the permutations patterns of length k contained in P\n
+    Finite generator
     
     Args:
-        P -- a permutation
-        k -- length of subsequences to generate
+        P -- tuple, a permutation
+        k -- int, length of patterns to generate
         reverse -- bool, return results in reverse order
         reflect -- bool, return descending combination rather than ascending
         colex -- bool, return results in colexicographic order, aka prefix order
@@ -335,7 +337,8 @@ def all_derangements(index=0):
 def adjacent_permutations(n,index=0):
     """
     Permutations on n that ordered so that each differs from the previous by an adjacent transposition\n
-    Recursive version of Steinhaus–Johnson–Trotter algorithm
+    Recursive version of Steinhaus–Johnson–Trotter algorithm\n
+    Finite generator
     
     Args:
         n -- positive integer, size of the set
@@ -367,7 +370,8 @@ def adjacent_permutations(n,index=0):
 def swap_permutations(n,index=0):
     """
     Permutations on n that ordered so that each differs from the previous by a single transposition\n
-    Iternative version of Heap's algorithm
+    Iterative version of Heap's algorithm\n
+    Finite generator
     
     Args:
         n -- positive integer, size of the set
@@ -450,7 +454,11 @@ def even_permutations(n,index=0,mode="H"):
 def cyclic_permutations(n,index=0):
     """
     Permutations on n that contain exactly one nontrivial cycle, ordered by underlying cycle\n
-    OEIS
+    Finite generator
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
     """
     
     if index not in (0,1):
@@ -466,7 +474,11 @@ def cyclic_permutations(n,index=0):
 def cyclic_derangements(n,index=0):
     """
     Derangements on n that consist of exactly one cycle, ordered by underlying cycle\n
-    OEIS
+    Finite Generator
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
     """
     
     if index not in (0,1):
@@ -519,8 +531,7 @@ def cyclic_derangements(n,index=0):
 # Definitely a more efficent way to do this
 def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
     """
-    Permutation on n with exactly k fixed points in lexicographic order\n
-    OEIS A001250
+    Permutations on n with exactly k fixed points in lexicographic order
     
     Args:
         n -- int, size of the set to choose from
@@ -529,6 +540,8 @@ def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index
         reverse -- bool, return results in reverse order
         reflect -- bool, reflect each permutation
         index -- 0 or 1, value to start counting permutations from
+    
+    OEIS A001250
     """
     
     if k > n:
@@ -593,7 +606,7 @@ def even_permutation():
 def odd_permutation():
     """
     Odd Permutation Numbers: Number of odd permutations of n elements (same as the even permutations for n > 1)\n
-    OEIS
+    OEIS A001710 (except for first two terms)
     """
     
     yield 0
@@ -609,7 +622,7 @@ def odd_permutation():
 
 def recontres():
     """
-    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points
+    Recontres Numbers: Triangle by rows counting numbers of permutations of n elements with k fixed points\n
     OEIS A008290
     """
     
@@ -630,7 +643,7 @@ def recontres():
 
 def alternating_permutation():
     """
-    Number of alternating permutations on n
+    Number of alternating permutations on n\n
     OEIS A001250
     """
     
@@ -688,45 +701,45 @@ if __name__ == '__main__':
     simple_test(all_derangements(),4,
                 "(1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
     
-    print("\nCyclic Derangements on 4 (indexed from 1)")
+    print("\nCyclic Derangements of Four Elements (indexed from 1)")
     simple_test(cyclic_derangements(4,index=1),3,
                 "(4, 1, 2, 3), (3, 1, 4, 2), (4, 3, 1, 2)")
     
-    print("\nCyclic Permutations on 4 (indexed from 1)")
+    print("\nCyclic Permutations of Four Elements (indexed from 1)")
     simple_test(cyclic_permutations(4,index=1),3,
                 "(2, 1, 3, 4), (3, 2, 1, 4), (4, 2, 3, 1)")
     
-    print("\nPermutations on 3 in Steinhaus–Johnson–Trotter Order")
+    print("\nPermutations of Three Elements in Steinhaus–Johnson–Trotter Order")
     simple_test(adjacent_permutations(3,index=0),5,
                 "(0, 1, 2), (0, 2, 1), (2, 0, 1), (2, 1, 0), (1, 2, 0)")
     
-    print("\nPermutations on 3 in Heap's Order")
+    print("\nPermutations of Three Element in Heap's Order")
     simple_test(swap_permutations(3,index=0),5,
                 "(0, 1, 2), (1, 0, 2), (2, 0, 1), (0, 2, 1), (1, 2, 0)")
     
-    print("\nEven Permutations on 4 (in Heap's Order)")
+    print("\nEven Permutations of Four Elements (in Heap's Order)")
     simple_test(even_permutations(4,index=0),4,
                 "(0, 1, 2, 3), (2, 0, 1, 3), (1, 2, 0, 3), (3, 1, 0, 2)")
     
-    print("\nOdd Permutations on 4 (in Heap's Order)")
+    print("\nOdd Permutations of Four Elements(in Heap's Order)")
     simple_test(odd_permutations(4,index=0),4,
                 "(1, 0, 2, 3), (0, 2, 1, 3), (2, 1, 0, 3), (1, 3, 0, 2)")
     
-    print("\nSubsequences of length 3 from (1,5,7,2,6,3,4)")
+    print("\nSubsequences of Length 3 from (1,5,7,2,6,3,4)")
     simple_test(subsequences((1,5,7,2,6),3),5,
                 "(1, 5, 7), (1, 5, 2), (1, 5, 6), (1, 7, 2), (1, 7, 6)")
     
-    print("\nPatterns of length 3 from (1,5,7,2,6,3,4)")
+    print("\nPatterns of Length 3 from (1,5,7,2,6,3,4)")
     simple_test(permutation_patterns((1,5,7,2,6),3),5,
                 "(0, 1, 2), (0, 2, 1), (0, 1, 2), (0, 2, 1), (0, 2, 1)")
     
-    print("\nPermutation of Length 4 with 2 Fixed Points")
+    print("\nPermutations of Four Elements with 2 Fixed Points")
     simple_test(permutation_fixed_points(4,2),3,
                 "(0, 1, 3, 2), (0, 2, 1, 3), (0, 3, 2, 1)")
     
     
     
-    print("\n\n\nCombinations on 5 of length 3")
+    print("\n\n\nCombinations of Length 3 From a Set with 5 Elements")
     print("Lexicographc Order")
     simple_test(combinations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4)")
@@ -745,7 +758,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nPermutations on 5 of length 3")
+    print("\n\n\nPermutations of Length 3 From a Set with 5 Elements")
     print("Lexicographic Order")
     simple_test(permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
@@ -764,7 +777,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nDerangements of length 4, indexed from 1 for ease of reading")
+    print("\n\n\nDerangements of a Set With 4 Elements (indexed from 1)")
     print("Lexicographc Order")
     simple_test(derangements(4,index=1),4,
                 "(2, 1, 4, 3), (2, 3, 4, 1), (2, 4, 1, 3), (3, 1, 4, 2)")
@@ -783,7 +796,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nDistinct circular permutation on 5 of length 3")
+    print("\n\n\nDistinct Circular Permutation of Length 3 from a Set With 5 Elements")
     print("Lexicographc Order")
     simple_test(circular_permutations(5,3),5,
                 "(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 1), (0, 2, 3)")
@@ -802,7 +815,7 @@ if __name__ == '__main__':
     
     
     
-    print("\n\n\nAlternating permutation on 4 of length 3")
+    print("\n\n\nAlternating Permutation of Length 3 from a Set with 4 Elements")
     print("Lexicographc Order")
     simple_test(alternating_permutations(4,3),5,
                 "(0, 2, 1), (0, 3, 1), (0, 3, 2), (1, 0, 2), (1, 0, 3)")
