@@ -334,15 +334,19 @@ def all_derangements(index=0):
 
 def adjacent_permutations(n,index=0):
     """
-    Permutations on n that ordered so that each differs from the previous by an adjacent transposition
+    Permutations on n that ordered so that each differs from the previous by an adjacent transposition\n
     Recursive version of Steinhaus–Johnson–Trotter algorithm
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
     """
     
     if index not in (0,1):
         raise Exception("index must be 0 or 1")
     
     if n == 1:
-        yield (0,)
+        yield (index,)
     
     else:
         direct = -1
@@ -350,22 +354,58 @@ def adjacent_permutations(n,index=0):
             if direct == 1:
                 # Ascending step
                 for i in range(n):
-                    yield P[:i] + (n-1,) + P[i:]
+                    yield P[:i] + (n+index-1,) + P[i:]
             
             else:
                 # Descending step
                 for i in range(n-1,-1,-1):
-                    yield P[:i] + (n-1,) + P[i:]
+                    yield P[:i] + (n+index-1,) + P[i:]
             
             direct *= -1
+
+
+def adjacent_permutations_heap(n,index=0):
+    """
+    Permutations on n that ordered so that each differs from the previous by a single transposition\n
+    Iternative version of Heap's algorithm
+    
+    Args:
+        n -- positive integer, size of the set
+        index -- 0 or 1, least element
+    """
+    
+    if index not in (0,1):
+        raise Exception("index must be 0 or 1")
+    
+    C = [0]*n
+    L = [i+index for i in range(n)]
+    
+    yield tuple(L)
+    
+    i = 0
+    while i < n:
+        if C[i] < i:
+            if i % 2 == 0:
+                L[0], L[i] = L[i], L[0]
+            
+            else:
+                L[C[i]], L[i] = L[i], L[C[i]]
+            
+            yield tuple(L)
+            
+            C[i] += 1
+            i = 0
+        
+        else:
+            C[i] = 0
+            i += 1
 
 
 # Probably a better way to order these
 def odd_permutations(n,index=0):
     """
-    The odd permutations (created by an odd number of transpositions) on n elements
-    Finite generator
-    
+    The odd permutations (created by an odd number of transpositions) on n elements\n
+    Finite generator\n
     OEIS
     """
     
@@ -377,9 +417,8 @@ def odd_permutations(n,index=0):
 
 def even_permutations(n,index=0):
     """
-    The even permutations (created by an even number of transpositions) on n elements
-    Finite generator
-    
+    The even permutations (created by an even number of transpositions) on n elements\n
+    Finite generator\n
     OEIS
     """
     
@@ -457,6 +496,7 @@ def cyclic_derangements(n,index=0):
 #             yield t
 #             new.append(t)
 #         R = new + [0]
+
 
 # Definitely a more efficent way to do this
 def permutation_fixed_points(n,k,replace=False,reverse=False,reflect=False,index=0):
@@ -630,24 +670,28 @@ if __name__ == '__main__':
     simple_test(all_derangements(),4,
                 "(1, 0), (1, 2, 0), (2, 0, 1), (1, 0, 3, 2)")
     
-    print("\nCyclic Derangements on 4, indexed from 1 for ease of reading")
+    print("\nCyclic Derangements on 4 (indexed from 1)")
     simple_test(cyclic_derangements(4,index=1),3,
                 "(4, 1, 2, 3), (3, 1, 4, 2), (4, 3, 1, 2)")
     
-    print("\nCyclic Permutations on 4, indexed from 1 for ease of reading")
+    print("\nCyclic Permutations on 4 (indexed from 1)")
     simple_test(cyclic_permutations(4,index=1),3,
                 "(2, 1, 3, 4), (3, 2, 1, 4), (4, 2, 3, 1)")
     
     print("\nPermutations on 3 in Steinhaus–Johnson–Trotter Order")
-    simple_test(adjacent_permutations(3,index=1),5,
+    simple_test(adjacent_permutations(3,index=0),5,
                 "(0, 1, 2), (0, 2, 1), (2, 0, 1), (2, 1, 0), (1, 2, 0)")
     
+    print("\nPermutations on 3 in Heap's Order")
+    simple_test(adjacent_permutations_heap(3,index=0),5,
+                "(0, 1, 2), (1, 0, 2), (2, 0, 1), (0, 2, 1), (1, 2, 0)")
+    
     print("\nOdd Permutations on 4 (in SJT Order)")
-    simple_test(odd_permutations(4,index=1),4,
+    simple_test(odd_permutations(4,index=0),4,
                 "(0, 1, 3, 2), (3, 0, 1, 2), (0, 3, 2, 1), (0, 2, 1, 3)")
     
     print("\nEven Permutations on 4 (in SJT Order)")
-    simple_test(even_permutations(4,index=1),4,
+    simple_test(even_permutations(4,index=0),4,
                 "(0, 1, 2, 3), (0, 3, 1, 2), (3, 0, 2, 1), (0, 2, 3, 1)")
     
     print("\nSubsequences of length 3 from (1,5,7,2,6,3,4)")
