@@ -367,6 +367,46 @@ def all_repdigit(B=10):
             yield next(i)
 
 
+def cantor():
+    """
+    Cantor Numbers: Naturals that contain no 1s in their ternary expansion
+    OEIS A005823
+    """
+    
+    for n in naturals():
+        D = int_to_digits(n,3)
+        if 1 not in D:
+            yield n
+
+
+def stanley():
+    """
+    Stanley Numbers: Naturals that contain no 2s in their ternary expansion
+    OEIS A005836
+    """
+    
+    for n in naturals():
+        D = int_to_digits(n,3)
+        if 2 not in D:
+            yield n
+
+
+def digit_avoiding(d,B=10):
+    """
+    Naturals that do not contain the digit d in base B
+    """
+    
+    if d >= B:
+        raise Exception("d must be less than B")
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        if d not in D:
+            yield n
+
+
+
+
 
 
 
@@ -460,3 +500,12 @@ if __name__ == '__main__':
     print("\nAll Base 3 Repdigits")
     simple_test(all_repdigit(3), 13,
                 "0, 1, 2, 4, 8, 13, 26, 40, 80, 121, 242, 364, 728")
+    
+    print("\nCantor Numbers")
+    simple_test(cantor(), 15,
+                "0, 2, 6, 8, 18, 20, 24, 26, 54, 56, 60, 62, 72, 74, 78")
+    
+    print("\nStanley Numbers")
+    simple_test(stanley(), 15,
+                "0, 1, 3, 4, 9, 10, 12, 13, 27, 28, 30, 31, 36, 37, 39")
+    
