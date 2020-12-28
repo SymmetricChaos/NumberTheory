@@ -515,6 +515,7 @@ def logistic_map(x,r):
 def juggler(n):
     """
     Juggler Sequence starting with n\n
+    OEIS 
     """
     
     while True:
@@ -526,9 +527,23 @@ def juggler(n):
             n = isqrt(n*n*n)
 
 
+def juggler_map():
+    """
+    Juggler Map of the Naturals\n
+    OEIS 
+    """
+    
+    for n in naturals():
+        if n % 2 == 0:
+            yield isqrt(n)
+        else:
+            yield isqrt(n*n*n)
+
+
 def sorting():
     """
-    The Sorting Numbers: Greatest number of comparisons needed for merge sort
+    The Sorting Numbers: Greatest number of comparisons needed for merge sort\n
+    OEIS A001855
     """
     
     def half_ceil(n):
@@ -681,6 +696,10 @@ if __name__ == '__main__':
     print("\nJuggler Sequence Starting with 2051")
     simple_test(juggler(2051),5,
                 "2051, 92885, 28308599, 150618238728, 241772594")
+    
+    print("\nJuggler Map")
+    simple_test(juggler_map(),16,
+                "0, 1, 1, 5, 2, 11, 2, 18, 2, 27, 3, 36, 3, 46, 3, 58")
     
     print("\nThe Sorting Numbers")
     simple_test(sorting(),15,

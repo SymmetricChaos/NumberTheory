@@ -83,7 +83,7 @@ __all__=[#MANIPULATIONS
          "palindrome","fraction_period","digital_prods","additive_persistence",
          "multiplicative_persistence","radix_digits","palindrome_digits",
          "radix_k_weight","roman_numerals_str","roman_numerals","repdigit",
-         "all_repdigit","cantor","stanley","digit_avoiding",
+         "all_repdigit","cantor","stanley","digit_avoiding","digit_including",
          
          #BINARY
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",
@@ -133,7 +133,7 @@ __all__=[#MANIPULATIONS
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
          "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
          "perrin", "semifibonacci","tribonnaci_word","tribonnaci_words",
-         "narayana_cows","juggler","sorting",
+         "narayana_cows","juggler","juggler_map","sorting",
          
          #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",

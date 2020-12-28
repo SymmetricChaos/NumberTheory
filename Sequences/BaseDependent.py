@@ -369,7 +369,7 @@ def all_repdigit(B=10):
 
 def cantor():
     """
-    Cantor Numbers: Naturals that contain no 1s in their ternary expansion
+    Cantor Numbers: Naturals that contain no 1s in their ternary expansion\n
     OEIS A005823
     """
     
@@ -381,7 +381,7 @@ def cantor():
 
 def stanley():
     """
-    Stanley Numbers: Naturals that contain no 2s in their ternary expansion
+    Stanley Numbers: Naturals that contain no 2s in their ternary expansion\n
     OEIS A005836
     """
     
@@ -393,7 +393,8 @@ def stanley():
 
 def digit_avoiding(d,B=10):
     """
-    Naturals that do not contain the digit d in base B
+    Naturals that do not contain the digit d in base B\n
+    OEIS A005823, A005836
     """
     
     if d >= B:
@@ -405,7 +406,19 @@ def digit_avoiding(d,B=10):
             yield n
 
 
-
+def digit_including(d,B=10):
+    """
+    Naturals that do contain the digit d in base B\n
+    OEIS
+    """
+    
+    if d >= B:
+        raise Exception("d must be less than B")
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        if d in D:
+            yield n
 
 
 
@@ -508,4 +521,12 @@ if __name__ == '__main__':
     print("\nStanley Numbers")
     simple_test(stanley(), 15,
                 "0, 1, 3, 4, 9, 10, 12, 13, 27, 28, 30, 31, 36, 37, 39")
+    
+    print("\n3-Avoiding Numbers in Base 5")
+    simple_test(digit_avoiding(3,5), 15,
+                "0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12, 14, 20, 21, 22")
+    
+    print("\n3-Including Numbers in Base 5")
+    simple_test(digit_including(3,5), 14,
+                "3, 8, 13, 15, 16, 17, 18, 19, 23, 28, 33, 38, 40, 41")
     
