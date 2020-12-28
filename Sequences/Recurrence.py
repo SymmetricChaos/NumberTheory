@@ -526,6 +526,31 @@ def juggler(n):
             n = isqrt(n*n*n)
 
 
+def sorting():
+    """
+    The Sorting Numbers: Greatest number of comparisons needed for merge sort
+    """
+    
+    def half_ceil(n):
+        if n % 2 == 1:
+            return n//2+1
+        return n//2
+    
+    def half_floor(n):
+        return n//2
+    
+    A = [0]
+    
+    yield 0
+    
+    for n in naturals(2):
+        t = A[half_floor(n)-1] + A[half_ceil(n)-1] + n -1
+        
+        yield t
+        
+        A.append(t)
+
+
 
 
 
@@ -656,4 +681,8 @@ if __name__ == '__main__':
     print("\nJuggler Sequence Starting with 2051")
     simple_test(juggler(2051),5,
                 "2051, 92885, 28308599, 150618238728, 241772594")
+    
+    print("\nThe Sorting Numbers")
+    simple_test(sorting(),15,
+                "0, 1, 3, 5, 8, 11, 14, 17, 21, 25, 29, 33, 37, 41, 45")
     
