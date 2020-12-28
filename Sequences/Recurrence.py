@@ -3,7 +3,7 @@ from Sequences.Simple import evens, naturals
 from Sequences.Manipulations import offset
 
 from fractions import Fraction
-from math import floor, ceil, gcd, isqrt
+from math import floor, ceil, gcd
 from collections import Counter
 
 def fibonacci():
@@ -512,34 +512,6 @@ def logistic_map(x,r):
         x = r*x*(1-x)
 
 
-def juggler(n):
-    """
-    Juggler Sequence starting with n\n
-    OEIS 
-    """
-    
-    while True:
-        yield n
-        
-        if n % 2 == 0:
-            n = isqrt(n)
-        if n % 2 == 1:
-            n = isqrt(n*n*n)
-
-
-def juggler_map():
-    """
-    Juggler Map of the Naturals\n
-    OEIS 
-    """
-    
-    for n in naturals():
-        if n % 2 == 0:
-            yield isqrt(n)
-        else:
-            yield isqrt(n*n*n)
-
-
 def sorting():
     """
     The Sorting Numbers: Greatest number of comparisons needed for merge sort\n
@@ -692,14 +664,6 @@ if __name__ == '__main__':
     print("\nLogistic Map with x=1/3 and r=1/2")
     simple_test(logistic_map(Fraction(1,3),Fraction(1,2)),5,
                 "1/3, 1/9, 4/81, 154/6561, 493339/43046721")
-    
-    print("\nJuggler Sequence Starting with 2051")
-    simple_test(juggler(2051),5,
-                "2051, 92885, 28308599, 150618238728, 241772594")
-    
-    print("\nJuggler Map")
-    simple_test(juggler_map(),16,
-                "0, 1, 1, 5, 2, 11, 2, 18, 2, 27, 3, 36, 3, 46, 3, 58")
     
     print("\nThe Sorting Numbers")
     simple_test(sorting(),15,

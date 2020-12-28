@@ -37,6 +37,8 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        hypotenuse, mosner, primitive_pythagorean_triples, \
        pythagorean_triples, primitive_optic_triples
 
+from Juggler import juggler, juggler_map, juggler_length
+
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
        jacobi_symbols, kronecker_symbols, mobius_function, quadratic_residue, \
        quadratic_nonresidue, all_quadratic_residues, \
@@ -51,7 +53,7 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        tribonacci, lucas_U, lucas_V, padovan, simple_recurrence, sylvester, \
        leonardo, arbitrary_recurrence, pisot_E, pisot_L, pisot_P, pisot_T, \
        ulam, perrin, semifibonacci, tribonnaci_word, tribonnaci_words, \
-       narayana_cows, juggler, sorting
+       narayana_cows, sorting, rowland, rowland_primes, logistic_map
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
       powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
@@ -116,6 +118,9 @@ __all__=[#MANIPULATIONS
          "primitive_pythagorean_triples","pythagorean_triples",
          "primitive_optic_triples",
          
+         #JUGGLER
+         "juggler","juggler_map","juggler_length",
+         
          #MODULAR ARITHMETIC
          "modular_inverses","legendre_symbols","jacobi_symbols",
          "kronecker_symbols","mobius_function","quadratic_residue", 
@@ -133,7 +138,8 @@ __all__=[#MANIPULATIONS
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
          "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
          "perrin", "semifibonacci","tribonnaci_word","tribonnaci_words",
-         "narayana_cows","juggler","juggler_map","sorting",
+         "narayana_cows","juggler","juggler_map","sorting", "rowland",
+         "rowland_primes","logistic_map",
          
          #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",
