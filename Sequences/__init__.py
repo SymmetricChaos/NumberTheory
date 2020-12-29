@@ -37,7 +37,8 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        hypotenuse, mosner, primitive_pythagorean_triples, \
        pythagorean_triples, primitive_optic_triples
 
-from Juggler import juggler, juggler_map, juggler_length
+from Juggler import juggler, juggler_map, juggler_length, juggler_longest, \
+       juggler_highpoint, juggler_highwater
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
        jacobi_symbols, kronecker_symbols, mobius_function, quadratic_residue, \
@@ -119,7 +120,8 @@ __all__=[#MANIPULATIONS
          "primitive_optic_triples",
          
          #JUGGLER
-         "juggler","juggler_map","juggler_length",
+         "juggler","juggler_map","juggler_length","juggler_longest",
+         "juggler_highpoint","juggler_highwater",
          
          #MODULAR ARITHMETIC
          "modular_inverses","legendre_symbols","jacobi_symbols",

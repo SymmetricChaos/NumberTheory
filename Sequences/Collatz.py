@@ -117,7 +117,7 @@ def collatz_length():
 
 def collatz_longest():
     """
-    Greatest Collatz Lenth: Positive integers that set a record for length of their Collatz sequence\n
+    Greatest Collatz Length: Positive integers that set a record for length of their Collatz sequence\n
     OEIS A006877
     """
     
