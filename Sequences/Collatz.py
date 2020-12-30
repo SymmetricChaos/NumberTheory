@@ -1,4 +1,4 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, odds
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
 
@@ -16,7 +16,7 @@ def _reduced_collatz_step(n):
     return (3*n+1)//2
 
 
-def collatz_sequence(n):
+def collatz(n):
     """
     Collatz Sequence of n: Iteratively apply the Collatz function to n\n
     OEIS
@@ -75,8 +75,7 @@ def collatz_all():
     """
     
     for n in naturals(1):
-        for c in collatz_sequence(n):
-            yield c
+        yield from collatz(n)
 
 
 # Unknown if any terms are undefined but this code isn't fast enough to ever 
@@ -190,6 +189,24 @@ def collatz_highwater():
             rec = cur_rec
 
 
+def collatz_dropping_time():
+    """
+    Dropping Time of the Odd Collatz Sequences: Steps until the Collatz Sequence starting at each odd number is less than the starting value\n
+    OEIS A060445
+    """
+    
+    
+    for n in odds():
+        val = n
+        ctr = 0
+        
+        while val >= n and val != 1:
+            ctr += 1
+            val = _collatz_step(val)
+        
+        yield ctr
+
+
 
 
 
@@ -205,7 +222,7 @@ if __name__ == '__main__':
                 "0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7, 23")
     
     print("\nCollatz Sequence of 11")
-    simple_test(collatz_sequence(11),18,
+    simple_test(collatz(11),18,
                 "11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1")
     
     print("\nReduced Collatz Sequence of 11")
@@ -231,4 +248,8 @@ if __name__ == '__main__':
     print("\nCollatz High-Water Marks")
     simple_test(collatz_highwater(),10,
                 "1, 2, 16, 52, 160, 9232, 13120, 39364, 41524, 250504")
+    
+    print("\nCollatz Dropping Times")
+    simple_test(collatz_dropping_time(),16,
+                "0, 6, 3, 11, 3, 8, 3, 11, 3, 6, 3, 8, 3, 96, 3, 91")
     

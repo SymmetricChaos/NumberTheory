@@ -1,4 +1,4 @@
-from Sequences.Simple import naturals
+from Sequences.Simple import naturals, odds
 from math import isqrt
 
 def _juggler_step(n):
@@ -10,20 +10,34 @@ def _juggler_step(n):
 
 def juggler(n):
     """
-    Juggler Sequence starting with n\n
-    OEIS 
+    Juggler Sequence starting with n
     """
     
-    while True:
+    if n == 0:
+        yield 0
+    
+    if n == 1:
+        yield 1
+    
+    while n != 1:
         yield n
         
         n = _juggler_step(n)
 
 
+def juggler_all(n):
+    """
+    Concatenation of all Juggler Sequences
+    """
+    
+    for n in naturals():
+        yield from juggler(n)
+
+
 def juggler_map():
     """
     Juggler Map of the Naturals\n
-    OEIS 
+    OEIS A094683
     """
     
     for n in naturals():
@@ -66,7 +80,7 @@ def juggler_length():
 def juggler_longest():
     """
     Greatest Juggler Length: Positive integers that set a record for length of their Juggler sequence\n
-    OEIS
+    OEIS A094679
     """
     
     D = {1:0}
@@ -138,6 +152,25 @@ def juggler_highwater():
             rec = cur_rec
 
 
+def juggler_dropping_time():
+    """
+    Dropping Time of the Odd Juggler Sequences: Steps until the Juggler Sequence starting at each odd number is less than the starting value\n
+    OEIS A094778
+    """
+    
+    
+    for n in odds():
+        val = n
+        ctr = 0
+        
+        while val >= n and val != 1:
+            ctr += 1
+            val = _juggler_step(val)
+        
+        yield ctr
+
+
+
 
 
 if __name__ == '__main__':
@@ -166,4 +199,8 @@ if __name__ == '__main__':
     print("\nJuggler Highwater Marks")
     simple_test(juggler_highwater(),6,
                 "1, 2, 36, 140, 52214, 24906114455136")
+    
+    print("\nJuggler Dropping Times")
+    simple_test(juggler_dropping_time(),18,
+                "0, 5, 4, 2, 5, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 4, 4")
     

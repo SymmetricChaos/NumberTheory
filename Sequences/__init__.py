@@ -20,9 +20,9 @@ from Sequences.Cellular import rule_30, rule_30_str, rule_30_black, \
        rule_30_white, rule_90, rule_90_str, rule_90_black, rule_90_white, \
        rule_110, rule_110_str, rule_110_black, rule_110_white
 
-from Sequences.Collatz import collatz_length, collatz_longest, \
-       collatz_sequence, collatz_map, collatz_all, collatz_highpoint, \
-       collatz_highwater, reduced_collatz_sequence, reduced_collatz_map
+from Sequences.Collatz import collatz_length, collatz_longest, collatz, \
+       collatz_map, collatz_all, collatz_highpoint, collatz_highwater, \
+       reduced_collatz_sequence, reduced_collatz_map, collatz_dropping_time
 
 from Sequences.Constant import pi_digits, sqrt_digits, root_digits, \
        phi_digits, champernowne_digits, silver_ratio_digits
@@ -38,7 +38,7 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        pythagorean_triples, primitive_optic_triples
 
 from Juggler import juggler, juggler_map, juggler_length, juggler_longest, \
-       juggler_highpoint, juggler_highwater
+       juggler_highpoint, juggler_highwater, juggler_all
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
        jacobi_symbols, kronecker_symbols, mobius_function, quadratic_residue, \
@@ -99,9 +99,10 @@ __all__=[#MANIPULATIONS
          "rule_110_str","rule_110_black","rule_110_white",
          
          #COLLATZ
-         "collatz_length","collatz_longest","collatz_sequence",
-         "collatz_map","collatz_all","collatz_highpoint","collatz_highwater",
+         "collatz_length","collatz_longest","collatz","collatz_map",
+         "collatz_all","collatz_highpoint","collatz_highwater",
          "reduced_collatz_sequence","reduced_collatz_map",
+         "collatz_dropping_time",
          
          #CONSTANT
          "pi_digits","sqrt_digits","root_digits","phi_digits",
@@ -121,7 +122,8 @@ __all__=[#MANIPULATIONS
          
          #JUGGLER
          "juggler","juggler_map","juggler_length","juggler_longest",
-         "juggler_highpoint","juggler_highwater",
+         "juggler_highpoint","juggler_highwater","juggler_all",
+         "juggler_dropping_time",
          
          #MODULAR ARITHMETIC
          "modular_inverses","legendre_symbols","jacobi_symbols",
