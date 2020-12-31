@@ -1,7 +1,7 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from Sequences.MathUtils import all_subsets
 
 from math import gcd
+from fractions import Fraction
 
 def recaman():
     """
@@ -239,15 +239,24 @@ def selfridge():
         yield s*n
 
 
-def natural_subsets_2():
+def birthday():
     """
-    All subset's of the positive integer in the standard recursive order, by convention begins with 0 to represent the empty set\n
-    OEIS A048793
+    Solutions to the Birthday Problem for n Uniformly Distributed Birthdays\n
+    OEIS A033810
     """
     
-    yield 0
-    for i in all_subsets(naturals(1)):
-        yield from i
+    yield 2
+    for n in naturals(2):
+        p = Fraction(1,1)
+        ctr = 0
+        unused_bdays = n
+        
+        while p > Fraction(1,2):
+            ctr += 1
+            p *= Fraction(unused_bdays,n)
+            unused_bdays -= 1
+        
+        yield ctr
 
 
 
@@ -300,7 +309,7 @@ if __name__ == '__main__':
     simple_test(selfridge(),13,
                 "5, -7, 9, -11, 13, -15, 17, -19, 21, -23, 25, -27, 29")
     
-    print("\nAll Subsets of Positive Integers (OEIS representation)")
-    simple_test(natural_subsets_2(),18,
-                "0, 1, 2, 1, 2, 3, 1, 3, 2, 3, 1, 2, 3, 4, 1, 4, 2, 4")
+    print("\nSolutions to the Birthday Problem")
+    simple_test(birthday(),18,
+                "2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6")
     

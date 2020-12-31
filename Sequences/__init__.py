@@ -66,7 +66,7 @@ from Sequences.Totient import totients, cototients, charmichael, \
        sparsely_totient, highly_totient, totient_count
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, \
-       even_odd, hofstader_Q, lucky
+       even_odd, hofstader_Q, lucky, birthday, selfridge
 
 
 
@@ -158,5 +158,5 @@ __all__=[#MANIPULATIONS
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
-         "hofstader_Q","lucky",
+         "hofstader_Q","lucky","birthday","selfridge"
          ]
