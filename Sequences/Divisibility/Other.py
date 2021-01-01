@@ -138,8 +138,7 @@ def all_divisors():
 
 def prime_divisors():
     """
-    Number of Prime Divisors with Multiplicity: Length of prime factorization for each positive integer
-    Also the big omega function\n
+    Number of Prime Divisors with Multiplicity: Big Omega Function\n
     OEIS A001222
     """
     
@@ -171,8 +170,7 @@ def prime_divisors():
 
 def unique_prime_divisors():
     """
-    Number of Unique Prime Divisors: Count of unique prime factors for positive n
-    Also the little omega function\n
+    Number of Unique Prime Divisors: Little Omega\n
     OEIS A001221
     """
     
@@ -247,7 +245,7 @@ def squarefree_core():
 
 def powerfree_core(p=2):
     """
-    Powerfree Core: Smallest integer m such that n/m is a perfect pth power for positive n\n
+    Powerfree Core: Smallest integer m such that n/m is a perfect pth power for positive n
     
     Args:
         p -- power
@@ -292,6 +290,7 @@ def powerful(n=2):
 def coprimes(n):
     """
     All positive integers coprime to n
+    Finite generator
     
     Args:
         n -- an integer greater than 0
@@ -451,7 +450,7 @@ def almost_primes(n):
 
 def blum():
     """
-    The Blum Integers: Integers that are the product of distinct primes both congruent to 3 mod 4
+    The Blum Integers: Integers that are the product of distinct primes both congruent to 3 mod 4\n
     OEIS A016105
     """
     
@@ -468,7 +467,8 @@ def blum():
 
 def blum_blum_shub_integers():
     """
-    Integers that maximize the period of the Blum-Blum-Shub PRNG
+    Integers that maximize the period of the Blum-Blum-Shub PRNG\n
+    OEIS A338407
     """
     
     P = blum_primes()

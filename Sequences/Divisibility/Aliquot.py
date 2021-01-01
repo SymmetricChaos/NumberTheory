@@ -6,7 +6,7 @@ from collections import Counter
 
 def aliquot():
     """
-    Aliquot Numbers: Sum of proper divisors for each positive integer
+    Aliquot Numbers: Sum of proper divisors for each positive integer\n
     OEIS A001065
     """
     
@@ -16,7 +16,7 @@ def aliquot():
 
 def touchable():
     """
-    Touchable Numbers: Non-negative integers that can be an aliquot sum
+    Touchable Numbers: Non-negative integers that can be an aliquot sum\n
     OEIS A078923
     """
     
@@ -40,7 +40,7 @@ def touchable():
 
 def untouchable():
     """
-    Untouchable Numbers: Non-negative integers that cannot be an aliquot sum
+    Untouchable Numbers: Non-negative integers that cannot be an aliquot sum\n
     OEIS A005114
     """
     
@@ -65,6 +65,8 @@ def aliquot_recurrence(n):
     
     Args:
         n -- integer greater than zero
+    
+    OEIS
     """
     
     require_integers(["n"],[n])
@@ -77,7 +79,7 @@ def aliquot_recurrence(n):
 
 def abundant():
     """
-    Abundant Numbers: Positive integers that are less than their aliquot sum
+    Abundant Numbers: Positive integers that are less than their aliquot sum\n
     OEIS A005101
     """
     
@@ -88,7 +90,7 @@ def abundant():
 
 def primitive_abundant_1():
     """
-    Primitive Abundant Numbers: Positive integers that are abundant but have only deficient factors
+    Primitive Abundant Numbers: Positive integers that are abundant but have only deficient factors\n
     OEIS A071395
     """
     
@@ -113,7 +115,7 @@ def primitive_abundant_1():
 
 def primitive_abundant_2():
     """
-    Primitive Abundant Numbers: Positive integers that are abundant but no abundant factors
+    Primitive Abundant Numbers: Positive integers that are abundant but no abundant factors\n
     OEIS A091191
     """
     
@@ -132,7 +134,7 @@ def primitive_abundant_2():
 
 def abundance():
     """
-    Abundance: The aliquot sum of each positive number minus that number
+    Abundance: The aliquot sum of each positive number minus that number\n
     OEIS A033880
     """
     
@@ -142,7 +144,7 @@ def abundance():
 
 def highly_abundant():
     """
-    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer
+    Highly Abundant Numbers: Positive integers with a greater sum of divisors than every smaller positive integer\n
     OEIS A002093
     """
     
@@ -158,7 +160,7 @@ def highly_abundant():
 
 def superabundant():
     """
-    Super Abundant Numbers: Positive integers such that the sum of divisors divided by n is greater than for every smaller positive integer
+    Super Abundant Numbers: Positive integers such that the sum of divisors divided by n is greater than for every smaller positive integer\n
     OEIS A004394
     """
     
@@ -174,7 +176,7 @@ def superabundant():
 
 def deficient():
     """
-    Deficient Numbers: Positive integers that are greater than their aliquot sum
+    Deficient Numbers: Positive integers that are greater than their aliquot sum\n
     OEIS A005100
     """
     
@@ -185,7 +187,7 @@ def deficient():
 
 def deficiency():
     """
-    Deficiency: Each positive integer minus its aliquot sum
+    Deficiency: Each positive integer minus its aliquot sum\n
     OEIS A033879
     """
     
@@ -195,7 +197,7 @@ def deficiency():
 
 def perfect():
     """
-    Perfect Numbers: Positive integers that are equal to their aliquot sum
+    Perfect Numbers: Positive integers that are equal to their aliquot sum\n
     OEIS A000396
     """
     
@@ -245,43 +247,31 @@ def weird():
             yield a
 
 
-def amicable():
-    """
-    Amicable Pairs:\n
-    OEIS A063990
-    """
-    
-    lower = set([])
-    
-    for n in naturals(220):
-        b = aliquot_sum(n)
-        
-        if b <= n or b in lower:
-            continue
-        
-        if aliquot_sum(b) == n:
-            lower.add(n)
-            yield n
-            yield b
-
-
 def amicable_pairs():
     """
-    Amicable Pairs:\n
+    Amicable Pairs: Pairs of numbers which are each the Aliquot sum of the other\n
     OEIS A063990
     """
     
-    lower = set([])
-    
-    for n in naturals(220):
+    for n in naturals(284):
         b = aliquot_sum(n)
         
-        if b <= n or b in lower:
+        if b >= n:
             continue
         
         if aliquot_sum(b) == n:
-            lower.add(n)
-            yield n,b
+            yield b,n
+
+
+def amicable():
+    """
+    Amicable Numbers: Naturals which are part of an amicable pair\n
+    OEIS A063990
+    """
+    
+    for a,b in amicable_pairs():
+        yield a
+        yield b
 
 
 def practical():
@@ -372,6 +362,10 @@ if __name__ == '__main__':
     print("\nAmicable Pairs")
     simple_test(amicable_pairs(),4,
                 "(220, 284), (1184, 1210), (2620, 2924), (5020, 5564)")
+    
+    print("\nAmicable Numbers")
+    simple_test(amicable(),9,
+                "220, 284, 1184, 1210, 2620, 2924, 5020, 5564, 6232")
     
     print("\nPractical Numbers")
     simple_test(practical(),15,
