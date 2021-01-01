@@ -9,24 +9,31 @@ from itertools import cycle
 from math import gcd
 from sympy import legendre_symbol
 
-def modular_inverses():
+def modular_inverses(flatten=False):
     """
     Triangle of Modular Multiplicative Inverses\n
     OEIS A102057
     """
     
     for a in naturals(2):
+        T = []
+        
         for b in range(1,a):
             g,x,y = egcd(b,a)
             
             if g != 1:
-                yield 0
+                T.append(0)
             
             else:
-                yield x%a
+                T.append(x%a)
+        
+        if flatten == True:
+            yield from T
+        else:
+            yield tuple(T)
 
 
-def legendre_symbols():
+def legendre_symbols(flatten=False):
     """
     Irreguar Array of Legendre Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
     One row for each prime, p, of length p\n
@@ -34,19 +41,24 @@ def legendre_symbols():
     """
     
     for p in primes():
-        yield 0
+        T = [0]
         
         for a in range(1,p):
             out = pow(a,(p-1)//2,p)
             
             if out == 1:
-                yield 1
+                T.append(1)
             
             else:
-                yield -1
+                T.append(-1)
+        
+        if flatten == True:
+            yield from T
+        else:
+            yield tuple(T)
 
 
-def jacobi_symbols():
+def jacobi_symbols(flatten=False):
     """
     Irreguar Array of Jacobi Symbols: 1 at quadratic residues, -1 at nonresideus, 0 at zero
     One row for each odd natural, n, of length n\n
@@ -56,13 +68,20 @@ def jacobi_symbols():
     for p in odds():
         pfacs = canonical_factorization(p)
         
+        T = []
+        
         for a in range(p):
             out = 1
             
             for f,e in pfacs.items():
                 out *= legendre_symbol(a,f)**e
             
-            yield out
+            T.append(out)
+        
+        if flatten == True:
+            yield from T
+        else:
+            yield tuple(T)
 
 
 def kronecker_symbols():
@@ -95,7 +114,7 @@ def mobius_function():
 
 def mertens_function():
     """
-    Merten's Function: Partial sums of the Mobius Function
+    Merten's Function: Partial sums of the Mobius Function\n
     OEIS A002321
     """
     
@@ -192,16 +211,16 @@ if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
     print("Triangle of Modular Inverses")
-    simple_test(modular_inverses(),18,
-                "1, 1, 2, 1, 0, 3, 1, 3, 2, 4, 1, 0, 0, 0, 5, 1, 4, 5")
+    simple_test(modular_inverses(),4,
+                "(1,), (1, 2), (1, 0, 3), (1, 3, 2, 4)")
     
     print("\nIrregular Array of Legendre Symbols")
-    simple_test(legendre_symbols(),16,
-                "0, 1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1")
+    simple_test(legendre_symbols(),3,
+                "(0, 1), (0, 1, -1), (0, 1, -1, -1, 1)")
     
     print("\nIrregular Array of Jacobi Symbols")
-    simple_test(jacobi_symbols(),16,
-                "1, 0, 1, -1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, -1, -1")
+    simple_test(jacobi_symbols(),3,
+                "(1,), (0, 1, -1), (0, 1, -1, -1, 1)")
     
     print("\nTriangle of Kronecker Symbols")
     simple_test(kronecker_symbols(),17,

@@ -57,9 +57,9 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        sorting, rowland, rowland_primes, logistic_map
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
-      powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
-      constant, arithmetrico_geometric, gen_polynomial, self_powers, \
-      sign_sequence, floyd_triangle, magic_square
+       powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
+       constant, arithmetrico_geometric, gen_polynomial, self_powers, \
+       sign_sequence, floyd_triangle, magic_square
 
 from Sequences.Totient import totients, cototients, charmichael, \
        jordan_totients, totient_range, nontotients, even_nontotients, \

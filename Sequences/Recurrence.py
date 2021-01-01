@@ -567,7 +567,7 @@ if __name__ == '__main__':
     simple_test(leonardo(),13,
                 "1, 1, 3, 5, 9, 15, 25, 41, 67, 109, 177, 287, 465")
     
-    print("\nSimple Recurrence for a = 7, b = 9")
+    print("\nSimple Additive Recurrence for a = 7, b = 9")
     simple_test(simple_recurrence(7,9),12,
                 "7, 9, 16, 25, 41, 66, 107, 173, 280, 453, 733, 1186")
     
