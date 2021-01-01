@@ -1,10 +1,10 @@
 from Sequences.Divisibility import composites, primes
 from Sequences.MathUtils import factor_out_twos, coprime_to
 from Sequences.NiceErrorChecking import require_integers, require_geq
-from Sequences.Weird import selfridge
+#from Sequences.Weird import selfridge
 
 from sympy import jacobi_symbol
-from sympy.ntheory.primetest import is_square
+#from sympy.ntheory.primetest import is_square
 from math import gcd
 
 def fermat_pseudoprimes(a):
@@ -114,7 +114,7 @@ def strong_pseudoprimes(a):
 
 def euler_pseudoprimes():
     """
-    Euler Pseudoprimes
+    Euler Pseudoprimes\n
     OEIS A006970
     """
     
@@ -126,7 +126,7 @@ def euler_pseudoprimes():
 
 def euler_jacobi_pseudoprimes():
     """
-    Euler-Jacobi Pseudoprimes
+    Euler-Jacobi Pseudoprimes\n
     OEIS A047713
     """
     
@@ -206,7 +206,7 @@ def lucas_pseudoprimes(P,Q):
 
 def fibonacci_pseudoprimes():
     """
-    Fibonacci Pseudoprimes: Special case of Lucas Pseudoprimes, also excluding multiples of 5
+    Fibonacci Pseudoprimes: Special case of Lucas Pseudoprimes, also excluding multiples of 5\n
     OEIS A081264
     """
 
@@ -229,7 +229,7 @@ def fibonacci_pseudoprimes():
 
 def pell_pseudoprimes():
     """
-    Pell Pseudoprimes: Special case of Lucas Pseudoprimes
+    Pell Pseudoprimes: Special case of Lucas Pseudoprimes\n
     OEIS 
     """
     
@@ -238,7 +238,7 @@ def pell_pseudoprimes():
 
 def pell_pseudoprimes_2():
     """
-    Pell Pseudoprimes: Passes a version of the Pell primality test
+    Pell Pseudoprimes: Passes a version of the Pell primality test\n
     OEIS A099011
     """
     
@@ -257,10 +257,11 @@ def pell_pseudoprimes_2():
                 yield c
 
 
-# Only seems to work for base 1 need anotehr reference
+# Only seems to work for base 1, need another reference
 def strong_lucas_pseudoprimes(P,Q):
     """
-    Lucas Pseudoprimes: Composite numbers passing either of two the Lucas primality tests for P and Q
+    Lucas Pseudoprimes: Composite numbers passing either of two the Lucas primality tests for P and Q\n
+    OEIS
     """
     
     def lucas_U_test(n,d,P,Q):

@@ -625,7 +625,7 @@ def multiplicative_partition():
 
 def multiplicative_partitions(n):
     """
-    Multiplicative Partitions: Sets of integers, not including one, that have a product of n, in lexicographic order\n
+    Multiplicative Partitions: Sets of positive integers, not including one, that have a product of n, in lexicographic order\n
     Finite generator
     """
     

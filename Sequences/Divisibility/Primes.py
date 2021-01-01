@@ -24,7 +24,7 @@ def primes():
 
 def odd_primes():
     """
-    Odd Primes: Primes that are odd positive integer
+    Odd Primes: Primes that are odd positive integer\n
     OEIS A065091
     """
     
@@ -33,7 +33,7 @@ def odd_primes():
 
 def twin_primes():
     """
-    Twin Primes: Primes that are two more or less than another prime
+    Twin Primes: Primes that are two more or less than another prime\n
     OEIS A001097
     """
     
@@ -49,7 +49,7 @@ def twin_primes():
 
 def twin_prime_pairs():
     """
-    Twin Prime Pairs: Primes that are two more or less than another prime
+    Twin Prime Pairs: Primes that are two more or less than another prime\n
     OEIS A077800
     """
     
@@ -65,7 +65,7 @@ def twin_prime_pairs():
 
 def n_gap_prime_pairs(n):
     """
-    Pairs of primes (p,q) such that p+n = q
+    Pairs of primes (p,q) such that p+n = q\n
     OEIS A077800, A156274, A156320, A140445, A156323, A140446, A272815, 
          A156328, A272816, A140447
     """
@@ -93,7 +93,7 @@ def n_gap_prime_pairs(n):
 
 def prime_tuples(K):
     """
-    Tuples of primes (p,q,r...) with gaps specified by K
+    Tuples of primes (p,q,r...) with gaps specified by K\n
     OEIS
     """
     
@@ -127,7 +127,7 @@ def prime_tuples(K):
 
 def superprimes():
     """
-    Prime Indexed Primes: The pth primes for p in primes
+    Prime Indexed Primes: The pth primes for p in primes\n
     OEIS A006450
     """
     
@@ -211,7 +211,8 @@ def congruent_primes(n,k):
 
 def blum_primes():
     """
-    Primes such that P = 2p+1 and p = 2q+1 where p and q are odd primes
+    Primes such that P = 2p+1 and p = 2q+1 where p and q are odd primes\n
+    OEIS
     """
     
     for p in congruent_primes(3,4):
@@ -232,7 +233,7 @@ def blum_primes():
 
 def prime_gaps():
     """
-    Prime Gaps: Gaps between successive primes
+    Prime Gaps: Gaps between successive primes\n
     OEIS A001223
     """
     
@@ -353,7 +354,8 @@ def prime_product(P,inclusive=False):
 
 def prime_signatures():
     """
-    Prime Signatures: The prime signature of each positive integer, returns tuples
+    Prime Signatures: The prime signature of each positive integer, returns tuples\n
+    OEIS
     """
     
     D = defaultdict(list)
