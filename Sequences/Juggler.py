@@ -11,6 +11,7 @@ def _juggler_step(n):
 def juggler(n):
     """
     Juggler Sequence starting with n
+    Finite generator
     """
     
     if n == 0:
@@ -27,7 +28,8 @@ def juggler(n):
 
 def juggler_all(n):
     """
-    Concatenation of all Juggler Sequences
+    Concatenation of all Juggler Sequences\n
+    OEIS
     """
     
     for n in naturals():
