@@ -37,7 +37,7 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        hypotenuse, mosner, primitive_pythagorean_triples, \
        pythagorean_triples, primitive_optic_triples
 
-from Juggler import juggler, juggler_map, juggler_length, juggler_longest, \
+from Sequences.Juggler import juggler, juggler_map, juggler_length, juggler_longest, \
        juggler_highpoint, juggler_highwater, juggler_all
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
@@ -52,9 +52,9 @@ from Sequences.Pseudorandom import LCG, ICG, CIG, aLFG, mLFG, gLFG, LFSR, \
 
 from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        tribonacci, lucas_U, lucas_V, padovan, simple_recurrence, sylvester, \
-       leonardo, arbitrary_recurrence, pisot_E, pisot_L, pisot_P, pisot_T, \
-       ulam, perrin, semifibonacci, tribonnaci_word, tribonnaci_words, \
-       narayana_cows, sorting, rowland, rowland_primes, logistic_map
+       leonardo, pisot_E, pisot_L, pisot_P, pisot_T, ulam, perrin, \
+       semifibonacci, tribonnaci_word, tribonnaci_words, narayana_cows, \
+       sorting, rowland, rowland_primes, logistic_map
 
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
       powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
@@ -141,10 +141,9 @@ __all__=[#MANIPULATIONS
          #RECURRENCE
          "lucas","fibonacci","pell","companion_pell","tribonacci","leonardo",
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
-         "arbitrary_recurrence","pisot_E","pisot_L","pisot_P","pisot_T",
-         "perrin", "semifibonacci","tribonnaci_word","tribonnaci_words",
-         "narayana_cows","juggler","juggler_map","sorting", "rowland",
-         "rowland_primes","logistic_map",
+         "pisot_E","pisot_L","pisot_P","pisot_T","perrin", "semifibonacci",
+         "tribonnaci_word","tribonnaci_words","narayana_cows","juggler",
+         "juggler_map","sorting", "rowland","rowland_primes","logistic_map",
          
          #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",

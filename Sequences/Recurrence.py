@@ -125,20 +125,28 @@ def jacobsthal():
         a,b = b,2*a+b
 
 
-def simple_recurrence(a,b):
+def simple_recurrence(a,b,operation="+"):
     """
-    Additive recurrence based relation on two terms
+    Recurrence on successive values of a sequence using an arithmetic operation
     
     Args:
-        a -- first term
-        b -- second term
+        a -- integer, first term
+        b -- integer, second term
+        operation -- string, operation to be used chosen from: +,-,*,/,**
     """
     
     require_integers(["a","b"],[a,b])
     
+    O = {"+": lambda x,y: x+y,
+         "-": lambda x,y: x-y,
+         "*": lambda x,y: x*y,
+         "**": lambda x,y: x**y}
+    
+    func = O[operation]
+    
     while True:
         yield a
-        a, b = b, a+b
+        a, b = b, func(a,b)
 
 
 def leonardo():
@@ -280,27 +288,6 @@ def sylvester():
         yield v
         
         v = v*v-v+1
-
-
-def arbitrary_recurrence(S,func):
-    """
-    Recurrence based sequences given a starting list and a function
-    
-    Args:
-        S -- Starting list
-        func -- A function that that will take in S and return the next value of S
-    """
-    
-    if type(S) != list:
-        raise Exception(f"S must be of type list not {type(S)}")
-    
-    for i in S:
-        if type(i) != int:
-            raise Exception(f"All elements of S must be of type int not {type(i)}")
-    
-    while True:
-        yield S[0]
-        S = S[1:] + [func(S)]
 
 
 def pisot_E(a,b):
@@ -531,7 +518,7 @@ def sorting():
     yield 0
     
     for n in naturals(2):
-        t = A[half_floor(n)-1] + A[half_ceil(n)-1] + n -1
+        t = A[half_floor(n)-1] + A[half_ceil(n)-1] + n - 1
         
         yield t
         
@@ -607,11 +594,6 @@ if __name__ == '__main__':
     print("\nNarayana's Cows Sequence")
     simple_test(narayana_cows(),15,
                 "1, 1, 1, 2, 3, 4, 6, 9, 13, 19, 28, 41, 60, 88, 129")
-    
-    from math import sqrt
-    print("\nArbitrary Reccurence with f(a,b,c) = ⌊2√(a+b+c)⌋+a\nand initial state 1, 1, 1")
-    simple_test(arbitrary_recurrence([1,1,1],lambda x: floor(2*sqrt(x[0]+x[1]+x[2]))+x[0]),15,
-                "1, 1, 1, 4, 5, 7, 12, 14, 18, 25, 29, 34, 43, 49, 56")
     
     print("\nPisot E-Sequence(8,21)")
     simple_test(pisot_E(8,21),10,
