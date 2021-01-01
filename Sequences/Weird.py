@@ -259,6 +259,22 @@ def birthday():
         yield ctr
 
 
+def binary_addition_chain(n):
+    """
+    Addition Chain for n Using the Binary Method
+    """
+    
+    def bac_recur(n):
+        if n == 1:
+            return (n,)
+        if n % 2 == 0:
+            return bac_recur(n//2)+ (n,)
+        else:
+            return bac_recur(n-1) + (n,)
+    
+    yield from bac_recur(n)
+
+
 
 
 
@@ -312,4 +328,8 @@ if __name__ == '__main__':
     print("\nSolutions to the Birthday Problem")
     simple_test(birthday(),18,
                 "2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6")
+    
+    print("\nBinary Addition Chain For 525")
+    simple_test(binary_addition_chain(525),18,
+                "1, 2, 4, 8, 16, 32, 64, 65, 130, 131, 262, 524, 525")
     
