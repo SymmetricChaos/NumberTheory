@@ -1,4 +1,5 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
+from Sequences.MathUtils import int_to_bits, int_to_digits
 
 from math import gcd
 from fractions import Fraction
@@ -261,7 +262,7 @@ def birthday():
 
 def binary_addition_chain(n):
     """
-    Addition Chain for n Using the Binary Method
+    Semantic Addition Chain for n Using the Binary Method
     """
     
     def bac_recur(n):
@@ -273,6 +274,42 @@ def binary_addition_chain(n):
             return bac_recur(n-1) + (n,)
     
     yield from bac_recur(n)
+
+
+def chi_binary_addition_chain(n):
+    """
+    Chi Sequence for the Binary Addition Chain of n, returns tuples of positions to be added
+    """
+    
+    B = int_to_bits(n,2)
+    
+    ctr = 0
+    for b in B[1:]:
+        if b == 1:
+            yield (ctr,ctr)
+            ctr += 1
+            yield (ctr,0)
+        else:
+            yield (ctr,ctr)
+        ctr += 1
+
+
+# def chi_brauer_addition_chian(n,d):
+#     """
+#     Chi Sequence for the Brauer Addition Chain of n in base 2**d, returns tuples of positions to be added
+#     """
+    
+#     B = int_to_digits(n,2**d)
+    
+#     ctr = 0
+#     for b in B[1:]:
+#         if B[n+1] == 1:
+#             yield (ctr,ctr)
+#             ctr += 1
+#             yield (ctr,0)
+#         else:
+#             yield (ctr,ctr)
+#         ctr += 1
 
 
 
@@ -329,7 +366,13 @@ if __name__ == '__main__':
     simple_test(birthday(),18,
                 "2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6")
     
-    print("\nBinary Addition Chain For 525")
-    simple_test(binary_addition_chain(525),18,
-                "1, 2, 4, 8, 16, 32, 64, 65, 130, 131, 262, 524, 525")
+    print("\nBinary Addition Chain For 219")
+    simple_test(binary_addition_chain(219),18,
+                "1, 2, 3, 6, 12, 13, 26, 27, 54, 108, 109, 218, 219")
+    
+    print("\nBinary Addition Chain For 219")
+    simple_test(chi_binary_addition_chain(219),18,
+                "(0, 0), (1, 0), (2, 2), (3, 3), (4, 0), (5, 5), (6, 0), (7, 7), (8, 8), (9, 0), (10, 10), (11, 0)")
+    
+    
     

@@ -37,8 +37,8 @@ from Sequences.Geometric import primitive_hypotenuse, nonhypotenuse, \
        hypotenuse, mosner, primitive_pythagorean_triples, \
        pythagorean_triples, primitive_optic_triples
 
-from Sequences.Juggler import juggler, juggler_map, juggler_length, juggler_longest, \
-       juggler_highpoint, juggler_highwater, juggler_all
+from Sequences.Juggler import juggler, juggler_map, juggler_length, \
+       juggler_longest, juggler_highpoint, juggler_highwater, juggler_all
 
 from Sequences.ModularArithmetic import modular_inverses, legendre_symbols, \
        jacobi_symbols, kronecker_symbols, mobius_function, quadratic_residue, \
@@ -67,7 +67,7 @@ from Sequences.Totient import totients, cototients, charmichael, \
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, \
        even_odd, hofstader_Q, lucky, birthday, selfridge, \
-       binary_addition_chain
+       binary_addition_chain, chi_binary_addition_chain
 
 
 
@@ -158,5 +158,6 @@ __all__=[#MANIPULATIONS
          
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
-         "hofstader_Q","lucky","birthday","selfridge","binary_addition_chain"
+         "hofstader_Q","lucky","birthday","selfridge","binary_addition_chain",
+         "chi_binary_addition_chain"
          ]

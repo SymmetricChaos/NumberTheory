@@ -103,7 +103,10 @@ def prime_power_factorization(n):
 
 
 def canonical_factorization(n):
-    """Prime factors and their exponents"""
+    """
+    Prime factors and their exponents
+    Returns a dict with primes and keys and exponents as values
+    """
     
     if type(n) != int:
         raise Exception("n must be an integer") 
