@@ -67,7 +67,7 @@ from Sequences.Totient import totients, cototients, charmichael, \
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, \
        even_odd, hofstader_Q, lucky, birthday, selfridge, \
-       binary_addition_chain, chi_binary_addition_chain
+       binary_addition_chain, binary_addition_chain_chi
 
 
 
@@ -159,5 +159,5 @@ __all__=[#MANIPULATIONS
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
          "hofstader_Q","lucky","birthday","selfridge","binary_addition_chain",
-         "chi_binary_addition_chain"
+         "binary_addition_chain_chi"
          ]
