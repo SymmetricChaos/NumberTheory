@@ -365,6 +365,28 @@ def number_names_str(hyphen=False,use_and=False,long_scale=False):
         yield int_to_name(n,hyphen,use_and,long_scale)
 
 
+def number_name_lengths(count_spaces=False,use_and=False,long_scale=False):
+    """
+    The English names of the natural numbers, returns strings
+    
+    Args:
+        n -- int to be named
+        count_spaces --bool, include spaces/hyphens is length, defaults to false
+        use_and -- bool, use the phrasing "hundred and" rather than just "hundred"
+        long_scale -- bool, use the long scale where (1,000,000 = 'one thousand million')
+    
+    With short scale goes up to 65 digit numbers
+    With long scale goes up to 122 digit numbers
+    
+    OEIS A005589, A052360
+    """
+    
+    for n in naturals():
+        s = int_to_name(n,use_and,long_scale)
+        s.replace(" ","")
+        yield len(s)
+
+
 
 
 
@@ -436,7 +458,11 @@ if __name__ == '__main__':
     #             "(0, 0), (1, 0), (2, 2), (3, 3), (4, 0), (5, 5), (6, 0), (7, 7), (8, 8), (9, 0), (10, 10), (11, 0)")
     
     print("\nNames of Natural Numbers")
-    simple_test(number_names_str(hyphen=True),101,
-                "1, 2, 3, 4, 6, 12, 24, 27, 54, 108, 110")
+    simple_test(number_names_str(hyphen=True),16,
+                "zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen")
+    
+    print("\nLength of the Namers of Natural Numbers")
+    simple_test(number_name_lengths(),18,
+                "zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen")
     
     
