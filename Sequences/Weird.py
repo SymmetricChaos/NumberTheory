@@ -347,6 +347,12 @@ def brauer_addition_chain(n,d):
 #         ctr += 1
 
 
+# def number_names():
+#     """
+#     The English names of the natural numbers
+#     """
+
+
 
 
 

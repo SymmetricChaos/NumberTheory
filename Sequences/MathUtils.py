@@ -429,6 +429,65 @@ def int_to_roman(n):
     return out
 
 
+def int_to_name(n):
+    """
+    Convert an integer to its standard English name using the short scale where 1,000,000,000 = 'one billion'
+    Works for integers of up to 65 digits
+    """
+    
+    lt20 = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+         6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven",
+         12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen",
+         16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen",
+        }
+    
+    geq20 = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty", 6: "sixty",
+         7: "seventy", 8: "eighty", 9: "ninety"
+        }
+    
+    mags = ["","thousand","million","billion","trillion","quadrillion",
+            "quintillion","sextillion","septillion","octillion","nonillion",
+            "decillion","undecillion","duodecillion","tredecillion",
+            "quattuordecillion","quindecillion","sexdecillion",
+            "septendecillion","octodecillion","novemdecillion",
+            "vigintillion"]
+    
+    if n == 0:
+        return "zero"
+    
+    if n < 0:
+        n = abs(n)
+        sgn = -1
+    
+    s = ""
+    
+    def lt_hund(n):
+        t = str(n)
+        if a < 20:
+            return lt20[int(t[0])]
+        if a >= 20:
+            return f"{geq20[int(t[0])]} {lt20[int(t[1])]}"
+    
+    ctr = 0
+    while n != 0:
+        n,a = divmod(n,1000)
+        t = str(a)
+        if a < 100:
+            s = f"{lt_hund(a)} {mags[ctr]} " + s
+        else:
+            s = f"{lt20[int(t[0])]} hundred {lt_hund(a%100)} {mags[ctr]} " + s
+        ctr += 1
+    
+    if sgn == -1:
+        s = "negative " + s
+    
+    while s[-1] == " ":
+        s = s[:-1]
+    
+    return s
+
+
+
 
 
 ########################
@@ -882,6 +941,5 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
-    
-    # for i in range(1,100):
-    #     print(i,int_to_roman(i))
+    N = -2348799
+    print(N,"=",int_to_name(N))
