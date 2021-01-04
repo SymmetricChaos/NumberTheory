@@ -1,5 +1,5 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from Sequences.MathUtils import int_to_bits, int_to_digits
+from Sequences.MathUtils import int_to_bits, int_to_digits, int_to_name
 
 from math import gcd
 from fractions import Fraction
@@ -347,10 +347,22 @@ def brauer_addition_chain(n,d):
 #         ctr += 1
 
 
-# def number_names():
-#     """
-#     The English names of the natural numbers
-#     """
+def number_names_str(hyphen=False,use_and=False,long_scale=False):
+    """
+    The English names of the natural numbers, returns strings
+    
+    Args:
+        n -- int to be named
+        hyphen --bool, use hyphens for numbers like forty-eight
+        use_and -- bool, use the phrasing "hundred and" rather than just "hundred"
+        long_scale -- bool, use the long scale where (1,000,000 = 'one thousand million')
+    
+    With short scale goes up to 65 digit numbers
+    With long scale goes up to 122 digit numbers
+    """
+    
+    for n in naturals():
+        yield int_to_name(n,hyphen,use_and,long_scale)
 
 
 
@@ -422,4 +434,9 @@ if __name__ == '__main__':
     # print("\nBrauer Addition Chain For 219, m = 2**2")
     # simple_test(brauer_addition_chain_chi(219,2),18,
     #             "(0, 0), (1, 0), (2, 2), (3, 3), (4, 0), (5, 5), (6, 0), (7, 7), (8, 8), (9, 0), (10, 10), (11, 0)")
+    
+    print("\nNames of Natural Numbers")
+    simple_test(number_names_str(hyphen=True),101,
+                "1, 2, 3, 4, 6, 12, 24, 27, 54, 108, 110")
+    
     

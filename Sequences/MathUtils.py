@@ -429,13 +429,20 @@ def int_to_roman(n):
     return out
 
 
-def int_to_name(n):
+def int_to_name(n,hyphen=False,use_and=False,long_scale=False):
     """
-    Convert an integer to its standard English name using the short scale where 1,000,000,000 = 'one billion'
-    Works for integers of up to 65 digits
+    Convert an integer to its English name, defaults to short scale (1,000,000 = 'one billion')
+    Args:
+        n -- int to be named
+        hyphen --bool, use hyphens for numbers like forty-eight
+        use_and -- bool, use the phrasing "hundred and" rather than just "hundred"
+        long_scale -- bool, use the long scale where (1,000,000 = 'one thousand million')
+    
+    With short scale works for integer of up to 65 digits
+    With long scale works for integers of up to 120 digits
     """
     
-    lt20 = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+    lt20 = {0: "", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
          6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven",
          12: "twelve", 13: "thirteen", 14: "fourteen", 15: "fifteen",
          16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen",
@@ -445,12 +452,34 @@ def int_to_name(n):
          7: "seventy", 8: "eighty", 9: "ninety"
         }
     
-    mags = ["","thousand","million","billion","trillion","quadrillion",
-            "quintillion","sextillion","septillion","octillion","nonillion",
-            "decillion","undecillion","duodecillion","tredecillion",
-            "quattuordecillion","quindecillion","sexdecillion",
-            "septendecillion","octodecillion","novemdecillion",
-            "vigintillion"]
+    if long_scale:
+        mags = ["","thousand","million","thousand million","billion",
+                "thousand billion","trillion","thousand trillion","quadrillion",
+                "thousand quadrillion","quintillion","thousand quintillion",
+                "sextillion","thousand sextillion",
+                "septillion","thousand septillion",
+                "octillion","thousand octillion",
+                "nonillion","thousand nonillion",
+                "decillion","thousand decillion",
+                "undecillion","thousand undecillion",
+                "duodecillion","thousand duodecillion",
+                "tredecillion","thousand tredecillion",
+                "quattuordecillion","thousand quattuordecillion",
+                "quindecillion","thousand quindecillion",
+                "sexdecillion","thousand sexdecillion",
+                "septendecillion","thousand septendecillion",
+                "octodecillion","thousand octodecillion",
+                "novemdecillion","thousand novemdecillion",
+                "vigintillion"]
+    else:
+        mags = ["","thousand","million","billion","trillion","quadrillion",
+                "quintillion","sextillion","septillion","octillion","nonillion",
+                "decillion","undecillion","duodecillion","tredecillion",
+                "quattuordecillion","quindecillion","sexdecillion",
+                "septendecillion","octodecillion","novemdecillion",
+                "vigintillion"]
+    
+    
     
     if n == 0:
         return "zero"
@@ -458,24 +487,45 @@ def int_to_name(n):
     if n < 0:
         n = abs(n)
         sgn = -1
+    else:
+        sgn = 1
     
     s = ""
     
-    def lt_hund(n):
+    def lt_hund(n,hyphen):
+        if n >= 100:
+            raise Exception(f"{n} is >= 100")
         t = str(n)
-        if a < 20:
-            return lt20[int(t[0])]
-        if a >= 20:
-            return f"{geq20[int(t[0])]} {lt20[int(t[1])]}"
+        if n == 0:
+            return ""
+        if n < 20:
+            return lt20[n]
+        if n >= 20:
+            if t[1] == "0":
+                return f"{geq20[int(t[0])]}"
+            else:
+                if hyphen:
+                    return f"{geq20[int(t[0])]}-{lt20[int(t[1])]}"
+                else:
+                    return f"{geq20[int(t[0])]} {lt20[int(t[1])]}"
     
     ctr = 0
     while n != 0:
         n,a = divmod(n,1000)
+        if a == 0:
+            ctr += 1
+            continue
         t = str(a)
         if a < 100:
-            s = f"{lt_hund(a)} {mags[ctr]} " + s
+            s = f"{lt_hund(a,hyphen=hyphen)} {mags[ctr]} " + s
         else:
-            s = f"{lt20[int(t[0])]} hundred {lt_hund(a%100)} {mags[ctr]} " + s
+            if a % 100 == 0:
+                s = f"{lt20[int(t[0])]} hundred {mags[ctr]} " + s
+            else:
+                if use_and:
+                    s = f"{lt20[int(t[0])]} hundred and {lt_hund(a%100,hyphen=hyphen)} {mags[ctr]} " + s
+                else:
+                    s = f"{lt20[int(t[0])]} hundred {lt_hund(a%100,hyphen=hyphen)} {mags[ctr]} " + s
         ctr += 1
     
     if sgn == -1:
@@ -941,5 +991,7 @@ if __name__ == '__main__':
     print("\nAll Subsets of [1,2,3,4,5]")
     print([i for i in all_subsets(iter([1,2,3,4,5]))])
     
-    N = -2348799
+    print("\nConvert an Integer to its Name\nFirst with default settings then with all options set")
+    N = 100201#1_000_555_123
     print(N,"=",int_to_name(N))
+    print(N,"=",int_to_name(N,hyphen=True,use_and=True,long_scale=True))
