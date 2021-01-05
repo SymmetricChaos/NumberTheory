@@ -302,8 +302,6 @@ def brauer_addition_chain(n,d):
     m = 2**d
     D = int_to_digits(n,m)
     
-    print(D)
-    
     L = [i for i in range(1,m)]
     
     cur = D[0]
@@ -312,13 +310,18 @@ def brauer_addition_chain(n,d):
         if digit == 0:
             for _ in range(d):
                 cur += cur
-                L.append(cur)
+                if cur >= max(L):
+                    L.append(cur)
+        
         else:
             for _ in range(d):
                 cur += cur
-                L.append(cur)
+                if cur >= max(L):
+                    L.append(cur)
+            
             cur += digit
-            L.append(cur)
+            if cur >= max(L):
+                L.append(cur)
     
     yield from L
 
@@ -367,7 +370,7 @@ def number_names_str(hyphen=False,use_and=False,long_scale=False):
 
 def number_name_lengths(count_spaces=False,use_and=False,long_scale=False):
     """
-    The English names of the natural numbers, returns strings
+    The English names of the natural numbers
     
     Args:
         n -- int to be named
@@ -449,9 +452,9 @@ if __name__ == '__main__':
     simple_test(binary_addition_chain_chi(219),18,
                 "(0, 0), (1, 0), (2, 2), (3, 3), (4, 0), (5, 5), (6, 0), (7, 7), (8, 8), (9, 0), (10, 10), (11, 0)")
     
-    print("\nBrauer Addition Chain For 110, m = 2**2")
-    simple_test(brauer_addition_chain(110,2),18,
-                "1, 2, 3, 4, 6, 12, 24, 27, 54, 108, 110")
+    print("\nBrauer Addition Chain For 219, m = 2**2")
+    simple_test(brauer_addition_chain(219,2),18,
+                "1, 2, 3, 6, 12, 13, 26, 52, 54, 108, 216, 219")
     
     # print("\nBrauer Addition Chain For 219, m = 2**2")
     # simple_test(brauer_addition_chain_chi(219,2),18,
@@ -463,6 +466,5 @@ if __name__ == '__main__':
     
     print("\nLength of the Namers of Natural Numbers")
     simple_test(number_name_lengths(),18,
-                "zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen")
-    
+                "4, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9")
     
