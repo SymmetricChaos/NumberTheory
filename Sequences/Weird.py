@@ -390,6 +390,16 @@ def number_name_lengths(count_spaces=False,use_and=False,long_scale=False):
         yield len(s)
 
 
+# def goodstein(n):
+#     """
+#     The Goodstein Sequence of n
+#     Because Godstein sequences grow so quickly this generator will quickly exhaust system memory for values of n greater than 3
+#     Finite generator
+#     """
+    
+#     def hereditary_base_notation(x,b):
+        
+
 
 
 

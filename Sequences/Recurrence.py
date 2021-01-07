@@ -472,7 +472,7 @@ def rowland():
 def rowland_primes():
     """
     Prime values of Rowland's Sequence\n
-    OEIS 
+    OEIS A137613
     """
     
     a = 7

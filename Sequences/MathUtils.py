@@ -431,7 +431,8 @@ def int_to_roman(n):
 
 def int_to_name(n,hyphen=False,use_and=False,long_scale=False):
     """
-    Convert an integer to its English name, defaults to short scale (1,000,000 = 'one billion')
+    Convert an integer to its English name, defaults to short scale (1,000,000 = 'one billion'), returns a string
+    
     Args:
         n -- int to be named
         hyphen --bool, use hyphens for numbers like forty-eight
@@ -531,6 +532,68 @@ def int_to_name(n,hyphen=False,use_and=False,long_scale=False):
         s = s[:-1]
     
     return s
+
+
+def int_to_pow_sum_str(n,B):
+    """
+    Write n as a sum of multiples of powers of B, returns a string
+    """
+    
+    n = abs(n)
+    D = []
+    
+    while n != 0:
+        n,r = divmod(n,B)
+        D.append(r)
+    
+    D.reverse()
+    p = len(D)-1
+    if D[0] == 1:
+        s = f"{B}^{p}"
+    else:
+        s = f"{D[0]}·{B}^{p}"
+    
+    for m in D[1:]:
+        p -= 1
+        if m == 0:
+            pass
+        elif m == 1:
+            s += f" + {B}^{p}"
+        else:
+            s += f" + {m}·{B}^{p}"
+    
+    return s
+
+
+def int_to_pow_sum(n,B):
+    """
+    Write n as a sum of multiples of powers of B, returns a tuple of 3-tuples
+    """
+    
+    n = abs(n)
+    D = []
+    
+    while n != 0:
+        n,r = divmod(n,B)
+        D.append(r)
+    
+    D.reverse()
+    p = len(D)-1
+    T = []
+    
+    for m in D:
+        if m == 0:
+            pass
+        else:
+            T.append((m,B,p))
+        p -= 1
+        
+    return tuple(T)
+
+
+# def int_to_hered_base(n,B):
+
+
 
 
 
@@ -991,3 +1054,10 @@ if __name__ == '__main__':
     N = 100201#1_000_555_123
     print(N,"=",int_to_name(N))
     print(N,"=",int_to_name(N,hyphen=True,use_and=True,long_scale=True))
+    
+    print("\nConvert an Integer to its Representation as a sum of multiples of powers of some base")
+    print(35,"=",int_to_pow_sum_str(35,2))
+    print(100,"=",int_to_pow_sum_str(100,3))
+    
+    print(35,"=",int_to_pow_sum(35,2))
+    print(100,"=",int_to_pow_sum(100,3))
