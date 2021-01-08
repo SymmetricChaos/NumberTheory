@@ -140,7 +140,7 @@ def sum_of_triangular(n):
 
 
 centered_figurate(5,5,show_lines=True)
-figurate(5,5,show_lines=True)
+# figurate(5,5,show_lines=True)
 # show_primitive_pthyagorean_triples(100)
 # pthyagorean_butterfly(400,300)
-# sum_of_triangular(7)
+sum_of_triangular(7)

@@ -544,6 +544,9 @@ def int_to_pow_sum_str(n,B):
         B -- integer greater than 1, the base
     """
     
+    if n == 0:
+        return "0"
+    
     n = abs(n)
     D = []
     
@@ -554,12 +557,15 @@ def int_to_pow_sum_str(n,B):
     D.reverse()
     p = len(D)-1
     
+    if len(D) == 1:
+        return str(D[0])
+    
     if D[0] == 1:
         s = f"{B}^{p}"
     else:
         s = f"{D[0]}·{B}^{p}"
     
-    for m in D[1:-1]:
+    for m in D[1:-2]:
         p -= 1
         if m == 0:
             pass
@@ -629,6 +635,14 @@ def int_to_hered_base_str(n,B):
     
     return S
 
+def hered_base_to_int(s):
+    """
+    Take s, a string in hereditary base B notation, and return to corresponding integer
+    """
+    
+    s = re.sub("\^", "**", s)
+    s = re.sub("·", "*", s)
+    return eval(s)
 
 
 
@@ -1096,5 +1110,10 @@ if __name__ == '__main__':
     print(35,"=",int_to_pow_sum(35,2))
     print(101,"=",int_to_pow_sum(101,3))
     
+    
+    print("\nConvert an Integer to its Representation in some hereditary base notation")
     print(35,"=",int_to_hered_base_str(35,2))
     print(101,"=",int_to_hered_base_str(101,3))
+    
+    print("2^(2^2 + 1) + 2^1 + 1","=",hered_base_to_int("2^(2^2 + 1) + 2^1 + 1"),)
+    print("3^(3^1 + 1) + 2·3^2 + 2","=",hered_base_to_int("3^(3^1 + 1) + 2·3^2 + 2"))
