@@ -1,8 +1,9 @@
 from Sequences.Simple import naturals, arithmetic, sign_sequence
-from Sequences.MathUtils import int_to_bits, int_to_digits, int_to_name
+from Sequences.MathUtils import int_to_bits, int_to_digits, int_to_name, int_to_hered_base_str, hered_base_to_int
 
 from math import gcd
 from fractions import Fraction
+import re
 
 def recaman():
     """
@@ -390,15 +391,27 @@ def number_name_lengths(count_spaces=False,use_and=False,long_scale=False):
         yield len(s)
 
 
-# def goodstein(n):
-#     """
-#     The Goodstein Sequence of n
-#     Because Godstein sequences grow so quickly this generator will quickly exhaust system memory for values of n greater than 3
-#     Finite generator
-#     """
+
+def goodstein(n):
+    """
+    The Goodstein Sequence of n
+    Because Godstein sequences grow so quickly this generator will quickly exhaust system memory for values of n greater than 3
+    Finite generator
+    """
     
-#     def hereditary_base_notation(x,b):
-        
+    s = int_to_hered_base_str(n,2)
+    ctr = 2
+    
+    while n != 0:
+        yield n
+        # We need to regex replace with the funky lookbehind stuff to ensure we don't get a substring inside a number
+        s = re.sub(f"((?<!\d){ctr}(?!\d))", f"{ctr+1}", s)
+        n = hered_base_to_int(s)-1
+        s = int_to_hered_base_str(n,ctr+1)
+        ctr += 1
+    
+    yield 0
+
 
 
 
@@ -477,4 +490,8 @@ if __name__ == '__main__':
     print("\nLength of the Namers of Natural Numbers")
     simple_test(number_name_lengths(),18,
                 "4, 3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9")
+    
+    print("\nGoodstein Sequence G(4)")
+    simple_test(goodstein(4),12,
+                "4, 26, 41, 60, 83, 109, 139, 173, 211, 253, 299, 348")
     

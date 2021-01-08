@@ -565,7 +565,7 @@ def int_to_pow_sum_str(n,B):
     else:
         s = f"{D[0]}·{B}^{p}"
     
-    for m in D[1:-2]:
+    for m in D[1:-1]:
         p -= 1
         if m == 0:
             pass
