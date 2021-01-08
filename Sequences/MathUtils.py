@@ -2,6 +2,7 @@ from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from functools import reduce
 from sympy import factorint, divisors, divisor_sigma, legendre_symbol
+import re
 
 ###################
 ## FACTORIZATION ##
@@ -537,6 +538,10 @@ def int_to_name(n,hyphen=False,use_and=False,long_scale=False):
 def int_to_pow_sum_str(n,B):
     """
     Write n as a sum of multiples of powers of B, returns a string
+    
+    Args:
+        n -- non-negative integer, the number to be represented
+        B -- integer greater than 1, the base
     """
     
     n = abs(n)
@@ -548,12 +553,13 @@ def int_to_pow_sum_str(n,B):
     
     D.reverse()
     p = len(D)-1
+    
     if D[0] == 1:
         s = f"{B}^{p}"
     else:
         s = f"{D[0]}·{B}^{p}"
     
-    for m in D[1:]:
+    for m in D[1:-1]:
         p -= 1
         if m == 0:
             pass
@@ -562,10 +568,13 @@ def int_to_pow_sum_str(n,B):
         else:
             s += f" + {m}·{B}^{p}"
     
+    if D[-1] != 0:
+        s += f" + {D[-1]}"
+    
     return s
 
 
-def int_to_pow_sum(n,B):
+def int_to_pow_sum(n,B,raw=False):
     """
     Write n as a sum of multiples of powers of B, returns a tuple of 3-tuples
     """
@@ -581,19 +590,44 @@ def int_to_pow_sum(n,B):
     p = len(D)-1
     T = []
     
-    for m in D:
-        if m == 0:
-            pass
-        else:
+    if raw:
+        for m in D:
             T.append((m,B,p))
-        p -= 1
+            p -= 1
+    else:
+        for m in D:
+            if m == 0:
+                pass
+            else:
+                T.append((m,B,p))
+            p -= 1
         
     return tuple(T)
 
 
-# def int_to_hered_base(n,B):
-
-
+def int_to_hered_base_str(n,B):
+    """
+    Write n in hereditary base B notation, returns a string
+    """
+    
+    S = int_to_pow_sum_str(n,B)
+    D = {}
+    
+    keep_looping = True
+    while keep_looping:
+        # Make any substitutions we know
+        for k,v in D.items():
+            S = re.sub(k,v,S)
+        
+        # Find numbers and convert them to strings
+        keep_looping = False
+        for s in re.findall(r'\d+',S):
+            i = int(s)
+            if i > B and i not in D:
+                D[s] = f"({int_to_pow_sum_str(i,B)})"
+                keep_looping = True
+    
+    return S
 
 
 
@@ -1057,7 +1091,10 @@ if __name__ == '__main__':
     
     print("\nConvert an Integer to its Representation as a sum of multiples of powers of some base")
     print(35,"=",int_to_pow_sum_str(35,2))
-    print(100,"=",int_to_pow_sum_str(100,3))
+    print(101,"=",int_to_pow_sum_str(101,3))
     
     print(35,"=",int_to_pow_sum(35,2))
-    print(100,"=",int_to_pow_sum(100,3))
+    print(101,"=",int_to_pow_sum(101,3))
+    
+    print(35,"=",int_to_hered_base_str(35,2))
+    print(101,"=",int_to_hered_base_str(101,3))
