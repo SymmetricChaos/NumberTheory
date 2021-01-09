@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits, int_to_roman
+from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
 
@@ -309,26 +309,6 @@ def radix_digits(B=10):
         yield int_to_digits(n,B)
 
 
-def roman_numerals_str():
-    """
-    The positive integers as standard Roman Numerals\n
-    """
-    
-    for n in naturals(1):
-        yield int_to_roman(n)
-
-
-def roman_numerals():
-    """
-    The positive integers as standard Roman Numerals in numeric form\n
-    OEIS A093796
-    """
-    
-    D = {"M": 1000, "D": 500, "C": 100, "L": 50, "X": 10, "V":5, "I": 1}
-    for R in roman_numerals_str():
-        yield tuple([D[letter] for letter in R])
-
-
 def repdigit(n,B=10):
     """
     Repdigit Numbers: Numbers that consist entire of the digtit n in base B\n
@@ -494,14 +474,6 @@ if __name__ == '__main__':
     print("\nNumber of 2s in the Base-3 Expansion of Each Natural")
     simple_test(radix_k_weight(2,3),18,
                 "0, 0, 1, 0, 0, 1, 1, 1, 2, 0, 0, 1, 0, 0, 1, 1, 1, 2")
-    
-    print("\nRoman Numerals")
-    simple_test(roman_numerals_str(), 13,
-                "I, II, III, IV, V, VI, VII, VIII, IX, X, XI, XII, XIII")
-    
-    print("\nRoman Numerals (numeric)")
-    simple_test(roman_numerals(), 6,
-                "(1,), (1, 1), (1, 1, 1), (1, 5), (5,), (5, 1)")
     
     print("\nThe Repunit Sequence in Base 10")
     simple_test(repdigit(1), 8,

@@ -9,8 +9,8 @@ from Sequences.BaseDependent import evil, odious, binary_weight, \
        co_binary_weight, ruler, binary_length, base_length, digital_sums, \
        digital_roots, fraction_period, palindrome, digital_prods, \
        additive_persistence, multiplicative_persistence, radix_digits, \
-       palindrome_digits, radix_k_weight, roman_numerals_str, roman_numerals, \
-       repdigit, all_repdigit, cantor, stanley, digit_avoiding
+       palindrome_digits, radix_k_weight, repdigit, all_repdigit, cantor, \
+       stanley, digit_avoiding
 
 from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, \
        fibonacci_words, cantor_set, paperfolding_word, paperfolding_words, \
@@ -56,6 +56,9 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        semifibonacci, tribonnaci_word, tribonnaci_words, narayana_cows, \
        sorting, rowland, rowland_primes, logistic_map
 
+from Sequences.Representations import roman_numerals_str, roman_numerals, \
+       number_names_str
+
 from Sequences.Simple import naturals, integers, arithmetic, geometric, \
        powers, polynomial, fermat, evens, gen_evens, odds, gen_odds, counting, \
        constant, arithmetrico_geometric, gen_polynomial, self_powers, \
@@ -66,8 +69,8 @@ from Sequences.Totient import totients, cototients, charmichael, \
        sparsely_totient, highly_totient, totient_count
 
 from Sequences.Weird import recaman, nonadditive, hofstader, co_hofstader, \
-       even_odd, hofstader_Q, lucky, birthday, selfridge, \
-       binary_addition_chain, binary_addition_chain_chi
+       even_odd, hofstader_Q, lucky, birthday, selfridge, goodstein, \
+       binary_addition_chain, binary_addition_chain_chi, number_name_lengths
 
 
 
@@ -143,7 +146,10 @@ __all__=[#MANIPULATIONS
          "padovan","simple_recurrence","sylvester","lucas_U","lucas_V","ulam",
          "pisot_E","pisot_L","pisot_P","pisot_T","perrin", "semifibonacci",
          "tribonnaci_word","tribonnaci_words","narayana_cows","juggler",
-         "juggler_map","sorting", "rowland","rowland_primes","logistic_map",
+         "juggler_map","sorting","rowland","rowland_primes","logistic_map",
+         
+         #REPRESENTATIONS
+         "roman_numerals_str", "roman_numerals","number_names_str",
          
          #SIMPLE
          "naturals","integers","arithmetic","geometric","powers","fermat",
@@ -159,5 +165,5 @@ __all__=[#MANIPULATIONS
          #WEIRD
          "recaman","nonadditive","hofstader","co_hofstader","even_odd",
          "hofstader_Q","lucky","birthday","selfridge","binary_addition_chain",
-         "binary_addition_chain_chi"
+         "binary_addition_chain_chi","goodstein","number_name_lengths"
          ]
