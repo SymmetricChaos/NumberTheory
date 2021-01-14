@@ -635,6 +635,7 @@ def int_to_hered_base_str(n,B):
     
     return S
 
+
 def hered_base_to_int(s):
     """
     Take s, a string in hereditary base B notation, and return to corresponding integer
@@ -643,6 +644,7 @@ def hered_base_to_int(s):
     s = re.sub("\^", "**", s)
     s = re.sub("·", "*", s)
     return eval(s)
+
 
 
 
@@ -954,6 +956,7 @@ def sign_of(n):
         return 1
     else:
         return 0
+
 
 
 

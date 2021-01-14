@@ -1,6 +1,7 @@
 from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
+from Sequences.Divisibility import odd_primes
 
 from fractions import Fraction
 from math import gcd, isqrt
@@ -389,6 +390,18 @@ def leibniz_harmonic_triangle(flatten=False):
             row = new_row
 
 
+def prime_coverage():
+    """
+    The probability that an integer is divisible by the first n primes\n
+    OEIS
+    """
+    
+    pr = [Fraction(1,2)]
+    
+    for p in odd_primes():
+        yield pr[-1]
+        
+        pr.append(pr[-1] + Fraction(1,p) - pr[-1]/Fraction(p))
 
 
 
@@ -471,6 +484,10 @@ if __name__ == '__main__':
     
     print("\nLeibniz's Harmonic Triangle")
     simple_test(_pretty_fracs_tuple(leibniz_harmonic_triangle()),4,
-                "1, 1, 2, 3, 5, 10, 28, 154, 3520, 1551880")
+                "(1/1), (1/2, 1/2), (1/3, 1/6, 1/3), (1/4, 1/12, 1/12, 1/4)")
+    
+    print("\nChance of Being Divisible by any of the first n primes")
+    simple_test(_pretty_fracs(prime_coverage()),7,
+                "1/2, 2/3, 11/15, 27/35, 61/77, 809/1001, 13945/17017")
     
     
