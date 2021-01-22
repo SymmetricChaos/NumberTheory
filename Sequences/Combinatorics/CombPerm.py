@@ -490,6 +490,30 @@ def cyclic_derangements(n,index=0):
         yield permutation_cycle(P, base, index=index)
 
 
+def distinct_permutations(T):
+    """
+    Given a tuple with possibly repeated elements return the distinct permutations
+    """
+    
+    def should_swap(L, start, cur):
+        for i in range(start, cur):
+            if L[i] == L[cur]:
+                return False
+        return True
+    
+    def distinct_recur(L,pos):
+        if pos == len(L)-1:
+            yield tuple(L)
+        else:
+            for i in range(pos, len(L)):
+                if should_swap(L, pos, i):
+                    L[pos], L[i] = L[i], L[pos]
+                    yield from distinct_recur(L, pos + 1)
+                    L[pos], L[i] = L[i], L[pos]
+    
+    yield from distinct_recur(list(T),0)
+
+
 # def stirling_1():
 #     """
 #     Stirling Numbers of the First Kind\n
@@ -737,6 +761,9 @@ if __name__ == '__main__':
     simple_test(permutation_fixed_points(4,2),3,
                 "(0, 1, 3, 2), (0, 2, 1, 3), (0, 3, 2, 1)")
     
+    print("\nDistinct Permutations of (0,0,0,1,1)")
+    simple_test(distinct_permutations((0,0,0,1,1)),4,
+                "(0, 0, 0, 1, 1), (0, 0, 1, 0, 1), (0, 0, 1, 1, 0), (0, 1, 0, 0, 1)")
     
     
     print("\n\n\nCombinations of Length 3 From a Set with 5 Elements")
@@ -831,4 +858,3 @@ if __name__ == '__main__':
     print("\nReversed and Reflected")
     simple_test(alternating_permutations(4,3,reverse=True,reflect=True),5,
                 "(2, 1, 3), (2, 0, 3), (1, 0, 3), (1, 3, 2), (0, 3, 2)")
-    
