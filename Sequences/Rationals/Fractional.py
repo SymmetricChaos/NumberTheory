@@ -2,51 +2,11 @@ from Sequences.Simple import naturals
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 from Sequences.Divisibility import odd_primes
+from Sequences.Rationals.FractionUtils import _pretty_fracs, _pretty_fracs_tuple, numerators, denominators
 
 from fractions import Fraction
 from math import gcd, isqrt
 
-def numerators(sequence):
-    """
-    Numerators of a sequence of rational numbers
-    Equivalently first value from each pair in a sequence
-    """
-    
-    for f in sequence:
-        yield f.numerator
-
-
-def denominators(sequence):
-    """
-    Denominators of a sequence of rational numbers
-    Equivalently second value from each pair in a sequence
-    """
-    
-    for f in sequence:
-        yield f.denominator
-
-
-def _pretty_fracs(sequence):
-    """
-    Internal function to show fractions more compactly
-    """
-    
-    for f in sequence:
-        a,b = f.numerator,f.denominator
-        yield f"{a}/{b}"
-
-
-def _pretty_fracs_tuple(sequence):
-    """
-    Internal function to show tuples of fractions more compactly
-    """
-    
-    for f in sequence:
-        L = []
-        for e in f:
-            a,b = e.numerator,e.denominator
-            L.append(f"{a}/{b}")
-        yield "(" + ", ".join(L) + ")"
 
 
 

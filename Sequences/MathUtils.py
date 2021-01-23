@@ -1,7 +1,9 @@
 from math import isqrt, gcd
 from itertools import chain, combinations, repeat, count
 from functools import reduce
+from fractions import Fraction
 from sympy import factorint, divisors, divisor_sigma, legendre_symbol
+from math import ceil
 import re
 
 ###################
@@ -1120,3 +1122,4 @@ if __name__ == '__main__':
     
     print("2^(2^2 + 1) + 2^1 + 1","=",hered_base_to_int("2^(2^2 + 1) + 2^1 + 1"),)
     print("3^(3^1 + 1) + 2·3^2 + 2","=",hered_base_to_int("3^(3^1 + 1) + 2·3^2 + 2"))
+    

@@ -761,9 +761,10 @@ if __name__ == '__main__':
     simple_test(permutation_fixed_points(4,2),3,
                 "(0, 1, 3, 2), (0, 2, 1, 3), (0, 3, 2, 1)")
     
-    print("\nDistinct Permutations of (0,0,0,1,1)")
-    simple_test(distinct_permutations((0,0,0,1,1)),4,
-                "(0, 0, 0, 1, 1), (0, 0, 1, 0, 1), (0, 0, 1, 1, 0), (0, 1, 0, 0, 1)")
+    print("\nDistinct Permutations of (0,1,1,2)")
+    simple_test(distinct_permutations((0,1,1,2)),4,
+                "(0, 1, 1, 2), (0, 1, 2, 1), (0, 2, 1, 1), (1, 0, 1, 2)")
+    
     
     
     print("\n\n\nCombinations of Length 3 From a Set with 5 Elements")
