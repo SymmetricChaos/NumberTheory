@@ -281,6 +281,51 @@ def palindrome_digits(B=10):
             yield tuple(d)
 
 
+def _plaindrome(n,B):
+    prev = B
+    d = []
+    while n != 0:
+        n,r = divmod(n,B)
+        if r > prev:
+            return []
+        d.append(r)
+        prev = r
+    return reversed(d)
+
+
+def plaindrome(B=10):
+    """
+    Plaindrome Numbers: Non-negative integers with their digits nondecreasing in base B\n
+    OEIS
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    yield 0
+    
+    for n in naturals(1):
+        if _plaindrome(n,B):
+            yield n
+
+
+def plaindrome_digits(B=10):
+    """
+    Plaindrome Numbers: Non-negative integers with their digits nondecreasing in base B\n
+    OEIS
+    """
+    
+    require_integers(["B"],[B])
+    require_geq(["B"],[B],2)
+    
+    yield (0,)
+    
+    for n in naturals(1):
+        p = _plaindrome(n,B)
+        if p:
+            yield tuple(p)
+
+
 def fraction_period(B=10):
     """
     Repeating period of each unit fraction in base B\n
@@ -462,6 +507,14 @@ if __name__ == '__main__':
     print("\nPalindrome Digits (Base 2)")
     simple_test(palindrome_digits(2),6,
                 "(0,), (1,), (1, 1), (1, 0, 1), (1, 1, 1), (1, 0, 0, 1)")
+    
+    print("\nPlaindromes (Base 3)")
+    simple_test(plaindrome(3),16,
+                "0, 1, 2, 4, 5, 8, 13, 14, 17, 26, 40, 41, 44, 53, 80, 121")
+    
+    print("\nPlaindrome Digits (Base 3)")
+    simple_test(plaindrome_digits(3),7,
+                "(0,), (1,), (2,), (1, 1), (1, 2), (2, 2), (1, 1, 1)")
     
     print("\nRepeating Unit Fraction Length (Base 10)")
     simple_test(fraction_period(10),18,

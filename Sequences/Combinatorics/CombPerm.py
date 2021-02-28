@@ -319,7 +319,7 @@ def all_permutations(index=0):
 
 def all_derangements(index=0):
     """
-    Every permutation on n elements for positive n, returns tuples in lexicographic order
+    Every deragement on n elements for positive n, returns tuples in lexicographic order
     
     Args:
         index -- 0 or 1, least element

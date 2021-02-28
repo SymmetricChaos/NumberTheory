@@ -91,6 +91,7 @@ __all__=[#MANIPULATIONS
          "multiplicative_persistence","radix_digits","palindrome_digits",
          "radix_k_weight","roman_numerals_str","roman_numerals","repdigit",
          "all_repdigit","cantor","stanley","digit_avoiding","digit_including",
+         "plaindrome","plaindrome_digits",
          
          #BINARY
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",

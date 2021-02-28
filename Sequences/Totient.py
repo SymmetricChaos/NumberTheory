@@ -230,7 +230,7 @@ if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
     
     print("Totient Sequence")
-    simple_test(totients(),17,
+    simple_test(totients(),16,
                 "1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16")
     
     print("\nJordan 2-Totients")
