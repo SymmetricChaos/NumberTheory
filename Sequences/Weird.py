@@ -395,6 +395,34 @@ def goodstein(n):
     yield 0
 
 
+def levine_tuples():
+    """
+    OEIS A011784
+    """
+    
+    T = [1,1]
+    
+    while True:
+        yield tuple(T)
+        
+        newT = []
+        T.reverse()
+        for pos,val in enumerate(T,1):
+            newT += [pos]*val
+        
+        T = newT
+
+
+def levine():
+    """
+    Levine's Sequence
+    OEIS A011784
+    """
+    
+    yield 1
+    yield 2
+    for T in levine_tuples():
+        yield sum(T)
 
 
 
@@ -472,4 +500,12 @@ if __name__ == '__main__':
     print("\nGoodstein Sequence G(4)")
     simple_test(goodstein(4),12,
                 "4, 26, 41, 60, 83, 109, 139, 173, 211, 253, 299, 348")
+    
+    print("\nTuples of the Levine Sequence")
+    simple_test(levine_tuples(),5,
+                "(1, 1), (1, 2), (1, 1, 2), (1, 1, 2, 3), (1, 1, 1, 2, 2, 3, 4)")
+    
+    print("\nThe Levine Sequence")
+    simple_test(levine(),11,
+                "1, 2, 2, 3, 4, 7, 14, 42, 213, 2837, 175450")
     
