@@ -525,6 +525,26 @@ def sorting():
         A.append(t)
 
 
+def stern_diatomic():
+    """
+    Stern's Diatopic Sequence\n
+    OEIS A002487
+    """
+    
+    yield 0
+    yield 1
+    
+    L = [0,1]
+    
+    for n in naturals(2):
+        if n%2 == 0:
+            L.append(L[n//2])
+            yield L[n//2]
+        else:
+            L.append(L[n//2]+L[n//2+1])
+            yield L[n//2]+L[n//2+1]
+
+
 
 
 
@@ -650,4 +670,8 @@ if __name__ == '__main__':
     print("\nThe Sorting Numbers")
     simple_test(sorting(),15,
                 "0, 1, 3, 5, 8, 11, 14, 17, 21, 25, 29, 33, 37, 41, 45")
+    
+    print("\nStern's Diatomic Sequence")
+    simple_test(stern_diatomic(),18,
+                "0, 1, 1, 2, 1, 3, 2, 3, 1, 4, 3, 5, 2, 5, 3, 4, 1, 5")
     

@@ -1,4 +1,5 @@
 from Sequences.Simple import naturals
+from Sequences.Recurrence import stern_diatomic
 from Sequences.NiceErrorChecking import require_integers, require_geq, require_iterable
 from Sequences.MathUtils import poly_mult, poly_sum, poly_eval
 from Sequences.Divisibility import odd_primes
@@ -364,6 +365,18 @@ def prime_coverage():
         pr.append(pr[-1] + Fraction(1,p) - pr[-1]/Fraction(p))
 
 
+def stern_rational():
+    """
+    Permutation of the rationals defined by Stern's Diatomic Sequence
+    OEIS A002487
+    """
+    
+    S = stern_diatomic()
+    
+    while True:
+        yield Fraction(next(S),next(S))
+
+
 
 
 if __name__ == '__main__':
@@ -449,5 +462,9 @@ if __name__ == '__main__':
     print("\nChance of Being Divisible by any of the first n primes")
     simple_test(_pretty_fracs(prime_coverage()),7,
                 "1/2, 2/3, 11/15, 27/35, 61/77, 809/1001, 13945/17017")
+    
+    print("\nPermutation of the Positive Rationals by Stern's Diatomic Sequence")
+    simple_test(_pretty_fracs(stern_rational()),11,
+                "0/1, 1/2, 1/3, 2/3, 1/4, 3/5, 2/5, 3/4, 1/5, 4/7, 3/8")
     
     
