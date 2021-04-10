@@ -54,7 +54,8 @@ from Sequences.Recurrence import fibonacci, lucas, pell, companion_pell, \
        tribonacci, lucas_U, lucas_V, padovan, simple_recurrence, sylvester, \
        leonardo, pisot_E, pisot_L, pisot_P, pisot_T, ulam, perrin, \
        semifibonacci, tribonnaci_word, tribonnaci_words, narayana_cows, \
-       sorting, rowland, rowland_primes, logistic_map, stern_diatomic
+       sorting, rowland, rowland_primes, logistic_map, stern_diatomic, \
+       jacobsthal
 
 from Sequences.Representations import roman_numerals_str, roman_numerals, \
        number_names_str
@@ -149,7 +150,7 @@ __all__=[#MANIPULATIONS
          "pisot_E","pisot_L","pisot_P","pisot_T","perrin", "semifibonacci",
          "tribonnaci_word","tribonnaci_words","narayana_cows","juggler",
          "juggler_map","sorting","rowland","rowland_primes","logistic_map",
-         "stern_diatomic",
+         "stern_diatomic","jacobsthal",
          
          #REPRESENTATIONS
          "roman_numerals_str", "roman_numerals","number_names_str",
