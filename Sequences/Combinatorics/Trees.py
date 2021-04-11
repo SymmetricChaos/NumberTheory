@@ -1,10 +1,9 @@
-from math import comb
 from Sequences.Simple import naturals
 
 def max_tree_nodes(k=2):
     """
     Maximum number of nodes in an k-ary tree of height n
-    OEIS
+    OEIS A000225, A003462, A002450, A003463, A003464
     """
     
     s = 1
@@ -16,13 +15,27 @@ def max_tree_nodes(k=2):
         p *= k
 
 
-def free_tree():
+def binary_tree():
     """
-    Number of unique free trees with n unlabeled nodes
-    OEIS A000055
+    Number of binary trees of height n
+    OEIS A001699
     """
     
+    yield 1
+    yield 1
     
+    s = 1 # sum of previous terms
+    c = 1 # current value
+    p = 1 # previous value
+    
+    while True:
+        c = 2*c*s+(c*c)
+        s += p
+        p = c
+        yield c
+
+
+
 
 
 def rooted_tree():
@@ -30,19 +43,6 @@ def rooted_tree():
     Number of unique rooted trees with n unlabeled nodes
     OEIS A000081
     """
-    
-
-
-
-
-def oriented_tree():
-    """
-    Number of unique oriented trees with n unlabeled nodes
-    OEIS A000238
-    """
-    
-    # a(n+1) = (1/n) * Sum_{k=1..n} ( Sum_{d|k} d*a(d) ) * a(n-k+1).
-    
     
     A = [0,1]
     
@@ -62,11 +62,33 @@ def oriented_tree():
         yield out//n
 
 
+
+
+
+def oriented_tree():
+    """
+    Number of unique oriented trees with n unlabeled nodes
+    OEIS A000238
+    """
+    
+    
+
+
 def ordered_tree():
     """
     Number of unique ordered trees with n unlabeled nodes
     OEIS 
     """
+    
+
+
+def free_tree():
+    """
+    Number of unique free trees with n unlabeled nodes
+    OEIS A000055
+    """
+    
+
 
 
 
@@ -79,6 +101,10 @@ if __name__ == '__main__':
                 "1, 4, 13, 40, 121, 364, 1093, 3280, 9841, 29524")
     
     print("\nNumber of unique oriented trees with n unlabeled nodes")
-    simple_test(oriented_tree(),12,
+    simple_test(rooted_tree(),12,
                 "0, 1, 1, 2, 4, 9, 20, 48, 115, 286, 719, 1842")
+    
+    print("\nNumber Binary Trees of Height n")
+    simple_test(binary_tree(),7,
+                "1, 1, 3, 21, 651, 457653, 210065930571")
     

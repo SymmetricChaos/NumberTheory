@@ -28,7 +28,8 @@ from Sequences.Combinatorics.Partitions import partitions, partition_count, \
        even_goldbach_partitions, tribonnaci_partitions, composition_count, \
        compositions, all_compositions, polite_partitions, politeness
 
-
+from Sequences.Combinatorics.Trees import max_tree_nodes, rooted_tree, \
+       binary_tree
 
 
 
@@ -67,5 +68,8 @@ __all__=[
          "partitions","equal_partitions","all_partitions","partition_ordering",
          "partition_count","power_partitions","even_goldbach_partitions",
          "tribonnaci_partitions","composition_count","compositions",
-         "all_compositions","polite_partitions","politeness"
+         "all_compositions","polite_partitions","politeness",
+         
+         #TREE
+         "max_tree_nodes","rooted_tree","binary_tree"
          ]
