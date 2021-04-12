@@ -1,6 +1,6 @@
 from Sequences.Simple import naturals, evens, powers
 from Sequences.Manipulations import offset
-from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits
+from Sequences.MathUtils import digital_sum, digital_root, repeating_part, digital_prod, int_to_digits, digits_to_int
 from Sequences.NiceErrorChecking import require_integers, require_geq
 
 
@@ -554,5 +554,9 @@ if __name__ == '__main__':
     
     print("\n3-Including Numbers in Base 5")
     simple_test(digit_including(3,5), 14,
+                "3, 8, 13, 15, 16, 17, 18, 19, 23, 28, 33, 38, 40, 41")
+    
+    print("\nRotation Doubling Numbers in Base 3")
+    simple_test(rotation_doubling(3), 14,
                 "3, 8, 13, 15, 16, 17, 18, 19, 23, 28, 33, 38, 40, 41")
     

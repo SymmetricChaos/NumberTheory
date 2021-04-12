@@ -136,6 +136,16 @@ def all_divisors():
         yield from factors(i)
 
 
+def all_divisors_tuple():
+    """
+    Irregular Array with Divisors of Every Positive Integer. Returns Tuples.\n
+    OEIS A027750
+    """
+    
+    for i in naturals(1):
+        yield tuple(factors(i))
+
+
 def prime_divisors():
     """
     Number of Prime Divisors with Multiplicity: Big Omega Function\n
@@ -643,6 +653,98 @@ def multiplicative_partitions(n):
     yield from mul_part_recur(n)
 
 
+def fermi_dirac():
+    """
+    Fermi-Dirac Primes: A prime like sequence with members of the form p^(2^k) with p prime and k >= 0
+    A050376
+    """
+    
+    L = [4]
+    
+    P = primes()
+    next(P)
+    yield 2
+    
+    for p in P:
+        
+        L.sort()
+        
+        changed = []
+        while L[0] < p:
+            n = L.pop(0)
+            yield n
+            changed.append(n*n)
+        
+        L += changed
+        
+        yield p
+        L.append(p*p)
+
+
+def fermi_dirac_divisors():
+    """
+    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer
+    OEIS A213925
+    """
+    yield 1
+    yield 2
+    
+    fd_gen = fermi_dirac();
+    FD = [next(fd_gen)]
+    
+    for n in naturals(3):
+        out = []
+        
+        if n > FD[-1]:
+            FD.append(next(fd_gen))
+        
+        for fd in reversed(FD):
+            if n in FD:
+                out.append(n)
+                break
+            elif n == 1:
+                break
+            else:
+                if n % fd == 0:
+                    n = n // fd
+                    out.append(fd)
+        
+        out.reverse()
+        yield from out
+
+
+def fermi_dirac_divisors_tuple():
+    """
+    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer. Returns Tuples.
+    OEIS A213925
+    """
+    yield ()
+    yield (2,)
+    
+    fd_gen = fermi_dirac();
+    FD = [next(fd_gen)]
+    
+    for n in naturals(3):
+        out = []
+        
+        if n > FD[-1]:
+            FD.append(next(fd_gen))
+        
+        for fd in reversed(FD):
+            if n in FD:
+                out.append(n)
+                break
+            elif n == 1:
+                break
+            else:
+                if n % fd == 0:
+                    n = n // fd
+                    out.append(fd)
+        
+        out.reverse()
+        yield tuple(out)
+
+
 
 
 
@@ -741,6 +843,10 @@ if __name__ == '__main__':
     simple_test(all_divisors(),18,
                 "1, 1, 2, 1, 3, 1, 2, 4, 1, 5, 1, 2, 3, 6, 1, 7, 1, 2")
     
+    print("\nArray of All Divisors as Tuples")
+    simple_test(all_divisors_tuple(),6,
+                "(1,), (1, 2), (1, 3), (1, 2, 4), (1, 5), (1, 2, 3, 6)")
+    
     print("\nOdd Parts")
     simple_test(odd_parts(),17,
                 "1, 1, 3, 1, 5, 3, 7, 1, 9, 5, 11, 3, 13, 7, 15, 1, 17")
@@ -772,4 +878,17 @@ if __name__ == '__main__':
     print("\nMultiplicative Partitions of 60")
     simple_test(multiplicative_partitions(60),11,
                 "(2, 2, 3, 5), (2, 2, 15), (2, 3, 10), (2, 5, 6), (2, 30), (3, 4, 5), (3, 20), (4, 15), (5, 12), (6, 10), (60,)")
+    
+    print("\nFermi-Dirac 'Primes'")
+    simple_test(fermi_dirac(),15,
+                "2, 3, 4, 5, 7, 9, 11, 13, 16, 17, 19, 23, 25, 29, 31")
+    
+    print("\nFermi-Dirac Factorizations")
+    simple_test(fermi_dirac_divisors(),18,
+                "1, 2, 3, 4, 5, 2, 3, 7, 2, 4, 9, 2, 5, 11, 3, 4, 13, 2")
+    
+    print("\nFermi-Dirac Factorizations as Tuples")
+    simple_test(fermi_dirac_divisors_tuple(),9,
+                "(), (2,), (3,), (4,), (5,), (2, 3), (7,), (2, 4), (9,)")
+    
     
