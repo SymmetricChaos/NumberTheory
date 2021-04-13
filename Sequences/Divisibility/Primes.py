@@ -355,7 +355,7 @@ def prime_product(P,inclusive=False):
 def prime_signatures():
     """
     Prime Signatures: The prime signature of each positive integer, returns tuples\n
-    OEIS
+    OEIS A124010
     """
     
     D = defaultdict(list)
@@ -384,6 +384,36 @@ def prime_signatures():
             del D[q]
 
 
+def odius_signature():
+    """
+    Positive integers which have an odd number of 1s in the binary expansions of their prime signatures
+    OEIS A000028
+    """
+    
+    for n,f in enumerate(prime_signatures(),1):
+        total = 0
+        for m in f:
+            while m != 0:
+                m,r = divmod(m,2)
+                total ^= r
+        if total == 1:
+            yield n
+
+
+def evil_signature():
+    """
+    Positive integers which have an odd number of 1s in the binary expansions of their prime signatures
+    OEIS A000379
+    """
+    
+    for n,f in enumerate(prime_signatures(),1):
+        total = 0
+        for m in f:
+            while m != 0:
+                m,r = divmod(m,2)
+                total ^= r
+        if total == 0:
+            yield n
 
 
 
@@ -465,4 +495,12 @@ if __name__ == '__main__':
     print("\nPrime Signatures")
     simple_test(prime_signatures(),9,
                 "(), (1,), (1,), (2,), (1,), (1, 1), (1,), (3,), (2,)")
+    
+    print("\nMOdius Signature Numbers")
+    simple_test(odius_signature(),16,
+                "2, 3, 4, 5, 7, 9, 11, 13, 16, 17, 19, 23, 24, 25, 29, 30")
+    
+    print("\nEvil Signature Numbers")
+    simple_test(evil_signature(),15,
+                "1, 6, 8, 10, 12, 14, 15, 18, 20, 21, 22, 26, 27, 28, 32")
     

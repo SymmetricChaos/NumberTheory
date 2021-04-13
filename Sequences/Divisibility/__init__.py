@@ -18,7 +18,8 @@ from Sequences.Divisibility.Primes import primes, primorial, prime_counting, \
        pythagorean_primes, prime_characteristic, prime_signatures, \
        superprimes, odd_primes, twin_primes, twin_prime_pairs, prime_gaps, \
        prime_tuples, n_gap_prime_pairs, sophie_germain_primes, safe_primes, \
-       linear_primes, congruent_primes, blum_primes
+       linear_primes, congruent_primes, blum_primes, evil_signature, \
+       odius_signature
 
 from Sequences.Divisibility.Pseudoprimes import fermat_pseudoprimes, \
        weak_pseudoprimes, strong_pseudoprimes, lucas_pseudoprimes, \
@@ -55,6 +56,7 @@ __all__=[
          "twin_primes","twin_prime_pairs","prime_gaps","prime_tuples",
          "n_gap_prime_pairs","sophie_germain_primes","safe_primes",
          "linear_primes","congruent_primes","blum_primes","prime_signatures",
+         "evil_signature","odius_signature",
          
          #PSEUDOPRIMES
          "fermat_pseudoprimes","weak_pseudoprimes","strong_pseudoprimes",

@@ -681,6 +681,7 @@ def fermi_dirac():
         L.append(p*p)
 
 
+# I think this and the tuple version are correct but I'd like to prove it
 def fermi_dirac_divisors():
     """
     Irregualar array with The Fermi-Dirac Factorization of each Positive Integer
@@ -743,6 +744,7 @@ def fermi_dirac_divisors_tuple():
         
         out.reverse()
         yield tuple(out)
+
 
 
 
@@ -890,5 +892,4 @@ if __name__ == '__main__':
     print("\nFermi-Dirac Factorizations as Tuples")
     simple_test(fermi_dirac_divisors_tuple(),9,
                 "(), (2,), (3,), (4,), (5,), (2, 3), (7,), (2, 4), (9,)")
-    
     
