@@ -496,7 +496,7 @@ if __name__ == '__main__':
     simple_test(prime_signatures(),9,
                 "(), (1,), (1,), (2,), (1,), (1, 1), (1,), (3,), (2,)")
     
-    print("\nMOdius Signature Numbers")
+    print("\nOdius Signature Numbers")
     simple_test(odius_signature(),16,
                 "2, 3, 4, 5, 7, 9, 11, 13, 16, 17, 19, 23, 24, 25, 29, 30")
     

@@ -4,6 +4,7 @@ from Sequences.MathUtils import int_to_bits, int_to_digits, int_to_name, int_to_
 from math import gcd
 from fractions import Fraction
 import re
+from itertools import cycle
 
 def recaman():
     """
@@ -425,6 +426,20 @@ def levine():
         yield sum(T)
 
 
+def kolakoski():
+    """
+    Kolakoski Sequence: the nth term the length of the nth run of values
+    """
+    yield 1
+    yield 2
+    L = [2]
+    
+    for digit in cycle([1,2]):
+        run = L.pop(0)
+        L += [digit]*run
+        yield run
+
+
 
 if __name__ == '__main__':
     from Sequences.Manipulations import simple_test
@@ -508,4 +523,8 @@ if __name__ == '__main__':
     print("\nThe Levine Sequence")
     simple_test(levine(),11,
                 "1, 2, 2, 3, 4, 7, 14, 42, 213, 2837, 175450")
+    
+    print("\nThe Oldenburger-Kolakoski Sequence")
+    simple_test(kolakoski(),18,
+                "1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2")
     
