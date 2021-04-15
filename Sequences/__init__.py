@@ -10,7 +10,9 @@ from Sequences.BaseDependent import evil, odious, binary_weight, \
        digital_roots, fraction_period, palindrome, digital_prods, \
        additive_persistence, multiplicative_persistence, radix_digits, \
        palindrome_digits, radix_k_weight, repdigit, all_repdigit, cantor, \
-       stanley, digit_avoiding
+       stanley, digit_avoiding, digit_avoiding_words, digit_including, \
+       digit_including_words, sequence_avoiding, sequence_avoiding_words, \
+       sequence_including, sequence_including_words
 
 from Sequences.BinarySequences import thue_morse, gray_codes, fibonacci_word, \
        fibonacci_words, cantor_set, paperfolding_word, paperfolding_words, \
@@ -93,7 +95,10 @@ __all__=[#MANIPULATIONS
          "multiplicative_persistence","radix_digits","palindrome_digits",
          "radix_k_weight","roman_numerals_str","roman_numerals","repdigit",
          "all_repdigit","cantor","stanley","digit_avoiding","digit_including",
-         "plaindrome","plaindrome_digits",
+         "plaindrome","plaindrome_digits","digit_avoiding_words", 
+         "digit_including" "digit_including_words","sequence_avoiding",
+         "sequence_avoiding_words","sequence_including",
+         "sequence_including_words",
          
          #BINARY
          "thue_morse","gray_codes","fibonacci_word","fibonacci_words",

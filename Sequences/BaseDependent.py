@@ -442,6 +442,134 @@ def digit_including(d,B=10):
             yield n
 
 
+def digit_avoiding_words(d,B=10):
+    """
+    Naturals that do not contain the digit d in base B, returns tuples\n
+    OEIS A005823, A005836
+    """
+    
+    if d >= B:
+        raise Exception("d must be less than B")
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        if d not in D:
+            yield D
+
+
+def digit_including_words(d,B=10):
+    """
+    Naturals that do contain the digit d in base B, returns tuples\n
+    OEIS
+    """
+    
+    if d >= B:
+        raise Exception("d must be less than B")
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        if d in D:
+            yield D
+
+
+def _subseq(subseq, L):
+    try:
+        l = len(subseq)
+    except TypeError:
+        l = 1
+        subseq = type(L)((subseq,))
+    
+    for i in range(len(L)):
+        if L[i:i+l] == subseq:
+            return True
+    return False
+
+
+def sequence_avoiding(S,B=10):
+    """
+    Naturals that do not include the sequence S as a subsequence of digits in base B
+    """
+    
+    for s in S:
+        if s >= B:
+            raise Exception("all values in S must be less than D")
+    
+    l = len(S)
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        d = len(D)
+        if d < l:
+            yield n
+        
+        elif not _subseq(S,D):
+            yield n
+
+
+
+def sequence_including(S,B=10):
+    """
+    Naturals that do include the sequence S as a subsequence of digits in base B
+    """
+    
+    for s in S:
+        if s >= B:
+            raise Exception("all values in S must be less than D")
+    
+    l = len(S)
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        d = len(D)
+        if d < l:
+            continue
+        
+        elif _subseq(S,D):
+            yield n
+
+
+def sequence_avoiding_words(S,B=10):
+    """
+    Naturals that do not include the sequence S as a subsequence of digits in base B, returns tuples
+    """
+    
+    for s in S:
+        if s >= B:
+            raise Exception("all values in S must be less than D")
+    
+    l = len(S)
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        d = len(D)
+        if d < l:
+            yield D
+        
+        elif not _subseq(S,D):
+            yield D
+
+
+def sequence_including_words(S,B=10):
+    """
+    Naturals that do include the sequence S as a subsequence of digits in base B, returns tuples
+    """
+    
+    for s in S:
+        if s >= B:
+            raise Exception("all values in S must be less than D")
+    
+    l = len(S)
+    
+    for n in naturals():
+        D = int_to_digits(n,B)
+        d = len(D)
+        if d < l:
+            continue
+        
+        elif _subseq(S,D):
+            yield D
+
+
 
 
 
@@ -548,7 +676,31 @@ if __name__ == '__main__':
     simple_test(digit_avoiding(3,5), 15,
                 "0, 1, 2, 4, 5, 6, 7, 9, 10, 11, 12, 14, 20, 21, 22")
     
+    print("\n3-Avoiding Words in Base 5")
+    simple_test(digit_avoiding_words(3,5), 8,
+                "(), (1,), (2,), (4,), (1, 0), (1, 1), (1, 2), (1, 4)")
+    
     print("\n3-Including Numbers in Base 5")
     simple_test(digit_including(3,5), 14,
                 "3, 8, 13, 15, 16, 17, 18, 19, 23, 28, 33, 38, 40, 41")
+    
+    print("\n3-Including Words in Base 5")
+    simple_test(digit_including_words(3,5), 7,
+                "(3,), (1, 3), (2, 3), (3, 0), (3, 1), (3, 2), (3, 3)")
+    
+    print("\n12-Avoiding Numbers in Base 4")
+    simple_test(sequence_avoiding((1,2),4), 16,
+                "0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16")
+    
+    print("\n12-Avoiding Words in Base 4")
+    simple_test(sequence_avoiding_words((1,2),4), 8,
+                "(), (1,), (2,), (3,), (1, 0), (1, 1), (1, 3), (2, 0)")
+    
+    print("\n12-Avoiding Numbers in Base 4")
+    simple_test(sequence_including((1,2),4), 14,
+                "6, 22, 24, 25, 26, 27, 38, 54, 70, 86, 88, 89, 90, 91")
+    
+    print("\n12-Avoiding Words in Base 4")
+    simple_test(sequence_including_words((1,2),4), 5,
+                "(1, 2), (1, 1, 2), (1, 2, 0), (1, 2, 1), (1, 2, 2)")
     
