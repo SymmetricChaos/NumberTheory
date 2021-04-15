@@ -430,8 +430,10 @@ def kolakoski():
     """
     Kolakoski Sequence: the nth term the length of the nth run of values
     """
+    
     yield 1
     yield 2
+    
     L = [2]
     
     for digit in cycle([1,2]):

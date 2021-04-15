@@ -545,6 +545,36 @@ def stern_diatomic():
             yield L[n//2]+L[n//2+1]
 
 
+def fibonacci_bisection_even():
+    """
+    Bisection of the Fibonacci Numbers: Every other value, starting from zero
+    OEIS A001906
+    """
+    
+    F = fibonacci()
+    
+    while True:
+        yield next(F)
+        next(F)
+
+
+def fibonacci_bisection_odd(leading_one=False):
+    """
+    Bisection of the Fibonacci Numbers: Every other value, starting from one
+        equal to a(n+1) = 2*a(n) + B(n) with B = A001906
+    OEIS A001519, A122367
+    """
+    
+    if leading_one:
+        yield 1
+    
+    F = fibonacci()
+    
+    while True:
+        next(F)
+        yield next(F)
+
+
 
 
 
@@ -674,4 +704,13 @@ if __name__ == '__main__':
     print("\nStern's Diatomic Sequence")
     simple_test(stern_diatomic(),18,
                 "0, 1, 1, 2, 1, 3, 2, 3, 1, 4, 3, 5, 2, 5, 3, 4, 1, 5")
+    
+    print("\nFibonacci Bisection (Even)")
+    simple_test(fibonacci_bisection_even(),12,
+                "0, 1, 3, 8, 21, 55, 144, 377, 987, 2584, 6765, 17711")
+    
+    print("\nFibonacci Bisection (Odd)")
+    simple_test(fibonacci_bisection_odd(),11,
+                "1, 2, 5, 13, 34, 89, 233, 610, 1597, 4181, 10946")
+    
     
