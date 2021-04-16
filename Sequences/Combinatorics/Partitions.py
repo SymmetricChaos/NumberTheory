@@ -259,7 +259,7 @@ def all_compositions():
         yield from compositions(n)
 
 
-def _coin_125_partions(n):
+def _coin_125_partions_recur(n):
     
 
     if n < 1:
@@ -270,23 +270,24 @@ def _coin_125_partions(n):
     
     elif n == 2:
         yield (2,)
-        yield (1,1,)
+        yield (1,1)
     
     elif n == 5:
         yield (5,)
         yield (2,2,1)
         yield (2,1,1,1)
-        yield (1,1,1,1,1,1)
+        yield (1,1,1,1,1)
         
     
     else:
-        
-        for s in [1,2,5]:
+        for s in [5,2]:
             if s > n:
-                break
-            for p in _coin_125_partions(s):
-                if n-s in [1,2,5] and p[0] <= n-s:
-                    yield (n-s,) + p
+                continue
+            for p in _coin_125_partions_recur(n-s):
+                if p[0] <= s:
+                    yield (s,) + p
+    
+        yield tuple([1]*n)
 
 def coin_125_partions(n):
     """
@@ -294,12 +295,11 @@ def coin_125_partions(n):
     OEIS A000008
     """
     
-    yield from _coin_125_partions(n)
+    yield from _coin_125_partions_recur(n)
 
 
 
 def _coin_partions_recur(n,S):
-    
     # if n == 0:
     #     yield ()
     
@@ -317,18 +317,13 @@ def _coin_partions_recur(n,S):
     if n < min(S):
         yield ()
     
-    if n in S:
-        # paritions of n as a base case
-        pass
-    
-    
     else:
         for s in S:
             if s > n:
-                break
-            for p in _coin_partions_recur(s,S):
-                if n-s in S and p[0] <= n-s:
-                    yield (n-s,) + p
+                continue
+            for p in _coin_partions_recur(n-s,S):
+                if len(p) == 0 or p[0] <= s:
+                    yield (s,) + p
 
 def coin_partions(n,S):
     """
@@ -342,7 +337,7 @@ def coin_partions(n,S):
         if not isinstance(s, int):
             raise Exception("values of S must be integers")
     
-    S = sorted(list(set(S)))
+    S = sorted(list(set(S)),reverse=True)
     
     yield from _coin_partions_recur(n,S)
 
@@ -405,7 +400,11 @@ if __name__ == '__main__':
     simple_test(politeness(),18,
                 "0, 0, 1, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 3, 0, 1, 2")
     
-    print("\n(1,2,5)-Partitions of 5")
-    simple_test(coin_125_partions(10),25,
-                "(5, 5), (5, 2, 2, 1), (5, 2, 1, 1, 1), (5, 1, 1, 1, 1, 1, 1)")
+    print("\n(1,2,5)-Partitions of 6")
+    simple_test(coin_125_partions(6),25,
+                "(5, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
+    
+    print("\n(1,2,5)-Partitions of 6 (general algorithm)")
+    simple_test(coin_partions(6,(1,2,5)),25,
+                "(5, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
     
