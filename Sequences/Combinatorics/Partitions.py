@@ -259,6 +259,94 @@ def all_compositions():
         yield from compositions(n)
 
 
+def _coin_125_partions(n):
+    
+
+    if n < 1:
+        yield ()
+    
+    if n == 1:
+        yield (1,)
+    
+    elif n == 2:
+        yield (2,)
+        yield (1,1,)
+    
+    elif n == 5:
+        yield (5,)
+        yield (2,2,1)
+        yield (2,1,1,1)
+        yield (1,1,1,1,1,1)
+        
+    
+    else:
+        
+        for s in [1,2,5]:
+            if s > n:
+                break
+            for p in _coin_125_partions(s):
+                if n-s in [1,2,5] and p[0] <= n-s:
+                    yield (n-s,) + p
+
+def coin_125_partions(n):
+    """
+    All partitions of n using only 1, 2, and 5
+    OEIS A000008
+    """
+    
+    yield from _coin_125_partions(n)
+
+
+
+def _coin_partions_recur(n,S):
+    
+    # if n == 0:
+    #     yield ()
+    
+    # elif n == 1:
+    #     yield (1,)
+    
+    # else:
+    #     yield (n,)
+          
+    #     for x in range(1,n):
+    #         for p in partitions(x):
+    #             if p[0] <= n-x:
+    #                 yield (n-x,) + p
+    
+    if n < min(S):
+        yield ()
+    
+    if n in S:
+        # paritions of n as a base case
+        pass
+    
+    
+    else:
+        for s in S:
+            if s > n:
+                break
+            for p in _coin_partions_recur(s,S):
+                if n-s in S and p[0] <= n-s:
+                    yield (n-s,) + p
+
+def coin_partions(n,S):
+    """
+    All partitions of n with numbers from the set S
+    OEIS A000008
+    """
+    
+    for s in S:
+        if s < 1:
+            raise Exception("values of S must be positive")
+        if not isinstance(s, int):
+            raise Exception("values of S must be integers")
+    
+    S = sorted(list(set(S)))
+    
+    yield from _coin_partions_recur(n,S)
+
+
 
 
 
@@ -316,4 +404,8 @@ if __name__ == '__main__':
     print("\nPoliteness of Each Natural")
     simple_test(politeness(),18,
                 "0, 0, 1, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 3, 0, 1, 2")
+    
+    print("\n(1,2,5)-Partitions of 5")
+    simple_test(coin_125_partions(10),25,
+                "(5, 5), (5, 2, 2, 1), (5, 2, 1, 1, 1), (5, 1, 1, 1, 1, 1, 1)")
     
