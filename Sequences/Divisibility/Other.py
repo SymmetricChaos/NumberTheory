@@ -655,7 +655,7 @@ def multiplicative_partitions(n):
 
 def fermi_dirac():
     """
-    Fermi-Dirac Primes: A prime like sequence with members of the form p^(2^k) with p prime and k >= 0
+    Fermi-Dirac Primes: A prime like sequence with members of the form p^(2^k) with p prime and k >= 0\n
     A050376
     """
     
@@ -684,7 +684,7 @@ def fermi_dirac():
 # I think this and the tuple version are correct but I'd like to prove it
 def fermi_dirac_divisors():
     """
-    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer
+    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer\n
     OEIS A213925
     """
     yield 1
@@ -716,7 +716,7 @@ def fermi_dirac_divisors():
 
 def fermi_dirac_divisors_tuple():
     """
-    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer. Returns Tuples.
+    Irregualar array with The Fermi-Dirac Factorization of each Positive Integer, returns tuples.\n
     OEIS A213925
     """
     yield ()

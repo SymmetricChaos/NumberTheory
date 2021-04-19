@@ -259,60 +259,9 @@ def all_compositions():
         yield from compositions(n)
 
 
-def _coin_125_partions_recur(n):
-    
-
-    if n < 1:
-        yield ()
-    
-    if n == 1:
-        yield (1,)
-    
-    elif n == 2:
-        yield (2,)
-        yield (1,1)
-    
-    elif n == 5:
-        yield (5,)
-        yield (2,2,1)
-        yield (2,1,1,1)
-        yield (1,1,1,1,1)
-        
-    
-    else:
-        for s in [5,2]:
-            if s > n:
-                continue
-            for p in _coin_125_partions_recur(n-s):
-                if p[0] <= s:
-                    yield (s,) + p
-    
-        yield tuple([1]*n)
-
-def coin_125_partions(n):
-    """
-    All partitions of n using only 1, 2, and 5
-    OEIS A000008
-    """
-    
-    yield from _coin_125_partions_recur(n)
-
-
-
+# Need to validate this
+# Seems to fail if 1 is not in S
 def _coin_partions_recur(n,S):
-    # if n == 0:
-    #     yield ()
-    
-    # elif n == 1:
-    #     yield (1,)
-    
-    # else:
-    #     yield (n,)
-          
-    #     for x in range(1,n):
-    #         for p in partitions(x):
-    #             if p[0] <= n-x:
-    #                 yield (n-x,) + p
     
     if n < min(S):
         yield ()
@@ -327,8 +276,8 @@ def _coin_partions_recur(n,S):
 
 def coin_partions(n,S):
     """
-    All partitions of n with numbers from the set S
-    OEIS A000008
+    All partitions of n with numbers from the set S, returns tuples
+    OEIS A000008, A001299, A001313, A001312, A169718, A001301, A001302, A067996, A187243, A001306, A001319
     """
     
     for s in S:
@@ -340,6 +289,50 @@ def coin_partions(n,S):
     S = sorted(list(set(S)),reverse=True)
     
     yield from _coin_partions_recur(n,S)
+
+
+def all_coin_partions(S):
+    """
+    All partitions made using elements of the set S, returns tuples of tuples
+    OEIS A000008, A001299, A001313, A001312, A169718, A001301, A001302, A067996, A187243, A001306, A001319
+    """
+    
+    for s in S:
+        if s < 1:
+            raise Exception("values of S must be positive")
+        if not isinstance(s, int):
+            raise Exception("values of S must be integers")
+    
+    S = sorted(list(set(S)),reverse=True)
+    
+    for n in naturals(1):
+        l = [i for i in _coin_partions_recur(n,S)]
+        yield tuple(l)
+
+
+# memoize this?
+def coin_partion(S):
+    """
+    Number of partitions of each positive natural into pieces of the provided sizes
+    OEIS A000008, A001299, A001313, A001312, A169718, A001301, A001302, A067996, A187243, A001306, A001319, A001310
+    """
+    
+    for s in S:
+        if s < 1:
+            raise Exception("values of S must be positive")
+        if not isinstance(s, int):
+            raise Exception("values of S must be integers")
+    
+    S = sorted(list(set(S)),reverse=True)
+    
+    yield 1
+    
+    for n in naturals(1):
+        l = [i for i in _coin_partions_recur(n,S)]
+        yield len(l)
+
+
+#def fibonacci_partitions(n,S):
 
 
 
@@ -400,11 +393,15 @@ if __name__ == '__main__':
     simple_test(politeness(),18,
                 "0, 0, 1, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 3, 0, 1, 2")
     
-    print("\n(1,2,5)-Partitions of 6")
-    simple_test(coin_125_partions(6),25,
+    print("\n(1,2,5,10)-Partitions of 6")
+    simple_test(coin_partions(6,(1,2,5,10)),25,
                 "(5, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
     
-    print("\n(1,2,5)-Partitions of 6 (general algorithm)")
-    simple_test(coin_partions(6,(1,2,5)),25,
-                "(5, 1), (2, 2, 2), (2, 2, 1, 1), (2, 1, 1, 1, 1), (1, 1, 1, 1, 1, 1)")
+    print("\n(1,2,5,10)-Partition Numbers")
+    simple_test(coin_partion((1,2,5,10)),16,
+                "1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 11, 12, 15, 16, 19, 22")
+    
+    print("\nAll (1,2,5,10)-Partitions")
+    simple_test(all_coin_partions((1,2,5,10)),4,
+                "((1,),), ((2,), (1, 1)), ((2, 1), (1, 1, 1)), ((2, 2), (2, 1, 1), (1, 1, 1, 1))")
     
